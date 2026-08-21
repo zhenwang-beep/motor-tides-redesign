@@ -1,6 +1,6 @@
 # Motor Tides — Website Redesign Concepts
 
-Six complete, browsable website directions for **Motor Tides by Wiseman**, a brand-new
+Five complete, browsable website directions for **Motor Tides by Wiseman**, a brand-new
 107-residence lease-up at 3557 Motor Avenue in Los Angeles — plus an AI leasing-concierge
 chat widget that runs on every one of them.
 
@@ -8,16 +8,16 @@ Built to be pitched: each direction is a real multi-page site with the property'
 copy, photography, floor plans, and pricing, deployed live so stakeholders can open a link
 and scroll rather than squint at a mockup.
 
-**▶ Start here: [motor-tides-concepts.vercel.app](https://motor-tides-concepts.vercel.app)** — the hub that presents all six.
+**▶ Start here: [motor-tides-concepts.vercel.app](https://motor-tides-concepts.vercel.app)** — the hub that presents all five.
 
 ---
 
-## The six directions
+## The five directions
 
 | | | |
 |:--|:--|:--|
 | <a href="https://motor-tides-concept-e.vercel.app"><img src="redesign/assets/img/previews/e.jpg" width="260" alt="Resort Immersive"></a><br>**01 · [Resort Immersive](https://motor-tides-concept-e.vercel.app)**<br><sub>The flagship. Six switchable themes.</sub> | <a href="https://motor-tides-concept-nocturne.vercel.app"><img src="redesign/assets/img/previews/nocturne.jpg" width="260" alt="Pacific Nocturne"></a><br>**02 · [Pacific Nocturne](https://motor-tides-concept-nocturne.vercel.app)**<br><sub>The property as an after-dark film.</sub> | <a href="https://motor-tides-concept-monogram.vercel.app"><img src="redesign/assets/img/previews/monogram.jpg" width="260" alt="Living Monogram"></a><br>**03 · [Living Monogram](https://motor-tides-concept-monogram.vercel.app)**<br><sub>Fashion-house typography.</sub> |
-| <a href="https://motor-tides-concept-grandtour.vercel.app"><img src="redesign/assets/img/previews/grandtour.jpg" width="260" alt="The Grand Tour"></a><br>**04 · [The Grand Tour](https://motor-tides-concept-grandtour.vercel.app)**<br><sub>Sunrise to midnight in one scroll.</sub> | <a href="https://motor-tides-concept-riviera.vercel.app"><img src="redesign/assets/img/previews/riviera.jpg" width="260" alt="Riviera Journal"></a><br>**05 · [Riviera Journal](https://motor-tides-concept-riviera.vercel.app)**<br><sub>A sun-drenched travel magazine.</sub> | <a href="https://motor-tides-concept-voyage.vercel.app"><img src="redesign/assets/img/previews/voyage.jpg" width="260" alt="Voyage"></a><br>**06 · [Voyage](https://motor-tides-concept-voyage.vercel.app)**<br><sub>A journey with a progress rail.</sub> |
+| <a href="https://motor-tides-concept-grandtour.vercel.app"><img src="redesign/assets/img/previews/grandtour.jpg" width="260" alt="The Grand Tour"></a><br>**04 · [The Grand Tour](https://motor-tides-concept-grandtour.vercel.app)**<br><sub>Sunrise to midnight in one scroll.</sub> | <a href="https://motor-tides-concept-voyage.vercel.app"><img src="redesign/assets/img/previews/voyage.jpg" width="260" alt="Voyage"></a><br>**05 · [Voyage](https://motor-tides-concept-voyage.vercel.app)**<br><sub>A journey with a progress rail.</sub> | |
 
 Every direction shares the same spine — real plans and pricing, a leasing concierge, an apply
 path — and differs in the one thing that carries it:
@@ -41,11 +41,7 @@ a palette, and the site's live color variables interpolate between them as you s
 to golden-hour peach to midnight — with a time rail marking the hour. Nav items are stamped with
 the time they belong to.
 
-**05 · Riviera Journal** `option-riviera/` — Paper cream, terracotta, Italiana masthead. Postcards tilt
-and settle as they enter, and a white-matted rooftop postcard grows until its matte vanishes and
-it *becomes* the full screen.
-
-**06 · Voyage** `option-voyage/` — Bone and brass with blueprint line-work. A journey rail pinned to the
+**05 · Voyage** `option-voyage/` — Bone and brass with blueprint line-work. A journey rail pinned to the
 left edge fills with scroll progress and a live percentage; hover reveals six legs — Arrive, Reside,
 Refine, Ascend, Belong, Choose — each clickable.
 
@@ -83,10 +79,11 @@ personalities can be demoed side by side.
     ├── option-nocturne/      02 Pacific Nocturne  \
     ├── option-monogram/      03 Living Monogram    |  4 self-contained pages each
     ├── option-grandtour/     04 The Grand Tour     |  (home, residences, floorplans, experience)
-    ├── option-riviera/       05 Riviera Journal    |  with all CSS and JS inline
-    ├── option-voyage/        06 Voyage            /
+    │                                               |  with all CSS and JS inline
+    ├── option-voyage/        05 Voyage            /
     │
-    ├── option-a/  option-b/  option-c/    archived single-page explorations
+    ├── option-a/  option-b/  option-c/    archived explorations
+    ├── option-riviera/       archived — Riviera Journal (4 pages, still live)
     ├── option-current/       replica of the current live site with the concierge attached
     │
     ├── assets/
@@ -173,7 +170,8 @@ Two caveats worth carrying into any client conversation:
 
 ## Archived explorations
 
-Earlier directions, still live and linked quietly from the hub: **Coastal Editorial**
+Earlier directions, still live and linked quietly from the hub: **Riviera Journal**
+(`option-riviera/`, [live](https://motor-tides-concept-riviera.vercel.app)), **Coastal Editorial**
 (`option-a/`, [live](https://motor-tides-concept-a.vercel.app)), **Architectural Dark**
 (`option-c/`, [live](https://motor-tides-concept-c.vercel.app)), **Modern Platform**
 (`option-b/`, [live](https://motor-tides-concept-b.vercel.app)), and **Estate Green**, which

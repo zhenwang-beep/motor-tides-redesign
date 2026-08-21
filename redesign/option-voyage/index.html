@@ -110,15 +110,6 @@ svg.lw path,svg.lw rect,svg.lw circle,svg.lw line{fill:none;stroke:var(--bp);str
 .split .ph.land img{aspect-ratio:16/10.4}
 
 /* facade line-work */
-.trace{margin-top:clamp(40px,6vw,80px);position:relative;z-index:2}
-.trace svg{width:100%;height:auto}
-.trace path{fill:none;stroke:var(--bp);stroke-width:1.2;stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
-.trace.in path{animation:draw 2.8s var(--ease) forwards}
-.trace path:nth-child(2){animation-delay:.3s}
-.trace path:nth-child(3){animation-delay:.6s}
-.trace path:nth-child(4){animation-delay:.9s}
-@keyframes draw{to{stroke-dashoffset:0}}
-.trace .tcap{font-size:.62rem;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--bp);margin-top:14px;display:flex;justify-content:space-between}
 
 /* ascend: bars lock */
 .ascend{text-align:center}
@@ -184,7 +175,6 @@ svg.lw path,svg.lw rect,svg.lw circle,svg.lw line{fill:none;stroke:var(--bp);str
   .launch .cue::after{animation:none}
   .rail{display:none}
   .dr{display:none}
-  .trace path{animation:none;stroke-dashoffset:0}
   .ascend .barstage polygon{transform:none!important;opacity:1!important}
 }
 
@@ -301,15 +291,6 @@ dialog.pmodal::backdrop{background:rgba(4,16,16,.62);-webkit-backdrop-filter:blu
       <div class="leg rv"><span class="no">Leg 03</span><span class="ln"></span><span class="nm">Refine</span></div>
       <h2 class="big rv">Fitted like a hull</h2>
       <p class="body rv d1">Quartz counters. Stainless steel. Mirrored closets, vinyl plank floors, expansive windows — every line placed on purpose.</p>
-      <div class="trace" data-trace>
-        <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid meet" aria-label="Line drawing of the seven-story facade">
-          <path style="--len:2600" d="M60 260 h1080 M80 260 V80 h1040 v180 M80 80 l60 -34 h920 l60 34"/>
-          <path style="--len:2400" d="M140 260 V110 m120 150 V110 m120 150 V110 m120 150 V110 m120 150 V110 m120 150 V110 m120 150 V110 m120 150 V110"/>
-          <path style="--len:2000" d="M110 140 h980 M110 180 h980 M110 220 h980"/>
-          <path style="--len:900" d="M540 260 v-44 h120 v44 M560 216 h80"/>
-        </svg>
-        <div class="tcap"><span>Elevation &middot; Motor Avenue</span><span>Seven stories &middot; Est. 2026</span></div>
-      </div>
     </div>
   </section>
 
@@ -402,7 +383,7 @@ dialog.pmodal::backdrop{background:rgba(4,16,16,.62);-webkit-backdrop-filter:blu
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
-  document.querySelectorAll('.rv,.split .ph,[data-trace]').forEach(function(el){ io.observe(el); });
+  document.querySelectorAll('.rv,.split .ph').forEach(function(el){ io.observe(el); });
 
   var hdInv = document.getElementById('hd');
   new IntersectionObserver(function(es){
