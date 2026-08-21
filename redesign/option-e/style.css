@@ -245,7 +245,7 @@ main > .curtain:first-child .pinned img{animation:heroZoom 3.2s var(--ease) both
 .plan-meta .pmspec{font-weight:400;color:var(--ink-soft);font-size:.9rem}
 .plan-badge{font-size:.66rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--sand-ink);white-space:nowrap}
 .plan-cta{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
-.btn-line{flex:1;min-width:150px;text-align:center;font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:14px 18px;border:1px solid var(--ink);border-radius:999px;color:var(--ink);transition:background .25s,color .25s;white-space:nowrap}
+.btn-line{flex:1 1 auto;min-width:max-content;text-align:center;font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:14px 18px;border:1px solid var(--ink);border-radius:999px;color:var(--ink);transition:background .25s,color .25s;white-space:nowrap}
 .btn-line,.btn-fill{position:relative;overflow:hidden;z-index:0;transition:color .35s var(--ease)}
 .btn-line::before,.btn-fill::before{content:"";position:absolute;left:50%;top:50%;width:calc(100% + 24px);aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) scale(0);transition:transform .55s var(--ease);z-index:-1}
 .btn-line::before{background:var(--ink)}
@@ -253,7 +253,7 @@ main > .curtain:first-child .pinned img{animation:heroZoom 3.2s var(--ease) both
 .btn-line:hover,.btn-line:focus-visible{color:var(--cream)}
 .btn-fill:hover,.btn-fill:focus-visible{color:var(--ink)}
 .btn-line:hover::before,.btn-line:focus-visible::before,.btn-fill:hover::before,.btn-fill:focus-visible::before{transform:translate(-50%,-50%) scale(1)}
-.btn-fill{flex:1;min-width:150px;text-align:center;font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:14px 18px;background:var(--teal);border:1px solid var(--teal);border-radius:999px;color:var(--cream);transition:opacity .25s;white-space:nowrap}
+.btn-fill{flex:1 1 auto;min-width:max-content;text-align:center;font-size:.72rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;padding:14px 18px;background:var(--teal);border:1px solid var(--teal);border-radius:999px;color:var(--cream);transition:opacity .25s;white-space:nowrap}
 
 .plans-note{margin-top:24px;font-weight:400;font-size:.85rem;color:var(--mist)}
 @media (max-width:960px){
