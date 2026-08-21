@@ -58,7 +58,7 @@
   }
 
   /* ---------- theme variants (concept review) ---------- */
-  var THEMES = ['tide','emerald','manor','champagne','olive','midnight'];
+  var THEMES = ['tide','gilded','emerald','manor','olive','midnight'];
   var q = new URLSearchParams(location.search).get('theme');
   var saved = null;
   try{ saved = localStorage.getItem('mt-theme'); }catch(e){}
@@ -76,7 +76,7 @@
   sw.className = 'thsw';
   sw.setAttribute('role', 'group');
   sw.setAttribute('aria-label', 'Color & type themes');
-  var NAMES = { tide: 'Tide teal \u00b7 Marcellus', emerald: 'Emerald & gold \u00b7 Gloock', manor: 'Manor brass \u00b7 Cinzel', champagne: 'Champagne gold \u00b7 Cormorant', olive: 'Olive brass \u00b7 Prata', midnight: 'Midnight \u00b7 DM Serif' };
+  var NAMES = { tide: 'Tide teal \u00b7 Marcellus', emerald: 'Emerald & gold \u00b7 Gloock', manor: 'Manor brass \u00b7 Cinzel', gilded: 'Gilded \u00b7 Cormorant Garamond', olive: 'Olive brass \u00b7 Prata', midnight: 'Midnight \u00b7 DM Serif' };
   THEMES.forEach(function(t){
     var b = document.createElement('button');
     b.className = 't-' + t;

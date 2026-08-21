@@ -473,17 +473,23 @@ html body .mtc-badge{background:var(--sand);color:var(--night);border-color:var(
 /* ==================================================================
    THEME VARIANTS — palette + display-face systems (structure untouched)
    ================================================================== */
-[data-theme="champagne"]{
-  --paper:#F8F4EA; --paper-2:#F0E9D8;
-  --ink:#241C11; --ink-soft:#574A38; --mist:#746751;
-  --rule:rgba(36,28,17,.16); --rule-soft:rgba(36,28,17,.10);
-  --sand:#B99349; --sand-ink:#80621E;
-  --teal:#5A451F; --night:#191307; --cream:#F8F4EA;
+/* ---- gilded: gold as the primary colour ---- */
+[data-theme="gilded"]{
+  --paper:#FCFAF4; --paper-2:#F4ECD8;
+  --ink:#2B251B; --ink-soft:#564B3A; --mist:#6D614E;
+  --rule:#A37A18; --rule-soft:#D9C590;
+  --sand:#D0AF58; --sand-ink:#755409;
+  --teal:#76540B; --night:#21180A; --cream:#FFF9EA;
   --serif:'Cormorant Garamond',Georgia,serif;
-  --mtc-accent:#6E531C; --mtc-ink:#241C11; --mtc-surface:#F8F4EA; --mtc-bubble-bot:#F0E9D8; --mtc-bubble-user:#6E531C;
+  --mtc-accent:#76540B; --mtc-accent-ink:#FFF9EA; --mtc-ink:#2B251B; --mtc-surface:#FCFAF4;
+  --mtc-muted:#6D614E; --mtc-bubble-bot:#F4ECD8; --mtc-bubble-user:#76540B; --mtc-bubble-user-ink:#FFF9EA;
 }
-[data-theme="champagne"] .words,[data-theme="champagne"] .stitle,[data-theme="champagne"] .hero-title,[data-theme="champagne"] .xp-title,[data-theme="champagne"] .statement p,[data-theme="champagne"] .contact h2{font-weight:500}
-[data-theme="champagne"] .plan-row .pname,[data-theme="champagne"] .plan-meta .pmname,[data-theme="champagne"] .brand-name,[data-theme="champagne"] .top-nav a,[data-theme="champagne"] .fsmenu nav a,[data-theme="champagne"] .foot-nav a{font-weight:600}
+/* gold owns the display type; body copy stays on the AA neutral --ink */
+[data-theme="gilded"] :is(.cw.ink,.stitle,.xp-title,.statement p,.statement em,.contact h2){color:var(--sand-ink)}
+[data-theme="gilded"] :is(.xp-label,.legend-label,.contact .kicker,.c-col h3){color:var(--sand-ink)}
+[data-theme="gilded"] :is(.hero-title,.w-copy,.cw.cream){color:var(--sand);text-shadow:0 2px 30px rgba(33,24,10,.55),0 1px 10px rgba(33,24,10,.4)}
+[data-theme="gilded"] :is(.words,.stitle,.hero-title,.xp-title,.statement p,.contact h2){font-weight:500}
+[data-theme="gilded"] :is(.plan-row .pname,.plan-meta .pmname,.brand-name,.top-nav a,.fsmenu nav a,.foot-nav a){font-weight:600}
 
 [data-theme="manor"]{
   --paper:#F5F0E4; --paper-2:#E9E0CD; --ink:#202C21; --ink-soft:#4C5A4B; --mist:#586052;
@@ -558,7 +564,7 @@ html[data-theme="midnight"] body .mtc-v-pill .mtc-launch:hover{color:var(--night
 .thsw button:hover{transform:scale(1.15)}
 .thsw button[aria-pressed="true"]{box-shadow:0 0 0 2px var(--paper),0 0 0 3.5px var(--ink);transform:scale(1.08)}
 .thsw .t-tide{background:linear-gradient(135deg,#FBFAF7 55%,#C6A65D 55%)}
-.thsw .t-champagne{background:linear-gradient(135deg,#F8F4EA 55%,#B99349 55%)}
+.thsw .t-gilded{background:linear-gradient(135deg,#FCFAF4 55%,#D0AF58 55%)}
 .thsw .t-manor{background:linear-gradient(135deg,#F5F0E4 55%,#B18B3E 55%)}
 .thsw .t-olive{background:linear-gradient(135deg,#F2F0E7 55%,#A88B3F 55%)}
 .thsw .t-midnight{background:linear-gradient(135deg,#071612 55%,#C6A15B 55%)}
