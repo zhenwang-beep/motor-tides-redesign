@@ -78,6 +78,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--acv);outline-offset
 .hero h1 .o:nth-child(3) .t{animation-delay:.26s}
 .hero h1 em{font-style:italic;color:var(--acv)}
 .hero .lede{margin-top:26px;max-width:50ch;opacity:0;animation:fup 1.2s ease 1.5s forwards}
+/* hero copy sits above the sun: non-positioned text otherwise paints below any positioned z-index>=0 element */
+.hero .tstamp,.hero h1,.hero .lede{position:relative;z-index:2}
 .dawnset{position:absolute;right:8vw;top:12vh;width:clamp(200px,24vw,340px);aspect-ratio:1;pointer-events:none}
 .hero .sun{position:absolute;right:0;top:0;width:100%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 42% 38%,#FFE9C4,#F2B96B 62%,rgba(242,185,107,0) 75%);filter:blur(2px);opacity:.9;will-change:transform;z-index:1;animation:sunrise 2.4s var(--ease) 1.1s backwards}
 @keyframes sunrise{from{transform:translateY(34%) scale(.9);opacity:0}to{transform:translateY(0) scale(1);opacity:.9}}
@@ -135,7 +137,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--acv);outline-offset
   .prow{grid-template-columns:2em 1.2fr auto;row-gap:2px}
   .prow .sp{display:none}
   .prow .av{grid-column:2;font-size:.58rem}
-  .hero .sun{top:12vh;right:4vw}
+  .hero .sun{top:12vh;right:4vw;filter:blur(15px)}
+  .dawnset{opacity:.7}
 }
 @media (prefers-reduced-motion:reduce){
   .hero .sun{animation:none}
