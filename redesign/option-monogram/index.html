@@ -75,17 +75,17 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 /* ============ mask chapters ============ */
 .mask{position:relative;height:300vh}
-.mask.combo{height:520vh}
-.mask .stage .mword{grid-area:1/1}
-.mask .stage{position:sticky;top:0;height:100vh;display:grid;grid-template-areas:'m';place-items:center;overflow:hidden}
+.mask.combo{height:340vh}
+.mask .stage{position:sticky;top:0;height:100vh;display:grid;place-items:center;overflow:hidden}
 .mask .mfull{position:absolute;inset:0;background-size:cover;background-position:50% 50%;opacity:0;will-change:opacity,transform;z-index:1}
-.mask .idx,.mask .under{z-index:3;position:relative}
-.mask .stage .idx{position:absolute}
-.mword{position:relative;z-index:2;font-family:var(--serif);font-weight:500;font-size:clamp(6rem,23.5vw,23rem);line-height:1;text-transform:uppercase;letter-spacing:.01em;white-space:nowrap;
-  background-size:cover;background-position:50% 50%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;will-change:background-position,transform}
-@supports not ((-webkit-background-clip:text) or (background-clip:text)){.mword{color:var(--ink);background:none}}
+.mask .under{z-index:3}
+/* both words live in ONE element, so the photo is painted once across the whole lockup and
+   clipped to every glyph at once - the two lines read as windows onto a single continuous image */
+.lock{position:relative;z-index:2;text-align:center;font-family:var(--serif);font-weight:500;font-size:clamp(3rem,min(24vw,38vh),22rem);line-height:.88;text-transform:uppercase;letter-spacing:.01em;white-space:nowrap;
+  background-size:cover;background-position:50% 50%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;will-change:transform,opacity}
+.lock span{display:block}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){.lock{color:var(--ink);background:none;-webkit-text-fill-color:currentColor}}
 .mask .under{position:absolute;left:0;right:0;bottom:clamp(30px,7vh,68px);display:flex;justify-content:space-between;padding:0 var(--pad);font-size:.64rem;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--graphite);opacity:.75}
-.mask .idx{position:absolute;top:calc(50% - .5em);left:var(--pad);font-family:var(--serif);font-size:1.1rem;color:#945536}
 
 /* ============ inside the letters ============ */
 .inside{padding-top:clamp(70px,9vw,130px);padding-bottom:clamp(70px,9vw,130px)}
@@ -148,7 +148,6 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 
 @media (max-width:820px){
   .i1,.i2,.i3,.i4{grid-column:1/-1;margin-top:0;aspect-ratio:16/10}
-  .mword{font-size:clamp(4rem,19vw,8rem)}
   .pxrow .nm{flex-wrap:wrap;gap:8px 14px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -156,9 +155,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
   .mark h1 .w span,.mark .bars,.mark .tag,.mark .rule{animation:none;transform:none;opacity:1}
   .mask,.mask.combo{height:auto}
   .mask .stage{position:static;height:auto;padding:70px 0;display:block;text-align:center}
-  .mask .mword{opacity:1!important;transform:none!important;margin:30px auto}
+  .mask .lock{opacity:1!important;transform:none!important}
   .mask .mfull{display:none}
-  .mask .idx{position:static;display:block;margin-bottom:10px}
   .mask .under{position:static;margin-top:14px;justify-content:center;gap:26px}
   .ring svg{animation:none}
 }
@@ -247,12 +245,8 @@ dialog.pmodal::backdrop{background:rgba(4,16,16,.62);-webkit-backdrop-filter:blu
   <section class="mask combo" data-mask data-img="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1800&q=80" aria-label="Motor Tides, set in ocean light">
     <div class="stage">
       <div class="mfull" aria-hidden="true"></div>
-      <span class="idx ix1" aria-hidden="true">I.</span>
-      <span class="idx ix2" aria-hidden="true">II.</span>
-      <div class="mword w1" role="img" aria-label="The word Motor filled with ocean surf imagery">MOTOR</div>
-      <div class="mword w2" role="img" aria-label="The word Tides filled with ocean surf imagery">TIDES</div>
-      <div class="under u1"><span>The architecture</span><span>Seven stories, ocean light</span></div>
-      <div class="under u2"><span>The life inside</span><span>Open plans &middot; City views</span></div>
+      <div class="lock" role="img" aria-label="Motor Tides, the words filled with ocean surf"><span>Motor</span><span>Tides</span></div>
+      <div class="under"><span>Seven stories, ocean light</span><span>Open plans &middot; City views</span></div>
     </div>
   </section>
 
@@ -350,7 +344,8 @@ dialog.pmodal::backdrop{background:rgba(4,16,16,.62);-webkit-backdrop-filter:blu
   /* word masks: assign images */
   var combo = document.querySelector('[data-mask]');
   var comboImg = 'url("' + combo.dataset.img + '")';
-  [].slice.call(combo.querySelectorAll('.mword')).forEach(function(w){ w.style.backgroundImage = comboImg; });
+  var lock = combo.querySelector('.lock');
+  lock.style.backgroundImage = comboImg;
   combo.querySelector('.mfull').style.backgroundImage = comboImg;
 
   if(reduce) return;
@@ -371,37 +366,33 @@ dialog.pmodal::backdrop{background:rgba(4,16,16,.62);-webkit-backdrop-filter:blu
       var r = combo.getBoundingClientRect();
       var span = r.height - innerHeight;
       var p = clamp01(-r.top / span);
-      var w1 = combo.querySelector('.w1'), w2 = combo.querySelector('.w2');
       var full = combo.querySelector('.mfull');
+      var under = combo.querySelector('.under');
       var sm = function(q){ return q * q * (3 - 2 * q); };
-      var s1, o1, s2, o2, fo;
-      if(p < 0.28){
-        s1 = 0.92 + (p / 0.28) * 0.16; o1 = 1; s2 = 6.5; o2 = 0; fo = 0;
-      } else if(p < 0.46){
-        var q = sm(clamp01((p - 0.28) / 0.18));
-        s1 = 1.08 + q * 5.4; o1 = 1 - clamp01((q - 0.2) / 0.65);
-        s2 = 6.5; o2 = 0; fo = clamp01(q / 0.8);
-      } else if(p < 0.6){
-        s1 = 6.5; o1 = 0; s2 = 6.5; o2 = 0; fo = 1;
-      } else if(p < 0.78){
-        var q2 = sm(clamp01((p - 0.6) / 0.18));
-        s1 = 6.5; o1 = 0;
-        s2 = 6.5 - q2 * 5.55; o2 = clamp01((q2 - 0.3) / 0.6);
-        fo = 1 - clamp01((q2 - 0.35) / 0.6);
+      /* a 7x clipped-text texture is too much for a mid-range phone to rasterize */
+      var peak = innerWidth < 700 ? 4.8 : 7.2;
+      var ls, lo, fo, fs;
+      if(p < 0.30){
+        /* the lockup sits and breathes; the surf drifts inside the letterforms */
+        ls = 0.94 + (p / 0.30) * 0.08; lo = 1; fo = 0; fs = 1;
+        lock.style.backgroundPosition = (38 + p * 66) + '% 50%';
+      } else if(p < 0.66){
+        /* the letters open outward and the photo they were holding takes the screen */
+        var q = sm(clamp01((p - 0.30) / 0.36));
+        ls = 1.02 + q * (peak - 1.02);
+        lo = 1 - clamp01((q - 0.28) / 0.55);
+        fo = clamp01((q - 0.18) / 0.6);
+        fs = 1;
       } else {
-        s1 = 6.5; o1 = 0;
-        s2 = 0.95 + ((p - 0.78) / 0.22) * 0.12; o2 = 1; fo = 0;
+        /* nothing contracts: the full frame keeps pushing forward into the next section */
+        ls = peak; lo = 0; fo = 1;
+        fs = 1 + sm(clamp01((p - 0.66) / 0.34)) * 0.06;
       }
-      w1.style.backgroundPosition = (18 + p * 40) + '% 50%';
-      w2.style.backgroundPosition = (42 + p * 40) + '% 50%';
-      w1.style.transform = 'scale(' + s1.toFixed(4) + ')';
-      w1.style.opacity = o1.toFixed(3);
-      w2.style.transform = 'scale(' + s2.toFixed(4) + ')';
-      w2.style.opacity = o2.toFixed(3);
+      lock.style.transform = 'scale(' + ls.toFixed(4) + ')';
+      lock.style.opacity = lo.toFixed(3);
       full.style.opacity = fo.toFixed(3);
-      full.style.transform = 'scale(' + (1.1 - fo * 0.08).toFixed(4) + ')';
-      combo.querySelector('.ix1').style.opacity = combo.querySelector('.u1').style.opacity = o1.toFixed(3);
-      combo.querySelector('.ix2').style.opacity = combo.querySelector('.u2').style.opacity = o2.toFixed(3);
+      full.style.transform = 'scale(' + fs.toFixed(4) + ')';
+      under.style.opacity = (lo * 0.75).toFixed(3);
     })();
   }
   addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
