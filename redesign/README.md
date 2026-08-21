@@ -37,6 +37,7 @@ redesign/
 ├── CONTENT.md            source of truth: address, plans, pricing, amenities, real URLs
 ├── DEMO-SCRIPT.md        talk track for the owner meeting
 ├── option-e/             flagship — 4 pages (home, residences, experience, location)
+│                         plus shared style.css + app.js (the one concept not fully inline)
 ├── option-nocturne/      \
 ├── option-monogram/       |  each: 4 pages (home, residences, floorplans, experience),
 ├── option-grandtour/      |  self-contained HTML with inline CSS + JS
