@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motor Tides by Wiseman — Voyage</title>
+<meta name="description" content="From first light to move-in day — 107 brand-new residences on Motor Avenue, Culver City. Now leasing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<style>
+:root{
+  --bg:#F1EFE8; --ink:#143836; --accent:#B48A43; --deep:#052B2D; --bp:#6F8F8B; --line:#A8B8B2; --gold:#E0B866;
+  --disp:'Tenor Sans','Avenir Next',sans-serif; --sans:'Montserrat','Avenir Next',sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1); --pad:clamp(22px,4vw,96px);
+  --mtc-accent:#052B2D; --mtc-accent-ink:#F1EFE8; --mtc-ink:#143836; --mtc-surface:#F1EFE8;
+  --mtc-bubble-bot:#E6E2D5; --mtc-bubble-user:#052B2D; --mtc-font:'Montserrat',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:clip}
+html{scrollbar-width:thin;scrollbar-color:rgba(20,56,54,.4) transparent}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+::selection{background:#052B2D;color:#F1EFE8}
+
+.hd{position:fixed;inset:0 0 auto 0;z-index:90;display:flex;align-items:center;padding:0 var(--pad);height:74px;transition:opacity .5s,transform .55s var(--ease),color .45s ease}
+.hd.frost{background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(20,56,54,.14)}
+.hd.inv{color:#EFEDE2}
+.hd.inv.frost{background:rgba(5,43,45,.88);box-shadow:0 1px 0 rgba(239,237,226,.12)}
+.hd.inv .cta{border-color:#EFEDE2}
+.hd.inv .cta:hover,.hd.inv .cta:focus-visible{background:#EFEDE2;color:var(--deep)}
+.hd.gone{opacity:0;transform:translateY(-100%);pointer-events:none}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:22px;height:22px}
+.brand b{font-family:var(--disp);font-size:.88rem;letter-spacing:.32em;text-transform:uppercase}
+.brand i{display:block;font-style:normal;font-weight:500;font-size:.5rem;letter-spacing:.5em;text-transform:uppercase;opacity:.7;margin-top:2px}
+.hnav{margin-left:auto;display:flex;gap:clamp(16px,2.2vw,30px)}
+.hnav a{font-size:.64rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;opacity:.78;padding:8px 0;position:relative}
+.hnav a::after{content:"";position:absolute;left:0;right:100%;bottom:2px;border-bottom:1px solid currentColor;transition:right .3s ease}
+.hnav a:hover{opacity:1}
+.hnav a:hover::after,.hnav a:focus-visible::after{right:0}
+@media (max-width:760px){.hnav{display:none}}
+.hd .cta{margin-left:clamp(16px,2.2vw,30px);font-size:.68rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);border-radius:2px;padding:13px 24px;transition:background .3s,color .3s}
+.hd .cta:hover,.hd .cta:focus-visible{background:var(--ink);color:var(--bg)}
+
+/* journey rail */
+.rail{position:fixed;left:clamp(12px,2vw,34px);top:50%;transform:translateY(-50%);z-index:80;display:flex;align-items:center;gap:16px;padding:14px 10px 14px 0}
+.rail .track{width:2px;height:min(300px,38vh);background:rgba(20,56,54,.18);position:relative;border-radius:2px}
+.rail .fill{position:absolute;left:0;top:0;width:100%;height:100%;background:var(--accent);transform:scaleY(0);transform-origin:top;border-radius:2px}
+.rail .legs{display:flex;flex-direction:column;justify-content:space-between;height:min(300px,38vh);font-size:.56rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;opacity:0;transform:translateX(-6px);transition:opacity .35s ease,transform .35s ease;pointer-events:none}
+.rail:hover .legs,.rail:focus-within .legs{opacity:1;transform:none;pointer-events:auto}
+.rail .legs button{background:none;border:0;cursor:pointer;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;text-align:left;padding:4px 6px;opacity:.45;transition:opacity .3s,color .3s}
+.rail .legs button:hover{opacity:1}
+.rail .legs button.on{opacity:1;color:var(--accent)}
+.rail .pct{position:absolute;left:-6px;bottom:-34px;font-size:.6rem;font-weight:600;letter-spacing:.14em;color:#7C5C25;font-variant-numeric:tabular-nums}
+@media (max-width:900px){.rail{display:none}}
+@media (max-width:1249px){.rail .legs{display:none}}
+@media (min-width:1250px){.chap .wrap{padding-left:calc(var(--pad) + 84px)}}
+
+.skip-link{position:absolute;left:-9999px;top:0;z-index:300;background:var(--deep);color:var(--bg);padding:12px 20px;text-decoration:none;font-weight:600}
+.skip-link:focus{left:12px;top:12px}
+@media (max-width:760px){.hd .cta{margin-left:auto}}
+@media (max-width:430px){.hd{height:62px}.brand b{letter-spacing:.18em;font-size:.76rem}.brand i{display:none}.hd .cta{padding:12px 14px;letter-spacing:.12em;font-size:.58rem}}
+.wrap{padding:0 var(--pad)}
+.kick{font-size:.64rem;font-weight:600;letter-spacing:.46em;text-transform:uppercase;color:#7C5C25}
+.course .kick{color:var(--gold)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.14s}.rv.d2{transition-delay:.28s}
+h2.big{font-family:var(--disp);font-weight:400;font-size:clamp(2.3rem,5.6vw,5.4rem);line-height:1.06;text-transform:uppercase;letter-spacing:.03em}
+.body{max-width:50ch;color:#4B5F58;margin-top:20px}
+
+/* drifting objects */
+.dr{position:absolute;will-change:transform;pointer-events:none;z-index:1}
+.dr .sheet{background:#fff;padding:10px;box-shadow:0 18px 44px rgba(5,43,45,.16);border:1px solid rgba(20,56,54,.08)}
+.dr .sheet img{width:100%}
+.dr .sheet .shl{font-size:.5rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--bp);margin-top:7px;display:flex;justify-content:space-between}
+svg.lw{display:block}
+svg.lw path,svg.lw rect,svg.lw circle,svg.lw line{fill:none;stroke:var(--bp);stroke-width:1.1;vector-effect:non-scaling-stroke}
+
+/* ============ launch ============ */
+.launch{min-height:100svh;position:relative;display:grid;grid-template-rows:1fr auto;padding-top:86px;overflow:clip}
+.launch .titlebox{text-align:center;align-self:center;position:relative;z-index:2;padding:0 18px}
+.launch h1{font-family:var(--disp);font-weight:400;font-size:clamp(3rem,9.6vw,8.8rem);line-height:1;letter-spacing:.08em;text-indent:.08em;text-transform:uppercase}
+.launch h1 span{display:inline-block;opacity:0;transform:translateY(16px);animation:lup 1.4s var(--ease) forwards}
+.launch .sub{margin-top:20px;font-size:.7rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:#4B5F58;opacity:0;animation:lup 1.2s ease 1.2s forwards}
+.launch .cue{position:absolute;left:0;right:0;text-align:center;bottom:30px;z-index:3;font-size:.6rem;font-weight:600;letter-spacing:.36em;text-transform:uppercase;color:#4B5F58;opacity:0;animation:lup 1.2s ease 1.8s forwards}
+.launch .cue::after{content:"";display:block;width:1px;height:32px;background:var(--accent);margin:10px auto 0;animation:cueln 2.2s ease-in-out infinite}
+.launch .heroimg{position:relative;height:50vh;min-height:300px;margin:26px var(--pad) 132px;overflow:hidden}
+.launch .heroimg img{width:100%;height:120%;object-fit:cover;will-change:transform}
+.launch .heroimg .edge{position:absolute;inset:0;border:1px solid rgba(20,56,54,.2);pointer-events:none}
+@keyframes lup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes cueln{0%,100%{transform:scaleY(.4);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+
+/* ============ chapters ============ */
+.chap{position:relative;padding:clamp(90px,12vw,180px) 0;overflow:clip}
+.chap>.wrap{position:relative;z-index:2;transform:translateZ(0)}
+.chap .leg{display:flex;align-items:center;gap:18px;margin-bottom:clamp(26px,3.6vw,46px)}
+.chap .leg .no{font-family:var(--disp);font-size:1rem;letter-spacing:.2em;color:#7C5C25}
+.chap .leg .ln{flex:1;border-top:1px solid rgba(20,56,54,.2)}
+.chap .leg .nm{font-size:.64rem;font-weight:600;letter-spacing:.44em;text-transform:uppercase;color:#4B5F58}
+
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(26px,4vw,72px);align-items:center;position:relative;z-index:2}
+.split .ph{overflow:hidden}
+.split .ph img{width:100%;aspect-ratio:4/4.4;object-fit:cover;transform:scale(1.06);transition:transform 1.6s var(--ease)}
+.split .ph.in img{transform:none}
+.split .ph.land img{aspect-ratio:16/10.4}
+
+/* facade line-work */
+.trace{margin-top:clamp(40px,6vw,80px);position:relative;z-index:2}
+.trace svg{width:100%;height:auto}
+.trace path{fill:none;stroke:var(--bp);stroke-width:1.2;stroke-dasharray:var(--len);stroke-dashoffset:var(--len)}
+.trace.in path{animation:draw 2.8s var(--ease) forwards}
+.trace path:nth-child(2){animation-delay:.3s}
+.trace path:nth-child(3){animation-delay:.6s}
+.trace path:nth-child(4){animation-delay:.9s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.trace .tcap{font-size:.62rem;font-weight:600;letter-spacing:.34em;text-transform:uppercase;color:var(--bp);margin-top:14px;display:flex;justify-content:space-between}
+
+/* ascend: bars lock */
+.ascend{text-align:center}
+.ascend .barstage{width:150px;height:150px;margin:clamp(34px,5vw,60px) auto 0}
+.ascend .barstage svg{display:block;width:100%;height:100%;overflow:visible}
+.ascend .barstage polygon{fill:var(--deep);will-change:transform}
+.ascend .roof{margin-top:clamp(40px,6vw,72px);position:relative;overflow:hidden;max-width:1080px;margin-left:auto;margin-right:auto}
+.ascend .roof img{width:100%;aspect-ratio:21/10;object-fit:cover;will-change:transform}
+.ascend .roof .cap{position:absolute;left:20px;bottom:16px;color:#fff;font-size:.64rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;text-shadow:0 1px 14px rgba(5,43,45,.75)}
+
+/* belong chips + photos */
+.belong .grid{display:grid;grid-template-columns:1.25fr 1fr;gap:clamp(20px,3vw,44px);align-items:start;position:relative;z-index:2}
+.chips{display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:22px}
+.chips span{font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;border:1px solid rgba(20,56,54,.32);border-radius:2px;padding:10px 16px}
+
+/* plans / course ============ */
+.course{background:var(--deep);color:#EFEDE2;position:relative;overflow:clip}
+.course .kick{color:var(--gold)}
+.course h2.big{color:#EFEDE2}
+.crow{display:grid;grid-template-columns:2.4em 1.25fr 1.6fr auto auto;align-items:baseline;gap:16px;padding:19px 4px;border-bottom:1px solid rgba(239,237,226,.15);text-decoration:none;transition:padding-left .25s,background .25s;position:relative;z-index:2}
+.crow:first-of-type{border-top:1px solid rgba(239,237,226,.15)}
+.crow:hover{padding-left:14px;background:rgba(239,237,226,.05)}
+.crow .i{font-family:var(--disp);font-size:.8rem;color:var(--gold)}
+.crow .nm{font-family:var(--disp);font-size:1.3rem;letter-spacing:.06em;text-transform:uppercase}
+.crow .sp{font-size:.85rem;color:#A8BDB5;letter-spacing:.04em}
+.crow .pr{font-weight:600}
+.crow .pr span{font-weight:400;font-size:.75rem;color:#A8BDB5}
+.crow .av{font-size:.64rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold)}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:clamp(30px,4vw,46px);position:relative;z-index:2}
+.bfill,.bline{font-size:.7rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;text-decoration:none;border-radius:2px;padding:16px 30px;transition:background .3s,color .3s,border-color .3s;text-align:center}
+.bfill{background:var(--gold);border:1px solid var(--gold);color:var(--deep)}
+.bfill:hover,.bfill:focus-visible{background:transparent;color:var(--gold)}
+.bline{border:1px solid rgba(239,237,226,.45);color:#EFEDE2}
+.bline:hover,.bline:focus-visible{border-color:var(--gold);color:var(--gold)}
+
+/* make port */
+.port{text-align:center;position:relative;overflow:clip}
+.port h2.big{max-width:16ch;margin:14px auto 0}
+.port .meta{margin-top:26px;color:#4B5F58;line-height:2}
+.port .meta a{text-decoration:none;border-bottom:1px solid rgba(180,138,67,.55)}
+.port .actions{justify-content:center}
+.port .bfill{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.port .bfill:hover,.port .bfill:focus-visible{background:transparent;color:var(--ink)}
+.port .bline{border-color:rgba(20,56,54,.4);color:var(--ink)}
+.port .bline:hover{border-color:var(--accent);color:var(--accent)}
+.port .done{font-family:var(--disp);font-size:.9rem;letter-spacing:.3em;color:#7C5C25;margin-top:clamp(34px,5vw,54px)}
+
+.ft{border-top:1px solid rgba(20,56,54,.18);padding:30px var(--pad) 110px;display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-between;font-size:.78rem;color:#4B5F58}
+.ft a{color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(20,56,54,.35)}
+
+@media (max-width:820px){
+  .launch .heroimg{margin-bottom:110px}
+  .split,.belong .grid{grid-template-columns:1fr}
+  .split .ph img{aspect-ratio:16/10.4}
+  .crow{grid-template-columns:2.2em 1.2fr auto;row-gap:2px}
+  .crow .sp{display:none}
+  .crow .av{grid-column:2;font-size:.58rem}
+  .launch .heroimg{margin-bottom:70px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv,.split .ph img{opacity:1;transform:none;transition:none}
+  .launch h1 span,.launch .sub,.launch .cue,.launch .kick{animation:none!important;opacity:1!important;transform:none}
+  .launch .cue::after{animation:none}
+  .rail{display:none}
+  .dr{display:none}
+  .trace path{animation:none;stroke-dashoffset:0}
+  .ascend .barstage polygon{transform:none!important;opacity:1!important}
+}
+
+/* plan modal */
+dialog.pmodal{border:0;padding:0;background:transparent;max-width:min(640px,94vw);width:100%;margin:auto}
+.pmodal .pmact a{display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;border-radius:999px;padding:14px 26px;transition:opacity .25s}
+.pmodal .pmact a:hover{opacity:.75}
+.pmodal .pmact a.pmaf{background:var(--ink,var(--inkv,#153B39));color:var(--bg,var(--bgv,#F3F0E7));border:1px solid var(--ink,var(--inkv,#153B39))}
+.pmodal .pmact a.pmal{border:1px solid currentColor;color:inherit}
+dialog.pmodal::backdrop{background:rgba(4,16,16,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.pmodal .pmcard{background:var(--bg,var(--bgv,#fff));color:var(--ink,var(--inkv,#123));padding:clamp(22px,4vw,36px);position:relative}
+.pmodal .pmimg{background:#fff;padding:16px;margin-bottom:20px}
+.pmodal .pmimg img{width:100%;height:auto;max-height:56vh;object-fit:contain}
+.pmodal h3{font-size:1.7rem;margin-bottom:4px}
+.pmodal .pmspec{opacity:.75;font-size:.92rem}
+.pmodal .pmprice{margin-top:10px;font-weight:600}
+.pmodal .pmprice span{font-weight:400;font-size:.78rem;opacity:.7}
+.pmodal .pmact{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.pmodal .pmx{position:absolute;top:12px;right:12px;width:44px;height:44px;border:0;background:none;cursor:pointer;color:inherit;font-size:22px;line-height:1;border-radius:50%;display:grid;place-items:center;transition:background .25s ease,color .25s ease,transform .3s ease}
+.pmodal .pmx:hover,.pmodal .pmx:focus-visible{background:var(--ink,var(--inkv,#153B39));color:var(--bg,var(--bgv,#F3F0E7));transform:rotate(90deg)}
+
+/* mobile menu */
+.mbtn{display:none}
+@media (max-width:760px){.mbtn{display:grid;place-items:center;width:44px;height:44px;background:none;border:0;cursor:pointer;color:inherit;margin-left:10px;padding:0}}
+.mbtn i{display:block;width:22px;height:2px;background:currentColor;margin:2.5px 0;border-radius:2px}
+.mnav{position:fixed;inset:0;z-index:120;background:var(--bg,var(--bgv,#F3F0E7));color:var(--ink,var(--inkv,#153B39));display:flex;flex-direction:column;justify-content:center;padding:80px clamp(24px,8vw,60px) 44px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
+.mnav.open{opacity:1;visibility:visible;transition:opacity .35s ease}
+.mnav nav{display:flex;flex-direction:column}
+.mnav nav a{font-family:var(--serif,var(--disp,serif));font-size:clamp(1.7rem,7.5vw,2.4rem);line-height:1.2;text-decoration:none;padding:14px 0;border-bottom:1px solid color-mix(in srgb,currentColor 16%,transparent)}
+.mnav nav a[aria-current="page"]{opacity:.55}
+.mnav .mclose{position:absolute;top:12px;right:12px;width:44px;height:44px;background:none;border:0;color:inherit;font-size:26px;line-height:1;cursor:pointer}
+.mnav .msub{margin-top:28px;font-size:.85rem;opacity:.8;line-height:2}
+.mnav .msub a{text-decoration:none;border-bottom:1px solid color-mix(in srgb,currentColor 35%,transparent)}
+
+/* page transitions */
+.pt{position:fixed;inset:0;background:var(--deep,var(--deepv,#0E2726));z-index:100000;transform:translateY(102%);pointer-events:none}
+.js-pt .pt{animation:ptReveal .8s cubic-bezier(.65,0,.35,1) .42s both}
+.pt.cover{animation:ptCover .6s cubic-bezier(.65,0,.35,1) both}
+@keyframes ptReveal{from{transform:translateY(0)}to{transform:translateY(-102%)}}
+@keyframes ptCover{from{transform:translateY(102%)}to{transform:translateY(0)}}
+.pt .pt-brand{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#F4F1E8}
+.pt .pt-brand svg{width:36px;height:36px}
+.pt .pt-name{font-family:var(--serif,var(--disp,serif));font-size:1.15rem;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase}
+.pt .pt-sub{font-family:var(--sans,sans-serif);font-size:.52rem;font-weight:600;letter-spacing:.5em;text-indent:.5em;text-transform:uppercase;opacity:.72;margin-top:-6px}
+.pt.cover .pt-brand{animation:ptBrandIn .55s cubic-bezier(.22,.61,.36,1) .18s both}
+@keyframes ptBrandIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.js-pt .pt{animation:none;transform:translateY(-102%)}.pt.cover{animation:none;transform:translateY(102%)}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js-pt');</script>
+<div class="pt" aria-hidden="true"></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hd" id="hd">
+  <a class="brand" href="index.html" aria-label="Motor Tides by Wiseman — home">
+    <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><polygon points="14,18 34,18 34,74 14,80"></polygon><polygon points="40,18 60,18 60,71 40,77"></polygon><polygon points="66,18 86,18 86,68 66,74"></polygon></svg>
+    <span><b>Motor Tides</b><i>By Wiseman</i></span>
+  </a>
+  <nav class="hnav" aria-label="Pages"><a href="residences.html">Reside</a><a href="experience.html">Belong</a><a href="floorplans.html">Choose a Course</a></nav>
+  <a class="cta" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">View availability</a>
+</header>
+
+<div class="rail" id="rail" aria-hidden="true">
+  <div class="track"><span class="fill" id="railFill"></span><span class="pct" id="railPct">0%</span></div>
+  <div class="legs" id="railLegs"><button type="button" data-go="0">Arrive</button><button type="button" data-go="1">Reside</button><button type="button" data-go="2">Refine</button><button type="button" data-go="3">Ascend</button><button type="button" data-go="4">Belong</button><button type="button" data-go="5">Choose</button></div>
+</div>
+
+<main id="main">
+
+  <!-- launch -->
+  <section class="launch" aria-label="Motor Tides — the voyage begins">
+    <div class="titlebox">
+      <p class="kick" style="opacity:0;animation:lup 1.2s ease .15s forwards">Wiseman Residential &middot; Culver City</p>
+      <h1 aria-label="Motor Tides"><span style="animation-delay:.35s">Motor&nbsp;</span><span style="animation-delay:.5s">Tides</span></h1>
+      <p class="sub">The voyage from first look to move-in &middot; 107 residences &middot; 2026</p>
+    </div>
+    <div class="heroimg"><img id="heroImg" src="../assets/img/exterior-glass.jpg" alt="The Motor Tides building rising over Motor Avenue" fetchpriority="high"><span class="edge"></span></div>
+    <p class="cue">Scroll to set off</p>
+  </section>
+
+  <!-- leg 1: arrive -->
+  <section class="chap" data-leg="0" data-sec>
+    <div class="wrap">
+      <div class="leg rv"><span class="no">Leg 01</span><span class="ln"></span><span class="nm">Arrive</span></div>
+      <div class="split">
+        <div>
+          <h2 class="big rv">The Westside,<br>dead ahead</h2>
+          <p class="body rv d1">3557 Motor Avenue sits on the Culver City border — studios to the east, the E&nbsp;Line running direct toward the coast, restaurant row minutes away. A rare mooring.</p>
+          <p class="rv d2" style="margin-top:18px;font-size:.7rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#7C5C25">34.0244&deg; N &middot; 118.4104&deg; W</p>
+        </div>
+        <div class="ph rv d1 land"><img src="https://images.unsplash.com/photo-1754810628877-ed5e858942e5?auto=format&fit=crop&w=1400&q=80" alt="Palm-lined street approaching Culver City" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- leg 2: reside -->
+  <section class="chap" id="reside" data-leg="1" data-sec>
+    <div class="wrap">
+      <div class="leg rv"><span class="no">Leg 02</span><span class="ln"></span><span class="nm">Reside</span></div>
+      <div class="split">
+        <div class="ph rv"><img src="../assets/img/living-art-716.jpg" alt="Living room with seaside artwork and balcony light" loading="lazy"></div>
+        <div>
+          <h2 class="big rv d1">Drawn for<br>open water</h2>
+          <p class="body rv d2">One-to-four-bedroom homes with open layouts, expansive windows, and large private balconies. The drawings drift by; the real thing holds still beautifully.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- leg 3: refine -->
+  <section class="chap" data-leg="2" data-sec>
+    <div class="wrap">
+      <div class="leg rv"><span class="no">Leg 03</span><span class="ln"></span><span class="nm">Refine</span></div>
+      <h2 class="big rv">Fitted like a hull</h2>
+      <p class="body rv d1">Quartz counters. Stainless steel. Mirrored closets, vinyl plank floors, expansive windows — every line placed on purpose.</p>
+      <div class="trace" data-trace>
+        <svg viewBox="0 0 1200 300" preserveAspectRatio="xMidYMid meet" aria-label="Line drawing of the seven-story facade">
+          <path style="--len:2600" d="M60 260 h1080 M80 260 V80 h1040 v180 M80 80 l60 -34 h920 l60 34"/>
+          <path style="--len:2400" d="M140 260 V110 m120 150 V110 m120 150 V110 m120 150 V110 m120 150 V110 m120 150 V110 m120 150 V110 m120 150 V110"/>
+          <path style="--len:2000" d="M110 140 h980 M110 180 h980 M110 220 h980"/>
+          <path style="--len:900" d="M540 260 v-44 h120 v44 M560 216 h80"/>
+        </svg>
+        <div class="tcap"><span>Elevation &middot; Motor Avenue</span><span>Seven stories &middot; Est. 2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- leg 4: ascend -->
+  <section class="chap ascend" data-leg="3" data-sec>
+    <div class="wrap">
+      <div class="leg rv" style="justify-content:center"><span class="no">Leg 04</span><span class="ln" style="max-width:80px"></span><span class="nm">Ascend</span></div>
+      <h2 class="big rv">Seven decks up</h2>
+      <p class="body rv d1" style="margin-left:auto;margin-right:auto">The rooftop is the crow&rsquo;s nest — planted, furnished, and pointed at the whole sweeping basin.</p>
+      <div class="barstage" id="barstage" aria-hidden="true"><svg viewBox="0 0 100 100"><polygon points="14,18 34,18 34,74 14,80"></polygon><polygon points="40,18 60,18 60,71 40,77"></polygon><polygon points="66,18 86,18 86,68 66,74"></polygon></svg></div>
+      <div class="roof rv d1"><img id="roofImg" src="../assets/img/rooftop-aerial.jpg" alt="Aerial of the planted Motor Tides rooftop deck" loading="lazy"><span class="cap">The rooftop deck &middot; sweeping city views</span></div>
+    </div>
+  </section>
+
+  <!-- leg 5: belong -->
+  <section class="chap belong" id="belong" data-leg="4" data-sec>
+    <div class="wrap">
+      <div class="leg rv"><span class="no">Leg 05</span><span class="ln"></span><span class="nm">Belong</span></div>
+      <div class="grid">
+        <div>
+          <h2 class="big rv">Crew of 107</h2>
+          <p class="body rv d1">A pet-friendly, controlled-access building with a fitness center below deck and the whole Westside as your harbor.</p>
+          <div class="chips rv d2">
+            <span>Rooftop deck</span><span>Fitness center</span><span>Pet friendly</span><span>Controlled access</span><span>Elevator</span><span>Expo/Culver E Line</span><span>Ballona Creek Trail</span>
+          </div>
+        </div>
+        <div class="ph rv d1"><img src="../assets/img/entry-705.jpg" alt="Furnished living room with kitchen beyond" loading="lazy"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- leg 6: choose your course -->
+  <section class="chap course" id="choose" data-leg="5" data-sec>
+    <div class="wrap">
+      <div class="leg rv" style="--c:rgba(239,237,226,.6)"><span class="no">Leg 06</span><span class="ln" style="border-color:rgba(239,237,226,.25)"></span><span class="nm" style="color:#A8BDB5">Choose your course</span></div>
+      <p class="kick rv">Live pricing &middot; move-in specials on all plans</p>
+      <h2 class="big rv d1" style="margin-top:12px">Seven headings</h2>
+      <div class="rv d1" style="margin-top:clamp(28px,4vw,46px)">
+        <a class="crow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">i</span><span class="nm">Harbor</span><span class="sp">2 bd &middot; 2 ba &middot; 722&ndash;754 sq ft</span><span class="pr">$3,770 <span>from</span></span><span class="av">4 open</span></a>
+        <a class="crow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">ii</span><span class="nm">Reef</span><span class="sp">2 bd &middot; 2 ba &middot; 768 sq ft</span><span class="pr">$3,845 <span>from</span></span><span class="av">2 open</span></a>
+        <a class="crow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">iii</span><span class="nm">Pacific</span><span class="sp">2 bd &middot; 2 ba &middot; 757 sq ft</span><span class="pr">$3,895 <span>from</span></span><span class="av">1 open</span></a>
+        <a class="crow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">iv</span><span class="nm">Lighthouse</span><span class="sp">2 bd &middot; 2 ba &middot; 742&ndash;766 sq ft</span><span class="pr">$3,950 <span>from</span></span><span class="av">4 open</span></a>
+        <a class="crow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">v</span><span class="nm">Seacliff</span><span class="sp">2 bd &middot; 2 ba &middot; 895 sq ft</span><span class="pr">$3,975 <span>from</span></span><span class="av">2 open</span></a>
+        <a class="crow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">vi</span><span class="nm">Channel</span><span class="sp">2 bd &middot; 2 ba &middot; 799 sq ft</span><span class="pr">$4,095 <span>from</span></span><span class="av">1 open</span></a>
+        <a class="crow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">vii</span><span class="nm">Coral</span><span class="sp">3 bd &middot; 2 ba &middot; 876 sq ft</span><span class="pr">$4,495 <span>from</span></span><span class="av">5 open</span></a>
+      </div>
+      <div class="actions rv d2">
+        <a class="bfill" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability</a>
+        <a class="bline" href="tel:+12132869912">Call leasing &middot; +1 213-286-9912</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- make port -->
+  <section class="chap port" data-sec>
+    <div class="wrap">
+      <p class="kick rv">Make port</p>
+      <h2 class="big rv d1">Tour it in person, then drop anchor</h2>
+      <p class="meta rv d1">3557 Motor Avenue, Los Angeles, CA 90034<br>
+        <a href="tel:+12132869912">+1 213-286-9912</a> &middot; Tours by appointment, in person or virtual<br>
+        Mon&ndash;Fri 9:30&ndash;6:30 &middot; Sat&ndash;Sun 11&ndash;4</p>
+      <div class="actions rv d2">
+        <a class="bfill" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Apply now</a>
+        <a class="bline" href="https://maps.google.com/?q=3557%20Motor%20Avenue%20Los%20Angeles,%20CA%2090034" target="_blank" rel="noopener">Get directions</a>
+      </div>
+      <p class="done rv d2" id="doneLbl">Journey · 100%</p>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <span>&copy; 2026 Wiseman Residential &middot; Equal Housing Opportunity</span>
+  <span><a href="https://motortides-wisemanresidential.securecafenet.com/residentservices/motor-tabor-by-wiseman/userlogin" target="_blank" rel="noopener">Resident login</a></span>
+  <span>Design concept — Voyage &middot; <a href="../index.html">View all concepts</a></span>
+</footer>
+
+<script>window.MTC_VARIANT='pill';</script>
+<script src="../assets/chat.js?v=4" defer></script>
+<script>
+(function(){
+  'use strict';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  addEventListener('DOMContentLoaded', function(){
+    if(!reduce && window.Lenis){
+      var lenis = new Lenis({ lerp: 0.085 }); window._lenis = lenis;
+      (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
+    }
+  });
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv,.split .ph,[data-trace]').forEach(function(el){ io.observe(el); });
+
+  var hdInv = document.getElementById('hd');
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){ hdInv.classList.toggle('inv', e.isIntersecting); });
+  }, { rootMargin: '0px 0px -88% 0px' }).observe(document.querySelector('.course'));
+
+  if(reduce) return;
+
+  function clamp01(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
+  var mobile = matchMedia('(max-width:820px)').matches;
+
+  /* drifting objects: data-tr = "x0,y0,r0,x1,y1,r1,speed" in vw/vh/deg */
+  var drs = [].slice.call(document.querySelectorAll('[data-tr]')).map(function(el){
+    var v = el.dataset.tr.split(',').map(Number);
+    if(mobile){ v[0] = v[0] > 50 ? 104 : v[0] < 0 ? -44 : v[0]; }
+    return { el: el, x0: v[0], y0: v[1], r0: v[2], x1: v[3], y1: v[4], r1: v[5], sp: v[6] || 1, cur: 0 };
+  });
+
+  var hd = document.getElementById('hd'), lastY = 0;
+  var railFill = document.getElementById('railFill');
+  var railPct = document.getElementById('railPct');
+  var legs = [].slice.call(document.querySelectorAll('#railLegs button'));
+  legs.forEach(function(b){
+    b.addEventListener('click', function(){
+      var sec = document.querySelector('[data-leg="' + b.dataset.go + '"]');
+      if(sec && window._lenis) window._lenis.scrollTo(sec.offsetTop + 8, { duration: 1.6 });
+      else if(sec) sec.scrollIntoView();
+    });
+  });
+  var legSecs = [].slice.call(document.querySelectorAll('[data-leg]'));
+  var bars = [].slice.call(document.querySelectorAll('#barstage polygon'));
+  var barstage = document.getElementById('barstage');
+  var heroImg = document.getElementById('heroImg');
+  var roofImg = document.getElementById('roofImg');
+
+  var lastScrollY = -1;
+  function frame(){
+    var y = scrollY;
+    if(y !== lastScrollY){
+      lastScrollY = y;
+      hd.classList.toggle('frost', y > 120);
+      if(y > 120){
+        if(y > lastY + 6){ hd.classList.add('gone'); lastY = y; }
+        else if(y < lastY - 6){ hd.classList.remove('gone'); lastY = y; }
+      } else { hd.classList.remove('gone'); lastY = y; }
+
+      /* journey rail */
+      var max = document.documentElement.scrollHeight - innerHeight;
+      var pp = clamp01(y / max);
+      railFill.style.transform = 'scaleY(' + pp + ')';
+      railPct.textContent = Math.round(pp * 100) + '%';
+      var activeLeg = -1;
+      legSecs.forEach(function(s){
+        var r = s.getBoundingClientRect();
+        if(r.top < innerHeight * 0.55 && r.bottom > innerHeight * 0.35) activeLeg = +s.dataset.leg;
+      });
+      legs.forEach(function(l, i){ l.classList.toggle('on', i === activeLeg); });
+
+      /* hero slow zoom-drift */
+      if(heroImg && y < innerHeight * 1.4){
+        heroImg.style.transform = 'translateY(' + (-y * 0.08) + 'px)';
+      }
+      /* rooftop drift */
+      if(roofImg){
+        var rr = roofImg.getBoundingClientRect();
+        if(rr.bottom > 0 && rr.top < innerHeight){
+          var rp = (rr.top + rr.height / 2 - innerHeight / 2) / innerHeight;
+          roofImg.style.transform = 'scale(1.12) translateY(' + (rp * 26) + 'px)';
+        }
+      }
+      /* bars rise and lock */
+      if(barstage){
+        var br = barstage.getBoundingClientRect();
+        var bp = clamp01(1 - (br.top - innerHeight * 0.18) / (innerHeight * 0.6));
+        bars.forEach(function(b, i){
+          var lag = clamp01(bp * (1.35 + i * 0.28) - i * 0.22);
+          var e = lag * lag * (3 - 2 * lag);
+          b.style.transform = 'translateY(' + ((1 - e) * 130) + 'px)';
+          b.style.transformBox = 'fill-box';
+          b.style.opacity = String(0.15 + e * 0.85);
+        });
+      }
+    }
+
+    /* damped traversals — element crosses while its section crosses the viewport */
+    drs.forEach(function(d){
+      var sec = d.el.parentElement;
+      var r = sec.getBoundingClientRect();
+      var p = clamp01((innerHeight - r.top) / (innerHeight + r.height));
+      var target = clamp01(0.5 + (p - 0.5) * d.sp * 2);
+      d.cur += (target - d.cur) * 0.075;
+      var t = d.cur;
+      var x = d.x0 + (d.x1 - d.x0) * t;
+      var yy = d.y0 + (d.y1 - d.y0) * t;
+      var rot = d.r0 + (d.r1 - d.r0) * t;
+      d.el.style.transform = 'translate3d(' + x + 'vw,' + yy + 'vh,0) rotate(' + rot + 'deg)';
+      d.el.style.left = '0'; d.el.style.top = '0';
+    });
+
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+
+<dialog class="pmodal" id="pmodal" aria-label="Floor plan detail">
+  <div class="pmcard">
+    <button class="pmx" type="button" id="pmx" aria-label="Close">&times;</button>
+    <div class="pmimg"><img id="pmimg" src="" alt=""></div>
+    <h3 id="pmname"></h3>
+    <p class="pmspec" id="pmspec"></p>
+    <p class="pmprice" id="pmprice"></p>
+    <div class="pmact">
+      <a class="pmaf" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability</a>
+      <a class="pmal" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener">Live floor plans</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  var PLANS = {
+    harbor:{n:'Harbor',s:'2 bd \u00b7 2 ba \u00b7 722\u2013754 sq ft',p:'$3,770',a:'4 available'},
+    reef:{n:'Reef',s:'2 bd \u00b7 2 ba \u00b7 768 sq ft',p:'$3,845',a:'2 available'},
+    pacific:{n:'Pacific',s:'2 bd \u00b7 2 ba \u00b7 757 sq ft',p:'$3,895',a:'1 available'},
+    lighthouse:{n:'Lighthouse',s:'2 bd \u00b7 2 ba \u00b7 742\u2013766 sq ft',p:'$3,950',a:'4 available'},
+    seacliff:{n:'Seacliff',s:'2 bd \u00b7 2 ba \u00b7 895 sq ft',p:'$3,975',a:'2 available'},
+    channel:{n:'Channel',s:'2 bd \u00b7 2 ba \u00b7 799 sq ft',p:'$4,095',a:'1 available'},
+    coral:{n:'Coral',s:'3 bd \u00b7 2 ba \u00b7 876 sq ft',p:'$4,495',a:'5 available'}
+  };
+  var dlg = document.getElementById('pmodal');
+  if(!dlg || !dlg.showModal) return;
+  document.getElementById('pmx').addEventListener('click', function(){ dlg.close(); });
+  dlg.addEventListener('click', function(e){ if(e.target === dlg) dlg.close(); });
+  document.querySelectorAll('.crow').forEach(function(row){
+    row.addEventListener('click', function(e){
+      var txt = row.textContent.toLowerCase();
+      var key = Object.keys(PLANS).find(function(k){ return txt.indexOf(k) !== -1; });
+      if(!key) return;
+      e.preventDefault();
+      var d = PLANS[key];
+      document.getElementById('pmimg').src = '../assets/img/plans-trim/plan-' + key + '.png';
+      document.getElementById('pmimg').alt = d.n + ' floor plan drawing';
+      document.getElementById('pmname').textContent = d.n;
+      document.getElementById('pmspec').textContent = d.s;
+      document.getElementById('pmprice').innerHTML = d.p + ' <span>from / mo \u00b7 ' + d.a + ' \u00b7 move-in specials</span>';
+      dlg.showModal();
+    });
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  document.querySelectorAll('.hnav a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var el = document.querySelector(a.getAttribute('href'));
+      if(!el) return;
+      e.preventDefault();
+      if(window._lenis) window._lenis.scrollTo(el.offsetTop + 8, { duration: 1.5 });
+      else el.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var hd = document.getElementById('hd');
+  if(!hd) return;
+  var btn = document.createElement('button');
+  btn.className = 'mbtn'; btn.type = 'button';
+  btn.setAttribute('aria-label', 'Open menu');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = '<span><i></i><i></i><i></i></span>';
+  hd.appendChild(btn);
+  var ov = document.createElement('div');
+  ov.className = 'mnav';
+  var links = '<a href="index.html">Home</a>';
+  document.querySelectorAll('.hnav a').forEach(function(a){
+    links += '<a href="' + a.getAttribute('href') + '"' + (a.getAttribute('aria-current') ? ' aria-current="page"' : '') + '>' + a.textContent + '</a>';
+  });
+  ov.innerHTML = '<button class="mclose" type="button" aria-label="Close menu">&times;</button><nav aria-label="Pages">' + links + '</nav><p class="msub">3557 Motor Avenue, Los Angeles &middot; <a href="tel:+12132869912">+1 213-286-9912</a></p>';
+  document.body.appendChild(ov);
+  function setOpen(o){
+    ov.classList.toggle('open', o);
+    btn.setAttribute('aria-expanded', String(o));
+    document.body.style.overflow = o ? 'hidden' : '';
+  }
+  btn.addEventListener('click', function(){ setOpen(!ov.classList.contains('open')); });
+  ov.querySelector('.mclose').addEventListener('click', function(){ setOpen(false); });
+  ov.querySelectorAll('nav a').forEach(function(a){ a.addEventListener('click', function(){ setOpen(false); }); });
+  addEventListener('keydown', function(e){ if(e.key === 'Escape') setOpen(false); });
+})();
+</script>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pt = document.querySelector('.pt');
+  if(!pt) return;
+  pt.innerHTML = '<div class="pt-brand" aria-hidden="true"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><polygon points="14,18 34,18 34,74 14,80"></polygon><polygon points="40,18 60,18 60,71 40,77"></polygon><polygon points="66,18 86,18 86,68 66,74"></polygon></svg><span class="pt-name">Motor Tides</span><span class="pt-sub">By Wiseman</span></div>';
+  addEventListener('pageshow', function(e){ if(e.persisted) pt.classList.remove('cover'); });
+  if(reduce) return;
+  document.querySelectorAll('a[href]').forEach(function(a){
+    var href = a.getAttribute('href');
+    if(!href || /^(https?:|#|tel:|mailto:)/.test(href)) return;
+    if(a.getAttribute('target') === '_blank') return;
+    a.addEventListener('click', function(e){
+      if(e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
+      e.preventDefault();
+      pt.classList.add('cover');
+      var url = a.href;
+      setTimeout(function(){ location.href = url; }, 950);
+    });
+  });
+})();
+</script>
+</body>
+</html>

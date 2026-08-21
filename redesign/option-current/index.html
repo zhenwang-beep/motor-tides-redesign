@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motor Tides by Wiseman | Apartments in Los Angeles, CA</title>
+<meta name="description" content="Motor Tides by Wiseman — a demo of the current motortides.wisemanresidential.com homepage with the UnitPulse leasing concierge added.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%231C6775'%3E%3Cpolygon points='14,18 34,18 34,74 14,80'/%3E%3Cpolygon points='40,18 60,18 60,71 40,77'/%3E%3Cpolygon points='66,18 86,18 86,68 66,74'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --teal:#1C6775; --teal-deep:#074B4D; --ink:#202020; --grey:#4a4a4a;
+  --yellow:#FEDA77; --bg:#ffffff; --panel:#F6FAFF;
+  --mtc-accent:#1C6775; --mtc-accent-ink:#fff; --mtc-surface:#ffffff;
+  --mtc-bubble-bot:#EEF3F3; --mtc-bubble-user:#1C6775; --mtc-radius:14px;
+  --mtc-font:'Open Sans',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+img{max-width:100%;display:block}
+body{background:var(--bg);color:var(--ink);font-family:'Open Sans',sans-serif;font-size:16px;line-height:1.7}
+.demo-note{background:#0B2B2E;color:#FEDA77;font-family:'Montserrat',sans-serif;font-size:12px;letter-spacing:.06em;text-align:center;padding:8px 14px}
+.demo-note a{color:#fff}
+h1,h2,h3{font-family:'Montserrat',sans-serif;color:var(--teal-deep)}
+.topbar{position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:transparent;pointer-events:none}
+.topbar>*{pointer-events:auto}
+.menu-btn,.login-btn{font-family:'Montserrat',sans-serif;font-style:italic;font-weight:600;font-size:15px;border:0;cursor:pointer;padding:10px 20px;border-radius:0 12px 12px 0;background:var(--teal-deep);color:#fff}
+.login-btn{border-radius:12px 0 0 12px}
+.menu-panel{display:none;position:fixed;inset:0;z-index:200;background:rgba(7,45,48,.97);padding:90px 40px;flex-direction:column;gap:4px}
+.menu-panel.open{display:flex}
+.menu-panel a{color:#fff;font-family:'Montserrat',sans-serif;font-size:26px;font-weight:600;text-decoration:none;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.15)}
+.menu-panel a:hover{color:var(--yellow)}
+.menu-close{position:absolute;top:24px;right:28px;background:none;border:0;color:#fff;font-size:28px;cursor:pointer}
+/* hero collage */
+.collage{position:relative;margin-top:-56px;display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:180px;gap:10px;padding:0 10px}
+.collage img{width:100%;height:100%;object-fit:cover}
+.c-tall{grid-row:span 2}
+.hero-card{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.18);padding:34px 48px;text-align:center;z-index:5}
+.hero-card svg{width:64px;height:64px;color:var(--teal);margin:0 auto 4px}
+.hero-card .wm{font-family:'Montserrat',sans-serif;letter-spacing:.3em;color:var(--teal);font-weight:600;font-size:15px}
+.hero-card a{display:flex;align-items:center;gap:10px;justify-content:center;margin-top:14px;font-family:'Montserrat',sans-serif;font-weight:700;font-size:20px;color:var(--ink);text-decoration:underline}
+/* welcome */
+.welcome{max-width:1080px;margin:0 auto;padding:80px 24px 40px;display:grid;grid-template-columns:56px 1fr;gap:26px}
+.welcome .bar{background:var(--yellow);width:56px;height:220px;margin-top:8px}
+.welcome .kicker{font-style:italic;color:var(--grey);font-size:17px;margin-bottom:18px}
+.welcome h1{font-size:clamp(24px,3.4vw,34px);letter-spacing:.12em;margin-bottom:22px}
+.welcome p{margin-bottom:16px;color:var(--grey)}
+.btn-row{display:flex;gap:16px;flex-wrap:wrap;margin-top:26px}
+.btn{font-family:'Montserrat',sans-serif;font-weight:700;font-size:13px;letter-spacing:.1em;padding:15px 26px;cursor:pointer;text-decoration:none;text-align:center}
+.btn-dark{background:var(--teal-deep);color:#fff;border:2px solid var(--teal-deep)}
+.btn-dark:hover{background:#0a5c5f}
+.btn-line{background:#fff;color:var(--teal-deep);border:2px solid var(--teal-deep)}
+/* neighborhood lists */
+.hood{max-width:980px;margin:0 auto;padding:50px 24px;text-align:center}
+.hood h2{font-size:22px;letter-spacing:.24em;margin:44px 0 30px;color:var(--teal)}
+.hood-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:30px 26px;text-align:center}
+.hood-grid h3{font-size:15px;letter-spacing:.14em;margin-bottom:8px;color:var(--ink)}
+.hood-grid p{font-size:14px;color:var(--grey);text-transform:capitalize}
+/* floorplans */
+.fp{background:var(--panel);padding:80px 24px}
+.fp-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.fp h2{font-size:26px;letter-spacing:.2em;margin-bottom:22px}
+.fp p{color:var(--grey);margin-bottom:16px}
+.fp img{width:100%;height:420px;object-fit:cover}
+/* tour cta */
+.tourcta{text-align:center;padding:80px 24px}
+.tourcta h2{font-size:22px;letter-spacing:.14em;max-width:26ch;margin:0 auto 18px}
+.tourcta p{color:var(--grey);max-width:52ch;margin:0 auto 28px}
+/* footer */
+footer{background:var(--teal-deep);color:#fff;padding:60px 24px 30px}
+.f-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:40px}
+footer h3{color:#fff;font-size:14px;letter-spacing:.18em;margin-bottom:16px}
+footer a{color:rgba(255,255,255,.85);text-decoration:none;display:block;padding:4px 0;font-size:14.5px}
+footer a:hover{color:var(--yellow)}
+.f-social{display:flex;gap:12px;margin-top:14px}
+.f-social a{width:38px;height:38px;border:1px solid rgba(255,255,255,.4);border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff}
+.f-social svg{width:16px;height:16px}
+.f-legal{max-width:1080px;margin:44px auto 0;border-top:1px solid rgba(255,255,255,.2);padding-top:20px;font-size:12.5px;color:rgba(255,255,255,.6);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+.f-legal a{display:inline;color:rgba(255,255,255,.8);padding:0}
+@media(max-width:900px){
+  .collage{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px}
+  .collage img:nth-child(n+7){display:none}
+  .fp-inner{grid-template-columns:1fr}
+  .welcome{grid-template-columns:26px 1fr;gap:18px}
+  .welcome .bar{width:26px}
+  .hero-card{padding:24px 28px}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-note">DEMO — your current homepage, unchanged, with the UnitPulse leasing concierge added (bottom-right) · <a href="https://motortides.wisemanresidential.com/" target="_blank" rel="noopener">compare with the live site</a></div>
+
+<div class="topbar">
+  <button class="menu-btn" aria-expanded="false" aria-controls="menu">&#9776;&nbsp; Menu</button>
+  <a class="login-btn" href="https://motortides-wisemanresidential.securecafenet.com/residentservices/motor-tabor-by-wiseman/userlogin" target="_blank" rel="noopener" style="text-decoration:none">Login &#9662;</a>
+</div>
+
+<nav class="menu-panel" id="menu" aria-label="Site menu">
+  <button class="menu-close" aria-label="Close menu">&#10005;</button>
+  <a href="#top">Home</a>
+  <a href="#floorplans">Floor Plans</a>
+  <a href="https://motortides.wisemanresidential.com/photogallery" target="_blank" rel="noopener">Photo Gallery</a>
+  <a href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Apply Now</a>
+  <a href="https://motortides.wisemanresidential.com/mapsanddirections" target="_blank" rel="noopener">Map</a>
+</nav>
+
+<main id="top">
+  <section class="collage" aria-label="Photo collage of Motor Tides">
+    <img class="c-tall" src="../assets/img/kitchen-dining.jpg" alt="Kitchen and dining area">
+    <img src="../assets/img/entry-705.jpg" alt="Living room with white sofa">
+    <img src="../assets/img/bedroom-705.jpg" alt="Bedroom with mirrored closet">
+    <img class="c-tall" src="../assets/img/rooftop-1.jpg" alt="Rooftop pergola seating">
+    <img src="../assets/img/rooftop-2.jpg" alt="Rooftop patio">
+    <img class="c-tall" src="../assets/img/kitchen-716.jpg" alt="Kitchen with stainless fridge">
+    <img src="../assets/img/bedroom-414.jpg" alt="Bedroom with art">
+    <img src="../assets/img/living-panorama-716.jpg" alt="Living room panorama">
+    <div class="hero-card">
+      <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg>
+      <div class="wm">WISEMAN</div>
+      <a href="tel:+12132869912">&#128222; +1 213-286-9912</a>
+    </div>
+  </section>
+
+  <section class="welcome">
+    <div class="bar" aria-hidden="true"></div>
+    <div>
+      <p class="kicker">With over forty-five years of experience, we design our properties with Los Angeles' savvy renter in mind.</p>
+      <h1>MOTOR TIDES BY WISEMAN</h1>
+      <p>Motor Tides is a brand new residential community now open at 3557 Motor Ave in the heart of Culver City's most walkable neighborhood. Choose from thoughtfully designed one, two, three, and four bedroom residences, each finished for elevated everyday living.</p>
+      <p>Positioned along the vibrant Motor Avenue corridor, Motor Tides puts you minutes from Culver City's acclaimed restaurant row, the Helms Bakery District, independent cafés, boutique retail, and the Ballona Creek Trail. Major entertainment studios, Sony Pictures, Amazon MGM, and Apple TV+'s Culver City campus, are nearby, as are the Expo/Culver E Line station and fast access to Santa Monica, Marina del Rey, and Downtown LA.</p>
+      <p>At Motor Tides, you'll enjoy a rooftop deck with sweeping city views as well as a fitness center. As a pet-friendly building, your cats and dogs are also welcome.</p>
+      <p>In-person and virtual tours available by appointment. Contact our leasing team at (310)&nbsp;564-6408.</p>
+      <p><em>Experience Good Living at Motor Tides by Wiseman Residential.</em></p>
+      <div class="btn-row">
+        <a class="btn btn-dark" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener">CHECK AVAILABILITY</a>
+        <a class="btn btn-line" href="https://motortides.wisemanresidential.com/mapsanddirections" target="_blank" rel="noopener">EXPLORE THE NEIGHBORHOOD</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="hood">
+    <h2>FOR YOUR MORNINGS</h2>
+    <div class="hood-grid">
+      <div><h3>SUPER DOMESTIC COFFEE</h3><p>Stylish neighborhood coffee spot with a relaxed local crowd</p></div>
+      <div><h3>DESTROYER</h3><p>Modern café known for elevated breakfast plates and espresso</p></div>
+      <div><h3>THE WENDE MUSEUM</h3><p>Contemporary museum with rotating exhibits and creative community events</p></div>
+      <div><h3>LOVE YOGA</h3><p>Popular neighborhood yoga studio near the heart of Culver City</p></div>
+    </div>
+    <h2>AND IN THE EVENINGS</h2>
+    <div class="hood-grid">
+      <div><h3>HATCHET HALL</h3><p>Modern wood-fired restaurant with craft cocktails and local energy</p></div>
+      <div><h3>SIMONETTE</h3><p>French-inspired brasserie with cocktails and stylish patio dining</p></div>
+      <div><h3>THE CULVER HOTEL</h3><p>Historic cocktail lounge with live music and evening ambiance</p></div>
+      <div><h3>DEAR JOHN&rsquo;S</h3><p>American classics at a Sinatra-in-spirit restaurant and bar</p></div>
+    </div>
+  </section>
+
+  <section class="fp" id="floorplans">
+    <div class="fp-inner">
+      <div>
+        <h2>FLOOR PLANS</h2>
+        <p>This contemporary apartment building features sleek architectural lines, lush landscaping, and a modern atmosphere that feels both stylish and welcoming. Inside, each residence is thoughtfully designed with open layouts, contemporary finishes, and expansive windows that fill the space with natural light.</p>
+        <p>Many units feature large private balconies or patios that invite residents to enjoy Southern California's sunshine and take in stunning views of Los Angeles.</p>
+        <div class="btn-row"><a class="btn btn-dark" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener">VIEW FLOOR PLANS</a></div>
+      </div>
+      <img src="../assets/img/rooftop-aerial.jpg" alt="Aerial view of the rooftop deck" loading="lazy">
+    </div>
+  </section>
+
+  <section class="tourcta">
+    <h2>VISUALIZE YOUR NEW HOME BEFORE YOU VISIT</h2>
+    <p>Ready to make the move? Set up an appointment for a tour, and get ready to kick-start your staycation!</p>
+    <a class="btn btn-dark" href="https://motortides.wisemanresidential.com/contactus" target="_blank" rel="noopener">SCHEDULE A TOUR</a>
+  </section>
+</main>
+
+<footer>
+  <div class="f-inner">
+    <div>
+      <h3>MOTOR TIDES BY WISEMAN</h3>
+      <a href="https://maps.google.com/?q=3557%20Motor%20Avenue%20Los%20Angeles,%20CA%2090034" target="_blank" rel="noopener">3557 Motor Avenue<br>Los Angeles, CA 90034</a>
+      <a href="tel:+12132869912">+1 213-286-9912</a>
+      <div class="f-social">
+        <a href="https://www.facebook.com/Officialwisemanresidential/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a>
+        <a href="https://www.instagram.com/wisemanresidential" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".8" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://www.yelp.com/biz/wiseman-residential-los-angeles-2" target="_blank" rel="noopener" aria-label="Yelp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 12V4.2M12 12l7 3.4M12 12l-7 3.4M12 12l4.8-5.8M12 12 7.2 6.2"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <h3>QUICK LINKS</h3>
+      <a href="#top">Home</a>
+      <a href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener">Floor Plans</a>
+      <a href="https://motortides.wisemanresidential.com/photogallery" target="_blank" rel="noopener">Photo Gallery</a>
+      <a href="https://motortides.wisemanresidential.com/mapsanddirections" target="_blank" rel="noopener">Map</a>
+    </div>
+    <div>
+      <h3>RESIDENTS</h3>
+      <a href="https://motortides-wisemanresidential.securecafenet.com/residentservices/motor-tabor-by-wiseman/userlogin" target="_blank" rel="noopener">Resident Login</a>
+      <a href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Applicant Login</a>
+      <a href="https://motortides.wisemanresidential.com/contactus" target="_blank" rel="noopener">Contact Us</a>
+    </div>
+  </div>
+  <div class="f-legal">
+    <span>&copy; Single Property. All Rights Reserved. &middot; Equal Housing Opportunity</span>
+    <span><a href="https://motortides.wisemanresidential.com/termsandconditions" target="_blank" rel="noopener">Terms and Conditions</a> &middot; <a href="https://motortides.wisemanresidential.com/privacypolicy" target="_blank" rel="noopener">Privacy Policy</a> &middot; <a href="https://motortides.wisemanresidential.com/accessibility" target="_blank" rel="noopener">Accessibility</a></span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn = document.querySelector('.menu-btn');
+  var panel = document.getElementById('menu');
+  var close = document.querySelector('.menu-close');
+  function toggle(open){ panel.classList.toggle('open', open); btn.setAttribute('aria-expanded', open); }
+  btn.addEventListener('click', function(){ toggle(!panel.classList.contains('open')); });
+  close.addEventListener('click', function(){ toggle(false); });
+  panel.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ toggle(false); }); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') toggle(false); });
+})();
+</script>
+<script>window.MTC_VARIANT = 'agent'; /* human-face launcher on the current-site demo */</script>
+<script src="../assets/chat.js?v=2" defer></script>
+</body>
+</html>

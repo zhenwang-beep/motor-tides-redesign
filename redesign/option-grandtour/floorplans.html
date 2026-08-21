@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Floor Plans — Motor Tides by Wiseman</title>
+<meta name="description" content="Seven floor plans at Motor Tides — two- and three-bedroom homes from $3,770/mo with move-in specials. Plan drawings, availability, and 3D tours. Now leasing on Motor Avenue, Culver City border.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<style>
+/* The Grand Tour — Floor Plans. Fixed palette: 8:30 PM, "decision time". */
+:root{
+  --bgv:#8E5A54; --inkv:#FFF2E2; --acv:#F0C36D; --deepv:#3B2023;
+  --serif:'Fraunces',Georgia,serif; --sans:'Montserrat','Avenir Next',sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1); --pad:clamp(22px,4vw,96px);
+  --mtc-accent:#F0C36D; --mtc-accent-ink:#3B2023; --mtc-ink:#FFF2E2; --mtc-surface:#7C4B45;
+  --mtc-bubble-bot:#9C6660; --mtc-bubble-user:#3B2023; --mtc-font:'Montserrat',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:clip;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--inkv) 40%,transparent) transparent}
+body{background:var(--bgv);color:var(--inkv);font-family:var(--sans);font-size:16px;line-height:1.62;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--acv);outline-offset:3px}
+
+.hd{position:fixed;inset:0 0 auto 0;z-index:90;display:flex;align-items:center;padding:0 var(--pad);height:74px;transition:opacity .5s,transform .55s var(--ease)}
+.hd.gone{opacity:0;transform:translateY(-100%);pointer-events:none}
+.hd.frost{background:color-mix(in srgb,var(--bgv) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 1px 0 color-mix(in srgb,var(--inkv) 16%,transparent)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:22px;height:22px}
+.brand b{font-weight:600;font-size:.82rem;letter-spacing:.34em;text-transform:uppercase}
+.brand i{display:block;font-style:normal;font-weight:500;font-size:.5rem;letter-spacing:.5em;text-transform:uppercase;opacity:.7;margin-top:2px}
+.hnav{margin-left:auto;display:flex;gap:clamp(16px,2.2vw,30px)}
+.hnav a{font-size:.64rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;opacity:.78;padding:8px 0;position:relative}
+.hnav a::after{content:"";position:absolute;left:0;right:100%;bottom:2px;border-bottom:1px solid currentColor;transition:right .3s ease}
+.hnav a:hover{opacity:1}
+.hnav a:hover::after,.hnav a:focus-visible::after{right:0}
+.hnav a[aria-current="page"]{opacity:1;color:var(--acv)}
+.hnav a[aria-current="page"]::after{right:0}
+@media (max-width:760px){.hnav{display:none}}
+.hd .cta{margin-left:clamp(16px,2.2vw,30px);font-size:.68rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;text-decoration:none;border:1px solid currentColor;border-radius:999px;padding:12px 24px;transition:opacity .3s}
+.hd .cta:hover{opacity:.65}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:300;background:var(--inkv);color:var(--deepv);padding:12px 20px;text-decoration:none;font-weight:600}
+.skip-link:focus{left:12px;top:12px}
+@media (max-width:760px){.hd .cta{margin-left:auto}}
+@media (max-width:430px){.hd{height:62px}.brand b{letter-spacing:.18em;font-size:.72rem}.brand i{display:none}.hd .cta{padding:11px 14px;letter-spacing:.12em;font-size:.58rem}}
+
+.wrap{padding-left:var(--pad);padding-right:var(--pad)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.14s}.rv.d2{transition-delay:.28s}
+.tstamp{font-size:.66rem;font-weight:600;letter-spacing:.44em;text-transform:uppercase;color:var(--acv);display:flex;align-items:center;gap:16px}
+.tstamp::after{content:"";width:56px;border-top:1px solid currentColor;opacity:.5}
+.ch{padding-top:clamp(90px,12vw,170px);padding-bottom:clamp(90px,12vw,170px);position:relative}
+.ch h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,6vw,5.8rem);line-height:1.04;margin-top:18px;max-width:16ch}
+.ch h2 em{font-style:italic;font-weight:300;color:var(--acv)}
+.ch .body{max-width:52ch;margin-top:22px;opacity:.82}
+@keyframes fup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes rup{to{transform:none}}
+
+/* typographic hero with lit-window skyline */
+.hero{min-height:92svh;display:flex;flex-direction:column;justify-content:center;padding-top:100px;padding-bottom:40px;position:relative}
+.hero .tstamp{opacity:0;animation:fup 1.2s ease .3s forwards}
+.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(3rem,8.4vw,7.6rem);line-height:1.02;margin-top:20px;max-width:14ch}
+.hero h1 .o{display:block;overflow:hidden}
+.hero h1 .t{display:block;transform:translateY(112%);animation:rup 1.5s var(--ease) forwards}
+.hero h1 .o:nth-child(2) .t{animation-delay:.13s}
+.hero h1 .o:nth-child(3) .t{animation-delay:.26s}
+.hero h1 em{font-style:italic;color:var(--acv)}
+.hero .lede{margin-top:26px;max-width:50ch;opacity:0;animation:fup 1.2s ease 1.5s forwards}
+
+/* plan strip */
+.prow{display:grid;grid-template-columns:2.2em 1.25fr 1.6fr auto auto;align-items:baseline;gap:16px;padding:19px 4px;border-bottom:1px solid;border-color:color-mix(in srgb,var(--inkv) 22%,transparent);text-decoration:none;transition:padding-left .25s}
+.prow:first-of-type{border-top:1px solid;border-top-color:color-mix(in srgb,var(--inkv) 22%,transparent)}
+.prow:hover{padding-left:14px}
+.prow .i{font-size:.68rem;color:var(--acv);letter-spacing:.1em}
+.prow .nm{font-family:var(--serif);font-weight:400;font-size:1.32rem}
+.prow .sp{font-size:.85rem;opacity:.72;letter-spacing:.04em}
+.prow .pr{font-weight:600}
+.prow .pr span{font-weight:400;font-size:.75rem;opacity:.7}
+.prow .av{font-size:.64rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--acv)}
+.pnote{margin-top:18px;font-size:.8rem;opacity:.7}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:clamp(30px,4vw,46px)}
+.bfill,.bline{font-size:.7rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;text-decoration:none;border-radius:999px;padding:16px 30px;transition:opacity .3s;text-align:center}
+.bfill{background:var(--inkv);color:var(--deepv);border:1px solid var(--inkv)}
+.bline{border:1px solid;border-color:color-mix(in srgb,var(--inkv) 50%,transparent)}
+.bfill:hover,.bline:hover{opacity:.7}
+
+/* 3D tours strip */
+.tours{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,28px);margin-top:clamp(36px,5vw,64px)}
+.tcard{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;text-decoration:none}
+.tcard img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.tcard:hover img,.tcard:focus-visible img{transform:scale(1.05)}
+.tcard::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(29,12,12,.68),transparent 55%)}
+.tcard .tt{position:absolute;left:16px;bottom:14px;z-index:2;color:#fff}
+.tcard .tt b{display:block;font-family:var(--serif);font-weight:400;font-size:1.3rem;line-height:1.1}
+.tcard .tt i{display:block;font-style:normal;font-size:.6rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;opacity:.85;margin-top:5px}
+.tcard .ext{position:absolute;top:12px;right:12px;z-index:2;font-size:.58rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--deepv);background:var(--acv);border-radius:999px;padding:7px 12px}
+.extnote{margin-top:16px;font-size:.8rem;opacity:.7;max-width:60ch}
+@media (max-width:820px){.tours{grid-template-columns:repeat(2,1fr)}}
+
+.close{text-align:center;padding-bottom:clamp(90px,11vw,150px)}
+.close h2{margin:18px auto 0}
+.close .tstamp{justify-content:center}
+.close .meta{margin-top:26px;opacity:.82;line-height:2}
+.close .meta a{text-decoration:none;border-bottom:1px solid;border-color:color-mix(in srgb,var(--acv) 60%,transparent)}
+.close .actions{justify-content:center}
+
+.ft{padding:30px var(--pad) 110px;display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-between;font-size:.78rem;opacity:.85;border-top:1px solid;border-color:color-mix(in srgb,var(--inkv) 20%,transparent)}
+.ft a{text-decoration:none;border-bottom:1px solid;border-color:color-mix(in srgb,var(--inkv) 40%,transparent)}
+.ftnav{width:100%;display:flex;flex-wrap:wrap;gap:0 30px;border-bottom:1px solid;border-color:color-mix(in srgb,var(--inkv) 14%,transparent);margin-bottom:8px}
+.ftnav a{font-size:.66rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;border-bottom:0;padding-top:17px;padding-bottom:17px;opacity:.8}
+.ftnav a:hover{opacity:1}
+.ftnav a[aria-current="page"]{opacity:1;color:var(--acv)}
+
+@media (max-width:820px){
+  .prow{grid-template-columns:2em 1.2fr auto;row-gap:2px}
+  .prow .sp{display:none}
+  .prow .av{grid-column:2;font-size:.58rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .hero .tstamp,.hero .lede{animation:none;opacity:1}
+  .hero h1 .t{animation:none;transform:none}
+  .tcard img{transition:none}
+}
+
+/* plan modal */
+dialog.pmodal{border:0;padding:0;background:transparent;max-width:min(640px,94vw);width:100%;margin:auto}
+.pmodal .pmact a{display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;border-radius:999px;padding:14px 26px;transition:opacity .25s}
+.pmodal .pmact a:hover{opacity:.75}
+.pmodal .pmact a.pmaf{background:var(--inkv);color:var(--deepv);border:1px solid var(--inkv)}
+.pmodal .pmact a.pmal{border:1px solid currentColor;color:inherit}
+dialog.pmodal::backdrop{background:rgba(16,4,4,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.pmodal .pmcard{background:var(--deepv);color:var(--inkv);padding:clamp(22px,4vw,36px);position:relative}
+.pmodal .pmimg{background:#fff;padding:16px;margin-bottom:20px}
+.pmodal .pmimg img{width:100%;height:auto;max-height:56vh;object-fit:contain}
+.pmodal h3{font-family:var(--serif);font-weight:400;font-size:1.7rem;margin-bottom:4px}
+.pmodal .pmspec{opacity:.75;font-size:.92rem}
+.pmodal .pmprice{margin-top:10px;font-weight:600}
+.pmodal .pmprice span{font-weight:400;font-size:.78rem;opacity:.7}
+.pmodal .pmact{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.pmodal .pmx{position:absolute;top:12px;right:12px;width:44px;height:44px;border:0;background:none;cursor:pointer;color:inherit;font-size:22px;line-height:1;border-radius:50%;display:grid;place-items:center;transition:background .25s ease,color .25s ease,transform .3s ease}
+.pmodal .pmx:hover,.pmodal .pmx:focus-visible{background:var(--inkv);color:var(--deepv);transform:rotate(90deg)}
+
+/* mobile menu */
+.mbtn{display:none}
+@media (max-width:760px){.mbtn{display:grid;place-items:center;width:44px;height:44px;background:none;border:0;cursor:pointer;color:inherit;margin-left:10px;padding:0}}
+.mbtn i{display:block;width:22px;height:2px;background:currentColor;margin:2.5px 0;border-radius:2px}
+.mnav{position:fixed;inset:0;z-index:120;background:var(--bg,var(--bgv,#F3F0E7));color:var(--ink,var(--inkv,#153B39));display:flex;flex-direction:column;justify-content:center;padding:80px clamp(24px,8vw,60px) 44px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
+.mnav.open{opacity:1;visibility:visible;transition:opacity .35s ease}
+.mnav nav{display:flex;flex-direction:column}
+.mnav nav a{font-family:var(--serif,var(--disp,serif));font-size:clamp(1.7rem,7.5vw,2.4rem);line-height:1.2;text-decoration:none;padding:14px 0;border-bottom:1px solid color-mix(in srgb,currentColor 16%,transparent)}
+.mnav nav a[aria-current="page"]{opacity:.55}
+.mnav .mclose{position:absolute;top:12px;right:12px;width:44px;height:44px;background:none;border:0;color:inherit;font-size:26px;line-height:1;cursor:pointer}
+.mnav .msub{margin-top:28px;font-size:.85rem;opacity:.8;line-height:2}
+.mnav .msub a{text-decoration:none;border-bottom:1px solid color-mix(in srgb,currentColor 35%,transparent)}
+
+/* page transitions */
+.pt{position:fixed;inset:0;background:var(--deep,var(--deepv,#0E2726));z-index:100000;transform:translateY(102%);pointer-events:none}
+.js-pt .pt{animation:ptReveal .8s cubic-bezier(.65,0,.35,1) .42s both}
+.pt.cover{animation:ptCover .6s cubic-bezier(.65,0,.35,1) both}
+@keyframes ptReveal{from{transform:translateY(0)}to{transform:translateY(-102%)}}
+@keyframes ptCover{from{transform:translateY(102%)}to{transform:translateY(0)}}
+.pt .pt-brand{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#F4F1E8}
+.pt .pt-brand svg{width:36px;height:36px}
+.pt .pt-name{font-family:var(--serif,var(--disp,serif));font-size:1.15rem;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase}
+.pt .pt-sub{font-family:var(--sans,sans-serif);font-size:.52rem;font-weight:600;letter-spacing:.5em;text-indent:.5em;text-transform:uppercase;opacity:.72;margin-top:-6px}
+.pt.cover .pt-brand{animation:ptBrandIn .55s cubic-bezier(.22,.61,.36,1) .18s both}
+@keyframes ptBrandIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.js-pt .pt{animation:none;transform:translateY(-102%)}.pt.cover{animation:none;transform:translateY(102%)}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js-pt');</script>
+<div class="pt" aria-hidden="true"></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hd" id="hd">
+  <a class="brand" href="index.html" aria-label="Motor Tides by Wiseman — home">
+    <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><polygon points="14,18 34,18 34,74 14,80"></polygon><polygon points="40,18 60,18 60,71 40,77"></polygon><polygon points="66,18 86,18 86,68 66,74"></polygon></svg>
+    <span><b>Motor Tides</b><i>By Wiseman</i></span>
+  </a>
+  <nav class="hnav" aria-label="Pages"><a href="residences.html">12:30p &middot; Residences</a><a href="experience.html">6:48p &middot; Experience</a><a href="floorplans.html" aria-current="page">8:30p &middot; Floor Plans</a></nav>
+  <a class="cta" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Book a tour</a>
+</header>
+
+<main id="main">
+
+  <!-- 8:30 PM — hero -->
+  <section class="ch hero wrap">
+    <p class="tstamp">8:30 PM &middot; Decision time</p>
+    <h1 aria-label="One address, seven ways to come home">
+      <span class="o"><span class="t">One address,</span></span>
+      <span class="o"><span class="t">seven ways</span></span>
+      <span class="o"><span class="t">to <em>come home.</em></span></span>
+    </h1>
+    <p class="lede">Two- and three-bedroom homes from $3,770 a month, move-in specials on every plan. Tap a plan for its drawing, or step inside with a 3D tour.</p>
+  </section>
+
+  <!-- 9:00 PM — the seven plans -->
+  <section class="ch wrap" id="plans" style="padding-top:0">
+    <p class="tstamp rv">9:00 PM &middot; The shortlist</p>
+    <h2 class="rv d1">Compare all <em>seven.</em></h2>
+    <div class="rv d1" style="margin-top:clamp(30px,4vw,50px)">
+      <a class="prow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">i</span><span class="nm">Harbor</span><span class="sp">2 bd &middot; 2 ba &middot; 722&ndash;754 sq ft</span><span class="pr">$3,770 <span>from</span></span><span class="av">4 open</span></a>
+      <a class="prow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">ii</span><span class="nm">Reef</span><span class="sp">2 bd &middot; 2 ba &middot; 768 sq ft</span><span class="pr">$3,845 <span>from</span></span><span class="av">2 open</span></a>
+      <a class="prow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">iii</span><span class="nm">Pacific</span><span class="sp">2 bd &middot; 2 ba &middot; 757 sq ft</span><span class="pr">$3,895 <span>from</span></span><span class="av">1 open</span></a>
+      <a class="prow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">iv</span><span class="nm">Lighthouse</span><span class="sp">2 bd &middot; 2 ba &middot; 742&ndash;766 sq ft</span><span class="pr">$3,950 <span>from</span></span><span class="av">4 open</span></a>
+      <a class="prow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">v</span><span class="nm">Seacliff</span><span class="sp">2 bd &middot; 2 ba &middot; 895 sq ft</span><span class="pr">$3,975 <span>from</span></span><span class="av">2 open</span></a>
+      <a class="prow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">vi</span><span class="nm">Channel</span><span class="sp">2 bd &middot; 2 ba &middot; 799 sq ft</span><span class="pr">$4,095 <span>from</span></span><span class="av">1 open</span></a>
+      <a class="prow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="i">vii</span><span class="nm">Coral</span><span class="sp">3 bd &middot; 2 ba &middot; 876 sq ft</span><span class="pr">$4,495 <span>from</span></span><span class="av">5 open</span></a>
+    </div>
+    <p class="pnote rv d2">Pricing shown is &ldquo;from / month&rdquo; and changes with availability &mdash; confirm today&rsquo;s numbers with the leasing team. Move-in specials on all plans. Part of 107 brand-new one- to four-bedroom residences.</p>
+    <div class="actions rv d2">
+      <a class="bfill" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability</a>
+      <a class="bline" href="tel:+12132869912">Call leasing</a>
+    </div>
+  </section>
+
+  <!-- 9:30 PM — 3D tours -->
+  <section class="ch wrap" style="padding-top:0">
+    <p class="tstamp rv">9:30 PM &middot; Walk them tonight</p>
+    <h2 class="rv d1">Step inside from <em>the sofa.</em></h2>
+    <p class="body rv d2">Every plan has a full 3D tour on our live leasing site. Each card below opens motortides.wisemanresidential.com in a new tab.</p>
+    <div class="tours rv d2">
+      <a class="tcard" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener">
+        <img src="../assets/img/hero-living.jpg" alt="Living room inside the Harbor floor plan" loading="lazy">
+        <span class="ext">External &nearr;</span><span class="tt"><b>Harbor</b><i>3D tour</i></span>
+      </a>
+      <a class="tcard" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener">
+        <img src="../assets/img/living-green.jpg" alt="Living room inside the Reef floor plan" loading="lazy">
+        <span class="ext">External &nearr;</span><span class="tt"><b>Reef</b><i>3D tour</i></span>
+      </a>
+      <a class="tcard" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener">
+        <img src="../assets/img/entry-705.jpg" alt="Entry and kitchen inside the Seacliff floor plan" loading="lazy">
+        <span class="ext">External &nearr;</span><span class="tt"><b>Seacliff</b><i>3D tour</i></span>
+      </a>
+      <a class="tcard" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener">
+        <img src="../assets/img/living-art-716.jpg" alt="Living room inside the Coral floor plan" loading="lazy">
+        <span class="ext">External &nearr;</span><span class="tt"><b>Coral</b><i>3D tour</i></span>
+      </a>
+    </div>
+    <p class="extnote rv">3D tours are hosted on the live Motor Tides leasing site and open in a new tab.</p>
+  </section>
+
+  <!-- 11:15 PM — close -->
+  <section class="ch close wrap">
+    <p class="tstamp rv">11:15 PM &middot; Sleep on it</p>
+    <h2 class="rv d1" style="max-width:18ch">Tomorrow, see it <em>in daylight.</em></h2>
+    <p class="meta rv d1">3557 Motor Avenue, Los Angeles, CA 90034<br>
+      <a href="tel:+12132869912">+1 213-286-9912</a> &middot; Tours by appointment &middot; Mon&ndash;Fri 9:30&ndash;6:30 &middot; Sat&ndash;Sun 11&ndash;4</p>
+    <div class="actions rv d2">
+      <a class="bfill" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Book a tour</a>
+      <a class="bline" href="residences.html">See the residences</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ft">
+  <nav class="ftnav" aria-label="Pages">
+    <a href="index.html">The Full Day</a>
+    <a href="residences.html">Residences</a>
+    <a href="floorplans.html" aria-current="page">Floor Plans</a>
+    <a href="experience.html">Experience</a>
+  </nav>
+  <span>&copy; 2026 Wiseman Residential &middot; Equal Housing Opportunity</span>
+  <span><a href="https://motortides-wisemanresidential.securecafenet.com/residentservices/motor-tabor-by-wiseman/userlogin" target="_blank" rel="noopener">Resident login</a></span>
+  <span>Design concept — The Grand Tour &middot; <a href="../index.html">View all concepts</a></span>
+</footer>
+
+<dialog class="pmodal" id="pmodal" aria-label="Floor plan detail">
+  <div class="pmcard">
+    <button class="pmx" type="button" id="pmx" aria-label="Close">&times;</button>
+    <div class="pmimg"><img id="pmimg" src="" alt=""></div>
+    <h3 id="pmname"></h3>
+    <p class="pmspec" id="pmspec"></p>
+    <p class="pmprice" id="pmprice"></p>
+    <div class="pmact">
+      <a class="pmaf" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability</a>
+      <a class="pmal" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener">Live floor plans</a>
+    </div>
+  </div>
+</dialog>
+
+<script>window.MTC_VARIANT='pill';</script>
+<script src="../assets/chat.js?v=4" defer></script>
+<script>
+(function(){
+  'use strict';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  addEventListener('DOMContentLoaded', function(){
+    if(!reduce && window.Lenis){
+      var lenis = new Lenis({ lerp: 0.09 }); window._lenis = lenis;
+      (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
+    }
+  });
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+  var hd = document.getElementById('hd'), lastY = 0, ticking = false;
+
+  function onScroll(){
+    ticking = false;
+    var y = scrollY;
+    hd.classList.toggle('frost', y > 120);
+    if(y > 120){
+      if(y > lastY + 6){ hd.classList.add('gone'); lastY = y; }
+      else if(y < lastY - 6){ hd.classList.remove('gone'); lastY = y; }
+    } else { hd.classList.remove('gone'); lastY = y; }
+  }
+  addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
+
+  /* plan modal — same interaction as the home page */
+  var PLANS = {
+    harbor:{n:'Harbor',s:'2 bd · 2 ba · 722–754 sq ft',p:'$3,770',a:'4 available'},
+    reef:{n:'Reef',s:'2 bd · 2 ba · 768 sq ft',p:'$3,845',a:'2 available'},
+    pacific:{n:'Pacific',s:'2 bd · 2 ba · 757 sq ft',p:'$3,895',a:'1 available'},
+    lighthouse:{n:'Lighthouse',s:'2 bd · 2 ba · 742–766 sq ft',p:'$3,950',a:'4 available'},
+    seacliff:{n:'Seacliff',s:'2 bd · 2 ba · 895 sq ft',p:'$3,975',a:'2 available'},
+    channel:{n:'Channel',s:'2 bd · 2 ba · 799 sq ft',p:'$4,095',a:'1 available'},
+    coral:{n:'Coral',s:'3 bd · 2 ba · 876 sq ft',p:'$4,495',a:'5 available'}
+  };
+  var dlg = document.getElementById('pmodal');
+  if(!dlg || !dlg.showModal) return;
+  document.getElementById('pmx').addEventListener('click', function(){ dlg.close(); });
+  dlg.addEventListener('click', function(e){ if(e.target === dlg) dlg.close(); });
+  document.querySelectorAll('.prow').forEach(function(row){
+    row.addEventListener('click', function(e){
+      var txt = row.textContent.toLowerCase();
+      var key = Object.keys(PLANS).find(function(k){ return txt.indexOf(k) !== -1; });
+      if(!key) return;
+      e.preventDefault();
+      var d = PLANS[key];
+      document.getElementById('pmimg').src = '../assets/img/plans-trim/plan-' + key + '.png';
+      document.getElementById('pmimg').alt = d.n + ' floor plan drawing';
+      document.getElementById('pmname').textContent = d.n;
+      document.getElementById('pmspec').textContent = d.s;
+      document.getElementById('pmprice').innerHTML = d.p + ' <span>from / mo · ' + d.a + ' · move-in specials</span>';
+      dlg.showModal();
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var hd = document.getElementById('hd');
+  if(!hd) return;
+  var btn = document.createElement('button');
+  btn.className = 'mbtn'; btn.type = 'button';
+  btn.setAttribute('aria-label', 'Open menu');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = '<span><i></i><i></i><i></i></span>';
+  hd.appendChild(btn);
+  var ov = document.createElement('div');
+  ov.className = 'mnav';
+  var links = '<a href="index.html">Home</a>';
+  document.querySelectorAll('.hnav a').forEach(function(a){
+    links += '<a href="' + a.getAttribute('href') + '"' + (a.getAttribute('aria-current') ? ' aria-current="page"' : '') + '>' + a.textContent + '</a>';
+  });
+  ov.innerHTML = '<button class="mclose" type="button" aria-label="Close menu">&times;</button><nav aria-label="Pages">' + links + '</nav><p class="msub">3557 Motor Avenue, Los Angeles &middot; <a href="tel:+12132869912">+1 213-286-9912</a></p>';
+  document.body.appendChild(ov);
+  function setOpen(o){
+    ov.classList.toggle('open', o);
+    btn.setAttribute('aria-expanded', String(o));
+    document.body.style.overflow = o ? 'hidden' : '';
+  }
+  btn.addEventListener('click', function(){ setOpen(!ov.classList.contains('open')); });
+  ov.querySelector('.mclose').addEventListener('click', function(){ setOpen(false); });
+  ov.querySelectorAll('nav a').forEach(function(a){ a.addEventListener('click', function(){ setOpen(false); }); });
+  addEventListener('keydown', function(e){ if(e.key === 'Escape') setOpen(false); });
+})();
+</script>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pt = document.querySelector('.pt');
+  if(!pt) return;
+  pt.innerHTML = '<div class="pt-brand" aria-hidden="true"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><polygon points="14,18 34,18 34,74 14,80"></polygon><polygon points="40,18 60,18 60,71 40,77"></polygon><polygon points="66,18 86,18 86,68 66,74"></polygon></svg><span class="pt-name">Motor Tides</span><span class="pt-sub">By Wiseman</span></div>';
+  addEventListener('pageshow', function(e){ if(e.persisted) pt.classList.remove('cover'); });
+  if(reduce) return;
+  document.querySelectorAll('a[href]').forEach(function(a){
+    var href = a.getAttribute('href');
+    if(!href || /^(https?:|#|tel:|mailto:)/.test(href)) return;
+    if(a.getAttribute('target') === '_blank') return;
+    a.addEventListener('click', function(e){
+      if(e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
+      e.preventDefault();
+      pt.classList.add('cover');
+      var url = a.href;
+      setTimeout(function(){ location.href = url; }, 950);
+    });
+  });
+})();
+</script>
+</body>
+</html>

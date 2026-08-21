@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# Vercel project links (per-machine, recreated by `vercel link`)
+.vercel/
+**/.vercel/
+
+# Generated deploy bundles — rebuilt by `python3 scripts/prep_deploy.py`
+redesign/deploy/
+
+# Editor / tooling
+.idea/
+.vscode/
+*.log

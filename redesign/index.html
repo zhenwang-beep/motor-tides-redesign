@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motor Tides — Leasing Concierge & Redesign Concepts</title>
+<meta name="description" content="A 24/7 AI leasing concierge for Motor Tides — live on the current site and across four redesign concepts.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%230E6B72'%3E%3Cpolygon points='14,18 34,18 34,74 14,80'/%3E%3Cpolygon points='40,18 60,18 60,71 40,77'/%3E%3Cpolygon points='66,18 86,18 86,68 66,74'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F6F1E7; --paper:#FBF8F2; --teal:#0C3A3D; --teal-mid:#0E6B72;
+    --ink:#33413F; --sand:#E9C874; --line:rgba(12,58,61,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--cream);color:var(--ink);font-family:'Mulish',sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+  header{padding:44px 0 0}
+  .brand{display:flex;align-items:center;gap:14px;color:var(--teal)}
+  .brand svg{width:38px;height:38px}
+  .brand span{font-size:15px;letter-spacing:.35em;font-weight:600;padding-left:2px}
+  .hero{padding:72px 0 56px;border-bottom:1px solid var(--line)}
+  .kicker{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:700;color:var(--teal-mid);margin-bottom:22px;display:flex;align-items:center;gap:12px}
+  .kicker::before{content:"";width:34px;height:1px;background:var(--sand)}
+  h1{font-family:'Fraunces',serif;font-weight:390;font-size:clamp(38px,5.4vw,64px);line-height:1.06;color:var(--teal);letter-spacing:-.01em;max-width:15ch}
+  h1 em{font-style:italic;font-weight:340}
+  .hero p{max-width:58ch;margin-top:24px;font-size:16.5px;line-height:1.65}
+  .hero .meta{margin-top:30px;display:flex;flex-wrap:wrap;gap:10px 26px;font-size:13px;color:var(--teal);font-weight:600}
+  .hero .meta a{color:var(--teal-mid)}
+  .hero-2col{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+  .hero-copy p{margin-top:20px}
+  .hero-ctas{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .cta-solid{background:var(--teal);color:#F6F1E7;font-weight:700;font-size:14px;padding:14px 24px;border-radius:999px;text-decoration:none;transition:transform .2s;display:inline-block}
+  .cta-solid:hover{transform:translateY(-2px)}
+  .cta-ghost{color:var(--teal-mid);font-weight:700;font-size:14px;text-decoration:none;border-bottom:1.5px solid var(--sand);padding-bottom:2px}
+  .hero-chat{background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:0 24px 60px rgba(12,58,61,.14);padding:18px;display:flex;flex-direction:column;gap:10px;max-width:420px;justify-self:end;width:100%}
+  .hc-head{display:flex;align-items:center;gap:11px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .hc-head img{width:38px;height:38px;border-radius:50%;object-fit:cover}
+  .hc-head b{display:block;font-size:14px;color:var(--teal)}
+  .hc-head span{font-size:11.5px;color:rgba(51,65,63,.65);display:flex;align-items:center;gap:5px}
+  .hc-head span::before{content:"";width:7px;height:7px;border-radius:50%;background:#3ddc84}
+  .hc-msg{font-size:13.5px;line-height:1.5;padding:9px 13px;border-radius:14px;max-width:85%}
+  .hc-msg.u{align-self:flex-end;background:var(--teal);color:#F6F1E7;border-bottom-right-radius:4px}
+  .hc-msg.m{align-self:flex-start;background:#EEE7D9;color:var(--ink);border-bottom-left-radius:4px}
+  .hc-chips{display:flex;gap:7px}
+  .hc-chips span{font-size:12px;font-weight:700;color:var(--teal-mid);border:1.5px solid rgba(14,107,114,.4);border-radius:999px;padding:5px 12px}
+  .hc-chips span.on{background:var(--teal-mid);color:#fff;border-color:var(--teal-mid)}
+  .hc-time{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:rgba(51,65,63,.55);text-align:center;margin-top:2px}
+  .hc-body{display:flex;flex-direction:column;gap:10px}
+  .hc-slot{position:relative;display:flex;flex-direction:column;align-items:flex-start}
+  .hc-step{opacity:0;transform:translateY(8px);transition:opacity .45s ease,transform .45s cubic-bezier(.22,1,.36,1)}
+  .hc-step.show{opacity:1;transform:none}
+  .hc-typing{position:absolute;left:0;top:0;background:#EEE7D9;border-radius:14px;border-bottom-left-radius:4px;padding:12px 14px;display:inline-flex;gap:4px;opacity:0;pointer-events:none;transition:opacity .3s}
+  .hc-typing.show{opacity:1}
+  .hc-typing i{width:6px;height:6px;border-radius:50%;background:rgba(51,65,63,.5);animation:hcB 1s infinite}
+  .hc-typing i:nth-child(2){animation-delay:.15s}.hc-typing i:nth-child(3){animation-delay:.3s}
+  @keyframes hcB{0%,60%,100%{transform:none;opacity:.5}30%{transform:translateY(-4px);opacity:1}}
+  .hc-chips span{transition:background .3s,color .3s,border-color .3s}
+  .hc-chips span.pick.on{background:var(--teal-mid);color:#fff;border-color:var(--teal-mid)}
+  @media(prefers-reduced-motion:reduce){.hc-step{opacity:1;transform:none}.hc-typing{display:none!important}.hc-chips span.pick{background:var(--teal-mid);color:#fff;border-color:var(--teal-mid)}}
+  .bico{display:flex;width:40px;height:40px;border-radius:12px;background:rgba(14,107,114,.1);color:var(--teal-mid);align-items:center;justify-content:center;margin-bottom:12px}
+  .bico svg{width:20px;height:20px}
+  .ownchips{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+  .ownchips span{font-size:13px;font-weight:700;color:var(--teal);background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:8px 16px}
+  @media(max-width:920px){.hero-2col{grid-template-columns:1fr}.hero-chat{justify-self:start}}
+  .pitch{border-top:1px solid var(--line);padding:14px 0 46px}
+  .pitch h2{font-family:'Fraunces',serif;font-weight:420;font-size:28px;color:var(--teal);margin:34px 0 8px}
+  .bgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:24px}
+  .bcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 22px 24px}
+  .bcard h3{font-family:'Fraunces',serif;font-weight:440;font-size:18px;color:var(--teal);margin-bottom:8px}
+  .bcard p{font-size:13.5px;line-height:1.6}
+  .trycard{margin-top:26px;background:var(--teal);color:#F6F1E7;border-radius:18px;padding:26px 30px;display:flex;align-items:center;gap:30px;flex-wrap:wrap}
+  .trycard h3{font-family:'Fraunces',serif;font-weight:440;font-size:22px;color:#F6F1E7;margin-bottom:6px}
+  .trycard p{font-size:14px;line-height:1.6;max-width:60ch;color:rgba(246,241,231,.85)}
+  .trycard>div{flex:1;min-width:280px}
+  .trybtn{background:#F6F1E7;color:var(--teal);font-weight:700;font-size:14px;padding:14px 24px;border-radius:999px;text-decoration:none;white-space:nowrap;transition:transform .2s}
+  .trybtn:hover{transform:translateY(-2px)}
+  .ownp{max-width:76ch;font-size:14.5px;line-height:1.7;margin-top:12px}
+  .ownp b{color:var(--teal)}
+  .concepts-head{border-top:1px solid var(--line);padding-top:14px}
+  .concepts-head h2{font-family:'Fraunces',serif;font-weight:420;font-size:28px;color:var(--teal);margin:34px 0 8px}
+  .concepts-head p{max-width:60ch;font-size:14.5px;line-height:1.6}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;padding:30px 0 40px}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit;transition:transform .3s cubic-bezier(.22,1,.36,1),box-shadow .3s}
+  .card:hover{transform:translateY(-5px);box-shadow:0 22px 50px rgba(12,58,61,.14)}
+  .thumb{aspect-ratio:16/10;position:relative;overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+  .card:hover .thumb img{transform:scale(1.045)}
+  .tag{position:absolute;top:14px;left:14px;background:rgba(251,248,242,.92);color:var(--teal);font-size:11px;font-weight:700;letter-spacing:.16em;padding:7px 12px;border-radius:999px}
+  .cbody{padding:24px 24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+  .cbody h2{font-family:'Fraunces',serif;font-weight:420;font-size:24px;color:var(--teal)}
+  .cbody p{font-size:14px;line-height:1.6;flex:1}
+  .dots{display:flex;gap:7px;margin-top:2px}
+  .dots i{width:16px;height:16px;border-radius:50%;border:1px solid rgba(0,0,0,.08)}
+  .go{margin-top:14px;font-size:13px;font-weight:700;letter-spacing:.06em;color:var(--teal-mid);display:flex;align-items:center;gap:8px}
+  .card.featured{grid-column:1/-1;flex-direction:row;min-height:340px}
+  .card.featured .thumb{flex:1.25;aspect-ratio:auto}
+  .card.featured .cbody{flex:1;justify-content:center;padding:34px 36px}
+  .card.featured h2{font-size:30px}
+  .archived{padding:6px 0 46px;font-size:13.5px;color:#6c6f66;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline}
+  .archived b{font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:11px;color:#8a8d82}
+  .archived a{color:#41564F;text-decoration:none;border-bottom:1px solid rgba(18,48,46,.25)}
+  .archived a:hover{color:var(--teal-mid)}
+  @media (max-width:760px){.card.featured{flex-direction:column;min-height:0}.card.featured .thumb{aspect-ratio:16/10;flex:none}}
+  .go::after{content:"→";transition:transform .25s}
+  .go.ext::after{content:"↗"}
+  .card:hover .go::after{transform:translateX(5px)}
+  .card:hover .go.ext::after{transform:translate(3px,-3px)}
+  footer{padding:34px 0 46px;border-top:1px solid var(--line);font-size:12.5px;color:rgba(51,65,63,.75);display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between}
+  footer a{color:var(--teal-mid)}
+  .eval{border-top:1px solid var(--line);padding:8px 0 26px}
+  .eval summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:14px;padding:26px 0;user-select:none}
+  .eval summary::-webkit-details-marker{display:none}
+  .eval summary h2{font-family:'Fraunces',serif;font-weight:420;font-size:28px;color:var(--teal)}
+  .eval summary .hint{font-size:13px;color:rgba(51,65,63,.65);margin-left:auto}
+  .eval summary .chev{width:30px;height:30px;border:1.5px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--teal-mid);transition:transform .3s;flex:none}
+  .eval[open] summary .chev{transform:rotate(180deg)}
+  .eval .eintro{max-width:62ch;font-size:14.5px;line-height:1.6;margin-bottom:26px}
+  .egrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px}
+  .ecard{background:var(--paper);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+  .ecard .shot{border-bottom:1px solid var(--line);background:#fff;position:relative}
+  .ecard .shot img{width:100%;display:block;max-height:240px;object-fit:cover;object-position:top}
+  .ecard .shot .lbl{position:absolute;top:12px;left:12px;background:rgba(12,58,61,.85);color:#FBF8F2;font-size:10.5px;font-weight:700;letter-spacing:.14em;padding:6px 10px;border-radius:999px;text-transform:uppercase}
+  .ecard .ebody{padding:20px 22px 22px}
+  .ecard h3{font-family:'Fraunces',serif;font-weight:440;font-size:19px;color:var(--teal);margin-bottom:8px}
+  .ecard p{font-size:13.5px;line-height:1.6}
+  .ecard p b{color:#A4552F;font-weight:700}
+  .eval .emore{margin-top:26px}
+  .eval .emore b{display:block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal-mid);margin-bottom:10px}
+  .eval .emore ul{list-style:none;columns:2;column-gap:40px}
+  .eval .emore li{font-size:13.5px;line-height:1.55;padding:7px 0 7px 18px;position:relative;break-inside:avoid}
+  .eval .emore li::before{content:"";position:absolute;left:2px;top:14px;width:6px;height:6px;border-radius:50%;background:var(--sand)}
+  .eval .emore li span{font-weight:700;color:var(--teal)}
+  @media(max-width:760px){.eval .emore ul{columns:1}}
+  .eval .efix{margin-top:24px;font-size:13.5px;color:var(--teal);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:14px 18px}
+  .widgets{padding:14px 0 64px;border-top:1px solid var(--line)}
+  .widgets h2{font-family:'Fraunces',serif;font-weight:420;font-size:28px;color:var(--teal);margin:34px 0 8px}
+  .widgets>p{max-width:60ch;font-size:14.5px;line-height:1.6}
+  .wgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:24px;margin-top:30px}
+  .wcard{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:26px 24px 22px;display:flex;flex-direction:column;gap:10px}
+  .wstage{height:120px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+  .wstage svg{display:block}
+  .w-min{width:64px;height:64px;border-radius:50%;background:var(--teal-mid);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 26px rgba(12,58,61,.28)}
+  .w-min svg{width:28px;height:28px}
+  .w-pill{display:inline-flex;align-items:center;gap:10px;height:52px;padding:0 22px 0 18px;border-radius:999px;background:var(--teal-mid);color:#fff;font-weight:700;font-size:15px;box-shadow:0 10px 26px rgba(12,58,61,.28)}
+  .w-pill svg{width:20px;height:20px}
+  .w-char{width:88px;height:96px;color:var(--teal-mid)}
+  .w-char.gold{color:#D9A93F}
+  @keyframes wbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+  .wstage .bob{animation:wbob 4.2s ease-in-out infinite}
+  .wcard h3{font-family:'Fraunces',serif;font-weight:440;font-size:19px;color:var(--teal)}
+  .wcard p{font-size:13.5px;line-height:1.6;flex:1}
+  .wtry{font-size:12.5px;font-weight:700;letter-spacing:.04em}
+  .wtry a{color:var(--teal-mid);text-decoration:none;border-bottom:1px solid var(--sand)}
+  .wtry a:hover{color:var(--teal)}
+  .wnote{margin-top:26px;font-size:12.5px;color:rgba(51,65,63,.7)}
+  .wnote code{background:rgba(12,58,61,.07);padding:2px 7px;border-radius:6px;font-size:11.5px}
+  @media(max-width:900px){.wgrid{grid-template-columns:1fr;max-width:520px}}
+  @media(prefers-reduced-motion:reduce){.wstage .bob{animation:none}}
+  @media(max-width:900px){.grid{grid-template-columns:1fr;max-width:520px}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand" aria-label="Wiseman Residential">
+        <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg>
+        <span>WISEMAN</span>
+      </div>
+    </header>
+
+    <section class="hero hero-2col">
+      <div class="hero-copy">
+        <div class="kicker">UnitPulse × Motor Tides</div>
+        <h1>Your 24/7 leasing desk, <em>plus a better site.</em></h1>
+        <p>Deploy an <b>AI leasing concierge</b> on your current site now — with a full website redesign and ongoing SEO &amp; GEO support included.</p>
+        <div class="hero-ctas">
+          <a class="cta-solid" href="option-current/index.html">Try the concierge →</a>
+          <a class="cta-ghost" href="#concepts">View website concepts ↓</a>
+        </div>
+      </div>
+      <div class="hero-chat" aria-hidden="true">
+        <div class="hc-head"><img src="https://randomuser.me/api/portraits/women/65.jpg" alt=""><div><b>AI Leasing Concierge</b><span>Online · replies instantly</span></div></div>
+        <div class="hc-body">
+          <div class="hc-msg u hc-step">How much is a 2-bedroom?</div>
+          <div class="hc-slot"><div class="hc-typing hc-step"><i></i><i></i><i></i></div><div class="hc-msg m hc-step">Harbor starts at <b>$3,770</b> — 4 homes open right now, with move-in specials 🎉</div></div>
+          <div class="hc-msg u hc-step">Can I see it Saturday?</div>
+          <div class="hc-slot"><div class="hc-typing hc-step"><i></i><i></i><i></i></div><div class="hc-msg m hc-step">Of course! I have <b>11:00</b>, <b>1:30</b>, or <b>3:00</b> — which works?</div></div>
+          <div class="hc-chips hc-step"><span>11:00 AM</span><span class="pick">1:30 PM</span><span>3:00 PM</span></div>
+          <div class="hc-time hc-step">Tuesday · 11:48 PM — office closed, lead captured</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pitch">
+      <h2>Why a concierge, and why now</h2>
+      <div class="bgrid">
+        <div class="bcard"><span class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9" />
+  <path d="M20 3v4" />
+  <path d="M22 5h-4" /></svg></span><h3>After-hours leads, caught</h3><p>Renters browse at 11pm. The concierge answers in seconds.</p></div>
+        <div class="bcard"><span class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v4" />
+  <path d="M16 2v4" />
+  <rect width="18" height="18" x="3" y="4" rx="2" />
+  <path d="M3 10h18" />
+  <path d="m9 16 2 2 4-4" /></svg></span><h3>Tours booked in chat</h3><p>Day and time in two taps — no phone tag.</p></div>
+        <div class="bcard"><span class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z" />
+  <path d="m9 12 2 2 4-4" /></svg></span><h3>Always-accurate answers</h3><p>Pricing, pets, parking — one source of truth.</p></div>
+        <div class="bcard"><span class="bico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" />
+  <path d="M21 3v5h-5" />
+  <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" />
+  <path d="M8 16H3v5" /></svg></span><h3>Synced with Yardi</h3><p>RentCafe in, guest cards and tours back to Voyager.</p></div>
+      </div>
+      <div class="trycard">
+        <div>
+          <h3>See it on your site — today</h3>
+          <p>Your current homepage, rebuilt, with the concierge added. No redesign required.</p>
+        </div>
+        <a class="trybtn" href="option-current/index.html">Open the demo →</a>
+      </div>
+    </section>
+
+    <section class="widgets">
+      <h2>Concierge widget styles</h2>
+      <p>Seven launcher personalities — any style works on any concept.</p>
+      <div class="wgrid">
+        <div class="wcard">
+          <div class="wstage">
+            <span class="w-min"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+          </div>
+          <h3>Minimal</h3>
+          <p>The quiet classic. Default on Coastal Editorial.</p>
+          <span class="wtry">Preview: <a href="option-a/index.html?chat=minimal">Editorial</a> · <a href="option-c/index.html?chat=minimal">Dark</a> · <a href="option-b/index.html?chat=minimal">Platform</a></span>
+        </div>
+        <div class="wcard">
+          <div class="wstage">
+            <span class="w-min"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true" style="width:30px;height:30px"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg></span>
+          </div>
+          <h3>The logo mark</h3>
+          <p>Your own mark — the bars rise like the tide. Default on Modern Platform.</p>
+          <span class="wtry">Preview: <a href="option-a/index.html?chat=logo">Editorial</a> · <a href="option-c/index.html?chat=logo">Dark</a> · <a href="option-b/index.html?chat=logo">Platform</a></span>
+        </div>
+        <div class="wcard">
+          <div class="wstage">
+            <span class="w-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H8l-5 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Chat with us</span>
+          </div>
+          <h3>The labeled pill</h3>
+          <p>Icon plus an explicit invitation — the clearest call to action.</p>
+          <span class="wtry">Preview: <a href="option-a/index.html?chat=pill">Editorial</a> · <a href="option-c/index.html?chat=pill">Dark</a> · <a href="option-b/index.html?chat=pill">Platform</a></span>
+        </div>
+        <div class="wcard">
+          <div class="wstage">
+            <span class="w-min" style="overflow:hidden;padding:0;position:relative"><img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Leasing agent portrait" style="width:100%;height:100%;object-fit:cover;border-radius:50%"><span style="position:absolute;right:2px;bottom:2px;width:14px;height:14px;border-radius:50%;background:#3ddc84;border:2.5px solid #fff"></span></span>
+          </div>
+          <h3>A real face</h3>
+          <p>A real face — the highest-trust signal. Swaps for your team's photo.</p>
+          <span class="wtry">Preview: <a href="option-a/index.html?chat=agent">Editorial</a> · <a href="option-c/index.html?chat=agent">Dark</a> · <a href="option-b/index.html?chat=agent">Platform</a></span>
+        </div>
+        <div class="wcard">
+          <div class="wstage">
+            <svg class="w-char bob" viewBox="0 0 96 104" aria-hidden="true"><ellipse cx="48" cy="98" rx="26" ry="4.5" fill="rgba(10,30,33,.18)"/><line x1="48" y1="22" x2="48" y2="13" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><circle cx="48" cy="10" r="4" fill="#E9C874"/><rect x="10" y="42" width="7" height="18" rx="3.5" fill="currentColor" opacity=".75"/><rect x="79" y="42" width="7" height="18" rx="3.5" fill="currentColor" opacity=".75"/><rect x="16" y="22" width="64" height="58" rx="18" fill="currentColor"/><rect x="23" y="30" width="50" height="42" rx="12" fill="rgba(255,255,255,.92)"/><g fill="currentColor" opacity=".8" transform="translate(41.5,34) scale(.13)"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></g><rect x="33" y="49" width="8" height="13" rx="4" fill="#132A2D"/><rect x="55" y="49" width="8" height="13" rx="4" fill="#132A2D"/><path d="M43 67 Q48 70.5 53 67" stroke="#132A2D" stroke-width="2.2" stroke-linecap="round" fill="none"/><rect x="34" y="80" width="28" height="9" rx="4.5" fill="currentColor" opacity=".85"/></svg>
+          </div>
+          <h3>Concierge bot</h3>
+          <p>A calm concierge bot. Default on Architectural Dark.</p>
+          <span class="wtry">Preview: <a href="option-a/index.html?chat=robot">Editorial</a> · <a href="option-c/index.html?chat=robot">Dark</a> · <a href="option-b/index.html?chat=robot">Platform</a></span>
+        </div>
+        <div class="wcard">
+          <div class="wstage">
+            <svg class="w-char bob" viewBox="0 0 96 96" aria-hidden="true" style="color:#12403A"><circle cx="48" cy="50" r="42" fill="#F6F0E2"/><circle cx="48" cy="50" r="41" fill="none" stroke="#12403A" stroke-width="2"/><polygon points="43,15.5 4,5.5 4,30 43,22.5" fill="#E9C874" opacity=".55"/><polygon points="53,15.5 92,5.5 92,30 53,22.5" fill="#E9C874" opacity=".55"/><circle cx="48" cy="7" r="1.7" fill="currentColor"/><line x1="48" y1="8.7" x2="48" y2="10.8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M41.5 15.5 A6.5 6.5 0 0 1 54.5 15.5 Z" fill="#E9C874"/><rect x="42.5" y="15.5" width="11" height="5.5" fill="currentColor"/><rect x="45.6" y="16.6" width="4.8" height="3.4" rx="0.8" fill="#E9C874"/><rect x="39.5" y="21" width="17" height="3" rx="1.5" fill="currentColor"/><path fill="#FDFAF2" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" d="M42.5 24 L53.5 24 L58.8 76 L37.2 76 Z"/><polygon points="42.2,28 53.8,28 54.2,33 41.8,33" fill="currentColor"/><circle cx="44.6" cy="43" r="2.5" fill="#132A2D"/><circle cx="51.4" cy="43" r="2.5" fill="#132A2D"/><circle cx="45.4" cy="42.2" r="0.8" fill="#fff"/><circle cx="52.2" cy="42.2" r="0.8" fill="#fff"/><circle cx="41.6" cy="48" r="1.7" fill="rgba(255,130,120,.45)"/><circle cx="54.4" cy="48" r="1.7" fill="rgba(255,130,120,.45)"/><path d="M45.2 48.6 Q48 51 50.8 48.6" stroke="#132A2D" stroke-width="2" stroke-linecap="round" fill="none"/><polygon points="39.4,57 56.6,57 57.3,64 38.7,64" fill="currentColor"/><rect x="33.5" y="76" width="29" height="9" rx="4.5" fill="currentColor"/></svg>
+          </div>
+          <h3>Beacon, the lighthouse</h3>
+          <p>A smiling lighthouse, sweeping its light. From the Estate Green artifact.</p>
+          <span class="wtry">Preview: <a href="option-a/index.html?chat=lighthouse">Editorial</a> · <a href="option-c/index.html?chat=lighthouse">Dark</a> · <a href="option-b/index.html?chat=lighthouse">Platform</a></span>
+        </div>
+        <div class="wcard">
+          <div class="wstage">
+            <svg class="w-char bob" viewBox="0 0 96 96" aria-hidden="true"><ellipse cx="48" cy="91" rx="24" ry="4" fill="rgba(10,30,33,.18)"/><path fill="currentColor" d="M30 14 h36 a20 20 0 0 1 20 20 v18 a20 20 0 0 1 -20 20 h-8 l6 14 -18 -14 h-16 a20 20 0 0 1 -20 -20 v-18 a20 20 0 0 1 20 -20 Z"/><ellipse cx="27" cy="26" rx="9" ry="5.5" fill="rgba(255,255,255,.18)" transform="rotate(-18 27 26)"/><ellipse cx="34" cy="42" rx="9.5" ry="10.5" fill="#fff"/><ellipse cx="62" cy="42" rx="9.5" ry="10.5" fill="#fff"/><circle cx="36" cy="44" r="4.4" fill="#132A2D"/><circle cx="37.6" cy="42.2" r="1.4" fill="#fff"/><circle cx="64" cy="44" r="4.4" fill="#132A2D"/><circle cx="65.6" cy="42.2" r="1.4" fill="#fff"/><circle cx="24" cy="55" r="3.2" fill="rgba(255,255,255,.28)"/><circle cx="72" cy="55" r="3.2" fill="rgba(255,255,255,.28)"/><path d="M40 57 Q48 64 56 57" stroke="rgba(255,255,255,.95)" stroke-width="3" stroke-linecap="round" fill="none"/></svg>
+          </div>
+          <h3>Chatty, the bubble</h3>
+          <p>Googly eyes that follow your cursor. Try it live.</p>
+          <span class="wtry">Preview: <a href="option-a/index.html?chat=buddy">Editorial</a> · <a href="option-c/index.html?chat=buddy">Dark</a> · <a href="option-b/index.html?chat=buddy">Platform</a></span>
+        </div>
+      </div>
+      <p class="wnote">Mix and match: add <code>?chat=minimal|pill|logo|agent|robot|lighthouse|buddy</code> to any concept URL. All seven respect reduced-motion and go still once the chat opens.</p>
+    </section>
+
+    <section class="pitch">
+      <h2>And when you're ready: own your website</h2>
+      <p class="ownp">Yardi RentCafe got you online fast — but the code isn't yours to shape. Our offer: <b>a complete redesign</b> (already built, below) plus ongoing search &amp; AI-visibility work to grow organic leads.</p>
+      <div class="ownchips">
+        <span>You own the code</span><span>Fully on-brand</span><span>SEO-ready</span><span>Visible to AI search (GEO)</span>
+      </div>
+    </section>
+
+
+    <section class="concepts-head" id="concepts">
+      <h2>The concepts</h2>
+      <p>The Resort Immersive family — six live directions, each fully browsable.</p>
+    </section>
+
+    <main class="grid">
+      <a class="card featured" href="option-e/index.html">
+        <div class="thumb"><img src="assets/img/previews/e.jpg" alt="Preview of the Resort Immersive concept site"><span class="tag">01</span></div>
+        <div class="cbody">
+          <h2>Resort Immersive</h2>
+          <p>The flagship — cinematic chapters, damped scroll, full-screen photography, and six switchable color &amp; type themes (Tide, Champagne, Noir, Olive, Midnight, Bordeaux).</p>
+          <span class="go">View the concept</span>
+        </div>
+      </a>
+      <a class="card featured" href="option-nocturne/index.html">
+        <div class="thumb"><img src="assets/img/previews/nocturne.jpg" alt="Preview of the Pacific Nocturne concept site"><span class="tag">02</span></div>
+        <div class="cbody">
+          <h2>Pacific Nocturne</h2>
+          <p>The after-dark resort film — a title sequence, chapters as acts, interiors revealed through traveling iris wipes, moonlit gold on near-black green.</p>
+          <span class="go">View the concept</span>
+        </div>
+      </a>
+      <a class="card featured" href="option-monogram/index.html">
+        <div class="thumb"><img src="assets/img/previews/monogram.jpg" alt="Preview of the Living Monogram concept site"><span class="tag">03</span></div>
+        <div class="cbody">
+          <h2>Living Monogram</h2>
+          <p>The fashion-house take — giant Bodoni letterforms filled with imagery that scrubs through them, plans as a typographic index, a rotating ring around 3557.</p>
+          <span class="go">View the concept</span>
+        </div>
+      </a>
+      <a class="card featured" href="option-grandtour/index.html">
+        <div class="thumb"><img src="assets/img/previews/grandtour.jpg" alt="Preview of The Grand Tour concept site"><span class="tag">04</span></div>
+        <div class="cbody">
+          <h2>The Grand Tour</h2>
+          <p>One day, sunrise to midnight — the whole site&rsquo;s palette shifts with the time of day as you scroll, from first light to the glowing basin at 11:59&nbsp;PM.</p>
+          <span class="go">View the concept</span>
+        </div>
+      </a>
+      <a class="card featured" href="option-riviera/index.html">
+        <div class="thumb"><img src="assets/img/previews/riviera.jpg" alt="Preview of the Riviera Journal concept site"><span class="tag">05</span></div>
+        <div class="cbody">
+          <h2>Riviera Journal</h2>
+          <p>A sun-drenched travel magazine — masthead cover, tilting postcards that settle as you scroll, and a rooftop postcard that grows into a full-bleed spread.</p>
+          <span class="go">View the concept</span>
+        </div>
+      </a>
+      <a class="card featured" href="option-voyage/index.html">
+        <div class="thumb"><img src="assets/img/previews/voyage.jpg" alt="Preview of the Voyage concept site"><span class="tag">06</span></div>
+        <div class="cbody">
+          <h2>Voyage</h2>
+          <p>The journey — specimen cards drift across the legs of the trip, the Wiseman mark assembles itself, and a progress rail logs Arrive through Choose.</p>
+          <span class="go">View the concept</span>
+        </div>
+      </a>
+    </main>
+
+    <div class="archived">
+      <b>Archived explorations</b>
+      <a href="option-a/index.html">Coastal Editorial</a>
+      <a href="option-c/index.html">Architectural Dark</a>
+      <a href="https://claude.ai/code/artifact/ed54ee9b-6c99-43b6-aadb-18a5bf551378" target="_blank" rel="noopener">Estate Green</a>
+      <a href="option-b/index.html">Modern Platform</a>
+    </div>
+
+
+    <footer>
+      <span>© 2026 Wiseman Residential · Design concepts for internal review</span>
+      <span>Photography & floor plans from the current Motor Tides site · <a href="https://www.wisemanresidential.com/" target="_blank" rel="noopener">wisemanresidential.com</a></span>
+    </footer>
+  </div>
+
+<script>
+(function(){
+  var card = document.querySelector('.hero-chat');
+  if (!card) return;
+  var steps = card.querySelectorAll('.hc-step');
+  var pick = card.querySelector('.hc-chips .pick');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    steps.forEach(function(el){ el.classList.add('show'); });
+    return;
+  }
+  // timeline: [stepIndex or fn, delay-after-ms]
+  function play(){
+    steps.forEach(function(el){ el.classList.remove('show'); });
+    if (pick) pick.classList.remove('on');
+    var t = 600;
+    function at(ms, fn){ timers.push(setTimeout(fn, ms)); }
+    var seq = [
+      [0, 700],            // user q1
+      [1, 1300],           // typing
+      [2, 1500],           // answer 1  (typing hides)
+      [3, 1300],           // user q2
+      [4, 1300],           // typing 2
+      [5, 1400],           // answer 2
+      [6, 900],            // chips
+      ['pick', 1000],      // select 1:30
+      [7, 0]               // caption
+    ];
+    seq.forEach(function(step){
+      var target = step[0];
+      at(t, function(){
+        if (target === 'pick') { if (pick) pick.classList.add('on'); return; }
+        var el = steps[target];
+        // hide typing bubbles once their message lands
+        if (el.classList.contains('hc-msg') && el.classList.contains('m')) {
+          var prev = el.previousElementSibling;
+          if (prev && prev.classList.contains('hc-typing')) prev.classList.remove('show');
+        }
+        el.classList.add('show');
+      });
+      t += step[1];
+    });
+    timers.push(setTimeout(play, t + 5200)); // hold, then loop
+  }
+  var timers = [], started = false;
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting && !started) { started = true; play(); io.disconnect(); }
+    });
+  }, {threshold: .3});
+  io.observe(card);
+  document.addEventListener('visibilitychange', function(){
+    if (document.hidden) { timers.forEach(clearTimeout); timers = []; started = false; io.observe(card); }
+  });
+})();
+</script>
+</body>
+</html>

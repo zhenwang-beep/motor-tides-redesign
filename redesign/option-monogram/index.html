@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Motor Tides by Wiseman — Living Monogram</title>
+<meta name="description" content="Motor Tides, set in type — 107 brand-new residences on Motor Avenue, Culver City. Now leasing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<style>
+:root{
+  --bg:#F3F0E7; --ink:#153B39; --accent:#C8784D; --deep:#082728; --tide:#AECBC2; --graphite:#263330;
+  --serif:'Bodoni Moda',Didot,serif; --sans:'Montserrat','Avenir Next',sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1); --pad:clamp(22px,4vw,96px);
+  --mtc-accent:#153B39; --mtc-accent-ink:#F3F0E7; --mtc-ink:#153B39; --mtc-surface:#F3F0E7;
+  --mtc-bubble-bot:#E9E4D6; --mtc-bubble-user:#153B39; --mtc-font:'Montserrat',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:clip}
+html{scrollbar-width:thin;scrollbar-color:rgba(21,59,57,.4) transparent}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+::selection{background:#153B39;color:#F3F0E7}
+
+.hd{position:fixed;inset:0 0 auto 0;z-index:90;display:flex;align-items:center;padding:0 var(--pad);height:74px;transition:opacity .5s,transform .55s var(--ease),color .45s ease}
+.hd.inv{color:#EFEADD}
+.hd.frost{background:rgba(243,240,231,.9);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(21,59,57,.14)}
+.hd.inv.frost{background:rgba(8,39,40,.88);box-shadow:0 1px 0 rgba(239,234,221,.12)}
+.hd.gone{opacity:0;transform:translateY(-100%);pointer-events:none}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:22px;height:22px}
+.brand b{font-weight:600;font-size:.82rem;letter-spacing:.34em;text-transform:uppercase}
+.brand i{display:block;font-style:normal;font-weight:500;font-size:.5rem;letter-spacing:.5em;text-transform:uppercase;opacity:.7;margin-top:2px}
+.hnav{margin-left:auto;display:flex;gap:clamp(16px,2.2vw,30px)}
+.hnav a{font-size:.64rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;opacity:.78;padding:8px 0;position:relative}
+.hnav a::after{content:"";position:absolute;left:0;right:100%;bottom:2px;border-bottom:1px solid currentColor;transition:right .3s ease}
+.hnav a:hover{opacity:1}
+.hnav a:hover::after,.hnav a:focus-visible::after{right:0}
+@media (max-width:760px){.hnav{display:none}}
+.hd .cta{margin-left:clamp(16px,2.2vw,30px);font-size:.68rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;text-decoration:none;border-bottom:2px solid currentColor;padding:12px 0 10px;transition:color .3s,border-color .3s}
+.hd .cta:hover,.hd .cta:focus-visible{color:var(--accent);border-color:var(--accent)}
+
+.skip-link{position:absolute;left:-9999px;top:0;z-index:300;background:var(--ink);color:var(--bg);padding:12px 20px;text-decoration:none;font-weight:600}
+.skip-link:focus{left:12px;top:12px}
+@media (max-width:760px){.hd .cta{margin-left:auto}}
+@media (max-width:430px){.hd{height:62px}.brand b{letter-spacing:.18em;font-size:.72rem}.brand i{display:none}.hd .cta{font-size:.6rem;letter-spacing:.16em}}
+.wrap{padding:0 var(--pad)}
+.kick{font-size:.64rem;font-weight:600;letter-spacing:.46em;text-transform:uppercase;color:#945536}
+.pindex .kick{color:var(--tide)}
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.14s}.rv.d2{transition-delay:.28s}
+
+/* ============ mark ============ */
+.mark{min-height:100svh;display:grid;place-items:center;text-align:center;position:relative;padding:90px var(--pad) 60px}
+.mark .bars{width:52px;height:52px;margin:0 auto 34px;color:var(--ink);opacity:0;animation:fadeup 1.2s var(--ease) .2s forwards}
+.mark h1{font-family:var(--serif);font-weight:400;font-size:clamp(3.4rem,12.5vw,12rem);line-height:.96;text-transform:uppercase;letter-spacing:.01em}
+.mark h1 .w{display:block;overflow:hidden}
+.mark h1 .w span{display:block;transform:translateY(112%);animation:riseup 1.5s var(--ease) forwards}
+.mark h1 .w:nth-child(2) span{animation-delay:.14s}
+.mark .tag{margin-top:30px;font-size:.7rem;font-weight:600;letter-spacing:.44em;text-transform:uppercase;opacity:0;animation:fadeup 1.2s ease 1.35s forwards}
+.mark .rule{position:absolute;left:50%;bottom:44px;transform:translateX(-50%);width:1px;height:64px;background:var(--ink);transform-origin:top;animation:growln 1.2s var(--ease) 1.7s both}
+@keyframes fadeup{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes riseup{to{transform:none}}
+@keyframes growln{from{transform:translateX(-50%) scaleY(0)}to{transform:translateX(-50%) scaleY(1)}}
+
+/* ============ manifesto ============ */
+.mani{padding-top:clamp(80px,11vw,150px);padding-bottom:clamp(80px,11vw,150px);text-align:center}
+.mani p.big{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,4vw,3.8rem);line-height:1.22;max-width:26ch;margin:24px auto 0}
+.mani p.big em{font-style:italic;color:var(--accent)}
+
+/* ============ mask chapters ============ */
+.mask{position:relative;height:300vh}
+.mask.combo{height:520vh}
+.mask .stage .mword{grid-area:1/1}
+.mask .stage{position:sticky;top:0;height:100vh;display:grid;grid-template-areas:'m';place-items:center;overflow:hidden}
+.mask .mfull{position:absolute;inset:0;background-size:cover;background-position:50% 50%;opacity:0;will-change:opacity,transform;z-index:1}
+.mask .idx,.mask .under{z-index:3;position:relative}
+.mask .stage .idx{position:absolute}
+.mword{position:relative;z-index:2;font-family:var(--serif);font-weight:500;font-size:clamp(6rem,23.5vw,23rem);line-height:1;text-transform:uppercase;letter-spacing:.01em;white-space:nowrap;
+  background-size:cover;background-position:50% 50%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;will-change:background-position,transform}
+@supports not ((-webkit-background-clip:text) or (background-clip:text)){.mword{color:var(--ink);background:none}}
+.mask .under{position:absolute;left:0;right:0;bottom:clamp(30px,7vh,68px);display:flex;justify-content:space-between;padding:0 var(--pad);font-size:.64rem;font-weight:600;letter-spacing:.4em;text-transform:uppercase;color:var(--graphite);opacity:.75}
+.mask .idx{position:absolute;top:calc(50% - .5em);left:var(--pad);font-family:var(--serif);font-size:1.1rem;color:#945536}
+
+/* ============ inside the letters ============ */
+.inside{padding-top:clamp(70px,9vw,130px);padding-bottom:clamp(70px,9vw,130px)}
+.igrid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(16px,2.2vw,30px);margin-top:clamp(36px,4.5vw,60px)}
+.itile{position:relative;overflow:hidden}
+.itile img{width:100%;height:100%;object-fit:cover;transform:scale(1.07);transition:transform 1.6s var(--ease)}
+.itile.in img{transform:none}
+.itile .lb{position:absolute;left:18px;bottom:16px;font-size:.62rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#fff;text-shadow:0 1px 14px rgba(8,39,40,.7)}
+.i1{grid-column:1/7;aspect-ratio:4/4.8}
+.i2{grid-column:7/13;aspect-ratio:4/3.1;margin-top:clamp(50px,8vw,120px)}
+.i3{grid-column:1/6;aspect-ratio:4/3.2;margin-top:12px}
+.i4{grid-column:6/13;aspect-ratio:16/9.4}
+.icopy{max-width:52ch;color:#4E5D57;margin-top:22px}
+
+/* ============ plan index ============ */
+.pindex{background:var(--deep);color:#EFEADD;padding:clamp(70px,9vw,130px) 0}
+.pindex .kick{color:var(--tide)}
+.pindex h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,5.4vw,5rem);text-transform:uppercase;line-height:1.04;margin:14px 0 clamp(34px,4vw,52px)}
+.pxrow{display:grid;grid-template-columns:1fr auto;align-items:baseline;gap:18px;text-decoration:none;padding:20px 2px;border-bottom:1px solid rgba(239,234,221,.16);transition:padding-left .3s var(--ease),background .3s}
+.pxrow:first-of-type{border-top:1px solid rgba(239,234,221,.16)}
+.pxrow:hover,.pxrow:focus-visible{padding-left:16px;background:rgba(239,234,221,.05)}
+.pxrow .nm{font-family:var(--serif);font-weight:400;font-size:clamp(1.7rem,3.6vw,3.2rem);text-transform:uppercase;letter-spacing:.02em;display:flex;align-items:baseline;gap:18px}
+.pxrow .nm i{font-style:normal;font-family:var(--sans);font-weight:600;font-size:.62rem;letter-spacing:.3em;color:var(--accent)}
+.pxrow .nm em{font-style:normal;font-family:var(--sans);font-weight:400;font-size:.8rem;letter-spacing:.06em;color:#9FB3AB}
+.pxrow .pr{text-align:right;font-weight:600;white-space:nowrap}
+.pxrow .pr span{display:block;font-weight:400;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--tide);margin-top:3px}
+.pactions{display:flex;gap:14px;flex-wrap:wrap;margin-top:clamp(30px,4vw,46px)}
+.bfill,.bline{font-size:.7rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;text-decoration:none;padding:16px 30px;transition:background .3s,color .3s,border-color .3s;text-align:center}
+.bfill{background:#EFEADD;border:1px solid #EFEADD;color:var(--deep)}
+.bfill:hover,.bfill:focus-visible{background:transparent;color:#EFEADD}
+.bline{border:1px solid rgba(239,234,221,.45);color:#EFEADD}
+.bline:hover,.bline:focus-visible{border-color:var(--accent);color:var(--accent)}
+
+/* ============ place as pattern ============ */
+.place{padding-top:clamp(90px,12vw,170px);padding-bottom:clamp(90px,12vw,170px);text-align:center;position:relative}
+.ring{position:relative;width:min(560px,84vw);margin:0 auto;aspect-ratio:1}
+.ring svg{position:absolute;inset:0;width:100%;height:100%;animation:spin 40s linear infinite}
+.ring svg text{font-family:var(--sans);font-weight:600;font-size:9.5px;letter-spacing:.42em;text-transform:uppercase;fill:var(--graphite)}
+.ring .addr{position:absolute;inset:0;display:grid;place-items:center}
+.ring .addr b{font-family:var(--serif);font-weight:500;font-size:clamp(4.6rem,13vw,9.4rem);line-height:1;color:var(--ink)}
+.ring .addr i{display:block;font-style:normal;font-size:.66rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:#945536;margin-top:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.place .amen{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 14px;max-width:760px;margin:clamp(40px,6vw,64px) auto 0}
+.place .amen span{font-size:.68rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;border:1px solid rgba(21,59,57,.35);border-radius:999px;padding:10px 18px}
+
+/* ============ close ============ */
+.close{border-top:1px solid rgba(21,59,57,.25);padding-top:clamp(80px,10vw,140px);padding-bottom:clamp(80px,10vw,140px);text-align:center}
+.close h2{font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,7vw,6.6rem);text-transform:uppercase;line-height:1.02}
+.close h2 em{font-style:italic;text-transform:none;color:var(--accent)}
+.close .meta{margin-top:26px;color:#4E5D57;line-height:2}
+.close .meta a{text-decoration:none;border-bottom:1px solid rgba(200,120,77,.5)}
+.close .pactions{justify-content:center}
+.close .bfill{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.close .bfill:hover,.close .bfill:focus-visible{background:transparent;color:var(--ink)}
+.close .bline{border-color:rgba(21,59,57,.4);color:var(--ink)}
+.close .bline:hover{border-color:var(--accent);color:var(--accent)}
+
+.ft{border-top:1px solid rgba(21,59,57,.2);padding:30px var(--pad) 110px;display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-between;font-size:.78rem;color:#4E5D57}
+.ft a{color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(21,59,57,.35)}
+
+@media (max-width:820px){
+  .i1,.i2,.i3,.i4{grid-column:1/-1;margin-top:0;aspect-ratio:16/10}
+  .mword{font-size:clamp(4rem,19vw,8rem)}
+  .pxrow .nm{flex-wrap:wrap;gap:8px 14px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv,.itile img{opacity:1;transform:none;transition:none}
+  .mark h1 .w span,.mark .bars,.mark .tag,.mark .rule{animation:none;transform:none;opacity:1}
+  .mask,.mask.combo{height:auto}
+  .mask .stage{position:static;height:auto;padding:70px 0;display:block;text-align:center}
+  .mask .mword{opacity:1!important;transform:none!important;margin:30px auto}
+  .mask .mfull{display:none}
+  .mask .idx{position:static;display:block;margin-bottom:10px}
+  .mask .under{position:static;margin-top:14px;justify-content:center;gap:26px}
+  .ring svg{animation:none}
+}
+
+/* plan modal */
+dialog.pmodal{border:0;padding:0;background:transparent;max-width:min(640px,94vw);width:100%;margin:auto}
+.pmodal .pmact a{display:inline-block;font-size:.68rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;text-decoration:none;border-radius:999px;padding:14px 26px;transition:opacity .25s}
+.pmodal .pmact a:hover{opacity:.75}
+.pmodal .pmact a.pmaf{background:var(--ink,var(--inkv,#153B39));color:var(--bg,var(--bgv,#F3F0E7));border:1px solid var(--ink,var(--inkv,#153B39))}
+.pmodal .pmact a.pmal{border:1px solid currentColor;color:inherit}
+dialog.pmodal::backdrop{background:rgba(4,16,16,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.pmodal .pmcard{background:var(--bg,var(--bgv,#fff));color:var(--ink,var(--inkv,#123));padding:clamp(22px,4vw,36px);position:relative}
+.pmodal .pmimg{background:#fff;padding:16px;margin-bottom:20px}
+.pmodal .pmimg img{width:100%;height:auto;max-height:56vh;object-fit:contain}
+.pmodal h3{font-size:1.7rem;margin-bottom:4px}
+.pmodal .pmspec{opacity:.75;font-size:.92rem}
+.pmodal .pmprice{margin-top:10px;font-weight:600}
+.pmodal .pmprice span{font-weight:400;font-size:.78rem;opacity:.7}
+.pmodal .pmact{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.pmodal .pmx{position:absolute;top:12px;right:12px;width:44px;height:44px;border:0;background:none;cursor:pointer;color:inherit;font-size:22px;line-height:1;border-radius:50%;display:grid;place-items:center;transition:background .25s ease,color .25s ease,transform .3s ease}
+.pmodal .pmx:hover,.pmodal .pmx:focus-visible{background:var(--ink,var(--inkv,#153B39));color:var(--bg,var(--bgv,#F3F0E7));transform:rotate(90deg)}
+
+/* mobile menu */
+.mbtn{display:none}
+@media (max-width:760px){.mbtn{display:grid;place-items:center;width:44px;height:44px;background:none;border:0;cursor:pointer;color:inherit;margin-left:10px;padding:0}}
+.mbtn i{display:block;width:22px;height:2px;background:currentColor;margin:2.5px 0;border-radius:2px}
+.mnav{position:fixed;inset:0;z-index:120;background:var(--bg,var(--bgv,#F3F0E7));color:var(--ink,var(--inkv,#153B39));display:flex;flex-direction:column;justify-content:center;padding:80px clamp(24px,8vw,60px) 44px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
+.mnav.open{opacity:1;visibility:visible;transition:opacity .35s ease}
+.mnav nav{display:flex;flex-direction:column}
+.mnav nav a{font-family:var(--serif,var(--disp,serif));font-size:clamp(1.7rem,7.5vw,2.4rem);line-height:1.2;text-decoration:none;padding:14px 0;border-bottom:1px solid color-mix(in srgb,currentColor 16%,transparent)}
+.mnav nav a[aria-current="page"]{opacity:.55}
+.mnav .mclose{position:absolute;top:12px;right:12px;width:44px;height:44px;background:none;border:0;color:inherit;font-size:26px;line-height:1;cursor:pointer}
+.mnav .msub{margin-top:28px;font-size:.85rem;opacity:.8;line-height:2}
+.mnav .msub a{text-decoration:none;border-bottom:1px solid color-mix(in srgb,currentColor 35%,transparent)}
+
+/* page transitions */
+.pt{position:fixed;inset:0;background:var(--deep,var(--deepv,#0E2726));z-index:100000;transform:translateY(102%);pointer-events:none}
+.js-pt .pt{animation:ptReveal .8s cubic-bezier(.65,0,.35,1) .42s both}
+.pt.cover{animation:ptCover .6s cubic-bezier(.65,0,.35,1) both}
+@keyframes ptReveal{from{transform:translateY(0)}to{transform:translateY(-102%)}}
+@keyframes ptCover{from{transform:translateY(102%)}to{transform:translateY(0)}}
+.pt .pt-brand{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#F4F1E8}
+.pt .pt-brand svg{width:36px;height:36px}
+.pt .pt-name{font-family:var(--serif,var(--disp,serif));font-size:1.15rem;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase}
+.pt .pt-sub{font-family:var(--sans,sans-serif);font-size:.52rem;font-weight:600;letter-spacing:.5em;text-indent:.5em;text-transform:uppercase;opacity:.72;margin-top:-6px}
+.pt.cover .pt-brand{animation:ptBrandIn .55s cubic-bezier(.22,.61,.36,1) .18s both}
+@keyframes ptBrandIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.js-pt .pt{animation:none;transform:translateY(-102%)}.pt.cover{animation:none;transform:translateY(102%)}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js-pt');</script>
+<div class="pt" aria-hidden="true"></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hd" id="hd">
+  <a class="brand" href="index.html" aria-label="Motor Tides by Wiseman — home">
+    <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><polygon points="14,18 34,18 34,74 14,80"></polygon><polygon points="40,18 60,18 60,71 40,77"></polygon><polygon points="66,18 86,18 86,68 66,74"></polygon></svg>
+    <span><b>Motor Tides</b><i>By Wiseman</i></span>
+  </a>
+  <nav class="hnav" aria-label="Pages"><a href="residences.html">Specimen</a><a href="floorplans.html">Index</a><a href="experience.html">Margins</a></nav>
+  <a class="cta" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Apply</a>
+</header>
+
+<main id="main">
+
+  <!-- mark -->
+  <section class="mark" aria-label="Motor Tides">
+    <div>
+      <svg class="bars" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><polygon points="14,18 34,18 34,74 14,80"></polygon><polygon points="40,18 60,18 60,71 40,77"></polygon><polygon points="66,18 86,18 86,68 66,74"></polygon></svg>
+      <h1 aria-label="Motor Tides"><span class="w" aria-hidden="true"><span>Motor</span></span><span class="w" aria-hidden="true"><span>Tides</span></span></h1>
+      <p class="tag">Culver City &middot; Est. 2026 &middot; 107 residences</p>
+    </div>
+    <span class="rule" aria-hidden="true"></span>
+  </section>
+
+  <!-- manifesto -->
+  <section class="mani wrap" data-sec>
+    <p class="kick rv">The house style</p>
+    <p class="big rv d1">Seven stories on Motor Avenue, set in a typeface of light, quartz, and <em>very good living.</em></p>
+  </section>
+
+  <!-- MOTOR / TIDES combined mask -->
+  <section class="mask combo" data-mask data-img="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1800&q=80" aria-label="Motor Tides, set in ocean light">
+    <div class="stage">
+      <div class="mfull" aria-hidden="true"></div>
+      <span class="idx ix1" aria-hidden="true">I.</span>
+      <span class="idx ix2" aria-hidden="true">II.</span>
+      <div class="mword w1" role="img" aria-label="The word Motor filled with ocean surf imagery">MOTOR</div>
+      <div class="mword w2" role="img" aria-label="The word Tides filled with ocean surf imagery">TIDES</div>
+      <div class="under u1"><span>The architecture</span><span>Seven stories, ocean light</span></div>
+      <div class="under u2"><span>The life inside</span><span>Open plans &middot; City views</span></div>
+    </div>
+  </section>
+
+  <!-- inside the letters -->
+  <section class="inside wrap" id="collection" data-sec>
+    <p class="kick rv">Inside the letters</p>
+    <h2 class="rv d1" style="font-family:var(--serif);font-weight:400;font-size:clamp(2.2rem,5vw,4.6rem);text-transform:uppercase;line-height:1.06;margin-top:14px">The collection</h2>
+    <div class="igrid">
+      <figure class="itile i1"><img src="../assets/img/living-art-716.jpg" alt="Living room with seaside artwork and balcony doors" loading="lazy"><figcaption class="lb">Living &middot; No. 716</figcaption></figure>
+      <figure class="itile i2"><img src="../assets/img/kitchen-716.jpg" alt="Modern kitchen with stainless appliances" loading="lazy"><figcaption class="lb">Kitchen &middot; Quartz &amp; steel</figcaption></figure>
+      <figure class="itile i3"><img src="../assets/img/bedroom-705.jpg" alt="Bedroom with woven textures and soft light" loading="lazy"><figcaption class="lb">Bedroom &middot; No. 705</figcaption></figure>
+      <figure class="itile i4"><img src="../assets/img/rooftop-1.jpg" alt="Rooftop deck with pergola seating and city views" loading="lazy"><figcaption class="lb">Rooftop &middot; The crown</figcaption></figure>
+    </div>
+    <p class="icopy rv">One-to-four-bedroom residences with open layouts, expansive windows, and large private balconies — mirrored closets, vinyl plank floors, and sweeping views on the upper floors.</p>
+  </section>
+
+  <!-- plan index -->
+  <section class="pindex" id="planindex" data-sec>
+    <div class="wrap">
+      <p class="kick rv">The index</p>
+      <h2 class="rv d1">Plans &amp; pricing</h2>
+      <div class="rv d1">
+        <a class="pxrow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="nm"><i>i.</i>Harbor<em>2 bd &middot; 2 ba &middot; 722&ndash;754 sq ft</em></span><span class="pr">$3,770<span>4 available</span></span></a>
+        <a class="pxrow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="nm"><i>ii.</i>Reef<em>2 bd &middot; 2 ba &middot; 768 sq ft</em></span><span class="pr">$3,845<span>2 available</span></span></a>
+        <a class="pxrow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="nm"><i>iii.</i>Pacific<em>2 bd &middot; 2 ba &middot; 757 sq ft</em></span><span class="pr">$3,895<span>1 available</span></span></a>
+        <a class="pxrow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="nm"><i>iv.</i>Lighthouse<em>2 bd &middot; 2 ba &middot; 742&ndash;766 sq ft</em></span><span class="pr">$3,950<span>4 available</span></span></a>
+        <a class="pxrow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="nm"><i>v.</i>Seacliff<em>2 bd &middot; 2 ba &middot; 895 sq ft</em></span><span class="pr">$3,975<span>2 available</span></span></a>
+        <a class="pxrow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="nm"><i>vi.</i>Channel<em>2 bd &middot; 2 ba &middot; 799 sq ft</em></span><span class="pr">$4,095<span>1 available</span></span></a>
+        <a class="pxrow" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener"><span class="nm"><i>vii.</i>Coral<em>3 bd &middot; 2 ba &middot; 876 sq ft</em></span><span class="pr">$4,495<span>5 available</span></span></a>
+      </div>
+      <div class="pactions rv d2">
+        <a class="bfill" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability</a>
+        <a class="bline" href="tel:+12132869912">Call leasing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- place as pattern -->
+  <section class="place wrap" data-sec>
+    <div class="ring rv">
+      <svg viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="cir" d="M100,100 m-84,0 a84,84 0 1,1 168,0 a84,84 0 1,1 -168,0"/></defs>
+        <text><textPath href="#cir">Sony Pictures &middot; Helms Bakery &middot; E Line &middot; Ballona Creek &middot; Restaurant Row &middot; Amazon MGM &middot; Apple TV+ &middot;&nbsp;</textPath></text>
+      </svg>
+      <div class="addr"><div><b>3557</b><i>Motor Avenue, Culver City border</i></div></div>
+    </div>
+    <div class="amen rv d1">
+      <span>Rooftop deck</span><span>Fitness center</span><span>Pet friendly</span><span>Controlled access</span><span>Elevator</span><span>Bike friendly</span>
+    </div>
+  </section>
+
+  <!-- close -->
+  <section class="close wrap" id="visit" data-sec>
+    <h2 class="rv">Sign the <em>lease,</em><br>keep the light.</h2>
+    <p class="meta rv d1">3557 Motor Avenue, Los Angeles, CA 90034<br>
+      <a href="tel:+12132869912">+1 213-286-9912</a> &middot; Tours by appointment &middot; Mon&ndash;Fri 9:30&ndash;6:30 &middot; Sat&ndash;Sun 11&ndash;4</p>
+    <div class="pactions rv d2">
+      <a class="bfill" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Apply now</a>
+      <a class="bline" href="https://maps.google.com/?q=3557%20Motor%20Avenue%20Los%20Angeles,%20CA%2090034" target="_blank" rel="noopener">Get directions</a>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <span>&copy; 2026 Wiseman Residential &middot; Equal Housing Opportunity</span>
+  <span><a href="https://motortides-wisemanresidential.securecafenet.com/residentservices/motor-tabor-by-wiseman/userlogin" target="_blank" rel="noopener">Resident login</a></span>
+  <span>Design concept — Living Monogram &middot; <a href="../index.html">View all concepts</a></span>
+</footer>
+
+<script>window.MTC_VARIANT='pill';</script>
+<script src="../assets/chat.js?v=4" defer></script>
+<script>
+(function(){
+  'use strict';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  addEventListener('DOMContentLoaded', function(){
+    if(!reduce && window.Lenis){
+      var lenis = new Lenis({ lerp: 0.09 }); window._lenis = lenis;
+      (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
+    }
+  });
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv,.itile').forEach(function(el){ io.observe(el); });
+
+  /* header inverts over the dark plan index */
+  var hdEl = document.getElementById('hd');
+  var pindex = document.querySelector('.pindex');
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){ hdEl.classList.toggle('inv', e.isIntersecting); });
+  }, { rootMargin: '0px 0px -88% 0px' }).observe(pindex);
+
+  /* word masks: assign images */
+  var combo = document.querySelector('[data-mask]');
+  var comboImg = 'url("' + combo.dataset.img + '")';
+  [].slice.call(combo.querySelectorAll('.mword')).forEach(function(w){ w.style.backgroundImage = comboImg; });
+  combo.querySelector('.mfull').style.backgroundImage = comboImg;
+
+  if(reduce) return;
+
+  function clamp01(v){ return v < 0 ? 0 : v > 1 ? 1 : v; }
+
+  var hd = document.getElementById('hd'), lastY = 0, ticking = false;
+  function onScroll(){
+    ticking = false;
+    var y = scrollY;
+    hd.classList.toggle('frost', y > 120);
+    if(y > 120){
+      if(y > lastY + 6){ hd.classList.add('gone'); lastY = y; }
+      else if(y < lastY - 6){ hd.classList.remove('gone'); lastY = y; }
+    } else { hd.classList.remove('gone'); lastY = y; }
+
+    (function(){
+      var r = combo.getBoundingClientRect();
+      var span = r.height - innerHeight;
+      var p = clamp01(-r.top / span);
+      var w1 = combo.querySelector('.w1'), w2 = combo.querySelector('.w2');
+      var full = combo.querySelector('.mfull');
+      var sm = function(q){ return q * q * (3 - 2 * q); };
+      var s1, o1, s2, o2, fo;
+      if(p < 0.28){
+        s1 = 0.92 + (p / 0.28) * 0.16; o1 = 1; s2 = 6.5; o2 = 0; fo = 0;
+      } else if(p < 0.46){
+        var q = sm(clamp01((p - 0.28) / 0.18));
+        s1 = 1.08 + q * 5.4; o1 = 1 - clamp01((q - 0.2) / 0.65);
+        s2 = 6.5; o2 = 0; fo = clamp01(q / 0.8);
+      } else if(p < 0.6){
+        s1 = 6.5; o1 = 0; s2 = 6.5; o2 = 0; fo = 1;
+      } else if(p < 0.78){
+        var q2 = sm(clamp01((p - 0.6) / 0.18));
+        s1 = 6.5; o1 = 0;
+        s2 = 6.5 - q2 * 5.55; o2 = clamp01((q2 - 0.3) / 0.6);
+        fo = 1 - clamp01((q2 - 0.35) / 0.6);
+      } else {
+        s1 = 6.5; o1 = 0;
+        s2 = 0.95 + ((p - 0.78) / 0.22) * 0.12; o2 = 1; fo = 0;
+      }
+      w1.style.backgroundPosition = (18 + p * 40) + '% 50%';
+      w2.style.backgroundPosition = (42 + p * 40) + '% 50%';
+      w1.style.transform = 'scale(' + s1.toFixed(4) + ')';
+      w1.style.opacity = o1.toFixed(3);
+      w2.style.transform = 'scale(' + s2.toFixed(4) + ')';
+      w2.style.opacity = o2.toFixed(3);
+      full.style.opacity = fo.toFixed(3);
+      full.style.transform = 'scale(' + (1.1 - fo * 0.08).toFixed(4) + ')';
+      combo.querySelector('.ix1').style.opacity = combo.querySelector('.u1').style.opacity = o1.toFixed(3);
+      combo.querySelector('.ix2').style.opacity = combo.querySelector('.u2').style.opacity = o2.toFixed(3);
+    })();
+  }
+  addEventListener('scroll', function(){ if(!ticking){ ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
+})();
+</script>
+
+<dialog class="pmodal" id="pmodal" aria-label="Floor plan detail">
+  <div class="pmcard">
+    <button class="pmx" type="button" id="pmx" aria-label="Close">&times;</button>
+    <div class="pmimg"><img id="pmimg" src="" alt=""></div>
+    <h3 id="pmname"></h3>
+    <p class="pmspec" id="pmspec"></p>
+    <p class="pmprice" id="pmprice"></p>
+    <div class="pmact">
+      <a class="pmaf" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability</a>
+      <a class="pmal" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener">Live floor plans</a>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+  var PLANS = {
+    harbor:{n:'Harbor',s:'2 bd \u00b7 2 ba \u00b7 722\u2013754 sq ft',p:'$3,770',a:'4 available'},
+    reef:{n:'Reef',s:'2 bd \u00b7 2 ba \u00b7 768 sq ft',p:'$3,845',a:'2 available'},
+    pacific:{n:'Pacific',s:'2 bd \u00b7 2 ba \u00b7 757 sq ft',p:'$3,895',a:'1 available'},
+    lighthouse:{n:'Lighthouse',s:'2 bd \u00b7 2 ba \u00b7 742\u2013766 sq ft',p:'$3,950',a:'4 available'},
+    seacliff:{n:'Seacliff',s:'2 bd \u00b7 2 ba \u00b7 895 sq ft',p:'$3,975',a:'2 available'},
+    channel:{n:'Channel',s:'2 bd \u00b7 2 ba \u00b7 799 sq ft',p:'$4,095',a:'1 available'},
+    coral:{n:'Coral',s:'3 bd \u00b7 2 ba \u00b7 876 sq ft',p:'$4,495',a:'5 available'}
+  };
+  var dlg = document.getElementById('pmodal');
+  if(!dlg || !dlg.showModal) return;
+  document.getElementById('pmx').addEventListener('click', function(){ dlg.close(); });
+  dlg.addEventListener('click', function(e){ if(e.target === dlg) dlg.close(); });
+  document.querySelectorAll('.pxrow').forEach(function(row){
+    row.addEventListener('click', function(e){
+      var txt = row.textContent.toLowerCase();
+      var key = Object.keys(PLANS).find(function(k){ return txt.indexOf(k) !== -1; });
+      if(!key) return;
+      e.preventDefault();
+      var d = PLANS[key];
+      document.getElementById('pmimg').src = '../assets/img/plans-trim/plan-' + key + '.png';
+      document.getElementById('pmimg').alt = d.n + ' floor plan drawing';
+      document.getElementById('pmname').textContent = d.n;
+      document.getElementById('pmspec').textContent = d.s;
+      document.getElementById('pmprice').innerHTML = d.p + ' <span>from / mo \u00b7 ' + d.a + ' \u00b7 move-in specials</span>';
+      dlg.showModal();
+    });
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  document.querySelectorAll('.hnav a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var el = document.querySelector(a.getAttribute('href'));
+      if(!el) return;
+      e.preventDefault();
+      if(window._lenis) window._lenis.scrollTo(el.offsetTop + 8, { duration: 1.5 });
+      else el.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  var hd = document.getElementById('hd');
+  if(!hd) return;
+  var btn = document.createElement('button');
+  btn.className = 'mbtn'; btn.type = 'button';
+  btn.setAttribute('aria-label', 'Open menu');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = '<span><i></i><i></i><i></i></span>';
+  hd.appendChild(btn);
+  var ov = document.createElement('div');
+  ov.className = 'mnav';
+  var links = '<a href="index.html">Home</a>';
+  document.querySelectorAll('.hnav a').forEach(function(a){
+    links += '<a href="' + a.getAttribute('href') + '"' + (a.getAttribute('aria-current') ? ' aria-current="page"' : '') + '>' + a.textContent + '</a>';
+  });
+  ov.innerHTML = '<button class="mclose" type="button" aria-label="Close menu">&times;</button><nav aria-label="Pages">' + links + '</nav><p class="msub">3557 Motor Avenue, Los Angeles &middot; <a href="tel:+12132869912">+1 213-286-9912</a></p>';
+  document.body.appendChild(ov);
+  function setOpen(o){
+    ov.classList.toggle('open', o);
+    btn.setAttribute('aria-expanded', String(o));
+    document.body.style.overflow = o ? 'hidden' : '';
+  }
+  btn.addEventListener('click', function(){ setOpen(!ov.classList.contains('open')); });
+  ov.querySelector('.mclose').addEventListener('click', function(){ setOpen(false); });
+  ov.querySelectorAll('nav a').forEach(function(a){ a.addEventListener('click', function(){ setOpen(false); }); });
+  addEventListener('keydown', function(e){ if(e.key === 'Escape') setOpen(false); });
+})();
+</script>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pt = document.querySelector('.pt');
+  if(!pt) return;
+  pt.innerHTML = '<div class="pt-brand" aria-hidden="true"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><polygon points="14,18 34,18 34,74 14,80"></polygon><polygon points="40,18 60,18 60,71 40,77"></polygon><polygon points="66,18 86,18 86,68 66,74"></polygon></svg><span class="pt-name">Motor Tides</span><span class="pt-sub">By Wiseman</span></div>';
+  addEventListener('pageshow', function(e){ if(e.persisted) pt.classList.remove('cover'); });
+  if(reduce) return;
+  document.querySelectorAll('a[href]').forEach(function(a){
+    var href = a.getAttribute('href');
+    if(!href || /^(https?:|#|tel:|mailto:)/.test(href)) return;
+    if(a.getAttribute('target') === '_blank') return;
+    a.addEventListener('click', function(e){
+      if(e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
+      e.preventDefault();
+      pt.classList.add('cover');
+      var url = a.href;
+      setTimeout(function(){ location.href = url; }, 950);
+    });
+  });
+})();
+</script>
+</body>
+</html>

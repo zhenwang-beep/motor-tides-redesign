@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>On Deck — Motor Tides by Wiseman · Voyage</title>
+<meta name="description" content="Life at Motor Tides — a planted rooftop deck with sweeping city views, fitness center, pet-friendly and controlled-access living on the Culver City border, near the E Line and Ballona Creek Trail.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tenor+Sans&amp;family=Montserrat:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js" defer></script>
+<style>
+:root{
+  --bg:#F1EFE8; --ink:#143836; --accent:#B48A43; --deep:#052B2D; --bp:#6F8F8B; --line:#A8B8B2; --gold:#E0B866;
+  --disp:'Tenor Sans','Avenir Next',sans-serif; --sans:'Montserrat','Avenir Next',sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1); --pad:clamp(22px,4vw,96px);
+  --mtc-accent:#052B2D; --mtc-accent-ink:#F1EFE8; --mtc-ink:#143836; --mtc-surface:#F1EFE8;
+  --mtc-bubble-bot:#E6E2D5; --mtc-bubble-user:#052B2D; --mtc-font:'Montserrat',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:clip;scrollbar-width:thin;scrollbar-color:rgba(20,56,54,.4) transparent}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.62;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+::selection{background:#052B2D;color:#F1EFE8}
+
+.hd{position:fixed;inset:0 0 auto 0;z-index:90;display:flex;align-items:center;padding:0 var(--pad);height:74px;transition:opacity .5s,transform .55s var(--ease),color .45s ease}
+.hd.frost{background:color-mix(in srgb,var(--bg) 88%,transparent);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(20,56,54,.14)}
+.hd.inv{color:#EFEDE2}
+.hd.inv.frost{background:rgba(5,43,45,.88);box-shadow:0 1px 0 rgba(239,237,226,.12)}
+.hd.inv .cta{border-color:#EFEDE2}
+.hd.inv .cta:hover,.hd.inv .cta:focus-visible{background:#EFEDE2;color:var(--deep)}
+.hd.gone{opacity:0;transform:translateY(-100%);pointer-events:none}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand svg{width:22px;height:22px}
+.brand b{font-family:var(--disp);font-size:.88rem;letter-spacing:.32em;text-transform:uppercase}
+.brand i{display:block;font-style:normal;font-weight:500;font-size:.5rem;letter-spacing:.5em;text-transform:uppercase;opacity:.7;margin-top:2px}
+.hnav{margin-left:auto;display:flex;gap:clamp(16px,2.2vw,30px)}
+.hnav a{font-size:.64rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;opacity:.78;padding:8px 0;position:relative}
+.hnav a::after{content:"";position:absolute;left:0;right:100%;bottom:2px;border-bottom:1px solid currentColor;transition:right .3s ease}
+.hnav a:hover{opacity:1}
+.hnav a:hover::after,.hnav a:focus-visible::after{right:0}
+.hnav a[aria-current="page"]{opacity:1;color:#7C5C25}
+.hnav a[aria-current="page"]::after{right:0;border-bottom:2px solid var(--accent)}
+.hd.inv .hnav a[aria-current="page"]{color:var(--gold)}
+.hd.inv .hnav a[aria-current="page"]::after{border-color:var(--gold)}
+@media (max-width:760px){.hnav{display:none}}
+.hd .cta{margin-left:clamp(16px,2.2vw,30px);font-size:.68rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;text-decoration:none;border:1px solid var(--ink);border-radius:2px;padding:13px 24px;transition:background .3s,color .3s}
+.hd .cta:hover,.hd .cta:focus-visible{background:var(--ink);color:var(--bg)}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:300;background:var(--deep);color:var(--bg);padding:12px 20px;text-decoration:none;font-weight:600}
+.skip-link:focus{left:12px;top:12px}
+@media (max-width:760px){.hd .cta{margin-left:auto}}
+@media (max-width:430px){.hd{height:62px}.brand b{letter-spacing:.18em;font-size:.76rem}.brand i{display:none}.hd .cta{padding:12px 14px;letter-spacing:.12em;font-size:.58rem}}
+
+.wrap{padding-left:var(--pad);padding-right:var(--pad)}
+.kick{font-size:.64rem;font-weight:600;letter-spacing:.46em;text-transform:uppercase;color:#7C5C25}
+.rv{opacity:0;transform:translateY(26px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.14s}.rv.d2{transition-delay:.28s}
+h2.big{font-family:var(--disp);font-weight:400;font-size:clamp(2.3rem,5.6vw,5.4rem);line-height:1.06;text-transform:uppercase;letter-spacing:.03em}
+.body{max-width:50ch;color:#4B5F58;margin-top:20px}
+.coord{margin-top:18px;font-size:.7rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:#7C5C25}
+
+/* hero */
+.launch{min-height:100svh;position:relative;display:grid;grid-template-rows:1fr auto;padding-top:86px;overflow:clip}
+.launch .titlebox{text-align:center;align-self:center;position:relative;z-index:2;padding-left:18px;padding-right:18px}
+.launch h1{font-family:var(--disp);font-weight:400;font-size:clamp(2.7rem,8.6vw,8rem);line-height:1;letter-spacing:.08em;text-indent:.08em;text-transform:uppercase}
+.launch h1 span{display:inline-block;opacity:0;transform:translateY(16px);animation:lup 1.4s var(--ease) forwards}
+.launch .sub{margin-top:20px;font-size:.7rem;font-weight:600;letter-spacing:.42em;text-transform:uppercase;color:#4B5F58;opacity:0;animation:lup 1.2s ease 1.2s forwards}
+.launch .cue{position:absolute;left:0;right:0;text-align:center;bottom:30px;z-index:3;font-size:.6rem;font-weight:600;letter-spacing:.36em;text-transform:uppercase;color:#4B5F58;opacity:0;animation:lup 1.2s ease 1.8s forwards}
+.launch .cue::after{content:"";display:block;width:1px;height:32px;background:var(--accent);margin:10px auto 0;animation:cueln 2.2s ease-in-out infinite}
+.launch .heroimg{position:relative;height:50vh;min-height:300px;margin:26px var(--pad) 132px;overflow:hidden}
+.launch .heroimg img{width:100%;height:120%;object-fit:cover;will-change:transform}
+.launch .heroimg .edge{position:absolute;inset:0;border:1px solid rgba(20,56,54,.2);pointer-events:none}
+.launch .heroimg .cap{position:absolute;left:20px;bottom:16px;color:#fff;font-size:.64rem;font-weight:600;letter-spacing:.32em;text-transform:uppercase;text-shadow:0 1px 14px rgba(5,43,45,.75)}
+@keyframes lup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes cueln{0%,100%{transform:scaleY(.4);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}}
+
+/* chapters */
+.chap{position:relative;padding-top:clamp(90px,12vw,180px);padding-bottom:clamp(90px,12vw,180px);overflow:clip}
+.chap>.wrap{position:relative;z-index:2}
+.chap .leg{display:flex;align-items:center;gap:18px;margin-bottom:clamp(26px,3.6vw,46px)}
+.chap .leg .no{font-family:var(--disp);font-size:1rem;letter-spacing:.2em;color:#7C5C25}
+.chap .leg .ln{flex:1;border-top:1px solid rgba(20,56,54,.2)}
+.chap .leg .nm{font-size:.64rem;font-weight:600;letter-spacing:.44em;text-transform:uppercase;color:#4B5F58}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(26px,4vw,72px);align-items:center;position:relative;z-index:2}
+.split .ph{overflow:hidden}
+.split .ph img{width:100%;aspect-ratio:4/4.4;object-fit:cover;transform:scale(1.06);transition:transform 1.6s var(--ease)}
+.split .ph.in img{transform:none}
+.split .ph.land img{aspect-ratio:16/10.4}
+.chips{display:flex;flex-wrap:wrap;gap:10px 12px;margin-top:22px}
+.chips span{font-size:.66rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;border:1px solid rgba(20,56,54,.32);border-radius:2px;padding:10px 16px}
+
+/* rooftop trio */
+.trio{display:grid;grid-template-columns:1.6fr 1fr;gap:clamp(14px,2vw,26px);margin-top:clamp(30px,4vw,50px)}
+.trio figure{overflow:hidden;position:relative;margin:0}
+.trio figure img{width:100%;height:100%;object-fit:cover;transform:scale(1.06);transition:transform 1.6s var(--ease)}
+.trio figure.in img{transform:none}
+.trio .a{grid-row:1 / span 2}
+.trio .a img{min-height:100%}
+.trio .b img,.trio .c img{aspect-ratio:16/10}
+.trio figcaption{position:absolute;left:16px;bottom:12px;color:#fff;font-size:.56rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;text-shadow:0 1px 14px rgba(5,43,45,.75)}
+@media (max-width:820px){.trio{grid-template-columns:1fr}.trio .a{grid-row:auto}.trio .a img{aspect-ratio:16/10;min-height:0}}
+
+/* stacked amenity photos */
+.stack2{display:grid;gap:clamp(14px,2vw,24px)}
+.stack2 .ph img{aspect-ratio:16/10.4}
+
+/* the harbor (dark) */
+.course{background:var(--deep);color:#EFEDE2;position:relative;overflow:clip}
+.course .kick{color:var(--gold)}
+.course h2.big{color:#EFEDE2}
+.course .body{color:#A8BDB5}
+.course .leg .no{color:var(--gold)}
+.course .leg .ln{border-color:rgba(239,237,226,.25)}
+.course .leg .nm{color:#A8BDB5}
+.course .coord{color:var(--gold)}
+.crow{display:grid;grid-template-columns:2.4em 1fr auto;align-items:baseline;gap:16px;padding-top:17px;padding-bottom:17px;padding-left:4px;padding-right:4px;border-bottom:1px solid rgba(239,237,226,.15);text-decoration:none;transition:padding-left .25s,background .25s;position:relative;z-index:2}
+.crow:first-of-type{border-top:1px solid rgba(239,237,226,.15)}
+.crow:hover{padding-left:14px;background:rgba(239,237,226,.05)}
+.crow .i{font-family:var(--disp);font-size:.8rem;color:var(--gold)}
+.crow .nm{font-family:var(--disp);font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase}
+.crow .ds{font-size:.64rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-variant-numeric:tabular-nums}
+.hnote{margin-top:18px;font-size:.72rem;letter-spacing:.06em;color:#A8BDB5;max-width:64ch}
+
+/* port + buttons */
+.port{text-align:center;position:relative;overflow:clip}
+.port h2.big{max-width:18ch;margin:14px auto 0}
+.port .meta{margin-top:26px;color:#4B5F58;line-height:2}
+.port .meta a{text-decoration:none;border-bottom:1px solid rgba(180,138,67,.55)}
+.actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:clamp(30px,4vw,46px);position:relative;z-index:2}
+.port .actions{justify-content:center}
+.bfill,.bline{font-size:.7rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;text-decoration:none;border-radius:2px;padding:16px 30px;transition:background .3s,color .3s,border-color .3s;text-align:center}
+.bfill{background:var(--ink);border:1px solid var(--ink);color:var(--bg)}
+.bfill:hover,.bfill:focus-visible{background:transparent;color:var(--ink)}
+.bline{border:1px solid rgba(20,56,54,.4);color:var(--ink)}
+.bline:hover,.bline:focus-visible{border-color:var(--accent);color:var(--accent)}
+
+.ft{border-top:1px solid rgba(20,56,54,.18);padding-top:30px;padding-bottom:110px;padding-left:var(--pad);padding-right:var(--pad)}
+.ftnav{display:flex;flex-wrap:wrap;gap:2px 26px;margin-bottom:16px}
+.ftnav a{display:inline-block;font-size:.64rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;text-decoration:none;color:var(--ink);opacity:.78;padding-top:12px;padding-bottom:12px}
+.ftnav a:hover{opacity:1}
+.ftnav a[aria-current="page"]{opacity:1;color:#7C5C25}
+.ftrow{display:flex;flex-wrap:wrap;gap:10px 30px;justify-content:space-between;font-size:.78rem;color:#4B5F58}
+.ftrow a{color:var(--ink);text-decoration:none;border-bottom:1px solid rgba(20,56,54,.35)}
+
+@media (max-width:820px){
+  .launch .heroimg{margin-bottom:70px}
+  .split{grid-template-columns:1fr}
+  .split .ph img{aspect-ratio:16/10.4}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv,.split .ph img,.trio figure img{opacity:1;transform:none;transition:none}
+  .launch h1 span,.launch .sub,.launch .cue,.launch .kick{animation:none!important;opacity:1!important;transform:none}
+  .launch .cue::after{animation:none}
+  .launch .heroimg img{transform:none!important}
+  .crow{transition:none}
+}
+
+/* mobile menu */
+.mbtn{display:none}
+@media (max-width:760px){.mbtn{display:grid;place-items:center;width:44px;height:44px;background:none;border:0;cursor:pointer;color:inherit;margin-left:10px;padding:0}}
+.mbtn i{display:block;width:22px;height:2px;background:currentColor;margin:2.5px 0;border-radius:2px}
+.mnav{position:fixed;inset:0;z-index:120;background:var(--bg,var(--bgv,#F3F0E7));color:var(--ink,var(--inkv,#153B39));display:flex;flex-direction:column;justify-content:center;padding:80px clamp(24px,8vw,60px) 44px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
+.mnav.open{opacity:1;visibility:visible;transition:opacity .35s ease}
+.mnav nav{display:flex;flex-direction:column}
+.mnav nav a{font-family:var(--serif,var(--disp,serif));font-size:clamp(1.7rem,7.5vw,2.4rem);line-height:1.2;text-decoration:none;padding:14px 0;border-bottom:1px solid color-mix(in srgb,currentColor 16%,transparent)}
+.mnav nav a[aria-current="page"]{opacity:.55}
+.mnav .mclose{position:absolute;top:12px;right:12px;width:44px;height:44px;background:none;border:0;color:inherit;font-size:26px;line-height:1;cursor:pointer}
+.mnav .msub{margin-top:28px;font-size:.85rem;opacity:.8;line-height:2}
+.mnav .msub a{text-decoration:none;border-bottom:1px solid color-mix(in srgb,currentColor 35%,transparent)}
+
+/* page transitions */
+.pt{position:fixed;inset:0;background:var(--deep,var(--deepv,#0E2726));z-index:100000;transform:translateY(102%);pointer-events:none}
+.js-pt .pt{animation:ptReveal .8s cubic-bezier(.65,0,.35,1) .42s both}
+.pt.cover{animation:ptCover .6s cubic-bezier(.65,0,.35,1) both}
+@keyframes ptReveal{from{transform:translateY(0)}to{transform:translateY(-102%)}}
+@keyframes ptCover{from{transform:translateY(102%)}to{transform:translateY(0)}}
+.pt .pt-brand{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:#F4F1E8}
+.pt .pt-brand svg{width:36px;height:36px}
+.pt .pt-name{font-family:var(--serif,var(--disp,serif));font-size:1.15rem;letter-spacing:.34em;text-indent:.34em;text-transform:uppercase}
+.pt .pt-sub{font-family:var(--sans,sans-serif);font-size:.52rem;font-weight:600;letter-spacing:.5em;text-indent:.5em;text-transform:uppercase;opacity:.72;margin-top:-6px}
+.pt.cover .pt-brand{animation:ptBrandIn .55s cubic-bezier(.22,.61,.36,1) .18s both}
+@keyframes ptBrandIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.js-pt .pt{animation:none;transform:translateY(-102%)}.pt.cover{animation:none;transform:translateY(102%)}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js-pt');</script>
+<div class="pt" aria-hidden="true"></div>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hd" id="hd">
+  <a class="brand" href="index.html" aria-label="Motor Tides by Wiseman — home">
+    <svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><polygon points="14,18 34,18 34,74 14,80"></polygon><polygon points="40,18 60,18 60,71 40,77"></polygon><polygon points="66,18 86,18 86,68 66,74"></polygon></svg>
+    <span><b>Motor Tides</b><i>By Wiseman</i></span>
+  </a>
+  <nav class="hnav" aria-label="Pages"><a href="residences.html">Reside</a><a href="experience.html" aria-current="page">Belong</a><a href="floorplans.html">Choose a Course</a></nav>
+  <a class="cta" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">View availability</a>
+</header>
+
+<main id="main">
+
+  <section class="launch" aria-label="On deck — life at Motor Tides">
+    <div class="titlebox">
+      <p class="kick" style="opacity:0;animation:lup 1.2s ease .15s forwards">Legs 04 &amp; 05 &middot; Ascend, then belong</p>
+      <h1 aria-label="On Deck"><span style="animation-delay:.35s">On&nbsp;</span><span style="animation-delay:.5s">Deck</span></h1>
+      <p class="sub">Rooftop &middot; fitness &middot; pets welcome &middot; the Westside as your harbor</p>
+    </div>
+    <div class="heroimg"><img id="heroImg" src="../assets/img/rooftop-aerial.jpg" alt="Aerial view of the planted Motor Tides rooftop deck" fetchpriority="high"><span class="edge"></span><span class="cap">Seven decks up &middot; sweeping city views</span></div>
+    <p class="cue">Scroll to climb</p>
+  </section>
+
+  <section class="chap" aria-label="The rooftop deck">
+    <div class="wrap">
+      <div class="leg rv"><span class="no">Leg 04</span><span class="ln"></span><span class="nm">Ascend</span></div>
+      <h2 class="big rv">The crow&rsquo;s nest</h2>
+      <p class="body rv d1">Seven stories up, the rooftop deck is planted, furnished, and pointed at the whole sweeping basin &mdash; morning coffee at the rail, golden hour on the long seats.</p>
+      <div class="trio">
+        <figure class="a rv"><img src="../assets/img/rooftop-1.jpg" alt="The Motor Tides rooftop deck with lounge seating" loading="lazy"><figcaption>The rooftop deck</figcaption></figure>
+        <figure class="b rv d1"><img src="../assets/img/rooftop-2.jpg" alt="Rooftop patio corner at Motor Tides with white walls" loading="lazy"></figure>
+        <figure class="c rv d2"><img src="../assets/img/rooftop-3.jpg" alt="Rooftop lounge seating at Motor Tides with city views beyond" loading="lazy"></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap" aria-label="Amenities" style="padding-top:0">
+    <div class="wrap">
+      <div class="leg rv"><span class="no">Leg 05</span><span class="ln"></span><span class="nm">Belong</span></div>
+      <div class="split">
+        <div>
+          <h2 class="big rv">Crew of 107</h2>
+          <p class="body rv d1">A brand-new, controlled-access elevator building with a fitness center below deck. Cats and dogs make the manifest &mdash; Motor Tides is pet friendly. Tours run in person or virtual, by appointment.</p>
+          <div class="chips rv d2">
+            <span>Rooftop deck</span><span>Fitness center</span><span>Pet friendly &middot; cats &amp; dogs</span><span>Controlled access</span><span>Elevator building</span><span>Tours by appointment</span>
+          </div>
+        </div>
+        <div class="stack2">
+          <div class="ph rv d1 land"><img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&amp;fit=crop&amp;w=1200&amp;q=80" alt="A person working out at a fitness machine — stock photograph, not the Motor Tides fitness center" loading="lazy"></div>
+          <div class="ph rv d2 land"><img src="https://images.unsplash.com/photo-1613775774818-d7b40ab515c7?auto=format&amp;fit=crop&amp;w=900&amp;q=80" alt="A small dog waiting by an apartment door — stock photograph" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chap course" id="harbor" aria-label="The neighborhood">
+    <div class="wrap">
+      <div class="leg rv"><span class="no">Leg 05</span><span class="ln"></span><span class="nm">The harbor</span></div>
+      <div class="split">
+        <div>
+          <p class="kick rv">Culver City border &middot; Palms</p>
+          <h2 class="big rv d1" style="margin-top:12px">A rare<br>mooring</h2>
+          <p class="body rv d2">3557 Motor Avenue sits on the Culver City border &mdash; studios to the east, restaurant row minutes away, and the Expo/Culver E&nbsp;Line running direct toward Santa Monica. The bike-friendly Ballona Creek Trail is your channel to the sea.</p>
+          <p class="coord rv d2">34.0244&deg; N &middot; 118.4104&deg; W</p>
+        </div>
+        <div class="ph rv d1 land"><img src="https://images.unsplash.com/photo-1754810628877-ed5e858942e5?auto=format&amp;fit=crop&amp;w=1400&amp;q=80" alt="A palm-lined street on the west side of Los Angeles — stock photograph" loading="lazy"></div>
+      </div>
+      <div class="rv d1" style="margin-top:clamp(34px,5vw,60px)">
+        <a class="crow" href="https://www.google.com/maps/search/?api=1&amp;query=Sony+Pictures+Studios+Culver+City" target="_blank" rel="noopener"><span class="i">i</span><span class="nm">Sony Pictures Studios</span><span class="ds">1.2 mi</span></a>
+        <a class="crow" href="https://www.google.com/maps/search/?api=1&amp;query=Amazon+MGM+Studios+Culver+City" target="_blank" rel="noopener"><span class="i">ii</span><span class="nm">Amazon MGM Studios</span><span class="ds">1.3 mi</span></a>
+        <a class="crow" href="https://www.google.com/maps/search/?api=1&amp;query=Apple+Culver+City+campus" target="_blank" rel="noopener"><span class="i">iii</span><span class="nm">Apple TV+ campus</span><span class="ds">1.0 mi</span></a>
+        <a class="crow" href="https://www.google.com/maps/search/?api=1&amp;query=Helms+Bakery+District" target="_blank" rel="noopener"><span class="i">iv</span><span class="nm">Helms Bakery District</span><span class="ds">1.0 mi</span></a>
+        <a class="crow" href="https://www.google.com/maps/search/?api=1&amp;query=Downtown+Culver+City" target="_blank" rel="noopener"><span class="i">v</span><span class="nm">Downtown Culver City</span><span class="ds">1.3 mi</span></a>
+        <a class="crow" href="https://www.google.com/maps/search/?api=1&amp;query=Ballona+Creek+Bike+Path+Culver+City" target="_blank" rel="noopener"><span class="i">vi</span><span class="nm">Ballona Creek Trail</span><span class="ds">0.8 mi</span></a>
+        <a class="crow" href="https://www.google.com/maps/search/?api=1&amp;query=Culver+City+Station+Expo+Line" target="_blank" rel="noopener"><span class="i">vii</span><span class="nm">Expo/Culver E Line</span><span class="ds">1.2 mi</span></a>
+      </div>
+      <p class="hnote rv d2">Bearings open in Google Maps. Culver City&rsquo;s restaurant row, Downtown, and the studio lots are all minutes away.</p>
+    </div>
+  </section>
+
+  <section class="chap port" aria-label="Contact and tours">
+    <div class="wrap">
+      <p class="kick rv">Make port</p>
+      <h2 class="big rv d1">Come see the harbor</h2>
+      <p class="meta rv d1">3557 Motor Avenue, Los Angeles, CA 90034<br>
+        <a href="tel:+12132869912">+1 213-286-9912</a> &middot; Tours by appointment, in person or virtual<br>
+        Mon&ndash;Fri 9:30&ndash;6:30 &middot; Sat&ndash;Sun 11&ndash;4</p>
+      <div class="actions rv d2">
+        <a class="bfill" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Apply now</a>
+        <a class="bline" href="https://maps.google.com/?q=3557%20Motor%20Avenue%20Los%20Angeles,%20CA%2090034" target="_blank" rel="noopener">Get directions</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <nav class="ftnav" aria-label="Voyage pages">
+    <a href="index.html">The Voyage</a>
+    <a href="residences.html">Reside</a>
+    <a href="experience.html" aria-current="page">Belong</a>
+    <a href="floorplans.html">Choose a Course</a>
+  </nav>
+  <div class="ftrow">
+    <span>&copy; 2026 Wiseman Residential &middot; Equal Housing Opportunity</span>
+    <span><a href="https://motortides-wisemanresidential.securecafenet.com/residentservices/motor-tabor-by-wiseman/userlogin" target="_blank" rel="noopener">Resident login</a></span>
+    <span>Design concept — Voyage &middot; <a href="../index.html">View all concepts</a></span>
+  </div>
+</footer>
+
+<script>window.MTC_VARIANT='pill';</script>
+<script src="../assets/chat.js?v=4" defer></script>
+<script>
+(function(){
+  'use strict';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  addEventListener('DOMContentLoaded', function(){
+    if(!reduce && window.Lenis){
+      var lenis = new Lenis({ lerp: 0.085 }); window._lenis = lenis;
+      (function raf(t){ lenis.raf(t); requestAnimationFrame(raf); })(0);
+    }
+  });
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv,.split .ph,.trio figure').forEach(function(el){ io.observe(el); });
+
+  var hd = document.getElementById('hd');
+  new IntersectionObserver(function(es){
+    es.forEach(function(e){ hd.classList.toggle('inv', e.isIntersecting); });
+  }, { rootMargin: '0px 0px -88% 0px' }).observe(document.querySelector('.course'));
+
+  if(reduce) return;
+
+  var lastY = 0, lastScrollY = -1;
+  var heroImg = document.getElementById('heroImg');
+  function frame(){
+    var y = scrollY;
+    if(y !== lastScrollY){
+      lastScrollY = y;
+      hd.classList.toggle('frost', y > 120);
+      if(y > 120){
+        if(y > lastY + 6){ hd.classList.add('gone'); lastY = y; }
+        else if(y < lastY - 6){ hd.classList.remove('gone'); lastY = y; }
+      } else { hd.classList.remove('gone'); lastY = y; }
+      if(heroImg && y < innerHeight * 1.4){
+        heroImg.style.transform = 'translateY(' + (-y * 0.08) + 'px)';
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+
+<script>
+(function(){
+  var hd = document.getElementById('hd');
+  if(!hd) return;
+  var btn = document.createElement('button');
+  btn.className = 'mbtn'; btn.type = 'button';
+  btn.setAttribute('aria-label', 'Open menu');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.innerHTML = '<span><i></i><i></i><i></i></span>';
+  hd.appendChild(btn);
+  var ov = document.createElement('div');
+  ov.className = 'mnav';
+  var links = '<a href="index.html">Home</a>';
+  document.querySelectorAll('.hnav a').forEach(function(a){
+    links += '<a href="' + a.getAttribute('href') + '"' + (a.getAttribute('aria-current') ? ' aria-current="page"' : '') + '>' + a.textContent + '</a>';
+  });
+  ov.innerHTML = '<button class="mclose" type="button" aria-label="Close menu">&times;</button><nav aria-label="Pages">' + links + '</nav><p class="msub">3557 Motor Avenue, Los Angeles &middot; <a href="tel:+12132869912">+1 213-286-9912</a></p>';
+  document.body.appendChild(ov);
+  function setOpen(o){
+    ov.classList.toggle('open', o);
+    btn.setAttribute('aria-expanded', String(o));
+    document.body.style.overflow = o ? 'hidden' : '';
+  }
+  btn.addEventListener('click', function(){ setOpen(!ov.classList.contains('open')); });
+  ov.querySelector('.mclose').addEventListener('click', function(){ setOpen(false); });
+  ov.querySelectorAll('nav a').forEach(function(a){ a.addEventListener('click', function(){ setOpen(false); }); });
+  addEventListener('keydown', function(e){ if(e.key === 'Escape') setOpen(false); });
+})();
+</script>
+
+<script>
+(function(){
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pt = document.querySelector('.pt');
+  if(!pt) return;
+  pt.innerHTML = '<div class="pt-brand" aria-hidden="true"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><polygon points="14,18 34,18 34,74 14,80"></polygon><polygon points="40,18 60,18 60,71 40,77"></polygon><polygon points="66,18 86,18 86,68 66,74"></polygon></svg><span class="pt-name">Motor Tides</span><span class="pt-sub">By Wiseman</span></div>';
+  addEventListener('pageshow', function(e){ if(e.persisted) pt.classList.remove('cover'); });
+  if(reduce) return;
+  document.querySelectorAll('a[href]').forEach(function(a){
+    var href = a.getAttribute('href');
+    if(!href || /^(https?:|#|tel:|mailto:)/.test(href)) return;
+    if(a.getAttribute('target') === '_blank') return;
+    a.addEventListener('click', function(e){
+      if(e.metaKey || e.ctrlKey || e.shiftKey || e.defaultPrevented) return;
+      e.preventDefault();
+      pt.classList.add('cover');
+      var url = a.href;
+      setTimeout(function(){ location.href = url; }, 950);
+    });
+  });
+})();
+</script>
+</body>
+</html>

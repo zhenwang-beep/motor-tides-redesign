@@ -1,0 +1,1644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motor Tides by Wiseman | Apartments in Los Angeles, CA</title>
+<meta name="description" content="Motor Tides by Wiseman — a brand new seven-story community at 3557 Motor Ave on the Culver City border. Rooftop deck, fitness center, pet friendly. Two-bedroom homes from $3,770. Now leasing.">
+<meta property="og:title" content="Motor Tides by Wiseman | Apartments in Los Angeles, CA">
+<meta property="og:description" content="Good living, seven stories above Motor Ave. Brand new residences on the Culver City border — rooftop deck, fitness center, pet friendly. Now leasing.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="../assets/img/hero-living.jpg">
+<meta name="theme-color" content="#082226">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='%230E6B72'%3E%3Cpolygon points='14,18 34,18 34,74 14,80'/%3E%3Cpolygon points='40,18 60,18 60,71 40,77'/%3E%3Cpolygon points='66,18 86,18 86,68 66,74'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,500..800&family=Figtree:ital,wght@0,300..700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --bg:#082226;
+  --panel:#0E3238;
+  --panel-2:#14424A;
+  --footer:#051A1D;
+  --ink:#F2EFE6;
+  --muted:#9FB3B0;
+  --accent:#FEDA77;
+  --line:rgba(242,239,230,.14);
+  --line-strong:rgba(242,239,230,.28);
+  --teal-logo:#4FB3BA;
+  --cream:#FBF8EF;
+  --header-h:76px;
+  --font-display:'Archivo','Helvetica Neue',sans-serif;
+  --font-body:'Figtree','Gill Sans','Segoe UI',sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+  /* chatbot theme */
+  --mtc-accent:#FEDA77;
+  --mtc-accent-ink:#082226;
+  --mtc-surface:#0E3238;
+  --mtc-ink:#F2EFE6;
+  --mtc-muted:#9FB3B0;
+  --mtc-bubble-bot:#14424A;
+  --mtc-bubble-user:#FEDA77;
+  --mtc-bubble-user-ink:#082226;
+  --mtc-radius:16px;
+  --mtc-font:'Figtree',sans-serif;
+}
+
+/* ============ RESET / BASE ============ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+html.menu-locked{overflow:hidden}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:1.0625rem;
+  line-height:1.65;
+  font-weight:340;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+::selection{background:var(--accent);color:var(--bg)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+section{scroll-margin-top:calc(var(--header-h) + 16px)}
+
+.skip-link{
+  position:absolute;left:16px;top:-60px;z-index:300;
+  background:var(--accent);color:var(--bg);font-weight:600;
+  padding:10px 18px;text-decoration:none;transition:top .2s;
+}
+.skip-link:focus{top:12px}
+
+.container{max-width:1240px;margin-inline:auto;padding-inline:clamp(20px,4.5vw,52px)}
+.container-wide{max-width:1560px;margin-inline:auto;padding-inline:clamp(14px,2.5vw,32px)}
+
+/* ============ TYPE ============ */
+h1,h2,h3,.display{
+  font-family:var(--font-display);
+  font-stretch:125%;
+  text-transform:uppercase;
+  line-height:1;
+  letter-spacing:.01em;
+  font-weight:750;
+}
+.h2{font-size:clamp(1.9rem,4.4vw,3.6rem);letter-spacing:.015em;max-width:22ch}
+.prose{max-width:65ch}
+.prose p+p{margin-top:1.25em}
+.lead{font-size:clamp(1.1rem,1.6vw,1.3rem);font-weight:380;color:var(--ink)}
+.muted{color:var(--muted)}
+
+.eyebrow{
+  display:flex;align-items:center;gap:.75rem;
+  font-size:.72rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:clamp(1.25rem,3vw,2rem);
+}
+.eyebrow::before{content:"";width:22px;height:3px;background:var(--accent);flex:none}
+.eyebrow b{color:var(--accent);font-weight:700}
+
+/* ============ BUTTONS ============ */
+.btn{
+  display:inline-flex;align-items:center;gap:.65rem;
+  font-family:var(--font-display);font-stretch:125%;font-weight:700;
+  font-size:.82rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:1.05rem 1.7rem;text-decoration:none;border:1px solid transparent;
+  transition:background .25s var(--ease),color .25s var(--ease),border-color .25s var(--ease),transform .25s var(--ease);
+}
+.btn svg{width:14px;height:14px;flex:none;transition:transform .25s var(--ease)}
+.btn:hover svg{transform:translate(2px,-2px)}
+.btn-solid{background:var(--accent);color:var(--bg)}
+.btn-solid:hover{background:#fff3c4}
+.btn-ghost{border-color:var(--line-strong);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-dark{background:var(--bg);color:var(--ink)}
+.btn-dark:hover{background:#0f3a40}
+.btn-dark-ghost{border-color:rgba(8,34,38,.45);color:var(--bg)}
+.btn-dark-ghost:hover{border-color:var(--bg);background:rgba(8,34,38,.08)}
+
+/* ============ REVEAL ============ */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ HEADER ============ */
+.site-header{
+  position:fixed;inset:0 0 auto 0;z-index:100;height:var(--header-h);
+  border-bottom:1px solid transparent;
+  transition:background .35s var(--ease),border-color .35s var(--ease);
+}
+.site-header.scrolled{
+  background:rgba(8,34,38,.9);
+  -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+  border-color:var(--line);
+}
+.header-inner{
+  max-width:1560px;margin-inline:auto;height:100%;
+  padding-inline:clamp(16px,3vw,40px);
+  display:flex;align-items:center;gap:clamp(1rem,3vw,2.5rem);
+}
+.brand{display:flex;align-items:center;gap:.8rem;text-decoration:none;margin-right:auto}
+.brand-bars{width:34px;height:34px;color:var(--teal-logo);flex:none}
+.brand-text{display:flex;flex-direction:column;line-height:1.1}
+.brand-text .wm{
+  font-family:var(--font-body);font-weight:320;font-size:.95rem;
+  letter-spacing:.35em;text-transform:uppercase;
+}
+.brand-text .mt{
+  font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:.52rem;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--accent);margin-top:.3em;
+}
+.primary-nav ul{display:flex;gap:clamp(1.1rem,2vw,2rem);list-style:none}
+.primary-nav a{
+  font-size:.78rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  text-decoration:none;color:var(--ink);padding:.4rem 0;position:relative;white-space:nowrap;
+}
+.primary-nav a::after{
+  content:"";position:absolute;left:0;bottom:0;height:2px;width:0;
+  background:var(--accent);transition:width .3s var(--ease);
+}
+.primary-nav a:hover{color:var(--accent)}
+.primary-nav a:hover::after{width:100%}
+.header-phone{
+  font-size:.82rem;font-weight:600;letter-spacing:.06em;text-decoration:none;
+  color:var(--muted);white-space:nowrap;transition:color .25s;
+}
+.header-phone:hover{color:var(--accent)}
+.header-cta{padding:.8rem 1.3rem;font-size:.74rem}
+
+.menu-btn{
+  display:none;width:44px;height:44px;flex-direction:column;align-items:center;
+  justify-content:center;gap:6px;flex:none;
+}
+.menu-btn span{
+  width:24px;height:2px;background:var(--ink);display:block;
+  transition:transform .3s var(--ease),opacity .3s;
+}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+.mobile-menu{
+  position:fixed;inset:0;z-index:90;background:var(--bg);
+  padding:calc(var(--header-h) + 24px) clamp(24px,7vw,48px) 48px;
+  display:flex;flex-direction:column;
+  visibility:hidden;opacity:0;transform:translateY(-12px);
+  transition:opacity .35s var(--ease),transform .35s var(--ease),visibility 0s .35s;
+}
+.mobile-menu.open{visibility:visible;opacity:1;transform:none;transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.mobile-menu nav ul{list-style:none}
+.mobile-menu nav li{border-top:1px solid var(--line)}
+.mobile-menu nav li:last-child{border-bottom:1px solid var(--line)}
+.mobile-menu nav a{
+  display:flex;align-items:baseline;gap:1rem;text-decoration:none;
+  font-family:var(--font-display);font-stretch:125%;font-weight:750;text-transform:uppercase;
+  font-size:clamp(1.7rem,7vw,2.4rem);padding:1.1rem 0;letter-spacing:.02em;
+}
+.mobile-menu nav a i{font-style:normal;font-family:var(--font-body);font-weight:600;font-size:.7rem;letter-spacing:.25em;color:var(--accent)}
+.mobile-menu nav a:hover{color:var(--accent)}
+.mm-foot{margin-top:auto;display:flex;flex-direction:column;gap:1rem;padding-top:2rem}
+.mm-phone{font-size:1.1rem;font-weight:600;text-decoration:none;color:var(--muted)}
+.mm-phone:hover{color:var(--accent)}
+
+/* ============ HERO ============ */
+.hero{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden}
+.hero-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero-scrim{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(200deg,rgba(8,34,38,.28) 0%,rgba(8,34,38,.52) 55%,rgba(8,34,38,.86) 100%),
+    linear-gradient(0deg,var(--bg) 0%,rgba(8,34,38,0) 34%);
+}
+.hero-content{
+  position:relative;width:100%;
+  padding:calc(var(--header-h) + 8vh) clamp(20px,4.5vw,52px) clamp(4.5rem,9vh,7rem);
+  max-width:1560px;margin-inline:auto;
+}
+.hero-loc{
+  display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;
+  font-size:.75rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--ink);margin-bottom:clamp(1.2rem,2.5vh,2rem);
+}
+.hero-loc::before{content:"";width:34px;height:3px;background:var(--accent)}
+.hero-loc .dot{color:var(--accent)}
+.hero h1{
+  font-size:clamp(2.55rem,8.2vw,6.7rem);
+  font-weight:790;line-height:.96;letter-spacing:.005em;max-width:15ch;
+}
+.hero h1 .accent-line{color:var(--accent)}
+.hero-sub{
+  margin-top:clamp(1.2rem,2.6vh,1.8rem);max-width:52ch;
+  font-size:clamp(1rem,1.4vw,1.2rem);color:rgba(242,239,230,.85);
+}
+.hero-ctas{display:flex;gap:1rem;flex-wrap:wrap;margin-top:clamp(1.8rem,4vh,2.6rem)}
+.scroll-cue{
+  position:absolute;left:clamp(20px,4.5vw,52px);bottom:0;z-index:2;
+  display:flex;flex-direction:column;align-items:center;gap:.8rem;
+  text-decoration:none;color:var(--muted);
+  font-size:.62rem;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+  writing-mode:vertical-rl;padding-bottom:0;
+}
+.scroll-cue::after{content:"";width:1px;height:64px;background:linear-gradient(var(--line-strong),var(--accent))}
+.scroll-cue:hover{color:var(--accent)}
+@media (max-width:980px){.scroll-cue{display:none}}
+
+/* ============ MARQUEE ============ */
+.marquee{
+  overflow:hidden;border-bottom:1px solid var(--line);
+  padding-block:clamp(1.1rem,2.5vw,1.8rem);position:relative;
+}
+.mq-track{display:flex;width:max-content;animation:mq 42s linear infinite}
+.marquee:hover .mq-track{animation-play-state:paused}
+.mq-seq{display:flex;align-items:center;flex:none}
+.mq-item{
+  font-family:var(--font-display);font-stretch:125%;font-weight:800;text-transform:uppercase;
+  font-size:clamp(1.7rem,4.4vw,3.4rem);line-height:1;white-space:nowrap;
+  color:transparent;-webkit-text-stroke:1.5px rgba(242,239,230,.34);
+}
+@supports not ((-webkit-text-stroke:1px black) or (text-stroke:1px black)){
+  .mq-item{color:rgba(242,239,230,.3)}
+}
+.mq-star{color:var(--accent);font-size:clamp(.9rem,2vw,1.4rem);margin-inline:clamp(1.2rem,3vw,2.4rem);flex:none}
+@keyframes mq{to{transform:translateX(-50%)}}
+
+/* ============ SECTIONS ============ */
+.section{padding-block:clamp(4.5rem,10vw,8.5rem)}
+.section-head{margin-bottom:clamp(2.5rem,5.5vw,4.5rem)}
+
+/* About */
+.about-grid{
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  gap:clamp(2.5rem,6vw,6rem);align-items:start;
+}
+.about-fig{position:relative;overflow:hidden}
+.about-fig img{aspect-ratio:4/5;width:100%;object-fit:cover;transition:transform .8s var(--ease),filter .8s var(--ease)}
+.about-fig:hover img{transform:scale(1.04);filter:brightness(1.06)}
+.about-fig figcaption{
+  position:absolute;left:0;bottom:0;background:var(--bg);
+  padding:.7rem 1.1rem .7rem 0;padding-right:1.4rem;
+  font-size:.68rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
+}
+.about-tour{
+  margin-top:2.5rem;padding-top:1.5rem;border-top:1px solid var(--line);
+  display:flex;gap:1.25rem;align-items:baseline;flex-wrap:wrap;
+}
+.about-tour strong{font-family:var(--font-display);font-stretch:125%;font-weight:700;text-transform:uppercase;font-size:.85rem;letter-spacing:.1em;color:var(--accent)}
+
+/* Amenities */
+.amen{background:var(--panel);border-block:1px solid var(--line)}
+.amen-media{
+  display:grid;grid-template-columns:3fr 2fr;gap:clamp(1rem,2vw,1.5rem);
+  margin-bottom:clamp(2.5rem,5vw,4rem);
+}
+.amen-media figure{overflow:hidden;position:relative}
+.amen-media img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;transition:transform .8s var(--ease),filter .8s var(--ease)}
+.amen-media figure:hover img{transform:scale(1.04);filter:brightness(1.06)}
+.amen-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,5.5rem)}
+.amen-col h3{
+  font-size:.85rem;letter-spacing:.24em;font-weight:700;color:var(--accent);
+  margin-bottom:1.25rem;display:flex;align-items:center;gap:.75rem;
+}
+.amen-col h3::after{content:"";height:1px;background:var(--line);flex:1}
+.amen-list{list-style:none}
+.amen-list li{
+  display:flex;gap:1.1rem;align-items:baseline;
+  padding-block:.85rem;border-bottom:1px solid var(--line);
+  font-size:1rem;
+}
+.amen-list li:first-child{border-top:1px solid var(--line)}
+.amen-list .n{
+  font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:.72rem;
+  color:var(--accent);letter-spacing:.08em;flex:none;width:1.6rem;
+}
+.amen-note{margin-top:2rem;font-size:.85rem;color:var(--muted);max-width:65ch}
+
+/* Photo band */
+.band{position:relative;height:clamp(340px,62vh,640px);overflow:hidden}
+.band img{width:100%;height:100%;object-fit:cover}
+.band-scrim{position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,34,38,.62),rgba(8,34,38,.06) 55%)}
+.band-cap{
+  position:absolute;left:clamp(20px,4.5vw,52px);bottom:clamp(1.4rem,3.5vw,2.6rem);
+  display:flex;align-items:center;gap:.8rem;max-width:80%;
+  font-size:.72rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--ink);
+}
+.band-cap::before{content:"";width:26px;height:3px;background:var(--accent);flex:none}
+
+/* Stats */
+.stats{border-bottom:1px solid var(--line)}
+.stats-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border-left:1px solid var(--line);
+}
+.stat{
+  border-right:1px solid var(--line);
+  padding:clamp(2rem,4.5vw,3.75rem) clamp(1.2rem,2.5vw,2.5rem);
+  display:flex;flex-direction:column;
+}
+.stat dd{
+  order:-1;font-family:var(--font-display);font-stretch:125%;font-weight:800;
+  font-size:clamp(2.4rem,5.5vw,4.6rem);line-height:1;color:var(--accent);
+  letter-spacing:0;
+}
+.stat dd sup{font-size:.45em;top:-.9em;position:relative}
+.stat dt{
+  margin-top:.9rem;font-size:.72rem;font-weight:600;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--muted);
+}
+
+/* ============ FLOOR PLANS ============ */
+.plans-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.plans-note{max-width:44ch;font-size:.95rem;color:var(--muted)}
+.plans-note strong{color:var(--ink);font-weight:600}
+.plans-table{margin-top:clamp(2.5rem,5vw,4rem);border-bottom:1px solid var(--line)}
+.plan-row{display:grid;grid-template-columns:1fr auto;border-top:1px solid var(--line);transition:background .3s var(--ease)}
+.plan-row:hover,.plan-row.active{background:rgba(20,66,74,.45)}
+.plan-toggle{
+  display:grid;align-items:center;text-align:left;
+  grid-template-columns:3.4rem minmax(10rem,1.15fr) 1.15fr .75fr auto 3rem;
+  gap:clamp(.8rem,2vw,1.6rem);
+  padding:clamp(1.15rem,2.4vw,1.7rem) clamp(.4rem,1vw,1rem);
+  width:100%;
+}
+.p-idx{font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:.72rem;color:var(--muted);letter-spacing:.1em}
+.p-name{
+  font-family:var(--font-display);font-stretch:125%;font-weight:760;text-transform:uppercase;
+  font-size:clamp(1.15rem,2vw,1.6rem);letter-spacing:.02em;line-height:1.1;
+  display:flex;align-items:center;gap:.9rem;flex-wrap:wrap;
+}
+.p-badge{
+  font-family:var(--font-body);font-weight:600;font-size:.6rem;letter-spacing:.16em;
+  color:var(--accent);border:1px solid rgba(254,218,119,.45);
+  padding:.3em .7em;white-space:nowrap;text-transform:uppercase;
+}
+.p-specs{font-size:.92rem;color:var(--muted);letter-spacing:.02em}
+.p-avail{font-size:.8rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.p-avail::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--accent);margin-right:.6rem;vertical-align:1px}
+.p-price{
+  font-family:var(--font-display);font-stretch:125%;font-weight:750;
+  font-size:clamp(1.1rem,1.8vw,1.5rem);color:var(--accent);white-space:nowrap;text-align:right;
+}
+.p-price small{
+  display:block;font-family:var(--font-body);font-weight:600;font-size:.58rem;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--muted);margin-bottom:.25rem;
+}
+.p-caret{display:flex;justify-content:center}
+.p-caret svg{width:16px;height:16px;transition:transform .35s var(--ease);color:var(--muted)}
+.plan-toggle[aria-expanded="true"] .p-caret svg{transform:rotate(180deg);color:var(--accent)}
+.plan-toggle:hover .p-caret svg{color:var(--accent)}
+.plan-apply{
+  display:flex;align-items:center;gap:.5rem;align-self:stretch;
+  padding-inline:clamp(1rem,2vw,1.8rem);
+  border-left:1px solid var(--line);text-decoration:none;
+  font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:.74rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--muted);
+  transition:color .25s,background .25s;
+}
+.plan-apply svg{width:13px;height:13px;transition:transform .25s var(--ease)}
+.plan-apply:hover{color:var(--bg);background:var(--accent)}
+.plan-apply:hover svg{transform:translate(2px,-2px)}
+.plan-panel{
+  grid-column:1/-1;display:grid;grid-template-rows:0fr;
+  transition:grid-template-rows .5s var(--ease);
+}
+.plan-panel.open{grid-template-rows:1fr}
+.plan-panel-inner{overflow:hidden;visibility:hidden;transition:visibility 0s .5s}
+.plan-panel.open .plan-panel-inner{visibility:visible;transition:visibility 0s}
+.plan-card{
+  background:var(--cream);color:var(--bg);
+  margin:0 0 clamp(1.4rem,3vw,2.2rem);
+  display:grid;grid-template-columns:minmax(280px,5fr) 4fr;
+  gap:clamp(1.5rem,4vw,3.5rem);
+  padding:clamp(1.4rem,3.2vw,2.75rem);
+}
+.plan-fig{background:#fff;border:1px solid rgba(8,34,38,.12);padding:clamp(.8rem,2vw,1.4rem)}
+.plan-fig img{width:100%;height:auto}
+.plan-info h3{font-size:clamp(1.4rem,2.4vw,2rem);margin-bottom:1.4rem}
+.plan-info h3 span{color:#0E6B72}
+.spec-list{border-top:1px solid rgba(8,34,38,.16)}
+.spec-list div{
+  display:flex;justify-content:space-between;gap:1.5rem;align-items:baseline;
+  padding-block:.7rem;border-bottom:1px solid rgba(8,34,38,.16);
+}
+.spec-list dt{font-size:.68rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(8,34,38,.6)}
+.spec-list dd{font-weight:600;font-size:1rem}
+.plan-note{margin-top:1.2rem;font-size:.88rem;color:rgba(8,34,38,.68);max-width:44ch}
+.plan-info .btn{margin-top:1.5rem;background:var(--bg);color:var(--accent)}
+.plan-info .btn:hover{background:#0f3a40}
+.plans-foot{margin-top:2rem;font-size:.88rem;color:var(--muted);max-width:65ch}
+.plans-foot a{color:var(--accent);text-underline-offset:3px}
+
+/* ============ GALLERY ============ */
+.gallery-grid{
+  display:grid;gap:clamp(10px,1.4vw,18px);
+  grid-template-columns:repeat(4,1fr);
+  grid-auto-rows:clamp(150px,17vw,240px);
+  grid-auto-flow:dense;
+}
+.g-item{position:relative;overflow:hidden;padding:0;display:block}
+.g-item img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease),filter .8s var(--ease)}
+.g-item::after{
+  content:"";position:absolute;inset:0;border:1px solid transparent;
+  transition:border-color .3s;pointer-events:none;
+}
+.g-item:hover img{transform:scale(1.05);filter:brightness(1.08)}
+.g-item:hover::after{border-color:var(--accent)}
+.g-w2{grid-column:span 2}
+.g-r2{grid-row:span 2}
+
+/* Lightbox */
+.lb{
+  position:fixed;inset:0;z-index:200;background:rgba(5,26,29,.95);
+  display:flex;align-items:center;justify-content:center;
+  padding:clamp(12px,4vw,48px);
+}
+.lb[hidden]{display:none}
+.lb:not([hidden]){animation:lbfade .28s var(--ease)}
+@keyframes lbfade{from{opacity:0}}
+.lb figure{max-width:min(1200px,92%);max-height:100%;display:flex;flex-direction:column;gap:.9rem}
+.lb img{max-width:100%;max-height:78vh;object-fit:contain;margin-inline:auto}
+.lb figcaption{
+  text-align:center;font-size:.78rem;font-weight:600;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);
+}
+.lb-btn{
+  position:absolute;display:flex;align-items:center;justify-content:center;
+  width:52px;height:52px;border:1px solid var(--line-strong);
+  color:var(--ink);background:rgba(8,34,38,.6);transition:all .25s var(--ease);
+}
+.lb-btn:hover{border-color:var(--accent);color:var(--accent)}
+.lb-btn svg{width:20px;height:20px}
+.lb-close{top:clamp(12px,3vw,28px);right:clamp(12px,3vw,28px)}
+.lb-prev{left:clamp(8px,2.5vw,28px);top:50%;transform:translateY(-50%)}
+.lb-next{right:clamp(8px,2.5vw,28px);top:50%;transform:translateY(-50%)}
+.lb-count{
+  position:absolute;left:clamp(16px,3vw,32px);top:clamp(20px,3.2vw,34px);
+  font-family:var(--font-display);font-stretch:125%;font-weight:700;font-size:.8rem;
+  letter-spacing:.2em;color:var(--muted);
+}
+
+/* ============ NEIGHBORHOOD ============ */
+.hood{background:var(--panel);border-block:1px solid var(--line)}
+.hood-cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2.5rem,6vw,6rem)}
+.hood-col h3{
+  font-size:clamp(1.15rem,1.8vw,1.5rem);letter-spacing:.04em;margin-bottom:1.75rem;
+  display:flex;align-items:baseline;gap:1rem;
+}
+.hood-col h3 em{font-style:normal;color:var(--accent)}
+.hood-list{list-style:none}
+.hood-list li{
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(1.1rem,2.5vw,1.9rem);
+  padding-block:1.35rem;border-top:1px solid var(--line);align-items:start;
+}
+.hood-list li:last-child{border-bottom:1px solid var(--line)}
+.hood-num{
+  font-family:var(--font-display);font-stretch:125%;font-weight:800;
+  font-size:clamp(1.9rem,3.4vw,2.9rem);line-height:1;color:var(--accent);
+  min-width:2ch;
+}
+.hood-list h4{font-family:var(--font-body);font-weight:640;font-size:1.1rem;letter-spacing:.01em}
+.hood-list p{font-size:.92rem;color:var(--muted);margin-top:.25rem;max-width:42ch}
+.anchors{margin-top:clamp(3rem,6vw,4.5rem);padding-top:2rem;border-top:1px solid var(--line)}
+.anchors-label{
+  font-size:.72rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1.25rem;
+}
+.anchors ul{display:flex;flex-wrap:wrap;gap:.7rem;list-style:none}
+.anchors li{
+  border:1px solid var(--line-strong);padding:.55rem 1.05rem;
+  font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  transition:border-color .25s,color .25s;
+}
+.anchors li:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ============ TOUR BAND ============ */
+.tour{background:var(--accent);color:var(--bg)}
+.tour-grid{
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  gap:clamp(2.5rem,6vw,5rem);align-items:center;
+  padding-block:clamp(3.5rem,8vw,6.5rem);
+}
+.tour h2{font-size:clamp(2.1rem,5vw,4.2rem);letter-spacing:.01em}
+.tour-sub{margin-top:1.2rem;font-size:clamp(1rem,1.5vw,1.2rem);font-weight:450;max-width:44ch}
+.tour-info{display:flex;flex-direction:column;gap:1.4rem}
+.tour-phone{
+  font-family:var(--font-display);font-stretch:125%;font-weight:800;
+  font-size:clamp(1.5rem,3vw,2.4rem);text-decoration:none;letter-spacing:.01em;
+}
+.tour-phone:hover{text-decoration:underline;text-underline-offset:6px}
+.tour-hours{font-size:.92rem;font-weight:500;line-height:1.7}
+.tour-hours b{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.72rem}
+.tour-ctas{display:flex;gap:.9rem;flex-wrap:wrap}
+
+/* ============ CONTACT ============ */
+.contact-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(2.5rem,6vw,6rem)}
+.contact-block+.contact-block{margin-top:2.25rem}
+.contact-label{
+  font-size:.7rem;font-weight:600;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:.6rem;
+}
+.contact-big{font-size:clamp(1.15rem,1.8vw,1.45rem);font-weight:560;line-height:1.4}
+.contact-big a{text-decoration:none;border-bottom:1px solid var(--line-strong);transition:border-color .25s,color .25s;padding-bottom:2px}
+.contact-big a:hover{color:var(--accent);border-color:var(--accent)}
+.contact-note{font-size:.9rem;color:var(--muted);margin-top:.4rem}
+.socials{display:flex;gap:12px;flex-wrap:wrap}
+.socials a{
+  width:46px;height:46px;border:1px solid var(--line);
+  display:inline-flex;align-items:center;justify-content:center;color:var(--ink);
+  transition:color .25s,border-color .25s,transform .25s;
+}
+.socials a svg{width:18px;height:18px}
+.socials a:hover{color:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+.footer-socials a{width:40px;height:40px}
+.footer-socials a svg{width:15px;height:15px}
+.hours-card{border:1px solid var(--line);padding:clamp(1.6rem,3.5vw,2.75rem);background:var(--panel)}
+.hours-card h3{font-size:1rem;letter-spacing:.16em;margin-bottom:1.5rem;color:var(--accent)}
+.hours-table{width:100%;border-collapse:collapse}
+.hours-table th,.hours-table td{
+  text-align:left;padding-block:.85rem;border-bottom:1px solid var(--line);
+  font-size:.95rem;
+}
+.hours-table th{font-weight:600;letter-spacing:.06em}
+.hours-table td{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+.hours-foot{margin-top:1.4rem;font-size:.85rem;color:var(--muted)}
+
+/* ============ FOOTER ============ */
+.site-footer{background:var(--footer);border-top:1px solid var(--line)}
+.footer-grid{
+  display:grid;grid-template-columns:minmax(0,4fr) repeat(3,minmax(0,2.5fr));
+  gap:clamp(2rem,5vw,4rem);
+  padding-block:clamp(3.5rem,7vw,5.5rem) clamp(2.5rem,5vw,4rem);
+}
+.footer-brand .brand{margin:0 0 1.25rem}
+.footer-tag{font-size:.95rem;color:var(--muted);max-width:34ch}
+.footer-tag em{color:var(--ink);font-style:normal;font-weight:600}
+.footer-col h3{
+  font-size:.72rem;letter-spacing:.28em;color:var(--accent);
+  margin-bottom:1.25rem;font-weight:700;
+}
+.footer-col ul{list-style:none}
+.footer-col li+li{margin-top:.7rem}
+.footer-col a{
+  font-size:.92rem;text-decoration:none;color:var(--muted);
+  transition:color .25s;
+}
+.footer-col a:hover{color:var(--accent)}
+.footer-bottom{
+  border-top:1px solid var(--line);
+  padding-block:1.6rem;
+  display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;
+  font-size:.8rem;color:var(--muted);
+}
+.footer-bottom .eho{display:inline-flex;align-items:center;gap:.55rem}
+.footer-bottom .eho svg{width:15px;height:15px;color:var(--muted)}
+.footer-bottom a{color:var(--ink);text-underline-offset:3px}
+.footer-bottom a:hover{color:var(--accent)}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width:1100px){
+  .primary-nav{display:none}
+  .header-phone{display:none}
+  .menu-btn{display:flex}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:clamp(140px,24vw,220px)}
+}
+@media (max-width:920px){
+  .about-grid,.contact-grid,.tour-grid{grid-template-columns:1fr}
+  .amen-cols,.hood-cols{grid-template-columns:1fr;gap:2.75rem}
+  .amen-media{grid-template-columns:1fr}
+  .amen-media figure:last-child{display:none}
+  .stats-grid{grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
+  .stat{border-bottom:1px solid var(--line)}
+  .about-fig{order:-1}
+  .about-fig img{aspect-ratio:16/10}
+}
+@media (max-width:820px){
+  .plan-row{grid-template-columns:minmax(0,1fr) auto}
+  .plan-toggle{
+    grid-template-columns:1.6rem minmax(0,1fr) auto 1.4rem;
+    grid-template-areas:
+      "idx name price caret"
+      "idx specs price caret"
+      "idx avail price caret";
+    row-gap:.35rem;column-gap:.6rem;
+    padding-inline:.25rem;
+  }
+  .p-idx{grid-area:idx}
+  .p-name{grid-area:name;min-width:0;font-size:1.02rem;gap:.5rem}
+  .p-badge{font-size:.54rem;letter-spacing:.1em;padding:.25em .5em}
+  .p-specs{grid-area:specs;font-size:.82rem}
+  .p-avail{grid-area:avail;font-size:.66rem;letter-spacing:.1em}
+  .p-price{grid-area:price;font-size:1.05rem}
+  .p-price small{letter-spacing:.16em}
+  .p-caret{grid-area:caret}
+  .p-caret svg{width:13px;height:13px}
+  .plan-apply{padding-inline:.75rem}
+  .plan-apply span{display:none}
+  .plan-card{grid-template-columns:1fr}
+  .header-cta{display:none}
+}
+@media (max-width:480px){
+  .hero-ctas .btn{width:100%;justify-content:center}
+  .tour-ctas .btn{width:100%;justify-content:center}
+}
+
+/* ============ REDUCED MOTION ============ */
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1;transform:none;transition:none}
+  .mq-track{animation:none;flex-wrap:wrap;width:auto}
+  .mq-seq[aria-hidden]{display:none}
+  *,*::before,*::after{transition-duration:.01ms !important;animation-duration:.01ms !important}
+}
+
+/* ---------- virtual tours ---------- */
+.vt-row{margin-top:clamp(2.4rem,4vw,3.4rem);display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:14px}
+.vt-card{position:relative;display:block;overflow:hidden;text-decoration:none;border:1px solid var(--line)}
+.vt-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:saturate(.92);transition:transform .6s ease}
+.vt-card:hover img{transform:scale(1.05)}
+.vt-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(8,34,38,.78),transparent 46%)}
+.vt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent);display:flex;align-items:center;justify-content:center;z-index:1;transition:background .25s,color .25s,transform .25s}
+.vt-play svg{width:20px;height:20px;margin-left:2px}
+.vt-card:hover .vt-play{background:var(--accent);color:#082226;transform:translate(-50%,-50%) scale(1.08)}
+.vt-name{position:absolute;left:14px;bottom:12px;z-index:1;color:var(--ink);font-family:var(--font-display);font-stretch:115%;font-weight:700;font-size:.9rem;letter-spacing:.14em;text-transform:uppercase}
+/* ---------- neighborhood map ---------- */
+.nbh-map{margin-top:clamp(3rem,6vw,4.5rem);padding-top:2rem;border-top:1px solid var(--line);display:grid;grid-template-columns:1.55fr 1fr;gap:clamp(1.6rem,3.5vw,3rem);align-items:stretch}
+.nmap-card{border:1px solid var(--line);overflow:hidden;min-height:320px;background:var(--panel)}
+.nmap{width:100%;height:100%;display:block}
+.mbg{fill:#0E3238}
+.mblocks rect{fill:rgba(242,239,230,.05)}
+.mroad{stroke:rgba(242,239,230,.2);stroke-width:9;fill:none;stroke-linecap:round}
+.mroad.thin{stroke-width:5}
+.mrail{stroke:var(--accent);stroke-width:2.5;fill:none;stroke-dasharray:8 7;opacity:.55}
+.mcreek{stroke:rgba(126,200,207,.2);stroke-width:16;fill:none;stroke-linecap:round}
+.mroadlbl{font-size:10px;font-weight:700;letter-spacing:.14em;fill:rgba(242,239,230,.42)}
+.mroadlbl.rail{fill:var(--accent);opacity:.8}
+.mnote{font-size:9.5px;fill:rgba(242,239,230,.35);letter-spacing:.06em}
+.mpin{cursor:pointer}
+.mpin .mdot,.mhome .mpulse{transform-box:fill-box;transform-origin:center}
+.mpin .mdot{fill:var(--accent);stroke:#082226;stroke-width:2.5;transition:transform .25s ease}
+.mpin .mnum{fill:#082226;font-size:11px;font-weight:800;text-anchor:middle}
+.mpin .mlabel{opacity:0;transition:opacity .2s;pointer-events:none}
+.mpin .mlabel rect{fill:#082226;stroke:rgba(242,239,230,.25);stroke-width:1}
+.mpin .mlabel .mname{fill:var(--ink);font-size:11.5px;font-weight:700;text-anchor:middle}
+.mpin:hover .mdot,.mpin.hot .mdot{transform:scale(1.3)}
+.mpin:hover .mlabel,.mpin.hot .mlabel{opacity:1}
+.mhome .mhdot{fill:var(--ink);stroke:#082226;stroke-width:3}
+.mhome .mhbars{fill:#082226}
+.mhome .mpulse{fill:none;stroke:var(--accent);stroke-width:2.5;animation:mpulse 2.6s ease-out infinite}
+@keyframes mpulse{0%{transform:scale(1);opacity:.9}100%{transform:scale(2.1);opacity:0}}
+@media (prefers-reduced-motion:reduce){.mhome .mpulse{animation:none;opacity:.5}}
+.mhome .mhlabel rect{fill:var(--accent)}
+.mhome .mhlabel text{fill:#082226;font-size:11px;font-weight:800;letter-spacing:.1em;text-anchor:middle}
+.nmap-legend{display:flex;flex-direction:column}
+.llist{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.mland{display:flex;align-items:baseline;gap:16px;padding:12px 2px;border-bottom:1px solid var(--line);text-decoration:none;transition:background .2s}
+.mland:hover{background:rgba(254,218,119,.06)}
+.mland .ln{font-family:var(--font-display);font-weight:700;color:var(--accent);font-size:.95rem;flex:none;width:30px;letter-spacing:.04em}
+.mland .lt{font-weight:600;color:var(--ink);font-size:.95rem;flex:1}
+.mland .ld{font-size:.8rem;color:var(--muted);white-space:nowrap}
+.mall{margin-top:20px;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);text-decoration:none;align-self:flex-start;border-bottom:1px solid var(--accent);padding-bottom:3px}
+@media (max-width:900px){.nbh-map{grid-template-columns:1fr}}
+</style>
+</head>
+<body id="top">
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a class="brand" href="#top" aria-label="Motor Tides by Wiseman — back to top">
+      <svg class="brand-bars" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+        <polygon points="14,18 34,18 34,74 14,80"/>
+        <polygon points="40,18 60,18 60,71 40,77"/>
+        <polygon points="66,18 86,18 86,68 66,74"/>
+      </svg>
+      <span class="brand-text">
+        <span class="wm">Wiseman</span>
+        <span class="mt">Motor Tides</span>
+      </span>
+    </a>
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#floorplans">Floor Plans</a></li>
+        <li><a href="#amenities">Amenities</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#neighborhood">Neighborhood</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <a class="header-phone" href="tel:+12132869912">+1 213-286-9912</a>
+    <a class="btn btn-solid header-cta" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Apply Now
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+    </a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <nav aria-label="Mobile">
+    <ul>
+      <li><a href="#floorplans"><i>01</i>Floor Plans</a></li>
+      <li><a href="#amenities"><i>02</i>Amenities</a></li>
+      <li><a href="#gallery"><i>03</i>Gallery</a></li>
+      <li><a href="#neighborhood"><i>04</i>Neighborhood</a></li>
+      <li><a href="#contact"><i>05</i>Contact</a></li>
+    </ul>
+  </nav>
+  <div class="mm-foot">
+    <a class="mm-phone" href="tel:+12132869912">+1 213-286-9912</a>
+    <a class="btn btn-solid" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Apply Now
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+    </a>
+  </div>
+</div>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-label="Motor Tides by Wiseman">
+  <img class="hero-img" src="../assets/img/hero-living.jpg" fetchpriority="high"
+       alt="Bright open-plan living room, kitchen and patio inside residence 705 at Motor Tides">
+  <div class="hero-scrim" aria-hidden="true"></div>
+  <div class="hero-content">
+    <p class="hero-loc reveal in">3557 Motor Ave <span class="dot">·</span> Culver City-adjacent <span class="dot">·</span> Now Leasing</p>
+    <h1 class="reveal in">Good living,<br>seven stories<br><span class="accent-line">above Motor Ave</span></h1>
+    <p class="hero-sub reveal in">Motor Tides is a brand new residential community of 107 homes in the heart of Culver City's most walkable neighborhood. Experience Good Living.</p>
+    <div class="hero-ctas reveal in">
+      <a class="btn btn-solid" href="#floorplans">Check availability
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M8 3v10M3 8l5 5 5-5"/></svg>
+      </a>
+      <a class="btn btn-ghost" href="#contact">Schedule a tour
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+      </a>
+    </div>
+  </div>
+  <a class="scroll-cue" href="#about">Scroll</a>
+</section>
+
+<!-- ============ MARQUEE ============ -->
+<div class="marquee" aria-label="Amenity highlights">
+  <div class="mq-track">
+    <div class="mq-seq">
+      <span class="mq-item">Rooftop Deck</span><span class="mq-star" aria-hidden="true">✦</span>
+      <span class="mq-item">Fitness Center</span><span class="mq-star" aria-hidden="true">✦</span>
+      <span class="mq-item">Pet Friendly</span><span class="mq-star" aria-hidden="true">✦</span>
+      <span class="mq-item">Private Balconies</span><span class="mq-star" aria-hidden="true">✦</span>
+      <span class="mq-item">City Views</span><span class="mq-star" aria-hidden="true">✦</span>
+      <span class="mq-item">Controlled Access</span><span class="mq-star" aria-hidden="true">✦</span>
+      <span class="mq-item">Steps to the E Line</span><span class="mq-star" aria-hidden="true">✦</span>
+      <span class="mq-item">Ballona Creek Trail</span><span class="mq-star" aria-hidden="true">✦</span>
+      <span class="mq-item">Quartz Kitchens</span><span class="mq-star" aria-hidden="true">✦</span>
+    </div>
+    <div class="mq-seq" aria-hidden="true">
+      <span class="mq-item">Rooftop Deck</span><span class="mq-star">✦</span>
+      <span class="mq-item">Fitness Center</span><span class="mq-star">✦</span>
+      <span class="mq-item">Pet Friendly</span><span class="mq-star">✦</span>
+      <span class="mq-item">Private Balconies</span><span class="mq-star">✦</span>
+      <span class="mq-item">City Views</span><span class="mq-star">✦</span>
+      <span class="mq-item">Controlled Access</span><span class="mq-star">✦</span>
+      <span class="mq-item">Steps to the E Line</span><span class="mq-star">✦</span>
+      <span class="mq-item">Ballona Creek Trail</span><span class="mq-star">✦</span>
+      <span class="mq-item">Quartz Kitchens</span><span class="mq-star">✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ABOUT ============ -->
+<section class="section" id="about" aria-labelledby="about-h">
+  <div class="container">
+    <div class="about-grid">
+      <div class="reveal-group">
+        <p class="eyebrow reveal"><b>01</b> The Building</p>
+        <h2 class="h2 reveal" id="about-h">A new tide on Motor Avenue</h2>
+        <div class="prose reveal" style="margin-top:clamp(1.5rem,3vw,2.25rem)">
+          <p class="lead">Motor Tides is a brand new residential community now open at 3557 Motor Ave in the heart of Culver City's most walkable neighborhood. Choose from thoughtfully designed one, two, three, and four bedroom residences, each finished for elevated everyday living.</p>
+          <p class="muted">Positioned along the vibrant Motor Avenue corridor, Motor Tides puts you minutes from Culver City's acclaimed restaurant row, the Helms Bakery District, independent cafés, boutique retail, and the Ballona Creek Trail. Major entertainment studios — Sony Pictures, Amazon MGM, and Apple TV+'s Culver City campus — are nearby, as are the Expo/Culver E Line station and fast access to Santa Monica, Marina del Rey, and Downtown LA.</p>
+        </div>
+        <div class="about-tour reveal">
+          <strong>Tours</strong>
+          <span class="muted">In-person and virtual tours available by appointment.</span>
+        </div>
+      </div>
+      <figure class="about-fig reveal">
+        <img src="../assets/img/exterior-facade.jpg" loading="lazy"
+             alt="Street view of Motor Tides' concrete and glass facade on Motor Avenue">
+        <figcaption>3557 Motor Ave · Los Angeles</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AMENITIES ============ -->
+<section class="amen section" id="amenities" aria-labelledby="amen-h">
+  <div class="container">
+    <div class="section-head reveal-group">
+      <p class="eyebrow reveal"><b>02</b> Residences &amp; Amenities</p>
+      <h2 class="h2 reveal" id="amen-h">Built for elevated everyday living</h2>
+      <p class="prose muted reveal" style="margin-top:1.5rem;max-width:58ch">At Motor Tides, you'll enjoy a rooftop deck with sweeping city views as well as a fitness center. As a pet-friendly building, your cats and dogs are also welcome.</p>
+    </div>
+    <div class="amen-media reveal-group">
+      <figure class="reveal"><img src="../assets/img/kitchen-steel.jpg" loading="lazy" alt="Kitchen detail with stainless appliances and wood-tone flooring"></figure>
+      <figure class="reveal"><img src="../assets/img/rooftop-3.jpg" loading="lazy" alt="Rooftop lounge seating on the deck at Motor Tides"></figure>
+    </div>
+    <div class="amen-cols">
+      <div class="amen-col reveal-group">
+        <h3 class="reveal">In the residence</h3>
+        <ul class="amen-list">
+          <li class="reveal"><span class="n">01</span>Open layouts with contemporary finishes</li>
+          <li class="reveal"><span class="n">02</span>Expansive windows and abundant natural light</li>
+          <li class="reveal"><span class="n">03</span>Large private balconies or patios in many homes</li>
+          <li class="reveal"><span class="n">04</span>Modern kitchens with stainless appliances and quartz counters</li>
+          <li class="reveal"><span class="n">05</span>Mirrored and walk-in closets</li>
+          <li class="reveal"><span class="n">06</span>Vinyl plank flooring throughout</li>
+          <li class="reveal"><span class="n">07</span>Sweeping city views on upper floors</li>
+        </ul>
+      </div>
+      <div class="amen-col reveal-group">
+        <h3 class="reveal">In the building</h3>
+        <ul class="amen-list">
+          <li class="reveal"><span class="n">01</span>Rooftop deck with sweeping city views</li>
+          <li class="reveal"><span class="n">02</span>Fitness center</li>
+          <li class="reveal"><span class="n">03</span>Pet friendly — cats and dogs welcome</li>
+          <li class="reveal"><span class="n">04</span>Controlled access</li>
+          <li class="reveal"><span class="n">05</span>Elevator building</li>
+          <li class="reveal"><span class="n">06</span>Steps from the Expo/Culver E Line</li>
+          <li class="reveal"><span class="n">07</span>Bike friendly — near the Ballona Creek Trail</li>
+        </ul>
+      </div>
+    </div>
+    <p class="amen-note reveal">Note: all utilities (trash, gas, electric, water) are the responsibility of the tenant.</p>
+  </div>
+</section>
+
+<!-- ============ PHOTO BAND ============ -->
+<section class="band" aria-label="Rooftop deck aerial view">
+  <img src="../assets/img/rooftop-aerial.jpg" loading="lazy"
+       alt="Aerial drone view of the planted rooftop deck and pergola at Motor Tides">
+  <div class="band-scrim" aria-hidden="true"></div>
+  <p class="band-cap">The rooftop deck — seven stories above Motor Avenue</p>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats" aria-label="Motor Tides by the numbers">
+  <div class="container-wide">
+    <dl class="stats-grid reveal-group">
+      <div class="stat reveal"><dt>Residences</dt><dd>107</dd></div>
+      <div class="stat reveal"><dt>Stories over Palms</dt><dd>7</dd></div>
+      <div class="stat reveal"><dt>Two-bedrooms from</dt><dd>$3,770</dd></div>
+      <div class="stat reveal"><dt>Years of Wiseman</dt><dd>45<sup>+</sup></dd></div>
+    </dl>
+  </div>
+</section>
+
+<!-- ============ FLOOR PLANS ============ -->
+<section class="section" id="floorplans" aria-labelledby="plans-h">
+  <div class="container">
+    <div class="plans-head reveal-group">
+      <div>
+        <p class="eyebrow reveal"><b>03</b> Floor Plans</p>
+        <h2 class="h2 reveal" id="plans-h">Seven ways to live here</h2>
+      </div>
+      <p class="plans-note reveal"><strong>Live availability, real pricing.</strong> Select a plan to view the drawing. Move-in specials are available on every plan below.</p>
+    </div>
+
+    <div class="plans-table">
+
+      <!-- Harbor -->
+      <div class="plan-row reveal">
+        <button class="plan-toggle" id="toggle-harbor" aria-expanded="true" aria-controls="panel-harbor">
+          <span class="p-idx" aria-hidden="true">01</span>
+          <span class="p-name">Harbor <span class="p-badge">Specials available</span></span>
+          <span class="p-specs">2 bd · 2 ba · 722–754 sq ft</span>
+          <span class="p-avail">4 available</span>
+          <span class="p-price"><small>From</small>$3,770</span>
+          <span class="p-caret" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l5 5 5-5"/></svg></span>
+        </button>
+        <a class="plan-apply" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener" aria-label="Check availability and apply for the Harbor plan (opens in a new tab)">
+          <span>Apply</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+        </a>
+        <div class="plan-panel open" id="panel-harbor" role="region" aria-labelledby="toggle-harbor">
+          <div class="plan-panel-inner">
+            <div class="plan-card">
+              <figure class="plan-fig"><img src="../assets/img/plan-harbor.png" loading="lazy" alt="Harbor floor plan drawing — two bedroom, two bath, 722 to 754 square feet"></figure>
+              <div class="plan-info">
+                <h3>Harbor <span>· 01</span></h3>
+                <dl class="spec-list">
+                  <div><dt>Beds / Baths</dt><dd>2 bd · 2 ba</dd></div>
+                  <div><dt>Interior</dt><dd>722–754 sq ft</dd></div>
+                  <div><dt>From</dt><dd>$3,770 / mo</dd></div>
+                  <div><dt>Availability</dt><dd>4 homes</dd></div>
+                </dl>
+                <p class="plan-note">Move-in specials available — ask the leasing team when you tour.</p>
+                <a class="btn" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reef -->
+      <div class="plan-row reveal">
+        <button class="plan-toggle" id="toggle-reef" aria-expanded="false" aria-controls="panel-reef">
+          <span class="p-idx" aria-hidden="true">02</span>
+          <span class="p-name">Reef <span class="p-badge">Specials available</span></span>
+          <span class="p-specs">2 bd · 2 ba · 768 sq ft</span>
+          <span class="p-avail">2 available</span>
+          <span class="p-price"><small>From</small>$3,845</span>
+          <span class="p-caret" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l5 5 5-5"/></svg></span>
+        </button>
+        <a class="plan-apply" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener" aria-label="Check availability and apply for the Reef plan (opens in a new tab)">
+          <span>Apply</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+        </a>
+        <div class="plan-panel" id="panel-reef" role="region" aria-labelledby="toggle-reef">
+          <div class="plan-panel-inner">
+            <div class="plan-card">
+              <figure class="plan-fig"><img src="../assets/img/plan-reef.png" loading="lazy" alt="Reef floor plan drawing — two bedroom, two bath, 768 square feet"></figure>
+              <div class="plan-info">
+                <h3>Reef <span>· 02</span></h3>
+                <dl class="spec-list">
+                  <div><dt>Beds / Baths</dt><dd>2 bd · 2 ba</dd></div>
+                  <div><dt>Interior</dt><dd>768 sq ft</dd></div>
+                  <div><dt>From</dt><dd>$3,845 / mo</dd></div>
+                  <div><dt>Availability</dt><dd>2 homes</dd></div>
+                </dl>
+                <p class="plan-note">Move-in specials available — ask the leasing team when you tour.</p>
+                <a class="btn" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pacific -->
+      <div class="plan-row reveal">
+        <button class="plan-toggle" id="toggle-pacific" aria-expanded="false" aria-controls="panel-pacific">
+          <span class="p-idx" aria-hidden="true">03</span>
+          <span class="p-name">Pacific <span class="p-badge">Specials available</span></span>
+          <span class="p-specs">2 bd · 2 ba · 757 sq ft</span>
+          <span class="p-avail">1 available</span>
+          <span class="p-price"><small>From</small>$3,895</span>
+          <span class="p-caret" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l5 5 5-5"/></svg></span>
+        </button>
+        <a class="plan-apply" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener" aria-label="Check availability and apply for the Pacific plan (opens in a new tab)">
+          <span>Apply</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+        </a>
+        <div class="plan-panel" id="panel-pacific" role="region" aria-labelledby="toggle-pacific">
+          <div class="plan-panel-inner">
+            <div class="plan-card">
+              <figure class="plan-fig"><img src="../assets/img/plan-pacific.png" loading="lazy" alt="Pacific floor plan drawing — two bedroom, two bath, 757 square feet"></figure>
+              <div class="plan-info">
+                <h3>Pacific <span>· 03</span></h3>
+                <dl class="spec-list">
+                  <div><dt>Beds / Baths</dt><dd>2 bd · 2 ba</dd></div>
+                  <div><dt>Interior</dt><dd>757 sq ft</dd></div>
+                  <div><dt>From</dt><dd>$3,895 / mo</dd></div>
+                  <div><dt>Availability</dt><dd>1 home</dd></div>
+                </dl>
+                <p class="plan-note">Move-in specials available — ask the leasing team when you tour.</p>
+                <a class="btn" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lighthouse -->
+      <div class="plan-row reveal">
+        <button class="plan-toggle" id="toggle-lighthouse" aria-expanded="false" aria-controls="panel-lighthouse">
+          <span class="p-idx" aria-hidden="true">04</span>
+          <span class="p-name">Lighthouse <span class="p-badge">Specials available</span></span>
+          <span class="p-specs">2 bd · 2 ba · 742–766 sq ft</span>
+          <span class="p-avail">4 available</span>
+          <span class="p-price"><small>From</small>$3,950</span>
+          <span class="p-caret" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l5 5 5-5"/></svg></span>
+        </button>
+        <a class="plan-apply" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener" aria-label="Check availability and apply for the Lighthouse plan (opens in a new tab)">
+          <span>Apply</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+        </a>
+        <div class="plan-panel" id="panel-lighthouse" role="region" aria-labelledby="toggle-lighthouse">
+          <div class="plan-panel-inner">
+            <div class="plan-card">
+              <figure class="plan-fig"><img src="../assets/img/plan-lighthouse.png" loading="lazy" alt="Lighthouse floor plan drawing — two bedroom, two bath, 742 to 766 square feet"></figure>
+              <div class="plan-info">
+                <h3>Lighthouse <span>· 04</span></h3>
+                <dl class="spec-list">
+                  <div><dt>Beds / Baths</dt><dd>2 bd · 2 ba</dd></div>
+                  <div><dt>Interior</dt><dd>742–766 sq ft</dd></div>
+                  <div><dt>From</dt><dd>$3,950 / mo</dd></div>
+                  <div><dt>Availability</dt><dd>4 homes</dd></div>
+                </dl>
+                <p class="plan-note">Move-in specials available — ask the leasing team when you tour.</p>
+                <a class="btn" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Seacliff -->
+      <div class="plan-row reveal">
+        <button class="plan-toggle" id="toggle-seacliff" aria-expanded="false" aria-controls="panel-seacliff">
+          <span class="p-idx" aria-hidden="true">05</span>
+          <span class="p-name">Seacliff <span class="p-badge">Specials available</span></span>
+          <span class="p-specs">2 bd · 2 ba · 895 sq ft</span>
+          <span class="p-avail">2 available</span>
+          <span class="p-price"><small>From</small>$3,975</span>
+          <span class="p-caret" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l5 5 5-5"/></svg></span>
+        </button>
+        <a class="plan-apply" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener" aria-label="Check availability and apply for the Seacliff plan (opens in a new tab)">
+          <span>Apply</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+        </a>
+        <div class="plan-panel" id="panel-seacliff" role="region" aria-labelledby="toggle-seacliff">
+          <div class="plan-panel-inner">
+            <div class="plan-card">
+              <figure class="plan-fig"><img src="../assets/img/plan-seacliff.png" loading="lazy" alt="Seacliff floor plan drawing — two bedroom, two bath, 895 square feet"></figure>
+              <div class="plan-info">
+                <h3>Seacliff <span>· 05</span></h3>
+                <dl class="spec-list">
+                  <div><dt>Beds / Baths</dt><dd>2 bd · 2 ba</dd></div>
+                  <div><dt>Interior</dt><dd>895 sq ft</dd></div>
+                  <div><dt>From</dt><dd>$3,975 / mo</dd></div>
+                  <div><dt>Availability</dt><dd>2 homes</dd></div>
+                </dl>
+                <p class="plan-note">Move-in specials available — ask the leasing team when you tour.</p>
+                <a class="btn" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Channel -->
+      <div class="plan-row reveal">
+        <button class="plan-toggle" id="toggle-channel" aria-expanded="false" aria-controls="panel-channel">
+          <span class="p-idx" aria-hidden="true">06</span>
+          <span class="p-name">Channel <span class="p-badge">Specials available</span></span>
+          <span class="p-specs">2 bd · 2 ba · 799 sq ft</span>
+          <span class="p-avail">1 available</span>
+          <span class="p-price"><small>From</small>$4,095</span>
+          <span class="p-caret" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l5 5 5-5"/></svg></span>
+        </button>
+        <a class="plan-apply" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener" aria-label="Check availability and apply for the Channel plan (opens in a new tab)">
+          <span>Apply</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+        </a>
+        <div class="plan-panel" id="panel-channel" role="region" aria-labelledby="toggle-channel">
+          <div class="plan-panel-inner">
+            <div class="plan-card">
+              <figure class="plan-fig"><img src="../assets/img/plan-channel.png" loading="lazy" alt="Channel floor plan drawing — two bedroom, two bath, 799 square feet"></figure>
+              <div class="plan-info">
+                <h3>Channel <span>· 06</span></h3>
+                <dl class="spec-list">
+                  <div><dt>Beds / Baths</dt><dd>2 bd · 2 ba</dd></div>
+                  <div><dt>Interior</dt><dd>799 sq ft</dd></div>
+                  <div><dt>From</dt><dd>$4,095 / mo</dd></div>
+                  <div><dt>Availability</dt><dd>1 home</dd></div>
+                </dl>
+                <p class="plan-note">Move-in specials available — ask the leasing team when you tour.</p>
+                <a class="btn" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coral -->
+      <div class="plan-row reveal">
+        <button class="plan-toggle" id="toggle-coral" aria-expanded="false" aria-controls="panel-coral">
+          <span class="p-idx" aria-hidden="true">07</span>
+          <span class="p-name">Coral <span class="p-badge">Specials available</span></span>
+          <span class="p-specs">3 bd · 2 ba · 876 sq ft</span>
+          <span class="p-avail">5 available</span>
+          <span class="p-price"><small>From</small>$4,495</span>
+          <span class="p-caret" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l5 5 5-5"/></svg></span>
+        </button>
+        <a class="plan-apply" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener" aria-label="Check availability and apply for the Coral plan (opens in a new tab)">
+          <span>Apply</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+        </a>
+        <div class="plan-panel" id="panel-coral" role="region" aria-labelledby="toggle-coral">
+          <div class="plan-panel-inner">
+            <div class="plan-card">
+              <figure class="plan-fig"><img src="../assets/img/plan-coral.png" loading="lazy" alt="Coral floor plan drawing — three bedroom, two bath, 876 square feet"></figure>
+              <div class="plan-info">
+                <h3>Coral <span>· 07</span></h3>
+                <dl class="spec-list">
+                  <div><dt>Beds / Baths</dt><dd>3 bd · 2 ba</dd></div>
+                  <div><dt>Interior</dt><dd>876 sq ft</dd></div>
+                  <div><dt>From</dt><dd>$4,495 / mo</dd></div>
+                  <div><dt>Availability</dt><dd>5 homes</dd></div>
+                </dl>
+                <p class="plan-note">Move-in specials available — ask the leasing team when you tour.</p>
+                <a class="btn" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Check availability
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="plans-foot reveal">One-bedroom residences from $2,670 are currently waitlisted — call the leasing office at <a href="tel:+12132869912">+1 213-286-9912</a> for details. Applications are processed through our secure online leasing portal.</p>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+
+<!-- ============ VIRTUAL TOURS ============ -->
+<section class="section vtours" id="tours" aria-labelledby="vt-h">
+  <div class="container">
+    <p class="section-label reveal"><span class="tick"></span>04.5&ensp;Virtual Tours</p>
+    <h2 class="h2 reveal" id="vt-h">Walk it before<br>you visit</h2>
+    <p class="muted reveal" style="max-width:52ch;margin-top:1rem">Five of the seven plans have full 3D walkthroughs — wander the actual homes from anywhere, tonight.</p>
+    <div class="vt-row reveal">
+      <a class="vt-card" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener" aria-label="Open the Harbor 3D virtual tour"><img src="../assets/img/hero-living.jpg" alt="Inside the Harbor floor plan" loading="lazy"><span class="vt-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vt-name">Harbor</span></a><a class="vt-card" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener" aria-label="Open the Reef 3D virtual tour"><img src="../assets/img/living-green.jpg" alt="Inside the Reef floor plan" loading="lazy"><span class="vt-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vt-name">Reef</span></a><a class="vt-card" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener" aria-label="Open the Lighthouse 3D virtual tour"><img src="../assets/img/bedroom-705.jpg" alt="Inside the Lighthouse floor plan" loading="lazy"><span class="vt-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vt-name">Lighthouse</span></a><a class="vt-card" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener" aria-label="Open the Seacliff 3D virtual tour"><img src="../assets/img/living-panorama-716.jpg" alt="Inside the Seacliff floor plan" loading="lazy"><span class="vt-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vt-name">Seacliff</span></a><a class="vt-card" href="https://motortides.wisemanresidential.com/floorplans1" target="_blank" rel="noopener" aria-label="Open the Coral 3D virtual tour"><img src="../assets/img/living-art-716.jpg" alt="Inside the Coral floor plan" loading="lazy"><span class="vt-play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l11-6.5z"/></svg></span><span class="vt-name">Coral</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="gallery" aria-labelledby="gallery-h">
+  <div class="container">
+    <div class="section-head reveal-group">
+      <p class="eyebrow reveal"><b>04</b> Gallery</p>
+      <h2 class="h2 reveal" id="gallery-h">Inside the Tides</h2>
+    </div>
+  </div>
+  <div class="container-wide">
+    <div class="gallery-grid reveal-group">
+      <button type="button" class="g-item g-w2 g-r2 reveal" aria-haspopup="dialog">
+        <img src="../assets/img/living-panorama-716.jpg" loading="lazy" alt="Wide living, dining and kitchen panorama in residence 716">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/kitchen-view.jpg" loading="lazy" alt="Kitchen with a wide city-view window">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/bedroom-705.jpg" loading="lazy" alt="Bedroom with a walk-in closet in residence 705">
+      </button>
+      <button type="button" class="g-item g-w2 reveal" aria-haspopup="dialog">
+        <img src="../assets/img/rooftop-1.jpg" loading="lazy" alt="Rooftop deck pergola seating with sweeping city views">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/living-green.jpg" loading="lazy" alt="Living room with a green sofa and oversized window">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/kitchen-dining.jpg" loading="lazy" alt="Modern kitchen with a dining table">
+      </button>
+      <button type="button" class="g-item g-w2 reveal" aria-haspopup="dialog">
+        <img src="../assets/img/exterior-glass.jpg" loading="lazy" alt="Exterior detail of the glass wall at Motor Tides">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/view-city.jpg" loading="lazy" alt="Cityscape view from a residence window">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/patio-716.jpg" loading="lazy" alt="Spacious private patio of residence 716">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/closet-414.jpg" loading="lazy" alt="Walk-in closet with built-in organizers in residence 414">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/bedroom-414.jpg" loading="lazy" alt="Bedroom with artwork above the bed in residence 414">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/entry-705.jpg" loading="lazy" alt="Entry, kitchen and living area with white sofa in residence 705">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/kitchen-716.jpg" loading="lazy" alt="Kitchen with stainless refrigerator in residence 716">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/rooftop-2.jpg" loading="lazy" alt="Rooftop patio with white walls and open sky">
+      </button>
+      <button type="button" class="g-item reveal" aria-haspopup="dialog">
+        <img src="../assets/img/balcony-slider.jpg" loading="lazy" alt="Room with a sliding glass door opening to the balcony">
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEIGHBORHOOD ============ -->
+<section class="hood section" id="neighborhood" aria-labelledby="hood-h">
+  <div class="container">
+    <div class="section-head reveal-group">
+      <p class="eyebrow reveal"><b>05</b> The Neighborhood</p>
+      <h2 class="h2 reveal" id="hood-h">Palms &amp; Culver City, on foot</h2>
+    </div>
+    <div class="hood-cols">
+      <div class="hood-col reveal-group">
+        <h3 class="reveal">For your <em>mornings</em></h3>
+        <ul class="hood-list">
+          <li class="reveal">
+            <span class="hood-num" aria-hidden="true">01</span>
+            <div><h4>Super Domestic Coffee</h4><p>Stylish neighborhood coffee spot with a relaxed local crowd.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="hood-num" aria-hidden="true">02</span>
+            <div><h4>Destroyer</h4><p>Modern café known for elevated breakfast plates and espresso.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="hood-num" aria-hidden="true">03</span>
+            <div><h4>The Wende Museum</h4><p>Contemporary museum with rotating exhibits and creative community events.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="hood-num" aria-hidden="true">04</span>
+            <div><h4>Love Yoga</h4><p>Popular neighborhood yoga studio near the heart of Culver City.</p></div>
+          </li>
+        </ul>
+      </div>
+      <div class="hood-col reveal-group">
+        <h3 class="reveal">And in the <em>evenings</em></h3>
+        <ul class="hood-list">
+          <li class="reveal">
+            <span class="hood-num" aria-hidden="true">01</span>
+            <div><h4>Hatchet Hall</h4><p>Modern wood-fired restaurant with craft cocktails and local energy.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="hood-num" aria-hidden="true">02</span>
+            <div><h4>Simonette</h4><p>French-inspired brasserie with cocktails and stylish patio dining.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="hood-num" aria-hidden="true">03</span>
+            <div><h4>The Culver Hotel</h4><p>Historic cocktail lounge with live music and evening ambiance.</p></div>
+          </li>
+          <li class="reveal">
+            <span class="hood-num" aria-hidden="true">04</span>
+            <div><h4>Dear John's</h4><p>American classics at a Sinatra-in-spirit restaurant and bar.</p></div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="nbh-map reveal">
+      <div class="nmap-card"><svg class="nmap" viewBox="0 0 720 470" role="img" aria-label="Illustrated map of the neighborhood around Motor Tides with nearby landmarks">
+            <rect class="mbg" width="720" height="470"/>
+            <g class="mblocks">
+              <rect x="60" y="120" width="90" height="60" rx="8"/><rect x="380" y="40" width="100" height="40" rx="8"/>
+              <rect x="560" y="250" width="110" height="70" rx="8"/><rect x="420" y="150" width="70" height="60" rx="8"/>
+              <rect x="90" y="220" width="70" height="50" rx="8"/><rect x="560" y="60" width="90" height="50" rx="8"/>
+              <rect x="240" y="380" width="110" height="55" rx="8"/><rect x="460" y="390" width="90" height="50" rx="8"/>
+            </g>
+            <path class="mcreek" d="M340 470 C260 420 180 390 110 362 C60 342 30 330 0 322"/>
+            <text class="mroadlbl" x="150" y="415" transform="rotate(-20 150 415)">BALLONA CREEK TRAIL</text>
+            <path class="mroad" d="M0 92 H720"/><text class="mroadlbl" x="596" y="84">VENICE BLVD</text>
+            <path class="mroad" d="M520 30 V450"/><text class="mroadlbl" x="532" y="404" transform="rotate(90 532 404)">MOTOR AVE</text>
+            <path class="mroad thin" d="M300 252 H720"/><text class="mroadlbl" x="600" y="244">PALMS BLVD</text>
+            <path class="mroad thin" d="M240 30 C260 100 290 170 330 232"/>
+            <path class="mroad" d="M0 255 C160 290 300 330 470 330 C570 330 650 322 720 312"/>
+            <text class="mroadlbl" x="40" y="248">WASHINGTON BLVD</text>
+            <path class="mroad thin" d="M0 320 C120 348 230 388 330 442"/><text class="mroadlbl" x="30" y="312">CULVER BLVD</text>
+            <path class="mrail" d="M30 60 C90 108 140 140 192 176 C300 248 480 180 720 148"/>
+            <text class="mroadlbl rail" x="60" y="52">E LINE</text>
+            <g class="mpin" data-n="1" transform="translate(340,342)"><circle class="mdot" r="11"/><text class="mnum" y="3.8">1</text><g class="mlabel"><rect x="-72.2" y="-38" width="144.4" height="22" rx="11"/><text class="mname" y="-23">Sony Pictures Studios</text></g></g><g class="mpin" data-n="2" transform="translate(278,312)"><circle class="mdot" r="11"/><text class="mnum" y="3.8">2</text><g class="mlabel"><rect x="-62.6" y="-38" width="125.2" height="22" rx="11"/><text class="mname" y="-23">Amazon MGM Studios</text></g></g><g class="mpin" data-n="3" transform="translate(430,318)"><circle class="mdot" r="11"/><text class="mnum" y="3.8">3</text><g class="mlabel"><rect x="-56.2" y="-38" width="112.4" height="22" rx="11"/><text class="mname" y="-23">Apple TV+ campus</text></g></g><g class="mpin" data-n="4" transform="translate(312,208)"><circle class="mdot" r="11"/><text class="mnum" y="3.8">4</text><g class="mlabel"><rect x="-72.2" y="-38" width="144.4" height="22" rx="11"/><text class="mname" y="-23">Helms Bakery District</text></g></g><g class="mpin" data-n="5" transform="translate(238,308)"><circle class="mdot" r="11"/><text class="mnum" y="3.8">5</text><g class="mlabel"><rect x="-69.0" y="-38" width="138.0" height="22" rx="11"/><text class="mname" y="-23">Downtown Culver City</text></g></g><g class="mpin" data-n="6" transform="translate(110,368)"><circle class="mdot" r="11"/><text class="mnum" y="3.8">6</text><g class="mlabel"><rect x="-65.80000000000001" y="-38" width="131.60000000000002" height="22" rx="11"/><text class="mname" y="-23">Ballona Creek Trail</text></g></g><g class="mpin" data-n="7" transform="translate(192,176)"><circle class="mdot" r="11"/><text class="mnum" y="3.8">7</text><g class="mlabel"><rect x="-62.6" y="-38" width="125.2" height="22" rx="11"/><text class="mname" y="-23">Expo/Culver E Line</text></g></g><g class="mpin" data-n="8" transform="translate(168,336)"><circle class="mdot" r="11"/><text class="mnum" y="3.8">8</text><g class="mlabel"><rect x="-75.4" y="-38" width="150.8" height="22" rx="11"/><text class="mname" y="-23">Trader Joe's on Culver</text></g></g>
+            <g class="mhome" transform="translate(520,205)">
+              <circle class="mpulse" r="16"/><circle class="mhdot" r="14"/>
+              <g class="mhbars" transform="translate(-7.5,-7.5) scale(.15)">
+                <polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/>
+              </g>
+              <g class="mhlabel"><rect x="-56" y="-46" width="112" height="24" rx="12"/><text y="-29">MOTOR TIDES</text></g>
+            </g>
+            <text class="mnote" x="706" y="456" text-anchor="end">Illustrative — not to scale</text>
+          </svg></div>
+      <div class="nmap-legend">
+        <p class="anchors-label">Nearby anchors, mapped</p>
+        <div class="llist"><a class="mland" data-n="1" href="https://www.google.com/maps/search/?api=1&query=Sony+Pictures+Studios+Culver+City" target="_blank" rel="noopener"><span class="ln">01</span><span class="lt">Sony Pictures Studios</span><span class="ld">1.2 mi</span></a><a class="mland" data-n="2" href="https://www.google.com/maps/search/?api=1&query=Amazon+MGM+Studios+Culver+City" target="_blank" rel="noopener"><span class="ln">02</span><span class="lt">Amazon MGM Studios</span><span class="ld">1.3 mi</span></a><a class="mland" data-n="3" href="https://www.google.com/maps/search/?api=1&query=Apple+Culver+City+campus" target="_blank" rel="noopener"><span class="ln">03</span><span class="lt">Apple TV+ campus</span><span class="ld">1.0 mi</span></a><a class="mland" data-n="4" href="https://www.google.com/maps/search/?api=1&query=Helms+Bakery+District" target="_blank" rel="noopener"><span class="ln">04</span><span class="lt">Helms Bakery District</span><span class="ld">1.0 mi</span></a><a class="mland" data-n="5" href="https://www.google.com/maps/search/?api=1&query=Downtown+Culver+City" target="_blank" rel="noopener"><span class="ln">05</span><span class="lt">Downtown Culver City</span><span class="ld">1.3 mi</span></a><a class="mland" data-n="6" href="https://www.google.com/maps/search/?api=1&query=Ballona+Creek+Bike+Path+Culver+City" target="_blank" rel="noopener"><span class="ln">06</span><span class="lt">Ballona Creek Trail</span><span class="ld">0.8 mi</span></a><a class="mland" data-n="7" href="https://www.google.com/maps/search/?api=1&query=Culver+City+Station+Expo+Line" target="_blank" rel="noopener"><span class="ln">07</span><span class="lt">Expo/Culver E Line</span><span class="ld">1.2 mi</span></a><a class="mland" data-n="8" href="https://www.google.com/maps/search/?api=1&query=Trader+Joes+Culver+Blvd" target="_blank" rel="noopener"><span class="ln">08</span><span class="lt">Trader Joe's on Culver</span><span class="ld">1.4 mi</span></a></div>
+        <a class="mall" href="https://maps.google.com/?q=3557%20Motor%20Avenue%20Los%20Angeles,%20CA%2090034" target="_blank" rel="noopener">Open the real map ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PHOTO BAND 2 ============ -->
+<section class="band" aria-label="Balcony overlooking the city">
+  <img src="../assets/img/balcony-city.jpg" loading="lazy"
+       alt="Private balcony at Motor Tides overlooking the Los Angeles cityscape">
+  <div class="band-scrim" aria-hidden="true"></div>
+  <p class="band-cap">Your balcony. Your city.</p>
+</section>
+
+<!-- ============ TOUR CTA ============ -->
+<section class="tour" aria-labelledby="tour-h">
+  <div class="container">
+    <div class="tour-grid">
+      <div class="reveal-group">
+        <h2 class="reveal" id="tour-h">See it in person.</h2>
+        <p class="tour-sub reveal">In-person and virtual tours available by appointment. Come stand on the rooftop — the view does the rest.</p>
+      </div>
+      <div class="tour-info reveal-group">
+        <a class="tour-phone reveal" href="tel:+12132869912">+1 213-286-9912</a>
+        <p class="tour-hours reveal">
+          <b>Leasing hours</b><br>
+          Monday–Friday · 9:30 AM–6:30 PM<br>
+          Saturday–Sunday · 11 AM–4 PM
+        </p>
+        <div class="tour-ctas reveal">
+          <a class="btn btn-dark" href="tel:+12132869912">Call to schedule
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+          </a>
+          <a class="btn btn-dark-ghost" href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Apply online
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 13 13 3M5 3h8v8"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="section" id="contact" aria-labelledby="contact-h">
+  <div class="container">
+    <div class="section-head reveal-group">
+      <p class="eyebrow reveal"><b>06</b> Visit</p>
+      <h2 class="h2 reveal" id="contact-h">Find us on Motor</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal-group">
+        <div class="contact-block reveal">
+          <p class="contact-label">Address</p>
+          <p class="contact-big"><a href="https://maps.google.com/?q=3557%20Motor%20Avenue%20Los%20Angeles,%20CA%2090034" target="_blank" rel="noopener">3557 Motor Avenue<br>Los Angeles, CA 90034</a></p>
+          <p class="contact-note">Palms, on the Culver City border · Directions open in Google Maps</p>
+        </div>
+        <div class="contact-block reveal">
+          <p class="contact-label">Phone</p>
+          <p class="contact-big"><a href="tel:+12132869912">+1 213-286-9912</a></p>
+          <p class="contact-note">Secondary leasing line: <a href="tel:+13105646408" style="color:inherit">(310) 564-6408</a></p>
+        </div>
+        <div class="contact-block reveal">
+          <p class="contact-label">Follow</p>
+          <div class="socials">
+            <a href="https://www.facebook.com/Officialwisemanresidential/" target="_blank" rel="noopener" aria-label="Wiseman Residential on Facebook" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a>
+            <a href="https://www.instagram.com/wisemanresidential" target="_blank" rel="noopener" aria-label="Wiseman Residential on Instagram" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a>
+            <a href="https://www.yelp.com/biz/wiseman-residential-los-angeles-2" target="_blank" rel="noopener" aria-label="Wiseman Residential on Yelp" title="Yelp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m7.6885 15.1415-3.6715.8483c-.3769.0871-.755.183-1.1452.155-.2611-.0188-.5122-.0414-.7606-.213a1.179 1.179 0 0 1-.331-.3594c-.3486-.5519-.3656-1.3661-.3697-2.0004a6.2874 6.2874 0 0 1 .3314-2.0642 1.857 1.857 0 0 1 .1073-.2474 2.3426 2.3426 0 0 1 .1255-.2165 2.4572 2.4572 0 0 1 .1563-.1975 1.1736 1.1736 0 0 1 .399-.2831 1.082 1.082 0 0 1 .4592-.0837c.2355.0016.5139.052.91.1734.0555.0191.1237.0382.1856.0572.3277.1013.7048.2404 1.1499.3987.6863.2404 1.3663.487 2.0463.7397l1.2117.4423c.2217.0807.4363.18.6412.297.174.0984.3273.2298.4512.387a1.217 1.217 0 0 1 .192.4309 1.2205 1.2205 0 0 1-.872 1.4522c-.0468.0151-.0852.0239-.1085.0293l-1.105.2553-.0031-.001zM18.8208 7.565a1.8506 1.8506 0 0 0-.2042-.1754 2.4082 2.4082 0 0 0-.2077-.1394 2.3607 2.3607 0 0 0-.2269-.109 1.1705 1.1705 0 0 0-.482-.0796 1.0862 1.0862 0 0 0-.4498.1263c-.2107.1048-.4388.2732-.742.5551-.042.0417-.0947.0886-.142.133-.2502.2351-.5286.5252-.8599.863a114.6363 114.6363 0 0 0-1.5166 1.5629l-.8962.9293a4.1897 4.1897 0 0 0-.4466.5483 1.541 1.541 0 0 0-.2364.5459 1.2199 1.2199 0 0 0 .0107.4518l.0046.02a1.218 1.218 0 0 0 1.4184.923 1.162 1.162 0 0 0 .1105-.0213l4.7781-1.104c.3766-.087.7587-.1667 1.097-.3631.2269-.1316.4428-.262.5909-.5252a1.1793 1.1793 0 0 0 .1405-.4683c.0733-.6512-.2668-1.3908-.5403-1.963a6.2792 6.2792 0 0 0-1.2001-1.7103zM8.9703.0754a8.6724 8.6724 0 0 0-.83.1564c-.2754.066-.548.1383-.8146.2236-.868.2844-2.0884.8063-2.295 1.8065-.1165.5655.1595 1.1439.3737 1.66.2595.6254.614 1.1889.9373 1.7777.8543 1.5545 1.7245 3.0993 2.5922 4.6457.259.4617.5416 1.0464 1.043 1.2856a1.058 1.058 0 0 0 .1013.0383c.2248.0851.4699.1016.7041.0471a4.3015 4.3015 0 0 0 .0418-.0097 1.2136 1.2136 0 0 0 .5658-.3397 1.1033 1.1033 0 0 0 .079-.0822c.3463-.435.3454-1.0833.3764-1.6134.1042-1.771.2139-3.5423.3009-5.3142.0332-.6712.1055-1.3333.0655-2.0096-.0328-.5579-.0368-1.1984-.3891-1.6563-.6218-.8073-1.9476-.741-2.8523-.6158zm2.084 15.9505a1.1053 1.1053 0 0 0-1.2306-.4145 1.1398 1.1398 0 0 0-.1526.0633 1.4806 1.4806 0 0 0-.2171.1354c-.1992.1475-.3668.3392-.5196.5315-.0386.049-.074.1143-.12.1562l-.7686 1.0573a113.9168 113.9168 0 0 0-1.2913 1.789c-.278.3895-.5184.7184-.7083 1.0094-.036.0547-.0734.116-.1075.1647-.2277.3522-.3566.6092-.4228.8381a1.0945 1.0945 0 0 0-.046.4721c.0211.1655.0768.3246.1635.467.046.0715.0957.1406.1487.207a2.334 2.334 0 0 0 .1754.1825 1.843 1.843 0 0 0 .2108.1732c.5304.369 1.1112.6342 1.722.8391a6.0958 6.0958 0 0 0 1.5716.3004c.091.0046.1821.0025.2728-.006a2.3878 2.3878 0 0 0 .2506-.0351 2.3862 2.3862 0 0 0 .2447-.071 1.1927 1.1927 0 0 0 .4175-.2658c.1127-.113.1994-.249.2541-.3989.0889-.2214.1473-.5026.1857-.92.0034-.0593.0118-.1305.0177-.1958.0304-.3463.0443-.7531.0666-1.2315.0375-.7357.067-1.4681.0903-2.2026 0 0 .0495-1.3053.0494-1.306.0113-.3008.002-.6342-.0814-.9336a1.396 1.396 0 0 0-.1756-.4054zm8.6754 2.0439c-.1605-.176-.3878-.3514-.7462-.5682-.0518-.0288-.1124-.0674-.1684-.1009-.2985-.1795-.658-.3684-1.078-.5965a120.7615 120.7615 0 0 0-1.9427-1.042l-1.1515-.6107c-.0597-.0175-.1203-.0607-.1766-.0878-.2212-.1058-.4558-.2045-.6992-.2498a1.4915 1.4915 0 0 0-.2545-.0265 1.1527 1.1527 0 0 0-.1648.01 1.1077 1.1077 0 0 0-.9227.9133 1.4186 1.4186 0 0 0 .0159.439c.0563.3065.1932.6096.3346.875l.615 1.1526c.3422.65.6884 1.2963 1.0435 1.9406.229.4202.4196.7799.5982 1.078.0338.056.0721.1163.1011.1682.2173.3584.392.584.569.7458.1146.1107.252.195.4026.247.1583.0525.326.071.4919.0546a2.368 2.368 0 0 0 .251-.0435c.0817-.022.1622-.048.241-.0784a1.863 1.863 0 0 0 .2475-.1143 6.1018 6.1018 0 0 0 1.2818-.9597c.4596-.4522.8659-.9454 1.182-1.51.044-.08.0819-.163.1138-.2483a2.49 2.49 0 0 0 .0773-.2411c.0186-.083.033-.1669.0429-.2513a1.188 1.188 0 0 0-.0565-.491 1.0933 1.0933 0 0 0-.248-.4041zm2.86 3.742a.8523.8523 0 0 1-.111.4236c-.074.132-.178.2377-.3115.3172a.8428.8428 0 0 1-.4385.119.847.847 0 0 1-.4373-.1179.8526.8526 0 0 1-.3125-.3171.8548.8548 0 0 1-.111-.4248c0-.1526.038-.2958.1143-.4294a.8405.8405 0 0 1 .315-.3159.849.849 0 0 1 .4315-.1156.8514.8514 0 0 1 .4294.1144.84.84 0 0 1 .316.3148.8494.8494 0 0 1 .1156.4317zm-.1202 0c0-.1328-.0332-.256-.0996-.3698s-.1564-.2038-.2702-.2702a.7125.7125 0 0 0-.371-.1007.7204.7204 0 0 0-.3698.0996.7487.7487 0 0 0-.2713.2702.7181.7181 0 0 0-.0996.3709c0 .132.0332.2557.0996.371a.7355.7355 0 0 0 .2713.2713.7354.7354 0 0 0 .3698.0985.7205.7205 0 0 0 .3698-.0996.7423.7423 0 0 0 .2702-.2691.7186.7186 0 0 0 .1008-.3721zm-.577.0584.2724.4522h-.1922l-.237-.4052h-.1546v.4052h-.1695v-1.02h.2988c.1268 0 .2195.0247.2783.0744.0595.0496.0892.1252.0892.2267a.2785.2785 0 0 1-.0492.1625c-.032.0466-.0775.0813-.1362.1042zm-.0412-.1408a.1532.1532 0 0 0 .056-.1214c0-.0573-.0164-.0981-.0491-.1225-.0329-.0251-.0847-.0377-.1557-.0377h-.1214v.3285h.1237c.061 0 .1098-.0157.1465-.047z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="hours-card reveal">
+        <h3>Leasing Office Hours</h3>
+        <table class="hours-table">
+          <tbody>
+            <tr><th scope="row">Monday – Friday</th><td>9:30 AM – 6:30 PM</td></tr>
+            <tr><th scope="row">Saturday</th><td>11 AM – 4 PM</td></tr>
+            <tr><th scope="row">Sunday</th><td>11 AM – 4 PM</td></tr>
+          </tbody>
+        </table>
+        <p class="hours-foot">In-person and virtual tours available by appointment.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="#top" aria-label="Motor Tides by Wiseman — back to top">
+          <svg class="brand-bars" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+            <polygon points="14,18 34,18 34,74 14,80"/>
+            <polygon points="40,18 60,18 60,71 40,77"/>
+            <polygon points="66,18 86,18 86,68 66,74"/>
+          </svg>
+          <span class="brand-text">
+            <span class="wm">Wiseman</span>
+            <span class="mt">Motor Tides</span>
+          </span>
+        </a>
+        <p class="footer-tag"><em>Experience Good Living.</em> With over forty-five years of experience, we design our properties with Los Angeles' savvy renter in mind.</p>
+        <div class="socials footer-socials" style="margin-top:1.4rem">
+          <a href="https://www.facebook.com/Officialwisemanresidential/" target="_blank" rel="noopener" aria-label="Wiseman Residential on Facebook" title="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg></a>
+          <a href="https://www.instagram.com/wisemanresidential" target="_blank" rel="noopener" aria-label="Wiseman Residential on Instagram" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg></a>
+          <a href="https://www.yelp.com/biz/wiseman-residential-los-angeles-2" target="_blank" rel="noopener" aria-label="Wiseman Residential on Yelp" title="Yelp"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="m7.6885 15.1415-3.6715.8483c-.3769.0871-.755.183-1.1452.155-.2611-.0188-.5122-.0414-.7606-.213a1.179 1.179 0 0 1-.331-.3594c-.3486-.5519-.3656-1.3661-.3697-2.0004a6.2874 6.2874 0 0 1 .3314-2.0642 1.857 1.857 0 0 1 .1073-.2474 2.3426 2.3426 0 0 1 .1255-.2165 2.4572 2.4572 0 0 1 .1563-.1975 1.1736 1.1736 0 0 1 .399-.2831 1.082 1.082 0 0 1 .4592-.0837c.2355.0016.5139.052.91.1734.0555.0191.1237.0382.1856.0572.3277.1013.7048.2404 1.1499.3987.6863.2404 1.3663.487 2.0463.7397l1.2117.4423c.2217.0807.4363.18.6412.297.174.0984.3273.2298.4512.387a1.217 1.217 0 0 1 .192.4309 1.2205 1.2205 0 0 1-.872 1.4522c-.0468.0151-.0852.0239-.1085.0293l-1.105.2553-.0031-.001zM18.8208 7.565a1.8506 1.8506 0 0 0-.2042-.1754 2.4082 2.4082 0 0 0-.2077-.1394 2.3607 2.3607 0 0 0-.2269-.109 1.1705 1.1705 0 0 0-.482-.0796 1.0862 1.0862 0 0 0-.4498.1263c-.2107.1048-.4388.2732-.742.5551-.042.0417-.0947.0886-.142.133-.2502.2351-.5286.5252-.8599.863a114.6363 114.6363 0 0 0-1.5166 1.5629l-.8962.9293a4.1897 4.1897 0 0 0-.4466.5483 1.541 1.541 0 0 0-.2364.5459 1.2199 1.2199 0 0 0 .0107.4518l.0046.02a1.218 1.218 0 0 0 1.4184.923 1.162 1.162 0 0 0 .1105-.0213l4.7781-1.104c.3766-.087.7587-.1667 1.097-.3631.2269-.1316.4428-.262.5909-.5252a1.1793 1.1793 0 0 0 .1405-.4683c.0733-.6512-.2668-1.3908-.5403-1.963a6.2792 6.2792 0 0 0-1.2001-1.7103zM8.9703.0754a8.6724 8.6724 0 0 0-.83.1564c-.2754.066-.548.1383-.8146.2236-.868.2844-2.0884.8063-2.295 1.8065-.1165.5655.1595 1.1439.3737 1.66.2595.6254.614 1.1889.9373 1.7777.8543 1.5545 1.7245 3.0993 2.5922 4.6457.259.4617.5416 1.0464 1.043 1.2856a1.058 1.058 0 0 0 .1013.0383c.2248.0851.4699.1016.7041.0471a4.3015 4.3015 0 0 0 .0418-.0097 1.2136 1.2136 0 0 0 .5658-.3397 1.1033 1.1033 0 0 0 .079-.0822c.3463-.435.3454-1.0833.3764-1.6134.1042-1.771.2139-3.5423.3009-5.3142.0332-.6712.1055-1.3333.0655-2.0096-.0328-.5579-.0368-1.1984-.3891-1.6563-.6218-.8073-1.9476-.741-2.8523-.6158zm2.084 15.9505a1.1053 1.1053 0 0 0-1.2306-.4145 1.1398 1.1398 0 0 0-.1526.0633 1.4806 1.4806 0 0 0-.2171.1354c-.1992.1475-.3668.3392-.5196.5315-.0386.049-.074.1143-.12.1562l-.7686 1.0573a113.9168 113.9168 0 0 0-1.2913 1.789c-.278.3895-.5184.7184-.7083 1.0094-.036.0547-.0734.116-.1075.1647-.2277.3522-.3566.6092-.4228.8381a1.0945 1.0945 0 0 0-.046.4721c.0211.1655.0768.3246.1635.467.046.0715.0957.1406.1487.207a2.334 2.334 0 0 0 .1754.1825 1.843 1.843 0 0 0 .2108.1732c.5304.369 1.1112.6342 1.722.8391a6.0958 6.0958 0 0 0 1.5716.3004c.091.0046.1821.0025.2728-.006a2.3878 2.3878 0 0 0 .2506-.0351 2.3862 2.3862 0 0 0 .2447-.071 1.1927 1.1927 0 0 0 .4175-.2658c.1127-.113.1994-.249.2541-.3989.0889-.2214.1473-.5026.1857-.92.0034-.0593.0118-.1305.0177-.1958.0304-.3463.0443-.7531.0666-1.2315.0375-.7357.067-1.4681.0903-2.2026 0 0 .0495-1.3053.0494-1.306.0113-.3008.002-.6342-.0814-.9336a1.396 1.396 0 0 0-.1756-.4054zm8.6754 2.0439c-.1605-.176-.3878-.3514-.7462-.5682-.0518-.0288-.1124-.0674-.1684-.1009-.2985-.1795-.658-.3684-1.078-.5965a120.7615 120.7615 0 0 0-1.9427-1.042l-1.1515-.6107c-.0597-.0175-.1203-.0607-.1766-.0878-.2212-.1058-.4558-.2045-.6992-.2498a1.4915 1.4915 0 0 0-.2545-.0265 1.1527 1.1527 0 0 0-.1648.01 1.1077 1.1077 0 0 0-.9227.9133 1.4186 1.4186 0 0 0 .0159.439c.0563.3065.1932.6096.3346.875l.615 1.1526c.3422.65.6884 1.2963 1.0435 1.9406.229.4202.4196.7799.5982 1.078.0338.056.0721.1163.1011.1682.2173.3584.392.584.569.7458.1146.1107.252.195.4026.247.1583.0525.326.071.4919.0546a2.368 2.368 0 0 0 .251-.0435c.0817-.022.1622-.048.241-.0784a1.863 1.863 0 0 0 .2475-.1143 6.1018 6.1018 0 0 0 1.2818-.9597c.4596-.4522.8659-.9454 1.182-1.51.044-.08.0819-.163.1138-.2483a2.49 2.49 0 0 0 .0773-.2411c.0186-.083.033-.1669.0429-.2513a1.188 1.188 0 0 0-.0565-.491 1.0933 1.0933 0 0 0-.248-.4041zm2.86 3.742a.8523.8523 0 0 1-.111.4236c-.074.132-.178.2377-.3115.3172a.8428.8428 0 0 1-.4385.119.847.847 0 0 1-.4373-.1179.8526.8526 0 0 1-.3125-.3171.8548.8548 0 0 1-.111-.4248c0-.1526.038-.2958.1143-.4294a.8405.8405 0 0 1 .315-.3159.849.849 0 0 1 .4315-.1156.8514.8514 0 0 1 .4294.1144.84.84 0 0 1 .316.3148.8494.8494 0 0 1 .1156.4317zm-.1202 0c0-.1328-.0332-.256-.0996-.3698s-.1564-.2038-.2702-.2702a.7125.7125 0 0 0-.371-.1007.7204.7204 0 0 0-.3698.0996.7487.7487 0 0 0-.2713.2702.7181.7181 0 0 0-.0996.3709c0 .132.0332.2557.0996.371a.7355.7355 0 0 0 .2713.2713.7354.7354 0 0 0 .3698.0985.7205.7205 0 0 0 .3698-.0996.7423.7423 0 0 0 .2702-.2691.7186.7186 0 0 0 .1008-.3721zm-.577.0584.2724.4522h-.1922l-.237-.4052h-.1546v.4052h-.1695v-1.02h.2988c.1268 0 .2195.0247.2783.0744.0595.0496.0892.1252.0892.2267a.2785.2785 0 0 1-.0492.1625c-.032.0466-.0775.0813-.1362.1042zm-.0412-.1408a.1532.1532 0 0 0 .056-.1214c0-.0573-.0164-.0981-.0491-.1225-.0329-.0251-.0847-.0377-.1557-.0377h-.1214v.3285h.1237c.061 0 .1098-.0157.1465-.047z"/></svg></a>
+        </div>
+      </div>
+      <nav class="footer-col" aria-label="Footer">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="#floorplans">Floor Plans</a></li>
+          <li><a href="#amenities">Amenities</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#neighborhood">Neighborhood</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="footer-col">
+        <h3>Portals</h3>
+        <ul>
+          <li><a href="https://motortides-wisemanresidential.securecafenet.com/residentservices/motor-tabor-by-wiseman/userlogin" target="_blank" rel="noopener">Resident Login</a></li>
+          <li><a href="https://motortides-wisemanresidential.securecafe.com/onlineleasing/motor-tabor-by-wiseman/guestlogin.aspx" target="_blank" rel="noopener">Applicant Login</a></li>
+          <li><a href="https://www.wisemanresidential.com/" target="_blank" rel="noopener">Wiseman Residential</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="https://motortides.wisemanresidential.com/termsandconditions" target="_blank" rel="noopener">Terms &amp; Conditions</a></li>
+          <li><a href="https://motortides.wisemanresidential.com/privacypolicy" target="_blank" rel="noopener">Privacy Policy</a></li>
+          <li><a href="https://motortides.wisemanresidential.com/accessibility" target="_blank" rel="noopener">Accessibility</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="eho">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9 13h6M9 16.5h6"/></svg>
+        © 2026 Wiseman Residential · Equal Housing Opportunity
+      </p>
+      <p>Design concept · Architectural Dark · <a href="../index.html">View all concepts</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Gallery photo viewer" hidden>
+  <p class="lb-count" id="lbCount" aria-live="polite"></p>
+  <button type="button" class="lb-btn lb-close" aria-label="Close photo viewer">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 4l12 12M16 4 4 16"/></svg>
+  </button>
+  <button type="button" class="lb-btn lb-prev" aria-label="Previous photo">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M13 3l-7 7 7 7"/></svg>
+  </button>
+  <figure>
+    <img id="lbImg" src="" alt="">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button type="button" class="lb-btn lb-next" aria-label="Next photo">
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3l7 7-7 7"/></svg>
+  </button>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var d = document;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Header scroll state ---------- */
+  var header = d.querySelector('.site-header');
+  function onScroll() {
+    header.classList.toggle('scrolled', window.scrollY > 10);
+  }
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ---------- Mobile menu ---------- */
+  var burger = d.getElementById('menuBtn');
+  var menu = d.getElementById('mobileMenu');
+  function setMenu(open) {
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menu.classList.toggle('open', open);
+    d.documentElement.classList.toggle('menu-locked', open);
+  }
+  burger.addEventListener('click', function () {
+    setMenu(burger.getAttribute('aria-expanded') !== 'true');
+  });
+  menu.addEventListener('click', function (e) {
+    if (e.target.closest('a')) setMenu(false);
+  });
+
+  /* ---------- Reveal on scroll ---------- */
+  var groups = d.querySelectorAll('.reveal-group');
+  Array.prototype.forEach.call(groups, function (g) {
+    var kids = g.querySelectorAll('.reveal');
+    Array.prototype.forEach.call(kids, function (el, i) {
+      el.style.transitionDelay = (i * 80) + 'ms';
+    });
+  });
+  var reveals = Array.prototype.slice.call(d.querySelectorAll('.reveal'));
+  if (reduce || !('IntersectionObserver' in window)) {
+    reveals.forEach(function (el) { el.classList.add('in'); });
+  } else {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -4% 0px' });
+    reveals.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---------- Floor plan accordion ---------- */
+  var toggles = Array.prototype.slice.call(d.querySelectorAll('.plan-toggle'));
+  function closeAllPlans() {
+    toggles.forEach(function (b) {
+      b.setAttribute('aria-expanded', 'false');
+      b.closest('.plan-row').classList.remove('active');
+      d.getElementById(b.getAttribute('aria-controls')).classList.remove('open');
+    });
+  }
+  toggles.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var wasOpen = btn.getAttribute('aria-expanded') === 'true';
+      closeAllPlans();
+      if (!wasOpen) {
+        btn.setAttribute('aria-expanded', 'true');
+        btn.closest('.plan-row').classList.add('active');
+        d.getElementById(btn.getAttribute('aria-controls')).classList.add('open');
+      }
+    });
+  });
+
+  /* ---------- Lightbox ---------- */
+  var items = Array.prototype.slice.call(d.querySelectorAll('.g-item'));
+  var lb = d.getElementById('lightbox');
+  var lbImg = d.getElementById('lbImg');
+  var lbCap = d.getElementById('lbCap');
+  var lbCount = d.getElementById('lbCount');
+  var btnClose = lb.querySelector('.lb-close');
+  var btnPrev = lb.querySelector('.lb-prev');
+  var btnNext = lb.querySelector('.lb-next');
+  var current = 0;
+  var lastFocus = null;
+
+  function show(i) {
+    current = (i + items.length) % items.length;
+    var im = items[current].querySelector('img');
+    lbImg.src = im.currentSrc || im.src;
+    lbImg.alt = im.alt;
+    lbCap.textContent = im.alt;
+    lbCount.textContent = (current + 1) + ' / ' + items.length;
+  }
+  function onLbKey(e) {
+    if (e.key === 'Escape') {
+      closeLb();
+    } else if (e.key === 'ArrowRight') {
+      show(current + 1);
+    } else if (e.key === 'ArrowLeft') {
+      show(current - 1);
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      var f = [btnClose, btnPrev, btnNext];
+      var idx = f.indexOf(d.activeElement);
+      var n;
+      if (e.shiftKey) {
+        n = idx <= 0 ? f.length - 1 : idx - 1;
+      } else {
+        n = (idx === -1 || idx === f.length - 1) ? 0 : idx + 1;
+      }
+      f[n].focus();
+    }
+  }
+  function openLb(i) {
+    lastFocus = d.activeElement;
+    show(i);
+    lb.hidden = false;
+    d.documentElement.classList.add('menu-locked');
+    btnClose.focus();
+    d.addEventListener('keydown', onLbKey);
+  }
+  function closeLb() {
+    lb.hidden = true;
+    d.documentElement.classList.remove('menu-locked');
+    d.removeEventListener('keydown', onLbKey);
+    if (lastFocus) lastFocus.focus();
+  }
+  items.forEach(function (item, i) {
+    item.addEventListener('click', function () { openLb(i); });
+  });
+  btnClose.addEventListener('click', closeLb);
+  btnPrev.addEventListener('click', function () { show(current - 1); });
+  btnNext.addEventListener('click', function () { show(current + 1); });
+  lb.addEventListener('click', function (e) {
+    if (e.target === lb) closeLb();
+  });
+
+  /* ---------- Escape closes the mobile menu (when lightbox is shut) ---------- */
+  d.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && lb.hidden && burger.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      burger.focus();
+    }
+  });
+
+  // neighborhood map: legend <-> pin highlight; raise active pin (SVG paints in doc order)
+  (function(){
+    function raise(p){ p.parentNode.appendChild(p); }
+    document.querySelectorAll('.mpin').forEach(function(p){ p.addEventListener('mouseenter', function(){ raise(p); }); });
+    document.querySelectorAll('.mland').forEach(function(a){
+      var p = document.querySelector('.mpin[data-n="' + a.dataset.n + '"]');
+      if (!p) return;
+      ['mouseenter','focus'].forEach(function(ev){ a.addEventListener(ev, function(){ p.classList.add('hot'); raise(p); }); });
+      ['mouseleave','blur'].forEach(function(ev){ a.addEventListener(ev, function(){ p.classList.remove('hot'); }); });
+    });
+  })();
+})();
+</script>
+<script>window.MTC_VARIANT = 'robot'; /* override with ?chat=minimal|mascot */</script>
+<script src="../assets/chat.js?v=2" defer></script>
+</body>
+</html>
