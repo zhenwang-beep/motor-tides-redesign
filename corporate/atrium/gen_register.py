@@ -33,7 +33,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data", "wiseman.json")
 
-VER = "28"
+VER = "35"
 SNAPSHOT = "10 September 2026"
 TOTAL = 72
 FLAG_NO = "071"                    # Motor Tides — FACT-CHECK §2: never a rent
@@ -208,7 +208,7 @@ def footer(base, groups):
       </div>
       <p class="cp">&copy; 2026 Wiseman Residential</p>
     </div>
-    <p class="ft-note"><a href="{base}privacy.html">Privacy Policy</a> &middot; <a href="{base}accessibility.html">Accessibility</a> &middot; <a href="{base}privacy-choices.html">Your Privacy Choices</a> &middot; <a href="#site-map">Site Map</a> &middot; Every figure here is a point-in-time snapshot of the live leasing system. No DRE number is published pending the client&rsquo;s confirmation of the responsible broker entity.</p>
+    <p class="ft-note"><a href="{base}privacy.html">Privacy Policy</a> &middot; <a href="{base}accessibility.html">Accessibility</a> &middot; <a href="{base}privacy-choices.html">Your Privacy Choices</a> &middot; <a href="{base}sitemap.html">Site Map</a> &middot; Every figure here is a point-in-time snapshot of the live leasing system. No DRE number is published pending the client&rsquo;s confirmation of the responsible broker entity.</p>
   </div>
 </footer>""".format(base=base, mark=BRAND_SVG, areas=areas, total=TOTAL, eho=EHO_SVG,
                     resident=RESIDENT, applicant=APPLICANT, fb=FB, ig=IG, yelp=YELP,
@@ -360,15 +360,19 @@ def featured_card(p, delay):
         fig = '<span class="p"><span class="from">from</span>%s</span>' % money(p["priceMin"])
     else:
         fig = '<span class="p">Call for rents</span>'
+    # The card paints ~400 CSS px, so a 2x screen wants ~800 real pixels. The
+    # RentCafe originals measure 2048px, so the larger ask never upscales —
+    # we were simply requesting too few pixels and letting the browser stretch.
     img = cdn(p["image"], "q_auto,f_auto,w_760")
+    img2x = cdn(p["image"], "q_auto,f_auto,w_1400")
     return """    <a class="card rv" data-d="{d}" href="buildings/{path}.html">
-      <span class="ph rvi"><img src="{img}" alt="{name}, {area}." loading="lazy" decoding="async"></span>
+      <span class="ph rvi"><img src="{img}" srcset="{img} 760w, {img2x} 1400w" sizes="(min-width:1000px) 32vw, (min-width:640px) 46vw, 90vw" alt="{name}, {area}." loading="lazy" decoding="async"></span>
       <span class="info">
         <span class="area">{label}</span>
         <span class="nm">{name}</span>
         <span class="facts"><span class="b">{beds}</span>{fig}</span>
       </span>
-    </a>""".format(d=delay, path=p["path"], img=esc(img), name=esc(p["short"]),
+    </a>""".format(d=delay, path=p["path"], img=esc(img), img2x=esc(img2x), name=esc(p["short"]),
                    area=esc(p["area"]), label=esc(CARD_LABEL[p["areaKey"]]), beds=esc(beds), fig=fig)
 
 
@@ -672,6 +676,9 @@ def main():
     # ============================================================== search.html
     build_search(groups, props)
 
+    # ============================================================== sitemap.html
+    build_sitemap(groups, areas, props)
+
     # ============================================================== editorial shells
     for fn, title, desc, cur in [
         ("company.html", "About Wiseman &mdash; owner, developer, manager",
@@ -697,7 +704,7 @@ def main():
         shell += tail(groups)
         write(fn, shell)
 
-    print("atrium: wrote index, live, track, buildings, neighborhoods, search + 7 editorial shells")
+    print("atrium: wrote index, live, track, buildings, neighborhoods, search, sitemap + 7 editorial shells")
     print("areas   " + "  ".join("%s %d" % (k, area_counts[k]) for k in AREA_ORDER))
     print("streets %d · four+ beds %d · featured %d" % (streets_total, four_plus, len(FEATURED)))
     return 0
@@ -985,7 +992,7 @@ def build_search(groups, props):
 
   <p class="avail-line wrap wrap-n">
     Apply, pay and renew in the <a href="{applicant}" rel="noopener">live leasing system</a>.
-    <span class="avail-sub">Or call the leasing office on {tel}. Saved buildings are kept in this browser only. Wiseman Residential is an equal housing opportunity&nbsp;provider.</span>
+    <span class="avail-sub">Or call the leasing office on {tel}. Wiseman Residential is an equal housing opportunity&nbsp;provider.</span>
   </p>
 
 </main>
@@ -995,6 +1002,157 @@ def build_search(groups, props):
                            '\n<script src="../core/search.js?v=%s" defer></script>' % (VER, VER)),
                  boot=AV_BOOT)
     write("search.html", page)
+
+
+# ---------------------------------------------------------------- sitemap.html
+# The footer has always carried a "Site Map" link and it has always pointed at
+# `#site-map` — the id on the <footer> the link itself sits inside. Clicking it
+# from the footer did nothing at all. This builds the page it should have been
+# pointing at: every URL Clerestory publishes, in one flat list, grouped the way
+# the site is actually organised. Nothing here is hand-typed — the seven areas
+# and all 72 buildings are read from data/wiseman.json, so the page cannot drift
+# out of date behind the register.
+SM_SECTIONS = [
+    ("About Wiseman", "about", [
+        ("company.html", "About Wiseman",
+         "One Los Angeles company owns, develops and manages every building on this site."),
+    ]),
+    ("Live at Wiseman", "live", [
+        ("search.html", "Find a home",
+         "The property search: filters, cards and the map, on one page."),
+        ("buildings.html", "Every building",
+         "All %d buildings as an index, a map or a photograph each." % TOTAL),
+        ("neighborhoods.html", "The seven areas",
+         "Where in Los Angeles Wiseman owns, with a count for each area."),
+    ]),
+    ("Work at Wiseman", "work", [
+        ("careers.html", "Work at Wiseman",
+         "On-site management, maintenance, leasing, and the corporate office."),
+    ]),
+    ("Track Record", "track", [
+        ("track.html", "Track Record",
+         "Motor Tides and the filed pipeline, each figure cited to its source."),
+    ]),
+    ("Residents", "residents", [
+        ("residents.html", "Resident services",
+         "Report a repair without a login, pay rent, deposits, moving in."),
+    ]),
+    ("Contact", "contact", [
+        ("contact.html", "Contact Wiseman",
+         "Six ways in, routed by what you need. 1520 Federal Ave, +1 310-473-3000."),
+    ]),
+    ("This site", "legal", [
+        ("privacy.html", "Privacy Policy",
+         "What this website does with the information you give it."),
+        ("accessibility.html", "Accessibility",
+         "How the site is built to be usable by everyone, and who to tell if it is not."),
+        ("privacy-choices.html", "Your Privacy Choices",
+         "Your California rights to opt out, and to limit the use of sensitive information."),
+        ("sitemap.html", "Site Map",
+         "This page."),
+    ]),
+]
+
+
+def sm_group(title, key, rows, extra=""):
+    lis = "\n".join(
+        '        <li><a href="%s">%s</a><span class="sm-d">%s</span></li>' % (h, esc(l), esc(d))
+        for h, l, d in rows)
+    return """      <section class="sm-grp" aria-labelledby="sm-{key}">
+        <h2 class="sm-h" id="sm-{key}">{title}</h2>
+        <ul class="sm-list">
+{lis}
+        </ul>{extra}
+      </section>""".format(key=key, title=esc(title), lis=lis, extra=extra)
+
+
+def build_sitemap(groups, areas, props):
+    # the leasing system is a different system, not a page of this site — it is
+    # listed, and it says so, rather than being quietly mixed in with the rest
+    offsite = """
+        <ul class="sm-list sm-off">
+          <li><a href="{resident}" rel="noopener">Resident login</a><span class="sm-d">The live leasing system &mdash; a separate site.</span></li>
+          <li><a href="{applicant}" rel="noopener">Applicant login</a><span class="sm-d">Apply and pay in the live leasing system &mdash; a separate site.</span></li>
+        </ul>""".format(resident=esc(RESIDENT), applicant=esc(APPLICANT))
+
+    grps = []
+    for title, key, rows in SM_SECTIONS:
+        extra = offsite if key == "residents" else ""
+        grps.append(sm_group(title, key, rows, extra))
+        if key == "live":
+            area_rows = "\n".join(
+                '        <li><a href="neighborhoods/%s.html">%s</a>'
+                '<span class="sm-ct tnum">%d</span></li>' % (k, esc(areas[k]["name"]), len(groups[k]))
+                for k in AREA_ORDER)
+            grps.append("""      <section class="sm-grp" aria-labelledby="sm-areas">
+        <h2 class="sm-h" id="sm-areas">The seven areas</h2>
+        <ul class="sm-list sm-areas">
+{rows}
+        </ul>
+      </section>""".format(rows=area_rows))
+
+    blocks = []
+    for k in AREA_ORDER:
+        rows = sorted(groups[k], key=lambda p: p["short"].lower())
+        items = "\n".join(
+            '            <li><a href="buildings/%s.html">%s</a></li>' % (p["path"], esc(p["short"]))
+            for p in rows)
+        blocks.append("""        <section class="sm-area" aria-labelledby="sma-{k}">
+          <h3 class="sm-area-h" id="sma-{k}">{label} <span class="sm-ct tnum">{n}</span></h3>
+          <ul class="sm-cols">
+{items}
+          </ul>
+        </section>""".format(k=k, label=esc(areas[k]["name"]), n=len(rows), items=items))
+
+    pages = sum(len(r) for _, _, r in SM_SECTIONS) + 1 + len(AREA_ORDER) + len(props)  # +1 home
+
+    page = head(
+        title="Site Map &mdash; every page on wisemanresidential.com",
+        desc=("Every page on this site in one list: About Wiseman, the property search, all %d "
+              "buildings across seven Los Angeles neighbourhoods, careers, track record, resident "
+              "services, contact and the legal pages." % TOTAL),
+        img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1200/s3/2/9707/rsz_2motor_jpeg_1.jpg")
+    page += header("")
+    page += """
+<main id="main">
+
+  <section class="pagehead pagehead-split wrap wrap-n">
+    <div class="pagehead-l">
+      <p class="pagehead-no"><span>Site map</span><span class="tnum">{pages} pages</span></p>
+      <h1 class="pagehead-h">Every page on this&nbsp;site.</h1>
+    </div>
+    <p class="pagehead-sub">Seven sections, seven areas and all {total} buildings &mdash; each one a real, linkable page. <a href="search.html">Find a home</a></p>
+  </section>
+
+  <nav class="sitemap wrap wrap-n" aria-label="Site map">
+      <section class="sm-grp" aria-labelledby="sm-home">
+        <h2 class="sm-h" id="sm-home">Home</h2>
+        <ul class="sm-list">
+          <li><a href="index.html">Wiseman Residential</a><span class="sm-d">Los Angeles living, managed wisely.</span></li>
+        </ul>
+      </section>
+{grps}
+  </nav>
+
+  <section class="sitemap-b wrap wrap-n" aria-labelledby="sm-all">
+    <div class="sm-bhead">
+      <h2 class="sm-h" id="sm-all">All {total} buildings</h2>
+      <p class="sm-note">Grouped by area, west to east, then A&ndash;Z. Every building has its own page, its own leasing line and its own map.</p>
+    </div>
+    <div class="sm-areas-grid">
+{blocks}
+    </div>
+  </section>
+
+  <p class="avail-line wrap wrap-n">
+    For what is available this week, see <a href="search.html">Find a home</a>.
+    <span class="avail-sub">The live leasing system is the authority on availability and price.</span>
+  </p>
+
+</main>
+""".format(pages=pages, total=TOTAL, grps="\n".join(grps), blocks="\n".join(blocks))
+    page += tail(groups)
+    write("sitemap.html", page)
 
 
 def write(name, content):

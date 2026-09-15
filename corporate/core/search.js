@@ -345,22 +345,58 @@
     document.addEventListener('click', closePop);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePop(); });
 
-    /* more-filters modal */
+    /* more-filters modal.
+
+       A <dialog> closes in the frame .close() is called: it leaves the top layer
+       and [open] goes, so a CSS close animation never gets a frame to run in.
+       Every path out of this dialog therefore goes through dismiss(), which
+       stamps [data-closing] (core/search.css animates on that), waits for the
+       animation to finish and only then closes for real. Two guards: the
+       animationend listener is paired with a timeout, so a dropped event or a
+       browser that does not fire one can never strand the dialog open; and the
+       native Escape close is intercepted with preventDefault + dismiss, so the
+       key still closes the dialog and now closes it the same way as the others. */
     if (modal) {
+      var closing = false;
+
+      function dismiss() {
+        if (!modal.open) return;
+        if (closing) return;
+        if (!modal.close) { modal.removeAttribute('open'); return; }
+        closing = true;
+        modal.setAttribute('data-closing', '');
+        var done = false;
+        function finish() {
+          if (done) return;
+          done = true; closing = false;
+          modal.removeAttribute('data-closing');
+          if (modal.open) modal.close();
+        }
+        modal.addEventListener('animationend', function h(e) {
+          if (e.target !== modal) return;
+          modal.removeEventListener('animationend', h);
+          finish();
+        });
+        setTimeout(finish, 600);
+      }
+
       var opener = root.querySelector('[data-fmodal-open]');
       if (opener) opener.addEventListener('click', function () {
         closePop();
+        modal.removeAttribute('data-closing');
+        closing = false;
         if (modal.showModal) modal.showModal(); else modal.setAttribute('open', '');
       });
       [].forEach.call(modal.querySelectorAll('[data-fmodal-close]'), function (b) {
-        b.addEventListener('click', function () { modal.close ? modal.close() : modal.removeAttribute('open'); });
+        b.addEventListener('click', dismiss);
       });
       var applyBtn = modal.querySelector('[data-fmodal-apply]');
       if (applyBtn) applyBtn.addEventListener('click', function () {
         apply();
-        modal.close ? modal.close() : modal.removeAttribute('open');
+        dismiss();
       });
-      modal.addEventListener('click', function (e) { if (e.target === modal) modal.close(); });
+      modal.addEventListener('click', function (e) { if (e.target === modal) dismiss(); });
+      modal.addEventListener('cancel', function (e) { e.preventDefault(); dismiss(); });
     }
 
     /* list / map toggle on narrow screens */

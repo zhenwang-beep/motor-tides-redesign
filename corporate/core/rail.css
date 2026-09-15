@@ -18,7 +18,12 @@
   padding-bottom: 2px;           /* keeps focus rings from being clipped */
 }
 .rail-track::-webkit-scrollbar { width: 0; height: 0; display: none; }
-.rail-track > * { scroll-snap-align: start; flex: 0 0 auto; }
+/* Lock the SHRINK only. `flex: 0 0 auto` also pinned flex-grow and flex-basis on
+   every child at a specificity the owning sheet could not reach — which is how
+   the search field (`.sfield { flex: 1 1 300px }`, declared in the earlier
+   core/search.css) lost its basis and its growth and sliced its own placeholder.
+   A rail needs its items not to squash; it has no business setting their width. */
+.rail-track > * { scroll-snap-align: start; flex-shrink: 0; }
 /* a control strip scrolls but should not snap under the reader's hand */
 .rail-track.free { scroll-snap-type: none; }
 .rail-track.free > * { scroll-snap-align: none; }
@@ -35,6 +40,7 @@
   display: flex; align-items: center; gap: 10px;
 }
 .rail-btn {
+  position: relative;
   display: grid; place-items: center;
   width: var(--rail-btn, 46px); height: var(--rail-btn, 46px);
   border-radius: 50%;
@@ -44,33 +50,123 @@
   transition: background-color .3s var(--ease), color .3s var(--ease),
               box-shadow .3s var(--ease), opacity .3s var(--ease), transform .3s var(--ease);
 }
+/* the disc may be smaller than the target. ::after carries the hit area out to
+   44px so a float arrow is never a sub-44px tap. */
+.rail-btn::after {
+  content: ""; position: absolute;
+  inset: min(0px, calc((var(--rail-btn, 46px) - 44px) / 2));
+}
 .rail-btn svg { width: 17px; height: 8px; stroke: currentColor; stroke-width: 1.15; fill: none; }
 .rail-btn:hover:not(:disabled) { background: var(--ink); color: var(--paper); box-shadow: inset 0 0 0 1px var(--ink); }
 .rail-btn:active:not(:disabled) { transform: scale(.94); }
 .rail-btn:disabled { opacity: .28; cursor: default; }
 .rail-btn.prev svg { transform: scaleX(-1); }
+/* the global focus ring is a single 2px outline in --focus; on a float arrow it
+   lands on whatever the rail is floating over. Give the arrow the outline AND a
+   paper halo in the outline's own offset, so the ring reads on a photograph, on
+   the dark curtain and on paper alike. */
+.rail-btn:focus-visible {
+  outline: 2px solid var(--focus, var(--ink)); outline-offset: 3px;
+  box-shadow: inset 0 0 0 1px var(--ink), 0 0 0 3px var(--paper);
+}
 
 /* on a dark section */
 [data-rail][data-on="dark"] .rail-btn { color: var(--paper); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--paper) 34%, transparent); background: transparent; }
 [data-rail][data-on="dark"] .rail-btn:hover:not(:disabled) { background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1px var(--paper); }
+[data-rail][data-on="dark"] .rail-btn:focus-visible { box-shadow: inset 0 0 0 1px var(--paper), 0 0 0 3px var(--deep, var(--ink)); }
 
-/* floating variant: the arrows sit over the rail, vertically centred */
+/* ---- the floating variant: ONE placement rule for the whole site -----------
+   An arrow may never sit on top of a live control, and may never crowd the
+   viewport (and therefore the scrollbar) edge. Both used to happen, for the
+   same reason: the arrow was pinned near the container edge and the track was
+   given matching PADDING. Padding on a scroller is spare room at the END of the
+   scroll — it is not a no-go zone at the visible edge — so at scroll 0 the last
+   control still ran under the right-hand arrow (the "Baths" collision at
+   768–1059), while at 1440 `max(10px, …)` parked the disc 10px from the
+   viewport edge.
+
+   The rule now: each arrow owns a LANE at its end of the rail. The track's own
+   box stops at the lane (a MARGIN, so a control that scrolls out is clipped at
+   the lane's edge instead of sliding under the button), the arrow is centred in
+   the lane, and a --paper fade covers the lane plus the track's small inner
+   inset so a half-scrolled item dissolves rather than being cut. One lane
+   value, one arrow size, every rail, every direction.
+
+   A rail whose track is .bleed keeps its bleed — insetting it would undo the
+   full-bleed photograph — so there the arrow straddles the page gutter instead:
+   half in the margin, half over the first frame, never nearer than 14px to the
+   viewport edge.                                                              */
+[data-rail]:has(> .rail-float) {
+  --rail-btn: 38px;                       /* the float disc, in-flow stays 46 */
+  /* the arrow STANDS IN THE PAGE'S MARGIN COLUMN: its outer edge sits on the
+     page gutter, so it lines up with everything else on the page and is never
+     jammed against the viewport (and the scrollbar) the way `max(10px, …)`
+     used to leave it. A float rail whose own container is already inside the
+     gutter sets --rail-gutter: 0px. */
+  --rail-gutter: var(--pad);
+  --rail-lane: calc(var(--rail-gutter) + var(--rail-btn) + 10px);
+  --rail-fade: 20px;                      /* the track's inner inset = the fade */
+}
+.rail-float {
+  position: absolute; inset: 0; z-index: 4; pointer-events: none;
+}
 .rail-float .rail-btn {
-  position: absolute; top: 50%; z-index: 4; transform: translateY(-50%);
+  position: absolute; top: 50%; transform: translateY(-50%);
+  pointer-events: auto;
   background: color-mix(in srgb, var(--paper) 90%, transparent);
   backdrop-filter: blur(6px);
 }
-.rail-float .rail-btn.sm { --rail-btn: 34px; }
-.rail-float .rail-btn.sm svg { width: 13px; }
-.rail-float .rail-btn.prev { left: max(10px, calc(var(--pad) - 58px)); }
-.rail-float .rail-btn.next { right: max(10px, calc(var(--pad) - 58px)); }
+.rail-float .rail-btn svg { width: 14px; }
+.rail-float .rail-btn.prev { left: var(--rail-gutter); }
+.rail-float .rail-btn.next { right: var(--rail-gutter); }
 .rail-float .rail-btn:active:not(:disabled) { transform: translateY(-50%) scale(.94); }
 .rail-float .rail-btn[hidden] { display: none; }
 
-/* a progress readout, for rails where position matters */
+/* the track's visible box ends at the lane */
+[data-rail]:not([data-static]):has(> .rail-float) > .rail-track:not(.bleed) {
+  margin-left: var(--rail-lane); margin-right: var(--rail-lane);
+  padding-left: var(--rail-fade); padding-right: var(--rail-fade);
+  scroll-padding-inline: var(--rail-fade);
+}
+/* a bleed track keeps its bleed; the arrow straddles the gutter instead */
+[data-rail]:has(> .rail-float) > .rail-track.bleed ~ .rail-float .rail-btn.prev {
+  left: max(14px, calc(var(--pad) - var(--rail-btn) / 2));
+}
+[data-rail]:has(> .rail-float) > .rail-track.bleed ~ .rail-float .rail-btn.next {
+  right: max(14px, calc(var(--pad) - var(--rail-btn) / 2));
+}
+
+/* the fade: solid paper across the lane, then out over the track's inset */
+[data-rail]:not([data-static]) > .rail-float::before,
+[data-rail]:not([data-static]) > .rail-float::after {
+  content: ""; position: absolute; top: 0; bottom: 0; z-index: -1;
+  width: calc(var(--rail-lane) + var(--rail-fade) + 14px); pointer-events: none;
+}
+[data-rail]:not([data-static]) > .rail-float::before {
+  left: 0; background: linear-gradient(to right, var(--paper) calc(var(--rail-lane) - 4px), transparent);
+}
+[data-rail]:not([data-static]) > .rail-float::after {
+  right: 0; background: linear-gradient(to left, var(--paper) calc(var(--rail-lane) - 4px), transparent);
+}
+
+/* A CONTROL STRIP on a touch width drops its arrows. Two 38px discs and their
+   lanes cost 100px of a 350px track, and every control in the strip is already
+   reachable by finger and by Tab (rail.js scrolls a focused item into view).
+   The lane collapses to the page gutter — so the strip lines up with the page
+   again — and the fade sits on that gutter, so the strip still reads as
+   scrollable. Content rails — the photograph galleries, the reels — keep their
+   arrows at every width, because there the arrow is the only affordance. */
+@media (max-width: 759.98px) {
+  [data-rail]:has(> .rail-track.free) { --rail-lane: var(--pad); --rail-fade: 0px; }
+  [data-rail]:has(> .rail-track.free) > .rail-float .rail-btn { display: none; }
+}
+
+/* a progress readout, for rails where position matters. --ink-mute is the
+   direction's own AA-safe quiet stop (see core/base.css); at the 52-56% of the
+   ink this used to carry it measured 2.93:1 on cream. */
 .rail-count { font-size: .72rem; letter-spacing: .16em; font-variant-numeric: tabular-nums;
-  color: color-mix(in srgb, var(--ink) 56%, transparent); min-width: 5ch; }
-[data-rail][data-on="dark"] .rail-count { color: color-mix(in srgb, var(--paper) 66%, transparent); }
+  color: var(--ink-mute); min-width: 5ch; }
+[data-rail][data-on="dark"] .rail-count { color: var(--paper-mute); }
 
 /* a thin progress rule under the rail */
 .rail-bar { position: relative; height: 1px; background: color-mix(in srgb, var(--ink) 14%, transparent); margin-top: 18px; }

@@ -16,6 +16,13 @@ Everything between them is replaced. Run:
 """
 import json, os, re, sys, html
 
+
+def _2x(url):
+    """Retina variant of a card thumb. The card paints ~400 CSS px, so a 2x screen
+    wants ~800 real pixels; we were shipping 600 and letting the browser upscale.
+    The RentCafe originals measure 2048px, so w_1200 never upscales."""
+    return url.replace("w_600,h_400", "w_1200,h_800")
+
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data", "wiseman.json")
@@ -200,6 +207,10 @@ def price_label(p):
 
 
 def card(p, tag_labels):
+    # The availability clause is wrapped WITH its separator in .card-av so a
+    # direction can drop the whole clause in CSS without stranding a trailing
+    # " · " on the address line. The span carries no styling of its own, so
+    # every direction that does not opt out renders exactly what it did before.
     tags = [tag_labels[t] for t in p["tags"][:3] if t in tag_labels]
     price = price_label(p)
     beds = (p.get("beds") or "—").replace(" Beds", " bed").replace(" Bed", " bed")
@@ -220,7 +231,7 @@ def card(p, tag_labels):
   data-bathsmax="{p.get('bathsMax') if p.get('bathsMax') is not None else ''}"{rent}{sq}
   data-tags="{E('|'.join(p['tags']))}">
   <a class="card-img" href="buildings/{E(p['path'])}.html" tabindex="-1" aria-hidden="true">
-    <img src="{E(p['thumb'])}" alt="" width="600" height="400" loading="lazy" decoding="async">
+    <img src="{E(p['thumb'])}" srcset="{E(p['thumb'])} 600w, {E(_2x(p['thumb']))} 1200w" sizes="(min-width:1060px) 28vw, (min-width:640px) 45vw, 90vw" alt="" width="600" height="400" loading="lazy" decoding="async">
   </a>
   <button type="button" class="card-fav" data-fav="{E(p['no'])}" aria-pressed="false"
           aria-label="Save {E(p['short'])}">{HEART}</button>
@@ -228,7 +239,7 @@ def card(p, tag_labels):
     <p class="card-price tnum">{E(price)}</p>
     <p class="card-fx">{fx}</p>
     <h3 class="card-nm"><a href="buildings/{E(p['path'])}.html">{E(p['short'])}</a></h3>
-    <p class="card-ad">{E(p['streetLine'] if 'streetLine' in p else p['address'].split(',')[0])} &middot; {E(p['area'])}{(' &middot; <b>' + str(p['availableNow']) + ' available now</b>') if p.get('availableNow') else ''}</p>
+    <p class="card-ad">{E(p['streetLine'] if 'streetLine' in p else p['address'].split(',')[0])} &middot; {E(p['area'])}{('<span class="card-av"> &middot; <b>' + str(p['availableNow']) + ' available now</b></span>') if p.get('availableNow') else ''}</p>
     {'<p class="card-tags">' + ''.join(f'<span>{t}</span>' for t in tags) + '</p>' if tags else ''}
   </div>
 </article>"""

@@ -12,7 +12,8 @@ import json, os, re, sys, html
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-V = "18"
+V = "18"   # fallback only — splice() reads the page's own ?v= so a direction
+           # that has bumped never gets a stale core link written into it
 E = lambda s: html.escape(str(s), quote=True)
 DATA = json.load(open(os.path.join(ROOT, "data", "wiseman.json")))
 P = {p["slug"]: p for p in DATA["properties"]}
@@ -422,14 +423,20 @@ def splice(direction):
             print("  !", direction, fname, "has no <main id=main>"); continue
         body = '\n<div class="ed">' + build() + "\n</div>\n"
         s = s[:m.start(2)] + body + s[m.end(2):]
+        # every page in a direction carries ONE ?v=; read it rather than
+        # hard-coding one here, so a bumped direction stays internally uniform
+        mv = re.search(r'style\.css\?v=(\d+)', s)
+        ver = mv.group(1) if mv else V
         if "core/editorial.css" not in s:
-            s = re.sub(r'(<link rel="stylesheet" href="style\.css)', HEAD_LINKS + r"\1", s, count=1)
+            s = re.sub(r'(<link rel="stylesheet" href="style\.css)',
+                       HEAD_LINKS.replace("?v=" + V, "?v=" + ver) + r"\1", s, count=1)
         # The office map needs two things: core/map.js and the boot that calls
         # WR.map on #office-map. A direction whose shell already loads map.js
         # (register) still needs the boot, so test for the boot itself and add
         # the script tag only where it is missing.
         if fname == "contact.html" and "office-map" in s and "WR.map({ el: '#office-map'" not in s:
-            boot = MAP_BOOT if "core/map.js" not in s else MAP_BOOT.split("\n", 1)[1]
+            mb = MAP_BOOT.replace("?v=" + V, "?v=" + ver)
+            boot = mb if "core/map.js" not in s else mb.split("\n", 1)[1]
             s = s.replace("</body>", boot + "</body>", 1)
         # reveal hooks need the shared observers — every page already boots core.js
         open(path, "w", encoding="utf-8").write(s)

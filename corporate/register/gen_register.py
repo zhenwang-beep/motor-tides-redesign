@@ -55,7 +55,7 @@ PLATES = os.path.join(ROOT, "data", "plates.json")
 ARTDIR = os.path.join(ROOT, "data", "artdirection.json")
 SHELL = os.path.join(HERE, "templates", "_shell.html")
 
-VER = "18"                       # cache-bust: base.css, core.js, map.*, rail.*, search.*, style.css, app.js
+VER = "19"                       # cache-bust: base.css, core.js, map.*, rail.*, search.*, style.css, app.js
 SNAPSHOT = "10 September 2026"
 TOTAL = 72
 

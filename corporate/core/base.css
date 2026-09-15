@@ -7,6 +7,31 @@
   --vh100: 100vh;
   --ease: cubic-bezier(.22,.61,.36,1);
   --pad: clamp(20px, 5vw, 92px);
+
+  /* ---- quiet ink: two AA-safe stops below --ink -------------------------
+     The shared sheets used to set secondary text as a raw percentage of the
+     ink — 46% to 68% — and the SAME percentage lands in a different place in
+     every direction, because the headroom between ink and ground is not the
+     same twice: deep teal on cream is 8.68:1 end to end, near-black on white
+     is 17.65:1, cream on near-black is 15.84:1. At 58% that is 3.07:1 on
+     Clerestory's cream and 5.80:1 on Nocturne's black — one fails AA, the
+     other is barely quiet at all. So the percentage is not the token: the
+     COLOUR is, and each direction sets the pair against its own ground.
+
+       --ink-quiet  secondary body text — the card facts, an empty-state
+                    paragraph, an editorial standfirst.  AA >= 4.5:1.
+       --ink-mute   the quietest stop that is still text — facet labels,
+                    counts, addresses, tags, the rail readout, placeholders.
+                    Also AA >= 4.5:1; small text gets no discount.
+
+     The defaults below are measured for the WORST case (Clerestory's cream:
+     76% = 4.73:1, 82% = 5.51:1) so an un-tuned direction still passes.
+     --paper-quiet / --paper-mute are the same pair for light type on a dark
+     band, where a percentage of a LIGHT ink behaves the other way round. */
+  --ink-quiet:   color-mix(in srgb, var(--ink) 82%, transparent);
+  --ink-mute:    color-mix(in srgb, var(--ink) 76%, transparent);
+  --paper-quiet: color-mix(in srgb, var(--paper) 88%, transparent);
+  --paper-mute:  color-mix(in srgb, var(--paper) 80%, transparent);
 }
 @supports (height: 100svh) { :root { --vh100: 100svh; } }
 
@@ -46,9 +71,14 @@ button { background: none; border: 0; cursor: pointer; }
   padding: 12px 18px; font-size: .82rem; letter-spacing: .08em; text-transform: uppercase;
 }
 .skip-link:focus { left: 12px; top: 12px; }
+/* The ring follows the control's OWN shape. This rule used to set
+   `border-radius: 1px` on the focused element, which out-specified
+   `.rail-btn{border-radius:50%}` and squared off every circular rail arrow the
+   moment the keyboard reached it — the ring announcing focus also changed the
+   thing it was pointing at. */
 a:focus-visible, button:focus-visible, input:focus-visible,
 select:focus-visible, [tabindex]:focus-visible {
-  outline: 2px solid var(--focus, var(--ink)); outline-offset: 3px; border-radius: 1px;
+  outline: 2px solid var(--focus, var(--ink)); outline-offset: 3px;
 }
 .vh {
   position: absolute !important; width: 1px; height: 1px; overflow: hidden;

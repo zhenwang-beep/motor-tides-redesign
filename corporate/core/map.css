@@ -11,7 +11,7 @@
 .wr-map-loading {
   position: absolute; inset: 0; display: grid; place-items: center;
   font-size: .78rem; letter-spacing: .16em; text-transform: uppercase;
-  color: color-mix(in srgb, var(--ink) 46%, transparent);
+  color: var(--ink-mute);
 }
 
 /* Esri's Canvas greys ('light' / 'dark') are desaturated fully and tinted with the
@@ -50,10 +50,10 @@
 }
 .wr-map .leaflet-control-attribution {
   background: color-mix(in srgb, var(--paper) 82%, transparent);
-  color: color-mix(in srgb, var(--ink) 58%, transparent);
+  color: var(--ink-mute);
   font-size: 10px; letter-spacing: .02em; padding: 2px 7px;
 }
-.wr-map .leaflet-control-attribution a { color: color-mix(in srgb, var(--ink) 74%, transparent); text-decoration: underline; }
+.wr-map .leaflet-control-attribution a { color: var(--ink-quiet); text-decoration: underline; }
 .wr-map .leaflet-control-zoom a {
   background: var(--paper); color: var(--ink); border: 0;
   border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
@@ -101,6 +101,12 @@
   background: var(--paper); color: var(--ink);
 }
 .wr-pin.price i { font-size: 11.5px; font-weight: 500; letter-spacing: .02em; }
+/* The pill also carries the building's NAME (core/map.js writes it). It is inert
+   here — every direction paints the figure alone, exactly as it always has — and a
+   direction opts in by giving .wr-pin-nm a display of its own on hover / focus.
+   Kept out of the flow rather than merely transparent so it contributes no width
+   to crowd()'s overlap test and nothing to the accessibility tree until it shows. */
+.wr-pin .wr-pin-nm { display: none; font-style: normal; }
 .leaflet-marker-icon:hover .wr-pin.price,
 .leaflet-marker-icon:focus-visible .wr-pin.price,
 .wr-pin.price.lit { transform: scale(1.1); }
@@ -198,10 +204,10 @@
 .wr-pop-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
 .wr-pop-img:hover img { transform: scale(1.04); }
 .wr-pop-b { display: grid; gap: 3px; padding: 13px 15px 15px; }
-.wr-pop-no { font-size: .66rem; letter-spacing: .18em; color: color-mix(in srgb, var(--ink) 50%, transparent); font-variant-numeric: tabular-nums; }
+.wr-pop-no { font-size: .66rem; letter-spacing: .18em; color: var(--ink-mute); font-variant-numeric: tabular-nums; }
 .wr-pop-nm { font-size: 1.02rem; line-height: 1.2; }
 .wr-pop-nm:hover { text-decoration: underline; text-underline-offset: 3px; }
-.wr-pop-st, .wr-pop-fx { font-size: .74rem; color: color-mix(in srgb, var(--ink) 62%, transparent); }
+.wr-pop-st, .wr-pop-fx { font-size: .74rem; color: var(--ink-quiet); }
 .wr-pop-fx { letter-spacing: .04em; }
 
 /* ---- SVG fallback, used only when the CDN is unreachable ---- */

@@ -21,7 +21,7 @@ PLATES = os.path.join(ROOT, "data", "plates.json")
 ARTDIR = os.path.join(ROOT, "data", "artdirection.json")
 SHELL = os.path.join(HERE, "templates", "_shell.html")
 
-VER = "18"
+VER = "19"
 SNAPSHOT = "11 September 2026"
 TOTAL = 72
 FLAG_NO = "071"          # Motor Tides — FACT-CHECK §2

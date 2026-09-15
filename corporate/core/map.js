@@ -166,7 +166,14 @@
         var icon = PRICE
           ? L.divIcon({
               className: 'wr-pin-wrap',
-              html: '<span class="wr-pin price" data-no="' + esc(p.no) + '"><i>' + esc(pinLabel(p)) + '</i></span>',
+              /* The pill carries the building's NAME as well as the figure. The name
+                 element is inert everywhere by default (core/map.css hides it), so a
+                 direction that does not opt in renders exactly the pill it always did;
+                 a direction that does (atrium) reveals it on hover / focus, and on the
+                 crowd-thinned dots too, so a pointed-at pin reads "Name - $4K". */
+              html: '<span class="wr-pin price" data-no="' + esc(p.no) + '">' +
+                    (p.name ? '<em class="wr-pin-nm">' + esc(p.name) + '</em>' : '') +
+                    '<i>' + esc(pinLabel(p)) + '</i></span>',
               iconSize: [72, 28], iconAnchor: [36, 14], popupAnchor: [0, -16]
             })
           : L.divIcon({

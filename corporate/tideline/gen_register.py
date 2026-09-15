@@ -32,13 +32,13 @@ AREAS = D["areas"]          # dict, authored order = the site's order
 PROPS = D["properties"]     # 72
 TOTAL = len(PROPS)
 
-CSS_V = "18"                # ILS search skin + the rails handed to core/rail.css
-BASE_V = "18"
-CORE_V = "18"
-APP_V = "18"                 # the bespoke rail mechanic retired in favour of WR.rails
-MAP_V = "18"
-RAIL_V = "18"
-SEARCH_V = "18"
+CSS_V = "19"                # ILS search skin + the rails handed to core/rail.css
+BASE_V = "19"
+CORE_V = "19"
+APP_V = "19"                 # the bespoke rail mechanic retired in favour of WR.rails
+MAP_V = "19"
+RAIL_V = "19"
+SEARCH_V = "19"
 
 SITE = "https://www.wisemanresidential.com/"
 

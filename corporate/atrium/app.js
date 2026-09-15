@@ -43,7 +43,14 @@
     sync();
   })();
 
-  /* -------------------------------------------------- reveals (rv / rvi / rvl) */
+  /* -------------------------------------------------- reveals (rv / rvi / rvl)
+     Motor Tides observes at `threshold:0.12` with NO root margin
+     (ref/home.html). This used to add `rootMargin:'0px 0px -6% 0px'`, which
+     holds a reveal back until the element is 6% of the viewport past the fold
+     — so a block that is already fully on screen is still waiting, and then
+     pops as you keep scrolling. Dropping the inset lets each block begin the
+     moment it enters, which is both earlier and calmer: the travel is spent
+     while you are still scrolling toward it rather than after you arrive. */
   (function reveals() {
     var els = $$('.rv, .rvi, .rvl');
     if (!els.length) return;
@@ -55,7 +62,7 @@
       en.forEach(function (e) {
         if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+    }, { threshold: 0.12 });
     var kick = function () { els.forEach(function (e) { io.observe(e); }); };
     if (doc.fonts && doc.fonts.ready) {
       doc.fonts.ready.then(function () { requestAnimationFrame(kick); });
@@ -146,7 +153,7 @@
     } else {
       /* settle when the last beat finishes, and on any of the usual escapes */
       if (scroll) scroll.addEventListener('animationend', settle);
-      setTimeout(settle, 3400);
+      setTimeout(settle, 3800);   /* the last beat now ends at 2.48s + 1.2s */
       addEventListener('pointerdown', settle, { once: true, passive: true });
       addEventListener('keydown', settle, { once: true });
       W.onScroll(function (y) {
@@ -209,9 +216,11 @@
     W.pump();
   })();
 
-  /* the shared spine: menu, favourites */
+  /* the shared spine: menu. W.favourites() is deliberately NOT booted here —
+     the client does not want a favourites function on this site, so Clerestory
+     ships no Save control on a card or a building page and nothing listens for
+     one. The shared helper stays intact for the other directions. */
   W.menu();
-  W.favourites();
 
   /* ------------------------------------------------------------- transition
      The Motor Tides page transition, to the millisecond — the concept the
@@ -453,7 +462,16 @@
   /* -------------------------------------------------- widow guard
      No heading, lede or caption ends on a word alone on its line. The last run
      of whitespace before the last word becomes one no-break space. Flex/grid
-     containers are skipped (a nbsp between two items would be a third). */
+     containers are skipped (a nbsp between two items would be a third).
+
+     TWO THINGS IT MUST NOT DO, both of which it was doing. A no-break space is
+     not free: it DELETES a break opportunity. Where the surviving run is wider
+     than the box it sits in, `overflow-wrap:break-word` then cuts that run
+     wherever the edge falls, and the reader gets a word sawn in half with no
+     hyphen — "Reasonable accommodatio / n" on accessibility.html at 1440, and
+     "Venice Bouleva / rd", "Our commitme / nt", "Maintenance e / mergency" in
+     the 144px editorial label track at 768. Nineteen of them across seven
+     pages, every one of them a heading this guard had just glued. */
   (function widows() {
     var SEL = 'h1,h2,h3,.hero .sub,.band-head p,.pagehead-sub,.shead-sub,.lead,.ed-lede,' +
       '.reg-head-sub,figcaption,.cite,.plans-none,.reg-legend span,.avail-line,.ed-note,' +
@@ -461,6 +479,12 @@
     var NBSP = ' ';
     $$(SEL).forEach(function (el) {
       if (el.classList.contains('vh') || el.closest('.ft,.mnav')) return;
+      /* 2. The editorial row label sits in a FIXED track — core/editorial.css
+         gives it clamp(9rem,18vw,16rem), so 144px from 760px up to about 890px
+         — and holds short address and topic phrases. There is no width for a
+         glued tail to fall back into; "9000-9020 Venice Boulevard" glued is one
+         166px run in a 144px box. The label wraps on its own spaces instead. */
+      if (el.matches('.ed-row > h3')) return;
       var d = getComputedStyle(el).display;
       if (d.indexOf('flex') >= 0 || d.indexOf('grid') >= 0) return;
       var nodes = [], full = '', n;
@@ -471,6 +495,12 @@
       }
       var m = /(\s+)(\S+)(\s*)$/.exec(full);
       if (!m || !/\S/.test(full.slice(0, m.index))) return;
+      /* 1. Two words cannot widow. There is no line the second could be alone
+         on that the first is not already on, so gluing them prevents nothing
+         and removes the only break point the phrase has. Where the pair fits,
+         glued and unglued render identically; where it does not, the glue is
+         the whole defect. Three words is the first case with a widow to fix. */
+      if (full.trim().split(/\s+/).length < 3) return;
       var runStart = m.index, runEnd = m.index + m[1].length, placed = false;
       nodes.forEach(function (o) {
         var len = o.n.nodeValue.length;
@@ -504,5 +534,125 @@
     if (note) note.innerHTML = note.innerHTML.replace(/\s+\u00B7\s/g, '\u00A0\u00B7 ');
   })();
 
+  /* --------------------------------------------------- map pin: keep the name on the map
+     The price pill now carries the building's NAME as well as the figure
+     (core/map.js writes it, atrium/style.css reveals it). A named pill is
+     ~200px wide against the ~46px it used to be, and Leaflet centres a marker
+     icon on its address — so a pin sitting within 100px of the panel edge
+     expanded straight into the map's own overflow clip and lost the first half
+     of the name it had just been asked for.
+
+     This nudges the expanded pill back inside. It measures the pill against the
+     map's box and translates it the minimum distance that brings it fully in,
+     clamped so the figure never walks further than half a pill from the address
+     it belongs to. The translate lands on the INNER span; the 72x28
+     .leaflet-marker-icon the pointer is actually over never moves, so the hover
+     cannot chase itself off the element. Transform only, on the one brand ease
+     core already transitions, and it is undone the moment the pointer leaves.
+
+     Atrium-scoped by construction: --pin-dx is only read by this direction's
+     stylesheet, and the shared map keeps its own behaviour untouched. */
+  (function pinNudge() {
+    var PAD = 6;
+    /* How far the pill is translated AT THIS INSTANT. The nudge rides on a
+       transitioned transform, so the moment a second pointerover arrives — and
+       one always does, because the name the pill just revealed becomes a new
+       element under the pointer — a naive re-measure reads the rect the nudge
+       has already moved, decides the pill is safely inside, and cancels the
+       very translate that put it there. The pill then slides back out and stays
+       out. Measuring is only safe against the pill's UNNUDGED position. */
+    function shift(pin) {
+      var m = getComputedStyle(pin).transform;
+      if (!m || m === 'none') return 0;
+      var mm = m.match(/^matrix\(([^)]+)\)/);
+      if (mm) return parseFloat(mm[1].split(',')[4]) || 0;
+      var m3 = m.match(/^matrix3d\(([^)]+)\)/);
+      if (m3) return parseFloat(m3[1].split(',')[12]) || 0;
+      return 0;
+    }
+    function box(pin) {
+      var host = pin.closest('.wr-map');
+      if (!host) return null;
+      var r = pin.getBoundingClientRect(), h = host.getBoundingClientRect();
+      if (!r.width) return null;
+      var tx = shift(pin), left = r.left - tx, right = r.right - tx, dx = 0;
+      if (left < h.left + PAD) dx = (h.left + PAD) - left;
+      else if (right > h.right - PAD) dx = (h.right - PAD) - right;
+      /* never further than half a pill: the figure stays over its own address */
+      var cap = Math.max(0, r.width / 2 - 10);
+      dx = Math.max(-cap, Math.min(cap, dx));
+      /* round AWAY from the edge, so the rounding can never put the tail back
+         over it — a 0.2px shortfall is still a clipped letter */
+      return dx < 0 ? Math.floor(dx) : Math.ceil(dx);
+    }
+    function place(pin) {
+      if (!pin) return;
+      var dx = box(pin);
+      if (dx === null) return;
+      pin.style.setProperty('--pin-dx', dx + 'px');
+    }
+    function clear(pin) { if (pin) pin.style.removeProperty('--pin-dx'); }
+    function pinFor(el) {
+      if (!el || !el.closest) return null;
+      var direct = el.closest('.wr-pin.price');
+      if (direct) return direct;
+      /* keyboard focus lands on the .leaflet-marker-icon WRAPPER, not on the
+         pill inside it, so the pointer path alone would have left a tabbed-to
+         pin expanding straight off the edge of the map */
+      if (el.querySelector) {
+        var inner = el.classList && el.classList.contains('leaflet-marker-icon')
+          ? el.querySelector('.wr-pin.price') : null;
+        if (inner) return inner;
+      }
+      /* a register row lights its pin without the pointer ever going near it */
+      var row = el.closest('[data-row][data-no]');
+      return row ? document.querySelector('.wr-pin.price[data-no="' + row.dataset.no + '"]') : null;
+    }
+    ['pointerover', 'focusin'].forEach(function (t) {
+      document.addEventListener(t, function (e) {
+        var pin = pinFor(e.target);
+        if (pin) requestAnimationFrame(function () { place(pin); });
+      }, true);
+    });
+    ['pointerout', 'focusout'].forEach(function (t) {
+      document.addEventListener(t, function (e) { clear(pinFor(e.target)); }, true);
+    });
+  })();
+
   W.pump();
+})();
+
+
+/* ---------------------------------------------------------------------------
+   MORE-FILTERS DIALOG — let the close animation actually play.
+   A <dialog> closes synchronously, so the out-keyframes never render: the panel
+   just vanishes. Defer the real close until the animation ends. Escape does not
+   route through .close(), it fires `cancel` and closes natively, so that is
+   intercepted too. core/search.js's own open/close logic is untouched — this
+   only delays the final native close.
+--------------------------------------------------------------------------- */
+(function fmodalMotion () {
+  var d = document.querySelector('dialog.fmodal');
+  if (!d || !d.close) return;
+  var native = d.close.bind(d);
+  var closing = false;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  d.close = function (val) {
+    if (closing || reduce || !d.open) { closing = false; return native(val); }
+    closing = true;
+    d.classList.add('is-closing');
+    var done = function () {
+      d.removeEventListener('animationend', onEnd);
+      clearTimeout(t);
+      d.classList.remove('is-closing');
+      closing = false;
+      native(val);
+    };
+    var onEnd = function (e) { if (e.target === d) done(); };
+    d.addEventListener('animationend', onEnd);
+    var t = setTimeout(done, 320);          /* never strand the dialog open */
+  };
+
+  d.addEventListener('cancel', function (e) { e.preventDefault(); d.close(); });
 })();

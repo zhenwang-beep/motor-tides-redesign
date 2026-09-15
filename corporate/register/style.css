@@ -87,6 +87,12 @@
   --ink:#141414;
   --rule:#B9B4A8;
   --muted:#6A665C;
+  /* the two AA-safe quiet stops the shared core reads for its secondary text.
+     Measured on --paper #FBFAF7:
+       --ink-quiet  68% of #141414  6.25:1   (was 62-70%, 5.08-6.71)
+       --ink-mute   62% of #141414  5.08:1   (was 46-58%, 3.05-4.44) */
+  --ink-quiet:color-mix(in srgb,var(--ink) 68%,transparent);
+  --ink-mute:color-mix(in srgb,var(--ink) 62%,transparent);
   --blueline:#2E4A7D;
   --flag:#C1502E;
   --deep:#141414;
@@ -329,7 +335,7 @@ a{ color:inherit; }
   font-family:var(--mono); font-size:var(--fs-sm); letter-spacing:.01em;
   padding-top:10px; padding-bottom:10px; padding-left:0; padding-right:12px;
 }
-.search-field::placeholder{ color:var(--ink-32); }
+.search-field::placeholder{ color:var(--ink-mute); }
 .search-btn{
   flex:0 0 auto; font-family:var(--mono); font-size:var(--fs-xs);
   text-transform:uppercase; letter-spacing:.12em; color:var(--muted);
@@ -1609,28 +1615,16 @@ html:not(.js) .run-meta::before{ transform:scaleX(1); }
   top:calc(100% + 6px);
 }
 .sbar:not([data-static]) .fmenu.right{ left:var(--pad); right:var(--pad); }
-/* the bar is a rail: the arrows overlay it, on paper so they never sit on a
-   half-covered control, and they disappear on their own once it all fits */
+/* the bar is a rail. Its lane, its arrow positions and its paper fade are
+   core/rail.css's now — the "track's box stops at the lane, so nothing ever
+   scrolls under an arrow" rule this direction worked out in round 6 is the
+   shared rule for every rail in every direction, so only the skin is left here.
+   The menus still need their own answer to the scroller, which follows. */
 .sbar .rail-float .rail-btn{
   background:var(--paper);
   box-shadow:inset 0 0 0 var(--hair) var(--ink-18);
 }
-.sbar .rail-float .rail-btn.prev{ left:max(2px,calc(var(--pad) - 42px)); }
-.sbar .rail-float .rail-btn.next{ right:max(2px,calc(var(--pad) - 42px)); }
-/* On a phone the gutter is 20px and an arrow is 34px, so an edge-hugging arrow
-   would sit permanently on top of the search field. Move the gutter off .sbar
-   and onto the track as a 34px inset, so the controls scroll UNDER the arrows
-   instead of starting beneath them. Only while the bar actually scrolls — a bar
-   with nothing to scroll hides its arrows and wants its normal gutter back. */
 @media (max-width:860px){
-  .sbar:not([data-static]){ padding-left:0; padding-right:0; }
-  .sbar:not([data-static]) .sbar-in{
-    padding-left:36px; padding-right:36px;
-    scroll-padding-left:36px; scroll-padding-right:36px;
-  }
-  .sbar:not([data-static]) .rail-float .rail-btn{ --rail-btn:30px; }
-  .sbar:not([data-static]) .rail-float .rail-btn.prev{ left:2px; }
-  .sbar:not([data-static]) .rail-float .rail-btn.next{ right:2px; }
   .sbar:not([data-static]) .fmenu{ left:var(--pad); right:var(--pad); }
 }
 
@@ -1660,7 +1654,7 @@ html:not(.js) .run-meta::before{ transform:scaleX(1); }
 .opt{ font-size:var(--fs-sm); }
 .opt:hover{ background:var(--ink-03); }
 .opt input{ accent-color:var(--blueline); }
-.opt .cnt{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--ink-32); }
+.opt .cnt{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--ink-mute); }
 .seg{
   font-family:var(--mono); font-size:var(--fs-xs); border-color:var(--rule);
   padding-top:10px; padding-bottom:10px;
@@ -1824,7 +1818,7 @@ dialog.fmodal::backdrop{ background:rgba(20,20,20,.52); }
 .rail-btn:disabled{ opacity:.24; }
 .rail-count{
   font-family:var(--mono); font-size:var(--fs-cap);
-  letter-spacing:.16em; color:var(--ink-32);
+  letter-spacing:.16em; color:var(--ink-mute);   /* --ink-32 measured 2.07:1 */
 }
 .rail-bar{ background:var(--ink-10); margin-top:var(--sp-2); }
 .rail-bar i{ background:var(--ink); }
@@ -1934,11 +1928,9 @@ dialog.fmodal::backdrop{ background:rgba(20,20,20,.52); }
   letter-spacing:-.018em; line-height:1.06; padding-top:8px;
 }
 .shead-sub{ font-size:var(--fs-b); color:var(--muted); padding-top:6px; }
-/* the shared sheet sizes .sfield 300–420px, but the bar is also a rail and
-   rail.css's `.rail-track > *{flex:0 0 auto}` loads after it and pins the field
-   at its 300px floor. Restore the grow so the field takes the room it has; the
-   input inside stays borderless, one box only. */
-.sbar .sbar-in > .sfield{ flex:1 1 300px; }
+/* rail.css locks the SHRINK only now, so the shared sheet's own sizing of
+   .sfield survives and the field takes the room it has. The input inside stays
+   borderless — one box, not two. */
 .sfield input{ border:0; box-shadow:none; }
 
 /* ======================================================= 4. the building page */
@@ -2257,7 +2249,8 @@ dialog.fmodal::backdrop{ background:rgba(20,20,20,.52); }
 
 /* ---- the bar ---- */
 .sfield input{ font-family:var(--mono); font-size:var(--fs-sm); letter-spacing:.01em; }
-.sfield input::placeholder{ color:var(--ink-32); }
+/* a placeholder is text and gets no AA discount: --ink-32 measured 2.07:1 */
+.sfield input::placeholder{ color:var(--ink-mute); }
 .sfield:focus-within{ border-color:var(--ink); }
 .fbtn{ gap:10px; padding-left:14px; padding-right:12px; }
 .fbtn .cav{ width:9px; height:6px; stroke-width:1.6; }
@@ -2308,8 +2301,8 @@ dialog.fmodal::backdrop{ background:rgba(20,20,20,.52); }
 }
 .opts .opt:last-child{ border-bottom:0; }
 .opt:hover{ background:var(--ink-03); }
-.opt .cnt{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--ink-32); letter-spacing:.02em; }
-.opt:hover .cnt{ color:var(--muted); }
+.opt .cnt{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--ink-mute); letter-spacing:.02em; }
+.opt:hover .cnt{ color:var(--ink); }
 /* the checkbox: a hairline square in --rule, ink when checked, a paper check */
 [data-search] .opt input{
   appearance:none; -webkit-appearance:none;
@@ -2682,51 +2675,20 @@ dialog.fmodal::backdrop{ background:rgba(20,20,20,.5); backdrop-filter:blur(2px)
 }
 
 /* ------------------------------------------ 2. the filter rail's two edges
-   core/search.css builds the bar's rail edge as: track padded 46px, a paper
-   fade painted over the track that is solid to --pad + 34px, and the arrows
-   at --pad + 4px — all measured from a bar that keeps its --pad gutter. The
-   860px rule above dropped that gutter and moved the arrows to 2px, but its
-   36px track padding lost to the shared sheet's specificity and the fade was
-   never re-measured: at 480 the search field's left border and its magnifier
-   sat under solid paper at scroll 0, and on the right the controls scrolled
-   under the arrow itself (the probe's text-on-control at 390–768).
-   Re-measured at one specificity above the shared rules, for every width at
-   which the bar scrolls: the scroller's box now starts AFTER the arrow lane
-   (a margin, not padding), so a control that scrolls off is clipped at the
-   lane's edge and never sits under the arrow; the 20px of track padding is
-   the fade, so the first control is whole at scroll 0. Lane = arrow + 4px:
-   36px on a phone (30px arrow at 2px), --pad + 42px above 860 (34px arrow at
-   --pad + 4px, the shared sheet's own position). */
-.sbar[data-rail]:not([data-static]){ --lane:calc(var(--pad) + 42px); padding-left:0; padding-right:0; }
-@media (max-width:860px){ .sbar[data-rail]:not([data-static]){ --lane:36px; } }
-.sbar[data-rail]:not([data-static]) .sbar-in{
-  max-width:none;
-  margin-left:var(--lane); margin-right:var(--lane);
-  padding-left:20px; padding-right:20px;
-  scroll-padding-inline:20px;
-}
-.sbar[data-rail]:not([data-static]) .rail-float::before,
-.sbar[data-rail]:not([data-static]) .rail-float::after{ width:calc(var(--lane) + 20px); }
-.sbar[data-rail]:not([data-static]) .rail-float::before{ background:linear-gradient(to right,var(--paper) var(--lane),transparent); }
-.sbar[data-rail]:not([data-static]) .rail-float::after{ background:linear-gradient(to left,var(--paper) var(--lane),transparent); }
+   RESOLVED IN THE SHARED SHEET. The lane this direction worked out here — the
+   scroller's box starts AFTER the arrow lane (a margin, not padding), so a
+   control that scrolls off is clipped at the lane's edge and never sits under
+   the arrow — is now core/rail.css's rule for every floating rail in every
+   direction, with the lane, the arrow offset and the paper fade all derived
+   from one --rail-lane. Nothing direction-specific is left; see core/rail.css. */
 
 /* ---------------------------------------- 4. the search field at rest on a
-   360–429px phone (found verifying 2, by eye at scroll 0, not by the probe —
-   an input's placeholder is not a text node). The shared sheet floors .sfield
-   at 300px; the rail's visible lane on a 360 phone is 288px (360 − 2·36), so
-   the first control sat cut mid-word at rest — "…or neighbou", no right
-   border, the arrow immediately after — and read as the arrow sitting on the
-   search box. Below 430 the field is sized to the lane (viewport − two arrow
-   lanes − the track's two 20px pads), so it is whole at rest and the next
-   control fades at the lane edge as every other control does; a placeholder
-   that no longer fits ends in an ellipsis. From 430 up the 300px field fits
-   and nothing changes. */
-@media (max-width:429.98px){
-  .sbar[data-rail]:not([data-static]) .sbar-in > .sfield{
-    min-width:0; flex:0 0 calc(100vw - 2 * var(--lane) - 40px);
-  }
-  .sbar[data-rail]:not([data-static]) .sbar-in > .sfield input{ text-overflow:ellipsis; }
-}
+   360-429px phone. RESOLVED IN THE SHARED SHEET: core/search.css now sizes
+   .sfield from the longest placeholder it carries (--sfield-min: 330px, which
+   is the 257px of "Building, street or neighbourhood" in this direction's mono
+   plus the magnifier, the gap and two pads), and core/rail.css drops the arrows
+   — and with them the two lanes this rule was subtracting — on every control
+   strip below 760px. The field is whole at rest with the gutter it always had. */
 
 /* ==========================================================================
    ROUND 7 — CLIENT REVIEW, 11 September 2026 (fifth note)
@@ -2793,27 +2755,12 @@ dialog.fmodal::backdrop{ background:rgba(20,20,20,.5); backdrop-filter:blur(2px)
 .nstrip a[aria-current]{ color:var(--ink); box-shadow:inset 0 -2px 0 var(--blueline); }
 .nstrip a[aria-current] .tnum{ color:var(--blueline); }
 .nstrip a:focus-visible,.nstrip-track:focus-visible{ outline:2px solid var(--focus); outline-offset:-2px; }
-/* the arrows show only while the row overflows (rail.js stamps data-static
-   on the host — the nav — otherwise, and rail.css hides them). While the row
-   is a rail the nav drops its gutter and the track's box starts AFTER the
-   arrow lane (a margin, as the search bar's does since round 6), so a link
-   that scrolls off is clipped at the lane's edge and never sits under an
-   arrow; the track's own 20px of padding is what the paper fade covers. */
-.nstrip .rail-float .rail-btn{ --rail-btn:30px; }
-.nstrip .rail-float .rail-btn svg{ width:13px; }
-.nstrip .rail-float .rail-btn.prev{ left:2px; }
-.nstrip .rail-float .rail-btn.next{ right:2px; }
+/* the arrows show only while the row overflows (rail.js stamps data-static on
+   the host — the nav — otherwise, and rail.css hides them). The lane, the arrow
+   offsets and the paper fade are core/rail.css's, the same rule the filter bar
+   and every gallery use; all this strip declares is that it drops its gutter to
+   the lane while it is scrolling. */
 .nstrip-in:not([data-static]){ max-width:none; padding-left:0; padding-right:0; }
-.nstrip-in:not([data-static]) .nstrip-track{
-  margin-left:36px; margin-right:36px;
-  padding-left:20px; padding-right:20px; scroll-padding-inline:20px;
-}
-.nstrip-in:not([data-static])::before,
-.nstrip-in:not([data-static])::after{
-  content:""; position:absolute; top:0; bottom:0; width:56px; z-index:3; pointer-events:none;
-}
-.nstrip-in:not([data-static])::before{ left:0; background:linear-gradient(to right,var(--paper) 36px,transparent); }
-.nstrip-in:not([data-static])::after{ right:0; background:linear-gradient(to left,var(--paper) 36px,transparent); }
 @media (prefers-reduced-motion:reduce){ .nstrip a,.nstrip a .tnum{ transition:none; } }
 @media print{ .nstrip{ display:none !important; } }
 

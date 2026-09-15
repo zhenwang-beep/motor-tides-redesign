@@ -3,7 +3,11 @@
    native in every direction: --paper --paper-2 --ink --deep --brand --pad --ease --vh100
    and the type faces --serif / --sans (falling back sensibly). See ELEVATE.md. */
 
-.ed { --ed-display: var(--display, var(--serif, var(--sans))); --ed-mute: color-mix(in srgb, var(--ink) 62%, transparent);
+/* --ed-mute carried the eyebrows, the standfirst notes and the figure captions
+   at 62% of the ink — 3.37:1 on Clerestory's cream, 4.33:1 on Tideline's paper.
+   Both fail AA for text. It now points at the direction's own quiet stop (see
+   core/base.css), which is measured against that direction's ground. */
+.ed { --ed-display: var(--display, var(--serif, var(--sans))); --ed-mute: var(--ink-quiet);
       --ed-rule: color-mix(in srgb, var(--ink) 12%, transparent); }
 .ed .ed-eyebrow { font-size: .68rem; letter-spacing: .24em; text-transform: uppercase; color: var(--ed-mute); }
 .ed .ed-h1, .ed .ed-h2, .ed .ed-num { font-family: var(--ed-display); font-weight: 500; letter-spacing: -.018em; line-height: .96; }
@@ -29,10 +33,10 @@
   background: linear-gradient(to top, color-mix(in srgb, var(--deep, var(--ink)) 84%, transparent) 0%, color-mix(in srgb, var(--deep, var(--ink)) 42%, transparent) 42%, transparent 72%),
               linear-gradient(to bottom, color-mix(in srgb, var(--deep, var(--ink)) 52%, transparent), transparent 30%); }
 .ed-hero .ed-body { position: relative; z-index: 2; width: 100%; --focus: var(--paper); }
-.ed-hero .ed-eyebrow { color: color-mix(in srgb, var(--paper) 72%, transparent); }
+.ed-hero .ed-eyebrow { color: var(--paper-quiet); }
 .ed-hero .ed-h1 { font-size: clamp(2.5rem, 6.4vw, 6.8rem); max-width: 14ch; margin-top: 14px; }
-.ed-hero .ed-lede { margin-top: 20px; color: color-mix(in srgb, var(--paper) 86%, transparent); max-width: 50ch; }
-.ed-hero .ed-cred { position: absolute; right: var(--pad); bottom: 18px; z-index: 2; font-size: .64rem; letter-spacing: .16em; text-transform: uppercase; color: color-mix(in srgb, var(--paper) 58%, transparent); }
+.ed-hero .ed-lede { margin-top: 20px; color: var(--paper-quiet); max-width: 50ch; }
+.ed-hero .ed-cred { position: absolute; right: var(--pad); bottom: 18px; z-index: 2; font-size: .64rem; letter-spacing: .16em; text-transform: uppercase; color: var(--paper-mute); }
 
 /* ---- stats row ---- */
 .ed-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: clamp(20px, 3vw, 48px); padding-top: clamp(40px, 6vh, 72px); padding-bottom: clamp(40px, 6vh, 72px); border-bottom: 1px solid var(--ed-rule); }
@@ -62,7 +66,7 @@
 .ed-bleed::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, color-mix(in srgb, var(--deep, var(--ink)) 82%, transparent), transparent 60%); pointer-events: none; }
 .ed-bleed .ed-body { position: relative; z-index: 1; }
 .ed-bleed .ed-h2 { color: var(--paper); }
-.ed-bleed p { color: color-mix(in srgb, var(--paper) 82%, transparent); }
+.ed-bleed p { color: var(--paper-quiet); }
 
 /* ---- photo doors: the whole tile is the link ---- */
 .ed-doors { display: grid; gap: clamp(18px, 2.4vw, 32px); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }

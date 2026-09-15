@@ -124,6 +124,15 @@
   /* alpha ladder — the ONLY source of hairlines, scrims, dividers, tints */
   --ink-05: color-mix(in srgb, var(--ink) 5%, transparent);
   --ink-10: color-mix(in srgb, var(--ink) 10%, transparent);
+  /* the two AA-safe quiet stops core/search.css, core/map.css, core/editorial.css
+     and core/rail.css read for their secondary text. They used to be raw
+     percentages of --ink written into the shared sheets, which on this paper
+     landed at 2.76-5.20:1 — the facet labels, card addresses, eyebrows and the
+     rail readout all under AA. Measured on --paper #F2EFE7:
+       --ink-quiet  72% of #16242A  5.90:1   (was 62-70%, 4.33-5.54)
+       --ink-mute   66% of #16242A  4.89:1   (was 46-58%, 2.76-3.85) */
+  --ink-quiet: color-mix(in srgb, var(--ink) 72%, transparent);
+  --ink-mute:  color-mix(in srgb, var(--ink) 66%, transparent);
   --ink-30: color-mix(in srgb, var(--ink) 30%, transparent);
   --ink-60: color-mix(in srgb, var(--ink) 60%, transparent);
   --paper-05: color-mix(in srgb, var(--paper) 5%, transparent);
@@ -363,7 +372,7 @@ a:hover .arw, a:focus-visible .arw, button:hover .arw, button:focus-visible .arw
   padding: 12px 2px; font-size: var(--t-lede);
   transition: border-color 0.35s var(--ease);
 }
-.field-in::placeholder { color: var(--ink-30); }
+.field-in::placeholder { color: var(--ink-mute); }
 .field-in:focus, .sel:focus { outline: none; border-bottom-color: var(--brand); }
 .field-in:focus-visible, .sel:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
 .sel {
@@ -387,7 +396,7 @@ a:hover .arw, a:focus-visible .arw, button:hover .arw, button:focus-visible .arw
   font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0;
   padding: 10px 0 13px;
 }
-.search-in::placeholder { color: var(--ink-30); }
+.search-in::placeholder { color: var(--ink-mute); }
 .search-in:focus { outline: none; }
 .search-go {
   flex: 0 0 auto; align-self: center;
@@ -1797,7 +1806,8 @@ textarea.field-in { resize: vertical; min-height: 8em; }
 /* the text search: typed text stays sentence case; only the labels are caps */
 [data-search] .sfield { padding: 0 14px; gap: 10px; }
 [data-search] .sfield input { font-size: var(--t-sm); letter-spacing: 0.02em; }
-[data-search] .sfield input::placeholder { color: var(--ink-30); }
+/* a placeholder is text and gets no AA discount: --ink-30 measured 1.86:1 */
+[data-search] .sfield input::placeholder { color: var(--ink-mute); }
 [data-search] .sfield svg { opacity: 1; color: var(--slate); }
 
 /* the dropdown buttons: .kicker type in the square */
@@ -2503,20 +2513,10 @@ textarea.field-in { resize: vertical; min-height: 8em; }
   .reg-rent { grid-column: 2; grid-row: 2; }
 }
 
-/* 2. the search filter bar: a lane for each arrow */
-[data-search] .sbar[data-rail]:not([data-static]) .sbar-in {
-  margin-left: 46px; margin-right: 46px;
-  padding-left: 0; padding-right: 0;
-  scroll-padding-inline: 0;
-}
-[data-search] .sbar[data-rail]:not([data-static]) .rail-float::before,
-[data-search] .sbar[data-rail]:not([data-static]) .rail-float::after { width: calc(var(--pad) + 58px); }
-[data-search] .sbar[data-rail]:not([data-static]) .rail-float::before {
-  background: linear-gradient(to right, var(--paper) calc(var(--pad) + 46px), transparent);
-}
-[data-search] .sbar[data-rail]:not([data-static]) .rail-float::after {
-  background: linear-gradient(to left, var(--paper) calc(var(--pad) + 46px), transparent);
-}
+/* 2. the search filter bar: a lane for each arrow.
+   RESOLVED IN THE SHARED SHEET — core/rail.css gives every floating rail the
+   same lane, the same arrow offset (outer edge on the page gutter) and the same
+   paper fade, so this direction no longer restates any of it. */
 
 /* 3. the contact form */
 .ed-form { grid-template-columns: minmax(0, 1fr); }

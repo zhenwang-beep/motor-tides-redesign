@@ -19,14 +19,23 @@
 }
 .sbar-in::-webkit-scrollbar { display: none; }
 
+/* The field is sized from its placeholder, not from a round number. The longest
+   placeholder on the site — "Building, street or neighbourhood", 33 characters —
+   measures 257px in Register's mono at .92rem; plus the magnifier, the gap and
+   two 12px pads that is 307px of box. The old 300px floor cut it, and the floor
+   was all the field ever got, because core/rail.css loads after this sheet and
+   its `.rail-track > *{flex:0 0 auto}` overwrote the basis and the growth too.
+   rail.css now locks the shrink only, so this rule is honoured everywhere. */
 .sfield {
-  display: flex; align-items: center; gap: 9px; flex: 0 0 auto;
-  min-width: 300px; max-width: 420px; flex: 1 1 300px;
+  display: flex; align-items: center; gap: 9px;
+  --sfield-min: 330px;
+  flex: 1 1 var(--sfield-min);
+  min-width: min(var(--sfield-min), 100%); max-width: 460px;
   border: 1px solid color-mix(in srgb, var(--ink) 24%, transparent);
   padding: 0 12px; height: 42px; background: var(--paper);
 }
 .sfield input { flex: 1 1 auto; border: 0; background: none; height: 100%; font-size: .92rem; min-width: 0; }
-.sfield input::placeholder { color: color-mix(in srgb, var(--ink) 46%, transparent); }
+.sfield input::placeholder { color: var(--ink-mute); }
 .sfield svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.4; opacity: .6; flex: 0 0 auto; }
 
 .fpop { position: relative; flex: 0 0 auto; }
@@ -57,7 +66,7 @@
 .fmenu[hidden] { display: none; }
 .fmenu.right { left: auto; right: 0; }
 .fmenu h4 { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
-  color: color-mix(in srgb, var(--ink) 58%, transparent); }
+  color: var(--ink-mute); }
 .fmenu-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px;
   padding-top: 11px; border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent); }
 
@@ -68,7 +77,7 @@
 .opt:hover { background: color-mix(in srgb, var(--ink) 5%, transparent); }
 .opt input { flex: 0 0 auto; width: 16px; height: 16px; accent-color: var(--ink); cursor: pointer; }
 .opt .cnt { margin-left: auto; font-size: .78rem; font-variant-numeric: tabular-nums;
-  color: color-mix(in srgb, var(--ink) 52%, transparent); }
+  color: var(--ink-mute); }
 .opt.off { opacity: .42; }
 
 /* segmented pills, for beds and baths */
@@ -86,7 +95,7 @@
 
 /* price / sq ft ranges */
 .rng { display: grid; grid-template-columns: 1fr auto 1fr; gap: 9px; align-items: center; }
-.rng span { font-size: .78rem; color: color-mix(in srgb, var(--ink) 52%, transparent); }
+.rng span { font-size: .78rem; color: var(--ink-mute); }
 .rng select, .sel {
   width: 100%; height: 40px; padding: 0 10px; font-size: .88rem;
   border: 1px solid color-mix(in srgb, var(--ink) 24%, transparent);
@@ -98,17 +107,24 @@
 }
 
 .lnk-clear { font-size: .78rem; letter-spacing: .04em; text-decoration: underline; text-underline-offset: 3px;
-  color: color-mix(in srgb, var(--ink) 62%, transparent); }
+  color: var(--ink-quiet); }
 .lnk-clear:hover { color: var(--ink); }
 .btn-apply { background: var(--ink); color: var(--paper); padding: 9px 18px; font-size: .74rem;
   letter-spacing: .14em; text-transform: uppercase; }
 
 /* ───────────────────────────── chips + count ───────────────────────────── */
+/* The row wraps, so nothing here should ever be wider than the row itself —
+   but `.sright .sel { min-width: 190px }` plus the SORT label plus the row's
+   two --pad gutters is 2px over a 390px phone, and the row overflowed inside
+   its own box. Every child is allowed to shrink (a flex item's min-width is
+   auto, i.e. its content, unless you say otherwise) and on a phone the sort
+   control takes its own full line rather than fighting the count for one. */
 .sresults {
   display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
   padding: 14px var(--pad);
   border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
 }
+.sresults > * { min-width: 0; max-width: 100%; }
 .scount { font-size: .92rem; }
 .scount b { font-variant-numeric: tabular-nums; font-weight: 500; }
 .chips { display: flex; flex-wrap: wrap; gap: 7px; }
@@ -120,11 +136,11 @@
 .chip-f button { display: grid; place-items: center; width: 17px; height: 17px; opacity: .6; }
 .chip-f button:hover { opacity: 1; }
 .chip-f svg { width: 9px; height: 9px; stroke: currentColor; stroke-width: 1.7; }
-.snote { flex-basis: 100%; order: 9; font-size: .74rem; letter-spacing: .04em; color: color-mix(in srgb, var(--ink) 52%, transparent); }
+.snote { flex-basis: 100%; order: 9; font-size: .74rem; letter-spacing: .04em; color: var(--ink-mute); }
 .card-ad b { font-weight: 500; color: var(--ink); }
 .sright { margin-left: auto; display: flex; align-items: center; gap: 10px; }
 .sright label { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
-  color: color-mix(in srgb, var(--ink) 56%, transparent); }
+  color: var(--ink-mute); }
 .sright .sel { width: auto; min-width: 190px; height: 38px; }
 
 /* view toggle, mobile only */
@@ -174,20 +190,20 @@
 .card-fav[aria-pressed="true"] svg { fill: #16242A; }
 .card-b { display: grid; gap: 5px; padding: 13px 2px 0; }
 .card-price { font-size: 1.12rem; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
-.card-fx { font-size: .84rem; color: color-mix(in srgb, var(--ink) 68%, transparent); font-variant-numeric: tabular-nums; }
+.card-fx { font-size: .84rem; color: var(--ink-quiet); font-variant-numeric: tabular-nums; }
 .card-nm { font-size: .96rem; }
 .card-nm a::after { content: ""; position: absolute; inset: 0; } /* whole card is the link target */
-.card-ad { font-size: .8rem; color: color-mix(in srgb, var(--ink) 58%, transparent); }
+.card-ad { font-size: .8rem; color: var(--ink-mute); }
 .card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px; }
 .card-tags span { font-size: .64rem; letter-spacing: .1em; text-transform: uppercase;
   border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); padding: 3px 7px;
-  color: color-mix(in srgb, var(--ink) 64%, transparent); }
+  color: var(--ink-mute); }
 
 /* ───────────────────────────── empty state ───────────────────────────── */
 .sempty { padding: 64px 0; display: grid; gap: 18px; max-width: 56ch; }
 .sempty[hidden] { display: none; }
 .sempty h3 { font-size: 1.5rem; line-height: 1.2; }
-.sempty p { color: color-mix(in srgb, var(--ink) 70%, transparent); }
+.sempty p { color: var(--ink-quiet); }
 .sempty form { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 6px; }
 .sempty input { flex: 1 1 220px; height: 44px; padding: 0 13px;
   border: 1px solid color-mix(in srgb, var(--ink) 24%, transparent); background: var(--paper); }
@@ -205,6 +221,40 @@ dialog.fmodal {
 }
 dialog.fmodal[open] { display: flex; flex-direction: column; }
 dialog.fmodal::backdrop { background: color-mix(in srgb, var(--ink) 52%, transparent); backdrop-filter: blur(3px); }
+
+/* ---- the modal's two gestures -------------------------------------------
+   A plain <dialog> has no transition in either direction: [open] flips and the
+   box is simply there, and .close() removes it from the top layer in the same
+   frame, so a closing animation never gets to run. Both halves are written out.
+
+   IN   the box lifts 18px and settles, the backdrop fades — --t-nav on
+        --ease-ui, the quint-out this site already spends on anything under the
+        pointer. The same pair of values the Motor Tides reference uses for
+        tide-dialog-in (.4s cubic-bezier(.22,1,.36,1)).
+   OUT  shorter and on an ease-IN curve, so the box leaves without loitering:
+        --t-ui on --ease-out. core/search.js stamps [data-closing], waits for
+        the animation to end (with a timeout so a dropped animationend event
+        can never strand the dialog open) and only then calls .close(), so
+        Escape, the backdrop click, Close and Apply all keep their behaviour
+        and all four now animate.                                            */
+@keyframes wr-fmodal-in   { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes wr-fmodal-out  { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(12px); } }
+@keyframes wr-fbackdrop-in  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes wr-fbackdrop-out { from { opacity: 1; } to { opacity: 0; } }
+
+dialog.fmodal[open] {
+  animation: wr-fmodal-in var(--t-nav, .4s) var(--ease-ui, cubic-bezier(.22,1,.36,1)) both;
+}
+dialog.fmodal[open]::backdrop {
+  animation: wr-fbackdrop-in var(--t-nav, .4s) var(--ease, cubic-bezier(.22,.61,.36,1)) both;
+}
+dialog.fmodal[open][data-closing] {
+  animation: wr-fmodal-out var(--t-ui, .28s) var(--ease-out, cubic-bezier(.4,0,1,1)) both;
+  pointer-events: none;
+}
+dialog.fmodal[open][data-closing]::backdrop {
+  animation: wr-fbackdrop-out var(--t-ui, .28s) var(--ease-out, cubic-bezier(.4,0,1,1)) both;
+}
 .fmodal-h { display: flex; align-items: center; justify-content: space-between; gap: 14px;
   padding: 20px 24px; border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
   flex: 0 0 auto; background: var(--paper); }
@@ -221,11 +271,17 @@ dialog.fmodal::backdrop { background: color-mix(in srgb, var(--ink) 52%, transpa
 .fmodal-b::-webkit-scrollbar-track { background: transparent; }
 .fgrp { display: grid; gap: 11px; }
 .fgrp h3 { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
-  color: color-mix(in srgb, var(--ink) 58%, transparent); }
+  color: var(--ink-mute); }
 .fgrid { display: grid; gap: 2px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
 .fmodal-f { display: flex; align-items: center; justify-content: space-between; gap: 14px;
   padding: 16px 24px; border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
   flex: 0 0 auto; background: var(--paper); }
+
+@media (max-width: 560px) {
+  .sresults .sright { margin-left: 0; flex: 1 1 100%; }
+  .sresults .sright .sel { flex: 1 1 auto; width: auto; min-width: 0; }
+  .sresults .vtog { flex: 0 0 auto; }
+}
 
 @media (max-width: 1059px) {
   .vtog { display: flex; }
@@ -236,20 +292,23 @@ dialog.fmodal::backdrop { background: color-mix(in srgb, var(--ink) 52%, transpa
 }
 @media (prefers-reduced-motion: reduce) {
   .card, .card-img img, .card-fav, .fbtn, .seg, .opt { transition: none; }
+  /* the choreography goes, the composition stays: the dialog still crossfades
+     so it is clear that something arrived, it just does not travel. */
+  dialog.fmodal[open], dialog.fmodal[open][data-closing] {
+    animation-name: wr-fbackdrop-in; animation-duration: .12s;
+  }
+  dialog.fmodal[open][data-closing] { animation-name: wr-fbackdrop-out; }
+  dialog.fmodal[open]::backdrop, dialog.fmodal[open][data-closing]::backdrop {
+    animation-duration: .12s;
+  }
 }
 
 /* ───────────────────────────── filter bar as a rail ─────────────────────────────
-   When the bar overflows, rail.js adds arrows. They must never sit over a control: the
-   track gets end padding for them and a paper fade so scrolled controls dissolve rather
-   than being sliced by an arrow. On a wide screen the rail is static and none of this
-   applies (rail.js sets data-static and the arrows are hidden). */
-.sbar[data-rail]:not([data-static]) .sbar-in { padding-left: 46px; padding-right: 46px; scroll-padding-inline: 46px; }
-.sbar[data-rail]:not([data-static]) .rail-float::before,
-.sbar[data-rail]:not([data-static]) .rail-float::after {
-  content: ""; position: absolute; top: 0; bottom: 0; width: 84px; z-index: 3; pointer-events: none;
-}
-.sbar[data-rail]:not([data-static]) .rail-float::before { left: 0; background: linear-gradient(to right, var(--paper) var(--pad), var(--paper) calc(var(--pad) + 34px), transparent); }
-.sbar[data-rail]:not([data-static]) .rail-float::after { right: 0; background: linear-gradient(to left, var(--paper) var(--pad), var(--paper) calc(var(--pad) + 34px), transparent); }
-.sbar .rail-float .rail-btn { --rail-btn: 34px; z-index: 4; }
-.sbar .rail-float .rail-btn.prev { left: calc(var(--pad) + 4px); }
-.sbar .rail-float .rail-btn.next { right: calc(var(--pad) + 4px); }
+   The lane, the arrow position and the paper fade are all core/rail.css's now —
+   one rule for every rail on the site, so the bar cannot drift from the
+   neighbourhood strip or the gallery again. What is left here is the one thing
+   specific to THIS rail: the bar is a full-bleed sticky band that carries the
+   page gutter itself, so while it is scrolling it hands that gutter over to the
+   arrow lane instead of doubling it. */
+.sbar[data-rail]:not([data-static]) { padding-left: 0; padding-right: 0; }
+.sbar[data-rail]:not([data-static]) .sbar-in { max-width: none; }

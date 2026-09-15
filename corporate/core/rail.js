@@ -24,6 +24,15 @@
   function pad(n) { return n < 10 ? '0' + n : String(n); }
 
   W.rail = function (host) {
+    /* Resolve to the element that actually carries [data-rail]. A caller may hand
+       us the wrapper instead (register's neighbourhood strip passes [data-nstrip],
+       whose [data-rail] is the <nav> inside it): every state flag this module sets
+       and every CSS hook that reads it keys off [data-rail], so a mismatch parks
+       data-static on an element no rule is watching, and a row that fits keeps two
+       ghosted, permanently-disabled arrows for the life of the page. */
+    if (host && host.hasAttribute && !host.hasAttribute('data-rail')) {
+      host = (host.closest && host.closest('[data-rail]')) || host.querySelector('[data-rail]') || host;
+    }
     var track = host.querySelector('[data-rail-track]');
     if (!track) return;
     var prev = host.querySelector('[data-rail-prev]');
@@ -128,6 +137,13 @@
       if (!img.complete) img.addEventListener('load', queue, { once: true });
     });
     if (window.ResizeObserver) new ResizeObserver(queue).observe(track);
+    /* The first sync runs before the webfonts have swapped, and a rail that is
+       one word away from fitting reads as scrolling at that moment and keeps two
+       ghosted, permanently-disabled arrows for the life of the page. Re-measure
+       once the fonts are in and once everything has loaded; both are cheap and
+       both are idempotent. */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(queue).catch(function () {});
+    addEventListener('load', queue);
 
     sync();
     return { sync: sync, go: go };

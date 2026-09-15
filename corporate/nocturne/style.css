@@ -23,6 +23,16 @@
   --c56:color-mix(in srgb,var(--cream) 56%,transparent);
   --c40:color-mix(in srgb,var(--cream) 40%,transparent);
   --c24:color-mix(in srgb,var(--cream) 24%,transparent);
+  /* the two AA-safe quiet stops the shared core reads for its secondary text.
+     On a near-black ground a percentage of a LIGHT ink runs the other way: the
+     same 52-58% that measured 2.68-3.07:1 on Clerestory's cream measures
+     4.87-5.80:1 here, so this is the one direction the old numbers nearly
+     passed. Pinned to the existing cream ladder so the whole sheet stays on
+     one set of stops. Measured on --night #0F0E0C:
+       --ink-quiet  --c72  8.44:1
+       --ink-mute   --c56  5.48:1 */
+  --ink-quiet:var(--c72);
+  --ink-mute:var(--c56);
   --line:color-mix(in srgb,var(--cream) 14%,transparent);
   --line-2:color-mix(in srgb,var(--cream) 8%,transparent);
   /* the single accent */
@@ -562,7 +572,7 @@ body.search-page .hd{--hd-h:52px;}
 .opt,.seg{color:var(--c86);}
 .seg{border:1px solid var(--c24);border-radius:0;}
 .seg:has(input:checked){background:var(--brass);color:var(--brass-ink);border-color:var(--brass);}
-.cnt{color:var(--c40);}
+.cnt{color:var(--ink-mute);}
 .sel{background:var(--night);color:var(--cream);border:1px solid var(--c24);border-radius:0;}
 .btn-apply{background:var(--brass);color:var(--brass-ink);border-radius:0;}
 .lnk-clear{color:var(--c56);}
