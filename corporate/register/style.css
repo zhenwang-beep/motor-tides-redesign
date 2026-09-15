@@ -1,0 +1,3034 @@
+/* ============================================================================
+   WISEMAN RESIDENTIAL — DIRECTION "THE PLATES"  (folder: register/)
+   A large-format photographic plate book of Los Angeles with an index rail.
+   The spine is the surveyor's register it began as — permanent numbers 001-072,
+   neighbourhood grouping, sort-don't-filter, the specimen plate, the ruler — but
+   the ratio is inverted: the plate is the page and the index is the second
+   reading (?view=index). Built on core/base.css, core/map.css — never duplicate
+   what base already does.
+
+   ── COMPONENT INDEX ───────────────────────────────────────────────────────
+   FURNITURE (identical on all nine pages; copy from index.html)
+     .hd .brand .hnav .mbtn                header shell skinned over base.css
+     .mnav .mnav-in .mnav-list .mfoot      mobile menu (base shell)
+     .pt .ptmark                           page-transition curtain (base shell)
+     .colophon .colo-grid .colo-col
+       .colo-h .colo-list .colo-legal      footer
+   PAGE HEAD
+     .masthead .mast-eyebrow .mast-title
+       .mast-rule .mast-date .mast-search  the ruled masthead lockup
+     .search .search-field .search-btn
+       .ta .ta-no .ta-nm .ta-sub .ta-empty typeahead (WR.typeahead)
+     .pagehead .pagehead-no .pagehead-h
+       .pagehead-sub                       the masthead's smaller sibling; use
+                                           on every page EXCEPT index.html
+   SIGNATURE MECHANIC
+     .nstrip .nstrip-in .nstrip-track      the sticky neighbourhood strip that
+       .nstrip a[data-nmark]               replaced the ruler (round 7): seven
+       .nstrip a[aria-current]             area links + counts, lit on scroll
+     .plate .plate-frame .plate-img
+       .plate-cap .plate-no .plate-name
+       .plate-street .plate-link           the specimen plate (view transition)
+   THE REGISTER
+     .reg .reg-body .reg-block .reg-head
+       .reg-head-label .reg-head-count
+       .reg-head-sub .reg-cols .reg-rows
+       .reg-row .row-link .row-no
+       .row-thumb .row-body .row-name
+       .row-street .row-figs .row-beds
+       .row-rent .row-flag .reg-note
+   INDEX / TABLES
+     .tally .tally-figs .tally-fig
+       .tally-index .tix .tix-no .tix-name
+       .tix-sub .tix-count                 the count, stated flat
+     .ledger .led-row .led-fig .led-body
+       .led-src                            numbered facts with citations
+     .spec .spec-row .spec-k .spec-v       building/neighbourhood fact table
+     .index-links .ixl .ixl-no .ixl-h
+       .ixl-p                              big numbered links (residents, etc.)
+   EDITORIAL
+     .essay .essay-kicker .essay-h .prose
+       .measure(base) .cite .chip .avail-line
+   CONTROLS
+     .btn .btn-ink .btn-flag .btn-row
+     .sortbar .sort-btn                    [data-sort] controls
+     .views .view-btn .view-pane           ?view=register|atlas|plates
+     .field .label .input .select .check
+       .filters .filter-group .filter-foot availability page only
+   MAP
+     .mapbox .mapbleed .map-foot .map-key
+       .map-dir .rail-fig .regmap        the real embedded map (core/map.*)
+     .atlas-svg .atlas-grid .pin
+       .pin-hit .pin-no                  drawn-SVG fallback only
+   GRID / PLATES VIEW
+     .plates-grid .plate-card .pc-frame
+       .pc-no .pc-name .pc-sub
+   THE BOOK  (see "THE PLATES — the book layer" below)
+     .hero .run .pgrid .pl (buildings.html ?view=plates)
+   UTILITY
+     .mono .caps .muted .rule .hair .flagtext .over-img .stack
+
+   ── RULES OTHER BUILDERS MUST MATCH ───────────────────────────────────────
+   1. Two families only: Libre Franklin (--sans) and IBM Plex Mono (--mono).
+      Every numeral that sits in a column carries .tnum.
+   2. Radius is 0 everywhere. No shadows except the header's base hairline.
+   3. --flag (terracotta) is reserved for leasing/availability signals. Nothing
+      else may use it. --blueline is the link and active-state colour.
+   4. Longhand padding on anything carrying .wrap (see CONVENTIONS.md §2).
+   5. Every vh value has an svh twin behind @supports.
+   6. One easing curve: var(--ease), inherited from base.css.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- tokens */
+:root{
+  /* palette */
+  --paper:#FBFAF7;
+  --paper-2:#EFEDE6;
+  --ink:#141414;
+  --rule:#B9B4A8;
+  --muted:#6A665C;
+  --blueline:#2E4A7D;
+  --flag:#C1502E;
+  --deep:#141414;
+  --brand:#169BAC;
+
+  /* alpha ladder — static rgba first, color-mix upgrade below */
+  --ink-92:rgba(20,20,20,.92);
+  --ink-70:rgba(20,20,20,.70);
+  --ink-52:rgba(20,20,20,.52);
+  --ink-32:rgba(20,20,20,.32);
+  --ink-18:rgba(20,20,20,.18);
+  --ink-10:rgba(20,20,20,.10);
+  --ink-06:rgba(20,20,20,.06);
+  --ink-03:rgba(20,20,20,.03);
+  --paper-92:rgba(251,250,247,.92);
+  --paper-70:rgba(251,250,247,.70);
+  --paper-40:rgba(251,250,247,.40);
+  --blue-14:rgba(46,74,125,.14);
+  --blue-08:rgba(46,74,125,.08);
+  --flag-14:rgba(193,80,46,.14);
+  --rule-60:rgba(185,180,168,.60);
+
+  --focus:var(--blueline);
+
+  /* type */
+  --sans:"Libre Franklin","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --fs-xxs:.625rem;    /* 10px  strip counts, column captions           */
+  --fs-xs:.6875rem;    /* 11px  gutter numbers, nav, buttons, kickers   */
+  --fs-s:.75rem;       /* 12px  meta, captions, legend                  */
+  --fs-sm:.8125rem;    /* 13px  row figures, footer links               */
+  --fs-b:.9375rem;     /* 15px  base UI / row names                     */
+  --fs-m:1.0625rem;    /* 17px  prose                                   */
+  --fs-l:1.25rem;      /* 20px  lead paragraph                          */
+  --fs-xl:clamp(1.55rem,2.8vw,2.3rem);    /* essay headings             */
+  --fs-mast:clamp(1.75rem,4.4vw,3.25rem); /* masthead (inner pages)     */
+  --fs-run:clamp(2.2rem,5.6vw,5.5rem);    /* a neighbourhood run head   */
+  --fs-hero:clamp(2.6rem,7.2vw,8.5rem);   /* the opening plate          */
+  --fs-cap:.68rem;                        /* every plate caption        */
+  --tr-cap:.22em;                         /* and its tracking           */
+  --lh-tight:1.08;
+  --lh-snug:1.3;
+  --lh-body:1.62;
+  --tr-caps:.14em;     /* uppercase tracking */
+
+  /* metrics */
+  --maxw:1560px;
+  --edge:max(var(--pad),calc((100% - var(--maxw)) / 2 + var(--pad)));
+  --hd-h:62px;
+  --band-h:0px;              /* the band under the header: the neighbourhood strip's height where the page has one (round 7, at the foot) */
+  --strip-h:38vh;
+  --plate-w:min(46vw,720px);
+  --plate-gap:clamp(28px,3.4vw,56px);
+  --col-no:clamp(38px,3.6vw,58px);
+  --col-street:minmax(112px,.5fr);
+  --col-beds:80px;
+  --col-rent:92px;
+  --col-figs:calc(var(--col-beds) + var(--col-rent) + var(--sp-3));
+  --row-h:47px;   /* measured; keeps contain-intrinsic-size honest */
+  --hair:1px;
+
+  /* rhythm */
+  --sp-1:6px;
+  --sp-2:12px;
+  --sp-3:20px;
+  --sp-4:32px;
+  --sp-5:clamp(40px,5vw,68px);
+  --sp-6:clamp(64px,8vw,116px);
+  --sp-7:clamp(96px,14vh,220px);   /* section rhythm — generous is the point */
+  --plate-gap-v:clamp(56px,9vh,132px);
+
+  /* the map belongs to the palette */
+  --map-tint:var(--paper);
+}
+@supports (color:color-mix(in srgb,#000 50%,#fff)){
+  :root{
+    --ink-92:color-mix(in srgb,var(--ink) 92%,transparent);
+    --ink-70:color-mix(in srgb,var(--ink) 70%,transparent);
+    --ink-52:color-mix(in srgb,var(--ink) 52%,transparent);
+    --ink-32:color-mix(in srgb,var(--ink) 32%,transparent);
+    --ink-18:color-mix(in srgb,var(--ink) 18%,transparent);
+    --ink-10:color-mix(in srgb,var(--ink) 10%,transparent);
+    --ink-06:color-mix(in srgb,var(--ink) 6%,transparent);
+    --ink-03:color-mix(in srgb,var(--ink) 3%,transparent);
+    --paper-92:color-mix(in srgb,var(--paper) 92%,transparent);
+    --paper-70:color-mix(in srgb,var(--paper) 70%,transparent);
+    --paper-40:color-mix(in srgb,var(--paper) 40%,transparent);
+    --blue-14:color-mix(in srgb,var(--blueline) 14%,transparent);
+    --blue-08:color-mix(in srgb,var(--blueline) 8%,transparent);
+    --flag-14:color-mix(in srgb,var(--flag) 14%,transparent);
+    --rule-60:color-mix(in srgb,var(--rule) 60%,transparent);
+  }
+}
+/* every vh gets an svh twin — mobile URL bars change vh mid-scroll */
+@supports (height:38svh){ :root{ --strip-h:38svh; } }
+
+@media (max-width:860px){ :root{ --row-h:66px; } }
+@media (max-width:640px){
+  :root{ --row-h:74px; --col-no:44px; --col-rent:78px; --col-beds:72px; }
+}
+
+/* ------------------------------------------------------------- typography */
+body{
+  font-family:var(--sans);
+  font-size:var(--fs-b);
+  font-weight:400;
+  line-height:var(--lh-body);
+  letter-spacing:.002em;
+  background:var(--paper);
+  color:var(--ink);
+}
+h1,h2,h3,h4{ font-weight:600; line-height:var(--lh-snug); letter-spacing:-.012em; }
+a{ color:inherit; }
+.prose a,
+.colo-list a,
+.led-body a{ color:var(--blueline); text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:.18em; text-decoration-color:var(--blue-14); transition:text-decoration-color .3s var(--ease); }
+.prose a:hover,.colo-list a:hover,.led-body a:hover{ text-decoration-color:currentColor; }
+
+.mono{ font-family:var(--mono); font-variant-numeric:tabular-nums; font-feature-settings:"tnum" 1; }
+.caps{ text-transform:uppercase; letter-spacing:var(--tr-caps); }
+.muted{ color:var(--muted); }
+.flagtext{ color:var(--flag); }
+.rule{ border:0; border-top:var(--hair) solid var(--rule); }
+.hair{ border:0; border-top:var(--hair) solid var(--ink-18); }
+.stack > * + *{ margin-top:var(--sp-3); }
+
+/* display type over photography: stroke, never an offset shadow */
+.over-img{ color:var(--paper); -webkit-text-stroke:.6px rgba(20,20,20,.5); paint-order:stroke fill; }
+@media (max-width:640px){ .over-img{ -webkit-text-stroke-width:.4px; } }
+@supports not (-webkit-text-stroke:1px currentColor){
+  .over-img{ text-shadow:0 0 12px rgba(20,20,20,.55),0 1px 2px rgba(20,20,20,.4); }
+}
+
+/* the one accent chip — unverified copy renders visibly, never as fiction */
+.chip{
+  display:inline-block; font-family:var(--mono); font-size:var(--fs-xxs);
+  text-transform:uppercase; letter-spacing:.1em; color:var(--blueline);
+  border:var(--hair) solid var(--blue-14);
+  padding:1px 6px 2px; vertical-align:.09em; white-space:nowrap;
+}
+.cite{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); letter-spacing:.01em; }
+
+/* ------------------------------------------------------------ header skin */
+.hd{
+  padding-top:12px; padding-bottom:12px;
+  color:var(--ink);
+  background:transparent;
+}
+.hd::after{
+  content:""; position:absolute; left:var(--pad); right:var(--pad); bottom:0; height:var(--hair);
+  background:var(--ink-18); opacity:0; transition:opacity .3s var(--ease);
+}
+.hd.frost::after{ opacity:0; }
+.hd.frost{ background:var(--paper-92); box-shadow:0 var(--hair) 0 var(--ink-18); }
+@supports not (backdrop-filter:blur(2px)){ .hd.frost{ background:var(--paper); } }
+.hd.inv{ color:var(--paper); }
+.hd.inv.frost{ background:rgba(20,20,20,.88); box-shadow:0 var(--hair) 0 rgba(251,250,247,.16); }
+@supports (color:color-mix(in srgb,#000 50%,#fff)){
+  .hd.inv.frost{ background:color-mix(in srgb,var(--deep) 88%,transparent); }
+}
+
+.brand{ gap:10px; height:38px; }
+.brand svg{ width:22px; height:22px; color:var(--brand); fill:currentColor; }
+.hd.inv .brand svg{ color:var(--paper); }
+.brand b{ font-weight:600; font-size:var(--fs-xs); letter-spacing:.24em; }
+.brand .brand-sub{
+  font-family:var(--mono); font-size:var(--fs-xxs); letter-spacing:.1em;
+  color:var(--muted); text-transform:uppercase; padding-left:10px; margin-left:2px;
+  border-left:var(--hair) solid var(--rule);
+}
+.hd.inv .brand .brand-sub{ color:var(--paper-70); border-left-color:rgba(251,250,247,.28); }
+@media (max-width:1120px){ .brand .brand-sub{ display:none; } }
+
+.hnav{ gap:clamp(12px,1.7vw,26px); }
+.hnav a{ font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.1em; }
+.hnav a::after{ background:currentColor; }
+.hnav a[aria-current]{ color:var(--blueline); }
+.hd.inv .hnav a[aria-current]{ color:var(--paper); }
+.hnav .hnav-flag{ color:var(--flag); }
+.mbtn{ width:38px; height:38px; }
+
+/* ------------------------------------------------------------- mobile menu */
+.mnav{ background:var(--deep); color:var(--paper); }
+.mnav-in{ width:100%; max-width:640px; }
+.mnav-list{ list-style:none; }
+.mnav a{
+  font-family:var(--sans); font-weight:500; text-transform:uppercase;
+  font-size:clamp(1.45rem,6.4vw,2.2rem); letter-spacing:-.005em; line-height:1.24;
+  padding-top:7px; padding-bottom:7px;
+  display:grid; grid-template-columns:3.4ch 1fr; align-items:baseline; gap:14px;
+}
+.mnav a .mn-no{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--paper-40); letter-spacing:.08em; }
+.mnav a:hover .mn-no,.mnav a:focus-visible .mn-no{ color:var(--paper); }
+.mnav .mfoot{
+  font-family:var(--mono); font-size:var(--fs-s); letter-spacing:.04em;
+  color:var(--paper-70); opacity:1; border-top:var(--hair) solid rgba(251,250,247,.2);
+  padding-top:18px; margin-top:34px;
+}
+.mnav .mfoot a{ display:inline; font-size:inherit; letter-spacing:inherit; text-transform:none; padding:0; }
+
+/* -------------------------------------------------------------- curtain */
+.pt{ background:var(--deep); }
+.pt .ptmark svg{ width:30px; height:30px; color:var(--paper); fill:currentColor; }
+.pt .ptmark span{
+  font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.24em;
+  text-transform:uppercase; color:var(--paper-70);
+}
+
+/* ------------------------------------------------------------- masthead */
+.masthead{
+  padding-top:calc(var(--hd-h) + clamp(34px,6vw,72px));
+  padding-bottom:var(--sp-5);
+}
+.mast-eyebrow{
+  font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase;
+  letter-spacing:var(--tr-caps); color:var(--muted);
+  display:flex; flex-wrap:wrap; gap:6px 18px; align-items:baseline;
+  padding-bottom:var(--sp-3);
+}
+.mast-title{
+  font-size:var(--fs-mast); font-weight:600; line-height:var(--lh-tight);
+  letter-spacing:-.022em; text-transform:uppercase; max-width:22ch;
+  text-wrap:balance;
+}
+.nb{ white-space:nowrap; }
+.mast-title .mt-2{ display:block; font-weight:300; color:var(--ink-70); letter-spacing:-.018em; }
+.mast-rule{ border:0; border-top:var(--hair) solid var(--ink); margin-top:var(--sp-4); }
+.mast-date{
+  display:flex; flex-wrap:wrap; gap:4px 22px; align-items:baseline;
+  font-family:var(--mono); font-size:var(--fs-s); color:var(--muted);
+  padding-top:var(--sp-2); padding-bottom:var(--sp-4);
+}
+.mast-date b{ font-weight:500; color:var(--ink); }
+
+/* --------------------------------------------------------------- search */
+.search{ position:relative; max-width:520px; }
+.search-row{ display:flex; align-items:stretch; border-bottom:var(--hair) solid var(--ink); }
+.search-field{
+  flex:1 1 auto; min-width:0; background:transparent; border:0; outline-offset:4px;
+  font-family:var(--mono); font-size:var(--fs-sm); letter-spacing:.01em;
+  padding-top:10px; padding-bottom:10px; padding-left:0; padding-right:12px;
+}
+.search-field::placeholder{ color:var(--ink-32); }
+.search-btn{
+  flex:0 0 auto; font-family:var(--mono); font-size:var(--fs-xs);
+  text-transform:uppercase; letter-spacing:.12em; color:var(--muted);
+  padding-left:14px; padding-right:2px;
+}
+.search-btn:hover,.search-btn:focus-visible{ color:var(--blueline); }
+.ta{
+  position:absolute; left:0; right:0; top:calc(100% + 6px); z-index:40;
+  list-style:none; background:var(--paper); border:var(--hair) solid var(--ink-18);
+  box-shadow:0 12px 28px rgba(20,20,20,.08); max-height:56vh; overflow-y:auto;
+}
+@supports (max-height:56svh){ .ta{ max-height:56svh; } }
+.ta li + li{ border-top:var(--hair) solid var(--ink-10); }
+.ta a{
+  display:grid; grid-template-columns:4.2ch minmax(0,1fr) auto; gap:12px; align-items:baseline;
+  padding:9px 12px;
+}
+.ta a:hover,.ta a:focus-visible{ background:var(--blue-08); }
+.ta-no{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.ta-nm{ font-size:var(--fs-sm); }
+.ta-sub{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.ta-empty{ padding:10px 12px; font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+
+/* ------------------------------------------------ the count, stated flat */
+.tally{ padding-top:var(--sp-4); padding-bottom:var(--sp-5); }
+.tally-figs{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:var(--hair) solid var(--ink); border-bottom:var(--hair) solid var(--rule);
+}
+.tally-fig{ padding-top:14px; padding-bottom:16px; padding-right:16px; }
+.tally-fig + .tally-fig{ border-left:var(--hair) solid var(--rule-60); padding-left:16px; }
+.tally-fig dt{
+  font-family:var(--mono); font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.12em; color:var(--muted);
+}
+.tally-fig dd{
+  font-family:var(--mono); font-size:clamp(1.5rem,3.6vw,2.4rem); font-weight:400;
+  line-height:1.1; letter-spacing:-.02em; padding-top:6px;
+}
+.tally-fig dd small{ font-size:var(--fs-s); letter-spacing:.02em; color:var(--muted); padding-left:6px; }
+@media (max-width:760px){
+  .tally-figs{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .tally-fig:nth-child(odd){ border-left:0; padding-left:0; }
+  .tally-fig:nth-child(n+3){ border-top:var(--hair) solid var(--rule-60); }
+}
+
+.tally-index{ list-style:none; padding-top:var(--sp-4); }
+.tix a{
+  display:grid; grid-template-columns:var(--col-no) minmax(0,1fr) minmax(0,.85fr) 5.5ch;
+  align-items:baseline; gap:var(--sp-3);
+  padding-top:9px; padding-bottom:9px;
+  border-bottom:var(--hair) solid var(--rule-60);
+}
+.tix a:hover,.tix a:focus-visible{ background:var(--ink-03); }
+.tix a:hover .tix-name,.tix a:focus-visible .tix-name{ color:var(--blueline); }
+.tix-no{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.tix-name{ font-size:var(--fs-b); font-weight:500; transition:color .25s var(--ease); }
+.tix-sub{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.tix-count{ font-family:var(--mono); font-size:var(--fs-sm); text-align:right; }
+@media (max-width:760px){
+  .tix a{ grid-template-columns:var(--col-no) minmax(0,1fr) 5.5ch; gap:12px; }
+  .tix-sub{ display:none; }
+}
+
+/* ===========================================================================
+   SIGNATURE MECHANIC 2 OF 2 — THE SPECIMEN PLATE
+   >=1000px  fixed in the right third, swaps on row hover OR row focus
+   <1000px   a sticky 38svh strip above the list
+   <640px    gone; every row carries a 56px thumbnail instead
+   ========================================================================= */
+.plate{
+  position:relative;
+  background:var(--paper);
+}
+.plate-frame{
+  position:relative; overflow:clip; background:var(--paper-2);
+  aspect-ratio:4 / 3;
+}
+@supports not (aspect-ratio:4 / 3){ .plate-frame{ height:340px; } }
+.plate-img{ width:100%; height:100%; object-fit:cover; }
+.plate-cap{
+  display:grid; grid-template-columns:auto minmax(0,1fr); align-items:baseline;
+  column-gap:12px; row-gap:2px;
+  border-top:var(--hair) solid var(--ink); padding-top:10px; margin-top:12px;
+}
+.plate-no{ font-family:var(--mono); font-size:var(--fs-sm); color:var(--blueline); grid-row:1 / 3; }
+.plate-name{ font-size:var(--fs-m); font-weight:500; line-height:1.25; }
+.plate-street{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); grid-column:2; }
+.plate-foot{
+  display:flex; justify-content:space-between; gap:12px;
+  font-family:var(--mono); font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.12em; color:var(--ink-32); padding-top:10px;
+}
+
+/* >=1280px the plate travels inside .rail-fig, which is the sticky second
+   column of .reg (see "the rail figure" below). Below that
+   it is a sticky strip above the list, because a half-viewport figure leaves the
+   register rows too narrow to set Building and Street side by side. */
+@media (max-width:1279.98px){
+  .plate{
+    position:sticky; top:calc(var(--hd-h) + var(--band-h));
+    z-index:60; display:flex; align-items:stretch; gap:16px;
+    height:var(--strip-h);
+    border-bottom:var(--hair) solid var(--ink);
+    padding-top:10px; padding-bottom:10px;
+  }
+  .plate-frame{ flex:0 0 46%; aspect-ratio:auto; height:100%; }
+  .plate-cap{ border-top:0; margin-top:0; padding-top:2px; align-content:start; }
+  .plate-foot{ display:none; }
+}
+@media (max-width:640px){ .plate{ display:none; } }
+@media (prefers-reduced-motion:reduce){ .plate{ transition:none; } }
+
+/* same-document view transition on the plate — guarded in app.js as well */
+@supports (view-transition-name:none){
+  .plate-img{ view-transition-name:wr-plate-img; }
+  .plate-no{ view-transition-name:wr-plate-no; }
+  ::view-transition-old(root),::view-transition-new(root){ animation:none; mix-blend-mode:normal; }
+  ::view-transition-image-pair(root){ isolation:auto; }
+  ::view-transition-old(wr-plate-img){ animation:wr-vt-out .26s var(--ease) both; }
+  ::view-transition-new(wr-plate-img){ animation:wr-vt-in .38s var(--ease) both; }
+  ::view-transition-old(wr-plate-no){ animation:wr-vt-out .18s var(--ease) both; }
+  ::view-transition-new(wr-plate-no){ animation:wr-vt-up .32s var(--ease) both; }
+  @media (prefers-reduced-motion:reduce){
+    .plate-img,.plate-no{ view-transition-name:none; }
+  }
+}
+/* scale forward, never backward */
+@keyframes wr-vt-in{ from{ opacity:0; transform:scale(.992); } to{ opacity:1; transform:scale(1); } }
+@keyframes wr-vt-out{ from{ opacity:1; } to{ opacity:0; } }
+@keyframes wr-vt-up{ from{ opacity:0; transform:translateY(4px); } to{ opacity:1; transform:none; } }
+/* WR.register's own fallback swap when View Transitions are unavailable */
+.plate.swap .plate-img{ animation:wr-vt-in .4s var(--ease) both; }
+@media (prefers-reduced-motion:reduce){ .plate.swap .plate-img{ animation:none; } }
+
+/* ===========================================================================
+   THE REGISTER
+   Markup contract lives in BUILD-SPEC.md. Rows are complete and usable with
+   the plate absent; the plate is an enhancement.
+   ========================================================================= */
+.reg{ padding-top:0; padding-bottom:0; }
+@media (min-width:1280px){
+  /* Two real columns rather than a padded body with a fixed figure floating in
+     the gap. The figure is a grid item, so it can be sticky: it pins for
+     exactly as long as the register it belongs to is on screen, and stops.
+     A fixed figure never stopped — it covered the standfirst above the list
+     and the footer below it. align-items:start keeps each column its own
+     height while the grid area stays the full row, which is what sticky
+     travels inside. */
+  .reg{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) var(--plate-w);
+    column-gap:var(--plate-gap);
+    align-items:start;
+  }
+  .reg-body{ grid-column:1; grid-row:1; min-width:0; padding-right:0; }
+}
+.reg-block{ scroll-margin-top:calc(var(--hd-h) + var(--band-h) + 14px); }
+.reg-block + .reg-block{ padding-top:var(--sp-5); }
+.reg-head{
+  display:flex; align-items:baseline; justify-content:space-between; gap:16px;
+  border-bottom:var(--hair) solid var(--ink);
+  padding-top:12px; padding-bottom:8px;
+  background:var(--paper);
+}
+@media (min-width:1000px){
+  .reg-head{ position:sticky; top:calc(var(--hd-h) + var(--band-h)); z-index:40; }
+}
+.reg-head-label{
+  font-size:var(--fs-b); font-weight:600; text-transform:uppercase;
+  letter-spacing:var(--tr-caps);
+}
+.reg-head-count{ font-family:var(--mono); font-size:var(--fs-sm); color:var(--muted); }
+.reg-head-sub{
+  font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted);
+  padding-top:8px; padding-bottom:2px;
+}
+.reg-cols{
+  display:grid; grid-template-columns:var(--col-no) minmax(0,1fr) var(--col-figs,154px);
+  gap:var(--sp-3);
+  font-family:var(--mono); font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.12em; color:var(--ink-32);
+  border-bottom:var(--hair) solid var(--rule-60);
+  padding-top:10px; padding-bottom:6px;
+}
+.reg-cols .rc-body{ display:grid; grid-template-columns:minmax(0,1fr) var(--col-street); gap:var(--sp-3); }
+.reg-cols .rc-figs{ display:grid; grid-template-columns:var(--col-beds) var(--col-rent); gap:var(--sp-3); justify-items:end; }
+@media (max-width:860px){ .reg-cols{ display:none; } }
+
+.reg-rows{ content-visibility:visible; }
+@supports (content-visibility:auto){
+  .reg-rows{
+    content-visibility:auto;
+    contain-intrinsic-size:auto calc(var(--row-h) * var(--rows,12));
+  }
+}
+
+.reg-row{ position:relative; }
+.row-link{
+  position:relative;
+  display:grid;
+  grid-template-columns:var(--col-no) minmax(0,1fr) var(--col-figs,154px);
+  gap:var(--sp-3);
+  align-items:baseline;
+  padding-top:11px; padding-bottom:11px;
+  border-bottom:var(--hair) solid var(--rule-60);
+  transition:background-color .22s var(--ease);
+}
+.row-link::before{
+  content:""; position:absolute; left:calc(-1 * var(--sp-2)); top:0; bottom:0; width:2px;
+  background:var(--blueline); transform:scaleY(0); transform-origin:top;
+  transition:transform .28s var(--ease);
+}
+.reg-row:hover .row-link,
+.reg-row.lit .row-link,
+.row-link:focus-visible,
+.row-link:hover{ background:var(--ink-03); }
+.reg-row:hover .row-link::before,
+.reg-row.lit .row-link::before,
+.row-link:focus-visible::before{ transform:scaleY(1); }
+.reg-row:hover .row-no,
+.reg-row.lit .row-no,
+.row-link:focus-visible .row-no{ color:var(--blueline); }
+.row-link:focus-visible{ outline-offset:-2px; }
+
+.row-no{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); transition:color .22s var(--ease); }
+.row-thumb{ display:none; width:56px; height:56px; object-fit:cover; background:var(--paper-2); }
+.row-body{ display:grid; grid-template-columns:minmax(0,1fr) var(--col-street); gap:var(--sp-3); align-items:baseline; min-width:0; }
+.row-name{ font-size:var(--fs-b); font-weight:500; letter-spacing:-.004em; }
+.row-street{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.row-figs{ display:grid; grid-template-columns:var(--col-beds) var(--col-rent); gap:var(--sp-3); justify-items:end; align-items:baseline; }
+.row-beds,.row-rent{ font-family:var(--mono); font-size:var(--fs-sm); }
+.row-rent{ text-align:right; }
+.row-rent.is-none{ color:var(--ink-32); }
+/* --flag is reserved for leasing signals and nothing else */
+.row-flag{
+  font-family:var(--mono); font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.1em; color:var(--flag); white-space:nowrap;
+  border:var(--hair) solid var(--flag-14); padding:1px 6px 2px;
+}
+
+@media (max-width:860px){
+  .row-link{ grid-template-columns:var(--col-no) minmax(0,1fr) auto; row-gap:2px; gap:14px; }
+  .row-body{ grid-template-columns:minmax(0,1fr); row-gap:1px; }
+  .row-figs{ grid-template-columns:minmax(0,1fr); justify-items:end; row-gap:1px; }
+  .row-beds{ color:var(--muted); font-size:var(--fs-xs); order:2; }
+  .row-rent{ order:1; }
+}
+@media (max-width:640px){
+  .row-link{ grid-template-columns:56px minmax(0,1fr) auto; align-items:center; padding-top:8px; padding-bottom:8px; }
+  .row-thumb{ display:block; grid-column:1; grid-row:1; }
+  .row-no{ position:absolute; left:0; top:0; padding:2px 4px; background:var(--paper-92); font-size:var(--fs-xxs); }
+  .row-link::before{ left:0; width:2px; }
+}
+
+.reg-note{
+  font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted);
+  display:flex; flex-wrap:wrap; gap:6px 22px;
+  padding-top:14px; padding-bottom:2px;
+}
+.reg-legend{
+  font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted);
+  border-top:var(--hair) solid var(--rule-60);
+  padding-top:14px; margin-top:var(--sp-4);
+  display:grid; gap:4px;
+}
+
+/* =========================================================== editorial */
+.essay{
+  padding-top:var(--sp-6); padding-bottom:var(--sp-6);
+  border-top:var(--hair) solid var(--ink);
+  margin-top:var(--sp-5);
+}
+.essay-kicker{
+  font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase;
+  letter-spacing:var(--tr-caps); color:var(--muted); padding-bottom:var(--sp-3);
+}
+.essay-h{
+  font-size:var(--fs-xl); font-weight:600; letter-spacing:-.018em;
+  max-width:20ch; padding-bottom:var(--sp-3);
+}
+.prose{ font-size:var(--fs-m); line-height:var(--lh-body); color:var(--ink-92); }
+.prose > p + p{ padding-top:.9em; }
+.prose .lead{ font-size:var(--fs-l); line-height:1.48; color:var(--ink); }
+.prose ul{ list-style:none; padding-top:.6em; }
+.prose ul li{ padding-left:1.1em; position:relative; }
+.prose ul li::before{ content:"—"; position:absolute; left:0; color:var(--rule); }
+/* the leasing feed's own listing text, set as a quotation so the client's
+   marketing voice is never mistaken for this site's. See FACT-CHECK.md. */
+.prose .listing{
+  border-left:var(--hair) solid var(--rule);
+  padding-left:var(--sp-3);
+  font-size:var(--fs-l); line-height:1.48; color:var(--ink);
+}
+.prose .listing p::before{ content:"\201C"; }
+.prose .listing p::after{ content:"\201D"; }
+.prose .listing-cite{ padding-top:.7em; padding-left:var(--sp-3); }
+.prose > .listing + .listing-cite + p{ padding-top:1.2em; }
+.essay-foot{ padding-top:var(--sp-3); }
+
+/* ledger — numbered facts with their source. Used by the pipeline block,
+   the neighbourhood pages and company.html. */
+.ledger{ list-style:none; border-top:var(--hair) solid var(--ink); margin-top:var(--sp-3); }
+.led-row{
+  display:grid; grid-template-columns:7.5ch minmax(0,1fr);
+  gap:var(--sp-3);
+  padding-top:12px; padding-bottom:12px;
+  border-bottom:var(--hair) solid var(--rule-60);
+  align-items:baseline;
+}
+.led-fig{ font-family:var(--mono); font-size:var(--fs-sm); text-align:right; }
+.led-body{ font-size:var(--fs-b); line-height:1.5; }
+.led-body b{ font-weight:600; }
+.led-src{ display:block; font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); padding-top:4px; }
+@media (max-width:560px){
+  .led-row{ grid-template-columns:minmax(0,1fr); gap:4px; }
+  .led-fig{ text-align:left; color:var(--blueline); }
+}
+
+/* spec — the building / neighbourhood fact table */
+.spec{ border-top:var(--hair) solid var(--ink); }
+.spec-row{
+  display:grid; grid-template-columns:minmax(120px,.32fr) minmax(0,1fr); gap:var(--sp-3);
+  padding-top:10px; padding-bottom:10px;
+  border-bottom:var(--hair) solid var(--rule-60);
+  align-items:baseline;
+}
+.spec-k{
+  font-family:var(--mono); font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.12em; color:var(--muted);
+}
+.spec-v{ font-size:var(--fs-b); }
+.spec-v .tnum{ font-family:var(--mono); }
+
+/* index-links — the big numbered doors (residents.html, contact.html) */
+.index-links{ list-style:none; border-top:var(--hair) solid var(--ink); }
+.ixl a{
+  display:grid; grid-template-columns:var(--col-no) minmax(0,1fr);
+  gap:var(--sp-3);
+  padding-top:var(--sp-3); padding-bottom:var(--sp-3);
+  border-bottom:var(--hair) solid var(--rule-60);
+  transition:background-color .22s var(--ease);
+}
+.ixl a:hover,.ixl a:focus-visible{ background:var(--ink-03); }
+.ixl-no{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); padding-top:.35em; }
+.ixl-h{ font-size:var(--fs-xl); font-weight:500; letter-spacing:-.016em; line-height:1.18; }
+.ixl a:hover .ixl-h,.ixl a:focus-visible .ixl-h{ color:var(--blueline); }
+.ixl-p{ font-size:var(--fs-b); color:var(--muted); max-width:56ch; padding-top:6px; }
+
+/* the availability line — one line of type, the only flag-coloured link */
+.avail-line{
+  font-size:clamp(1.05rem,2.1vw,1.5rem); font-weight:400; letter-spacing:-.01em;
+  padding-top:var(--sp-6); padding-bottom:var(--sp-6);
+  border-top:var(--hair) solid var(--ink);
+  margin-top:var(--sp-5);
+}
+.avail-line a{
+  color:var(--flag); text-decoration:underline; text-decoration-thickness:1px;
+  text-underline-offset:.2em; text-decoration-color:var(--flag-14);
+  transition:text-decoration-color .3s var(--ease);
+}
+.avail-line a:hover,.avail-line a:focus-visible{ text-decoration-color:currentColor; }
+.avail-line .avail-sub{
+  display:block; font-family:var(--mono); font-size:var(--fs-xs);
+  color:var(--muted); letter-spacing:.04em; padding-top:12px;
+}
+
+/* page head — every page except index.html opens with this */
+.pagehead{
+  padding-top:calc(var(--hd-h) + clamp(30px,5vw,60px));
+  padding-bottom:var(--sp-5);
+  border-bottom:var(--hair) solid var(--ink);
+}
+.pagehead-no{
+  font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase;
+  letter-spacing:var(--tr-caps); color:var(--muted); padding-bottom:var(--sp-3);
+  display:flex; flex-wrap:wrap; gap:6px 18px;
+}
+.pagehead-h{
+  font-size:clamp(1.6rem,3.6vw,2.6rem); font-weight:600; text-transform:uppercase;
+  letter-spacing:-.018em; line-height:1.06; max-width:22ch;
+}
+.pagehead-sub{ font-size:var(--fs-m); color:var(--muted); max-width:62ch; padding-top:var(--sp-3); }
+
+/* =========================================================== controls */
+.btn-row{ display:flex; flex-wrap:wrap; gap:10px; }
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase;
+  letter-spacing:.12em; line-height:1;
+  padding-top:13px; padding-bottom:13px; padding-left:18px; padding-right:18px;
+  border:var(--hair) solid var(--ink); color:var(--ink); background:transparent;
+  transition:background-color .26s var(--ease),color .26s var(--ease),border-color .26s var(--ease);
+  /* never a pixel min-width: it clips long labels between 312 and 430px */
+  flex:1 1 auto; min-width:max-content;
+}
+.btn:hover,.btn:focus-visible{ background:var(--ink); color:var(--paper); }
+.btn-ink{ background:var(--ink); color:var(--paper); }
+.btn-ink:hover,.btn-ink:focus-visible{ background:transparent; color:var(--ink); }
+.btn-flag{ border-color:var(--flag); color:var(--flag); }
+.btn-flag:hover,.btn-flag:focus-visible{ background:var(--flag); color:var(--paper); }
+.btn-quiet{ border-color:var(--rule); color:var(--muted); }
+.btn-quiet:hover,.btn-quiet:focus-visible{ background:transparent; border-color:var(--ink); color:var(--ink); }
+
+/* sort controls — buildings.html. Sort, never filter. */
+.sortbar{
+  display:flex; flex-wrap:wrap; align-items:center; gap:8px 10px;
+  padding-top:var(--sp-3); padding-bottom:var(--sp-3);
+}
+.sortbar-label{
+  font-family:var(--mono); font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.12em; color:var(--muted); padding-right:6px;
+}
+.sort-btn{
+  font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase;
+  letter-spacing:.1em; color:var(--muted);
+  padding-top:7px; padding-bottom:7px; padding-left:12px; padding-right:12px;
+  border:var(--hair) solid var(--rule-60);
+  transition:color .24s var(--ease),border-color .24s var(--ease),background-color .24s var(--ease);
+}
+.sort-btn:hover,.sort-btn:focus-visible{ color:var(--ink); border-color:var(--ink); }
+.sort-btn[aria-pressed="true"]{ color:var(--paper); background:var(--blueline); border-color:var(--blueline); }
+
+/* view switch — ?view=register|atlas|plates */
+.views{ display:flex; gap:0; border:var(--hair) solid var(--ink); width:max-content; }
+.view-btn{
+  font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:.1em;
+  padding-top:9px; padding-bottom:9px; padding-left:16px; padding-right:16px;
+  color:var(--muted); transition:color .24s var(--ease),background-color .24s var(--ease);
+}
+.view-btn + .view-btn{ border-left:var(--hair) solid var(--ink); }
+.view-btn[aria-selected="true"]{ background:var(--ink); color:var(--paper); }
+.view-pane[hidden]{ display:none !important; }
+
+/* fields — search.html and contact.html */
+.field{ display:grid; gap:6px; }
+.label{
+  font-family:var(--mono); font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.12em; color:var(--muted);
+}
+.input,.select,textarea.input{
+  width:100%; background:var(--paper); color:var(--ink);
+  border:var(--hair) solid var(--rule);
+  font-family:var(--mono); font-size:var(--fs-sm);
+  padding-top:11px; padding-bottom:11px; padding-left:12px; padding-right:12px;
+  transition:border-color .24s var(--ease);
+}
+.input:hover,.select:hover{ border-color:var(--ink); }
+.input:focus,.select:focus{ border-color:var(--blueline); }
+.select{ appearance:none; background-image:linear-gradient(45deg,transparent 49%,var(--ink) 50%,var(--ink) 56%,transparent 57%); background-repeat:no-repeat; background-position:right 14px center; background-size:9px 9px; padding-right:34px; }
+.check{ display:inline-flex; align-items:center; gap:9px; font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.04em; cursor:pointer; }
+.check input{ appearance:none; width:14px; height:14px; border:var(--hair) solid var(--rule); background:var(--paper); flex:0 0 auto; }
+.check input:checked{ background:var(--blueline); border-color:var(--blueline); }
+.check input:focus-visible{ outline:2px solid var(--focus); outline-offset:2px; }
+.filters{ display:grid; gap:var(--sp-3); border-top:var(--hair) solid var(--ink); border-bottom:var(--hair) solid var(--ink); padding-top:var(--sp-3); padding-bottom:var(--sp-3); }
+.filter-group{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; }
+.filter-foot{ display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+
+/* ============================================= the drawn atlas, as fallback
+   No page body draws WR.atlas any more — every map on this site is the real
+   embedded one. These rules survive for the single case map.js falls back to:
+   the Leaflet CDN is unreachable, and it renders the SVG plot inside its own
+   host, which core/map.css skins as .wr-map-fallback .atlas-svg. */
+.atlas-svg{ width:100%; height:auto; display:block; }
+.atlas-grid line{ stroke:var(--rule); stroke-width:.6; opacity:.5; }
+.pin{ cursor:pointer; }
+.pin-hit{ fill:var(--paper); stroke:var(--rule); stroke-width:.8; transition:fill .22s var(--ease),stroke .22s var(--ease); }
+.pin-no{ font-family:var(--mono); font-size:10px; fill:var(--muted); transition:fill .22s var(--ease); pointer-events:none; }
+.pin:hover .pin-hit,.pin.lit .pin-hit{ fill:var(--blueline); stroke:var(--blueline); }
+.pin:hover .pin-no,.pin.lit .pin-no{ fill:var(--paper); }
+.map-key{
+  display:flex; flex-wrap:wrap; gap:6px 18px;
+  font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted);
+  padding-top:12px;
+}
+
+/* ==================================================== plates (grid view) */
+.plates-grid{
+  list-style:none; display:grid; gap:var(--sp-4) var(--sp-3);
+  grid-template-columns:repeat(auto-fill,minmax(232px,1fr));
+}
+.plate-card a{ display:block; }
+.pc-frame{ position:relative; overflow:clip; background:var(--paper-2); aspect-ratio:4 / 3; }
+.pc-frame img{ width:100%; height:100%; object-fit:cover; transition:opacity .3s var(--ease); }
+.plate-card a:hover .pc-frame img,.plate-card a:focus-visible .pc-frame img{ opacity:.86; }
+.pc-cap{ display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:10px; border-top:var(--hair) solid var(--ink); padding-top:8px; margin-top:8px; }
+.pc-no{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--blueline); grid-row:1 / 3; }
+.pc-name{ font-size:var(--fs-sm); font-weight:500; }
+.pc-sub{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); grid-column:2; }
+
+/* =========================================================== colophon */
+/* Full-bleed footer: the band (background + top hairline) spans the whole
+   page container, and the content sits on the SAME gutter as the header.
+   .colophon carries .wrap .wrap-n; here we release the wrap-n 1560 cap so the
+   element runs full width, and swap the .wrap --pad gutter for --edge, which
+   equals the header's effective inset (pad, growing to centre a 1560 column
+   past --maxw). So above 1560 the footer no longer floats as an inset island. */
+.colophon{
+  background:var(--paper-2);
+  border-top:var(--hair) solid var(--ink);
+  padding-top:var(--sp-6); padding-bottom:var(--sp-5);
+  margin-top:var(--sp-6);
+  max-width:none; margin-left:0; margin-right:0;
+  padding-left:var(--edge); padding-right:var(--edge);
+}
+.colo-top{
+  display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between;
+  gap:16px 32px; border-bottom:var(--hair) solid var(--rule);
+  padding-bottom:var(--sp-3);
+}
+.colo-mark{ display:inline-flex; align-items:center; gap:10px; }
+.colo-mark svg{ width:22px; height:22px; color:var(--brand); fill:currentColor; }
+.colo-mark b{ font-size:var(--fs-xs); font-weight:600; letter-spacing:.24em; text-transform:uppercase; }
+.colo-say{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); letter-spacing:.04em; }
+.colo-grid{
+  display:grid; gap:var(--sp-4) var(--sp-3);
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  padding-top:var(--sp-4);
+}
+.colo-col{ min-width:0; }
+.colo-h{
+  font-family:var(--mono); font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.12em; color:var(--muted);
+  border-bottom:var(--hair) solid var(--rule-60); padding-bottom:8px; margin-bottom:10px;
+}
+.colo-list{ list-style:none; display:grid; gap:5px; font-size:var(--fs-sm); }
+.colo-list a{ display:inline-flex; align-items:baseline; gap:8px; }
+.colo-list a:hover,.colo-list a:focus-visible{ color:var(--blueline); }
+.colo-list .cl-n{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--ink-32); }
+.colo-list address{ font-style:normal; }
+.colo-legal{
+  display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between;
+  gap:14px 24px;
+  border-top:var(--hair) solid var(--rule);
+  padding-top:var(--sp-3); margin-top:var(--sp-5);
+  font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted);
+}
+.colo-legal .eho{ gap:10px; }
+.colo-legal .eho svg{ width:26px; height:auto; color:var(--ink); }
+.colo-legal .eho span{ letter-spacing:.06em; text-transform:uppercase; font-size:var(--fs-xxs); }
+@media (max-width:900px){ .colo-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:520px){ .colo-grid{ grid-template-columns:minmax(0,1fr); } }
+
+/* =========================================================== motion floor */
+@media (prefers-reduced-motion:reduce){
+  .row-link,.row-link::before,.ixl a,.btn,.sort-btn,.view-btn,
+  .pc-frame img,.tix-name,
+  .pin-hit,.pin-no,.input,.select{ transition:none !important; }
+  .row-link::before{ transform:scaleY(1); opacity:0; }
+  .reg-row:hover .row-link::before,.reg-row.lit .row-link::before,
+  .row-link:focus-visible::before{ opacity:1; }
+}
+
+/* =========================================================== print */
+@media print{
+  .hd,.plate,.mnav,.pt,.mbtn,.search,.views,.sortbar{ display:none !important; }
+  /* a skipped-rendering subtree prints blank — the register must print whole */
+  .reg-rows{ content-visibility:visible !important; }
+  .reg-body{ padding-right:0; }
+  body{ background:#fff; color:#000; }
+  .row-link{ break-inside:avoid; }
+}
+
+/* ===========================================================================
+   STAGE 2 ADDITIONS — buildings.html (the register, three views) and
+   search.html (the only page with filters).
+   Appended, never edited above this line. Same tokens, same easing, radius 0,
+   no vh without an svh twin, longhand padding on anything that carries .wrap
+   (nothing here does). Three rules key off classes defined above; each is a
+   STATE rule for a state core.js creates, not a change to how the class looks.
+
+   ── INDEX ─────────────────────────────────────────────────────────────────
+     .reg-head-flat                      the count for a flat sort — core
+                                         rewrites only the group label, so the
+                                         grouped count and street line stand
+                                         down and this one stands up
+     .atlas-fallback                     what the atlas box holds with JS off
+     .avtable .av-cols .avc-body
+       .avc-figs .av .av-row .av-no
+       .av-body .av-name .av-area
+       .av-figs .av-fig .av-rent
+       .av-none .av-act .av-save
+       .av-live .av-saved                the availability table
+     .fg-key .fg-select .fg-note
+       .fg-count .ck-n                   filter-form furniture
+     .av-empty .av-interest
+       .av-interest-grid .btn-off        the empty state and its interest list
+   ========================================================================= */
+
+/* ---------------------------------------------------- the flat sorts -----
+   WR.register's flat mode pours all 72 rows into the first block and renames
+   its label to "All 72 buildings". The grouped count (27) and the street line
+   belong to the grouping, so they step aside and the total steps in. */
+.reg-head-flat{
+  display:none;
+  font-family:var(--mono); font-size:var(--fs-sm); color:var(--muted);
+}
+[data-register][data-mode="flat"] .reg-head-count,
+[data-register][data-mode="flat"] .reg-head-sub{ display:none; }
+[data-register][data-mode="flat"] .reg-head-flat{ display:block; }
+/* contain-intrinsic-size must follow the rows, or the scrollbar lies */
+[data-register][data-mode="flat"] .reg-rows{ --rows:72; }
+/* ---------------------------------------------------- header, on its own page
+   `.hnav a[aria-current]` above is more specific than `.hnav .hnav-flag`, so the
+   one deliberately flagged nav item would lose its colour on the very page it
+   points at. The underline still marks it current. */
+.hnav .hnav-flag[aria-current]{ color:var(--flag); }
+
+/* ---------------------------------------------------- the atlas, no JS --- */
+.atlas-fallback{
+  font-family:var(--mono); font-size:var(--fs-xs); line-height:1.7;
+  color:var(--muted); max-width:54ch;
+  padding:22px 20px;
+}
+
+/* ===================================================== availability table
+   Building, neighbourhood, bedrooms, baths, square feet, rent, and the way
+   out to the live listing. Eight columns at full width; two lines from
+   1000px down, where the column captions are gone and each figure carries
+   its own. */
+.avtable{
+  --av-beds:78px; --av-baths:66px; --av-sqft:112px; --av-rent:98px;
+  --av-figs:calc(var(--av-beds) + var(--av-baths) + var(--av-sqft) + var(--av-rent) + var(--sp-3) * 3);
+  --av-act:118px;
+  --av-grid:var(--col-no) minmax(0,1fr) var(--av-figs) var(--av-act);
+}
+.av-cols{
+  display:grid; grid-template-columns:var(--av-grid); gap:var(--sp-3);
+  font-family:var(--mono); font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.12em; color:var(--ink-32);
+  border-top:var(--hair) solid var(--ink);
+  border-bottom:var(--hair) solid var(--rule-60);
+  padding-top:10px; padding-bottom:6px;
+}
+.avc-body{ display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.62fr); gap:var(--sp-3); }
+.avc-figs{
+  display:grid; justify-items:end; gap:var(--sp-3);
+  grid-template-columns:var(--av-beds) var(--av-baths) var(--av-sqft) var(--av-rent);
+}
+.av{ list-style:none; }
+.av-row{
+  display:grid; grid-template-columns:var(--av-grid); gap:var(--sp-3);
+  align-items:baseline;
+  padding-top:11px; padding-bottom:11px;
+  border-bottom:var(--hair) solid var(--rule-60);
+  transition:background-color .22s var(--ease);
+}
+.av-row:hover,.av-row:focus-within{ background:var(--ink-03); }
+.av-no{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.av-body{
+  display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.62fr);
+  gap:var(--sp-3); align-items:baseline; min-width:0;
+}
+.av-name{
+  font-size:var(--fs-b); font-weight:500; letter-spacing:-.004em;
+  transition:color .22s var(--ease);
+}
+.av-name:hover,.av-name:focus-visible{ color:var(--blueline); }
+.av-area{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.av-figs{
+  display:grid; justify-items:end; align-items:baseline; gap:var(--sp-3);
+  grid-template-columns:var(--av-beds) var(--av-baths) var(--av-sqft) var(--av-rent);
+}
+.av-fig{ font-family:var(--mono); font-size:var(--fs-sm); }
+.av-fig i{ display:none; font-style:normal; }
+.av-none{ color:var(--ink-32); }
+.av-act{
+  display:flex; align-items:baseline; gap:12px;
+  font-family:var(--mono); font-size:var(--fs-xs);
+}
+.av-save{
+  color:var(--muted); border-bottom:var(--hair) solid transparent;
+  transition:color .22s var(--ease),border-color .22s var(--ease);
+}
+.av-save:hover,.av-save:focus-visible{ color:var(--ink); border-bottom-color:var(--ink); }
+.av-save[aria-pressed="true"]{ color:var(--blueline); border-bottom-color:var(--blue-14); }
+.av-live{
+  color:var(--blueline); border-bottom:var(--hair) solid var(--blue-14);
+  transition:border-color .3s var(--ease);
+}
+.av-live:hover,.av-live:focus-visible{ border-bottom-color:currentColor; }
+@supports selector(:has(*)){
+  /* saved rows stay marked in the list, which is what makes a comparison possible */
+  .av-row:has(.av-save[aria-pressed="true"]){ background:var(--blue-08); }
+  .av-row:has(.av-save[aria-pressed="true"]) .av-no{ color:var(--blueline); }
+}
+@supports selector(:has(*)){
+  /* column captions over an empty table are a promise with nothing under it */
+  .avtable:not(:has(.av-row:not([hidden]))) .av-cols{ display:none; }
+}
+.av-saved{
+  display:flex; flex-wrap:wrap; gap:4px 14px;
+  font-family:var(--mono); font-size:var(--fs-xs);
+  border-top:var(--hair) solid var(--ink);
+  border-bottom:var(--hair) solid var(--rule-60);
+  padding-top:10px; padding-bottom:10px; margin-bottom:var(--sp-4);
+}
+.av-saved a{ color:var(--blueline); }
+
+@media (max-width:999.98px){
+  .av-cols{ display:none; }
+  .avtable{ --av-grid:var(--col-no) minmax(0,1fr) max-content; }
+  .av-row{ row-gap:9px; }
+  .av-no{ grid-column:1; grid-row:1; }
+  .av-body{ grid-column:2; grid-row:1; grid-template-columns:minmax(0,1fr); row-gap:1px; }
+  .av-act{ grid-column:3; grid-row:1; justify-content:flex-end; }
+  .av-figs{
+    grid-column:2 / 4; grid-row:2; justify-items:start;
+    grid-template-columns:repeat(4,max-content); gap:4px 22px;
+  }
+  .av-fig{ display:grid; }
+  .av-fig i{
+    display:block; font-size:var(--fs-xxs); text-transform:uppercase;
+    letter-spacing:.1em; color:var(--ink-32);
+  }
+}
+@media (max-width:560px){
+  .av-figs{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px 18px; }
+  .av-act{ grid-column:2 / 4; grid-row:3; justify-content:flex-start; }
+}
+
+/* ===================================================== the filter form --- */
+.fg-key{ flex:0 0 9.5em; }
+.fg-select{ flex:0 1 15em; width:auto; }
+.fg-note{
+  flex:1 1 18em; max-width:48ch;
+  font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted);
+}
+.fg-count{ color:var(--ink); }
+.ck-n{ color:var(--ink-32); }
+@media (max-width:640px){
+  .fg-key{ flex:1 0 100%; }
+  .fg-select{ flex:1 1 100%; }
+}
+
+/* ===================================================== the empty state ---
+   No result is still an answer, so it carries the three things that actually
+   move a search on: the leasing number, the way back to the whole register,
+   and the interest list. The form is real markup; its destination is not ours
+   to invent, so the send is held and says so. */
+.av-empty{
+  border-top:var(--hair) solid var(--ink);
+  padding-top:var(--sp-5); padding-bottom:var(--sp-4);
+  margin-top:var(--sp-4);
+}
+.av-interest{
+  border-top:var(--hair) solid var(--rule-60);
+  padding-top:var(--sp-4);
+  margin-top:var(--sp-5);
+}
+.av-interest-grid{
+  display:grid; gap:var(--sp-3);
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  padding-top:var(--sp-3); padding-bottom:var(--sp-3);
+}
+/* a .btn is flex:1 1 auto by contract, so a row holding one would run the full
+   measure; the row is capped instead of the button */
+.av-interest-foot{ max-width:26em; }
+.btn-off{ opacity:.5; pointer-events:none; }
+@media (max-width:760px){ .av-interest-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:520px){ .av-interest-grid{ grid-template-columns:minmax(0,1fr); } }
+
+/* ===================================================== floors ------------ */
+@media (prefers-reduced-motion:reduce){
+  .av-row,.av-name,.av-save,.av-live{ transition:none !important; }
+}
+@media print{
+  .filters,.av-act,.av-empty,.av-saved{ display:none !important; }
+  .av-row{ break-inside:avoid; }
+  /* the view on screen is the view that prints; a hidden pane stays hidden */
+}
+
+/* ===========================================================================
+   STAGE 2 ADDITIONS — company.html, residents.html, contact.html.
+   Appended, never edited above this line. Three new classes and one sibling
+   rule; no existing selector is redefined. Same tokens, same easing, radius 0,
+   longhand padding on everything that carries .wrap.
+
+   ── INDEX ─────────────────────────────────────────────────────────────────
+     .essay-run                          a run of consecutive .essay blocks
+     .pagehead + .essay-run              kills the doubled rule under a page head
+     .anchored                           scroll-margin for a same-page target
+     .alarm .alarm-k .alarm-grid
+       .alarm-tel .alarm-note .alarm-sub the 24/7 maintenance band
+   ========================================================================= */
+
+/* ------------------------------------------------------------ .essay-run --
+   index.html separates its two notes with register blocks, so .essay's
+   margin-top:--sp-5 on top of --sp-6 padding both sides never doubled up.
+   These three pages are nothing but blocks: five .essay in a row would carry
+   close to 300px of air between one heading and the next. The run keeps the
+   --ink hinge rule and the same internal rhythm and drops the gap to
+   2 x --sp-5, which is the documented minor-block spacing. */
+.essay-run{ margin-top:0; padding-top:var(--sp-5); padding-bottom:var(--sp-5); }
+
+/* .pagehead already lays a full-width --ink rule across the foot of the page
+   head. A run starting immediately after it butts a second rule against the
+   first and reads as a 2px mistake, so the first block in a run drops its own. */
+.pagehead + .essay-run{ border-top:0; }
+
+/* -------------------------------------------------------------- .anchored --
+   The header is fixed at --hd-h, so a heading a same-page link lands on would
+   otherwise sit underneath it. .reg-block carries the same idea for register
+   blocks; this is the version for sections outside the register. */
+.anchored{ scroll-margin-top:calc(var(--hd-h) + 16px); }
+
+/* ---------------------------------------------------------------- .alarm --
+   residents.html's emergency band: the one thing on that page that has to be
+   found without reading. --flag is reserved for leasing signals (see the rules
+   at the head of this file), so the band takes its weight from rule weight,
+   type size and position instead of colour — it is the only element on the
+   page set above --fs-xl, and it sits above the five doors rather than inside
+   them. No login, no account, no form: a number and what it is for. */
+.alarm{
+  border-top:2px solid var(--ink);
+  border-bottom:var(--hair) solid var(--ink);
+  padding-top:var(--sp-4); padding-bottom:var(--sp-4);
+  margin-top:var(--sp-5);
+}
+.alarm-k{
+  font-family:var(--mono); font-weight:400; font-size:var(--fs-xs);
+  text-transform:uppercase; letter-spacing:var(--tr-caps); color:var(--muted);
+  padding-bottom:var(--sp-3);
+}
+.alarm-grid{ display:grid; gap:var(--sp-3); align-items:baseline; }
+.alarm-tel{
+  display:inline-block;
+  font-family:var(--mono); font-size:clamp(1.5rem,4vw,2.5rem); font-weight:400;
+  line-height:1.05; letter-spacing:-.02em; white-space:nowrap;
+  border-bottom:2px solid var(--ink); padding-bottom:5px;
+  transition:color .24s var(--ease),border-color .24s var(--ease);
+}
+.alarm-tel:hover,.alarm-tel:focus-visible{ color:var(--blueline); border-bottom-color:var(--blueline); }
+.alarm-note{ font-size:var(--fs-m); line-height:var(--lh-body); color:var(--ink-92); max-width:52ch; }
+.alarm-sub{
+  font-family:var(--mono); font-size:var(--fs-xs); line-height:1.75;
+  color:var(--muted); max-width:64ch; padding-top:12px;
+}
+@media (min-width:1000px){
+  .alarm-grid{ grid-template-columns:minmax(0,auto) minmax(0,1fr); column-gap:var(--sp-5); }
+}
+@media (prefers-reduced-motion:reduce){
+  .alarm-tel{ transition:none !important; }
+}
+
+/* ===========================================================================
+   STAGE 2 — APPENDED COMPONENTS
+   For neighborhoods.html, templates/building.html and templates/neighborhood.html.
+   Nothing above this line is modified: every rule below is either a new class
+   or a new descendant selector under one.
+
+     .slab               vertical rhythm for a block that carries no top rule
+     .duo / .duo-fig     text column + specimen column — the plate geometry,
+                         held still, for pages that have no travelling plate
+     .gal                a building's photographic plates, two to four of them
+     .amen               the two amenity lists
+     .areas / .area      the seven ruled area entries on neighborhoods.html
+     .spec-v a           links inside the fact table and the page head
+   ========================================================================= */
+.slab{ padding-top:var(--sp-4); padding-bottom:var(--sp-5); }
+
+.duo{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) clamp(240px,30vw,420px);
+  gap:var(--sp-4) var(--plate-gap);
+  align-items:start;
+}
+.duo-fig{ min-width:0; }
+@media (max-width:900px){
+  .duo{ grid-template-columns:minmax(0,1fr); gap:var(--sp-4); }
+  .duo-fig{ max-width:460px; }
+}
+
+/* two to four frames, read left to right like the plates they are. This was a
+   wrapping grid, which shrank each photograph to ~200px; it is now a rail
+   (core/rail.*) so each plate is printed large and the arrows do the walking.
+   The wrapper is only the positioning context — .gal-track carries the scroll,
+   and its scrollbar is hidden because the arrow buttons are the control. */
+.gal{ position:relative; }
+
+.amen{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--sp-4) var(--plate-gap); }
+.amen ul{ padding-top:10px; }
+@media (max-width:640px){ .amen{ grid-template-columns:minmax(0,1fr); } }
+
+.areas{ list-style:none; border-top:var(--hair) solid var(--ink); }
+.area{
+  padding-top:var(--sp-5); padding-bottom:var(--sp-5);
+  border-bottom:var(--hair) solid var(--rule-60);
+  scroll-margin-top:calc(var(--hd-h) + 20px);
+}
+
+
+
+.spec-v a,.pagehead-sub a{
+  color:var(--blueline); text-decoration:underline; text-decoration-thickness:1px;
+  text-underline-offset:.18em; text-decoration-color:var(--blue-14);
+  transition:text-decoration-color .3s var(--ease);
+}
+.spec-v a:hover,.spec-v a:focus-visible,
+.pagehead-sub a:hover,.pagehead-sub a:focus-visible{ text-decoration-color:currentColor; }
+@media (prefers-reduced-motion:reduce){ .spec-v a,.pagehead-sub a{ transition:none; } }
+
+/* ===========================================================================
+   THE PLATES — the book layer
+   The register's spine is unchanged: permanent numbers, neighbourhood grouping,
+   sort-don't-filter, the specimen plate, the ruler. What is inverted is the
+   ratio. The plate is the page; the index is the second reading.
+
+   .hero .hero-frame .hero-img .hero-scrim
+     .hero-in .hero-mast .hero-h .hl .hero-cap      the opening plate, 100svh
+   .run .run-head .run-eyebrow .run-h .run-meta     a neighbourhood run
+   .pgrid .pl .pl--open
+     .pl-frame .pl-cap .pl-nm .pl-st .pl-fg .pl-flag the plate grid (round 5:
+                                                    on buildings.html ?view=plates)
+   .rail-fig .regmap .mapbox .map-foot              the real embedded map
+   ========================================================================= */
+
+/* ------------------------------------------------- 1. the opening plate */
+.hero{
+  position:relative; height:var(--vh100); min-height:520px;
+  display:flex; align-items:flex-end;
+  overflow:clip; background:var(--deep); color:var(--paper); isolation:isolate;
+}
+.hero-frame{ position:absolute; inset:0; z-index:0; }
+.hero-img{ width:100%; height:100%; object-fit:cover; }
+/* gradient, never a flat sheet across the frame */
+.hero-scrim{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(to top,var(--deep-74) 0%,transparent 58%),
+    linear-gradient(to bottom,var(--deep-44) 0%,transparent 30%);
+}
+.hero-in{ position:relative; z-index:2; width:100%; padding-bottom:clamp(56px,10vh,140px); }
+.hero-mast{
+  display:flex; flex-wrap:wrap; gap:5px 26px;
+  font-family:var(--mono); font-size:var(--fs-cap); letter-spacing:var(--tr-cap);
+  text-transform:uppercase; color:var(--paper-70);
+  padding-bottom:clamp(18px,2.6vh,38px);
+}
+.hero-h{
+  font-family:var(--sans); font-size:var(--fs-hero); font-weight:300;
+  line-height:.94; letter-spacing:-.02em; color:var(--paper); max-width:15ch;
+}
+/* an overflow:hidden line mask cuts ~.098em off the descenders (CONVENTIONS §5) */
+.hl{ display:block; overflow:hidden; padding-bottom:.14em; margin-bottom:-.14em; }
+.hl i{ display:block; font-style:normal; }
+.hero-cap{
+  position:absolute; z-index:2; right:var(--edge); bottom:clamp(56px,10vh,140px);
+  display:grid; justify-items:end; gap:2px; text-align:right;
+  font-family:var(--mono); font-size:var(--fs-cap); letter-spacing:var(--tr-cap);
+  text-transform:uppercase; color:var(--paper-70);
+}
+.hero-cap .tnum{ color:var(--paper); }
+@media (max-width:760px){
+  .hero-h{ max-width:none; }
+  .hero-cap{ position:static; justify-items:start; text-align:left; padding-left:var(--pad); padding-right:var(--pad); padding-bottom:18px; }
+  .hero{ display:grid; align-content:end; }
+  .hero-in{ padding-bottom:clamp(18px,3vh,30px); }
+}
+
+/* page load: the image settles, the lines rise 90ms apart, the meta fades in.
+   `both` fill means reduced motion (which collapses every duration in base.css)
+   lands on the end state rather than freezing mid-reveal. */
+@keyframes pl-settle{ from{ transform:scale(1.06); } to{ transform:scale(1); } }
+@keyframes pl-line{ from{ transform:translateY(105%); } to{ transform:none; } }
+@keyframes pl-fade{ from{ opacity:0; } to{ opacity:1; } }
+.js .hero-img{ animation:pl-settle 1.2s var(--ease) both; }
+.js .hero-scrim{ animation:pl-fade 1.2s var(--ease) both; }
+.js .hl i{ animation:pl-line .9s var(--ease) both; }
+.js .hl:nth-child(2) i{ animation-delay:.09s; }
+.js .hero-mast{ animation:pl-fade .8s var(--ease) .34s both; }
+.js .hero-cap{ animation:pl-fade .8s var(--ease) .52s both; }
+
+/* -------------------------------------------------- 3. a neighbourhood run */
+.book{ padding-bottom:var(--sp-6); }
+.run{ padding-top:var(--sp-7); scroll-margin-top:calc(var(--hd-h) + var(--band-h) + 14px); }
+.run-eyebrow{
+  display:flex; flex-wrap:wrap; gap:5px 22px;
+  font-family:var(--mono); font-size:var(--fs-cap); letter-spacing:var(--tr-cap);
+  text-transform:uppercase; color:var(--muted);
+}
+.run-h{
+  font-family:var(--sans); font-size:var(--fs-run); font-weight:300;
+  line-height:.96; letter-spacing:-.02em; max-width:13ch;
+  padding-top:clamp(10px,1.6vh,20px);
+}
+.run-meta{
+  position:relative; display:flex; flex-wrap:wrap; gap:8px 28px; align-items:baseline;
+  font-family:var(--mono); font-size:var(--fs-s); color:var(--muted);
+  margin-top:clamp(20px,3vh,38px); padding-top:clamp(12px,1.8vh,22px);
+}
+.run-meta b{ font-weight:500; color:var(--ink); }
+/* a 1px rule that draws itself on reveal */
+.run-meta::before{
+  content:""; position:absolute; left:0; right:0; top:0; height:1px; background:var(--ink);
+  transform:scaleX(0); transform-origin:left;
+}
+.js .run-meta.in::before{ transform:scaleX(1); transition:transform .8s var(--ease); }
+html:not(.js) .run-meta::before{ transform:scaleX(1); }
+.run-meta a{ color:var(--blueline); }
+.run-meta a:hover,.run-meta a:focus-visible{ text-decoration:underline; text-underline-offset:.2em; }
+
+/* --------------------------------------------------- 5. the plate grid
+   One rule for every run: identical 3:2 frames, three across at 1100px and
+   up, two from 640, one below, the same gutter between every pair. A run may
+   open on one plate at the full width of the column (.pl--open) — the frame a
+   human chose for it — and that plate is always the first in the run. No
+   half / tall / offset slots, no stagger: the client read the collage as
+   messy, and a catalogue page is a grid. */
+.pgrid{
+  display:grid; grid-template-columns:repeat(3,minmax(0,1fr));
+  column-gap:var(--sp-4); row-gap:var(--sp-5);
+  align-items:start;
+  padding-top:clamp(28px,4vh,48px);
+}
+.pl{ display:block; min-width:0; }
+.pl--open{ grid-column:1 / -1; }
+.pl-frame{
+  display:block; position:relative; overflow:clip; background:var(--paper-2);
+  aspect-ratio:3 / 2;
+}
+@supports not (aspect-ratio:3 / 2){ .pl-frame{ height:0; padding-bottom:66.667%; } .pl-frame img{ position:absolute; inset:0; } }
+.pl-frame img{ width:100%; height:100%; object-fit:cover; }
+/* the one image per screen that may move: 1.00 -> 1.04 across a viewport of scroll */
+.pl--open .pl-frame img{ transform:scale(var(--z,1)); will-change:transform; }
+.pl-frame::after{
+  content:""; position:absolute; inset:0; background:var(--paper); opacity:0;
+  transition:opacity .28s var(--ease);
+}
+.pl:hover .pl-frame::after,.pl:focus-visible .pl-frame::after{ opacity:.07; }
+.pl:focus-visible{ outline-offset:6px; }
+
+/* the caption: the name in the display face, the street in mono under it,
+   and the figure — bedrooms · from $ — set right in mono, tabular */
+.pl-cap{
+  display:grid; grid-template-columns:minmax(0,1fr) auto;
+  column-gap:14px; row-gap:2px; align-items:baseline;
+  border-top:var(--hair) solid var(--ink);
+  padding-top:10px; margin-top:12px;
+}
+.pl-nm{ grid-column:1; font-size:var(--fs-b); font-weight:500; letter-spacing:-.004em; line-height:1.3; transition:color .22s var(--ease); }
+.pl-st{ grid-column:1; font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.pl-fg{
+  grid-column:2; grid-row:1 / 3; align-self:baseline; text-align:right; white-space:nowrap;
+  font-family:var(--mono); font-size:var(--fs-sm); color:var(--ink);
+}
+.pl-fg .tnum{ font-variant-numeric:tabular-nums; }
+/* --flag is reserved for leasing signals and nothing else */
+.pl-flag{
+  font-family:var(--mono); font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.1em; color:var(--flag); white-space:nowrap;
+  border:var(--hair) solid var(--flag-14); padding:1px 6px 2px;
+}
+.pl:hover .pl-nm,.pl:focus-visible .pl-nm{ color:var(--blueline); }
+
+@media (max-width:1099.98px){ .pgrid{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:639.98px){
+  .pgrid{ grid-template-columns:minmax(0,1fr); row-gap:var(--sp-4); }
+  .pl-cap{ grid-template-columns:minmax(0,1fr); }
+  .pl-fg{ grid-column:1; grid-row:auto; text-align:left; padding-top:2px; }
+}
+@media (prefers-reduced-motion:reduce){
+  .pl-frame::after,.pl-nm{ transition:none; }
+  .pl--open .pl-frame img{ transform:none !important; }
+}
+
+/* ---------------------------------------------- 7. the real embedded map */
+.mapbox{ width:100%; min-height:clamp(460px,68vh,760px); }
+.map-full{
+  margin-top:clamp(26px,4vh,50px);
+  border-top:var(--hair) solid var(--ink); border-bottom:var(--hair) solid var(--ink);
+}
+.map-foot{
+  display:flex; flex-wrap:wrap; justify-content:space-between; gap:6px 22px;
+  font-family:var(--mono); font-size:var(--fs-cap); letter-spacing:var(--tr-cap);
+  text-transform:uppercase; color:var(--muted); padding-top:10px;
+}
+.map-dir{
+  display:inline-flex; align-items:baseline; gap:8px; color:var(--blueline);
+}
+.map-dir::after{ content:"\2192"; transition:transform .28s var(--ease); }
+.map-dir:hover::after,.map-dir:focus-visible::after{ transform:translateX(4px); }
+[data-showin][hidden]{ display:none !important; }
+
+/* the rail figure: specimen plate in the index view, the real map in the map
+   view, both in the right half of the viewport beside the rows */
+@media (min-width:1280px){
+  /* the rail figure is the thing that sticks; the plate inside it is in flow.
+     Sticky, not fixed: it is the second column of .reg (see "THE REGISTER"
+     above), so it pins beside the rows and releases with them instead of
+     riding over the page head and the footer. */
+  .rail-fig{
+    grid-column:2; grid-row:1;
+    position:sticky; z-index:820;
+    top:calc(var(--hd-h) + var(--band-h) + 30px);
+  }
+  .rail-fig .plate{
+    position:static; width:100%; top:auto; right:auto; height:auto;
+    display:block; border-bottom:0;
+  }
+  /* round 7: the plate is on from the first paint (it used to wait for the
+     ruler to wake it), showing the first row of the current sort */
+  .rail-fig .plate .plate-frame{ flex:none; aspect-ratio:4 / 3; height:auto; }
+  .rail-fig .mapbox{ min-height:0; height:min(64vh,640px); }
+}
+@media (max-width:1279.98px){
+  /* display:contents puts the plate back into .reg's own box, which is what the
+     sticky strip above the list is positioned against; the map becomes a block */
+  .rail-fig{ display:contents; }
+  .regmap{ display:block; padding-bottom:var(--sp-4); }
+  .regmap .mapbox{ min-height:clamp(340px,52vh,520px); }
+}
+@media (prefers-reduced-motion:reduce){
+  .rail-fig .plate{ transition:none; }
+  .map-dir::after{ transition:none; }
+}
+
+/* ------------------------------------------------------------ 8. tokens */
+:root{
+  --deep-88:rgba(20,20,20,.88);
+  --deep-74:rgba(20,20,20,.74);
+  --deep-44:rgba(20,20,20,.44);
+}
+@supports (color:color-mix(in srgb,#000 50%,#fff)){
+  :root{
+    --deep-88:color-mix(in srgb,var(--deep) 88%,transparent);
+    --deep-74:color-mix(in srgb,var(--deep) 74%,transparent);
+    --deep-44:color-mix(in srgb,var(--deep) 44%,transparent);
+  }
+}
+
+/* a map that takes the page's full width, with its caption back inside the gutter */
+.mapbleed{
+  margin-top:clamp(30px,5vh,64px); margin-bottom:clamp(34px,6vh,80px);
+  border-top:var(--hair) solid var(--ink);
+  border-bottom:var(--hair) solid var(--rule-60);
+  padding-bottom:12px;
+}
+.mapbleed .mapbox{ min-height:clamp(460px,68vh,760px); }
+.mapbleed .mapbox-one{ min-height:clamp(380px,52vh,560px); }
+.mapbleed .map-foot{ padding-top:12px; }
+@media (max-width:640px){ .mapbleed .mapbox{ min-height:clamp(380px,58vh,520px); } }
+
+/* ---------------------------------------------- 9. legibility over photography
+   Reviewed in the browser at 1440x900: the dusk sky behind the opening plate is
+   bright lilac at the top and the street carries a billboard and a fast-food sign
+   in its right third. The scrim is three gradients, not a sheet: the bottom third
+   carries the lockup, a right-edge falloff drops the signage into shadow and gives
+   the corner caption ground to sit on, and a short top wash keeps the inverted
+   header legible. Display type over photography gets a stroke, never an offset
+   shadow (CONVENTIONS §8). */
+.hero-scrim{
+  background:
+    linear-gradient(to top,var(--deep-88) 0%,var(--deep-44) 30%,transparent 64%),
+    linear-gradient(to left,var(--deep-74) 0%,transparent 52%),
+    linear-gradient(to bottom,var(--deep-44) 0%,transparent 24%);
+}
+.hero-h{ -webkit-text-stroke:.6px rgba(20,20,20,.3); paint-order:stroke fill; }
+@media (max-width:640px){ .hero-h{ -webkit-text-stroke-width:.35px; } }
+@supports not (-webkit-text-stroke:1px currentColor){
+  .hero-h{ text-shadow:0 2px 26px rgba(20,20,20,.55); }
+}
+.hero-mast{ color:var(--paper-92); }
+.hero-cap span + span{ color:var(--paper-92); }
+.hero-cap span + span + span{ color:var(--paper-70); }
+
+/* the leasing flag is terracotta on paper; over a photograph it needs to come up */
+.hd.inv .hnav-flag{ color:#E9A98F; }
+
+/* the ledger must not run out onto the lit half of the rooftop */
+.essay-dark .ed-frame::after{
+  background:linear-gradient(100deg,var(--deep-88) 0%,var(--deep-74) 54%,var(--deep-44) 82%,transparent 100%);
+}
+.essay-dark .ledger,.essay-dark .cite{ max-width:min(100%,1040px); }
+
+/* the masthead row and the corner caption cross the lit part of the frame. The
+   masked headline keeps the stroke treatment (an offset shadow ghosts at a clip
+   edge); these two are unclipped labels, so a soft shadow is the right tool. */
+.hero-scrim{
+  background:
+    linear-gradient(to top,var(--deep-88) 0%,var(--deep-44) 38%,transparent 68%),
+    linear-gradient(to left,var(--deep-74) 0%,transparent 52%),
+    linear-gradient(to bottom,var(--deep-44) 0%,transparent 24%);
+}
+.hero-mast,.hero-cap{ text-shadow:0 1px 12px rgba(20,20,20,.6); }
+
+/* ==========================================================================
+   THE SEARCH PAGE + THE RAILS — skin only
+   --------------------------------------------------------------------------
+   Two shared modules are dropped into this direction and dressed here:
+
+     core/search.css + core/search.js   the ILS marketplace on search.html
+     core/rail.css   + core/rail.js     every horizontal scroller, arrow-driven
+
+   Both are token-driven and shared by all three directions, so NOTHING in this
+   block edits them and nothing here restyles a class that already existed above.
+   It only re-dresses the modules' own classes in THE PLATES' terms:
+
+     · two families only — Libre Franklin for names, figures and the display
+       count; IBM Plex Mono, uppercase, tracked, for every label and caption
+     · radius 0 everywhere, including the save heart and the rail arrows, which
+       arrive from the shared sheet as circles
+     · hairlines, never boxes: --rule at the edges, --ink for a closing rule
+     · --blueline is the link and active-state colour, so it marks a live filter,
+       a checked pill and the card the map is pointing at
+     · --flag stays reserved for the leasing signal and is not spent here
+     · the plate crop is 4:5 — tall, for a single building (ELEVATE §1)
+     · one easing curve, and the image moves 1.00 -> 1.04, nothing lifts
+
+   Load order matters: search.css and rail.css are linked BEFORE style.css in
+   search.html's <head>, which is what lets this block win on equal
+   specificity. See HEAD in gen_register.py.
+   ========================================================================== */
+
+/* ------------------------------------------------ promoting the search page
+   A renter's first job is to find a home, so "Find a home" is the first item in
+   the header, the first item in the mobile menu and the first line of the footer
+   site map on all 86 pages. It keeps the leasing flag it already carried. */
+.colo-list .cl-flag{ color:var(--flag); }
+.colo-list .cl-flag .cl-n{ color:inherit; }
+
+/* ---------------------------------------------------------- search: scope */
+[data-search]{
+  /* the module's accent token is the focus ring on a pill; this direction
+     focuses on --blueline, not on the mark's teal */
+  --brand:var(--blueline);
+  --rail-gap:var(--sp-1);
+  --rail-btn:34px;
+  --sbar-h:67px;            /* 12 + 42 + 12 + the 1px closing rule */
+}
+@media (max-width:640px){ [data-search]{ --sbar-h:63px; } }
+
+/* ------------------------------------------------------ search: filter bar */
+/* Three things have to be put right before the bar behaves, and all three come
+   from stacking two shared sheets on one element (the bar is both .sbar and
+   [data-rail], and rail.css loads after search.css):
+
+   1. rail.css's `[data-rail]{position:relative}` beats `.sbar{position:sticky}`
+      on equal specificity, which unsticks the bar AND turns its `top` into a
+      62px downward nudge that lands it on top of the result count. Restate it.
+   2. rail.css's `.rail-track{padding-bottom:2px}` beats `.sbar-in`'s 12px, so
+      the bar measures 57px, not the 67px the sticky map offset assumes. Restate
+      the padding rather than the number, so --sbar-h stays true.
+   3. the page header is position:fixed, so the bar parks under it, not at the
+      top of the viewport — the register's block heads already do this. */
+.sbar{
+  position:sticky;
+  top:var(--hd-h);
+  background:var(--paper);
+  border-bottom:var(--hair) solid var(--ink);
+}
+.sbar-in{
+  max-width:calc(var(--maxw) - var(--pad) * 2);
+  margin-left:auto; margin-right:auto;
+  gap:var(--sp-1);
+  padding-top:12px; padding-bottom:12px;
+}
+
+/* A popover inside a horizontal scroller is clipped by it: overflow-x:auto
+   forces the block axis to `hidden`, so a menu that opens downwards is cut off.
+   rail.js keeps [data-static] on a rail with nothing to scroll, which gives the
+   two cases their own answer:
+     · bar fits  — nothing clips, so each menu stays anchored to its button
+     · bar scrolls — the menu hangs off .sbar instead of off .fpop. .sbar is
+       OUTSIDE the scroller, and an absolutely positioned box is not clipped by
+       an overflow ancestor that is not also its containing block, so the menu
+       survives whole, as a full-width sheet under the bar. Which is the right
+       shape on a phone anyway. */
+/* overflow that is not `visible` clips whether or not anything scrolls, so the
+   fitting case has to switch it off, not just rely on there being no scroll */
+.sbar[data-static] .sbar-in{ overflow:visible; }
+.sbar[data-static] .fpop{ position:relative; }
+.sbar:not([data-static]) .fpop{ position:static; }
+.sbar:not([data-static]) .fmenu{
+  left:var(--pad); right:var(--pad);
+  max-width:none; min-width:0;
+  top:calc(100% + 6px);
+}
+.sbar:not([data-static]) .fmenu.right{ left:var(--pad); right:var(--pad); }
+/* the bar is a rail: the arrows overlay it, on paper so they never sit on a
+   half-covered control, and they disappear on their own once it all fits */
+.sbar .rail-float .rail-btn{
+  background:var(--paper);
+  box-shadow:inset 0 0 0 var(--hair) var(--ink-18);
+}
+.sbar .rail-float .rail-btn.prev{ left:max(2px,calc(var(--pad) - 42px)); }
+.sbar .rail-float .rail-btn.next{ right:max(2px,calc(var(--pad) - 42px)); }
+/* On a phone the gutter is 20px and an arrow is 34px, so an edge-hugging arrow
+   would sit permanently on top of the search field. Move the gutter off .sbar
+   and onto the track as a 34px inset, so the controls scroll UNDER the arrows
+   instead of starting beneath them. Only while the bar actually scrolls — a bar
+   with nothing to scroll hides its arrows and wants its normal gutter back. */
+@media (max-width:860px){
+  .sbar:not([data-static]){ padding-left:0; padding-right:0; }
+  .sbar:not([data-static]) .sbar-in{
+    padding-left:36px; padding-right:36px;
+    scroll-padding-left:36px; scroll-padding-right:36px;
+  }
+  .sbar:not([data-static]) .rail-float .rail-btn{ --rail-btn:30px; }
+  .sbar:not([data-static]) .rail-float .rail-btn.prev{ left:2px; }
+  .sbar:not([data-static]) .rail-float .rail-btn.next{ right:2px; }
+  .sbar:not([data-static]) .fmenu{ left:var(--pad); right:var(--pad); }
+}
+
+.sfield,.fbtn,.sel,.rng select,.sempty input{ border-color:var(--rule); border-radius:0; }
+.sfield{ height:42px; }
+.sfield input{ font-size:var(--fs-sm); }
+.sfield svg{ opacity:.45; }
+.fbtn{
+  font-family:var(--mono); font-size:var(--fs-xs);
+  text-transform:uppercase; letter-spacing:.1em;
+}
+.fbtn:hover{ border-color:var(--ink); }
+.fbtn[aria-expanded="true"]{ border-color:var(--ink); }
+.fbtn.on{ background:var(--blueline); color:var(--paper); border-color:var(--blueline); }
+
+/* -------------------------------------------------- search: dropdown menus */
+.fmenu{
+  border:var(--hair) solid var(--ink);
+  box-shadow:0 18px 44px rgba(20,20,20,.14);
+  padding:var(--sp-3); gap:var(--sp-2);
+}
+.fmenu h4,.fgrp h3,.sright label{
+  font-family:var(--mono); font-size:var(--fs-xxs);
+  text-transform:uppercase; letter-spacing:.18em; color:var(--ink-32);
+}
+.fmenu-foot{ border-top-color:var(--ink-18); }
+.opt{ font-size:var(--fs-sm); }
+.opt:hover{ background:var(--ink-03); }
+.opt input{ accent-color:var(--blueline); }
+.opt .cnt{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--ink-32); }
+.seg{
+  font-family:var(--mono); font-size:var(--fs-xs); border-color:var(--rule);
+  padding-top:10px; padding-bottom:10px;
+}
+.seg:hover{ border-color:var(--ink); }
+.seg:has(input:checked){ background:var(--blueline); border-color:var(--blueline); color:var(--paper); }
+.rng span{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.lnk-clear{
+  font-family:var(--mono); font-size:var(--fs-xs);
+  text-transform:uppercase; letter-spacing:.1em; color:var(--muted);
+}
+.btn-apply{
+  font-family:var(--mono); font-size:var(--fs-xs);
+  letter-spacing:var(--tr-caps); padding:12px 22px;
+}
+.btn-apply:hover{ background:var(--blueline); }
+/* the running count in a dropdown foot is a caption, not a headline */
+.fmenu-foot .scount,.fmodal-f .scount{
+  font-family:var(--mono); font-size:var(--fs-xs);
+  text-transform:uppercase; letter-spacing:.1em; color:var(--muted);
+}
+
+/* ------------------------------------------- search: the count, chips, sort */
+.sresults{
+  max-width:var(--maxw); margin-left:auto; margin-right:auto;
+  border-bottom:var(--hair) solid var(--ink);
+  padding-top:var(--sp-3); padding-bottom:var(--sp-3);
+  gap:10px var(--sp-3);
+}
+.sresults .scount{
+  font-family:var(--mono); font-size:var(--fs-xs);
+  text-transform:uppercase; letter-spacing:.14em; color:var(--muted);
+}
+/* the count is the one figure on this page set in the display face */
+.sresults .scount b{
+  font-family:var(--sans); font-weight:600;
+  font-size:clamp(1.3rem,2.4vw,1.9rem); letter-spacing:-.02em;
+  color:var(--ink); padding-right:5px; vertical-align:-.04em;
+}
+.chip-f{
+  font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.03em;
+  background:none; border:var(--hair) solid var(--rule);
+  padding:4px 6px 4px 10px;
+  transition:border-color .25s var(--ease);
+}
+.chip-f:hover{ border-color:var(--ink); }
+.sright .sel,.vtog button{ font-family:var(--mono); font-size:var(--fs-xs); }
+.sright .sel{ height:36px; }
+.vtog{ border-color:var(--rule); }
+.vtog button{ font-size:var(--fs-xxs); letter-spacing:var(--tr-caps); }
+
+/* the standing note. It sits above the bar so it is read before any result. */
+.srch-note{
+  padding-top:var(--sp-3); max-width:76ch;
+  border-top:var(--hair) solid var(--ink-18); margin-top:var(--sp-3);
+}
+.srch-note-h{
+  display:block; font-size:var(--fs-b); font-weight:500; color:var(--ink);
+}
+.srch-note-b{
+  display:block; font-family:var(--mono); font-size:var(--fs-xs);
+  line-height:1.7; color:var(--muted); letter-spacing:.01em; padding-top:8px;
+}
+
+/* --------------------------------------------------- search: the split view */
+.slist{ padding-top:var(--sp-4); padding-bottom:var(--sp-6); }
+.cards{
+  grid-template-columns:repeat(auto-fill,minmax(clamp(230px,20vw,300px),1fr));
+  gap:var(--sp-5) var(--sp-4);
+}
+@media (min-width:1060px){
+  .split > .smap{
+    top:calc(var(--hd-h) + var(--sbar-h));
+    height:calc(var(--vh100) - var(--hd-h) - var(--sbar-h));
+    border-left:var(--hair) solid var(--ink);
+  }
+}
+
+/* ------------------------------------------------------- search: the plates */
+.card{ background:none; }
+.card-img{ aspect-ratio:4 / 5; }                 /* tall crop, one building */
+.card:hover .card-img img,.card:focus-within .card-img img{ transform:scale(1.04); }
+.card-img::after{ box-shadow:inset 0 0 0 var(--hair) var(--ink); }
+.card:hover .card-img::after,.card:focus-within .card-img::after{ opacity:1; }
+/* the plate does not lift off the page; the map's pointer lands as a blue
+   frame and a blue number plate, which is this direction's active state */
+.card.lit{ transform:none; }
+.card.lit .card-img::after{ box-shadow:inset 0 0 0 2px var(--blueline); opacity:1; }
+.card.lit .card-no{ background:var(--blueline); color:var(--paper); }
+
+.card-no{
+  background:var(--paper); color:var(--ink);
+  font-family:var(--mono); font-size:var(--fs-cap); letter-spacing:.16em;
+  padding:6px 9px 5px;
+}
+.card-fav{
+  border-radius:0; right:0; top:0; width:32px; height:32px;
+  background:var(--paper-92);
+}
+.card-fav:hover{ transform:none; background:var(--paper); }
+.card-fav svg{ width:15px; height:15px; }
+.card-fav[aria-pressed="true"] svg{ stroke:var(--blueline); fill:var(--blueline); }
+
+.card-b{
+  padding-left:0; padding-right:0; padding-top:11px;
+  margin-top:11px; gap:4px;
+  border-top:var(--hair) solid var(--ink);
+}
+/* the display face, on the one figure a renter came for */
+.card-price{
+  font-family:var(--sans); font-weight:600;
+  font-size:clamp(1rem,1.35vw,1.2rem);
+  text-transform:uppercase; letter-spacing:-.004em;
+}
+.card-fx{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.card-nm{
+  font-size:var(--fs-m); font-weight:500; letter-spacing:-.008em;
+  transition:color .22s var(--ease);
+}
+.card:hover .card-nm,.card:focus-within .card-nm{ color:var(--blueline); }
+.card-ad{
+  font-family:var(--mono); font-size:var(--fs-cap); letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted);
+}
+.card-tags{ padding-top:3px; }
+.card-tags span{
+  font-family:var(--mono); font-size:var(--fs-xxs); letter-spacing:.1em;
+  border-color:var(--rule); color:var(--muted); padding:3px 7px 2px;
+}
+
+/* -------------------------------------------- search: empty state and modal */
+.sempty{ padding-top:var(--sp-6); padding-bottom:var(--sp-6); gap:var(--sp-3); }
+.sempty h3{
+  font-size:var(--fs-xl); font-weight:600; text-transform:uppercase;
+  letter-spacing:-.018em; line-height:1.06;
+}
+.sempty p{ font-size:var(--fs-m); color:var(--muted); }
+.sempty .card-ad{ text-transform:none; letter-spacing:.02em; }
+
+dialog.fmodal{ border:var(--hair) solid var(--ink); box-shadow:0 40px 90px rgba(20,20,20,.26); }
+dialog.fmodal::backdrop{ background:rgba(20,20,20,.52); }
+.fmodal-h,.fmodal-f{ border-color:var(--ink-18); }
+.fmodal-h h2{
+  font-size:1.05rem; font-weight:600; text-transform:uppercase; letter-spacing:-.008em;
+}
+
+/* =============================================================== the rails
+   core/rail.css draws a circular button on every direction; this one has no
+   radius anywhere, so the arrows are squares and the progress rule is a hairline
+   in ink. Every horizontal scroller in this direction is one of these, and none
+   of them shows a scrollbar — the arrows are the control. */
+.rail-btn{
+  border-radius:0;
+  background:var(--paper);
+  box-shadow:inset 0 0 0 var(--hair) var(--rule);
+}
+.rail-btn:hover:not(:disabled){
+  background:var(--ink); color:var(--paper);
+  box-shadow:inset 0 0 0 var(--hair) var(--ink);
+}
+.rail-btn:disabled{ opacity:.24; }
+.rail-count{
+  font-family:var(--mono); font-size:var(--fs-cap);
+  letter-spacing:.16em; color:var(--ink-32);
+}
+.rail-bar{ background:var(--ink-10); margin-top:var(--sp-2); }
+.rail-bar i{ background:var(--ink); }
+
+/* Audited for the client's "no visible scrollbar" request: after this pass the
+   only overflow:auto left in the direction is on the VERTICAL axis — the
+   typeahead list (.ta), the neighbourhood option list (.opts) and the tall
+   more-filters body (.fmodal-b). Those keep their native scrollbar on purpose:
+   they scroll up and down, they have no arrows, and a hidden vertical scrollbar
+   in a tall list hides the fact that there is more below. Every HORIZONTAL
+   scroller is a [data-rail] and shows arrows instead of a bar. */
+
+/* the building page's plates, printed large and walked with the arrows */
+.gal-track{ --rail-gap:var(--sp-3); align-items:flex-start; }
+.gal-track > .pc-frame{ flex:0 0 clamp(250px,40vw,620px); }
+.gal-nav{ justify-content:flex-end; margin-top:var(--sp-2); }
+@media (max-width:640px){ .gal-track > .pc-frame{ flex:0 0 82%; } }
+
+/* ---------------------------------------------------------------- 360px sort row
+   search.css sizes the sort row as vtog + label + a select with min-width:190px
+   and never lets .sright wrap, so the row is a fixed 359px. Inside the 320px
+   gutter of a 360px screen the select's right edge landed 19px off the page —
+   clipped, not scrollable, because html/body are overflow-x:clip. It fits from
+   399px up, so below that let the row take the full measure and wrap, and let
+   the select give way. Measured: 360 → cut 19px, 375 → 4px, 390 → fits. */
+@media (max-width:398px){
+  .sresults .sright{ margin-left:0; width:100%; flex-wrap:wrap; row-gap:10px; }
+  .sresults .sright .sel{ min-width:0; flex:1 1 150px; }
+}
+
+/* ============================================================ HERO SEARCH BAR */
+.hero-sub{ margin-top:16px; max-width:52ch; font-size:var(--fs-sm, .95rem); color:color-mix(in srgb, var(--paper) 82%, transparent); line-height:1.5; }
+.search.hs{ max-width:820px; }
+.hs-row{ flex-wrap:wrap; }
+.hs-row .search-field{ flex:1 1 240px; }
+.hs-sel{ flex:0 0 auto; display:grid; align-items:center; border-left:var(--hair) solid var(--ink-32); }
+.hs-sel select{ appearance:none; background:transparent; border:0; color:var(--ink); font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:.12em;
+  padding:10px 26px 10px 14px; cursor:pointer;
+  background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+  background-position:calc(100% - 13px) 50%,calc(100% - 8px) 50%; background-size:5px 5px; background-repeat:no-repeat; }
+.hs-sel select:focus{ outline:none; }
+@media (max-width:640px){ .hs-row .search-field{ flex-basis:100%; } .hs-sel{ border-left:0; } .hs-sel select{ padding-left:0; } }
+/* the two selects and the button share one row on a phone; a select's
+   intrinsic width is its longest option, which is what pushed Search down */
+@media (max-width:640px){
+  .hs-sel{ flex:1 1 0; min-width:0; }
+  .hs-sel select{ width:100%; min-width:0; }
+  .hs-row .search-btn{ padding-left:10px; }
+}
+
+/* ==========================================================================
+   ROUND 3 — CLIENT REVIEW, 11 September 2026
+   --------------------------------------------------------------------------
+   1. No property numbering anywhere a reader can see. The register number is
+      an internal id (data-no, for favourites and row↔pin sync) and is never
+      printed: every grid that reserved a --col-no gutter closes up, the
+      ruler's readout names the building instead of counting it, and the
+      typeahead drops its number column.
+   2. The home hero carries the client's own line and the search bar.
+   3. The search page opens on a compact head: breadcrumb, a modest H1, one
+      line — then the filter bar.
+   4. The building page, rebuilt as a listing page: full-bleed photograph,
+      a facts strip, a pinned action row, floor plans, photographs, the
+      listing copy, amenities with icons, the office and its map, nearby.
+   5. Footer lockup: mark and wordmark together.
+   Appended, never edited above. Same tokens, same easing, radius 0,
+   hairlines not boxes, longhand padding on everything that carries .wrap.
+   ========================================================================== */
+
+/* ---------------------------------------------- 1. the number gutter closes */
+.reg-cols{ grid-template-columns:minmax(0,1fr) var(--col-figs,154px); }
+.row-link{ grid-template-columns:minmax(0,1fr) var(--col-figs,154px); }
+@media (max-width:860px){ .row-link{ grid-template-columns:minmax(0,1fr) auto; } }
+@media (max-width:640px){ .row-link{ grid-template-columns:56px minmax(0,1fr) auto; } }
+.plate-cap{ grid-template-columns:minmax(0,1fr); }
+.plate-street{ grid-column:1; }
+.pc-cap{ grid-template-columns:minmax(0,1fr); }
+.pc-sub{ grid-column:1; }
+.ta a{ grid-template-columns:minmax(0,1fr) auto; }
+.ta-no{ display:none; }
+/* -------------------------------------------- 2. the search bar in the hero */
+.hero .search.hs{ margin-top:clamp(22px,3.4vh,40px); max-width:760px; }
+.hero .search-row{ border-bottom-color:var(--paper-70); }
+.hero .search-field{ color:var(--paper); }
+.hero .search-field::placeholder{ color:var(--paper-40); }
+.hero .search-btn{ color:var(--paper-92); }
+.hero .search-btn:hover,.hero .search-btn:focus-visible{ color:var(--paper); }
+.hero .hs-sel{ border-left-color:var(--paper-40); }
+.hero .hs-sel select{ color:var(--paper); }
+.hero .hs-sel select option{ color:var(--ink); background:var(--paper); }
+.hero .ta{ color:var(--ink); }
+.js .hero .search{ animation:pl-fade .8s var(--ease) .44s both; }
+.hero-sub{ font-size:var(--fs-m); max-width:48ch; }
+
+/* ------------------------------------------- 3. the search page's short head */
+.shead{ margin-top:var(--hd-h); padding-top:18px; padding-bottom:18px; }
+.crumb{
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:8px;
+  font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.06em;
+  text-transform:uppercase; color:var(--muted);
+}
+.crumb a:hover,.crumb a:focus-visible{ color:var(--blueline); }
+.crumb [aria-current]{ color:var(--ink); }
+.crumb span[aria-hidden]{ color:var(--ink-32); }
+.shead-h{
+  font-size:clamp(1.5rem,2.6vw,2.1rem); font-weight:600; text-transform:uppercase;
+  letter-spacing:-.018em; line-height:1.06; padding-top:8px;
+}
+.shead-sub{ font-size:var(--fs-b); color:var(--muted); padding-top:6px; }
+/* the shared sheet sizes .sfield 300–420px, but the bar is also a rail and
+   rail.css's `.rail-track > *{flex:0 0 auto}` loads after it and pins the field
+   at its 300px floor. Restore the grow so the field takes the room it has; the
+   input inside stays borderless, one box only. */
+.sbar .sbar-in > .sfield{ flex:1 1 300px; }
+.sfield input{ border:0; box-shadow:none; }
+
+/* ======================================================= 4. the building page */
+
+/* ---- the building, full bleed ---- */
+.bh{
+  position:relative; isolation:isolate; overflow:clip;
+  height:calc(var(--vh100) * .84); min-height:540px; max-height:960px;
+  display:flex; align-items:flex-end;
+  background:var(--deep); color:var(--paper);
+}
+.bh-frame{ position:absolute; inset:0; z-index:0; }
+.bh-img{ width:100%; height:100%; object-fit:cover; }
+.bh-scrim{
+  position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:
+    linear-gradient(to top,var(--deep-88) 0%,var(--deep-44) 34%,transparent 66%),
+    linear-gradient(to bottom,var(--deep-44) 0%,transparent 24%);
+}
+.bh-in{ position:relative; z-index:2; width:100%; padding-bottom:clamp(36px,6vh,72px); }
+.crumb-inv{ color:var(--paper-70); text-shadow:0 1px 12px rgba(20,20,20,.6); }
+.crumb-inv a:hover,.crumb-inv a:focus-visible{ color:var(--paper); }
+.crumb-inv span[aria-hidden]{ color:var(--paper-40); }
+.bh-h{
+  font-family:var(--sans); font-size:var(--fs-run); font-weight:300;
+  line-height:.96; letter-spacing:-.02em; color:var(--paper); max-width:16ch;
+  padding-top:clamp(14px,2.4vh,26px);
+  -webkit-text-stroke:.6px rgba(20,20,20,.3); paint-order:stroke fill;
+}
+@media (max-width:640px){ .bh-h{ -webkit-text-stroke-width:.35px; } }
+@supports not (-webkit-text-stroke:1px currentColor){ .bh-h{ text-shadow:0 2px 26px rgba(20,20,20,.55); } }
+.bh-addr{
+  display:flex; flex-wrap:wrap; gap:6px 22px; align-items:baseline;
+  font-family:var(--mono); font-size:var(--fs-cap); letter-spacing:var(--tr-cap);
+  text-transform:uppercase; color:var(--paper-92);
+  padding-top:clamp(14px,2.2vh,24px); text-shadow:0 1px 12px rgba(20,20,20,.6);
+}
+.bh-addr a{ color:var(--paper-70); transition:color .28s var(--ease); }
+.bh-addr a:hover,.bh-addr a:focus-visible{ color:var(--paper); }
+.js .bh-img{ animation:pl-settle 1.2s var(--ease) both; }
+.js .bh-scrim{ animation:pl-fade 1.2s var(--ease) both; }
+.js .crumb-inv,.js .bh-addr{ animation:pl-fade .8s var(--ease) .34s both; }
+
+/* ---- the facts strip: four figures in the display face, ruled ---- */
+.bh-facts{ border-bottom:var(--hair) solid var(--ink); }
+.facts{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); }
+.fact{ padding-top:clamp(18px,2.6vh,28px); padding-bottom:clamp(18px,2.6vh,28px); padding-right:16px; min-width:0; }
+.fact + .fact{ border-left:var(--hair) solid var(--rule-60); padding-left:clamp(16px,2vw,32px); }
+.fact dt{ font-family:var(--mono); font-size:var(--fs-xxs); text-transform:uppercase; letter-spacing:.14em; color:var(--muted); }
+.fact dd{
+  font-family:var(--sans); font-weight:300; font-size:clamp(1.3rem,2.3vw,2.1rem);
+  line-height:1.1; letter-spacing:-.02em; padding-top:8px; overflow-wrap:anywhere;
+}
+.fact-rent dd{ font-weight:500; }
+@media (max-width:760px){
+  .facts{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .fact:nth-child(odd){ border-left:0; padding-left:0; }
+  .fact:nth-child(n+3){ border-top:var(--hair) solid var(--rule-60); }
+}
+
+/* ---- the action row, pinned under the header ---- */
+.acts{
+  position:sticky; top:var(--hd-h); z-index:70;
+  background:var(--paper-92); backdrop-filter:blur(10px);
+  border-bottom:var(--hair) solid var(--ink-18);
+}
+@supports not (backdrop-filter:blur(2px)){ .acts{ background:var(--paper); } }
+.acts-in{
+  display:flex; align-items:center; justify-content:space-between; gap:16px;
+  padding-top:10px; padding-bottom:10px;
+}
+.acts-name{
+  font-size:var(--fs-b); font-weight:500; letter-spacing:-.004em;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0;
+}
+.acts-btns{ display:flex; flex-wrap:nowrap; gap:8px; flex:0 1 auto; }
+.acts-btns .btn{ flex:0 0 auto; padding-top:11px; padding-bottom:11px; }
+.acts-btns .ai{ width:14px; height:14px; }
+.acts-tel{ color:var(--muted); letter-spacing:.04em; transition:color .26s var(--ease); }
+.btn:hover .acts-tel,.btn:focus-visible .acts-tel{ color:inherit; }
+.btn-s{ display:none; }
+@media (max-width:900px){
+  .acts-name{ display:none; }
+  .acts-btns{ width:100%; flex-wrap:wrap; }
+  .acts-btns .btn{ flex:1 1 auto; min-width:max-content; }
+  .acts-tel{ display:none; }
+}
+/* on a phone the row is one line of three: the long labels step aside for
+   short ones (the accessible names stay on the aria-labels) */
+@media (max-width:640px){
+  .acts .btn-l{ display:none; }
+  .acts .btn-s{ display:inline; }
+  .acts-btns{ gap:6px; }
+  .acts-btns .btn{ padding-left:10px; padding-right:10px; }
+  .acts-btns .btn-flag{ flex-grow:2; }
+}
+
+/* ---- sections ---- */
+.bsec{ padding-top:var(--sp-6); padding-bottom:var(--sp-6); border-top:var(--hair) solid var(--ink-18); }
+.acts + .bsec{ border-top:0; }
+.bsec-h{ font-size:var(--fs-xl); font-weight:600; letter-spacing:-.018em; line-height:1.14; max-width:28ch; }
+.bsec-at{ font-weight:300; color:var(--muted); }
+.bsec-foot{ padding-top:var(--sp-3); max-width:70ch; }
+.bsec-foot a{ color:var(--blueline); text-decoration:underline; text-underline-offset:.18em; text-decoration-color:var(--blue-14); }
+.bsec-foot a:hover,.bsec-foot a:focus-visible{ text-decoration-color:currentColor; }
+
+/* ---- floor plans: a ruled table, the rent in the display face ---- */
+.plans{ width:100%; border-collapse:collapse; margin-top:var(--sp-4); border-top:var(--hair) solid var(--ink); }
+.plans th{
+  font-family:var(--mono); font-weight:400; font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.12em; color:var(--ink-32); text-align:left;
+  padding:10px 18px 8px 0; border-bottom:var(--hair) solid var(--rule-60);
+}
+.plans td{
+  padding:16px 18px 16px 0; border-bottom:var(--hair) solid var(--rule-60);
+  vertical-align:baseline; font-family:var(--mono); font-size:var(--fs-sm);
+}
+.plans td.pl-name{ font-family:var(--sans); font-size:var(--fs-m); font-weight:500; letter-spacing:-.006em; }
+.plans td.pl-name a{ transition:color .22s var(--ease); }
+.plans td.pl-name a:hover,.plans td.pl-name a:focus-visible{ color:var(--blueline); }
+.plans td.pl-rent{ font-family:var(--sans); font-size:clamp(1.05rem,1.5vw,1.3rem); font-weight:500; letter-spacing:-.01em; white-space:nowrap; }
+.plans td.pl-go{ text-align:right; padding-right:0; white-space:nowrap; }
+.plans td.pl-go a{
+  display:inline-flex; align-items:baseline; gap:8px; color:var(--blueline);
+  font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:.1em;
+}
+.plans td.pl-go a::after{ content:"\2192"; transition:transform .28s var(--ease); }
+.plans td.pl-go a:hover::after,.plans td.pl-go a:focus-visible::after{ transform:translateX(4px); }
+.plans .is-none{ color:var(--ink-32); }
+.plans tbody tr{ transition:background-color .22s var(--ease); }
+.plans tbody tr:hover{ background:var(--ink-03); }
+.plans-none{ font-size:var(--fs-l); line-height:1.48; max-width:44ch; padding-top:var(--sp-3); }
+.plans-none a{ color:var(--blueline); text-decoration:underline; text-underline-offset:.18em; }
+@media (max-width:860px){
+  .plans thead{ display:none; }
+  .plans,.plans tbody,.plans td{ display:block; }
+  .plans tr{
+    display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px 18px;
+    padding:16px 0; border-bottom:var(--hair) solid var(--rule-60);
+  }
+  .plans td{ padding:0; border:0; }
+  .plans td[data-l]::before{
+    content:attr(data-l); display:block; font-family:var(--mono); font-size:var(--fs-xxs);
+    text-transform:uppercase; letter-spacing:.12em; color:var(--ink-32); padding-bottom:3px;
+  }
+  .plans td.pl-name{ grid-column:1 / -1; }
+  .plans td.pl-name::before{ display:none; }
+  .plans td.pl-go{ grid-column:1 / -1; text-align:left; }
+}
+
+/* ---- the photographs, printed large ---- */
+.bgal-track{ --rail-gap:var(--sp-3); align-items:flex-start; margin-top:var(--sp-3); }
+.bgal-fr{ flex:0 0 clamp(280px,64vw,980px); position:relative; overflow:clip; background:var(--paper-2); aspect-ratio:3 / 2; }
+.bgal-fr img{ width:100%; height:100%; object-fit:cover; }
+@media (max-width:640px){ .bgal-fr{ flex-basis:86%; } }
+
+/* ---- the listing copy ---- */
+.bsec-desc .prose{ max-width:72ch; }
+
+/* ---- amenities, with icons: stroke only, inheriting currentColor ---- */
+.amen2{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--sp-4) var(--plate-gap); padding-top:var(--sp-4); }
+.amen-h{
+  font-family:var(--mono); font-weight:400; font-size:var(--fs-xxs); text-transform:uppercase;
+  letter-spacing:.14em; color:var(--muted); border-bottom:var(--hair) solid var(--ink); padding-bottom:10px;
+}
+.ailist{ list-style:none; }
+.ailist li{
+  display:flex; align-items:center; gap:14px;
+  padding-top:12px; padding-bottom:12px; border-bottom:var(--hair) solid var(--rule-60);
+  font-size:var(--fs-b);
+}
+.ai{
+  width:20px; height:20px; flex:0 0 auto; display:inline-block; color:inherit;
+  fill:none; stroke:currentColor; stroke-width:1.4; stroke-linecap:round; stroke-linejoin:round;
+}
+.ailist .ai{ color:var(--ink-70); }
+@media (max-width:640px){ .amen2{ grid-template-columns:minmax(0,1fr); } }
+
+/* ---- the office, and where it stands ---- */
+.office{ display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:var(--sp-4) var(--plate-gap); align-items:stretch; }
+.office-list{ border-top:var(--hair) solid var(--ink); margin-top:var(--sp-4); }
+.office-row{
+  display:grid; grid-template-columns:24px minmax(0,1fr); gap:14px; align-items:start;
+  padding-top:14px; padding-bottom:14px; border-bottom:var(--hair) solid var(--rule-60);
+  font-size:var(--fs-b);
+}
+.office-row dt .ai{ color:var(--muted); position:relative; top:2px; }
+.office-tel{
+  display:inline-block; font-family:var(--sans); font-size:clamp(1.3rem,2.2vw,1.9rem); font-weight:400;
+  letter-spacing:-.015em; line-height:1.1; border-bottom:2px solid var(--ink); padding-bottom:3px;
+  transition:color .24s var(--ease),border-color .24s var(--ease);
+}
+.office-tel:hover,.office-tel:focus-visible{ color:var(--blueline); border-bottom-color:var(--blueline); }
+.office-row .map-dir{ margin-top:8px; font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:.1em; }
+.office-map{ min-width:0; }
+.office-map .mapbox{ min-height:clamp(380px,52vh,600px); height:100%; box-shadow:inset 0 0 0 var(--hair) var(--ink-18); }
+@media (max-width:900px){
+  .office{ grid-template-columns:minmax(0,1fr); }
+  .office-map .mapbox{ height:auto; }
+}
+
+/* ---- nearby: four tall plates, no numbers ---- */
+.near{ list-style:none; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:var(--sp-4) var(--sp-3); padding-top:var(--sp-4); }
+.near-it a{ display:block; }
+.near-fr{ display:block; position:relative; overflow:clip; background:var(--paper-2); aspect-ratio:4 / 5; }
+.near-fr img{ width:100%; height:100%; object-fit:cover; transition:transform .9s var(--ease); }
+.near-it a:hover .near-fr img,.near-it a:focus-visible .near-fr img{ transform:scale(1.04); }
+.near-nm{
+  display:block; font-size:var(--fs-m); font-weight:500; letter-spacing:-.008em;
+  padding-top:12px; border-top:var(--hair) solid var(--ink); margin-top:12px; transition:color .22s var(--ease);
+}
+.near-it a:hover .near-nm,.near-it a:focus-visible .near-nm{ color:var(--blueline); }
+.near-st,.near-fx{ display:block; font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); padding-top:3px; }
+@media (max-width:900px){ .near{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+/* ---------------------------------------------- 5. the footer lockup */
+.colo-mark{ gap:12px; }
+.colo-mark svg{ width:26px; height:26px; }
+.colo-mark b{ font-size:var(--fs-sm); letter-spacing:.22em; }
+
+/* ---- floors ---- */
+@media (prefers-reduced-motion:reduce){
+  .near-fr img,.plans tbody tr,.plans td.pl-go a::after,.office-tel,.bh-addr a,.acts-tel,.near-nm{ transition:none !important; }
+  .near-it a:hover .near-fr img{ transform:none; }
+}
+@media print{ .acts{ display:none !important; } .bh{ height:auto; min-height:0; } }
+
+/* ---- ROUND 3, after browser verification on 11 September 2026 ----
+   1. At 640px and below the hero's two selects carried flex-basis 0, so they
+      stayed on the text field's line with no room left and rendered 0px wide
+      (only a caret peeked past the right edge on a 360px phone). A real basis
+      wraps them onto their own line, shared with the Search button. */
+@media (max-width:640px){
+  .hs-row .hs-sel{ flex:1 1 96px; min-width:0; }
+  .hs-row .search-btn{ flex:0 0 auto; }
+}
+/* 2. The pinned action row wrapped Save onto a second line on a 360px phone by
+      four pixels (180 + 78 + 54 plus two 6px gaps in a 320px gutter). Trimmed
+      padding and gaps keep the three on one line down to 346px wide; below
+      that Save still wraps rather than clipping (CONVENTIONS §4). */
+@media (max-width:640px){
+  .acts-btns{ gap:5px; }
+  .acts-btns .btn{ padding-left:8px; padding-right:8px; gap:8px; }
+}
+
+/* ==========================================================================
+   ROUND 4 — CLIENT REVIEW, 11 September 2026 (second note)
+   --------------------------------------------------------------------------
+   Reviewed at ~2000px wide. Three notes, all binding:
+   1. One left inset per page. The header, the page head and every content
+      block share the column's own gutter (--edge) at any width, and the nav's
+      right edge is the content's right edge. On the search page the map may
+      run to the right edge of the screen; everything else lines up.
+   2. The search skin belongs to this design, and the More-filters modal keeps
+      its scrollbar inside the paper box, between the two hairlines.
+   3. The map is colour cartography now; the pins are checked against it.
+   Appended, never edited above. Same tokens, same easing, radius 0, hairlines
+   not boxes, longhand padding on everything that carries .wrap.
+   ========================================================================== */
+
+/* ------------------------------------------------- 1. one inset per page */
+/* The header carried .wrap-n, so its BOX was the 1560px column: at 1920 the
+   frosted band and its hairline began 180px in from the screen edge and read
+   as a floating bar. The band now runs edge to edge and its gutter is
+   --edge — the same expression the column resolves to — so the mark sits
+   over the H1 at 272 on a 1920 screen and at 72 on a 1440 one, with nothing
+   else moving. (--edge's 100% resolves against the header's containing block,
+   which for a fixed element is the viewport.) */
+.hd.wrap-n{
+  max-width:none;
+  padding-left:var(--edge); padding-right:var(--edge);
+}
+.hd::after{ left:var(--edge); right:var(--edge); }
+
+/* search.css writes `.sbar[data-rail]{top:0}` at two classes' worth of
+   specificity, which beat the one-class `top:var(--hd-h)` above: the bar was
+   sticking UNDER the fixed header and only surfaced once the header retracted.
+   Restated at matching specificity. */
+.sbar[data-rail]{ top:var(--hd-h); }
+
+/* The count rail was a centred 1560px box with the gutter inside it: its rule
+   started at 180 while its text sat at 272. The box itself now sits on --edge,
+   so the rule closes the row exactly under the column, like every other
+   closing rule in this direction. Sort's right edge is the nav's right edge. */
+.sresults{
+  width:auto; max-width:none;
+  margin-left:var(--edge); margin-right:var(--edge);
+  padding-left:0; padding-right:0;
+}
+/* The list took a bare --pad gutter (92 at 1920) while the head above it sat
+   at 272. The split now starts on --edge and the list drops its own left
+   gutter; the map is the second column and keeps running to the screen edge,
+   as a marketplace map does. Below the split the list keeps --pad, which is
+   what --edge resolves to at those widths anyway. */
+@media (min-width:1060px){
+  .split{ padding-left:var(--edge); }
+  .slist{ padding-left:0; }
+}
+
+/* neighbourhood pages: the caption under a full-bleed map carried the wrap
+   classes itself, so its box began at 180 with the text at 272. Box on --edge. */
+.mapbleed .map-foot{
+  width:auto; max-width:none;
+  padding-left:0; padding-right:0;
+  margin-left:var(--edge); margin-right:var(--edge);
+}
+/* buildings.html: the atlas key sits outside .reg's wrap and printed from x=0 */
+.view-pane > .map-key{ margin-left:var(--edge); margin-right:var(--edge); }
+
+/* ------------------------------------------- 2. the search skin, properly
+   The shared module is dressed here in this direction's own terms: Libre
+   Franklin for the modal title and the count, IBM Plex Mono — uppercase,
+   tracked — for every label, kicker and figure; hairlines in --rule at the
+   edges and --ink where a block opens or closes; an ink check on paper; one
+   chevron (the .fbtn's own path) drawn on every select; 4/8px spacing. */
+
+/* ---- the bar ---- */
+.sfield input{ font-family:var(--mono); font-size:var(--fs-sm); letter-spacing:.01em; }
+.sfield input::placeholder{ color:var(--ink-32); }
+.sfield:focus-within{ border-color:var(--ink); }
+.fbtn{ gap:10px; padding-left:14px; padding-right:12px; }
+.fbtn .cav{ width:9px; height:6px; stroke-width:1.6; }
+
+/* every select on the page is drawn like a filter button: 42px, a --rule
+   hairline, mono caps, and the same chevron path the buttons carry inline */
+[data-search] .sel,[data-search] .rng select{
+  height:42px; padding-left:12px; padding-right:34px;
+  font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:.1em;
+  color:var(--ink); background-color:var(--paper);
+  border:var(--hair) solid var(--rule); border-radius:0; appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23141414' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-size:9px 6px; background-position:right 14px center; background-repeat:no-repeat;
+  transition:border-color .25s var(--ease);
+}
+[data-search] .sel:hover,[data-search] .rng select:hover{ border-color:var(--ink); }
+.sright{ gap:12px; }
+.sright .sel{ width:auto; min-width:200px; height:42px; }
+.sright label{ color:var(--muted); letter-spacing:.14em; }
+.vtog{ border-color:var(--rule); }
+.vtog button{ height:40px; padding-top:0; padding-bottom:0; }
+
+/* ---- the dropdowns ---- */
+.fmenu{
+  min-width:300px;
+  border:var(--hair) solid var(--ink);
+  box-shadow:0 12px 28px rgba(20,20,20,.08);
+  padding:var(--sp-3) var(--sp-3) var(--sp-2); gap:var(--sp-2);
+}
+/* a kicker with the block's opening rule under it — the .amen-h / .colo-h
+   pattern — for the dropdown headings and the modal's group headings */
+.fmenu h4,.fgrp h3{
+  font-family:var(--mono); font-weight:400; font-size:var(--fs-xxs);
+  text-transform:uppercase; letter-spacing:.14em; color:var(--muted);
+  border-bottom:var(--hair) solid var(--ink); padding-bottom:8px;
+}
+.fmenu-foot{
+  border-top:var(--hair) solid var(--rule-60);
+  padding-top:12px; gap:12px;
+}
+.opts{ gap:0; }
+/* option rows: a ruled list, 44px to the row so the whole line is the target */
+.opt{
+  gap:12px; min-height:44px; padding:0 4px;
+  font-size:var(--fs-sm);
+  border-bottom:var(--hair) solid var(--rule-60);
+  transition:background-color .2s var(--ease);
+}
+.opts .opt:last-child{ border-bottom:0; }
+.opt:hover{ background:var(--ink-03); }
+.opt .cnt{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--ink-32); letter-spacing:.02em; }
+.opt:hover .cnt{ color:var(--muted); }
+/* the checkbox: a hairline square in --rule, ink when checked, a paper check */
+[data-search] .opt input{
+  appearance:none; -webkit-appearance:none;
+  width:16px; height:16px; margin:0; flex:0 0 auto;
+  display:grid; place-items:center;
+  border:var(--hair) solid var(--rule); background:var(--paper); border-radius:0;
+  cursor:pointer;
+  transition:background-color .2s var(--ease),border-color .2s var(--ease);
+}
+[data-search] .opt input::before{
+  content:""; width:9px; height:5px;
+  border-left:1.5px solid var(--paper); border-bottom:1.5px solid var(--paper);
+  transform:translateY(-1px) rotate(-45deg) scale(0);
+  transition:transform .18s var(--ease);
+}
+[data-search] .opt:hover input{ border-color:var(--ink); }
+[data-search] .opt input:checked{ background:var(--ink); border-color:var(--ink); }
+[data-search] .opt input:checked::before{ transform:translateY(-1px) rotate(-45deg) scale(1); }
+[data-search] .opt input:focus-visible{ outline:2px solid var(--focus); outline-offset:2px; }
+/* the bed and bath pills: 42px, like the buttons that open them */
+.segs{ gap:8px; }
+.seg{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:42px; padding:0 12px; letter-spacing:.08em;
+}
+.rng{ gap:8px; }
+.rng span{ text-transform:uppercase; letter-spacing:.1em; }
+.fmenu .card-ad{ font-family:var(--mono); font-size:var(--fs-xs); text-transform:none; letter-spacing:.01em; line-height:1.6; color:var(--muted); }
+.lnk-clear{ text-decoration-color:var(--ink-18); text-underline-offset:4px; transition:color .22s var(--ease); }
+.lnk-clear:hover,.lnk-clear:focus-visible{ color:var(--ink); }
+.lnk-clear:disabled{ color:var(--ink-32); text-decoration:none; cursor:default; }
+
+/* ---- the count rail and the chips ---- */
+.sresults{ gap:8px var(--sp-3); }
+.sresults .scount b{ padding-right:8px; }
+.chips{ gap:8px; }
+.chip-f{
+  height:32px; padding:0 4px 0 10px; gap:6px;
+  font-size:var(--fs-xs); letter-spacing:.06em; text-transform:uppercase;
+  border:var(--hair) solid var(--rule); background:none;
+}
+.chip-f:hover{ border-color:var(--ink); }
+.chip-f button{ width:24px; height:24px; opacity:.5; transition:opacity .2s var(--ease); }
+.chip-f button:hover,.chip-f button:focus-visible{ opacity:1; }
+.chip-f svg{ width:9px; height:9px; stroke-width:1.5; }
+.snote{ font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.02em; color:var(--muted); }
+
+/* ---- the apply button, in the .btn-ink idiom ---- */
+.btn-apply{
+  border:var(--hair) solid var(--ink); background:var(--ink); color:var(--paper);
+  padding:0 20px; height:42px; display:inline-flex; align-items:center; gap:8px;
+  letter-spacing:.12em; line-height:1;
+  transition:background-color .26s var(--ease),color .26s var(--ease);
+}
+.btn-apply:hover,.btn-apply:focus-visible{ background:transparent; color:var(--ink); }
+.btn-apply [data-count]{ font-variant-numeric:tabular-nums; }
+
+/* ---- the More-filters modal ----
+   A paper box with an ink hairline, a title in the display face, and two ink
+   rules — one under the head, one over the foot. search.css already makes the
+   dialog a flex column with overflow:hidden and scrolls .fmodal-b between the
+   two, so the thin scrollbar is drawn inside the box between those rules,
+   never hanging off its edge. Radius 0 on the thumb, as everywhere else. */
+dialog.fmodal{
+  width:min(700px,94vw);
+  border:var(--hair) solid var(--ink);
+  box-shadow:0 30px 80px rgba(20,20,20,.22);
+}
+dialog.fmodal::backdrop{ background:rgba(20,20,20,.5); backdrop-filter:blur(2px); }
+.fmodal-h{
+  padding:var(--sp-3) var(--sp-4);
+  border-bottom:var(--hair) solid var(--ink);
+}
+.fmodal-h h2{
+  font-family:var(--sans); font-size:clamp(1.3rem,2.2vw,1.65rem); font-weight:600;
+  text-transform:uppercase; letter-spacing:-.018em; line-height:1.06;
+}
+.fmodal-x{
+  width:36px; height:36px; margin-right:-8px;
+  box-shadow:inset 0 0 0 var(--hair) transparent;
+  transition:box-shadow .22s var(--ease),background-color .22s var(--ease),color .22s var(--ease);
+}
+.fmodal-x:hover,.fmodal-x:focus-visible{ box-shadow:inset 0 0 0 var(--hair) var(--ink); }
+.fmodal-x svg{ width:12px; height:12px; stroke-width:1.4; }
+.fmodal-b{
+  padding:var(--sp-4); gap:var(--sp-4);
+  scrollbar-color:var(--ink-32) transparent;
+}
+.fmodal-b::-webkit-scrollbar{ width:8px; }
+.fmodal-b::-webkit-scrollbar-thumb{ background:var(--ink-32); border-radius:0; }
+.fmodal-b::-webkit-scrollbar-track{ background:transparent; }
+.fgrp{ gap:0; }
+.fgrp > .sel{ margin-top:12px; }
+/* two ruled columns, like the building page's amenity lists */
+.fgrid{ gap:0 var(--sp-4); }
+.fgrid .opt{ padding-left:0; padding-right:0; }
+.fmodal-f{
+  padding:var(--sp-3) var(--sp-4);
+  border-top:var(--hair) solid var(--ink);
+  gap:8px 16px;
+}
+@media (max-width:480px){
+  .fmodal-h,.fmodal-b,.fmodal-f{ padding-left:var(--sp-3); padding-right:var(--sp-3); }
+  /* the foot's two controls do not share 280px; the button leads, full width */
+  .fmodal-f{ flex-wrap:wrap; }
+  .fmodal-f .btn-apply{ flex:1 1 100%; order:-1; justify-content:center; }
+}
+
+/* ---- the empty state ---- */
+.sempty input{ font-family:var(--mono); font-size:var(--fs-sm); border-color:var(--rule); }
+.sempty input:focus{ border-color:var(--ink); }
+
+/* -------------------------------------------------- 3. pins on colour tiles
+   OpenStreetMap's cartography is white roads on pale beige, so the paper
+   pill's 22%-ink ring all but vanished over a street. A firmer ring and the
+   register's mono figure. The lit state is this direction's active colour
+   (--blueline), not the mark's teal: --brand is remapped inside the map only,
+   so the mark itself is untouched. Dots keep map.css's ink-on-paper-ring,
+   which reads on every tile here. */
+.wr-map{ --brand:var(--blueline); }
+.wr-pin.price{
+  box-shadow:0 0 0 var(--hair) var(--ink-32), 0 2px 8px rgba(20,20,20,.16);
+}
+.wr-pin.price i{ font-family:var(--mono); font-size:var(--fs-xs); font-weight:500; letter-spacing:.02em; }
+.leaflet-marker-icon:hover .wr-pin.price,
+.leaflet-marker-icon:focus-visible .wr-pin.price,
+.wr-pin.price.lit{ box-shadow:0 0 0 var(--hair) var(--ink), 0 8px 22px rgba(20,20,20,.3); }
+.wr-pop-nm{ font-weight:500; letter-spacing:-.006em; }
+.wr-pop-st,.wr-pop-fx{ font-family:var(--mono); font-size:var(--fs-xs); letter-spacing:.02em; }
+
+/* -------------------------------------------- 4. two things a 360px screen clipped
+   html/body are overflow-x:clip, so neither scrolled sideways — they were cut.
+   contact.html: editorial.css's `.ed-two{grid-template-columns:1fr 1fr}` lets
+   each column grow to an input's intrinsic width, 388px in a 320px gutter.
+   neighborhoods.html: a .btn is min-width:max-content by contract (§4), and
+   "The 2 buildings in Palms · Motor Avenue" is 347px on its own. */
+.ed-form .ed-two{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+.ed-form input,.ed-form select,.ed-form textarea{ min-width:0; width:100%; }
+@media (max-width:480px){ .ed-form .ed-two{ grid-template-columns:minmax(0,1fr); } }
+@media (max-width:420px){
+  .areas .btn{ min-width:0; white-space:normal; line-height:1.4; text-align:left; padding-top:10px; padding-bottom:10px; }
+}
+
+/* ---- floors ---- */
+@media (prefers-reduced-motion:reduce){
+  [data-search] .sel,[data-search] .rng select,[data-search] .opt input,[data-search] .opt input::before,
+  .chip-f button,.btn-apply,.lnk-clear,.fmodal-x{ transition:none !important; }
+}
+
+/* the bed and bath pills sit in one row: six of them at 44px plus their gaps
+   need 306px, and the popover's 300px floor put "5+" on a line of its own.
+   Guarded — without :has() the row simply wraps, as it did. On a phone the
+   popover is already a full-width sheet (.sbar:not([data-static]) above). */
+.seg{ min-width:44px; padding-left:8px; padding-right:8px; }
+.segs{ gap:6px; }
+@supports selector(:has(*)){
+  .fmenu:has(.segs){ min-width:360px; }
+}
+
+/* search.css sets the standard scrollbar-width / scrollbar-color on the modal
+   body, and Chrome ignores every ::-webkit-scrollbar rule while either is set
+   — so on a Mac the modal got the system overlay bar, which is invisible until
+   it moves. Back to `auto` here, which lets the 8px radius-0 ink thumb above
+   draw: always visible, inside the paper box, between the two rules. Firefox
+   keeps its own thin bar in the same place. */
+.fmodal-b{ scrollbar-width:auto; scrollbar-color:auto; }
+
+/* ---------------------------------------------- 1b. the rules, re-measured
+   The fixes above were measured on text: every heading and paragraph sits at
+   272 on a 1920 screen. The RULES were not, and seven of them still drew across
+   the 1560px box — 180→1740 — while the words inside sat at 272→1648 (at 1440
+   the box is the viewport, so they ran edge to edge). Same cause as .map-foot
+   and .sresults: a .wrap.wrap-n section that also carries a border. Same
+   answer: the box moves onto --edge with its gutter removed, so the rule
+   closes exactly under the column at every width and no text moves. Named
+   one by one — a band that bleeds on purpose (.acts, .sbar, .mapbleed, the
+   home page's .essay-fig) keeps its full-width rule. */
+.pagehead.wrap-n,.essay.wrap-n,.bh-facts.wrap-n,.bsec.wrap-n,.ed-stats.wrap-n,
+.reg-legend.wrap-n,.avail-line.wrap-n{
+  width:auto; max-width:none;
+  padding-left:0; padding-right:0;
+  margin-left:var(--edge); margin-right:var(--edge);
+}
+
+/* The building page's photograph rail (rail.css's .rail-track.bleed) bleeds on
+   purpose and stopped bleeding past 1560: it undoes its container's gutter
+   with a negative margin written in --pad, but above 1560 + 2·pad the gutter
+   is --edge, not --pad — and --edge cannot be reused for the margin, because
+   its `100%` resolves against the item's own grid area (1376px at 1920), so
+   it came out at 92 and a "bleed" photograph started 180px in: a floating box
+   beside a column at 272. The container pads with the viewport's --edge, so
+   the margin that undoes it is written against the viewport too: the same
+   expression with 100vw in place of 100%. Below 1560 + 2·pad both forms are
+   --pad, so nothing changes on a phone. */
+:root{ --edge-vw:max(var(--pad),(100vw - var(--maxw)) / 2 + var(--pad)); }
+.bgal .rail-track.bleed{
+  margin-left:calc(-1 * var(--edge-vw)); margin-right:calc(-1 * var(--edge-vw));
+  padding-left:var(--edge-vw); padding-right:var(--edge-vw);
+  scroll-padding-left:var(--edge-vw);
+}
+
+/* ==========================================================================
+   ROUND 5 — CLIENT REVIEW, 11 September 2026 (third note)
+   --------------------------------------------------------------------------
+   Five notes, all binding:
+   1. The home page is a home page: five screens, not the book. (gen_register)
+   2. The book moves to buildings.html › Photographs as an orderly grid.
+      (section 5 of the book layer, rewritten in place above)
+   3. No blank band above any pinned bar; the ruler is clickable, draggable
+      and a keyboard slider.
+   4. Footer: no bullets, the count after its label.
+   5. No visible register numbers; FACT-CHECK; one gutter.
+   Appended, never edited above except where a note said "remove". Same
+   tokens, same easing, radius 0, hairlines not boxes, longhand padding on
+   everything that carries .wrap.
+   ========================================================================== */
+
+/* ------------------------------------------- 3a. the header stays put
+   core.js still classes the header .up on a scroll-down and .frost on a
+   scroll-up (shared; not touched). base.css slid the .up header away, which
+   left a 62px slot above every bar pinned at top:var(--hd-h) — the ruler, the
+   search page's filter bar, the building page's action row, the register's
+   group heads — and each of them painted a paper band over the slot. The
+   client saw the band. So the header no longer retracts: once past the hero
+   it frosts, whichever way the page is moving, and every bar sits directly
+   under its hairline with nothing to cover. The bands are gone from above. */
+.hd.up{ transform:none; }
+.hd.up,.hd.frost{
+  background:var(--paper-92);
+  backdrop-filter:blur(14px) saturate(1.1);
+  box-shadow:0 var(--hair) 0 var(--ink-18);
+}
+.hd.up::after{ opacity:0; }
+@supports not (backdrop-filter:blur(2px)){ .hd.up,.hd.frost{ background:var(--paper); } }
+.hd.inv.up,.hd.inv.frost{ background:rgba(20,20,20,.88); box-shadow:0 var(--hair) 0 rgba(251,250,247,.16); }
+@supports (color:color-mix(in srgb,#000 50%,#fff)){
+  .hd.inv.up,.hd.inv.frost{ background:color-mix(in srgb,var(--deep) 88%,transparent); }
+}
+
+/* ------------------------------------------- 2. the book on buildings.html
+   The photographs pane holds the seven runs. Each run head is the one the
+   book always had — eyebrow, area name, meta with the way to the area page —
+   and the grid follows. The first run sits close under the standing note;
+   the rest keep the section rhythm. */
+.book{ padding-bottom:var(--sp-6); }
+.book .run{ padding-top:var(--sp-7); scroll-margin-top:calc(var(--hd-h) + var(--band-h) + 14px); }
+.book .reg-note + .run{ padding-top:var(--sp-5); }
+.book .run-h{ max-width:none; }
+.book .reg-legend{ margin-top:var(--sp-6); }
+
+/* ------------------------------------------- 1. the home page
+   Three ruled sections under the opening plate: seven neighbourhoods (four
+   across, then three), the buildings with the most homes available (three
+   across), and one paragraph about the company. Both grids use the same
+   frame (3:2), the same gutter (--sp-4) and the same caption geometry as the
+   book's grid, so the home page and the book read as one catalogue. */
+.hsec{ padding-top:var(--sp-7); }
+.hsec-head{
+  border-bottom:var(--hair) solid var(--ink);
+  padding-bottom:clamp(18px,2.6vh,28px);
+}
+.hsec-eyebrow{
+  display:flex; flex-wrap:wrap; gap:5px 22px;
+  font-family:var(--mono); font-size:var(--fs-cap); letter-spacing:var(--tr-cap);
+  text-transform:uppercase; color:var(--muted);
+}
+.hsec-h{
+  font-family:var(--sans); font-size:var(--fs-run); font-weight:300;
+  line-height:.96; letter-spacing:-.02em;
+  padding-top:clamp(10px,1.6vh,20px);
+}
+.hsec-sub{ font-size:var(--fs-m); color:var(--muted); max-width:58ch; padding-top:clamp(12px,1.8vh,20px); }
+.hsec-p{ font-size:var(--fs-l); line-height:1.48; color:var(--ink-92); max-width:62ch; padding-top:clamp(14px,2vh,24px); }
+.hsec-foot{ padding-top:var(--sp-4); }
+.hsec-foot a{
+  display:inline-flex; align-items:baseline; gap:10px;
+  font-size:var(--fs-m); font-weight:500; letter-spacing:-.006em; color:var(--blueline);
+}
+.hsec-foot a span{ display:inline-block; transition:transform .28s var(--ease); }
+.hsec-foot a:hover span,.hsec-foot a:focus-visible span{ transform:translateX(4px); }
+.hsec-co .hsec-eyebrow{ padding-bottom:0; }
+
+.agrid,.ngrid{
+  list-style:none; display:grid;
+  column-gap:var(--sp-4); row-gap:var(--sp-5);
+  align-items:start;
+  padding-top:clamp(28px,4vh,48px);
+}
+.agrid{ grid-template-columns:repeat(4,minmax(0,1fr)); }
+.ngrid{ grid-template-columns:repeat(3,minmax(0,1fr)); }
+.ag a,.ng a{ display:block; min-width:0; }
+.ag-frame,.ng-frame{
+  display:block; position:relative; overflow:clip; background:var(--paper-2);
+  aspect-ratio:3 / 2;
+}
+@supports not (aspect-ratio:3 / 2){
+  .ag-frame,.ng-frame{ height:0; padding-bottom:66.667%; }
+  .ag-frame img,.ng-frame img{ position:absolute; inset:0; }
+}
+.ag-frame img,.ng-frame img{ width:100%; height:100%; object-fit:cover; }
+.ag-frame::after,.ng-frame::after{
+  content:""; position:absolute; inset:0; background:var(--paper); opacity:0;
+  transition:opacity .28s var(--ease);
+}
+.ag a:hover .ag-frame::after,.ag a:focus-visible .ag-frame::after,
+.ng a:hover .ng-frame::after,.ng a:focus-visible .ng-frame::after{ opacity:.07; }
+.ag a:focus-visible,.ng a:focus-visible{ outline-offset:6px; }
+.ag-cap,.ng-cap{
+  display:grid; grid-template-columns:minmax(0,1fr) auto;
+  column-gap:14px; row-gap:2px; align-items:baseline;
+  border-top:var(--hair) solid var(--ink);
+  padding-top:10px; margin-top:12px;
+}
+.ag-nm,.ng-nm{ grid-column:1; font-size:var(--fs-b); font-weight:500; letter-spacing:-.004em; line-height:1.3; transition:color .22s var(--ease); }
+.ag-n,.ng-av{ grid-column:2; grid-row:1; text-align:right; white-space:nowrap; font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.ag-st,.ng-st{ grid-column:1; font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); }
+.ng-fx{ grid-column:2; grid-row:2; text-align:right; white-space:nowrap; font-family:var(--mono); font-size:var(--fs-sm); color:var(--ink); }
+/* the leasing signal, in its reserved colour */
+.ng-av{ color:var(--flag); }
+.ag a:hover .ag-nm,.ag a:focus-visible .ag-nm,
+.ng a:hover .ng-nm,.ng a:focus-visible .ng-nm{ color:var(--blueline); }
+@media (max-width:1099.98px){
+  .agrid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .ngrid{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (max-width:639.98px){
+  .agrid,.ngrid{ grid-template-columns:minmax(0,1fr); row-gap:var(--sp-4); }
+  .ag-cap,.ng-cap{ grid-template-columns:minmax(0,1fr) auto; }
+}
+@media (prefers-reduced-motion:reduce){
+  .ag-frame::after,.ng-frame::after,.ag-nm,.ng-nm,.hsec-foot a span{ transition:none; }
+}
+
+/* ------------------------------------------- 4. the footer counts
+   "West Los Angeles  27": the label leads, the count follows as a muted
+   tabular figure, and there is no bullet before any link. */
+.colo-list a{ gap:8px; align-items:baseline; }
+.colo-list .cl-n{ font-family:var(--mono); font-size:var(--fs-xs); color:var(--muted); font-variant-numeric:tabular-nums; }
+.colo-list .cl-flag .cl-n{ color:inherit; }
+
+/* ==========================================================================
+   ROUND 6 — CLIENT REVIEW, 11 September 2026 (fourth note): responsive audit
+   --------------------------------------------------------------------------
+   "On smaller screens, some texts/content overlaps." Probed every page at
+   360–1366 for text-on-text, text-on-control, horizontal overflow and clipped
+   text (scratchpad/pw/resp-r.js). Two causes, both fixed here; nothing else
+   collided. Appended, never edited above. Same tokens, same easing, radius 0,
+   longhand padding on everything that carries .wrap; nothing animates layout;
+   no overflow-x:hidden anywhere.
+   ========================================================================== */
+
+/* ---------------------------------------- 1. the hero caption vs the search row
+   .hero-cap is pinned to the bottom-right corner of the photograph and the
+   search row is 760px wide from the left gutter. Between 760px (where the
+   caption already dropped into the flow) and ~1150px the two share one line
+   and the caption printed across ANY BEDS · SEARCH — the client's screenshot,
+   at 980. Measured: the corner needs 2·pad + 1034px, i.e. 1150px of viewport.
+   Below 1180 the caption leaves the corner and sits in the flow under the
+   search row, in the left gutter, one line where it fits and two where it
+   does not — the same place a phone already puts it, so the phone rule below
+   760 is now just the tail of this one. */
+@media (max-width:1179.98px){
+  .hero{ display:grid; align-content:end; }
+  .hero-in{ padding-bottom:clamp(18px,3vh,30px); }
+  .hero-cap{
+    position:static; justify-items:start; text-align:left;
+    display:flex; flex-wrap:wrap; gap:4px 22px;
+    padding-left:var(--pad); padding-right:var(--pad); padding-bottom:18px;
+  }
+}
+
+/* ------------------------------------------ 2. the filter rail's two edges
+   core/search.css builds the bar's rail edge as: track padded 46px, a paper
+   fade painted over the track that is solid to --pad + 34px, and the arrows
+   at --pad + 4px — all measured from a bar that keeps its --pad gutter. The
+   860px rule above dropped that gutter and moved the arrows to 2px, but its
+   36px track padding lost to the shared sheet's specificity and the fade was
+   never re-measured: at 480 the search field's left border and its magnifier
+   sat under solid paper at scroll 0, and on the right the controls scrolled
+   under the arrow itself (the probe's text-on-control at 390–768).
+   Re-measured at one specificity above the shared rules, for every width at
+   which the bar scrolls: the scroller's box now starts AFTER the arrow lane
+   (a margin, not padding), so a control that scrolls off is clipped at the
+   lane's edge and never sits under the arrow; the 20px of track padding is
+   the fade, so the first control is whole at scroll 0. Lane = arrow + 4px:
+   36px on a phone (30px arrow at 2px), --pad + 42px above 860 (34px arrow at
+   --pad + 4px, the shared sheet's own position). */
+.sbar[data-rail]:not([data-static]){ --lane:calc(var(--pad) + 42px); padding-left:0; padding-right:0; }
+@media (max-width:860px){ .sbar[data-rail]:not([data-static]){ --lane:36px; } }
+.sbar[data-rail]:not([data-static]) .sbar-in{
+  max-width:none;
+  margin-left:var(--lane); margin-right:var(--lane);
+  padding-left:20px; padding-right:20px;
+  scroll-padding-inline:20px;
+}
+.sbar[data-rail]:not([data-static]) .rail-float::before,
+.sbar[data-rail]:not([data-static]) .rail-float::after{ width:calc(var(--lane) + 20px); }
+.sbar[data-rail]:not([data-static]) .rail-float::before{ background:linear-gradient(to right,var(--paper) var(--lane),transparent); }
+.sbar[data-rail]:not([data-static]) .rail-float::after{ background:linear-gradient(to left,var(--paper) var(--lane),transparent); }
+
+/* ---------------------------------------- 4. the search field at rest on a
+   360–429px phone (found verifying 2, by eye at scroll 0, not by the probe —
+   an input's placeholder is not a text node). The shared sheet floors .sfield
+   at 300px; the rail's visible lane on a 360 phone is 288px (360 − 2·36), so
+   the first control sat cut mid-word at rest — "…or neighbou", no right
+   border, the arrow immediately after — and read as the arrow sitting on the
+   search box. Below 430 the field is sized to the lane (viewport − two arrow
+   lanes − the track's two 20px pads), so it is whole at rest and the next
+   control fades at the lane edge as every other control does; a placeholder
+   that no longer fits ends in an ellipsis. From 430 up the 300px field fits
+   and nothing changes. */
+@media (max-width:429.98px){
+  .sbar[data-rail]:not([data-static]) .sbar-in > .sfield{
+    min-width:0; flex:0 0 calc(100vw - 2 * var(--lane) - 40px);
+  }
+  .sbar[data-rail]:not([data-static]) .sbar-in > .sfield input{ text-overflow:ellipsis; }
+}
+
+/* ==========================================================================
+   ROUND 7 — CLIENT REVIEW, 11 September 2026 (fifth note)
+   --------------------------------------------------------------------------
+   Five notes, all binding:
+   1. "Property details should have some primary buttons for inquiry, apply
+      etc." — Apply (solid ink), Inquire (outlined) and Call (tertiary) sit
+      under the facts strip; the same trio rides in the pinned row; a phone
+      gets a fixed bottom bar with Apply + Call that steps aside for the footer.
+   2. "I don't like to have just one word in its own row." — text-wrap:balance
+      on display type, text-wrap:pretty on running text, the last two words
+      tied with a no-break space where this direction's generator writes the
+      sentence, and a widow guard in app.js for copy the shared generator
+      writes (company / residents / contact). Checked by scratchpad/pw/orphans-r.js.
+   3. "Without hover, no image show on the left seems off." — the specimen
+      plate is on from the first paint (edited in place under "the rail
+      figure") and shows the first row of the current sort (app.js).
+   4. "The view and the sort could be same row" — from 1100px, one row: View
+      left, Sort right, one hairline under.
+   5. "I don't know if the ruler is useful or not." — it is gone: its markup,
+      its app.js section and its CSS are deleted, not hidden. In its place a
+      plain sticky strip of the seven neighbourhoods with counts. The band
+      under the header (--band-h, once the ruler's) is the strip's height on
+      the one page that has it and 0 everywhere else.
+   Appended; nothing above is edited except the cuts note 5 asked for. Same
+   tokens, same easing, radius 0, hairlines not boxes, longhand padding on
+   everything that carries .wrap; transform and opacity only; no
+   overflow-x:hidden anywhere.
+   ========================================================================== */
+
+/* ------------------------------------------- 5. the neighbourhood strip
+   A sticky band under the header on buildings.html, in the flow after the
+   toolbar so nothing above it is ever blank. Seven links in area order, the
+   count after each label as a muted figure, the current area carried on a
+   2px blue rule at the band's foot. On a narrow screen the row is a rail:
+   hidden scrollbar, arrows at the edges (core/rail.js), and a paper fade
+   under each arrow so a label never sits under one. */
+:root{ --nstrip-h:44px; }
+@supports selector(:has(*)){
+  html:has([data-nstrip]){ --band-h:var(--nstrip-h); }
+}
+.nstrip{
+  position:sticky; top:var(--hd-h); z-index:860;
+  height:var(--nstrip-h);
+  background:var(--paper-92); backdrop-filter:blur(10px);
+  border-bottom:var(--hair) solid var(--ink-18);
+}
+@supports not (backdrop-filter:blur(2px)){ .nstrip{ background:var(--paper); } }
+.nstrip-in{ position:relative; height:100%; padding-top:0; padding-bottom:0; }
+.nstrip-track{
+  list-style:none; height:100%;
+  --rail-gap:clamp(18px,2.4vw,36px);
+  align-items:stretch; padding-bottom:0;
+}
+.nstrip-track > li{ display:flex; flex:0 0 auto; }
+.nstrip a{
+  display:inline-flex; align-items:center; gap:8px; white-space:nowrap;
+  font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:.1em;
+  color:var(--muted); box-shadow:inset 0 -2px 0 transparent;
+  transition:color .24s var(--ease),box-shadow .24s var(--ease);
+}
+.nstrip a .tnum{ font-size:var(--fs-xxs); letter-spacing:.06em; color:var(--ink-32); transition:color .24s var(--ease); }
+.nstrip a:hover,.nstrip a:focus-visible{ color:var(--ink); }
+.nstrip a[aria-current]{ color:var(--ink); box-shadow:inset 0 -2px 0 var(--blueline); }
+.nstrip a[aria-current] .tnum{ color:var(--blueline); }
+.nstrip a:focus-visible,.nstrip-track:focus-visible{ outline:2px solid var(--focus); outline-offset:-2px; }
+/* the arrows show only while the row overflows (rail.js stamps data-static
+   on the host — the nav — otherwise, and rail.css hides them). While the row
+   is a rail the nav drops its gutter and the track's box starts AFTER the
+   arrow lane (a margin, as the search bar's does since round 6), so a link
+   that scrolls off is clipped at the lane's edge and never sits under an
+   arrow; the track's own 20px of padding is what the paper fade covers. */
+.nstrip .rail-float .rail-btn{ --rail-btn:30px; }
+.nstrip .rail-float .rail-btn svg{ width:13px; }
+.nstrip .rail-float .rail-btn.prev{ left:2px; }
+.nstrip .rail-float .rail-btn.next{ right:2px; }
+.nstrip-in:not([data-static]){ max-width:none; padding-left:0; padding-right:0; }
+.nstrip-in:not([data-static]) .nstrip-track{
+  margin-left:36px; margin-right:36px;
+  padding-left:20px; padding-right:20px; scroll-padding-inline:20px;
+}
+.nstrip-in:not([data-static])::before,
+.nstrip-in:not([data-static])::after{
+  content:""; position:absolute; top:0; bottom:0; width:56px; z-index:3; pointer-events:none;
+}
+.nstrip-in:not([data-static])::before{ left:0; background:linear-gradient(to right,var(--paper) 36px,transparent); }
+.nstrip-in:not([data-static])::after{ right:0; background:linear-gradient(to left,var(--paper) 36px,transparent); }
+@media (prefers-reduced-motion:reduce){ .nstrip a,.nstrip a .tnum{ transition:none; } }
+@media print{ .nstrip{ display:none !important; } }
+
+/* ------------------------------------------- 4. View and Sort, one row
+   The two control groups share a toolbar: stacked below 1100px as before,
+   one row from 1100 (View left, Sort right), one hairline under it. The
+   sort group belongs to the Index and Map views and steps out under
+   Photographs (data-showin). The rule sits on --edge like every other ruled
+   .wrap-n box (round 4, 1b), so it closes under the column at every width. */
+.toolbar{
+  display:flex; flex-direction:column; align-items:flex-start; gap:10px;
+  padding-top:var(--sp-3); padding-bottom:var(--sp-3);
+  border-bottom:var(--hair) solid var(--ink);
+}
+.toolbar.wrap-n{ width:auto; max-width:none; padding-left:0; padding-right:0; margin-left:var(--edge); margin-right:var(--edge); }
+.toolbar .sortbar{ padding-top:0; padding-bottom:0; }
+@media (min-width:1100px){
+  .toolbar{ flex-direction:row; align-items:center; justify-content:space-between; gap:12px 32px; }
+  .toolbar .tb-sorts{ justify-content:flex-end; }
+}
+
+/* ------------------------------------------- 3. the specimen plate
+   Visible from the first paint (the opacity rule under "the rail figure" is
+   edited out above). Its foot now says what it does. */
+.plate-foot .tnum{ letter-spacing:.1em; }
+
+/* ------------------------------------------- 1. the calls to action
+   Three buttons, 44px tall, kicker type, radius 0, in the .btn idiom: Apply
+   is solid ink (.btn-ink), Inquire is the outlined default, Call is tertiary
+   — no border, a 2px rule under the words on hover. Save keeps its quiet,
+   smaller form. The trio sits under the facts strip. The pinned row carries
+   the same three and the name — and it is now fixed under the header rather
+   than sticky in the flow, and slides in only once the trio has scrolled
+   past the header (app.js): while the trio is on screen the row would be its
+   own duplicate a hairline below it, and out of the flow it leaves no band.
+   On a phone (≤640) a fixed bar carries Apply and Call, padded for the home
+   indicator, on the same rule — it never covers the hero's address or the
+   facts at the top of the page — and slides away while the footer is on
+   screen (app.js, IntersectionObserver). Transform and opacity only. */
+.acts{
+  position:fixed; left:0; right:0; top:var(--hd-h);
+  transform:translate3d(0,-110%,0); visibility:hidden;
+  transition:transform .38s var(--ease),visibility .38s;
+}
+.acts.in{ transform:none; visibility:visible; }
+@media (prefers-reduced-motion:reduce){ .acts{ transition:none; } }
+.cta{
+  display:flex; flex-wrap:wrap; align-items:center; gap:10px 12px;
+  border-top:var(--hair) solid var(--rule-60);
+  padding-top:clamp(16px,2.4vh,24px); padding-bottom:clamp(18px,2.6vh,28px);
+}
+.cta .btn,.acts-btns .btn,.mbar .btn{ min-height:44px; padding-top:0; padding-bottom:0; }
+.cta .btn{ flex:0 1 auto; }
+.cta .btn-ink{ padding-left:26px; padding-right:26px; }
+.btn-tert{ border-color:transparent; color:var(--ink); padding-left:8px; padding-right:8px; gap:9px; box-shadow:inset 0 -2px 0 transparent; }
+.btn-tert:hover,.btn-tert:focus-visible{ background:transparent; color:var(--blueline); border-color:transparent; box-shadow:inset 0 -2px 0 var(--blueline); }
+.btn-tert .ai{ width:15px; height:15px; }
+.btn-tert .cta-tel{ letter-spacing:.06em; }
+.cta .btn-save,.acts-btns .btn-save{
+  min-height:36px; padding-top:0; padding-bottom:0; padding-left:14px; padding-right:14px;
+  font-size:var(--fs-xxs); flex:0 0 auto;
+}
+.cta .btn-save{ margin-left:auto; }
+.acts-btns{ align-items:center; }
+.acts-btns .btn-ink{ padding-left:22px; padding-right:22px; }
+.acts .acts-tel{ letter-spacing:.06em; }
+@media (max-width:900px){
+  .acts-btns .btn-ink{ flex-grow:2; }
+  .acts-btns .btn-save{ flex:0 0 auto; min-width:0; }
+}
+@media (max-width:640px){
+  .acts-btns .btn{ padding-left:12px; padding-right:12px; }
+  .acts-btns .btn-ink{ flex-grow:2; padding-left:14px; padding-right:14px; }
+  .cta .btn{ flex:1 1 auto; }
+  .cta .btn-save{ margin-left:0; flex:0 0 auto; }
+}
+/* the phone bar */
+.mbar{ display:none; }
+@media (max-width:640px){
+  .mbar{
+    display:flex; align-items:center; gap:8px;
+    position:fixed; left:0; right:0; bottom:0; z-index:840;
+    padding-top:10px; padding-left:var(--pad); padding-right:var(--pad);
+    padding-bottom:calc(10px + env(safe-area-inset-bottom,0px));
+    background:var(--paper-92); backdrop-filter:blur(10px);
+    border-top:var(--hair) solid var(--ink-18);
+    transform:translate3d(0,110%,0); visibility:hidden;
+    transition:transform .32s var(--ease),visibility .32s;
+  }
+  .mbar.in:not(.off){ transform:none; visibility:visible; }
+  .mbar .btn{ flex:1 1 auto; min-width:max-content; }
+  .mbar .btn-ink{ flex-grow:1.6; }
+  .mbar .btn-tert{ border-color:var(--ink); }
+  .mbar .btn-tert:hover,.mbar .btn-tert:focus-visible{ box-shadow:none; background:var(--ink); color:var(--paper); }
+}
+@supports not (backdrop-filter:blur(2px)){ .mbar{ background:var(--paper); } }
+@media (prefers-reduced-motion:reduce){ .mbar,.btn-tert{ transition:none; } }
+@media print{ .mbar,.cta{ display:none !important; } }
+/* the contact page, arrived at from a building's Inquire button: one line
+   above the form names the building (app.js reads ?building=) */
+.ed-about{
+  font-family:var(--mono); font-size:var(--fs-xs); text-transform:uppercase; letter-spacing:.12em;
+  color:var(--muted); padding-top:36px; margin-bottom:-18px;
+  scroll-margin-top:calc(var(--hd-h) + 28px);
+}
+.ed-about b{ font-weight:500; color:var(--ink); }
+.ed-about a{ color:var(--blueline); text-decoration:underline; text-underline-offset:.2em; text-decoration-color:var(--blue-14); }
+.ed-about a:hover,.ed-about a:focus-visible{ text-decoration-color:currentColor; }
+
+/* ------------------------------------------- 2. no word alone on its last line
+   Display type balances its lines; running text wraps "pretty" (Chromium
+   trades a little raggedness at the end of a paragraph for no orphan). A
+   .nb span keeps a building's name whole inside a heading. The last two
+   words of every sentence this direction's generator writes are tied with
+   &nbsp; in the generator; app.js does the same for copy written by the
+   shared generator. Both are belt-and-braces over these rules. */
+h1,h2,h3,.pagehead-h,.run-h,.hero-h,.shead-h,.bh-h,.hsec-h,.essay-h,.bsec-h,
+.ed .ed-h1,.ed .ed-h2,.ed-row h3,.card-nm{ text-wrap:balance; }
+p,.hero-sub,.hsec-sub,.hsec-p,.pagehead-sub,.shead-sub,.lead,.ed-lede,figcaption,.cite,
+.reg-legend span,.reg-note span,.run-eyebrow span,.hsec-eyebrow span,.pagehead-no span,
+.ed-note,.plans-none,.avail-sub,dd{ text-wrap:pretty; }
+.nb{ white-space:nowrap; }
+/* the shared editorial rows (company's pipeline, contact's six routes): below
+   760 the row had no column template, and the cite's grid-column:2 opened an
+   implicit second column that squeezed "3557 Motor Avenue" into 126px on a
+   phone; from 760 to 1099 the heading column was 194–300px, one word short
+   for "9000–9020 Venice Boulevard". A phone stacks the row; a tablet gives
+   the heading the whole first line; from 1100 the shared three columns hold
+   every heading on one line. */
+@media (max-width:759.98px){
+  .ed .ed-row{ grid-template-columns:minmax(0,1fr); }
+  .ed .ed-row .ed-cite{ grid-column:auto; }
+}
+@media (min-width:760px) and (max-width:1099.98px){
+  .ed .ed-row{ grid-template-columns:minmax(0,1fr) auto; align-items:baseline; }
+  .ed .ed-row h3{ grid-column:1 / -1; }
+  .ed .ed-row p{ grid-column:1; }
+  .ed .ed-row .ed-state{ grid-column:2; grid-row:2; }
+  .ed .ed-row .ed-cite{ grid-column:1; }
+}
+/* "One number. Six routes." was set 14ch wide and broke after "Six" at every
+   width; 16ch lets it balance to two lines of two words */
+.ed-hero .ed-h1{ max-width:16ch; }
+
+/* ==========================================================================
+   ROUND 7 — FOLLOW-UP, 11 September 2026
+   --------------------------------------------------------------------------
+   Wiring the round-7 action bars that never appeared. The round-7 block above
+   styles .acts.in and .mbar.in, but nothing added `.in`: the pinned action
+   row and the phone bar both stayed translated off-screen (visibility:hidden)
+   at every scroll position. app.js §11 now adds `.in` to [data-acts] and
+   [data-mbar] once the hero trio (.cta) clears the header band, and removes it
+   when the trio returns — the single WR.onScroll loop, transform/opacity only.
+
+   With both bars live, a ≤640 phone would carry two Apply buttons at once: the
+   pinned row at the top and the bottom bar. The bottom bar (Apply + Call) is
+   the phone's action treatment, so the pinned row steps out below 640 and the
+   phone shows one clean bar. Nothing above is edited; this only adds the cut.
+   ========================================================================== */
+@media (max-width:640px){
+  .acts{ display:none !important; }
+}
+
+/* ==========================================================================
+   ROUND 8 — CORPORATE LAYER + PAGE SCROLLBAR, 11 September 2026
+   --------------------------------------------------------------------------
+   Two additions, appended never edited above.
+
+   1. The footer's "Legal & utility" strip (Privacy · Accessibility · Your
+      Privacy Choices · Site Map) sits inside .colo-legal on its own line,
+      above the EHO/copyright row. Mono, muted, the register's blueline on
+      hover; a hairline rule under it, and a mid-dot between items in the
+      catalogue manner.
+   2. The PAGE scrollbar, themed to the paper. base.css sets
+      `scrollbar-width:thin` on html but no colour, so the document bar fell
+      back to the OS default. Firefox takes scrollbar-color on :root; Blink
+      needs ::-webkit-scrollbar, but it ignores every webkit rule while the
+      standard scrollbar-width/scrollbar-color is set on the same element —
+      the same gotcha already solved for the modal body at line ~2470 — so the
+      webkit block is wrapped in @supports selector(::-webkit-scrollbar) and
+      resets scrollbar-width/-color to auto there before restyling. A 12px
+      square bar (radius 0, the hairline language), ink-32 thumb resting →
+      ink-52 on hover, paper-2 track. The rails, the .sbar-in bar and the
+      .fmodal-b modal scrollbar keep their own treatment and are untouched.
+   ========================================================================== */
+
+.colo-utility{
+  flex:1 1 100%;
+  display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 0;
+  padding-bottom:var(--sp-3); margin-bottom:2px;
+  border-bottom:var(--hair) solid var(--rule-60);
+}
+.colo-utility a{ color:var(--muted); }
+.colo-utility a:hover,.colo-utility a:focus-visible{ color:var(--blueline); }
+.colo-utility a:not(:last-child)::after{
+  content:"·"; margin:0 12px; color:var(--rule);
+}
+
+/* ---- page scrollbar ----
+   scrollbar-color goes on html (element selector, 0,0,1), NOT :root (0,1,0):
+   the @supports reset below also targets html, and only an equal-specificity
+   later rule can override it. On :root the color outspecified the reset, so
+   Blink kept the standard prop set and ignored every ::-webkit-scrollbar rule
+   (the same gotcha the modal solves), leaving a thin standard bar instead of
+   the 12px webkit bar. Token vars stay on :root; the declaration lives on html. */
+:root{
+  --sb-thumb:var(--ink-32);
+  --sb-thumb-hover:var(--ink-52);
+  --sb-track:var(--paper-2);
+}
+html{ scrollbar-color:var(--sb-thumb) var(--sb-track); }
+@supports selector(::-webkit-scrollbar){
+  html{ scrollbar-width:auto; scrollbar-color:auto; }
+  html::-webkit-scrollbar{ width:12px; height:12px; }
+  html::-webkit-scrollbar-thumb{ background:var(--sb-thumb); border-radius:0; }
+  html::-webkit-scrollbar-thumb:hover{ background:var(--sb-thumb-hover); }
+  html::-webkit-scrollbar-track{ background:var(--sb-track); }
+}

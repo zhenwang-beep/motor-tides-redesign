@@ -1,0 +1,2106 @@
+<!doctype html>
+<html lang="en" data-base="" data-data="../data/wiseman.json" data-index="../data/index.json">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Every building &mdash; all 72 Wiseman buildings in Los Angeles</title>
+<meta name="description" content="All 72 Wiseman Residential apartment buildings, grouped by neighborhood. Sort by street, bedrooms or rent, or read the same list against a map or as a set of photographs.">
+<meta name="theme-color" content="#FBFAF7">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20fill='%23FBFAF7'/%3E%3Cg%20fill='%23141414'%3E%3Cpolygon%20points='14,18%2034,18%2034,74%2014,80'/%3E%3Cpolygon%20points='40,18%2060,18%2060,71%2040,77'/%3E%3Cpolygon%20points='66,18%2086,18%2086,68%2066,74'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wiseman Residential">
+<meta property="og:title" content="Every building &mdash; all 72 Wiseman buildings in Los Angeles">
+<meta property="og:description" content="All 72 Wiseman Residential apartment buildings, grouped by neighborhood. Sort by street, bedrooms or rent, or read the same list against a map or as a set of photographs.">
+<meta property="og:image" content="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1200/s3/3/90953/1331amherst-106%20(1)%20real.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Every building &mdash; all 72 Wiseman buildings in Los Angeles">
+<meta name="twitter:description" content="All 72 Wiseman Residential apartment buildings, grouped by neighborhood. Sort by street, bedrooms or rent, or read the same list against a map or as a set of photographs.">
+<meta name="twitter:image" content="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1200/s3/3/90953/1331amherst-106%20(1)%20real.jpg">
+<link rel="preconnect" href="https://resource.rentcafe.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Libre+Franklin:wght@300..700&display=swap">
+<link rel="stylesheet" href="../core/base.css?v=18">
+<link rel="stylesheet" href="../core/map.css?v=18">
+<link rel="stylesheet" href="../core/rail.css?v=18">
+<link rel="stylesheet" href="style.css?v=18">
+<script>(function(d){var r=d.documentElement;r.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches){r.classList.add('js-pt');setTimeout(function(){r.classList.remove('js-pt');},1500);}})(document);</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hd wrap wrap-n">
+  <a class="brand" href="index.html" aria-label="Wiseman Residential, home">
+    <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg>
+    <b>Wiseman Residential</b>
+    <span class="brand-sub tnum">72 buildings</span>
+  </a>
+  <nav class="hnav" aria-label="Primary">
+    <a href="search.html" class="hnav-flag">Find a home</a>
+    <a href="buildings.html" aria-current="page">Buildings</a>
+    <a href="neighborhoods.html">Neighborhoods</a>
+    <a href="residents.html">Residents</a>
+    <a href="company.html">Company</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <button class="mbtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span></button>
+</header>
+
+
+<main id="main">
+
+  <section class="pagehead wrap wrap-n">
+    <p class="pagehead-no">
+      <span>Every building</span>
+      <span class="tnum">72 buildings</span>
+      <span>Compiled 10 September 2026 from the live leasing&nbsp;feed</span>
+    </p>
+    <h1 class="pagehead-h">Every building Wiseman&nbsp;owns</h1>
+    <p class="pagehead-sub">Seventy-two buildings in seven areas, listed in full. Nothing is hidden behind a&nbsp;filter.</p>
+    <form class="search" action="search.html" method="get" role="search">
+      <label class="vh" for="reg-q">Search the index by building, street or area</label>
+      <div class="search-row">
+        <input class="search-field" id="reg-q" name="q" type="search" autocomplete="off"
+               placeholder="Building, street or area" data-typeahead
+               role="combobox" aria-expanded="false" aria-controls="reg-ta" aria-autocomplete="list">
+        <button class="search-btn" type="submit">Search</button>
+      </div>
+      <ul class="ta" id="reg-ta" role="listbox" aria-label="Matching buildings" data-typeahead-out hidden></ul>
+    </form>
+  </section>
+
+  <!-- View and Sort share one row from 1100px (client note, round 7); the sort
+       group belongs to the Index and Map views and steps out under Photographs -->
+  <div class="toolbar wrap wrap-n">
+    <div class="sortbar tb-views">
+      <span class="sortbar-label" id="views-label">View</span>
+      <div class="views" role="tablist" aria-labelledby="views-label">
+        <a class="view-btn" id="vb-register" role="tab" href="?view=register" data-viewbtn="register" aria-selected="true" aria-controls="pane-register">Index</a>
+        <a class="view-btn" id="vb-atlas" role="tab" href="?view=atlas" data-viewbtn="atlas" aria-selected="false" aria-controls="pane-register">Map</a>
+        <a class="view-btn" id="vb-plates" role="tab" href="?view=plates" data-viewbtn="plates" aria-selected="false" aria-controls="pane-plates">Photographs</a>
+      </div>
+    </div>
+    <div class="sortbar tb-sorts" role="group" aria-labelledby="sort-label" data-showin="register atlas">
+      <span class="sortbar-label" id="sort-label">Sort</span>
+      <button class="sort-btn" type="button" data-sort="area" aria-pressed="true">Neighborhood</button>
+      <button class="sort-btn" type="button" data-sort="no" aria-pressed="false">Recommended</button>
+      <button class="sort-btn" type="button" data-sort="street" aria-pressed="false">Street A&ndash;Z</button>
+      <button class="sort-btn" type="button" data-sort="beds" aria-pressed="false">Bedrooms</button>
+      <button class="sort-btn" type="button" data-sort="rent" aria-pressed="false">Rent</button>
+    </div>
+  </div>
+
+<div class="nstrip" data-nstrip>
+  <nav class="nstrip-in wrap wrap-n" data-rail data-rail-label="Neighbourhoods" aria-label="Neighbourhoods">
+    <ol class="nstrip-track rail-track free" data-rail-track>
+      <li><a href="#west-la" data-nmark="west-la" aria-current="location">West Los Angeles <span class="tnum">27</span></a></li>
+      <li><a href="#brentwood" data-nmark="brentwood">Brentwood <span class="tnum">13</span></a></li>
+      <li><a href="#beverly-grove" data-nmark="beverly-grove">Beverly Grove <span class="tnum">14</span></a></li>
+      <li><a href="#hollywood" data-nmark="hollywood">Hollywood <span class="tnum">13</span></a></li>
+      <li><a href="#venice" data-nmark="venice">Venice <span class="tnum">2</span></a></li>
+      <li><a href="#palms" data-nmark="palms">Palms · Motor Avenue <span class="tnum">2</span></a></li>
+      <li><a href="#glendale" data-nmark="glendale">Glendale <span class="tnum">1</span></a></li>
+    </ol>
+    <div class="rail-float">
+      <button class="rail-btn sm prev" type="button" data-rail-prev aria-label="Earlier neighbourhoods"></button>
+      <button class="rail-btn sm next" type="button" data-rail-next aria-label="Later neighbourhoods"></button>
+    </div>
+  </nav>
+</div>
+
+  <section class="view-pane" id="pane-register" data-viewpane="register atlas" role="tabpanel" aria-labelledby="vb-register">
+    <div class="reg wrap wrap-n">
+      <aside class="rail-fig" data-railfig>
+        <div class="plate" data-plate data-cur="001" data-showin="register" aria-hidden="true">
+          <div class="plate-frame">
+            <img class="plate-img" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/1331%20amherst%20ave%20exteriors%20-22.jpg" alt="Amherst Rochester" width="2048" height="1365" loading="lazy" decoding="async">
+          </div>
+          <div class="plate-cap">
+            <span class="plate-name" data-platename>Amherst Rochester</span>
+            <span class="plate-street" data-platestreet>Amherst &middot; West Los Angeles</span>
+          </div>
+          <p class="plate-foot"><span>Specimen plate</span><span class="tnum">Follows the row under your pointer, or the&nbsp;scroll</span></p>
+        </div>
+        <div class="regmap" data-showin="atlas" hidden>
+          <div class="mapbox" id="register-map" data-map='{"scope":"all","bubbles":true,"theme":"light"}'></div>
+          <p class="map-foot"><span>All <span class="tnum">72</span>&nbsp;buildings</span><span>Hover a row to light its&nbsp;pin</span></p>
+        </div>
+      </aside>
+
+      <div class="reg-body" data-register data-mode="grouped" data-pool>
+        <section class="reg-block" id="west-la" data-group="west-la" aria-labelledby="h-west-la" style="--rows:27">
+          <h2 class="reg-head" id="h-west-la"><span class="reg-head-label" data-grouplabel>West Los Angeles · Sawtelle</span> <span class="reg-head-count tnum">27</span><span class="reg-head-flat tnum">72</span></h2>
+          <p class="reg-head-sub">Sawtelle · Santa Monica Blvd · Westgate &middot; 17&nbsp;streets</p>
+          <div class="reg-cols" aria-hidden="true"><span class="rc-body"><span>Building</span><span>Street</span></span><span class="rc-figs"><span>Bedrooms</span><span>From</span></span></div>
+          <div class="reg-rows" data-rows>
+          <div class="reg-row" data-row data-no="001" data-name="Amherst Rochester" data-street="Amherst"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="4" data-rent="4895"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/1331%20amherst%20ave%20exteriors%20-22.jpg">
+            <a class="row-link" href="buildings/amherst-rochester.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/90953/1331amherst-106%20(1)%20real.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Amherst Rochester</span>
+                <span class="row-street">Amherst</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">3–4</span>
+                <span class="row-rent tnum">$4,895</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="002" data-name="Armacost Bella" data-street="Armacost"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="4" data-rent="4895"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/1439%20armacost%20ave%20unit%20306%20-%20kitchen%20_%20dining_final.jpg">
+            <a class="row-link" href="buildings/armacost-bella.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/armacost%20bella%20-%20community%20thumbnail%20-%20resized.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Armacost Bella</span>
+                <span class="row-street">Armacost</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–4</span>
+                <span class="row-rent tnum">$4,895</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="003" data-name="Armacost Manor" data-street="Armacost"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="3" data-rent="4950"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/armacost%20manor%20-%20unit%20304-%20dining%20and%20living%20room%20patio_final.jpg">
+            <a class="row-link" href="buildings/armacost-manor.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/90961/1446armacost-106.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Armacost Manor</span>
+                <span class="row-street">Armacost</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum">$4,950</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="004" data-name="Barrington Santa Monica" data-street="Barrington"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="2" data-rent="2595"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/barrington%20-%20unit%20111-%20living%20room%20patio_final.jpg">
+            <a class="row-link" href="buildings/barrington-santa-monica.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_1561_s_barrington_ave_exteriors-1.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Barrington Santa Monica</span>
+                <span class="row-street">Barrington</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–2</span>
+                <span class="row-rent tnum">$2,595</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="005" data-name="Beloit at Ohio" data-street="Beloit"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="4" data-rent="3945"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/beloit%20at%20ohio%20unit%20116%20-%20kitchen%20and%20countertop%20bar_final.jpg">
+            <a class="row-link" href="buildings/beloit-at-ohio.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/232072/3_232072_1609853.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Beloit at Ohio</span>
+                <span class="row-street">Beloit</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–4</span>
+                <span class="row-rent tnum">$3,945</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="006" data-name="Bentley Woodland" data-street="Bentley"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="3" data-rent="3495"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/bentley%20woodland%20-%20bedroom%20and%20in-suite%20washer%20and%20dryer.jpg">
+            <a class="row-link" href="buildings/bentley-woodland.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/photo%20may%2025,%205%2005%2021%20pm(1).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Bentley Woodland</span>
+                <span class="row-street">Bentley</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–3</span>
+                <span class="row-rent tnum">$3,495</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="007" data-name="Brockton Manor" data-street="Brockton"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="5" data-rent="4995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/1301%20brockton%20-%20kitchen(2).jpg">
+            <a class="row-link" href="buildings/brockton-manor.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/216712/3_216712_1389740.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Brockton Manor</span>
+                <span class="row-street">Brockton</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–5</span>
+                <span class="row-rent tnum">$4,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="008" data-name="Brockton Townhomes" data-street="Brockton"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="4" data-rent="4595"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/brockton%20townhomes%20-%20kitchen,%20bar,%20dining,%20living%20room%20curtains_final.jpg">
+            <a class="row-link" href="buildings/brockton-townhomes.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/90963/1623brockton-106%20real%202.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Brockton Townhomes</span>
+                <span class="row-street">Brockton</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">3–4</span>
+                <span class="row-rent tnum">$4,595</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="009" data-name="Butler Cabana" data-street="Butler"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="3" data-rent="4995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/butler%20cabana%20-%20dining%20room,%20bar,%20curtaisn,%20kitchen%20and%20rugs.jpg">
+            <a class="row-link" href="buildings/butler-cabana.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/90970/1407butler-106.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Butler Cabana</span>
+                <span class="row-street">Butler</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–3</span>
+                <span class="row-rent tnum">$4,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="010" data-name="Butler Eighteen" data-street="Butler"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="2" data-rent="3395"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/butler%20eighteen%20-%20lr,%20dining,%20and%20kitchen.jpg">
+            <a class="row-link" href="buildings/butler-eighteen.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/1845%20butler%20ave%20unit%20107%20-25(1).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Butler Eighteen</span>
+                <span class="row-street">Butler</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–2</span>
+                <span class="row-rent tnum">$3,395</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="011" data-name="Colby at Ohio" data-street="Colby"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="4" data-rent="2995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/colby%20at%20ohio%20-%20unit%20108%20-%20kitchen,%20dinign,%20alr,%20and%20patio_final.jpg">
+            <a class="row-link" href="buildings/colby-at-ohio.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/789259/1515colby-105.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Colby at Ohio</span>
+                <span class="row-street">Colby</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–4</span>
+                <span class="row-rent tnum">$2,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="012" data-name="Colby Missouri" data-street="Colby"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="3" data-rent="4945"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/colby%20missouri%20-%20ph6%20-%20kitchen,%20living%20room,%20patio,%20shelving,%20curtains_final.jpg">
+            <a class="row-link" href="buildings/colby-missouri.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_1836_colby_exterior_1.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Colby Missouri</span>
+                <span class="row-street">Colby</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">3</span>
+                <span class="row-rent tnum">$4,945</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="013" data-name="Colby Townhomes" data-street="Colby"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="5" data-rent="5050"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/photo%20oct%2018,%203%2048%2030%20pm.jpg">
+            <a class="row-link" href="buildings/colby-townhomes.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/90965/1650colby-105.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Colby Townhomes</span>
+                <span class="row-street">Colby</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">4–5</span>
+                <span class="row-rent tnum">$5,050</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="014" data-name="Colby West" data-street="Colby"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="3" data-rent="2495"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/colby%20west%20-%20remove%20cars%20and%20lower%20sign.jpg">
+            <a class="row-link" href="buildings/colby-west.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/photo%20jan%2014,%202%2057%2046%20pm%20(3).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Colby West</span>
+                <span class="row-street">Colby</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum">$2,495</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="015" data-name="Santa Monica Federal" data-street="Federal"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="3" data-rent="4995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/santa%20monica%20federal%20-%20unit%20402%20-%20kitchen%20_final.jpg">
+            <a class="row-link" href="buildings/santa-monica-federal.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/90951/ca_losangeles_santamonicaatfederal_p0095236_01_phfeat_ext40_5_thumbnail.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Santa Monica Federal</span>
+                <span class="row-street">Federal</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–3</span>
+                <span class="row-rent tnum">$4,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="016" data-name="Fox Hills Dr" data-street="Fox Hills"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="3" data-rent="5195"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/fox%20hills%20dr%20-%20kitchen%20lr%20patio.jpg">
+            <a class="row-link" href="buildings/fox-hills-dr.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/fox%20hills%20dr%20-%20community%20thumbnail.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Fox Hills Dr</span>
+                <span class="row-street">Fox Hills</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum">$5,195</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="017" data-name="Kelton Madera" data-street="Kelton"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="4" data-rent="5145"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/kelton%20madera%20-%20dining%20kitchen%20and%20shelves_final.jpg">
+            <a class="row-link" href="buildings/kelton-madera.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/656650/1819kelton%20105(1).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Kelton Madera</span>
+                <span class="row-street">Kelton</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–4</span>
+                <span class="row-rent tnum">$5,145</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="018" data-name="Louisiana Glen" data-street="Louisiana"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="5" data-rent=""
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/louisiana%20glen%20-%20unit%20405%20-%20kitchen_final(1).jpg">
+            <a class="row-link" href="buildings/louisiana-glen.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_110405_louisiana_ave_exteriors-3_1.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Louisiana Glen</span>
+                <span class="row-street">Louisiana</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–5</span>
+                <span class="row-rent tnum is-none">—</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="019" data-name="McClellan Corner" data-street="McClellan"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="2" data-rent="3495"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/mcclellan%20corner%20-%20lr,%20dining,%20kitchen.jpg">
+            <a class="row-link" href="buildings/mcclellan-corner.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/90968/1212mcclellan-106.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">McClellan Corner</span>
+                <span class="row-street">McClellan</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–2</span>
+                <span class="row-rent tnum">$3,495</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="020" data-name="Ohio Sawtelle" data-street="Ohio"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="3" data-rent="3395"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/ohio%20sawtelle%20-%20dining%20-%20blue%20accents.jpg">
+            <a class="row-link" href="buildings/ohio-sawtelle.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_11551_ohio_ave_exterior_-5.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Ohio Sawtelle</span>
+                <span class="row-street">Ohio</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum">$3,395</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="021" data-name="Overland Century" data-street="Overland"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="3" data-rent="3295"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/overland%20century%20-%20kitchen.jpg">
+            <a class="row-link" href="buildings/overland-century.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/overland%20century%20-%20community%20thumbnail%20(newly%20painted%202026).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Overland Century</span>
+                <span class="row-street">Overland</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum">$3,295</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="022" data-name="Purdue Ohio" data-street="Purdue"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="4" data-rent="4995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/1500purdue-106%20(3).jpg">
+            <a class="row-link" href="buildings/purdue-ohio.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/1500purdue-106%20(3).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Purdue Ohio</span>
+                <span class="row-street">Purdue</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">3–4</span>
+                <span class="row-rent tnum">$4,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="023" data-name="Purdue Point" data-street="Purdue"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="" data-rent=""
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/edited%201515%20purdue%20ave%20street.jpeg">
+            <a class="row-link" href="buildings/purdue-point.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/edited%201515%20purdue%20ave%20street.jpeg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Purdue Point</span>
+                <span class="row-street">Purdue</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">—</span>
+                <span class="row-rent tnum is-none">—</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="024" data-name="Santa Monica Breeze" data-street="Purdue"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="3" data-rent="3795"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/image0.jpeg">
+            <a class="row-link" href="buildings/santa-monica-breeze.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/image0.jpeg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Santa Monica Breeze</span>
+                <span class="row-street">Purdue</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum">$3,795</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="025" data-name="Century City Icon" data-street="Santa Monica"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="2" data-rent="3445"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/10473%20santa%20monica%20bl%20exteriors-03.jpg">
+            <a class="row-link" href="buildings/century-city-icon.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_1century_city_icon_-_exterior_.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Century City Icon</span>
+                <span class="row-street">Santa Monica</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–2</span>
+                <span class="row-rent tnum">$3,445</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="026" data-name="Selby Venti" data-street="Selby"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="5" data-rent="5995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/selby%20venti%20-%20unit%20402%20-%20kitchen_%20countertop%20bar_final.jpg">
+            <a class="row-link" href="buildings/selby-venti.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_1830_selby_ave_exteriors-4.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Selby Venti</span>
+                <span class="row-street">Selby</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">4–5</span>
+                <span class="row-rent tnum">$5,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="027" data-name="West Idaho" data-street="Westgate"
+               data-area="west-la" data-arealabel="West Los Angeles" data-bedsmax="3" data-rent="4495"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/west%20idaho%20-%20dining%20and%20livnf%20room%20patio_final.jpg">
+            <a class="row-link" href="buildings/west-idaho.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/90962/1616swestgate-106.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">West Idaho</span>
+                <span class="row-street">Westgate</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum">$4,495</span>
+              </span>
+            </a>
+          </div>
+          </div>
+        </section>
+        <section class="reg-block" id="brentwood" data-group="brentwood" aria-labelledby="h-brentwood" style="--rows:13">
+          <h2 class="reg-head" id="h-brentwood"><span class="reg-head-label" data-grouplabel>Brentwood</span> <span class="reg-head-count tnum">13</span><span class="reg-head-flat tnum">72</span></h2>
+          <p class="reg-head-sub">San Vicente · Barrington · Montana &middot; 9&nbsp;streets</p>
+          <div class="reg-cols" aria-hidden="true"><span class="rc-body"><span>Building</span><span>Street</span></span><span class="rc-figs"><span>Bedrooms</span><span>From</span></span></div>
+          <div class="reg-rows" data-rows>
+          <div class="reg-row" data-row data-no="028" data-name="605 Barrington" data-street="Barrington"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="2" data-rent="3195"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/605%20s%20barrington%20ave%20unit%2017%20-%20kitchen_.jpg">
+            <a class="row-link" href="buildings/605-barrington.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/605%20barrington%20-%20community%20thumbnail%20copy.png" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">605 Barrington</span>
+                <span class="row-street">Barrington</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–2</span>
+                <span class="row-rent tnum">$3,195</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="029" data-name="Darlington Home" data-street="Darlington"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="2" data-rent="3495"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/darlington%20home%20-%20unit%204%20-%20kitchen,%20dining,%20and%20living%20room%20_final.jpg">
+            <a class="row-link" href="buildings/darlington-home.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/darlington%20home%20-%20community%20thumbnail.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Darlington Home</span>
+                <span class="row-street">Darlington</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–2</span>
+                <span class="row-rent tnum">$3,495</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="030" data-name="Darlington Legacy" data-street="Darlington"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="3" data-rent="4995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/darlington%20legacy%20-%20exterior%20edited.jpg">
+            <a class="row-link" href="buildings/darlington-legacy.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/darlington%20legacy%20-%20exterior%20edited.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Darlington Legacy</span>
+                <span class="row-street">Darlington</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–3</span>
+                <span class="row-rent tnum">$4,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="031" data-name="Gorham Fourteen" data-street="Gorham"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="2" data-rent="2595"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/gorham%20fourteen%20-%20unit%207%20-%20kitchen_final(1).jpg">
+            <a class="row-link" href="buildings/gorham-fourteen.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/gorham%20fourteen%20-%20community%20thumbnail.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Gorham Fourteen</span>
+                <span class="row-street">Gorham</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–2</span>
+                <span class="row-rent tnum">$2,595</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="032" data-name="Goshen Bundy" data-street="Goshen"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="2" data-rent="2895"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/goshen%20bundy%20-%20%20unit%208%20-%20kitchen,%20dining,%20and%20patio_final.jpg">
+            <a class="row-link" href="buildings/goshen-bundy.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/goshen%20bundy%20-%20community%20thumbnail.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Goshen Bundy</span>
+                <span class="row-street">Goshen</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–2</span>
+                <span class="row-rent tnum">$2,895</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="033" data-name="Goshen Eighteen" data-street="Goshen"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="3" data-rent="1805"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/12017%20goshen%20ave%20%20exterior-11(1).jpg">
+            <a class="row-link" href="buildings/goshen-eighteen.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/12017%20goshen%20ave%20%20exterior-11(1).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Goshen Eighteen</span>
+                <span class="row-street">Goshen</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–3</span>
+                <span class="row-rent tnum">$1,805</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="034" data-name="Granville Elegance" data-street="Granville"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="1" data-rent="2695"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/granville%20elegance%20-%20unit%209%20-%20kitchen_final.jpg">
+            <a class="row-link" href="buildings/granville-elegance.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/granville%20elegance%20-%20community%20thumbnail.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Granville Elegance</span>
+                <span class="row-street">Granville</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–1</span>
+                <span class="row-rent tnum">$2,695</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="035" data-name="Gretna Green Harlow" data-street="Gretna Green"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="3" data-rent=""
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/photo%20dec%2001%202022,%2012%2009%2033%20pm%20(2).jpg">
+            <a class="row-link" href="buildings/gretna-green-harlow.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/photo%20dec%2001%202022,%2012%2009%2033%20pm%20(2).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Gretna Green Harlow</span>
+                <span class="row-street">Gretna Green</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum is-none">—</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="036" data-name="Gretna Green Tinos" data-street="Gretna Green"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="2" data-rent="3995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/gretna%20green%20tinos%20-%20unit%20202%20-%20kitchen%20and%20lr%20curtains%20etc_final(1).jpg">
+            <a class="row-link" href="buildings/gretna-green-tinos.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/gretna%20green%20tinos%20-%20community%20thumbnail.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Gretna Green Tinos</span>
+                <span class="row-street">Gretna Green</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–2</span>
+                <span class="row-rent tnum">$3,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="037" data-name="Kiowa Grand" data-street="Kiowa"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="2" data-rent="3450"
+               data-img="../assets/img/wr12.jpg">
+            <a class="row-link" href="buildings/kiowa-grand.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_11978_kiowa_ave_exterior_-04.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Kiowa Grand</span>
+                <span class="row-street">Kiowa</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–2</span>
+                <span class="row-rent tnum">$3,450</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="038" data-name="Kiowa Hollow" data-street="Kiowa"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="2" data-rent="2205"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/kiowa%20hollow%20-%20unit%209%20-%20kitchen_final.jpg">
+            <a class="row-link" href="buildings/kiowa-hollow.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/kiowa%20hollow%20-%20community%20thunbnail.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Kiowa Hollow</span>
+                <span class="row-street">Kiowa</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–2</span>
+                <span class="row-rent tnum">$2,205</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="039" data-name="Mayfield Hall" data-street="Mayfield"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="2" data-rent="4295"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/mayfield%20hall%20-%20unit%209%20dining%20room_%20lving%20room_%20and%20patio_final.jpg">
+            <a class="row-link" href="buildings/mayfield-hall.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/mayfield%20hall%20-%20unit%209%20dining%20room_%20lving%20room_%20and%20patio_final.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Mayfield Hall</span>
+                <span class="row-street">Mayfield</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–2</span>
+                <span class="row-rent tnum">$4,295</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="040" data-name="Montana View" data-street="Montana"
+               data-area="brentwood" data-arealabel="Brentwood" data-bedsmax="3" data-rent="4195"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/montana%20view%20unit%208%20-%20kitchen%20and%20dining%20room%20_final.jpg">
+            <a class="row-link" href="buildings/montana-view.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/montana%20view%20-community%20thumbnail.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Montana View</span>
+                <span class="row-street">Montana</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum">$4,195</span>
+              </span>
+            </a>
+          </div>
+          </div>
+        </section>
+        <section class="reg-block" id="beverly-grove" data-group="beverly-grove" aria-labelledby="h-beverly-grove" style="--rows:14">
+          <h2 class="reg-head" id="h-beverly-grove"><span class="reg-head-label" data-grouplabel>Beverly Grove</span> <span class="reg-head-count tnum">14</span><span class="reg-head-flat tnum">72</span></h2>
+          <p class="reg-head-sub">Third Street · Beverly Center · Miracle Mile &middot; 10&nbsp;streets</p>
+          <div class="reg-cols" aria-hidden="true"><span class="rc-body"><span>Building</span><span>Street</span></span><span class="rc-figs"><span>Bedrooms</span><span>From</span></span></div>
+          <div class="reg-rows" data-rows>
+          <div class="reg-row" data-row data-no="041" data-name="Blackburn Beverly" data-street="Blackburn"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="2" data-rent="3995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/8403%20blackburn%20ave%20unit%20209-%20bedroom%20and%20living%20room%20area%20_final(2).jpg">
+            <a class="row-link" href="buildings/blackburn-beverly.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_8403_blackburn_ave_exterior_-_remove_parking_sign_.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Blackburn Beverly</span>
+                <span class="row-street">Blackburn</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–2</span>
+                <span class="row-rent tnum">$3,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="042" data-name="Blackburn La Cienega" data-street="Blackburn"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="5" data-rent="3295"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/8457%20blackburn%20ave%20exterior-15.jpg">
+            <a class="row-link" href="buildings/blackburn-la-cienega.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_8457_blackburn_ave_street_edit-3.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Blackburn La Cienega</span>
+                <span class="row-street">Blackburn</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–5</span>
+                <span class="row-rent tnum">$3,295</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="043" data-name="Croft Eleven" data-street="Croft"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="2" data-rent=""
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/croft%20eleven%20-%20lrand%20curtains_final.jpg">
+            <a class="row-link" href="buildings/croft-eleven.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_111_s_croft_ave_exterior_-2.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Croft Eleven</span>
+                <span class="row-street">Croft</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–2</span>
+                <span class="row-rent tnum is-none">—</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="044" data-name="Croft Retreat" data-street="Croft"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="4" data-rent="4495"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/croft%20retreat%20-%20%20unit%20103%20-%20kitchen,%20dining,%20lr,%20and%20patio_final.jpg">
+            <a class="row-link" href="buildings/croft-retreat.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_130_n_croft_ave_exterior-4.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Croft Retreat</span>
+                <span class="row-street">Croft</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–4</span>
+                <span class="row-rent tnum">$4,495</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="045" data-name="Hayworth Abbey" data-street="Hayworth"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="4" data-rent="1700"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/hayworth%20abbey%20-%20patio_final.jpg">
+            <a class="row-link" href="buildings/hayworth-abbey.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_429_n_hayworth_ave_exterior_-02.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Hayworth Abbey</span>
+                <span class="row-street">Hayworth</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–4</span>
+                <span class="row-rent tnum">$1,700</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="046" data-name="Hayworth Hyde" data-street="Hayworth"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="3" data-rent="4495"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/409%20n%20hayworth%20ave%20exterior-01.jpg">
+            <a class="row-link" href="buildings/hayworth-hyde.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/409%20n%20hayworth%20ave%20exterior-01.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Hayworth Hyde</span>
+                <span class="row-street">Hayworth</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–3</span>
+                <span class="row-rent tnum">$4,495</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="047" data-name="Hi Point Terrace" data-street="Hi Point"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="3" data-rent="2995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/hi%20point%20-%20orion%20-%20patio,%20kitchen,%20dining,%20and%20living%20room%20_final(1).jpg">
+            <a class="row-link" href="buildings/hi-point-terrace.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_1500_hi_point_st_exterior-no_shadows-1%20(1).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Hi Point Terrace</span>
+                <span class="row-street">Hi Point</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–3</span>
+                <span class="row-rent tnum">$2,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="048" data-name="Kings on Third" data-street="Kings"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="3" data-rent="4795"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/129%20kings%20rd%20unit%20203%20-%20kitchen%20and%20living%20room_final(1).jpg">
+            <a class="row-link" href="buildings/kings-on-third.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/604516/129kingsrd-305.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Kings on Third</span>
+                <span class="row-street">Kings</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–3</span>
+                <span class="row-rent tnum">$4,795</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="049" data-name="Rimini" data-street="Kings"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="3" data-rent="5395"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/rimini%20-%20kitchen%20(1).jpg">
+            <a class="row-link" href="buildings/rimini.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_106_s_kings_rd_exterior_-7%20(1).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Rimini</span>
+                <span class="row-street">Kings</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–3</span>
+                <span class="row-rent tnum">$5,395</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="050" data-name="Ogden Garden" data-street="Ogden"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="2" data-rent="2595"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/ogden%20garden%20-%20pear%20-%20kitchen%20and%20dining_final.jpg">
+            <a class="row-link" href="buildings/ogden-garden.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/ogden%20garden%20-%20community%20thumbnail.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Ogden Garden</span>
+                <span class="row-street">Ogden</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–2</span>
+                <span class="row-rent tnum">$2,595</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="051" data-name="Orlando on First" data-street="Orlando"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="3" data-rent="4595"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/3/1030854/100sorlando-105.jpg">
+            <a class="row-link" href="buildings/orlando-on-first.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/1030854/100sorlando-105.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Orlando on First</span>
+                <span class="row-street">Orlando</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">3</span>
+                <span class="row-rent tnum">$4,595</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="052" data-name="Orlando on Third" data-street="Orlando"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="3" data-rent="4595"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/orlando%20on%20third%20-%20unit%20ph1%20-%20kitchen%20and%20rugs_final.jpg">
+            <a class="row-link" href="buildings/orlando-on-third.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/511756/120sorlandostaged-205.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Orlando on Third</span>
+                <span class="row-street">Orlando</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–3</span>
+                <span class="row-rent tnum">$4,595</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="053" data-name="Sherbourne Hall" data-street="Sherbourne"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="3" data-rent="3995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/sherbourne%20hall%20-%20living%20room,%20dining%20room,%20and%20patio.jpg">
+            <a class="row-link" href="buildings/sherbourne-hall.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/90971/1240sherbourne-106.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Sherbourne Hall</span>
+                <span class="row-street">Sherbourne</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–3</span>
+                <span class="row-rent tnum">$3,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="054" data-name="Sweetzer on Third" data-street="Sweetzer"
+               data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmax="3" data-rent="4595"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/sweetzer%20-%20unit%20105%20-%20kitchen%20and%20countertop%20bar.jpg">
+            <a class="row-link" href="buildings/sweetzer-on-third.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/107%20sweetzerr%20exterior%202(1).jpeg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Sweetzer on Third</span>
+                <span class="row-street">Sweetzer</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–3</span>
+                <span class="row-rent tnum">$4,595</span>
+              </span>
+            </a>
+          </div>
+          </div>
+        </section>
+        <section class="reg-block" id="hollywood" data-group="hollywood" aria-labelledby="h-hollywood" style="--rows:13">
+          <h2 class="reg-head" id="h-hollywood"><span class="reg-head-label" data-grouplabel>Hollywood</span> <span class="reg-head-count tnum">13</span><span class="reg-head-flat tnum">72</span></h2>
+          <p class="reg-head-sub">Melrose · Fairfax · Larchmont &middot; 11&nbsp;streets</p>
+          <div class="reg-cols" aria-hidden="true"><span class="rc-body"><span>Building</span><span>Street</span></span><span class="rc-figs"><span>Bedrooms</span><span>From</span></span></div>
+          <div class="reg-rows" data-rows>
+          <div class="reg-row" data-row data-no="055" data-name="Alfred Atlas" data-street="Alfred"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="2" data-rent="3995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/alfred%20atlas%20-%20kitchen%20picture.jpg">
+            <a class="row-link" href="buildings/alfred-atlas.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/aa%202%20appliances.jpeg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Alfred Atlas</span>
+                <span class="row-street">Alfred</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–2</span>
+                <span class="row-rent tnum">$3,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="056" data-name="Cole Grove" data-street="Cole"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="3" data-rent="3322"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/cole%20grove%20-%20kitchen%20and%20countertop%20bar.jpg">
+            <a class="row-link" href="buildings/cole-grove.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/604515/711cole-156.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Cole Grove</span>
+                <span class="row-street">Cole</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–3</span>
+                <span class="row-rent tnum">$3,323</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="057" data-name="Sunset Rise" data-street="Detroit"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="3" data-rent=""
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/sunset%20rise%20-%20exterior%203(1).jpg">
+            <a class="row-link" href="buildings/sunset-rise.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/sunset%20rise%20-%20exterior%203(1).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Sunset Rise</span>
+                <span class="row-street">Detroit</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–3</span>
+                <span class="row-rent tnum is-none">—</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="058" data-name="Edinburgh Courtyard" data-street="Edinburgh"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="4" data-rent="3695"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/edinburgh%20-%20kitchen%20_final.jpg">
+            <a class="row-link" href="buildings/edinburgh-courtyard.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/90952/833edinburgh-106.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Edinburgh Courtyard</span>
+                <span class="row-street">Edinburgh</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–4</span>
+                <span class="row-rent tnum">$3,695</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="059" data-name="Formosa Fountain" data-street="Formosa"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="3" data-rent="4495"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/3/1086901/1338formosa-205.jpg">
+            <a class="row-link" href="buildings/formosa-fountain.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/1086901/1338formosa-205.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Formosa Fountain</span>
+                <span class="row-street">Formosa</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–3</span>
+                <span class="row-rent tnum">$4,495</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="060" data-name="Gramercy Park" data-street="Gramercy"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="3" data-rent="2495"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/gramercy%20-%20kitchen,%20dining,%20living%20room.jpg">
+            <a class="row-link" href="buildings/gramercy-park.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/1106176/518gramercy-106.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Gramercy Park</span>
+                <span class="row-street">Gramercy</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–3</span>
+                <span class="row-rent tnum">$2,495</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="061" data-name="Hawthorn at Poinsettia" data-street="Hawthorn"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="3" data-rent="4095"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/old%20hawthorn%20exterior_final.jpg">
+            <a class="row-link" href="buildings/hawthorn-at-poinsettia.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/old%20hawthorn%20exterior_final.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Hawthorn at Poinsettia</span>
+                <span class="row-street">Hawthorn</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum">$4,095</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="062" data-name="Hudson Lux" data-street="Hudson"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="4" data-rent="2695"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/hudson%20lux%20unit%20103%20-%20lr_%20dining_%20kitchen_%20and%20patio_final.jpg">
+            <a class="row-link" href="buildings/hudson-lux.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/582556/1-807hudson-105(1).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Hudson Lux</span>
+                <span class="row-street">Hudson</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–4</span>
+                <span class="row-rent tnum">$2,695</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="063" data-name="Martel Flats" data-street="Martel"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="3" data-rent="3895"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/martel%20flats%20-%20unit%20304-%20dining%20and%20kitchen.jpg">
+            <a class="row-link" href="buildings/martel-flats.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_1319_n_martel_ave_exterior-01.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Martel Flats</span>
+                <span class="row-street">Martel</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–3</span>
+                <span class="row-rent tnum">$3,895</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="064" data-name="Poinsettia Sunset" data-street="Poinsettia"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="3" data-rent="3995"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/poinsettia%20-%20unit%20307%20-%20kitchen_%20countertop%20bar_%20dining_%20lr_%20patio_final.jpg">
+            <a class="row-link" href="buildings/poinsettia-sunset.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_1439_poinsettia_pl_exteriors-3.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Poinsettia Sunset</span>
+                <span class="row-street">Poinsettia</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">3</span>
+                <span class="row-rent tnum">$3,995</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="065" data-name="Waring Hudson" data-street="Waring"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="3" data-rent="4095"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/waring%20hudson%20-%20kitchen,%20dining,%20and%20storage%20closet.jpg">
+            <a class="row-link" href="buildings/waring-hudson.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/227366/3_227366_1607555.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Waring Hudson</span>
+                <span class="row-street">Waring</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–3</span>
+                <span class="row-rent tnum">$4,095</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="066" data-name="Wilcox Bea" data-street="Wilcox"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="3" data-rent="4100"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/850%20wilcox%20ave%20exteriors-7.jpg">
+            <a class="row-link" href="buildings/wilcox-bea.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/726789/850wilcox-105(1).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Wilcox Bea</span>
+                <span class="row-street">Wilcox</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">2–3</span>
+                <span class="row-rent tnum">$4,100</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="067" data-name="Wilcox Melrose" data-street="Wilcox"
+               data-area="hollywood" data-arealabel="Hollywood" data-bedsmax="3" data-rent="3895"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/wilcox%20melrose%20-%20kitchen%20and%20rugs_final.jpg">
+            <a class="row-link" href="buildings/wilcox-melrose.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/550100/1(1).jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Wilcox Melrose</span>
+                <span class="row-street">Wilcox</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">3</span>
+                <span class="row-rent tnum">$3,895</span>
+              </span>
+            </a>
+          </div>
+          </div>
+        </section>
+        <section class="reg-block" id="venice" data-group="venice" aria-labelledby="h-venice" style="--rows:2">
+          <h2 class="reg-head" id="h-venice"><span class="reg-head-label" data-grouplabel>Venice</span> <span class="reg-head-count tnum">2</span><span class="reg-head-flat tnum">72</span></h2>
+          <p class="reg-head-sub">Abbot Kinney · Penmar · Rose &middot; 2&nbsp;streets</p>
+          <div class="reg-cols" aria-hidden="true"><span class="rc-body"><span>Building</span><span>Street</span></span><span class="rc-figs"><span>Bedrooms</span><span>From</span></span></div>
+          <div class="reg-rows" data-rows>
+          <div class="reg-row" data-row data-no="068" data-name="Penmar Superba" data-street="Penmar"
+               data-area="venice" data-arealabel="Venice" data-bedsmax="2" data-rent="3595"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/penmar%20superba%20-%20unit%2013%20-%20kitchen%202_final.jpg">
+            <a class="row-link" href="buildings/penmar-superba.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_2001_penmar_ave_new_exterior_-2.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Penmar Superba</span>
+                <span class="row-street">Penmar</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">Studio–2</span>
+                <span class="row-rent tnum">$3,595</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="069" data-name="Venice Wave" data-street="Venice"
+               data-area="venice" data-arealabel="Venice" data-bedsmax="2" data-rent="3045"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/venice%20wave%20unit%20405%20-%20kitchen%20and%20small%20island%20with%20stools_final(1).jpg">
+            <a class="row-link" href="buildings/venice-wave.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_1600_venice_bl_hdr-03.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Venice Wave</span>
+                <span class="row-street">Venice</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–2</span>
+                <span class="row-rent tnum">$3,045</span>
+              </span>
+            </a>
+          </div>
+          </div>
+        </section>
+        <section class="reg-block" id="palms" data-group="palms" aria-labelledby="h-palms" style="--rows:2">
+          <h2 class="reg-head" id="h-palms"><span class="reg-head-label" data-grouplabel>Palms · Motor Avenue</span> <span class="reg-head-count tnum">2</span><span class="reg-head-flat tnum">72</span></h2>
+          <p class="reg-head-sub">Motor Avenue · minutes from Culver City &middot; 1&nbsp;streets</p>
+          <div class="reg-cols" aria-hidden="true"><span class="rc-body"><span>Building</span><span>Street</span></span><span class="rc-figs"><span>Bedrooms</span><span>From</span></span></div>
+          <div class="reg-rows" data-rows>
+          <div class="reg-row" data-row data-no="070" data-name="Motor Midway" data-street="Motor"
+               data-area="palms" data-arealabel="Palms · Motor Avenue" data-bedsmax="3" data-rent="3395"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/motor%20midway%20-%20unit%20704%20-%20kitchen_%20dining_%20lr_%20and%20patio_final.jpg">
+            <a class="row-link" href="buildings/motor-midway.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_3657_motor_ave_exterior-1.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Motor Midway</span>
+                <span class="row-street">Motor</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum">$3,395</span>
+              </span>
+            </a>
+          </div>
+          <div class="reg-row" data-row data-no="071" data-name="Motor Tides" data-street="Motor"
+               data-area="palms" data-arealabel="Palms · Motor Avenue" data-bedsmax="4" data-rent=""
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1100/s3/2/9707/motor%20tides%20-%20unit%20705%20-%20kithcenm%20small%20dining_%20lr_%20and%20patio_final%20(1).jpg">
+            <a class="row-link" href="buildings/motor-tides.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/2/9707/rsz_2motor_jpeg_1.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Motor Tides</span>
+                <span class="row-street">Motor</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–4</span>
+                <span class="row-flag">Now leasing</span>
+              </span>
+            </a>
+          </div>
+          </div>
+        </section>
+        <section class="reg-block" id="glendale" data-group="glendale" aria-labelledby="h-glendale" style="--rows:1">
+          <h2 class="reg-head" id="h-glendale"><span class="reg-head-label" data-grouplabel>Glendale</span> <span class="reg-head-count tnum">1</span><span class="reg-head-flat tnum">72</span></h2>
+          <p class="reg-head-sub">Brand Boulevard &middot; 1&nbsp;streets</p>
+          <div class="reg-cols" aria-hidden="true"><span class="rc-body"><span>Building</span><span>Street</span></span><span class="rc-figs"><span>Bedrooms</span><span>From</span></span></div>
+          <div class="reg-rows" data-rows>
+          <div class="reg-row" data-row data-no="072" data-name="Broadway Glendale" data-street="Broadway"
+               data-area="glendale" data-arealabel="Glendale" data-bedsmax="3" data-rent="3450"
+               data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_960/s3/3/119320/220_east_broadway_exterior.jpg">
+            <a class="row-link" href="buildings/broadway-glendale.html">
+              <img class="row-thumb" src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_160,h_160,c_fill,g_auto/s3/3/119320/220_east_broadway_exterior.jpg" alt="" width="56" height="56" loading="lazy" decoding="async">
+              <span class="row-body">
+                <span class="row-name">Broadway Glendale</span>
+                <span class="row-street">Broadway</span>
+              </span>
+              <span class="row-figs">
+                <span class="row-beds tnum">1–3</span>
+                <span class="row-rent tnum">$3,450</span>
+              </span>
+            </a>
+          </div>
+          </div>
+        </section>
+
+      <p class="reg-legend">
+        <span>Seventy-two buildings in seven areas, set out west to&nbsp;east.</span>
+        <span>Bedrooms and rent are the leasing feed&rsquo;s own figures, read on 10 September 2026. Rent is the lowest figure a building lists; an em dash means the feed lists no price&nbsp;today.</span>
+        <span>Motor Tides completes in 2026 and leases through the live&nbsp;system.</span>
+      </p>
+      </div>
+    </div>
+    <p class="map-key" data-showin="atlas" hidden><span><span class="tnum" data-mapcount>72</span>&nbsp;buildings</span><span>West Los Angeles&nbsp;<span class="tnum">27</span></span><span>Brentwood&nbsp;<span class="tnum">13</span></span><span>Beverly Grove&nbsp;<span class="tnum">14</span></span><span>Hollywood&nbsp;<span class="tnum">13</span></span><span>Venice&nbsp;<span class="tnum">2</span></span><span>Palms · Motor Avenue&nbsp;<span class="tnum">2</span></span><span>Glendale&nbsp;<span class="tnum">1</span></span></p>
+  </section>
+
+  <section class="view-pane" id="pane-plates" data-viewpane="plates" role="tabpanel" aria-labelledby="vb-plates" hidden>
+    <div class="book wrap wrap-n" data-pool>
+      <h2 class="vh">The photographs</h2>
+      <p class="reg-note">
+        <span>One photograph per building, grouped by neighborhood, west to&nbsp;east.</span>
+        <span>Photographs are Wiseman&rsquo;s own, as published in the leasing&nbsp;feed.</span>
+      </p>
+      <section class="run" id="p-west-la" data-group="west-la" aria-labelledby="ph-west-la">
+        <header class="run-head">
+          <p class="run-eyebrow rv"><span class="tnum">01</span><span>of seven</span><span>Sawtelle · Santa Monica Blvd · Westgate</span></p>
+          <h2 class="run-h rv" id="ph-west-la">West Los Angeles · Sawtelle</h2>
+          <p class="run-meta rv"><span><b class="tnum">27</b>&nbsp;buildings</span><span><b class="tnum">17</b>&nbsp;streets</span><a href="neighborhoods/west-la.html">The area&nbsp;&rarr;</a></p>
+        </header>
+        <div class="pgrid">
+          <a class="pl pl--open" href="buildings/amherst-rochester.html"
+             data-plateitem data-no="001" data-name="Amherst Rochester" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_2048/s3/2/9707/1331%20amherst%20ave%20exteriors%20-22.jpg" alt="Amherst Rochester, 1331 Amherst Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Amherst Rochester</span>
+              <span class="pl-st">1331 Amherst Ave</span>
+              <span class="pl-fg"><span class="tnum">3–4</span> &middot; from <span class="tnum">$4,895</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/armacost-bella.html"
+             data-plateitem data-no="002" data-name="Armacost Bella" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/1439%20armacost%20ave%20unit%20306%20-%20kitchen%20_%20dining_final.jpg" alt="Armacost Bella, 1439 Armacost Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Armacost Bella</span>
+              <span class="pl-st">1439 Armacost Avenue</span>
+              <span class="pl-fg"><span class="tnum">Studio–4</span> &middot; from <span class="tnum">$4,895</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/armacost-manor.html"
+             data-plateitem data-no="003" data-name="Armacost Manor" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/armacost%20manor%20-%20unit%20304-%20dining%20and%20living%20room%20patio_final.jpg" alt="Armacost Manor, 1446 Armacost Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Armacost Manor</span>
+              <span class="pl-st">1446 Armacost Ave</span>
+              <span class="pl-fg"><span class="tnum">1–3</span> &middot; from <span class="tnum">$4,950</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/barrington-santa-monica.html"
+             data-plateitem data-no="004" data-name="Barrington Santa Monica" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/barrington%20-%20unit%20111-%20living%20room%20patio_final.jpg" alt="Barrington Santa Monica, 1561 South Barrington Ave." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Barrington Santa Monica</span>
+              <span class="pl-st">1561 South Barrington Ave.</span>
+              <span class="pl-fg"><span class="tnum">Studio–2</span> &middot; from <span class="tnum">$2,595</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/beloit-at-ohio.html"
+             data-plateitem data-no="005" data-name="Beloit at Ohio" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/beloit%20at%20ohio%20unit%20116%20-%20kitchen%20and%20countertop%20bar_final.jpg" alt="Beloit at Ohio, 1539 Beloit Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Beloit at Ohio</span>
+              <span class="pl-st">1539 Beloit Ave</span>
+              <span class="pl-fg"><span class="tnum">1–4</span> &middot; from <span class="tnum">$3,945</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/bentley-woodland.html"
+             data-plateitem data-no="006" data-name="Bentley Woodland" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/bentley%20woodland%20-%20bedroom%20and%20in-suite%20washer%20and%20dryer.jpg" alt="Bentley Woodland, 1821 S Bentley Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Bentley Woodland</span>
+              <span class="pl-st">1821 S Bentley Ave</span>
+              <span class="pl-fg"><span class="tnum">Studio–3</span> &middot; from <span class="tnum">$3,495</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/brockton-manor.html"
+             data-plateitem data-no="007" data-name="Brockton Manor" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/1301%20brockton%20-%20kitchen(2).jpg" alt="Brockton Manor, 1301 Brockton Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Brockton Manor</span>
+              <span class="pl-st">1301 Brockton Ave</span>
+              <span class="pl-fg"><span class="tnum">Studio–5</span> &middot; from <span class="tnum">$4,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/brockton-townhomes.html"
+             data-plateitem data-no="008" data-name="Brockton Townhomes" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/brockton%20townhomes%20-%20kitchen,%20bar,%20dining,%20living%20room%20curtains_final.jpg" alt="Brockton Townhomes, 1623 Brockton Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Brockton Townhomes</span>
+              <span class="pl-st">1623 Brockton Ave</span>
+              <span class="pl-fg"><span class="tnum">3–4</span> &middot; from <span class="tnum">$4,595</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/butler-cabana.html"
+             data-plateitem data-no="009" data-name="Butler Cabana" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/butler%20cabana%20-%20dining%20room,%20bar,%20curtaisn,%20kitchen%20and%20rugs.jpg" alt="Butler Cabana, 1417 Butler Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Butler Cabana</span>
+              <span class="pl-st">1417 Butler Ave</span>
+              <span class="pl-fg"><span class="tnum">Studio–3</span> &middot; from <span class="tnum">$4,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/butler-eighteen.html"
+             data-plateitem data-no="010" data-name="Butler Eighteen" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/butler%20eighteen%20-%20lr,%20dining,%20and%20kitchen.jpg" alt="Butler Eighteen, 1845 Butler Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Butler Eighteen</span>
+              <span class="pl-st">1845 Butler Ave</span>
+              <span class="pl-fg"><span class="tnum">Studio–2</span> &middot; from <span class="tnum">$3,395</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/colby-at-ohio.html"
+             data-plateitem data-no="011" data-name="Colby at Ohio" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/colby%20at%20ohio%20-%20unit%20108%20-%20kitchen,%20dinign,%20alr,%20and%20patio_final.jpg" alt="Colby at Ohio, 1515 Colby Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Colby at Ohio</span>
+              <span class="pl-st">1515 Colby Avenue</span>
+              <span class="pl-fg"><span class="tnum">1–4</span> &middot; from <span class="tnum">$2,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/colby-missouri.html"
+             data-plateitem data-no="012" data-name="Colby Missouri" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/colby%20missouri%20-%20ph6%20-%20kitchen,%20living%20room,%20patio,%20shelving,%20curtains_final.jpg" alt="Colby Missouri, 1836 Colby Ave." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Colby Missouri</span>
+              <span class="pl-st">1836 Colby Ave.</span>
+              <span class="pl-fg"><span class="tnum">3</span> &middot; from <span class="tnum">$4,945</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/colby-townhomes.html"
+             data-plateitem data-no="013" data-name="Colby Townhomes" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/photo%20oct%2018,%203%2048%2030%20pm.jpg" alt="Colby Townhomes, 1650 Colby Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Colby Townhomes</span>
+              <span class="pl-st">1650 Colby Ave</span>
+              <span class="pl-fg"><span class="tnum">4–5</span> &middot; from <span class="tnum">$5,050</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/colby-west.html"
+             data-plateitem data-no="014" data-name="Colby West" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/colby%20west%20-%20remove%20cars%20and%20lower%20sign.jpg" alt="Colby West, 1671 Colby Ave." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Colby West</span>
+              <span class="pl-st">1671 Colby Ave.</span>
+              <span class="pl-fg"><span class="tnum">1–3</span> &middot; from <span class="tnum">$2,495</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/santa-monica-federal.html"
+             data-plateitem data-no="015" data-name="Santa Monica Federal" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/santa%20monica%20federal%20-%20unit%20402%20-%20kitchen%20_final.jpg" alt="Santa Monica Federal, 1518 Federal Ave." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Santa Monica Federal</span>
+              <span class="pl-st">1518 Federal Ave.</span>
+              <span class="pl-fg"><span class="tnum">Studio–3</span> &middot; from <span class="tnum">$4,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/fox-hills-dr.html"
+             data-plateitem data-no="016" data-name="Fox Hills Dr" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/fox%20hills%20dr%20-%20kitchen%20lr%20patio.jpg" alt="Fox Hills Dr, 2250 Fox Hills Dr." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Fox Hills Dr</span>
+              <span class="pl-st">2250 Fox Hills Dr.</span>
+              <span class="pl-fg"><span class="tnum">1–3</span> &middot; from <span class="tnum">$5,195</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/kelton-madera.html"
+             data-plateitem data-no="017" data-name="Kelton Madera" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/kelton%20madera%20-%20dining%20kitchen%20and%20shelves_final.jpg" alt="Kelton Madera, 1819 Kelton Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Kelton Madera</span>
+              <span class="pl-st">1819 Kelton Avenue</span>
+              <span class="pl-fg"><span class="tnum">1–4</span> &middot; from <span class="tnum">$5,145</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/louisiana-glen.html"
+             data-plateitem data-no="018" data-name="Louisiana Glen" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/louisiana%20glen%20-%20unit%20405%20-%20kitchen_final(1).jpg" alt="Louisiana Glen, 10405 Louisiana Ave." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Louisiana Glen</span>
+              <span class="pl-st">10405 Louisiana Ave.</span>
+              <span class="pl-fg"><span class="tnum">2–5</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/mcclellan-corner.html"
+             data-plateitem data-no="019" data-name="McClellan Corner" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/mcclellan%20corner%20-%20lr,%20dining,%20kitchen.jpg" alt="McClellan Corner, 1212 McClellan Drive" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">McClellan Corner</span>
+              <span class="pl-st">1212 McClellan Drive</span>
+              <span class="pl-fg"><span class="tnum">1–2</span> &middot; from <span class="tnum">$3,495</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/ohio-sawtelle.html"
+             data-plateitem data-no="020" data-name="Ohio Sawtelle" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/ohio%20sawtelle%20-%20dining%20-%20blue%20accents.jpg" alt="Ohio Sawtelle, 11551 Ohio Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Ohio Sawtelle</span>
+              <span class="pl-st">11551 Ohio Ave</span>
+              <span class="pl-fg"><span class="tnum">1–3</span> &middot; from <span class="tnum">$3,395</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/overland-century.html"
+             data-plateitem data-no="021" data-name="Overland Century" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/overland%20century%20-%20kitchen.jpg" alt="Overland Century, 1920 Overland Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Overland Century</span>
+              <span class="pl-st">1920 Overland Ave</span>
+              <span class="pl-fg"><span class="tnum">1–3</span> &middot; from <span class="tnum">$3,295</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/purdue-ohio.html"
+             data-plateitem data-no="022" data-name="Purdue Ohio" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/1500purdue-106%20(3).jpg" alt="Purdue Ohio, 1500 Purdue Ave" width="3000" height="1252" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Purdue Ohio</span>
+              <span class="pl-st">1500 Purdue Ave</span>
+              <span class="pl-fg"><span class="tnum">3–4</span> &middot; from <span class="tnum">$4,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/purdue-point.html"
+             data-plateitem data-no="023" data-name="Purdue Point" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/edited%201515%20purdue%20ave%20street.jpeg" alt="Purdue Point, 1515 Purdue Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Purdue Point</span>
+              <span class="pl-st">1515 Purdue Ave</span>
+              <span class="pl-fg"><span class="tnum">—</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/santa-monica-breeze.html"
+             data-plateitem data-no="024" data-name="Santa Monica Breeze" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/image0.jpeg" alt="Santa Monica Breeze, 1539 Purdue Ave." width="3000" height="2000" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Santa Monica Breeze</span>
+              <span class="pl-st">1539 Purdue Ave.</span>
+              <span class="pl-fg"><span class="tnum">1–3</span> &middot; from <span class="tnum">$3,795</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/century-city-icon.html"
+             data-plateitem data-no="025" data-name="Century City Icon" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/10473%20santa%20monica%20bl%20exteriors-03.jpg" alt="Century City Icon, 10473 Santa Monica Boulevard" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Century City Icon</span>
+              <span class="pl-st">10473 Santa Monica Boulevard</span>
+              <span class="pl-fg"><span class="tnum">Studio–2</span> &middot; from <span class="tnum">$3,445</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/selby-venti.html"
+             data-plateitem data-no="026" data-name="Selby Venti" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/selby%20venti%20-%20unit%20402%20-%20kitchen_%20countertop%20bar_final.jpg" alt="Selby Venti, 1830 Selby Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Selby Venti</span>
+              <span class="pl-st">1830 Selby Avenue</span>
+              <span class="pl-fg"><span class="tnum">4–5</span> &middot; from <span class="tnum">$5,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/west-idaho.html"
+             data-plateitem data-no="027" data-name="West Idaho" data-area="west-la" data-arealabel="West Los Angeles">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/west%20idaho%20-%20dining%20and%20livnf%20room%20patio_final.jpg" alt="West Idaho, 1616 S. Westgate Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">West Idaho</span>
+              <span class="pl-st">1616 S. Westgate Ave</span>
+              <span class="pl-fg"><span class="tnum">1–3</span> &middot; from <span class="tnum">$4,495</span></span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section class="run" id="p-brentwood" data-group="brentwood" aria-labelledby="ph-brentwood">
+        <header class="run-head">
+          <p class="run-eyebrow rv"><span class="tnum">02</span><span>of seven</span><span>San Vicente · Barrington · Montana</span></p>
+          <h2 class="run-h rv" id="ph-brentwood">Brentwood</h2>
+          <p class="run-meta rv"><span><b class="tnum">13</b>&nbsp;buildings</span><span><b class="tnum">9</b>&nbsp;streets</span><a href="neighborhoods/brentwood.html">The area&nbsp;&rarr;</a></p>
+        </header>
+        <div class="pgrid">
+          <a class="pl pl--open" href="buildings/darlington-legacy.html"
+             data-plateitem data-no="030" data-name="Darlington Legacy" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_2048/s3/2/9707/darlington%20legacy%20-%20exterior%20edited.jpg" alt="Darlington Legacy, 11668 Darlington Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Darlington Legacy</span>
+              <span class="pl-st">11668 Darlington Ave</span>
+              <span class="pl-fg"><span class="tnum">2–3</span> &middot; from <span class="tnum">$4,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/605-barrington.html"
+             data-plateitem data-no="028" data-name="605 Barrington" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/605%20s%20barrington%20ave%20unit%2017%20-%20kitchen_.jpg" alt="605 Barrington, 605 S. Barrington Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">605 Barrington</span>
+              <span class="pl-st">605 S. Barrington Ave</span>
+              <span class="pl-fg"><span class="tnum">1–2</span> &middot; from <span class="tnum">$3,195</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/darlington-home.html"
+             data-plateitem data-no="029" data-name="Darlington Home" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/darlington%20home%20-%20unit%204%20-%20kitchen,%20dining,%20and%20living%20room%20_final.jpg" alt="Darlington Home, 11933 Darlington Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Darlington Home</span>
+              <span class="pl-st">11933 Darlington Ave</span>
+              <span class="pl-fg"><span class="tnum">1–2</span> &middot; from <span class="tnum">$3,495</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/gorham-fourteen.html"
+             data-plateitem data-no="031" data-name="Gorham Fourteen" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/gorham%20fourteen%20-%20unit%207%20-%20kitchen_final(1).jpg" alt="Gorham Fourteen, 11933 Gorham Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Gorham Fourteen</span>
+              <span class="pl-st">11933 Gorham Ave</span>
+              <span class="pl-fg"><span class="tnum">1–2</span> &middot; from <span class="tnum">$2,595</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/goshen-bundy.html"
+             data-plateitem data-no="032" data-name="Goshen Bundy" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/goshen%20bundy%20-%20%20unit%208%20-%20kitchen,%20dining,%20and%20patio_final.jpg" alt="Goshen Bundy, 12033 Goshen Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Goshen Bundy</span>
+              <span class="pl-st">12033 Goshen Avenue</span>
+              <span class="pl-fg"><span class="tnum">1–2</span> &middot; from <span class="tnum">$2,895</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/goshen-eighteen.html"
+             data-plateitem data-no="033" data-name="Goshen Eighteen" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/12017%20goshen%20ave%20%20exterior-11(1).jpg" alt="Goshen Eighteen, 12017 Goshen Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Goshen Eighteen</span>
+              <span class="pl-st">12017 Goshen Ave</span>
+              <span class="pl-fg"><span class="tnum">Studio–3</span> &middot; from <span class="tnum">$1,805</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/granville-elegance.html"
+             data-plateitem data-no="034" data-name="Granville Elegance" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/granville%20elegance%20-%20unit%209%20-%20kitchen_final.jpg" alt="Granville Elegance, 1025 Granville Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Granville Elegance</span>
+              <span class="pl-st">1025 Granville Avenue</span>
+              <span class="pl-fg"><span class="tnum">Studio–1</span> &middot; from <span class="tnum">$2,695</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/gretna-green-harlow.html"
+             data-plateitem data-no="035" data-name="Gretna Green Harlow" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/photo%20dec%2001%202022,%2012%2009%2033%20pm%20(2).jpg" alt="Gretna Green Harlow, 809 S Gretna Green Way" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Gretna Green Harlow</span>
+              <span class="pl-st">809 S Gretna Green Way</span>
+              <span class="pl-fg"><span class="tnum">1–3</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/gretna-green-tinos.html"
+             data-plateitem data-no="036" data-name="Gretna Green Tinos" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/gretna%20green%20tinos%20-%20unit%20202%20-%20kitchen%20and%20lr%20curtains%20etc_final(1).jpg" alt="Gretna Green Tinos, 818 Gretna Green Way" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Gretna Green Tinos</span>
+              <span class="pl-st">818 Gretna Green Way</span>
+              <span class="pl-fg"><span class="tnum">1–2</span> &middot; from <span class="tnum">$3,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/kiowa-grand.html"
+             data-plateitem data-no="037" data-name="Kiowa Grand" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="../assets/img/wr12.jpg" alt="Kiowa Grand, 11972-11978 Kiowa Ave." width="1800" height="1013" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Kiowa Grand</span>
+              <span class="pl-st">11972-11978 Kiowa Ave.</span>
+              <span class="pl-fg"><span class="tnum">Studio–2</span> &middot; from <span class="tnum">$3,450</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/kiowa-hollow.html"
+             data-plateitem data-no="038" data-name="Kiowa Hollow" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/kiowa%20hollow%20-%20unit%209%20-%20kitchen_final.jpg" alt="Kiowa Hollow, 11829 Kiowa Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Kiowa Hollow</span>
+              <span class="pl-st">11829 Kiowa Ave</span>
+              <span class="pl-fg"><span class="tnum">Studio–2</span> &middot; from <span class="tnum">$2,205</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/mayfield-hall.html"
+             data-plateitem data-no="039" data-name="Mayfield Hall" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/mayfield%20hall%20-%20unit%209%20dining%20room_%20lving%20room_%20and%20patio_final.jpg" alt="Mayfield Hall, 11930 Mayfield Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Mayfield Hall</span>
+              <span class="pl-st">11930 Mayfield Avenue</span>
+              <span class="pl-fg"><span class="tnum">1–2</span> &middot; from <span class="tnum">$4,295</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/montana-view.html"
+             data-plateitem data-no="040" data-name="Montana View" data-area="brentwood" data-arealabel="Brentwood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/montana%20view%20unit%208%20-%20kitchen%20and%20dining%20room%20_final.jpg" alt="Montana View, 11920 Montana Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Montana View</span>
+              <span class="pl-st">11920 Montana Avenue</span>
+              <span class="pl-fg"><span class="tnum">1–3</span> &middot; from <span class="tnum">$4,195</span></span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section class="run" id="p-beverly-grove" data-group="beverly-grove" aria-labelledby="ph-beverly-grove">
+        <header class="run-head">
+          <p class="run-eyebrow rv"><span class="tnum">03</span><span>of seven</span><span>Third Street · Beverly Center · Miracle Mile</span></p>
+          <h2 class="run-h rv" id="ph-beverly-grove">Beverly Grove</h2>
+          <p class="run-meta rv"><span><b class="tnum">14</b>&nbsp;buildings</span><span><b class="tnum">10</b>&nbsp;streets</span><a href="neighborhoods/beverly-grove.html">The area&nbsp;&rarr;</a></p>
+        </header>
+        <div class="pgrid">
+          <a class="pl pl--open" href="buildings/hayworth-hyde.html"
+             data-plateitem data-no="046" data-name="Hayworth Hyde" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_2048/s3/2/9707/409%20n%20hayworth%20ave%20exterior-01.jpg" alt="Hayworth Hyde, 409 Hayworth Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Hayworth Hyde</span>
+              <span class="pl-st">409 Hayworth Avenue</span>
+              <span class="pl-fg"><span class="tnum">2–3</span> &middot; from <span class="tnum">$4,495</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/blackburn-beverly.html"
+             data-plateitem data-no="041" data-name="Blackburn Beverly" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/8403%20blackburn%20ave%20unit%20209-%20bedroom%20and%20living%20room%20area%20_final(2).jpg" alt="Blackburn Beverly, 8403 Blackburn Ave." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Blackburn Beverly</span>
+              <span class="pl-st">8403 Blackburn Ave.</span>
+              <span class="pl-fg"><span class="tnum">Studio–2</span> &middot; from <span class="tnum">$3,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/blackburn-la-cienega.html"
+             data-plateitem data-no="042" data-name="Blackburn La Cienega" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/8457%20blackburn%20ave%20exterior-15.jpg" alt="Blackburn La Cienega, 8457 Blackburn Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Blackburn La Cienega</span>
+              <span class="pl-st">8457 Blackburn Ave</span>
+              <span class="pl-fg"><span class="tnum">Studio–5</span> &middot; from <span class="tnum">$3,295</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/croft-eleven.html"
+             data-plateitem data-no="043" data-name="Croft Eleven" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/croft%20eleven%20-%20lrand%20curtains_final.jpg" alt="Croft Eleven, 111 S. Croft Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Croft Eleven</span>
+              <span class="pl-st">111 S. Croft Avenue</span>
+              <span class="pl-fg"><span class="tnum">1–2</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/croft-retreat.html"
+             data-plateitem data-no="044" data-name="Croft Retreat" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/croft%20retreat%20-%20%20unit%20103%20-%20kitchen,%20dining,%20lr,%20and%20patio_final.jpg" alt="Croft Retreat, 130 S Croft Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Croft Retreat</span>
+              <span class="pl-st">130 S Croft Avenue</span>
+              <span class="pl-fg"><span class="tnum">Studio–4</span> &middot; from <span class="tnum">$4,495</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/hayworth-abbey.html"
+             data-plateitem data-no="045" data-name="Hayworth Abbey" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/hayworth%20abbey%20-%20patio_final.jpg" alt="Hayworth Abbey, 429 Hayworth Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Hayworth Abbey</span>
+              <span class="pl-st">429 Hayworth Avenue</span>
+              <span class="pl-fg"><span class="tnum">Studio–4</span> &middot; from <span class="tnum">$1,700</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/hi-point-terrace.html"
+             data-plateitem data-no="047" data-name="Hi Point Terrace" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/hi%20point%20-%20orion%20-%20patio,%20kitchen,%20dining,%20and%20living%20room%20_final(1).jpg" alt="Hi Point Terrace, 1500 Hi Point" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Hi Point Terrace</span>
+              <span class="pl-st">1500 Hi Point</span>
+              <span class="pl-fg"><span class="tnum">Studio–3</span> &middot; from <span class="tnum">$2,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/kings-on-third.html"
+             data-plateitem data-no="048" data-name="Kings on Third" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/129%20kings%20rd%20unit%20203%20-%20kitchen%20and%20living%20room_final(1).jpg" alt="Kings on Third, 129 Kings Road" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Kings on Third</span>
+              <span class="pl-st">129 Kings Road</span>
+              <span class="pl-fg"><span class="tnum">2–3</span> &middot; from <span class="tnum">$4,795</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/rimini.html"
+             data-plateitem data-no="049" data-name="Rimini" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/rimini%20-%20kitchen%20(1).jpg" alt="Rimini, 106 S. Kings Road" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Rimini</span>
+              <span class="pl-st">106 S. Kings Road</span>
+              <span class="pl-fg"><span class="tnum">2–3</span> &middot; from <span class="tnum">$5,395</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/ogden-garden.html"
+             data-plateitem data-no="050" data-name="Ogden Garden" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/ogden%20garden%20-%20pear%20-%20kitchen%20and%20dining_final.jpg" alt="Ogden Garden, 951 S. Ogden Drive" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Ogden Garden</span>
+              <span class="pl-st">951 S. Ogden Drive</span>
+              <span class="pl-fg"><span class="tnum">Studio–2</span> &middot; from <span class="tnum">$2,595</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/orlando-on-first.html"
+             data-plateitem data-no="051" data-name="Orlando on First" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/3/1030854/100sorlando-105.jpg" alt="Orlando on First, 100 South Orlando Ave." width="1600" height="1200" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Orlando on First</span>
+              <span class="pl-st">100 South Orlando Ave.</span>
+              <span class="pl-fg"><span class="tnum">3</span> &middot; from <span class="tnum">$4,595</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/orlando-on-third.html"
+             data-plateitem data-no="052" data-name="Orlando on Third" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/orlando%20on%20third%20-%20unit%20ph1%20-%20kitchen%20and%20rugs_final.jpg" alt="Orlando on Third, 120 South Orlando Ave." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Orlando on Third</span>
+              <span class="pl-st">120 South Orlando Ave.</span>
+              <span class="pl-fg"><span class="tnum">2–3</span> &middot; from <span class="tnum">$4,595</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/sherbourne-hall.html"
+             data-plateitem data-no="053" data-name="Sherbourne Hall" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/sherbourne%20hall%20-%20living%20room,%20dining%20room,%20and%20patio.jpg" alt="Sherbourne Hall, 1240 S. Sherbourne Drive" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Sherbourne Hall</span>
+              <span class="pl-st">1240 S. Sherbourne Drive</span>
+              <span class="pl-fg"><span class="tnum">2–3</span> &middot; from <span class="tnum">$3,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/sweetzer-on-third.html"
+             data-plateitem data-no="054" data-name="Sweetzer on Third" data-area="beverly-grove" data-arealabel="Beverly Grove">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/sweetzer%20-%20unit%20105%20-%20kitchen%20and%20countertop%20bar.jpg" alt="Sweetzer on Third, 107 S. Sweetzer Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Sweetzer on Third</span>
+              <span class="pl-st">107 S. Sweetzer Ave</span>
+              <span class="pl-fg"><span class="tnum">2–3</span> &middot; from <span class="tnum">$4,595</span></span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section class="run" id="p-hollywood" data-group="hollywood" aria-labelledby="ph-hollywood">
+        <header class="run-head">
+          <p class="run-eyebrow rv"><span class="tnum">04</span><span>of seven</span><span>Melrose · Fairfax · Larchmont</span></p>
+          <h2 class="run-h rv" id="ph-hollywood">Hollywood</h2>
+          <p class="run-meta rv"><span><b class="tnum">13</b>&nbsp;buildings</span><span><b class="tnum">11</b>&nbsp;streets</span><a href="neighborhoods/hollywood.html">The area&nbsp;&rarr;</a></p>
+        </header>
+        <div class="pgrid">
+          <a class="pl pl--open" href="buildings/sunset-rise.html"
+             data-plateitem data-no="057" data-name="Sunset Rise" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_2048/s3/2/9707/sunset%20rise%20-%20exterior%203(1).jpg" alt="Sunset Rise, 1446 N. Detroit St" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Sunset Rise</span>
+              <span class="pl-st">1446 N. Detroit St</span>
+              <span class="pl-fg"><span class="tnum">Studio–3</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/alfred-atlas.html"
+             data-plateitem data-no="055" data-name="Alfred Atlas" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/alfred%20atlas%20-%20kitchen%20picture.jpg" alt="Alfred Atlas, 939 North Alfred Street" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Alfred Atlas</span>
+              <span class="pl-st">939 North Alfred Street</span>
+              <span class="pl-fg"><span class="tnum">1–2</span> &middot; from <span class="tnum">$3,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/cole-grove.html"
+             data-plateitem data-no="056" data-name="Cole Grove" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/cole%20grove%20-%20kitchen%20and%20countertop%20bar.jpg" alt="Cole Grove, 711 Cole Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Cole Grove</span>
+              <span class="pl-st">711 Cole Avenue</span>
+              <span class="pl-fg"><span class="tnum">2–3</span> &middot; from <span class="tnum">$3,323</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/edinburgh-courtyard.html"
+             data-plateitem data-no="058" data-name="Edinburgh Courtyard" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/edinburgh%20-%20kitchen%20_final.jpg" alt="Edinburgh Courtyard, 833 N. Edinburgh Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Edinburgh Courtyard</span>
+              <span class="pl-st">833 N. Edinburgh Avenue</span>
+              <span class="pl-fg"><span class="tnum">2–4</span> &middot; from <span class="tnum">$3,695</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/formosa-fountain.html"
+             data-plateitem data-no="059" data-name="Formosa Fountain" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/3/1086901/1338formosa-205.jpg" alt="Formosa Fountain, 1338 Formosa Ave." width="1600" height="1068" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Formosa Fountain</span>
+              <span class="pl-st">1338 Formosa Ave.</span>
+              <span class="pl-fg"><span class="tnum">Studio–3</span> &middot; from <span class="tnum">$4,495</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/gramercy-park.html"
+             data-plateitem data-no="060" data-name="Gramercy Park" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/gramercy%20-%20kitchen,%20dining,%20living%20room.jpg" alt="Gramercy Park, 518 N Gramercy Pl." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Gramercy Park</span>
+              <span class="pl-st">518 N Gramercy Pl.</span>
+              <span class="pl-fg"><span class="tnum">Studio–3</span> &middot; from <span class="tnum">$2,495</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/hawthorn-at-poinsettia.html"
+             data-plateitem data-no="061" data-name="Hawthorn at Poinsettia" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/old%20hawthorn%20exterior_final.jpg" alt="Hawthorn at Poinsettia, 7260 Hawthorn Avenue" width="1600" height="1109" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Hawthorn at Poinsettia</span>
+              <span class="pl-st">7260 Hawthorn Avenue</span>
+              <span class="pl-fg"><span class="tnum">1–3</span> &middot; from <span class="tnum">$4,095</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/hudson-lux.html"
+             data-plateitem data-no="062" data-name="Hudson Lux" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/hudson%20lux%20unit%20103%20-%20lr_%20dining_%20kitchen_%20and%20patio_final.jpg" alt="Hudson Lux, 807 Hudson Ave." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Hudson Lux</span>
+              <span class="pl-st">807 Hudson Ave.</span>
+              <span class="pl-fg"><span class="tnum">2–4</span> &middot; from <span class="tnum">$2,695</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/martel-flats.html"
+             data-plateitem data-no="063" data-name="Martel Flats" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/martel%20flats%20-%20unit%20304-%20dining%20and%20kitchen.jpg" alt="Martel Flats, 1319 N. Martel Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Martel Flats</span>
+              <span class="pl-st">1319 N. Martel Ave</span>
+              <span class="pl-fg"><span class="tnum">Studio–3</span> &middot; from <span class="tnum">$3,895</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/poinsettia-sunset.html"
+             data-plateitem data-no="064" data-name="Poinsettia Sunset" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/poinsettia%20-%20unit%20307%20-%20kitchen_%20countertop%20bar_%20dining_%20lr_%20patio_final.jpg" alt="Poinsettia Sunset, 1439 N. Poinsettia Place" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Poinsettia Sunset</span>
+              <span class="pl-st">1439 N. Poinsettia Place</span>
+              <span class="pl-fg"><span class="tnum">3</span> &middot; from <span class="tnum">$3,995</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/waring-hudson.html"
+             data-plateitem data-no="065" data-name="Waring Hudson" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/waring%20hudson%20-%20kitchen,%20dining,%20and%20storage%20closet.jpg" alt="Waring Hudson, 6217 Waring Avenue" width="3000" height="2000" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Waring Hudson</span>
+              <span class="pl-st">6217 Waring Avenue</span>
+              <span class="pl-fg"><span class="tnum">Studio–3</span> &middot; from <span class="tnum">$4,095</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/wilcox-bea.html"
+             data-plateitem data-no="066" data-name="Wilcox Bea" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/850%20wilcox%20ave%20exteriors-7.jpg" alt="Wilcox Bea, 850 Wilcox Ave." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Wilcox Bea</span>
+              <span class="pl-st">850 Wilcox Ave.</span>
+              <span class="pl-fg"><span class="tnum">2–3</span> &middot; from <span class="tnum">$4,100</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/wilcox-melrose.html"
+             data-plateitem data-no="067" data-name="Wilcox Melrose" data-area="hollywood" data-arealabel="Hollywood">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/wilcox%20melrose%20-%20kitchen%20and%20rugs_final.jpg" alt="Wilcox Melrose, 748 Wilcox Ave" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Wilcox Melrose</span>
+              <span class="pl-st">748 Wilcox Ave</span>
+              <span class="pl-fg"><span class="tnum">3</span> &middot; from <span class="tnum">$3,895</span></span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section class="run" id="p-venice" data-group="venice" aria-labelledby="ph-venice">
+        <header class="run-head">
+          <p class="run-eyebrow rv"><span class="tnum">05</span><span>of seven</span><span>Abbot Kinney · Penmar · Rose</span></p>
+          <h2 class="run-h rv" id="ph-venice">Venice</h2>
+          <p class="run-meta rv"><span><b class="tnum">2</b>&nbsp;buildings</span><span><b class="tnum">2</b>&nbsp;streets</span><a href="neighborhoods/venice.html">The area&nbsp;&rarr;</a></p>
+        </header>
+        <div class="pgrid">
+          <a class="pl pl--open" href="buildings/venice-wave.html"
+             data-plateitem data-no="069" data-name="Venice Wave" data-area="venice" data-arealabel="Venice">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_2048/s3/2/9707/venice%20wave%20unit%20405%20-%20kitchen%20and%20small%20island%20with%20stools_final(1).jpg" alt="Venice Wave, 1600 Venice Blvd" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Venice Wave</span>
+              <span class="pl-st">1600 Venice Blvd</span>
+              <span class="pl-fg"><span class="tnum">1–2</span> &middot; from <span class="tnum">$3,045</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/penmar-superba.html"
+             data-plateitem data-no="068" data-name="Penmar Superba" data-area="venice" data-arealabel="Venice">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/penmar%20superba%20-%20unit%2013%20-%20kitchen%202_final.jpg" alt="Penmar Superba, 2001 Penmar Avenue" width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Penmar Superba</span>
+              <span class="pl-st">2001 Penmar Avenue</span>
+              <span class="pl-fg"><span class="tnum">Studio–2</span> &middot; from <span class="tnum">$3,595</span></span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section class="run" id="p-palms" data-group="palms" aria-labelledby="ph-palms">
+        <header class="run-head">
+          <p class="run-eyebrow rv"><span class="tnum">06</span><span>of seven</span><span>Motor Avenue · minutes from Culver City</span></p>
+          <h2 class="run-h rv" id="ph-palms">Palms · Motor Avenue</h2>
+          <p class="run-meta rv"><span><b class="tnum">2</b>&nbsp;buildings</span><span><b class="tnum">1</b>&nbsp;street</span><a href="neighborhoods/palms.html">The area&nbsp;&rarr;</a></p>
+        </header>
+        <div class="pgrid">
+          <a class="pl pl--open" href="buildings/motor-tides.html"
+             data-plateitem data-no="071" data-name="Motor Tides" data-area="palms" data-arealabel="Palms · Motor Avenue">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_2400/s3/2/9707/motor%20tides%20-%20unit%20705%20-%20kithcenm%20small%20dining_%20lr_%20and%20patio_final%20(1).jpg" alt="Motor Tides, 3557 Motor Avenue" width="3000" height="2001" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Motor Tides</span>
+              <span class="pl-st">3557 Motor Avenue</span>
+              <span class="pl-fg"><span class="pl-flag">Now leasing</span></span>
+            </span>
+          </a>
+          <a class="pl" href="buildings/motor-midway.html"
+             data-plateitem data-no="070" data-name="Motor Midway" data-area="palms" data-arealabel="Palms · Motor Avenue">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_900/s3/2/9707/motor%20midway%20-%20unit%20704%20-%20kitchen_%20dining_%20lr_%20and%20patio_final.jpg" alt="Motor Midway, 3657 Motor Ave." width="2048" height="1365" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Motor Midway</span>
+              <span class="pl-st">3657 Motor Ave.</span>
+              <span class="pl-fg"><span class="tnum">1–3</span> &middot; from <span class="tnum">$3,395</span></span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section class="run" id="p-glendale" data-group="glendale" aria-labelledby="ph-glendale">
+        <header class="run-head">
+          <p class="run-eyebrow rv"><span class="tnum">07</span><span>of seven</span><span>Brand Boulevard</span></p>
+          <h2 class="run-h rv" id="ph-glendale">Glendale</h2>
+          <p class="run-meta rv"><span><b class="tnum">1</b>&nbsp;building</span><span><b class="tnum">1</b>&nbsp;street</span><a href="neighborhoods/glendale.html">The area&nbsp;&rarr;</a></p>
+        </header>
+        <div class="pgrid">
+          <a class="pl pl--open" href="buildings/broadway-glendale.html"
+             data-plateitem data-no="072" data-name="Broadway Glendale" data-area="glendale" data-arealabel="Glendale">
+            <span class="pl-frame rvi"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_960/s3/3/119320/220_east_broadway_exterior.jpg" alt="Broadway Glendale, 220 E. Broadway" width="960" height="640" loading="lazy" decoding="async"></span>
+            <span class="pl-cap">
+              <span class="pl-nm">Broadway Glendale</span>
+              <span class="pl-st">220 E. Broadway</span>
+              <span class="pl-fg"><span class="tnum">1–3</span> &middot; from <span class="tnum">$3,450</span></span>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <p class="reg-legend">
+        <span>Seventy-two buildings in seven areas, set out west to east; each run opens on its one frame chosen for full&nbsp;width.</span>
+        <span>Bedrooms and rent are the leasing feed&rsquo;s own figures, read on 10 September 2026. Rent is the lowest figure a building&nbsp;lists.</span>
+        <span>Motor Tides completes in 2026 and leases through the live&nbsp;system.</span>
+      </p>
+    </div>
+  </section>
+
+  <p class="avail-line wrap wrap-n">
+    For what is available this week, see <a href="search.html">Availability</a>.
+    <span class="avail-sub">The live leasing system is the authority on availability and&nbsp;price.</span>
+  </p>
+
+</main>
+
+<footer class="colophon wrap wrap-n" id="site-map" data-menu-inert>
+  <div class="colo-top">
+    <span class="colo-mark"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg><b>Wiseman Residential</b></span>
+    <span class="colo-say">&ldquo;Los Angeles Living, Managed Wisely.&rdquo;</span>
+  </div>
+  <div class="colo-grid">
+    <div class="colo-col">
+      <h2 class="colo-h">Buildings</h2>
+      <ul class="colo-list">
+        <li><a class="cl-flag" href="search.html">Find a home &mdash; search &amp; availability</a></li>
+        <li><a href="buildings.html">All buildings <span class="cl-n tnum">72</span></a></li>
+        <li><a href="neighborhoods.html">Neighborhoods <span class="cl-n tnum">7</span></a></li>
+      </ul>
+    </div>
+    <div class="colo-col">
+      <h2 class="colo-h">Areas</h2>
+      <ul class="colo-list">
+          <li><a href="neighborhoods/west-la.html">West Los Angeles <span class="cl-n tnum">27</span></a></li>
+          <li><a href="neighborhoods/brentwood.html">Brentwood <span class="cl-n tnum">13</span></a></li>
+          <li><a href="neighborhoods/beverly-grove.html">Beverly Grove <span class="cl-n tnum">14</span></a></li>
+          <li><a href="neighborhoods/hollywood.html">Hollywood <span class="cl-n tnum">13</span></a></li>
+          <li><a href="neighborhoods/venice.html">Venice <span class="cl-n tnum">2</span></a></li>
+          <li><a href="neighborhoods/palms.html">Palms · Motor Avenue <span class="cl-n tnum">2</span></a></li>
+          <li><a href="neighborhoods/glendale.html">Glendale <span class="cl-n tnum">1</span></a></li>
+      </ul>
+    </div>
+    <div class="colo-col">
+      <h2 class="colo-h">Company</h2>
+      <ul class="colo-list">
+        <li><a href="company.html">Company</a></li>
+        <li><a href="residents.html">Residents</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="https://wisemanresidential.securecafe.com/residentservices/apartmentsforrent/userlogin.aspx" rel="noopener">Resident login</a></li>
+        <li><a href="https://wisemanresidential.securecafe.com/onlineleasing/apartmentsforrent/guestlogin.aspx" rel="noopener">Applicant login</a></li>
+      </ul>
+    </div>
+    <div class="colo-col">
+      <h2 class="colo-h">Office</h2>
+      <ul class="colo-list">
+        <li><address>1520 Federal Ave<br>Los Angeles, CA 90025</address></li>
+        <li><a href="tel:+13104733000">+1 310-473-3000 &middot; Leasing</a></li>
+        <li><a href="https://www.facebook.com/Officialwisemanresidential/" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.instagram.com/officialwisemanresidential" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.yelp.com/biz/wiseman-residential-los-angeles-2" rel="noopener">Yelp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="colo-legal">
+    <nav class="colo-utility" aria-label="Legal and site map">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="accessibility.html">Accessibility</a>
+      <a href="privacy-choices.html">Your Privacy Choices</a>
+      <a href="#site-map">Site Map</a>
+    </nav>
+    <p class="eho">
+      <svg viewBox="0 0 12 10.608" role="img" aria-label="Equal Housing Opportunity" fill="currentColor" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.95263 1.07242L0 4.00926V5.38295H0.663158V9.51979H11.2026V5.38295H11.9921V4.00926L5.95263 1.07242ZM9.9 8.27242H1.95789V4.49874L5.95263 2.44611L9.9 4.49874V8.27242Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 5.82505H4.08947V4.49874H7.77632V5.82505Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 7.73558H4.08947V6.40926H7.77632V7.73558Z"/></svg>
+      <span>Equal Housing Opportunity</span>
+    </p>
+    <p>&copy; 2026 Wiseman Residential</p>
+    <p>Every figure here is a point-in-time snapshot of the live leasing system.</p>
+  </div>
+</footer>
+
+<nav class="mnav" id="mnav" aria-label="Menu">
+  <div class="mnav-in">
+    <ul class="mnav-list">
+      <li><a href="search.html"><span class="mn-no tnum">01</span><span>Find a home</span></a></li>
+      <li><a href="buildings.html"><span class="mn-no tnum">02</span><span>Buildings</span></a></li>
+      <li><a href="neighborhoods.html"><span class="mn-no tnum">03</span><span>Neighborhoods</span></a></li>
+      <li><a href="residents.html"><span class="mn-no tnum">04</span><span>Residents</span></a></li>
+      <li><a href="company.html"><span class="mn-no tnum">05</span><span>Company</span></a></li>
+      <li><a href="contact.html"><span class="mn-no tnum">06</span><span>Contact</span></a></li>
+    </ul>
+    <div class="mfoot">
+      <p>1520 Federal Ave, Los Angeles, CA 90025</p>
+      <p><a href="tel:+13104733000">+1 310-473-3000</a> &middot; Leasing</p>
+      <p><a href="https://wisemanresidential.securecafe.com/residentservices/apartmentsforrent/userlogin.aspx" rel="noopener">Resident login</a> &middot; <a href="https://wisemanresidential.securecafe.com/onlineleasing/apartmentsforrent/guestlogin.aspx" rel="noopener">Apply</a></p>
+    </div>
+  </div>
+</nav>
+
+<div class="pt" aria-hidden="true">
+  <div class="ptmark">
+    <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg>
+    <span>Wiseman Residential</span>
+  </div>
+</div>
+
+<script src="../core/core.js?v=18" defer></script>
+<script src="../core/map.js?v=18" defer></script>
+<script src="../core/rail.js?v=18" defer></script>
+<script src="app.js?v=18" defer></script>
+</body>
+</html>

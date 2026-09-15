@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sanctuary — Wiseman Residential, concept board</title>
+<script>document.documentElement.classList.add('js')</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ---------- tokens ---------- */
+:root{
+  --stone:#E5E0D7;        /* the wall: limestone */
+  --bone:#EFEBE4;         /* a 4% lift for bars and cells */
+  --ink:#2B2724;          /* warm charcoal, never black */
+  --ink-2:#6B655C;        /* soft ink for body */
+  --ink-3:#9A9389;        /* faint ink for meta */
+  --line:rgba(43,39,36,.16);
+  --line-2:rgba(43,39,36,.34);
+  --clay:#B86A4B;         /* decorative accent */
+  --clay-ink:#8E4B32;     /* text-safe accent */
+  --brand:#169BAC;        /* focus ring only */
+  --milk:#F6F2EB;         /* type over photographs */
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --pad:clamp(16px,4.4vw,64px);
+  --hd:56px;
+  --bar:64px;
+  --vh100:100vh;
+  --caps:.6875rem;
+  --display:'Marcellus',Georgia,'Times New Roman',serif;
+  --text:'Jost','Helvetica Neue',Arial,sans-serif;
+}
+@supports (height:100svh){:root{--vh100:100svh}}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+html{background:var(--stone);color:var(--ink);font:400 15px/1.65 var(--text);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{background:var(--stone);min-height:100vh;position:relative}
+/* limestone grain */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.055;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--brand);outline-offset:3px}
+.wrap{padding-left:var(--pad);padding-right:var(--pad)}
+.caps{font-family:var(--text);font-weight:500;font-size:var(--caps);letter-spacing:.22em;text-transform:uppercase;line-height:1.4}
+.caps-l{font-family:var(--text);font-weight:400;font-size:var(--caps);letter-spacing:.2em;text-transform:uppercase;line-height:1.4;color:var(--ink-2)}
+.num{font-variant-numeric:tabular-nums}
+.disp{font-family:var(--display);font-weight:400;letter-spacing:.005em}
+.rule{height:1px;background:var(--line);transform-origin:left center}
+.js .rule.rv{transform:scaleX(0);transition:transform .9s var(--ease)}
+.js .rule.rv.in{transform:scaleX(1)}
+.arrow{display:inline-block;transition:transform .32s var(--ease)}
+/* reveals: opacity/transform only, layout already painted */
+.js .rv{opacity:0;transform:translateY(14px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.js .rv.in{opacity:1;transform:none}
+.js .rvi{opacity:0;transition:opacity 1.1s var(--ease)}
+.js .rvi.in{opacity:1}
+.d1{transition-delay:.12s!important}.d2{transition-delay:.24s!important}.d3{transition-delay:.36s!important}.d4{transition-delay:.48s!important}
+@media (prefers-reduced-motion:reduce){
+  .js .rv,.js .rvi,.js .rule.rv{opacity:1;transform:none;transition:none}
+}
+
+/* ---------- board chrome (meta labels between modules) ---------- */
+.board{display:flex;align-items:center;gap:18px;padding-top:22px;padding-bottom:22px;color:var(--clay-ink)}
+.board::after{content:"";flex:1;height:1px;background:linear-gradient(to right,var(--clay) 0,transparent 100%);opacity:.5}
+.board span{font-family:var(--text);font-weight:500;font-size:.625rem;letter-spacing:.3em;text-transform:uppercase;white-space:nowrap}
+
+/* ---------- header: stone, compact, centred wordmark, never retracts ---------- */
+.hd{position:sticky;top:0;z-index:30;height:var(--hd);background:var(--stone);border-bottom:1px solid var(--line);display:grid;grid-template-columns:1fr auto 1fr;align-items:center}
+.hd nav{display:flex;gap:clamp(18px,2.4vw,38px)}
+.hd nav.r{justify-content:flex-end}
+.hd nav a{position:relative;padding:6px 0;color:var(--ink)}
+.hd nav a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .32s var(--ease)}
+.hd nav a:hover::after,.hd nav a[aria-current]::after{transform:scaleX(1)}
+.mark{display:flex;align-items:center;gap:12px;justify-content:center}
+.mark svg{width:20px;height:20px;fill:currentColor}
+.mark .wm{font-family:var(--text);font-weight:500;font-size:.78rem;letter-spacing:.32em;text-transform:uppercase;white-space:nowrap}
+.hd .menu{display:none}
+.js .hd .fi{opacity:0;transition:opacity .8s var(--ease)}
+.js .hd.on .fi{opacity:1}
+
+/* ---------- hero: one print on the wall + the booking bar ---------- */
+.hero{height:calc(var(--vh100) - var(--hd));display:flex;flex-direction:column;position:relative;z-index:1}
+.print{position:relative;flex:1 1 auto;min-height:0;margin:20px var(--pad) 0;background:#CFC8BC;overflow:hidden}
+.print img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%;opacity:0;transition:opacity 2.4s var(--ease),transform 2.2s var(--ease)}
+.print img.on{opacity:1}
+.js .print.load img.on{transform:scale(1.03)}
+.js .print.load.go img.on{transform:scale(1)}
+.print .scrim{position:absolute;inset:0;background:linear-gradient(to top,rgba(24,20,16,.76) 0%,rgba(24,20,16,.34) 36%,transparent 64%);pointer-events:none}
+.hero-copy{position:absolute;left:clamp(20px,3.2vw,48px);right:clamp(20px,3.2vw,48px);bottom:clamp(22px,3.6vw,52px);color:var(--milk);z-index:2;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:24px}
+.hero-copy .eyebrow{color:rgba(246,242,235,.82);margin-bottom:clamp(14px,1.8vw,24px)}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(2rem,4.6vw,4.6rem);line-height:1.06;letter-spacing:.004em;max-width:16ch;text-wrap:balance}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.14em;margin-bottom:-.14em}
+.js .hero h1 .ln span{display:block;transform:translateY(105%);transition:transform 1.1s var(--ease)}
+.js .print.go h1 .ln span{transform:none}
+.js .print.go h1 .ln:nth-child(2) span{transition-delay:.11s}
+.hero .sub{margin-top:clamp(14px,1.6vw,22px);max-width:44ch;color:rgba(246,242,235,.86);font-weight:300;font-size:.95rem;line-height:1.6}
+.hero .cap{text-align:right;color:rgba(246,242,235,.78);white-space:nowrap}
+.hero .cap b{font-weight:500;color:var(--milk)}
+.js .fade{opacity:0;transition:opacity 1.2s var(--ease)}
+.js .print.go .fade{opacity:1}
+.js .print.go .fade.l2{transition-delay:.5s}.js .print.go .fade.l3{transition-delay:.9s}
+/* the booking bar */
+.bar{margin:20px var(--pad) 0;flex:0 0 auto;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) auto;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line);background:var(--stone)}
+.bar .cell{display:flex;flex-direction:column;justify-content:center;gap:3px;height:var(--bar);padding:0 clamp(14px,1.6vw,24px);border-right:1px solid var(--line);min-width:0;position:relative}
+.bar .cell .lab{color:var(--ink-3)}
+.bar .cell .val{font-size:.95rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bar .cell .val input{font:inherit;color:inherit;background:none;border:0;width:100%;min-width:0;outline:none}
+.bar .cell .val input::placeholder{color:var(--ink-2)}
+.bar .cell .val svg{width:10px;height:10px;flex:0 0 auto;stroke:var(--ink-2);fill:none;stroke-width:1.4}
+.bar .cell:first-child{padding-left:0}
+.bar .go-btn{height:var(--bar);padding:0 clamp(22px,2.6vw,40px);background:var(--ink);color:var(--milk);display:flex;align-items:center;gap:14px;white-space:nowrap}
+.bar .go-btn:hover .arrow{transform:translateX(4px)}
+
+/* ---------- the count line + the seven parts ---------- */
+.intro{padding-top:clamp(72px,10vh,140px);padding-bottom:clamp(56px,8vh,110px);display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:clamp(32px,6vw,120px);align-items:start;position:relative;z-index:1}
+.intro h2{font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.18;max-width:20ch;text-wrap:balance}
+.intro .facts{display:flex;flex-wrap:wrap;gap:12px clamp(18px,2.4vw,36px);margin-top:clamp(22px,2.6vw,34px);color:var(--ink-2)}
+.intro .facts b{font-family:var(--display);font-weight:400;font-size:1.05rem;color:var(--ink);letter-spacing:0;margin-right:.35em}
+.areas{list-style:none}
+.areas li{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:11px 0;border-top:1px solid var(--line)}
+.areas li:last-child{border-bottom:1px solid var(--line)}
+.areas li a{display:flex;justify-content:space-between;align-items:baseline;gap:16px;width:100%;color:var(--ink);font-size:.95rem}
+.areas li a:hover .arrow{transform:translateX(4px)}
+.areas li .n{font-family:var(--display);font-size:1.05rem;color:var(--ink-2);display:flex;gap:14px;align-items:baseline}
+.areas.head{display:flex;justify-content:space-between;padding-bottom:14px;color:var(--ink-3)}
+
+/* ---------- the hang: six prints on the wall ---------- */
+.hang{padding-bottom:clamp(80px,12vh,180px);position:relative;z-index:1}
+.hang .grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:clamp(16px,2vw,32px);row-gap:clamp(56px,7vh,110px);align-items:start}
+.plate{display:block;position:relative}
+.plate .ph{position:relative;overflow:hidden;background:#CFC8BC}
+.plate .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+.plate:hover .ph img{transform:scale(1.025)}
+.plate .lbl{margin-top:16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 20px;align-items:end}
+.plate .lbl .area{color:var(--ink-3)}
+.plate .lbl .nm{font-family:var(--display);font-size:clamp(1.15rem,1.5vw,1.45rem);line-height:1.2;margin-top:6px;position:relative;display:inline-block}
+.plate .lbl .nm::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease)}
+.plate:hover .lbl .nm::after{transform:scaleX(1)}
+.plate .lbl .st{color:var(--ink-2);font-size:.85rem;margin-top:3px}
+.plate .lbl .meta{text-align:right;color:var(--ink-2);white-space:nowrap}
+.plate .lbl .meta .avail{display:inline-flex;align-items:center;gap:8px;margin-top:6px;color:var(--ink-2)}
+.plate .lbl .meta .avail i{width:6px;height:6px;border-radius:50%;background:var(--clay);display:inline-block}
+.p1{grid-column:1/8}      .p1 .ph{aspect-ratio:4/3}
+.p2{grid-column:9/13;margin-top:clamp(60px,9vw,150px)} .p2 .ph{aspect-ratio:3/4}
+.p3{grid-column:2/6}      .p3 .ph{aspect-ratio:3/4}
+.p4{grid-column:7/13;align-self:end} .p4 .ph{aspect-ratio:3/2}
+.p5{grid-column:1/7}      .p5 .ph{aspect-ratio:3/2}
+.p6{grid-column:9/13;margin-top:clamp(24px,4vw,64px)} .p6 .ph{aspect-ratio:4/5}
+.hang .more{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:clamp(56px,7vh,110px);padding-top:22px;border-top:1px solid var(--line)}
+.hang .more a{display:inline-flex;align-items:center;gap:12px;color:var(--ink)}
+.hang .more a:hover .arrow{transform:translateX(4px)}
+
+/* ---------- building page (top) ---------- */
+.bld{position:relative;z-index:1}
+.crumbs{display:flex;gap:14px;align-items:center;padding-top:18px;padding-bottom:18px;color:var(--ink-3)}
+.crumbs a{color:var(--ink-2)}
+.crumbs i{font-style:normal;color:var(--ink-3)}
+.bprint{position:relative;margin:0 var(--pad);height:clamp(380px,72vh,760px);overflow:hidden;background:#CFC8BC}
+.bprint img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 58%}
+.plabel{padding-top:12px;color:var(--ink-3);font-size:.625rem;text-align:right}
+.plabel span{color:var(--ink-3)}
+.bprint .fav{position:absolute;right:clamp(16px,2.4vw,32px);top:clamp(14px,2vw,26px);width:40px;height:40px;display:grid;place-items:center;border:1px solid rgba(246,242,235,.55);color:var(--milk);background:rgba(24,20,16,.18);backdrop-filter:blur(6px)}
+.bprint .fav svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.3}
+.bhead{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(24px,4vw,80px);align-items:end;padding-top:clamp(28px,4vh,52px);padding-bottom:clamp(30px,4vh,48px)}
+.bhead h1{font-size:clamp(2.1rem,4.2vw,3.9rem);line-height:1.04;text-wrap:balance;max-width:14ch}
+.bhead .addr{margin-top:16px;color:var(--ink-2);display:flex;flex-wrap:wrap;gap:8px 18px;align-items:baseline}
+.bhead .addr a{color:var(--ink);display:inline-flex;gap:8px;align-items:center}
+.bhead .addr a:hover .arrow{transform:translateX(4px)}
+.bhead > p{color:var(--ink-2);max-width:40ch;font-weight:300;font-size:1.02rem}
+.bfacts{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--line-2);border-bottom:1px solid var(--line)}
+.bfacts .f{padding:22px clamp(14px,1.8vw,28px) 24px 0;border-right:1px solid var(--line);margin-right:clamp(14px,1.8vw,28px);min-width:0}
+.bfacts .f:last-child{border-right:0;margin-right:0}
+.bfacts .f .lab{color:var(--ink-3);margin-bottom:10px}
+.bfacts .f .v{font-family:var(--display);font-size:clamp(1.5rem,2.2vw,2rem);line-height:1.1;color:var(--ink);white-space:nowrap}
+.bfacts .f .v small{font-family:var(--text);font-size:.8rem;color:var(--ink-2);letter-spacing:.02em;margin-left:6px}
+.bfacts .f .v .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--clay);vertical-align:middle;margin-right:10px;position:relative;top:-3px}
+.acts{display:flex;gap:12px;padding-top:28px;padding-bottom:clamp(56px,8vh,110px)}
+.btn{flex:1 1 auto;min-width:max-content;height:52px;display:inline-flex;align-items:center;justify-content:center;gap:14px;background:var(--ink);color:var(--milk);padding:0 28px;font-family:var(--text);font-weight:500;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;transition:background .32s var(--ease)}
+.btn:hover{background:#1d1a17}
+.btn:hover .arrow{transform:translateX(4px)}
+.btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.3}
+.btn .num{letter-spacing:.08em}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding-bottom:18px}
+.sec-h h2{font-size:clamp(1.35rem,2vw,1.8rem);line-height:1.2}
+.sec-h .snap{color:var(--ink-3)}
+.plans{border-top:1px solid var(--line-2)}
+.plan{display:grid;grid-template-columns:minmax(0,2.2fr) minmax(0,1fr) minmax(0,1.1fr) minmax(0,1.1fr) minmax(0,1fr) auto;gap:24px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}
+.plan .k{color:var(--ink-3);margin-bottom:6px}
+.plan .v{font-family:var(--display);font-size:1.15rem;line-height:1.2;white-space:nowrap}
+.plan .v small{font-family:var(--text);font-size:.78rem;color:var(--ink-2);margin-left:4px}
+.plan .nm{font-family:var(--display);font-size:1.35rem}
+.plan .nm .sub{display:block;font-family:var(--text);font-size:.85rem;color:var(--ink-2);margin-top:4px}
+.plan .av{display:flex;align-items:center;gap:10px}
+.plan .av i{width:6px;height:6px;border-radius:50%;background:var(--clay)}
+.plan .btn{height:44px;padding:0 22px;flex:0 0 auto}
+.hours{display:flex;flex-wrap:wrap;gap:8px 28px;padding:18px 0 0;color:var(--ink-2)}
+.hours b{font-weight:500;color:var(--ink)}
+.amen{padding-top:clamp(56px,8vh,110px);padding-bottom:clamp(64px,9vh,130px)}
+.amen .row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.amen .a{padding:30px clamp(14px,1.8vw,28px) 30px 0;border-right:1px solid var(--line);margin-right:clamp(14px,1.8vw,28px);display:flex;gap:22px;align-items:center}
+.amen .a:last-child{border-right:0;margin-right:0}
+.amen .a svg{width:48px;height:48px;flex:0 0 auto;fill:none;stroke:var(--ink);stroke-width:1.15;stroke-linecap:round;stroke-linejoin:round}
+.amen .a .t{display:grid;gap:4px}
+.amen .a .t .k{color:var(--ink-3)}
+.amen .a .t .v{font-family:var(--display);font-size:1.05rem}
+.amen .all{display:inline-flex;gap:12px;align-items:center;margin-top:22px;color:var(--ink)}
+.amen .all:hover .arrow{transform:translateX(4px)}
+
+/* ---------- footer ---------- */
+.ft{position:relative;z-index:1;border-top:1px solid var(--line-2);padding-top:clamp(48px,7vh,88px);padding-bottom:40px}
+.ft .top{display:grid;grid-template-columns:minmax(0,4fr) repeat(3,minmax(0,2.4fr));gap:clamp(28px,4vw,72px);align-items:start}
+.ft .brand .mark{justify-content:flex-start}
+.ft .brand .tag{font-family:var(--display);font-size:1.25rem;margin-top:26px;line-height:1.3}
+.ft .brand .addr{margin-top:22px;color:var(--ink-2);line-height:1.8}
+.ft .brand .addr a{color:var(--ink)}
+.ft h3{color:var(--ink-3);margin-bottom:16px}
+.ft ul{list-style:none;display:grid;gap:9px}
+.ft ul a{color:var(--ink);font-size:.95rem;display:flex;justify-content:space-between;gap:12px}
+.ft ul a .n{font-family:var(--display);color:var(--ink-3);font-size:.95rem}
+.ft .bottom{margin-top:clamp(40px,6vh,72px);padding-top:22px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;color:var(--ink-2)}
+.eho{display:inline-flex;align-items:center;gap:12px;color:var(--ink)}
+.eho svg{width:26px;height:26px;fill:currentColor}
+.ft .bottom .soc{display:flex;gap:24px}
+
+/* ---------- responsive ---------- */
+@media (max-width:1180px){
+  .hd{grid-template-columns:auto 1fr auto}
+  .hd nav.l{display:none}
+  .hd .mark{justify-content:flex-start;grid-column:1}
+  .hd nav.r{grid-column:3}
+}
+@media (max-width:960px){
+  .hd nav.r{display:none}
+  .hd .menu{display:inline-flex;grid-column:3;align-items:center;gap:12px}
+  .hd .menu i{display:block;width:18px;height:1px;background:currentColor;box-shadow:0 5px 0 currentColor,0 -5px 0 currentColor}
+  .intro{grid-template-columns:1fr;gap:40px}
+  .p1{grid-column:1/9}.p2{grid-column:9/13;margin-top:clamp(60px,9vw,150px)}
+  .p3{grid-column:1/6}.p4{grid-column:6/13}
+  .p5{grid-column:1/8}.p6{grid-column:9/13}
+  .bfacts{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .bfacts .f:nth-child(3){border-right:0;margin-right:0}
+  .bfacts .f:nth-child(4),.bfacts .f:nth-child(5){border-top:1px solid var(--line)}
+  .plan{grid-template-columns:minmax(0,1.6fr) repeat(2,minmax(0,1fr)) auto;row-gap:16px}
+  .plan .c4,.plan .c5{display:none}
+  .ft .top{grid-template-columns:1fr 1fr;row-gap:44px}
+}
+@media (max-width:760px){
+  .hero{height:auto;min-height:calc(var(--vh100) - var(--hd))}
+  .print{min-height:58svh;margin-top:16px}
+  .hero-copy{grid-template-columns:1fr;gap:14px}
+  .hero .cap{text-align:left;white-space:normal}
+  .hero .sub{display:none}
+  .bar{grid-template-columns:1fr 1fr;margin-top:16px}
+  .bar .cell{height:56px}
+  .bar .cell:first-child{grid-column:1/-1;padding-left:0;border-right:0;border-bottom:1px solid var(--line)}
+  .bar .cell:nth-child(2){padding-left:0}
+  .bar .go-btn{grid-column:1/-1;height:56px;justify-content:space-between;padding:0 18px}
+  .hang .grid{grid-template-columns:1fr;row-gap:52px}
+  .p1,.p2,.p3,.p4,.p5,.p6{grid-column:1/-1;margin-top:0;align-self:auto}
+  .p1 .ph,.p4 .ph,.p5 .ph{aspect-ratio:4/3}
+  .plate .lbl{grid-template-columns:1fr}
+  .plate .lbl .meta{text-align:left}
+  .bhead{grid-template-columns:1fr;gap:20px}
+  .bfacts{grid-template-columns:1fr 1fr}
+  .bfacts .f{border-right:0;margin-right:0;padding-right:0}
+  .bfacts .f:nth-child(odd){border-right:1px solid var(--line);margin-right:18px;padding-right:14px}
+  .bfacts .f:nth-child(n+3){border-top:1px solid var(--line)}
+  .bfacts .f:nth-child(5){border-right:0;margin-right:0;grid-column:1/-1}
+  .acts{flex-direction:column}
+  .btn{width:100%}
+  .plan{grid-template-columns:1fr 1fr;row-gap:18px}
+  .plan .c1{grid-column:1/-1}
+  .plan .c4,.plan .c5{display:block}
+  .plan .btn{grid-column:1/-1;width:100%}
+  .amen .row{grid-template-columns:1fr}
+  .amen .a{border-right:0;margin-right:0;padding:22px 0;border-bottom:1px solid var(--line)}
+  .amen .a:last-child{border-bottom:0}
+  .hang .more{flex-direction:column;align-items:flex-start;gap:14px}
+  .sec-h{flex-direction:column;align-items:flex-start;gap:8px}
+  .ft .top{grid-template-columns:1fr;row-gap:36px}
+  .ft .bottom{flex-direction:column;align-items:flex-start;gap:18px}
+}
+@media (max-width:420px){
+  .mark .wm{font-size:.7rem;letter-spacing:.26em}
+  .bar .cell .val{font-size:.9rem}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="caps" style="position:absolute;left:-999px;top:0" >Skip to content</a>
+
+<!-- ================= HEADER ================= -->
+<header class="hd wrap" id="hd">
+  <nav class="l caps fi" aria-label="Primary">
+    <a href="#">Find a home</a>
+    <a href="#">Buildings</a>
+    <a href="#">Neighbourhoods</a>
+  </nav>
+  <a class="mark fi" href="#" aria-label="Wiseman Residential, home">
+    <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+      <polygon points="14,18 34,18 34,74 14,80"/>
+      <polygon points="40,18 60,18 60,71 40,77"/>
+      <polygon points="66,18 86,18 86,68 66,74"/>
+    </svg>
+    <span class="wm">Wiseman Residential</span>
+  </a>
+  <nav class="r caps fi" aria-label="Secondary">
+    <a href="#">Residents</a>
+    <a href="#">Company</a>
+    <a href="#">Contact</a>
+  </nav>
+  <button class="menu caps fi" aria-label="Open menu"><span>Menu</span><i></i></button>
+</header>
+
+<main id="main">
+
+<!-- ================= HOME · HERO ================= -->
+<section class="hero" id="hero" aria-label="Wiseman Residential">
+  <div class="print load" id="print">
+    <img src="../../assets/img/wr11.jpg" alt="A tree-lined street in front of a Wiseman building, dappled light" class="on" data-cap="Kelton Madera" data-area="West Los Angeles" fetchpriority="high" decoding="async" style="object-position:50% 50%">
+    <img src="../../assets/img/wr12.jpg" alt="A planted courtyard stair with birds of paradise" data-cap="Kiowa Grand" data-area="Brentwood" loading="lazy" decoding="async" style="object-position:50% 54%">
+    <img src="../../assets/img/wr14.jpg" alt="An arched terrace looking over Los Angeles in late light" data-cap="An arched terrace" data-area="Late light" loading="lazy" decoding="async" style="object-position:50% 50%">
+    <img src="../../assets/img/wr03.jpg" alt="A brick corner building under palms and a deep blue sky" data-cap="A brick corner" data-area="Under palms" loading="lazy" decoding="async" style="object-position:50% 50%">
+    <div class="scrim"></div>
+    <div class="hero-copy">
+      <div>
+        <h1><span class="ln"><span>Los Angeles living,</span></span><span class="ln"><span>managed wisely.</span></span></h1>
+        <p class="sub fade l2">Studios to five-bedroom homes in 72 buildings, across seven parts of Los Angeles.</p>
+      </div>
+      <p class="caps-l cap fade l3"><b id="capname">Kelton Madera</b> · <span id="caparea">West Los Angeles</span></p>
+    </div>
+  </div>
+
+  <form class="bar" action="../../tideline/search.html" method="get" role="search" aria-label="Find a home">
+    <label class="cell">
+      <span class="caps-l lab">Building, street or area</span>
+      <span class="val"><input type="text" name="q" placeholder="Brockton, Hollywood, Motor Tides…" autocomplete="off"></span>
+    </label>
+    <button type="button" class="cell" aria-haspopup="listbox" aria-expanded="false" style="text-align:left">
+      <span class="caps-l lab">Neighbourhood</span>
+      <span class="val">Anywhere <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5"/></svg></span>
+    </button>
+    <button type="button" class="cell" aria-haspopup="listbox" aria-expanded="false" style="text-align:left">
+      <span class="caps-l lab">Bedrooms</span>
+      <span class="val">Any <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1.5 3.5 5 7l3.5-3.5"/></svg></span>
+    </button>
+    <button type="submit" class="go-btn caps"><span>Search</span><span class="arrow" aria-hidden="true">→</span></button>
+  </form>
+</section>
+
+<!-- ================= HOME · THE COUNT + SEVEN PARTS ================= -->
+<section class="intro wrap">
+  <div>
+    <h2 class="disp rv">Seventy-two buildings, seven parts of the city, one local owner.</h2>
+    <p class="facts caps-l rv d1">
+      <span><b class="num">72</b> buildings</span>
+      <span><b class="num">7</b> neighbourhoods</span>
+      <span><b class="num">52</b> named streets</span>
+      <span>Studios to five bedrooms</span>
+    </p>
+  </div>
+  <div class="rv d2">
+    <p class="areas head caps-l"><span>Neighbourhoods</span><span>Buildings</span></p>
+    <ul class="areas">
+      <li><a href="#"><span>West Los Angeles · Sawtelle</span><span class="n num">27 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+      <li><a href="#"><span>Beverly Grove</span><span class="n num">14 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+      <li><a href="#"><span>Brentwood</span><span class="n num">13 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+      <li><a href="#"><span>Hollywood</span><span class="n num">13 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+      <li><a href="#"><span>Venice</span><span class="n num">&nbsp;2 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+      <li><a href="#"><span>Palms · Motor Avenue</span><span class="n num">&nbsp;2 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+      <li><a href="#"><span>Glendale</span><span class="n num">&nbsp;1 <span class="arrow" aria-hidden="true">→</span></span></a></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= HOME · THE HANG (portfolio) ================= -->
+<section class="hang wrap" aria-label="Selected buildings">
+  <div class="grid">
+
+    <a class="plate p1 rvi" href="#">
+      <div class="ph"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1400/s3/3/1030854/100sorlando-105.jpg" alt="Orlando on First, a navy and white building in crisp light" loading="lazy" decoding="async" width="1400" height="1050"></div>
+      <div class="lbl">
+        <div><p class="caps-l area">Beverly Grove</p><p class="nm">Orlando on First</p><p class="st">100 South Orlando Ave · Three bedrooms</p></div>
+        <div class="meta caps-l"><span>From $4,595</span><br><span class="avail"><i></i>1 available now</span></div>
+      </div>
+    </a>
+
+    <a class="plate p2 rvi d1" href="#">
+      <div class="ph"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_675,h_900,c_fill,g_auto/s3/3/550100/1(1).jpg" alt="Wilcox Melrose, stacked balconies with red accents" loading="lazy" decoding="async" width="675" height="900"></div>
+      <div class="lbl">
+        <div><p class="caps-l area">Hollywood</p><p class="nm">Wilcox Melrose</p><p class="st">748 Wilcox Ave · Three bedrooms</p></div>
+        <div class="meta caps-l"><span>From $3,895</span><br><span class="avail"><i></i>4 available now</span></div>
+      </div>
+    </a>
+
+    <a class="plate p3 rvi" href="#">
+      <div class="ph"><img src="../../assets/img/wr13.jpg" alt="Motor Tides, the flagship, a dark blue facade against a deep sky" loading="lazy" decoding="async" width="1800" height="1348" style="object-position:62% 50%"></div>
+      <div class="lbl">
+        <div><p class="caps-l area">Palms · Motor Avenue</p><p class="nm">Motor Tides</p><p class="st">3557 Motor Avenue · One to four bedrooms</p></div>
+        <div class="meta caps-l"><span>Completing 2026</span><br><span class="avail"><i></i>Now leasing</span></div>
+      </div>
+    </a>
+
+    <a class="plate p4 rvi d1" href="#">
+      <div class="ph"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_960/s3/3/119320/220_east_broadway_exterior.jpg" alt="Broadway Glendale at blue hour, street lights on" loading="lazy" decoding="async" width="960" height="640"></div>
+      <div class="lbl">
+        <div><p class="caps-l area">Glendale</p><p class="nm">Broadway Glendale</p><p class="st">220 E. Broadway · One to three bedrooms</p></div>
+        <div class="meta caps-l"><span>From $3,450</span><br><span class="avail"><i></i>2 available now</span></div>
+      </div>
+    </a>
+
+    <a class="plate p5 rvi" href="#">
+      <div class="ph"><img src="../../assets/img/wr05.jpg" alt="Century City Icon at dusk under a violet sky" loading="lazy" decoding="async" width="1800" height="1200" style="object-position:50% 46%"></div>
+      <div class="lbl">
+        <div><p class="caps-l area">West Los Angeles · Sawtelle</p><p class="nm">Century City Icon</p><p class="st">10473 Santa Monica Boulevard · Studios to two bedrooms</p></div>
+        <div class="meta caps-l"><span>From $3,445</span><br><span class="avail"><i></i>2 available now</span></div>
+      </div>
+    </a>
+
+    <a class="plate p6 rvi d1" href="#">
+      <div class="ph"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_500/s3/2/9707/rsz_11978_kiowa_ave_exterior_-04.jpg" alt="Kiowa Grand, palms and bougainvillea over a courtyard stair" loading="lazy" decoding="async" width="500" height="340" style="object-position:50% 40%"></div>
+      <div class="lbl">
+        <div><p class="caps-l area">Brentwood</p><p class="nm">Kiowa Grand</p><p class="st">11972 Kiowa Ave · Studios to two bedrooms</p></div>
+        <div class="meta caps-l"><span>From $3,450</span><br><span class="avail"><i></i>1 available now</span></div>
+      </div>
+    </a>
+
+  </div>
+  <div class="more caps rv">
+    <a href="#">All 72 buildings <span class="arrow" aria-hidden="true">→</span></a>
+    <a href="#">On the map <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<!-- ================= BUILDING PAGE · TOP ================= -->
+<div class="board wrap"><span>Concept board · a building page, the top</span></div>
+
+<article class="bld" aria-label="Orlando on First">
+  <nav class="crumbs wrap caps-l" aria-label="Breadcrumb"><a href="#">Home</a><i>/</i><a href="#">Buildings</a><i>/</i><a href="#">Beverly Grove</a></nav>
+  <div class="bprint rvi">
+    <img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1600/s3/3/1030854/100sorlando-105.jpg" alt="Orlando on First from the street" loading="lazy" decoding="async">
+    <button class="fav" aria-label="Save Orlando on First"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.4-7-9.5A3.8 3.8 0 0 1 12 8a3.8 3.8 0 0 1 7 2.5C19 15.6 12 20 12 20Z"/></svg></button>
+  </div>
+  <p class="wrap caps-l plabel">Orlando on First · From the street · <span>Photograph, Wiseman Residential</span></p>
+
+  <div class="bhead wrap">
+    <div>
+      <h1 class="disp rv">Orlando on First</h1>
+      <p class="addr caps-l rv d1"><span>100 South Orlando Ave., Los Angeles, CA 90048</span><a href="#">Beverly Grove <span class="arrow" aria-hidden="true">→</span></a></p>
+    </div>
+    <p class="rv d2">Three-bedroom, three-bath homes of 1,266 to 1,600 square feet on South Orlando Avenue, with a rooftop deck, a courtyard and a gated resident garage. The building has its own office and its own leasing line.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="bfacts rv">
+      <div class="f"><p class="caps-l lab">Bedrooms</p><p class="v num">3</p></div>
+      <div class="f"><p class="caps-l lab">Bathrooms</p><p class="v num">3</p></div>
+      <div class="f"><p class="caps-l lab">Square feet</p><p class="v num">1,266–1,600</p></div>
+      <div class="f"><p class="caps-l lab">Rent</p><p class="v num">From $4,595<small>/ month</small></p></div>
+      <div class="f"><p class="caps-l lab">Available now</p><p class="v"><span class="dot" aria-hidden="true"></span>One<small>home</small></p></div>
+    </div>
+    <div class="acts rv d1">
+      <a class="btn" href="#">Apply <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn" href="#">Inquire <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn" href="tel:+14242548806"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg>Call <span class="num">+1 424-254-8806</span></a>
+    </div>
+
+    <div class="sec-h rv">
+      <h2 class="disp">Today's floor plans</h2>
+      <p class="caps-l snap">Snapshot of the live leasing feed · 11 Sep 2026</p>
+    </div>
+    <div class="plans rv d1">
+      <div class="plan">
+        <div class="c1"><p class="nm">3 Beds, 3 Baths<span class="sub">Apply on the building's own leasing site</span></p></div>
+        <div class="c2"><p class="caps-l k">Square feet</p><p class="v num">1,450</p></div>
+        <div class="c3"><p class="caps-l k">Rent</p><p class="v num">$4,595<small>/ month</small></p></div>
+        <div class="c4"><p class="caps-l k">Deposit</p><p class="v num">$4,595</p></div>
+        <div class="c5"><p class="caps-l k">Available</p><p class="v av"><i aria-hidden="true"></i>One now</p></div>
+        <a class="btn" href="#">Apply <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+    <p class="hours caps-l rv d2"><span><b>Office</b> Monday to Friday 9 AM to 5 PM · Saturday to Sunday 11 AM to 4 PM</span><span><b>Leasing</b> <span class="num">+1 424-254-8806</span></span></p>
+
+    <div class="amen">
+      <div class="sec-h rv"><h2 class="disp">In the building</h2><p class="caps-l snap">Six community features · six in the apartment</p></div>
+      <div class="row rv d1">
+        <div class="a">
+          <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M8 38V16h28v22"/><path d="M8 16h28"/><path d="M12 16v-6M17 16v-6M22 16v-6M27 16v-6M32 16v-6M8 10h28"/><path d="M15 38V28h6v10M25 38V28h6v10"/></svg>
+          <div class="t"><p class="caps-l k">Community</p><p class="v">Rooftop deck</p></div>
+        </div>
+        <div class="a">
+          <svg viewBox="0 0 44 44" aria-hidden="true"><rect x="11" y="6" width="22" height="32"/><path d="M22 6v32"/><path d="M14 21l2.5-4 2.5 4M25 23l2.5 4 2.5-4"/></svg>
+          <div class="t"><p class="caps-l k">Community</p><p class="v">Elevator</p></div>
+        </div>
+        <div class="a">
+          <svg viewBox="0 0 44 44" aria-hidden="true"><path d="M6 38V17l16-9 16 9v21"/><path d="M12 38V24h20v14"/><path d="M17 24v14M22 24v14M27 24v14"/><path d="M12 30h20"/></svg>
+          <div class="t"><p class="caps-l k">Community</p><p class="v">Gated resident garage</p></div>
+        </div>
+      </div>
+      <a class="all caps rv d2" href="#">Every feature, and the apartment <span class="arrow" aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</article>
+
+</main>
+
+<!-- ================= FOOTER ================= -->
+<footer class="ft wrap">
+  <div class="top">
+    <div class="brand">
+      <a class="mark" href="#" aria-label="Wiseman Residential">
+        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <polygon points="14,18 34,18 34,74 14,80"/>
+          <polygon points="40,18 60,18 60,71 40,77"/>
+          <polygon points="66,18 86,18 86,68 66,74"/>
+        </svg>
+        <span class="wm">Wiseman Residential</span>
+      </a>
+      <p class="tag">Los Angeles living,<br>managed wisely.</p>
+      <p class="addr">1520 Federal Ave, Los Angeles, CA 90025<br><a href="tel:+13104733000" class="num">+1 310-473-3000</a></p>
+    </div>
+    <div>
+      <h3 class="caps-l">Neighbourhoods</h3>
+      <ul>
+        <li><a href="#"><span>West Los Angeles · Sawtelle</span><span class="n num">27</span></a></li>
+        <li><a href="#"><span>Beverly Grove</span><span class="n num">14</span></a></li>
+        <li><a href="#"><span>Brentwood</span><span class="n num">13</span></a></li>
+        <li><a href="#"><span>Hollywood</span><span class="n num">13</span></a></li>
+        <li><a href="#"><span>Venice</span><span class="n num">2</span></a></li>
+        <li><a href="#"><span>Palms · Motor Avenue</span><span class="n num">2</span></a></li>
+        <li><a href="#"><span>Glendale</span><span class="n num">1</span></a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="caps-l">Wiseman</h3>
+      <ul>
+        <li><a href="#">Buildings</a></li>
+        <li><a href="#">Find a home</a></li>
+        <li><a href="#">Residents</a></li>
+        <li><a href="#">Company</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3 class="caps-l">Sign in</h3>
+      <ul>
+        <li><a href="https://wisemanresidential.securecafe.com/residentservices/apartmentsforrent/userlogin.aspx">Resident portal</a></li>
+        <li><a href="https://wisemanresidential.securecafe.com/onlineleasing/apartmentsforrent/guestlogin.aspx">Applicant portal</a></li>
+      </ul>
+      <h3 class="caps-l" style="margin-top:28px">Follow</h3>
+      <ul>
+        <li><a href="https://www.instagram.com/officialwisemanresidential">Instagram</a></li>
+        <li><a href="https://www.facebook.com/Officialwisemanresidential/">Facebook</a></li>
+        <li><a href="https://www.yelp.com/biz/wiseman-residential-los-angeles-2">Yelp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="bottom caps-l">
+    <p class="eho">
+      <svg viewBox="0 0 12 10.608" role="img" aria-label="Equal Housing Opportunity" fill="currentColor" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.95263 1.07242L0 4.00926V5.38295H0.663158V9.51979H11.2026V5.38295H11.9921V4.00926L5.95263 1.07242ZM9.9 8.27242H1.95789V4.49874L5.95263 2.44611L9.9 4.49874V8.27242Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 5.82505H4.08947V4.49874H7.77632V5.82505Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 7.73558H4.08947V6.40926H7.77632V7.73558Z"/></svg>
+      <span>Equal Housing Opportunity</span>
+    </p>
+    <p>© 2026 Wiseman Residential</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hd = document.getElementById('hd');
+  var print = document.getElementById('print');
+  var imgs = print ? Array.prototype.slice.call(print.querySelectorAll('img')) : [];
+  var cap = document.getElementById('capname');
+  var root = document.documentElement;
+
+  // entrance: image first, then hairlines, then the two lines, then the caption
+  function go(){
+    requestAnimationFrame(function(){
+      hd.classList.add('on');
+      print.classList.add('go');
+      root.classList.add('go');
+    });
+  }
+  if (reduce){ hd.classList.add('on'); print.classList.add('go'); root.classList.add('go'); }
+  else {
+    var first = imgs[0];
+    if (first && first.complete) setTimeout(go, 80); else if (first) { first.addEventListener('load', function(){ setTimeout(go, 80); }); setTimeout(go, 1800); }
+    else go();
+  }
+
+  // the slow room: one print crossfades to the next every 8s, pauses on hover/focus
+  if (!reduce && imgs.length > 1){
+    var i = 0, paused = false, t;
+    function next(){
+      if (paused) return;
+      var cur = imgs[i]; i = (i + 1) % imgs.length; var nx = imgs[i];
+      nx.classList.add('on'); cur.classList.remove('on');
+      if (cap) { cap.textContent = nx.getAttribute('data-cap'); var ca = document.getElementById('caparea'); if (ca) ca.textContent = nx.getAttribute('data-area'); }
+    }
+    t = setInterval(next, 8000);
+    print.addEventListener('mouseenter', function(){ paused = true; });
+    print.addEventListener('mouseleave', function(){ paused = false; });
+    print.addEventListener('focusin', function(){ paused = true; });
+    print.addEventListener('focusout', function(){ paused = false; });
+    document.addEventListener('visibilitychange', function(){ paused = document.hidden; });
+  }
+
+  // reveals: text at .14, images at .001 so no band is ever blank under the sticky header
+  if ('IntersectionObserver' in window && !reduce){
+    var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } }); }, {threshold:.001, rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.rv,.rvi').forEach(function(el){ io.observe(el); });
+  } else {
+    document.querySelectorAll('.rv,.rvi').forEach(function(el){ el.classList.add('in'); });
+  }
+})();
+</script>
+</body>
+</html>

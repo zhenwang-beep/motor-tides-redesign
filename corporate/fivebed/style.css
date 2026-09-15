@@ -1,0 +1,1554 @@
+/* ==========================================================================
+   WISEMAN RESIDENTIAL — direction: FIVE BEDROOMS
+   The portfolio organised by the size of the home.
+   Loads AFTER ../core/base.css, which owns the reset, the .wrap gutter, the
+   reveal classes, and the header / menu / curtain shells. Nothing here
+   duplicates those; this file skins them and adds the direction's components.
+
+   FONTS — exactly these two, linked from the <head> of every page:
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?
+       family=Work+Sans:ital,wght@0,300..700;1,400&family=Young+Serif&display=swap">
+
+   THE ONE TYPE RULE: Young Serif (var(--serif)) renders DIGITS ONLY — the five
+   giant numerals, the register's building numbers, and standalone counts.
+   Never a word, never a heading. Everything else is Work Sans (var(--sans)).
+   Use class .num on any run of digits that should be set in Young Serif.
+
+   --------------------------------------------------------------------------
+   CLASS DICTIONARY — the shared furniture. Build the other eight pages from
+   these; do not invent new components without adding them here.
+
+   LAYOUT
+     .sec              vertical rhythm block. Longhand padding-top/bottom only.
+                       NEVER carries .wrap — it holds a nested .wrap.wrap-n.
+     .sec-s            tighter vertical rhythm.
+     .mt-s .mt-m .mt-l flow spacing utilities (so pages carry no inline styles).
+     .sec-p2           section on --paper-2.
+     .sec-d            dark section on --deep. Pair with data-hd="dark".
+     .rule             1px hairline in --rule (an <hr> or a <div>).
+     .split            heading column + body column, collapses under 900px.
+     .g2 .g3 .g4       equal-column grids, gap var(--gap), collapse on mobile.
+     .stack            vertical flow with gap var(--gap-s).
+     .measure          (base.css) 62ch text column.
+
+   TYPE
+     .eyebrow          uppercase tracked label with a terra tick before it.
+     .h1 .h2 .h3       display sizes (Work Sans 500, tight tracking).
+     .lead             intro paragraph.
+     .small .micro     caption sizes.
+     .muted            --muted colour.
+     .num              Young Serif digits, tabular. Digits only.
+     .chip             [CLIENT] chip — small, monospace, boxed, terra.
+     .src              citation line ("Urbanize LA, 12 May 2026").
+     .note             small muted caption under a block.
+     .overtype         display type set directly over a photograph:
+                       stroke + paint-order, thinned under 640px, shadow fallback.
+
+   CONTROLS
+     .btn .btn-solid .btn-line .btn-sm      buttons
+     .btn-row                               flex row; children flex:1 1 auto
+     .lnk                                   inline link with a rule + arrow
+     .seg  [data-sort]                      sort control for the register
+     .field .field-lab .field-in            labelled input
+     .search .search-in .ta                 hero search + typeahead list
+     .sbar .fbtn .fmenu .card               the search page (core/search.css),
+                                            skinned at the foot of this file
+
+   PAGE FURNITURE
+     .hd .brand .hnav .hd-cta               header (shell in base.css)
+     .mbtn .mnav .mnav-in .mnav-list .mfoot mobile menu
+     .pt .ptmark                            page-transition curtain
+     .ft .ft-map .ft-col .ft-h .ft-list
+     .ft-contact .ft-base .ft-soc .eho      footer
+     .crumb                                 breadcrumb for sub-pages
+
+   HOME / SHARED COMPONENTS
+     .hero .hero-fig .hero-body .hero-h .hero-sub .hero-facts   page-opening image
+     .phero .phero-h                                       compact interior-page hero
+     .count .count-intro .stage .stage-in .digit
+     .digit-line .digit-cap                                THE SIGNATURE MECHANIC
+     .spec-grid .spec .spec-fig .spec-no .spec-name .spec-meta   large plates
+     .mini-grid .mini .mini-no .mini-name .mini-meta             compact plates
+     .reg-wrap .reg .reg-group .reg-head .reg-rows .reg-row
+     .reg-a .reg-no .reg-name .reg-street .reg-area .reg-beds
+     .reg-tools .reg-tools-lab .reg-more
+     .plate .plate-fig .plate-meta .plate-no                     register + plate
+     .atlas .atlas-svg .pin .pin-hit .pin-no                     drawn map
+     .strip .strip-rail .strip-frame .strip-cap .strip-foot-in   room strips (a rail)
+     .bands .band .band-a .band-count .band-name
+     .band-sub .band-streets .band-fig                           neighborhood bands
+     .steps .step .step-no .step-h                               numbered process
+     .panel .panel-key                                           bordered aside
+     .pipe .pipe-row .pipe-n .pipe-place                         pipeline list
+     .facts .quote .tbl .tbl-rail                                data furniture
+                                                                 (the table is a rail)
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ tokens */
+:root {
+  /* palette */
+  --paper:   #FAF4EA;   /* warm plaster */
+  --paper-2: #F0E6D6;
+  --ink:     #2A211B;   /* warm brown-black */
+  --rule:    #C7B7A2;   /* hairlines, decorative only */
+  --muted:   #6E6152;   /* AA on --paper at 5.57:1 */
+  --terra:   #A8562F;   /* accent 1 — decorative + large type */
+  --olive:   #6B6F4B;   /* accent 2 — decorative + large type */
+  --deep:    #241C16;   /* dark sections, menu, curtain */
+  --brand:   #169BAC;   /* the logo mark and nothing else */
+
+  /* text-safe twins of the two accents (CONVENTIONS §7) */
+  --terra-ink: #8E4423; /* 6.40:1 on --paper */
+  --olive-ink: #545839; /* 6.78:1 on --paper */
+  --sand-dim:  #B6A794; /* muted text on --deep, 7.14:1 */
+
+  /* alpha ladder */
+  --ink-04:   color-mix(in srgb, var(--ink) 4%, transparent);
+  --ink-08:   color-mix(in srgb, var(--ink) 8%, transparent);
+  --ink-12:   color-mix(in srgb, var(--ink) 12%, transparent);
+  --ink-20:   color-mix(in srgb, var(--ink) 20%, transparent);
+  --ink-32:   color-mix(in srgb, var(--ink) 32%, transparent);
+  --ink-60:   color-mix(in srgb, var(--ink) 60%, transparent);
+  --paper-08: color-mix(in srgb, var(--paper) 8%, transparent);
+  --paper-16: color-mix(in srgb, var(--paper) 16%, transparent);
+  --paper-40: color-mix(in srgb, var(--paper) 40%, transparent);
+  --paper-72: color-mix(in srgb, var(--paper) 72%, transparent);
+  --terra-12: color-mix(in srgb, var(--terra) 12%, transparent);
+  --olive-12: color-mix(in srgb, var(--olive) 12%, transparent);
+
+  --focus: var(--terra-ink);
+
+  /* the embedded map is tinted with the page's own paper so the cartography
+     belongs to the design rather than sitting in it as a widget */
+  --map-tint: var(--paper);
+
+  /* type */
+  --sans:  "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  --serif: "Young Serif", "Iowan Old Style", Georgia, "Times New Roman", serif;
+
+  --t-micro: .72rem;
+  --t-small: .82rem;
+  --t-cap:   .78rem;
+  --t-body:  clamp(1rem, .965rem + .16vw, 1.09rem);
+  --t-lead:  clamp(1.15rem, 1.02rem + .58vw, 1.5rem);
+  --t-h3:    clamp(1.18rem, 1.04rem + .66vw, 1.6rem);
+  --t-h2:    clamp(1.75rem, 1.22rem + 2.3vw, 3.05rem);
+  --t-h1:    clamp(2.3rem, 1.35rem + 4vw, 4.4rem);
+  --t-digit: clamp(8.5rem, min(48vw, 68vh), 38rem);
+  --ta-max:  62vh;
+  --track:   .16em;
+
+  /* rhythm */
+  --sec:     clamp(76px, 9vw, 150px);
+  --sec-sm:  clamp(48px, 5.5vw, 92px);
+  --gap:     clamp(20px, 2.4vw, 40px);
+  --gap-s:   clamp(12px, 1.4vw, 20px);
+  --hd-h:    76px;
+
+  /* the count: each numeral owns 1.7 viewports of scroll */
+  --stage-h: calc(var(--vh100) * 1.8);
+}
+/* CONVENTIONS §3 — a viewport height that feeds a pinned stage needs its svh
+   twin, or the numerals resize every time the mobile URL bar shows or hides
+   and the sticky panel jumps mid-scroll. */
+@supports (height: 100svh) {
+  :root {
+    --t-digit: clamp(8.5rem, min(48vw, 68svh), 38rem);
+    --ta-max:  62svh;
+  }
+}
+
+/* ------------------------------------------------------------- base tuning */
+/* anchors land below the fixed header */
+html { scroll-padding-top: calc(var(--hd-h) + 18px); }
+body {
+  font-size: var(--t-body);
+  font-variation-settings: "wght" 400;
+  letter-spacing: .002em;
+}
+::selection { background: var(--terra); color: var(--paper); }
+hr { border: 0; height: 1px; background: var(--rule); }
+strong, b { font-weight: 600; }
+
+/* Young Serif is for digits. Anywhere it appears, it appears through .num. */
+.num {
+  font-family: var(--serif);
+  font-weight: 400;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: 0;
+}
+
+/* --------------------------------------------------------------- typography */
+.h1, .h2, .h3 {
+  font-family: var(--sans);
+  font-weight: 500;
+  letter-spacing: -.022em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+.h1 { font-size: var(--t-h1); }
+.h2 { font-size: var(--t-h2); line-height: 1.08; }
+.h3 { font-size: var(--t-h3); line-height: 1.18; letter-spacing: -.014em; }
+.lead { font-size: var(--t-lead); line-height: 1.34; letter-spacing: -.01em; font-weight: 350; }
+.small { font-size: var(--t-small); line-height: 1.5; }
+.micro { font-size: var(--t-micro); line-height: 1.45; }
+.muted { color: var(--muted); }
+.eyebrow {
+  display: inline-flex; align-items: baseline; gap: 10px;
+  font-size: var(--t-micro); font-weight: 500;
+  letter-spacing: var(--track); text-transform: uppercase;
+  color: var(--muted);
+}
+.eyebrow::before {
+  content: ""; width: 22px; height: 1px; background: var(--terra);
+  transform: translateY(-.34em);
+}
+p + p { margin-top: .9em; }
+.sec-d .muted, .sec-d .eyebrow { color: var(--sand-dim); }
+.sec-d .eyebrow::before { background: var(--terra); }
+
+.chip {
+  display: inline-block;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: .66rem; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--terra-ink);
+  border: 1px solid var(--terra);
+  padding: 2px 6px 1px;
+  vertical-align: .12em; white-space: nowrap;
+}
+.src {
+  font-size: var(--t-micro); color: var(--muted); letter-spacing: .02em;
+  font-style: italic;
+}
+.note { font-size: var(--t-small); color: var(--muted); }
+
+/* display type set DIRECTLY over a photograph — stroke, never offset shadow */
+.overtype {
+  color: var(--paper);
+  -webkit-text-stroke: 1.4px color-mix(in srgb, var(--deep) 62%, transparent);
+  paint-order: stroke fill;
+}
+@media (max-width: 640px) { .overtype { -webkit-text-stroke-width: .8px; } }
+@supports not (-webkit-text-stroke: 1px currentColor) {
+  .overtype { text-shadow: 0 0 18px color-mix(in srgb, var(--deep) 72%, transparent); }
+}
+
+/* -------------------------------------------------------------- layout kit */
+.mt-s { margin-top: clamp(16px, 2vw, 26px); }
+.mt-m { margin-top: clamp(26px, 3.4vw, 48px); }
+.mt-l { margin-top: clamp(44px, 6vw, 86px); }
+.sec { padding-top: var(--sec); padding-bottom: var(--sec); }
+.sec-s { padding-top: var(--sec-sm); padding-bottom: var(--sec-sm); }
+.sec-p2 { background: var(--paper-2); }
+.sec-d { background: var(--deep); color: var(--paper); }
+.sec-d a { color: var(--paper); }
+.sec-d .rule, .sec-d hr { background: color-mix(in srgb, var(--paper) 22%, transparent); }
+.rule { height: 1px; background: var(--rule); width: 100%; }
+
+.split { display: grid; gap: var(--gap); grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); align-items: start; }
+.g2 { display: grid; gap: var(--gap); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.g3 { display: grid; gap: var(--gap); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.g4 { display: grid; gap: var(--gap); grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.stack { display: grid; gap: var(--gap-s); }
+.sec-head { display: grid; gap: 18px; max-width: 54ch; }
+.sec-head .lead { max-width: 44ch; }
+.sec-head + * { margin-top: clamp(32px, 4vw, 64px); }
+
+@media (max-width: 980px) {
+  .split, .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .split, .g2, .g3, .g4 { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ------------------------------------------------------------ header skin */
+.hd { color: var(--ink); padding-top: 20px; padding-bottom: 20px; }
+.hd .brand svg { color: var(--brand); }
+.hd.inv { color: var(--paper); }
+.hd.inv .brand svg { color: var(--paper); }
+.hd.frost {
+  background: var(--paper-72);
+  box-shadow: 0 1px 0 var(--ink-12);
+  padding-top: 14px; padding-bottom: 14px;
+}
+.hd.frost { color: var(--ink); }
+.hd.frost .brand svg { color: var(--brand); }
+.hd.inv.frost {
+  background: color-mix(in srgb, var(--deep) 82%, transparent);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--paper) 16%, transparent);
+  color: var(--paper);
+}
+.hd.inv.frost .brand svg { color: var(--paper); }
+.brand b { font-weight: 500; letter-spacing: .28em; font-size: .7rem; }
+.hnav a { font-weight: 450; font-size: .74rem; letter-spacing: .14em; }
+.hd-right { display: flex; align-items: center; gap: clamp(12px, 2vw, 28px); }
+.hd-cta {
+  border: 1px solid currentColor;
+  padding: 9px 18px 8px;
+  font-size: .7rem; letter-spacing: var(--track); text-transform: uppercase;
+  white-space: nowrap;
+  transition: background-color .4s var(--ease), color .4s var(--ease);
+}
+.hd-cta:hover, .hd-cta:focus-visible { background: var(--ink); color: var(--paper); }
+.hd.inv .hd-cta:hover, .hd.inv .hd-cta:focus-visible { background: var(--paper); color: var(--deep); }
+@media (max-width: 900px) { .hd-cta { display: none; } }
+
+/* --------------------------------------------------------------- mobile menu */
+.mnav { background: var(--deep); }
+.mnav-in { width: 100%; max-width: 1560px; margin-left: auto; margin-right: auto; }
+/* Young Serif is digits only — the menu is Work Sans, large and light */
+.mnav a {
+  font-family: var(--sans); font-weight: 350; letter-spacing: -.02em;
+  font-size: clamp(1.9rem, 8vw, 3rem); line-height: 1.2;
+}
+.mnav-list { display: grid; gap: 2px; }
+.mnav a .mnav-n {
+  font-family: var(--serif); font-size: .34em; color: var(--terra);
+  margin-right: .7em; vertical-align: .22em;
+}
+.mnav .mfoot {
+  display: grid; gap: 6px; color: var(--sand-dim); opacity: 1;
+  font-size: var(--t-small); letter-spacing: .04em;
+  border-top: 1px solid color-mix(in srgb, var(--paper) 18%, transparent);
+  padding-top: 22px;
+}
+.mnav .mfoot a { font-size: var(--t-small); font-family: var(--sans); }
+
+/* ------------------------------------------------------------- the curtain */
+.pt { background: var(--deep); }
+.pt .ptmark svg { width: 44px; height: 44px; color: var(--paper); }
+.pt .ptmark b { font-weight: 500; letter-spacing: .3em; font-size: .68rem; text-transform: uppercase; }
+
+/* ------------------------------------------------------------------ buttons */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 15px 26px 14px;
+  font-size: .76rem; font-weight: 500; letter-spacing: var(--track); text-transform: uppercase;
+  border: 1px solid var(--ink);
+  transition: background-color .4s var(--ease), color .4s var(--ease), border-color .4s var(--ease);
+  white-space: nowrap;
+}
+.btn-solid { background: var(--ink); color: var(--paper); }
+.btn-solid:hover, .btn-solid:focus-visible { background: var(--terra-ink); border-color: var(--terra-ink); color: var(--paper); }
+.btn-line { background: transparent; color: var(--ink); border-color: var(--ink-32); }
+.btn-line:hover, .btn-line:focus-visible { border-color: var(--ink); background: var(--ink); color: var(--paper); }
+.btn-sm { padding: 10px 16px 9px; font-size: .68rem; }
+.sec-d .btn-line { color: var(--paper); border-color: color-mix(in srgb, var(--paper) 40%, transparent); }
+.sec-d .btn-line:hover, .sec-d .btn-line:focus-visible { background: var(--paper); color: var(--deep); border-color: var(--paper); }
+.sec-d .btn-solid { background: var(--paper); color: var(--deep); border-color: var(--paper); }
+
+/* long labels must never clip: auto basis + content floor, never a px min-width */
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn-row > * { flex: 1 1 auto; min-width: max-content; }
+/* CONVENTIONS §4 again, from the other end. The content floor is right until
+   the content is wider than the gutter itself: "Call this building ·
+   +1 213-286-9912" wants 354px and a 360px phone offers 320, so max-content
+   pushed it 34px past the gutter and `overflow-x: clip` ate the last digits of
+   the phone number. Below 430px — the exact band the convention names — the
+   floor is released and the label wraps instead of being cut. */
+@media (max-width: 430px) {
+  .btn-row > * { min-width: 0; }
+  .btn-row .btn { white-space: normal; text-align: center; }
+}
+
+.lnk {
+  display: inline-flex; align-items: baseline; gap: .55em;
+  font-weight: 500; letter-spacing: .01em;
+  box-shadow: inset 0 -1px 0 var(--ink-32);
+  transition: box-shadow .35s var(--ease), color .35s var(--ease);
+}
+.lnk::after { content: "\2192"; transition: transform .35s var(--ease); }
+.lnk:hover, .lnk:focus-visible { color: var(--terra-ink); box-shadow: inset 0 -1px 0 var(--terra); }
+.lnk:hover::after, .lnk:focus-visible::after { transform: translateX(4px); }
+.sec-d .lnk { box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--paper) 36%, transparent); }
+.sec-d .lnk:hover, .sec-d .lnk:focus-visible { color: var(--paper); box-shadow: inset 0 -1px 0 var(--terra); }
+
+/* --------------------------------------------------------------- form parts */
+.field { display: grid; gap: 8px; }
+.field-lab { font-size: var(--t-micro); letter-spacing: var(--track); text-transform: uppercase; color: var(--muted); }
+.field-in, input[type="text"], input[type="search"], input[type="email"], input[type="tel"], select, textarea {
+  width: 100%;
+  background: var(--paper);
+  border: 1px solid var(--ink-32);
+  padding: 14px 16px;
+  font-size: var(--t-body);
+  transition: border-color .3s var(--ease), background-color .3s var(--ease);
+}
+select { appearance: none; padding-right: 42px;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 22px) 55%, calc(100% - 16px) 55%;
+  background-size: 6px 6px, 6px 6px; background-repeat: no-repeat;
+}
+.field-in:focus, input:focus, select:focus, textarea:focus { border-color: var(--ink); outline-offset: 2px; }
+::placeholder { color: var(--muted); opacity: .8; }
+
+/* ------------------------------------------------ search field + typeahead */
+.search { position: relative; max-width: 560px; }
+.search-in {
+  width: 100%;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  padding: 17px 58px 16px 18px;
+  font-size: 1rem; letter-spacing: .01em;
+}
+.search-go {
+  position: absolute; right: 0; top: 0; height: 100%; width: 54px;
+  display: grid; place-items: center; color: var(--ink);
+}
+.search-go svg { width: 17px; height: 17px; }
+.ta {
+  position: absolute; left: 0; right: 0; top: calc(100% + 6px); z-index: 40;
+  list-style: none; background: var(--paper);
+  border: 1px solid var(--ink-32);
+  box-shadow: 0 18px 44px -26px var(--ink-60);
+  /* VERTICAL overflow — a suggestion list, not a horizontal scroller, so the
+     no-scrollbar / arrow-button rule does not apply to it. */
+  max-height: var(--ta-max); overflow-y: auto;
+}
+.ta li + li { border-top: 1px solid var(--ink-08); }
+.ta a { display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 4px 14px; padding: 12px 16px; align-items: baseline; }
+.ta a:hover, .ta a:focus-visible { background: var(--paper-2); }
+.ta-no { font-family: var(--serif); font-size: .9rem; color: var(--terra-ink); }
+.ta-nm { font-weight: 500; }
+.ta-sub { grid-column: 2; font-size: var(--t-micro); color: var(--muted); letter-spacing: .04em; }
+.ta-empty { padding: 14px 16px; font-size: var(--t-small); color: var(--muted); }
+
+/* ------------------------------------------------------------------- hero */
+.hero { position: relative; min-height: var(--vh100); display: flex; align-items: flex-end; overflow: clip; }
+/* the figure carries the scroll drift; the <img> inside carries the load bloom,
+   so the two transforms never fight over one element */
+.hero-fig { position: absolute; inset: 0; margin: 0; transform: scale(var(--z, 1)); will-change: transform; }
+/* focal point comes from data/artdirection.json, set per page as --pos */
+.hero-fig img { width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 50% 55%); }
+/* ELEVATE §1 — a scrim is a gradient from the bottom, never a sheet across the
+   whole frame. The frame this hero uses is a dusk photograph whose top third is
+   already deep sky, so the header reads paper-on-photograph with no top band. */
+.hero-fig::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top,
+                color-mix(in srgb, var(--deep) 78%, transparent) 0%,
+                color-mix(in srgb, var(--deep) 46%, transparent) 30%,
+                transparent 66%);
+}
+/* ---- page-load choreography. Pure CSS: it ends on the visible state, so a
+   failed script never leaves a hero blank. ---- */
+.hero-fig img { animation: hero-bloom 1.25s var(--ease) both; }
+.hero-fig::after { animation: hero-scrim .95s var(--ease) both; }
+@keyframes hero-bloom { from { transform: scale(1.06); } to { transform: scale(1); } }
+@keyframes hero-scrim { from { opacity: 0; } to { opacity: 1; } }
+/* the headline rises in masked lines, 90ms apart. CONVENTIONS §5: the mask has
+   to clear descenders, so it is padded .14em and pulled back the same amount. */
+.hero-h .hl { display: block; overflow: hidden; padding-bottom: .14em; margin-bottom: -.14em; }
+.hero-h .hl > span { display: block; animation: hero-line .9s var(--ease) both; }
+.hero-h .hl:nth-child(2) > span { animation-delay: .09s; }
+.hero-body > .hero-sub { animation: hero-rise .9s var(--ease) .2s both; }
+.hero-body > .search { animation: hero-rise .9s var(--ease) .29s both; }
+.hero-body > .hero-facts { animation: hero-rise .9s var(--ease) .38s both; }
+@keyframes hero-line { from { transform: translateY(102%); } to { transform: none; } }
+@keyframes hero-rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+/* non-positioned text paints below positioned siblings — say so explicitly */
+.hero-body {
+  position: relative; z-index: 2; width: 100%;
+  padding-top: calc(var(--hd-h) + 40px);
+  padding-bottom: clamp(44px, 7vh, 96px);
+  color: var(--paper);
+  display: grid; gap: clamp(22px, 3vh, 38px);
+}
+.hero-h { font-size: var(--t-h1); font-weight: 400; letter-spacing: -.028em; line-height: 1.03; max-width: 17ch; text-wrap: balance; }
+.hero-sub { max-width: 56ch; text-wrap: balance; color: color-mix(in srgb, var(--paper) 88%, transparent); }
+.hero-facts {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px clamp(18px, 3vw, 42px);
+  font-size: var(--t-small); letter-spacing: .05em;
+  color: color-mix(in srgb, var(--paper) 82%, transparent);
+  border-top: 1px solid var(--paper-40);
+  padding-top: 16px;
+}
+.hero-facts .num { font-size: 1.5em; color: var(--paper); margin-right: .3em; }
+.hero .search-in { background: var(--paper); border-color: var(--paper); }
+
+/* compact hero for the other eight pages */
+.phero { padding-top: calc(var(--hd-h) + clamp(40px, 8vw, 110px)); padding-bottom: clamp(34px, 5vw, 72px); }
+.phero-h { font-size: var(--t-h1); font-weight: 400; letter-spacing: -.028em; line-height: 1.04; max-width: 18ch; }
+.crumb { display: flex; flex-wrap: wrap; gap: 8px; font-size: var(--t-micro); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+.crumb a { box-shadow: inset 0 -1px 0 var(--ink-20); }
+.crumb span[aria-hidden] { color: var(--rule); }
+
+/* ==========================================================================
+   THE SIGNATURE MECHANIC — the count
+   Five stages. Each stage is 1.7 viewports tall and contains ONE sticky
+   full-height panel holding one enormous numeral. The numeral is a single
+   element with background-clip:text; a different photograph is clipped into
+   each glyph. app.js writes --s (scale, forward only 0.96 → 1.10) and
+   --bx / --by (background-position drift) per stage from WR.pinned().
+   Photograph comes in as --img on the .stage element (inline style).
+   ========================================================================== */
+.count { position: relative; }
+.count-intro { padding-top: var(--sec); padding-bottom: clamp(24px, 4vw, 56px); }
+
+.stage { height: var(--stage-h); position: relative; }
+.stage-in {
+  position: sticky; top: 0; height: var(--vh100);
+  display: flex; flex-direction: column; justify-content: center;
+  gap: clamp(18px, 3vh, 34px);
+  isolation: isolate;
+}
+/* ELEVATE §5 — the same photograph that is clipped into the numeral also sits
+   full-bleed behind the whole stage at low opacity, so the page never goes
+   flat between beats and the numeral reads as a window cut into the frame. */
+.stage-in::before {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background-image: var(--img);
+  background-size: cover;
+  background-position: var(--pos, 50% 50%);
+  /* a tone, not a picture: the numeral is the photograph on this page, and the
+     backdrop only keeps the ground from going flat between beats. It fades out
+     under the caption so the line beneath always sits on clean paper. */
+  opacity: .13;
+  filter: saturate(.88);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 92%);
+          mask-image: linear-gradient(to bottom, #000 0%, #000 58%, transparent 92%);
+}
+/* CONVENTIONS §6 — non-positioned text paints below a positioned sibling.
+   Say so explicitly rather than relying on source order. */
+.stage-in > * { position: relative; z-index: 1; }
+/* a 1px rule that draws itself in at the head of every stage. The selectors
+   carry both classes so they beat base.css's .js .rv on specificity, not on
+   file order. */
+.stage-rule { height: 1px; background: var(--rule); transform-origin: 0 50%; }
+.js .rv.stage-rule { opacity: 1; transform: scaleX(0); }
+.js .rv.stage-rule.in { opacity: 1; transform: scaleX(1); transition: transform .8s var(--ease); }
+.digit {
+  display: block; width: max-content; max-width: 100%;
+  font-family: var(--serif); font-weight: 400;
+  font-size: var(--t-digit); line-height: .84;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  /* two layers, both clipped to the glyph: a flat warm tint over the
+     photograph so a blown-out wall can never erase the numeral */
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--deep) 26%, transparent),
+                    color-mix(in srgb, var(--deep) 26%, transparent)),
+    var(--img);
+  background-repeat: no-repeat;
+  background-size: auto 150%;
+  background-position: var(--bx, 50%) var(--by, 50%);
+  transform: scale(var(--s, .96));
+  transform-origin: 0% 62%;
+  will-change: transform;
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .digit {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+/* mandatory fallback: no clip support → a solid ink numeral, no stray photo */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .digit {
+    background-image: none;
+    color: var(--ink);
+    -webkit-text-fill-color: currentColor;
+  }
+}
+.digit-line { max-width: 54ch; font-size: var(--t-lead); font-weight: 350; letter-spacing: -.012em; line-height: 1.3; }
+/* the rule must hug the words, not the 54ch column — text-decoration, not a box */
+.digit-line a {
+  text-decoration: underline;
+  text-decoration-color: var(--ink-20);
+  text-decoration-thickness: 1px;
+  text-underline-offset: .32em;
+  transition: text-decoration-color .4s var(--ease), color .4s var(--ease);
+}
+.digit-line a:hover, .digit-line a:focus-visible { color: var(--terra-ink); text-decoration-color: var(--terra); }
+.digit-line b { font-weight: 500; }
+.digit-line .sep { color: color-mix(in srgb, var(--muted) 62%, transparent); }
+/* position marker above the numeral: 01 / 05 */
+.digit-cap { font-size: var(--t-micro); letter-spacing: var(--track); text-transform: uppercase; color: var(--muted); }
+.digit-cap .num { font-size: 1.3em; letter-spacing: .02em; }
+.digit-cap .num:first-child { color: var(--terra-ink); }
+
+/* ------------------------------------------------- specimen plates (large) */
+.spec-grid { display: grid; gap: var(--gap); grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.spec { display: grid; align-content: start; }
+.spec > a { display: grid; gap: 14px; align-content: start; }
+.spec-fig { margin: 0; position: relative; overflow: clip; background: var(--paper-2); }
+.spec-fig img {
+  width: 100%; aspect-ratio: 4 / 5; object-fit: cover;
+  transition: transform 1.1s var(--ease), filter .6s var(--ease);
+}
+.spec:hover .spec-fig img, .spec:focus-within .spec-fig img { transform: scale(1.035); }
+.spec-no {
+  font-family: var(--serif); font-size: 1.05rem; color: var(--terra-ink);
+  font-variant-numeric: tabular-nums; letter-spacing: .02em;
+}
+.spec-name { font-size: var(--t-h3); font-weight: 450; letter-spacing: -.016em; line-height: 1.16; }
+.spec a:hover .spec-name, .spec a:focus-visible .spec-name { color: var(--terra-ink); }
+.spec-meta {
+  display: flex; flex-wrap: wrap; gap: 4px 14px;
+  font-size: var(--t-small); color: var(--muted); letter-spacing: .02em;
+  border-top: 1px solid var(--rule); padding-top: 10px;
+}
+.spec-meta .num { color: var(--ink); }
+
+/* -------------------------------------------------- compact plates (small) */
+.mini-grid { display: grid; gap: 2px 0; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.mini { border-top: 1px solid var(--rule); }
+.mini a {
+  display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 2px 16px;
+  padding-top: 14px; padding-bottom: 14px; padding-right: 16px;
+  align-items: center;
+  transition: background-color .35s var(--ease);
+}
+.mini a:hover, .mini a:focus-visible { background: var(--paper-2); }
+.mini img { grid-row: span 2; width: 64px; height: 64px; object-fit: cover; background: var(--paper-2); }
+.mini-name { font-weight: 500; letter-spacing: -.008em; }
+.mini-meta { font-size: var(--t-micro); color: var(--muted); letter-spacing: .04em; }
+.mini-no { font-family: var(--serif); color: var(--terra-ink); font-variant-numeric: tabular-nums; }
+
+/* ==========================================================================
+   THE REGISTER — a text list, never a card grid. Rows are complete and
+   usable with the plate absent; the plate is an enhancement only.
+   Markup contract lives in BUILD-SPEC.md.
+   ========================================================================== */
+.reg-tools {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 14px 22px;
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 16px; margin-bottom: 6px;
+}
+.reg-tools-lab { font-size: var(--t-micro); letter-spacing: var(--track); text-transform: uppercase; color: var(--muted); }
+.seg { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg [data-sort] {
+  font-size: var(--t-small); letter-spacing: .02em;
+  padding: 6px 13px 5px;
+  border: 1px solid transparent;
+  color: var(--muted);
+  transition: color .3s var(--ease), border-color .3s var(--ease), background-color .3s var(--ease);
+}
+.seg [data-sort]:hover { color: var(--ink); border-color: var(--ink-20); }
+.seg [data-sort][aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+
+.reg-wrap { display: grid; gap: var(--gap); grid-template-columns: minmax(0, 1fr) minmax(0, .4fr); align-items: start; }
+.reg { min-width: 0; }
+.reg-group + .reg-group { margin-top: clamp(34px, 4vw, 60px); }
+.reg-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  font-size: var(--t-micro); font-weight: 500; letter-spacing: var(--track); text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 10px; border-bottom: 1px solid var(--ink);
+}
+.reg-head .tnum { font-family: var(--serif); font-size: 1.35em; color: var(--terra-ink); letter-spacing: 0; }
+[data-register][data-mode="flat"] .reg-head .tnum { color: var(--muted); }
+.reg-rows { content-visibility: auto; contain-intrinsic-size: auto 3400px; }
+.reg-row { border-bottom: 1px solid var(--ink-12); }
+.reg-a {
+  display: grid;
+  grid-template-columns: 3.6rem minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr) 5.2rem;
+  gap: 2px 18px; align-items: baseline;
+  padding-top: 13px; padding-bottom: 12px; padding-left: 6px; padding-right: 6px;
+  transition: background-color .28s var(--ease);
+}
+/* CONVENTIONS §12 — the nudge is a transform on the cells, never animated
+   padding: padding relays the row's grid out on every frame. */
+.reg-a > * { transition: transform .28s var(--ease); }
+.reg-row:hover .reg-a, .reg-row:focus-within .reg-a, .reg-row.lit .reg-a {
+  background: var(--paper-2);
+}
+.reg-row:hover .reg-a > *:not(.reg-beds),
+.reg-row:focus-within .reg-a > *:not(.reg-beds),
+.reg-row.lit .reg-a > *:not(.reg-beds) { transform: translateX(6px); }
+.sec-p2 .reg-row:hover .reg-a, .sec-p2 .reg-row:focus-within .reg-a, .sec-p2 .reg-row.lit .reg-a { background: var(--paper); }
+.reg-no { font-family: var(--serif); font-size: .96rem; font-variant-numeric: tabular-nums; color: var(--muted); transition: color .28s var(--ease); }
+.reg-row:hover .reg-no, .reg-row:focus-within .reg-no, .reg-row.lit .reg-no { color: var(--terra-ink); }
+.reg-name { font-weight: 500; letter-spacing: -.008em; }
+.reg-street, .reg-area { font-size: var(--t-small); color: var(--muted); letter-spacing: .02em; }
+.reg-beds { font-size: var(--t-small); color: var(--muted); text-align: right; letter-spacing: .02em; white-space: nowrap; }
+.reg-beds .num { color: var(--ink); font-size: 1.02em; }
+.reg-more { display: flex; flex-wrap: wrap; gap: 14px 26px; align-items: baseline; padding-top: 26px; }
+
+/* the plate — hover OR keyboard focus, never hover-only */
+.plate { position: sticky; top: calc(var(--hd-h) + 18px); display: grid; gap: 12px; }
+.plate-fig { margin: 0; overflow: clip; background: var(--paper-2); aspect-ratio: 4 / 5; }
+.plate-fig img { width: 100%; height: 100%; object-fit: cover; }
+.plate.swap .plate-fig img { animation: plate-in .62s var(--ease) both; }
+@keyframes plate-in { from { opacity: 0; transform: scale(1.03); } to { opacity: 1; transform: none; } }
+.plate-meta { display: grid; gap: 3px; }
+.plate-no { font-family: var(--serif); font-size: 1.1rem; color: var(--terra-ink); font-variant-numeric: tabular-nums; }
+.plate-name { font-weight: 500; letter-spacing: -.01em; }
+.plate-street { font-size: var(--t-small); color: var(--muted); }
+.plate-hint { font-size: var(--t-micro); color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+
+@media (max-width: 900px) {
+  .reg-wrap { grid-template-columns: minmax(0, 1fr); }
+  .plate { order: -1; position: sticky; top: calc(var(--hd-h) + 6px); z-index: 3;
+    grid-template-columns: 118px minmax(0, 1fr); align-items: center; gap: 16px;
+    background: var(--paper); padding-top: 10px; padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule); }
+  .plate-fig { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 640px) {
+  .plate { display: none; }
+  .reg-a { grid-template-columns: 3.2rem minmax(0, 1fr) 4.6rem; }
+  .reg-street { grid-column: 2; }
+  .reg-area { grid-column: 2; }
+  .reg-beds { grid-row: 1; grid-column: 3; }
+}
+
+/* ------------------------------------------------------------------- atlas */
+.atlas { background: var(--paper-2); border: 1px solid var(--rule); }
+.atlas-svg { width: 100%; height: auto; display: block; }
+.atlas-grid line { stroke: var(--rule); stroke-width: .5; opacity: .5; }
+.pin { cursor: pointer; }
+.pin-hit { fill: var(--paper); stroke: var(--ink-32); stroke-width: 1; transition: fill .25s var(--ease), stroke .25s var(--ease); }
+.pin-no { font-family: var(--serif); font-size: 11px; fill: var(--muted); pointer-events: none; transition: fill .25s var(--ease); }
+.pin:hover .pin-hit, .pin.lit .pin-hit { fill: var(--terra); stroke: var(--terra); }
+.pin:hover .pin-no, .pin.lit .pin-no { fill: var(--paper); }
+
+/* ==========================================================================
+   SECOND DEVICE — room strips (building pages)
+   Horizontal scroll-snap rail, one photograph per frame, set-in-type label.
+   The progress rule below the rail is a FULLY STYLED STATIC ELEMENT first;
+   scroll-driven animation is layered on only where the platform has it.
+   Firefox ships no implementation — an ungated version ships broken.
+   ========================================================================== */
+.strip { position: relative; }
+/* .strip-rail also carries .rail-track now: core/rail.css hides the scrollbar and
+   core/rail.js drives it from the two arrow buttons overlaid on the photograph.
+   The overflow and snap declarations below are this direction's measurements for
+   that same track, not a second scroller. */
+.strip-rail {
+  display: flex; gap: clamp(10px, 1.4vw, 22px);
+  list-style: none;
+  overflow-x: auto; overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: var(--pad);
+  padding-bottom: 18px;
+  scrollbar-width: none;
+}
+.strip-rail::-webkit-scrollbar { display: none; }
+.strip-frame { flex: 0 0 min(86vw, 720px); scroll-snap-align: center; }
+.strip-frame:first-child { scroll-snap-align: start; }
+.strip-frame figure { margin: 0; display: grid; gap: 10px; }
+.strip-frame img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: var(--paper-2); }
+.strip-cap {
+  font-size: var(--t-micro); letter-spacing: var(--track); text-transform: uppercase;
+  color: var(--muted);
+}
+.strip-cap .num { color: var(--terra-ink); margin-right: .6em; }
+/* The progress rule is core/rail.css's .rail-bar now, driven by rail.js, so the
+   strip's own scroll-timeline scrub is gone and with it the Firefox fallback.
+   What is left here is the foot that carries it: the hairline fills the row and
+   the count sits at its right, tabular, in the direction's own small caps. */
+.strip-foot-in { display: flex; align-items: center; gap: clamp(14px, 2vw, 30px); }
+.strip-foot-in .rail-bar { flex: 1 1 auto; margin-top: 0; background: var(--rule); }
+/* core/rail.css leaves the fill at `inset: 0 auto 0 0`, which is width:auto and
+   therefore zero for an empty element, so its scaleX() had nothing to scale and
+   the progress rule never painted. A width is all it needs. Fixed here rather
+   than in core/rail.css, which the other two directions are building against
+   right now; flag it to them rather than editing under them. */
+.rail-bar i { width: 100%; }
+.strip-foot-in .rail-count { flex: 0 0 auto; color: var(--muted); letter-spacing: var(--track); }
+@supports (animation-timeline: view()) {
+  .strip-frame img { animation: strip-lift linear both; animation-timeline: view(inline); animation-range: entry 0% cover 30%; }
+}
+@keyframes strip-lift { from { opacity: .32; } to { opacity: 1; } }
+
+/* -------------------------------------------------------- neighborhood bands */
+.bands { display: grid; }
+.band { border-top: 1px solid var(--rule); }
+.band:last-child { border-bottom: 1px solid var(--rule); }
+.band-a {
+  display: grid; grid-template-columns: 4.2rem minmax(0, 1.1fr) minmax(0, 1.5fr) 168px;
+  gap: 10px var(--gap); align-items: center;
+  padding-top: clamp(18px, 2.4vw, 30px); padding-bottom: clamp(18px, 2.4vw, 30px);
+  transition: background-color .35s var(--ease);
+}
+.band:hover .band-a, .band:focus-within .band-a { background: var(--paper-2); }
+.band-count { font-family: var(--serif); font-size: clamp(1.7rem, 3vw, 2.6rem); color: var(--terra-ink); line-height: 1; font-variant-numeric: tabular-nums; }
+.band-name { font-size: var(--t-h3); font-weight: 450; letter-spacing: -.016em; }
+.band-sub { font-size: var(--t-small); color: var(--muted); letter-spacing: .02em; }
+.band-streets { font-size: var(--t-small); color: var(--muted); line-height: 1.5; }
+.band-fig { margin: 0; overflow: clip; background: var(--paper-2); }
+.band-fig img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; transition: transform 1.1s var(--ease); }
+.band:hover .band-fig img, .band:focus-within .band-fig img { transform: scale(1.04); }
+@media (max-width: 900px) {
+  .band-a { grid-template-columns: 3.4rem minmax(0, 1fr); }
+  .band-streets { grid-column: 2; }
+  .band-fig { display: none; }
+}
+
+/* ---------------------------------------------------------- numbered steps */
+.steps { display: grid; gap: var(--gap); grid-template-columns: repeat(3, minmax(0, 1fr)); counter-reset: step; }
+.step { display: grid; gap: 12px; align-content: start; padding-top: 22px; border-top: 1px solid color-mix(in srgb, var(--paper) 26%, transparent); }
+.sec:not(.sec-d) .step { border-top-color: var(--rule); }
+.step-no { font-family: var(--serif); font-size: 1.6rem; color: var(--terra); line-height: 1; }
+.step-h { font-size: var(--t-h3); font-weight: 450; letter-spacing: -.016em; }
+.step p { color: var(--sand-dim); }
+.sec:not(.sec-d) .step p { color: var(--muted); }
+@media (max-width: 900px) { .steps { grid-template-columns: minmax(0, 1fr); } }
+
+/* ------------------------------------------------------------------ panel */
+.panel { border: 1px solid var(--rule); background: var(--paper-2); padding: clamp(20px, 2.6vw, 34px); display: grid; gap: 12px; }
+.panel-key { border-left: 3px solid var(--terra); }
+.sec-d .panel { background: color-mix(in srgb, var(--paper) 6%, transparent); border-color: color-mix(in srgb, var(--paper) 22%, transparent); }
+
+/* --------------------------------------------------------------- pipeline */
+.pipe { display: grid; }
+.pipe-row {
+  display: grid; grid-template-columns: 5.6rem minmax(0, 1.2fr) minmax(0, 1.4fr);
+  gap: 6px var(--gap); align-items: baseline;
+  padding-top: 18px; padding-bottom: 18px;
+  border-top: 1px solid color-mix(in srgb, var(--paper) 22%, transparent);
+}
+.sec:not(.sec-d) .pipe-row { border-top-color: var(--rule); }
+.pipe-row:last-child { border-bottom: 1px solid color-mix(in srgb, var(--paper) 22%, transparent); }
+.sec:not(.sec-d) .pipe-row:last-child { border-bottom-color: var(--rule); }
+.pipe-n { font-family: var(--serif); font-size: clamp(1.4rem, 2.4vw, 2rem); line-height: 1; color: var(--terra); font-variant-numeric: tabular-nums; }
+.pipe-place { font-weight: 500; letter-spacing: -.008em; }
+.pipe-note { font-size: var(--t-small); color: var(--sand-dim); }
+.sec:not(.sec-d) .pipe-note { color: var(--muted); }
+@media (max-width: 760px) {
+  .pipe-row { grid-template-columns: 4.4rem minmax(0, 1fr); }
+  .pipe-note { grid-column: 2; }
+}
+
+/* ------------------------------------------------------- data furniture */
+.facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 0 24px; }
+.facts dt { font-size: var(--t-micro); letter-spacing: var(--track); text-transform: uppercase; color: var(--muted); padding-top: 12px; padding-bottom: 12px; border-top: 1px solid var(--rule); }
+.facts dd { padding-top: 12px; padding-bottom: 12px; border-top: 1px solid var(--rule); }
+.quote { font-size: var(--t-lead); font-weight: 350; letter-spacing: -.014em; line-height: 1.3; max-width: 34ch; }
+.quote cite { display: block; margin-top: 14px; font-size: var(--t-micro); font-style: normal; letter-spacing: var(--track); text-transform: uppercase; color: var(--muted); }
+.tbl { width: 100%; border-collapse: collapse; font-size: var(--t-small); }
+.tbl th { text-align: left; font-size: var(--t-micro); letter-spacing: var(--track); text-transform: uppercase; color: var(--muted); font-weight: 500; padding-top: 10px; padding-bottom: 10px; border-bottom: 1px solid var(--ink); }
+.tbl td { padding-top: 13px; padding-bottom: 12px; border-bottom: 1px solid var(--ink-12); }
+.tbl .num { font-size: .96rem; }
+/* A 960px table inside a 360px phone. `overflow-x: auto` scrolls it, but on
+   mobile Chrome the table's intrinsic width still widened the initial
+   containing block — innerWidth went to 960 while documentElement.clientWidth
+   stayed 360, and every `position: fixed` child of the ICB stretched with it.
+   The header is fixed, so the hamburger left the screen and the availability
+   page lost its navigation below 768px. `contain: paint` closes the box: the
+   overflow stops propagating and the ICB stays at the viewport.
+   tabindex/role/aria-label are on the element itself — a region that scrolls
+   must be reachable by keyboard (WCAG 2.1.1) and announced when it is. */
+.tbl-scroll { overflow-x: auto; contain: paint; max-width: 100%; }
+.tbl-scroll:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+
+/* ------------------------------------------------------------------ footer */
+.ft { background: var(--deep); color: var(--paper); padding-top: clamp(58px, 7vw, 104px); padding-bottom: 34px; }
+.ft a { color: var(--paper); }
+.ft-top { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: var(--gap); padding-bottom: clamp(38px, 5vw, 64px); }
+.ft-mark { display: grid; gap: 16px; align-content: start; }
+.ft-mark .wm svg { width: 38px; height: 38px; color: var(--paper); }
+.ft-tag { font-size: var(--t-small); color: var(--sand-dim); max-width: 26ch; }
+.ft-map { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--gap); }
+.ft-col { display: grid; gap: 10px; align-content: start; }
+.ft-h { font-size: var(--t-micro); letter-spacing: var(--track); text-transform: uppercase; color: var(--sand-dim); }
+.ft-list { list-style: none; display: grid; gap: 7px; font-size: var(--t-small); }
+.ft-list a { box-shadow: inset 0 0 0 currentColor; transition: color .3s var(--ease); }
+.ft-list a:hover, .ft-list a:focus-visible { color: var(--terra); }
+.ft-list .num { color: var(--sand-dim); margin-left: .4em; font-size: .92em; }
+.ft-contact { display: grid; gap: 6px; font-size: var(--t-small); color: var(--sand-dim); }
+.ft-contact a { box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--paper) 30%, transparent); }
+.ft-base {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 18px 28px;
+  border-top: 1px solid color-mix(in srgb, var(--paper) 18%, transparent);
+  padding-top: 26px;
+  font-size: var(--t-micro); color: var(--sand-dim); letter-spacing: .04em;
+}
+.ft-soc { display: flex; gap: 20px; }
+.ft-soc a { box-shadow: inset 0 -1px 0 color-mix(in srgb, var(--paper) 30%, transparent); }
+/* EHO mark is never smaller than the Wiseman mark */
+.ft .eho svg { width: 38px; height: 38px; color: var(--paper); }
+.ft .eho span { font-size: var(--t-micro); letter-spacing: .06em; color: var(--sand-dim); }
+@media (max-width: 980px) { .ft-top { grid-template-columns: minmax(0, 1fr); } .ft-map { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .ft-map { grid-template-columns: minmax(0, 1fr); } }
+
+/* ------------------------------------------------------- responsive tuning */
+@media (max-width: 1180px) {
+  .spec-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .mini-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  :root { --hd-h: 66px; }
+  .spec-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .mini-grid { grid-template-columns: minmax(0, 1fr); }
+  .digit-line { font-size: 1.06rem; }
+  .reg-tools { gap: 10px 16px; }
+}
+@media (max-width: 420px) {
+  .spec-grid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---------------------------------------------------------- reduced motion
+   Composition survives; choreography goes. The photographs stay inside the
+   numerals — only the drift and the scale are deleted. */
+@media (prefers-reduced-motion: reduce) {
+  .stage { height: auto; }
+  .stage-in {
+    position: static; height: auto;
+    padding-top: var(--sec-sm); padding-bottom: var(--sec-sm);
+  }
+  .digit { transform: none; background-position: 50% 50%; will-change: auto; }
+  .hero-fig { transform: none; will-change: auto; }
+  .hero-fig img, .hero-fig::after, .hero-h .hl > span,
+  .hero-body > .hero-sub, .hero-body > .search, .hero-body > .hero-facts { animation: none; }
+  .js .rv.stage-rule, .js .rv.stage-rule.in { transform: none; }
+  .tall-fig img { transition: none; }
+  .tall:hover .tall-fig img, .tall:focus-within .tall-fig img { transform: none; }
+  .spec-fig img, .band-fig img { transition: none; }
+  .spec:hover .spec-fig img, .band:hover .band-fig img { transform: none; }
+  .plate.swap .plate-fig img { animation: none; }
+  .strip-rail { scroll-snap-type: none; }
+  .strip-frame img { animation: none; opacity: 1; }
+  .lnk::after { transition: none; }
+}
+
+/* ==========================================================================
+   APPENDED — STAGE 2 (neighborhoods.html, templates/building.html,
+   templates/neighborhood.html). New components only. Nothing above this
+   line is modified, and no existing class is restyled.
+   ========================================================================== */
+
+/* --- neighborhoods.html: one entry per area, biggest first --------------- */
+.hoods { display: grid; }
+.hood { border-top: 1px solid var(--rule); padding-top: clamp(22px, 2.8vw, 40px); }
+.hood + .hood { margin-top: clamp(38px, 5vw, 78px); }
+.hood-head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 20px; }
+.hood-name {
+  font-size: clamp(1.5rem, 1.08rem + 1.7vw, 2.3rem);
+  font-weight: 500; letter-spacing: -.022em; line-height: 1.06;
+}
+.hood-sub { font-size: var(--t-small); color: var(--muted); letter-spacing: .02em; }
+@media (max-width: 720px) { .hood-head { gap: 2px 14px; } }
+/* the neighborhood photograph. NOT .band-fig — that one is deliberately
+   display:none under 900px, because a band row has no space for it. This one
+   survives to the phone, where it is the only picture on the entry. */
+.hood-fig { margin: 0; overflow: clip; background: var(--paper-2); }
+.hood-fig img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
+
+/* --- the quiet inline link used inside fact lists and running text ------- */
+.ulink {
+  box-shadow: inset 0 -1px 0 var(--ink-32);
+  transition: color .35s var(--ease), box-shadow .35s var(--ease);
+}
+.ulink:hover, .ulink:focus-visible { color: var(--terra-ink); box-shadow: inset 0 -1px 0 var(--terra); }
+
+/* --- the atlas ----------------------------------------------------------
+   Drawn with no register beside it, the numbers are an index of the extent,
+   not a set of links: they must not claim a link cursor. And with JS off the
+   host must not paint an empty bordered box. */
+.atlas-map .pin { cursor: default; }
+.atlas:empty { display: none; }
+
+/* --- amenity lists: a marked list, never a grid of pills ----------------- */
+.alist { list-style: none; display: grid; gap: 9px; font-size: var(--t-small); }
+/* the tick is positioned, not a grid cell: an item may hold a link AND a count,
+   and a two-column grid would drop the second child into the marker column */
+.alist li { position: relative; padding-left: 22px; line-height: 1.5; }
+.alist li::before {
+  content: ""; position: absolute; left: 0; top: .7em;
+  width: 10px; height: 1px; background: var(--terra);
+}
+
+/* ==========================================================================
+   STAGE 2 — buildings.html (the register) and search.html (the filters)
+   Appended, never edited above this line. Every class below is NEW; nothing
+   here redefines a component from the dictionary at the top of the file.
+   ========================================================================== */
+
+/* ---- .tally — the hero fact line on a PAPER ground. .hero-facts is the same
+   idea in paper-on-photograph and cannot be reused on a light background. --- */
+.tally {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: 8px clamp(18px, 3vw, 42px);
+  border-top: 1px solid var(--rule); padding-top: 16px;
+  font-size: var(--t-small); letter-spacing: .05em; color: var(--muted);
+}
+.tally .num { font-size: 1.5em; color: var(--ink); margin-right: .3em; }
+
+/* ==========================================================================
+   THREE PEER VIEWS behind ?view=register|atlas|plates
+   A static host cannot branch on a query string, so buildings.html stamps
+   data-view on <html> before first paint. With scripts off nothing is stamped,
+   no rule below matches, and all three views stay in the document — register
+   first. The toggle links are real URLs and survive a reload either way.
+   ========================================================================== */
+.view + .view { margin-top: var(--sec); }
+html[data-view] .view { display: none; }
+html[data-view] .view + .view { margin-top: 0; }
+html[data-view="register"] .view-register,
+html[data-view="atlas"] .view-atlas,
+html[data-view="plates"] .view-plates { display: block; }
+
+.vtog {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px;
+  border-bottom: 1px solid var(--rule); padding-bottom: 14px;
+  margin-bottom: clamp(24px, 3vw, 44px);
+}
+.vt {
+  display: inline-flex; align-items: baseline; gap: .6em;
+  font-size: var(--t-small); letter-spacing: .02em;
+  padding: 7px 15px 6px; border: 1px solid transparent; color: var(--muted);
+  transition: color .3s var(--ease), border-color .3s var(--ease), background-color .3s var(--ease);
+}
+.vt:hover { color: var(--ink); border-color: var(--ink-20); }
+.vt-n { font-size: .82em; color: var(--rule); }
+.vt-note, .tools-note { margin-left: auto; text-align: right; }
+html[data-view="register"] .vt-register,
+html[data-view="atlas"] .vt-atlas,
+html[data-view="plates"] .vt-plates {
+  color: var(--paper); background: var(--ink); border-color: var(--ink);
+}
+html[data-view="register"] .vt-register .vt-n,
+html[data-view="atlas"] .vt-atlas .vt-n,
+html[data-view="plates"] .vt-plates .vt-n { color: var(--terra); }
+@media (max-width: 760px) { .vt-note, .tools-note { margin-left: 0; text-align: left; flex: 1 0 100%; } }
+
+/* ---- register groups: the skipped-content estimate has to be in the right
+   order of magnitude per group or the scrollbar jumps on first paint. -------- */
+.reg-g-xl { contain-intrinsic-size: auto 1320px; }
+.reg-g-lg { contain-intrinsic-size: auto 680px; }
+.reg-g-sm { contain-intrinsic-size: auto 110px; }
+/* WR.register folds the seven groups into the first one for a flat sort and
+   rewrites its label — the authored per-group count would be left stale. */
+[data-register][data-mode="flat"] .reg-gcount { display: none; }
+
+/* ---- the atlas view: the drawn map plus its regional key ----------------- */
+.atlas-wrap {
+  display: grid; gap: var(--gap);
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, .9fr); align-items: start;
+}
+.atlas-fallback { padding: clamp(22px, 3vw, 44px); }
+.atlas-key { display: grid; gap: 14px; align-content: start; }
+.atlas-list { list-style: none; display: grid; }
+.atlas-list li { border-bottom: 1px solid var(--ink-12); }
+.atlas-list a {
+  display: grid; grid-template-columns: 2.8rem minmax(0, 1fr); gap: 0 14px;
+  align-items: baseline; padding-top: 11px; padding-bottom: 10px;
+  padding-left: 4px; padding-right: 8px;
+  transition: background-color .28s var(--ease);
+}
+.atlas-list a > * { transition: transform .28s var(--ease); }
+.atlas-list a:hover, .atlas-list a:focus-visible { background: var(--paper-2); }
+.atlas-list a:hover > *, .atlas-list a:focus-visible > * { transform: translateX(6px); }
+.ak-n { font-size: 1.1rem; color: var(--terra-ink); }
+.ak-name { font-weight: 500; letter-spacing: -.008em; }
+.ak-sub { grid-column: 2; font-size: var(--t-micro); color: var(--muted); letter-spacing: .03em; }
+@media (max-width: 900px) { .atlas-wrap { grid-template-columns: minmax(0, 1fr); } }
+
+/* ---- the plates view: grouped by neighborhood, never one undifferentiated
+   wall of seventy-two. ----------------------------------------------------- */
+.pgrp + .pgrp { margin-top: clamp(44px, 6vw, 86px); }
+/* Twenty-seven plates to a group, so a two-line building name must not step
+   the meta hairline out of the row. Scoped to .plates — .spec is unchanged
+   everywhere else on the site. */
+.plates .spec { align-content: stretch; }
+.plates .spec > a { grid-template-rows: auto auto 1fr auto; }
+
+/* ==========================================================================
+   AVAILABILITY / THE SEARCH PAGE
+   The hand-built filter band and results table that used to live here are gone:
+   search.html is the shared ILS module now (core/search.css + search.js,
+   spliced in by scripts/gen_search.py) and is skinned at the foot of this file.
+   What survives is the shortlist bar, which still reads core.js's favourites,
+   and the interest-list form under the results.
+   ========================================================================== */
+.savebar {
+  position: sticky; bottom: 0; z-index: 6;
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 8px var(--gap);
+  background: var(--paper); border-top: 1px solid var(--ink);
+  margin-top: var(--gap); padding-top: 15px; padding-bottom: 15px;
+}
+.savebar-n { font-size: var(--t-small); letter-spacing: .04em; color: var(--muted); }
+.savebar-n .num { font-size: 1.45em; color: var(--ink); margin-right: .12em; }
+
+/* ---- interest list ------------------------------------------------------- */
+.int-form { max-width: 74ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  .atlas-list a { transition: none; }
+  .atlas-list a > *, .reg-a > *, .route-in > * { transition: none; transform: none !important; }
+}
+
+/* ==========================================================================
+   APPENDED — STAGE 2 (company.html, residents.html, contact.html).
+   New components only. Nothing above this line is modified, and no existing
+   class is restyled.
+   ========================================================================== */
+
+/* --- .routes: one row per intent ----------------------------------------
+   Used twice. On residents.html the five doors are rows that ARE links to
+   anchors on the same page; on contact.html the six routes are rows that
+   HOLD their own actions. Same grid either way — only a row that is itself
+   a link takes a hover ground, so a row full of buttons never pretends to be
+   clickable. */
+.routes { display: grid; }
+.route { border-top: 1px solid var(--rule); }
+.routes .route:last-child { border-bottom: 1px solid var(--rule); }
+.route-in {
+  display: grid;
+  grid-template-columns: 3.4rem minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 10px var(--gap); align-items: start;
+  padding-top: clamp(18px, 2.2vw, 30px); padding-bottom: clamp(18px, 2.2vw, 30px);
+  padding-left: 6px; padding-right: 6px;
+  transition: background-color .3s var(--ease);
+}
+.route-in > * { transition: transform .3s var(--ease); }
+a.route-in:hover, a.route-in:focus-visible { background: var(--paper-2); }
+a.route-in:hover > *:not(:last-child),
+a.route-in:focus-visible > *:not(:last-child) { transform: translateX(6px); }
+.sec-p2 a.route-in:hover, .sec-p2 a.route-in:focus-visible { background: var(--paper); }
+.route-n {
+  font-family: var(--serif); font-size: 1.02rem; line-height: 1.62;
+  font-variant-numeric: tabular-nums; color: var(--terra-ink);
+}
+.route-h { display: block; font-size: var(--t-h3); font-weight: 450; letter-spacing: -.016em; line-height: 1.18; }
+a.route-in:hover .route-h, a.route-in:focus-visible .route-h { color: var(--terra-ink); }
+.route-what { display: block; margin-top: 8px; font-size: var(--t-small); color: var(--muted); }
+.route-next { display: grid; gap: 13px; align-content: start; font-size: var(--t-small); color: var(--muted); }
+.route-next b { color: var(--ink); font-weight: 500; }
+@media (max-width: 860px) {
+  .route-in { grid-template-columns: 3.2rem minmax(0, 1fr); }
+  .route-next { grid-column: 2; }
+}
+
+/* --- .pfig: a single photograph with its caption, sitting in a column --- */
+.pfig { margin: 0; display: grid; gap: 10px; }
+.pfig img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; background: var(--paper-2); }
+.pfig figcaption { font-size: var(--t-micro); color: var(--muted); letter-spacing: .04em; }
+
+/* --- .btn-off: a control that is deliberately inert ----------------------
+   The contact form posts nowhere in the demo and says so on the page; the
+   button has to read as switched off rather than as a live control that
+   failed. Used with the disabled attribute, never on its own. */
+.btn-off { background: transparent; color: var(--muted); border-color: var(--ink-20); cursor: not-allowed; }
+
+@media (prefers-reduced-motion: reduce) {
+  .route-in, .route-in > * { transition: none; }
+}
+
+/* ==========================================================================
+   APPENDED — STAGE 3 (audit fixes). New components only; nothing above this
+   line is modified.
+   ========================================================================== */
+
+/* --- .listing: the client's own listing copy, quoted and attributed -------
+   The RentCafe feed carries the client's marketing sentences verbatim, and a
+   few of them use words this site would never write in its own voice. They
+   are useful and they are true to the client, so they are kept — but set as a
+   quotation with a source line, never as body copy. */
+.listing { margin: 0; }
+.listing blockquote {
+  border-left: 2px solid var(--terra);
+  padding-left: clamp(14px, 1.6vw, 22px);
+  font-size: var(--t-body);
+  color: var(--ink);
+}
+.listing figcaption {
+  margin-top: 12px; padding-left: clamp(16px, 1.6vw, 24px);
+  font-size: var(--t-micro); letter-spacing: .04em; color: var(--muted);
+}
+
+
+/* ==========================================================================
+   APPENDED — ELEVATION (ELEVATE.md). Image-forward furniture and the real
+   embedded map. New components only; nothing above is restyled except the
+   hero scrim, the numeral ceiling and the stage backdrop, all marked in place.
+   ========================================================================== */
+
+/* --- tall plates ---------------------------------------------------------
+   A plate is a photograph with its number and street set small beneath it.
+   Two heights from one component: --tall-h. Never a card, never a radius. */
+.tall-grid {
+  --tall-h: clamp(420px, 56vh, 680px);
+  display: grid; gap: var(--gap);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.tall-grid.tall-4 {
+  --tall-h: clamp(300px, 40vh, 460px);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+.tall { display: grid; }
+.tall > a { display: grid; gap: 13px; align-content: start; }
+.tall-fig {
+  margin: 0; overflow: clip; background: var(--paper-2);
+  height: var(--tall-h);
+}
+.tall-fig img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 1.2s var(--ease);
+}
+.tall:hover .tall-fig img, .tall:focus-within .tall-fig img { transform: scale(1.04); }
+.tall-meta {
+  display: grid; grid-template-columns: 3.2rem minmax(0, 1fr); gap: 2px 14px;
+  align-items: baseline;
+  border-top: 1px solid var(--rule); padding-top: 11px;
+}
+.tall-no { font-family: var(--serif); font-size: 1.05rem; color: var(--terra-ink); font-variant-numeric: tabular-nums; }
+.tall-name { font-size: var(--t-h3); font-weight: 450; letter-spacing: -.016em; line-height: 1.14; }
+.tall > a:hover .tall-name, .tall > a:focus-visible .tall-name { color: var(--terra-ink); }
+.tall-sub { grid-column: 2; font-size: var(--t-small); color: var(--muted); letter-spacing: .02em; }
+.tall-sub .num { color: var(--ink); }
+@media (max-width: 1180px) {
+  .tall-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tall-grid.tall-4 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  .tall-grid { --tall-h: clamp(340px, 52vh, 520px); grid-template-columns: minmax(0, 1fr); }
+  .tall-grid.tall-4 { --tall-h: clamp(240px, 34vh, 340px); grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* --- full-bleed room strip (building pages) ------------------------------
+   One frame per screen width, tall, with the progress rule beneath it inside
+   the gutter. Built on the existing .strip; only the measurements change. */
+.strip-bleed .strip-rail {
+  gap: 0; padding-bottom: 0; scroll-padding-left: 0;
+  scroll-snap-type: x mandatory;
+}
+.strip-bleed .strip-frame { flex: 0 0 100%; scroll-snap-align: start; }
+.strip-bleed .strip-frame figure { gap: 0; }
+.strip-bleed .strip-frame img {
+  width: 100%; height: clamp(440px, 62vh, 720px);
+  aspect-ratio: auto; object-fit: cover;
+}
+.strip-bleed .strip-cap { padding-top: 13px; padding-bottom: 2px; }
+.strip-foot { padding-top: 14px; }
+
+/* --- the real map --------------------------------------------------------
+   core/map.css owns the skin. These are this direction's measurements only. */
+/* map.css loads after this file, so its .wr-map{min-height:420px} would win a
+   single-class rule. These carry the class twice on purpose. */
+.wr-map.map-full { min-height: clamp(460px, 68vh, 760px); }
+.wr-map.map-area { min-height: clamp(380px, 54vh, 600px); }
+.wr-map.map-one  { min-height: clamp(320px, 46vh, 500px); }
+.map-bleed { width: 100%; }
+.map-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 26px; padding-bottom: 16px; }
+.map-note { font-size: var(--t-micro); letter-spacing: var(--track); text-transform: uppercase; color: var(--muted); }
+/* --- buildings.html: the aside is a two-state column -----------------------
+   The register view shows the specimen plate. The atlas view shows the real
+   map in the same place, beside the same rows, so the two-way highlight has
+   something to highlight: hover a row, its pin lights; hover a pin, its row
+   lights. The rows never move between views. */
+.reg-side { position: sticky; top: calc(var(--hd-h) + 18px); display: grid; gap: 16px; }
+.reg-map { display: none; }
+.reg-map .wr-map.map-full { min-height: clamp(420px, 62vh, 700px); }
+.reg-map .reg-head { margin-top: 6px; }
+html[data-view="atlas"] .view-register { display: block; }
+html[data-view="atlas"] .reg-map { display: grid; gap: 14px; }
+html[data-view="atlas"] .plate { display: none; }
+html[data-view="atlas"] .reg-wrap { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+/* the map wants the width, and it is carrying the neighbourhood itself: every
+   pin's popup names it, and the rows stay grouped by it. So the row's own
+   neighbourhood column stands down in this view rather than wrapping. */
+html[data-view="atlas"] .reg-a { grid-template-columns: 3.4rem minmax(0, 1.6fr) minmax(0, 1fr) 5.2rem; }
+html[data-view="atlas"] .reg-area { display: none; }
+@media (max-width: 900px) {
+  .reg-side { position: static; }
+  html[data-view="atlas"] .reg-wrap { grid-template-columns: minmax(0, 1fr); }
+  html[data-view="atlas"] .reg-map { order: -1; }
+}
+@media (max-width: 640px) {
+  html[data-view="atlas"] .reg-a { grid-template-columns: 3.2rem minmax(0, 1fr) 4.6rem; }
+}
+
+/* seven bubbles in fifteen kilometres crowd each other, so they are set as
+   tight as they can be and still read */
+.wr-bub i { width: 54px; height: 54px; font-size: 1.08rem; }
+.wr-bub em { font-size: .56rem; letter-spacing: .1em; padding: 2px 7px; }
+
+/* --- the register plate: a photograph, not a thumbnail ------------------- */
+.reg-wrap { grid-template-columns: minmax(0, 1fr) minmax(0, .52fr); }
+@media (max-width: 900px) { .reg-wrap { grid-template-columns: minmax(0, 1fr); } }
+
+/* --- home-page neighbourhood bands: the street list moved to the
+   neighbourhood page, so the photograph takes the room it left ------------ */
+.bands-plate .band-a { grid-template-columns: 4.6rem minmax(0, 1fr) clamp(200px, 24vw, 340px); }
+@media (max-width: 900px) { .bands-plate .band-a { grid-template-columns: 3.4rem minmax(0, 1fr); } }
+
+/* --- the jump rail under the portfolio map ------------------------------- */
+.jump { list-style: none; display: flex; flex-wrap: wrap; gap: 10px clamp(18px, 2.6vw, 38px); }
+.jump a { font-size: var(--t-small); letter-spacing: .02em; }
+.jump .num { color: var(--terra-ink); margin-left: .5em; font-size: 1.05em; }
+
+/* --- the header over a photograph ---------------------------------------
+   The hero scrim is bottom-only by design, so the nav gets its cover from a
+   soft glow on the type itself rather than from a sheet laid over the frame.
+   It goes the moment the header frosts. */
+.hd.inv .brand b, .hd.inv .hnav a {
+  text-shadow: 0 1px 20px color-mix(in srgb, var(--deep) 70%, transparent),
+               0 0 3px color-mix(in srgb, var(--deep) 42%, transparent);
+}
+.hd.inv .brand svg { filter: drop-shadow(0 1px 12px color-mix(in srgb, var(--deep) 60%, transparent)); }
+.hd.inv .hd-cta { background: color-mix(in srgb, var(--deep) 30%, transparent); backdrop-filter: blur(8px); }
+.hd.inv.frost .brand b, .hd.inv.frost .hnav a { text-shadow: none; }
+.hd.inv.frost .brand svg { filter: none; }
+.hd.inv.frost .hd-cta { background: transparent; backdrop-filter: none; }
+
+/* ==========================================================================
+   THE SEARCH PAGE — skinning core/search.css for FIVE BEDROOMS
+   --------------------------------------------------------------------------
+   core/search.css is shared by all three directions and is deliberately
+   token-driven; it is never edited. Everything below is this direction's
+   voice laid over it, and nothing above this line is touched.
+
+   The direction's rules, applied to a marketplace:
+     · Hairlines, not boxes. Every control is a 1px rule on --ink-20 that goes
+       to --ink on hover. No radius anywhere except the map's own pins.
+     · THE ONE TYPE RULE holds. Young Serif sets DIGITS ONLY — the facet
+       counts, the result count, the plate number on a card, the rail count.
+       .card-price can read "Call for details", so it stays in Work Sans; it
+       gets the display treatment instead (500, tabular, -.02em).
+     · Labels are micro, uppercase, --track, --muted. Body copy is never
+       smaller than --t-small.
+     · One accent. Terra marks the plate number, the live count and the hover
+       state, and stops there.
+     · Hover moves one thing: a border to ink, a name to terra, the plate
+       photograph 1.035. Nothing bounces.
+
+   The page loads ../core/search.css, ../core/rail.css and ../core/map.css
+   BEFORE this file, so these single-class rules win on source order and no
+   selector here has to be inflated to beat the shared sheet.
+   ========================================================================== */
+
+/* The search page keeps its chrome: a marketplace that hides its header while
+   you scroll a list of results has taken the navigation away mid-task. So on
+   this page only, the header is given an exact height, is frosted from the
+   first pixel, and never retracts — which also means the filter bar has a
+   fixed, known number to stick under at every breakpoint. */
+html.ils .hd {
+  height: var(--hd-h); padding-top: 0; padding-bottom: 0;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.1);
+  box-shadow: 0 1px 0 var(--ink-12);
+}
+html.ils .hd.up { transform: none; }
+
+:root { --sbar-h: 67px; }   /* 12 + 42 + 12 + 1px rule — core/search.css's own rhythm */
+
+/* ----------------------------------------------------------- filter bar -- */
+/* Solid, not frosted, and deliberately so: backdrop-filter would make .sbar the
+   containing block for any position:fixed descendant, and app.js lifts the open
+   dropdown to fixed coordinates to get it out of the bar's own scroll container
+   (see "SEARCH DROPDOWNS" there). A blur here re-clips the menu it just freed. */
+.sbar {
+  position: sticky; top: var(--hd-h); z-index: 60;
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+.sfield, .fbtn {
+  border-color: var(--ink-20);
+  transition: border-color .3s var(--ease), background-color .3s var(--ease), color .3s var(--ease);
+}
+.sfield { min-width: 232px; }
+.sfield:focus-within { border-color: var(--ink); }
+.sfield input { font-size: var(--t-small); letter-spacing: .01em; }
+.sfield svg { opacity: .55; }
+.fbtn {
+  font-size: var(--t-micro); font-weight: 500;
+  letter-spacing: var(--track); text-transform: uppercase;
+}
+.fbtn:hover { border-color: var(--ink); background: var(--paper-2); }
+.fbtn[aria-expanded="true"] { border-color: var(--ink); background: var(--paper-2); }
+.fbtn.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.fbtn.on:hover { background: var(--terra-ink); border-color: var(--terra-ink); }
+
+/* the dropdown is a sheet of paper with a hairline, not a floating card */
+.fmenu {
+  border-color: var(--rule); background: var(--paper);
+  box-shadow: 0 26px 60px color-mix(in srgb, var(--deep) 16%, transparent);
+}
+.fmenu h4 { font-size: var(--t-micro); letter-spacing: var(--track); color: var(--muted); }
+.fmenu-foot { border-top-color: var(--rule); }
+.opt { font-size: var(--t-small); }
+.opt:hover { background: var(--paper-2); }
+.opt input { accent-color: var(--terra-ink); }
+.opt .cnt { font-family: var(--serif); font-size: .9rem; color: var(--muted); }   /* digits only */
+/* THREE NAME CLASHES. This direction already owns .seg (the register's sort
+   control), .vtog (the three-view nav on buildings.html) and .split (a heading
+   column beside a body column). core/search.css uses the same three words for
+   different objects, and style.css loads last, so the direction's rules were
+   winning and breaking the search page: the List|Map toggle showed at every
+   width and the map column took 57% of the row. Every rule below therefore
+   carries a second selector — .segs, [data-search], [data-split] — which the
+   module already puts in the markup. The direction's own three are untouched. */
+.segs .seg { display: block; border-color: var(--ink-20); font-size: var(--t-small); padding: 10px; }
+.segs .seg:hover { border-color: var(--ink); background: var(--paper-2); }
+.segs .seg:has(input:checked) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.rng span { font-size: var(--t-micro); letter-spacing: var(--track); text-transform: uppercase; color: var(--muted); }
+.rng select, .sel { border-color: var(--ink-20); font-size: var(--t-small); }
+.rng select:hover, .sel:hover { border-color: var(--ink); }
+
+.lnk-clear {
+  font-size: var(--t-micro); letter-spacing: var(--track); text-transform: uppercase;
+  text-decoration: none; color: var(--muted);
+  box-shadow: inset 0 -1px 0 var(--ink-20);
+  transition: color .3s var(--ease), box-shadow .3s var(--ease);
+}
+.lnk-clear:hover { color: var(--terra-ink); box-shadow: inset 0 -1px 0 var(--terra); }
+.btn-apply {
+  font-size: .68rem; letter-spacing: var(--track); font-weight: 500;
+  padding: 12px 20px 11px; border: 1px solid var(--ink);
+  transition: background-color .4s var(--ease), border-color .4s var(--ease);
+}
+.btn-apply:hover { background: var(--terra-ink); border-color: var(--terra-ink); }
+
+/* --------------------------------------------------- count, chips, sort -- */
+.sresults {
+  border-bottom-color: var(--rule);
+  font-size: var(--t-small);
+  padding-top: 16px; padding-bottom: 16px;
+}
+.scount { font-size: var(--t-small); letter-spacing: .05em; color: var(--muted); }
+.scount b { font-family: var(--serif); font-weight: 400; font-size: 1.55em; color: var(--ink); margin-right: .28em; }
+.fmenu-foot .scount b, .btn-apply [data-count] { font-family: var(--serif); font-weight: 400; }
+.fmenu-foot .scount b { font-size: 1.25em; }
+.btn-apply [data-count] { font-size: 1.18em; letter-spacing: 0; }
+
+/* an active filter reads as a hairline tag, the same object as .card-tags */
+.chip-f {
+  background: none; border: 1px solid var(--ink-20);
+  padding: 5px 7px 4px 11px; font-size: var(--t-micro);
+  letter-spacing: .04em;
+  transition: border-color .3s var(--ease);
+}
+.chip-f:hover { border-color: var(--ink); }
+.chip-f button { color: var(--muted); opacity: 1; transition: color .25s var(--ease); }
+.chip-f button:hover { color: var(--terra-ink); }
+.sright label { font-size: var(--t-micro); letter-spacing: var(--track); color: var(--muted); }
+[data-search] .vtog {
+  display: none; gap: 0; flex-wrap: nowrap; align-items: stretch;
+  border: 1px solid var(--ink-20);
+  padding-bottom: 0; margin-bottom: 0;
+}
+[data-search] .vtog button {
+  font-size: var(--t-micro); letter-spacing: var(--track); font-weight: 500;
+  transition: background-color .3s var(--ease), color .3s var(--ease);
+}
+[data-search] .vtog button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* ----------------------------------------------------- split list / map -- */
+.slist { padding-top: clamp(22px, 3vw, 40px); padding-bottom: var(--sec-sm); }
+/* a 3:4 plate needs a narrower column than the module's 268px default, or a
+   one-column list column paints a 675px-tall photograph per result */
+.cards { gap: clamp(28px, 2.8vw, 46px) clamp(16px, 1.8vw, 30px);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 218px), 1fr)); }
+.split[data-split] { gap: 0; grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 1060px) {
+  .split[data-split] { grid-template-columns: minmax(0, 1fr) minmax(400px, 43%); }
+  .split[data-split] > .smap {
+    position: sticky;
+    top: calc(var(--hd-h) + var(--sbar-h));
+    /* an explicit height here, so map.css's own .wr-map{min-height:420px} must
+       not also apply a floor — below 1060px it is the only height the map has */
+    height: calc(var(--vh100) - var(--hd-h) - var(--sbar-h));
+    min-height: 0;
+    border-left: 1px solid var(--rule);
+  }
+}
+@media (max-width: 1059px) {
+  [data-search] .vtog { display: flex; }
+  .split[data-split].show-map .smap { min-height: calc(var(--vh100) - var(--hd-h) - var(--sbar-h) - 64px); }
+}
+
+/* ------------------------------------------------------------ the plate -- */
+/* A result is a plate: a tall photograph, the number stamped on it in Young
+   Serif, and the facts set small beneath a hairline. ELEVATE §1 — never
+   letterbox a building into a 16:9 card. */
+.card-img { aspect-ratio: 3 / 4; background: var(--paper-2); }
+.card-img img { transition: transform 1.1s var(--ease); }
+.card:hover .card-img img, .card:focus-within .card-img img { transform: scale(1.035); }
+.card-img::after { box-shadow: inset 0 0 0 1px var(--terra); }
+/* squared off (no rounded chrome in this direction) but inset and white on the photograph,
+   so it reads as a control rather than a notch cut from the card corner */
+.card-fav { right: 12px; top: 12px; width: 36px; height: 36px; border-radius: 0; }
+.card-fav:hover { transform: none; }
+.card-fav svg { width: 16px; height: 16px; stroke: var(--ink); }
+.card-fav[aria-pressed="true"] svg { fill: var(--terra); stroke: var(--terra-ink); }
+.card-b {
+  gap: 6px; padding: 13px 0 0;
+  border-top: 1px solid var(--rule);
+  transition: border-color .35s var(--ease);
+}
+.card:hover .card-b, .card:focus-within .card-b { border-top-color: var(--terra); }
+.card-price {
+  font-size: 1.16rem; font-weight: 500; letter-spacing: -.02em; line-height: 1.15;
+}
+.card-fx { font-size: var(--t-small); color: var(--muted); letter-spacing: .02em; }
+.card-nm { font-size: var(--t-body); font-weight: 500; letter-spacing: -.012em; line-height: 1.2; }
+.card-nm a { transition: color .3s var(--ease); }
+.card:hover .card-nm a, .card:focus-within .card-nm a { color: var(--terra-ink); }
+.card-ad { font-size: var(--t-small); color: var(--muted); }
+.card-tags { gap: 4px; margin-top: 6px; }
+.card-tags span {
+  font-size: .64rem; letter-spacing: .1em;
+  border-color: var(--rule); color: var(--muted); padding: 3px 7px 2px;
+}
+
+/* --------------------------------------------------------- empty state -- */
+.sempty { padding-top: clamp(46px, 7vw, 92px); padding-bottom: clamp(46px, 7vw, 92px); }
+.sempty h3 { font-size: var(--t-h3); font-weight: 450; letter-spacing: -.016em; }
+.sempty p { color: var(--muted); font-size: var(--t-small); }
+.sempty input { border-color: var(--ink-20); font-size: var(--t-small); }
+.sempty input:focus { border-color: var(--ink); }
+
+/* --------------------------------------------------- more-filters modal -- */
+dialog.fmodal {
+  border: 1px solid var(--rule);
+  box-shadow: 0 50px 110px color-mix(in srgb, var(--deep) 34%, transparent);
+}
+dialog.fmodal::backdrop { background: color-mix(in srgb, var(--deep) 62%, transparent); }
+.fmodal-h { border-bottom-color: var(--rule); }
+.fmodal-h h2 { font-size: var(--t-h3); font-weight: 450; letter-spacing: -.016em; }
+.fmodal-x { transition: color .3s var(--ease); }
+.fmodal-x:hover { color: var(--terra-ink); }
+.fgrp h3 { font-size: var(--t-micro); letter-spacing: var(--track); color: var(--muted); }
+.fmodal-f { border-top-color: var(--rule); }
+
+/* ------------------------------------------------------------- the map --- */
+/* map.css's .wr-map{min-height:420px} is a single class and loads before this
+   file, so one class is enough here. The split column owns its own height. */
+.smap { min-height: 62svh; }
+
+@media (max-width: 900px) {
+  .sfield { min-width: 210px; }
+}
+/* On a phone the module's sort group (List | Map, the label and a 190px select)
+   is wider than the gutter allows and ran 5px past the page. Let it take its own
+   line and let the select give way. */
+@media (max-width: 640px) {
+  [data-search] .sright { flex-wrap: wrap; width: 100%; margin-left: 0; }
+  [data-search] .sright .sel { min-width: 0; flex: 1 1 150px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card-img img, .card-b, .card-nm a, .chip-f, .fbtn, .seg, .opt, .card-fav { transition: none; }
+}
+
+/* ----------------------------------------------------- a table as a rail --
+   company.html's neighbourhood table is wider than a phone. It scrolls, so it
+   gets the same treatment as every other scroller on the site: no scrollbar,
+   two arrow buttons. .free turns the snap off — a table should stop wherever
+   the reader stops it. The track keeps .tbl-scroll for `contain: paint`, which
+   is what stops a 960px table widening the initial containing block and
+   dragging the fixed header off a 360px screen. The table itself must not be
+   squeezed back to the flex line's width, hence min-width. */
+.tbl-rail .rail-track > .tbl { flex: 0 0 auto; min-width: 100%; width: auto; }
+.tbl-rail .rail-nav { justify-content: flex-end; padding-top: 14px; }
+
+/* ============================================================ HERO SEARCH BAR */
+.search.hs { max-width: 720px; display: grid; grid-template-columns: 1fr auto auto; align-items: stretch; }
+.search.hs .search-in { grid-column: 1 / -1; padding-right: 58px; }
+.hs-sels { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.hs-sel select {
+  appearance: none; height: 42px; padding: 0 34px 0 14px; border: 1px solid var(--paper); background: color-mix(in srgb, var(--paper) 92%, transparent);
+  color: var(--ink); font: inherit; font-size: .9rem; border-radius: 0; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 15px) 50%, calc(100% - 10px) 50%; background-size: 5px 5px; background-repeat: no-repeat;
+}
+.search.hs .search-go { top: 0; height: 54px; }

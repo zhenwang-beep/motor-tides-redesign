@@ -1,0 +1,1540 @@
+<!doctype html>
+<html lang="en" data-index="../data/index.json">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The register &mdash; Wiseman Residential</title>
+<meta name="description" content="All 72 Wiseman apartment buildings in Los Angeles on one page: number, name, street, neighborhood and bedrooms, sortable, with a drawn map and a plate for every building.">
+<meta name="theme-color" content="#FAF4EA">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wiseman Residential">
+<meta property="og:title" content="The register &mdash; Wiseman Residential">
+<meta property="og:description" content="All 72 Wiseman apartment buildings in Los Angeles on one page: number, name, street, neighborhood and bedrooms, sortable, with a drawn map and a plate for every building.">
+<meta property="og:image" content="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1400/s3/2/9707/1331%20amherst%20ave%20exteriors%20-22.jpg">
+<meta property="og:image:alt" content="The Amherst Avenue elevation of a Wiseman building in West Los Angeles.">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://resource.rentcafe.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,300..700;1,400&amp;family=Young+Serif&amp;display=swap">
+<link rel="stylesheet" href="../core/base.css?v=15">
+<link rel="stylesheet" href="../core/map.css?v=15">
+<link rel="stylesheet" href="style.css?v=15">
+<script>document.documentElement.classList.add('js')</script>
+<script>(function(){var v='register';try{var q=new URLSearchParams(location.search).get('view');if(q==='atlas'||q==='plates')v=q;}catch(e){}document.documentElement.setAttribute('data-view',v);})();</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="hd wrap wrap-n">
+    <a class="brand" href="index.html" aria-label="Wiseman Residential, home">
+      <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg>
+      <b>Wiseman Residential</b>
+    </a>
+    <div class="hd-right">
+      <nav class="hnav" aria-label="Primary">
+      <a href="search.html">Find a home</a>
+      <a href="buildings.html" aria-current="page">Buildings</a>
+      <a href="neighborhoods.html">Neighborhoods</a>
+      <a href="residents.html">Residents</a>
+      <a href="company.html">Company</a>
+      </nav>
+      <a class="hd-cta" href="contact.html">Contact</a>
+      <button class="mbtn" type="button" aria-expanded="false" aria-controls="mnav" aria-label="Menu"><span></span></button>
+    </div>
+  </header>
+
+  <nav class="mnav" id="mnav" aria-label="Menu">
+    <div class="mnav-in">
+      <div class="mnav-list">
+          <a href="index.html"><span class="mnav-n num">01</span>Home</a>
+          <a href="search.html"><span class="mnav-n num">02</span>Find a home</a>
+          <a href="buildings.html" aria-current="page"><span class="mnav-n num">03</span>Buildings</a>
+          <a href="neighborhoods.html"><span class="mnav-n num">04</span>Neighborhoods</a>
+          <a href="residents.html"><span class="mnav-n num">05</span>Residents</a>
+          <a href="company.html"><span class="mnav-n num">06</span>Company</a>
+          <a href="contact.html"><span class="mnav-n num">07</span>Contact</a>
+      </div>
+      <div class="mfoot">
+        <a href="tel:+13104733000">+1 310-473-3000</a>
+        <span>1520 Federal Ave, Los Angeles, CA 90025</span>
+        <a href="https://wisemanresidential.securecafe.com/residentservices/apartmentsforrent/userlogin.aspx" rel="noopener">Resident login</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="pt" aria-hidden="true">
+    <span class="ptmark"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg><b>Wiseman</b></span>
+  </div>
+
+  <main id="main">
+    <section class="phero" aria-labelledby="reg-h">
+      <div class="wrap wrap-n">
+        <p class="eyebrow">The register</p>
+        <h1 class="phero-h mt-s" id="reg-h">Seventy-two buildings, one line each.</h1>
+        <p class="lead muted mt-s measure">Number, name, street, neighborhood, bedrooms. Sorting reorders the list; it never hides anything from it. Read it as a list, as a map, or as plates.</p>
+        <form class="search mt-m" action="search.html" method="get" role="search">
+          <label class="vh" for="q">Search by street, building name or number</label>
+          <input class="search-in" id="q" name="q" type="search" data-search autocomplete="off"
+                 role="combobox" aria-expanded="false" aria-controls="ta" aria-autocomplete="list"
+                 placeholder="Search a street, a building or a number">
+          <button class="search-go" type="submit" aria-label="Search">
+            <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="M16.5 16.5 21 21"/></svg>
+          </button>
+          <ul class="ta" id="ta" role="listbox" data-ta hidden></ul>
+        </form>
+        <p class="tally mt-m">
+          <span><span class="num">72</span> buildings</span>
+          <span><span class="num">7</span> neighborhoods</span>
+          <span><span class="num">52</span> named streets</span>
+          <span><span class="num">17</span> with four bedrooms or more</span>
+        </p>
+      </div>
+    </section>
+
+    <section class="sec-s" aria-label="The portfolio">
+      <div class="wrap wrap-n">
+        <nav class="vtog" aria-label="Views">
+          <a class="vt vt-register" href="buildings.html?view=register"><span class="vt-n num">01</span>Register</a>
+          <a class="vt vt-atlas" href="buildings.html?view=atlas"><span class="vt-n num">02</span>Atlas</a>
+          <a class="vt vt-plates" href="buildings.html?view=plates"><span class="vt-n num">03</span>Plates</a>
+          <span class="note vt-note">Three ways to read the same seventy-two.</span>
+        </nav>
+        <noscript><p class="note mt-s">Scripts are off, so all three views are shown one after another and sorting is unavailable. The list itself is complete.</p></noscript>
+
+      <div class="view view-register" id="view-register">
+        <h2 class="vh">The register</h2>
+
+        <div class="reg-tools">
+          <span class="reg-tools-lab" id="sortlab">Sort</span>
+          <div class="seg" role="group" aria-labelledby="sortlab">
+            <button type="button" data-sort="area" aria-pressed="true">Neighborhood</button>
+            <button type="button" data-sort="no" aria-pressed="false">Number</button>
+            <button type="button" data-sort="street" aria-pressed="false">Street A&ndash;Z</button>
+            <button type="button" data-sort="beds" aria-pressed="false">Bedrooms</button>
+            <button type="button" data-sort="rent" aria-pressed="false">Rent</button>
+          </div>
+          <p class="note tools-note">Sorting reorders the whole list. Nothing is ever hidden from it.</p>
+        </div>
+
+        <div class="reg-wrap">
+          <div class="reg" data-register data-mode="grouped" data-flatlabel="All 72 buildings">
+            <section class="reg-group" data-group="west-la" aria-labelledby="g-west-la">
+              <h3 class="reg-head" id="g-west-la"><span data-grouplabel>West Los Angeles</span> <span class="tnum reg-gcount">27</span></h3>
+              <div class="reg-rows reg-g-xl" data-rows>
+            <div class="reg-row" data-row data-no="001" data-name="Amherst Rochester" data-street="Amherst" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="3" data-bedsmax="4" data-rent="4895" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/1331%20amherst%20ave%20exteriors%20-22.jpg">
+              <a class="reg-a" href="buildings/001-amherst-rochester.html">
+                <span class="reg-no num">001</span>
+                <span class="reg-name">Amherst Rochester</span>
+                <span class="reg-street">Amherst</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">3&ndash;4</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="002" data-name="Armacost Bella" data-street="Armacost" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="0" data-bedsmax="4" data-rent="4895" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/1439%20armacost%20ave%20unit%20306%20-%20kitchen%20_%20dining_final.jpg">
+              <a class="reg-a" href="buildings/002-armacost-bella.html">
+                <span class="reg-no num">002</span>
+                <span class="reg-name">Armacost Bella</span>
+                <span class="reg-street">Armacost</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">4</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="003" data-name="Armacost Manor" data-street="Armacost" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="1" data-bedsmax="3" data-rent="4950" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/armacost%20manor%20-%20unit%20304-%20dining%20and%20living%20room%20patio_final.jpg">
+              <a class="reg-a" href="buildings/003-armacost-manor.html">
+                <span class="reg-no num">003</span>
+                <span class="reg-name">Armacost Manor</span>
+                <span class="reg-street">Armacost</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="004" data-name="Barrington Santa Monica" data-street="Barrington" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="0" data-bedsmax="2" data-rent="2595" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/barrington%20-%20unit%20111-%20living%20room%20patio_final.jpg">
+              <a class="reg-a" href="buildings/004-barrington-santa-monica.html">
+                <span class="reg-no num">004</span>
+                <span class="reg-name">Barrington Santa Monica</span>
+                <span class="reg-street">Barrington</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="005" data-name="Beloit at Ohio" data-street="Beloit" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="1" data-bedsmax="4" data-rent="3945" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/beloit%20at%20ohio%20unit%20116%20-%20kitchen%20and%20countertop%20bar_final.jpg">
+              <a class="reg-a" href="buildings/005-beloit-at-ohio.html">
+                <span class="reg-no num">005</span>
+                <span class="reg-name">Beloit at Ohio</span>
+                <span class="reg-street">Beloit</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">1&ndash;4</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="006" data-name="Bentley Woodland" data-street="Bentley" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="0" data-bedsmax="3" data-rent="3495" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/bentley%20woodland%20-%20bedroom%20and%20in-suite%20washer%20and%20dryer.jpg">
+              <a class="reg-a" href="buildings/006-bentley-woodland.html">
+                <span class="reg-no num">006</span>
+                <span class="reg-name">Bentley Woodland</span>
+                <span class="reg-street">Bentley</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="007" data-name="Brockton Manor" data-street="Brockton" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="0" data-bedsmax="5" data-rent="4995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/1301%20brockton%20-%20kitchen(2).jpg">
+              <a class="reg-a" href="buildings/007-brockton-manor.html">
+                <span class="reg-no num">007</span>
+                <span class="reg-name">Brockton Manor</span>
+                <span class="reg-street">Brockton</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">5</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="008" data-name="Brockton Townhomes" data-street="Brockton" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="3" data-bedsmax="4" data-rent="4595" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/brockton%20townhomes%20-%20kitchen,%20bar,%20dining,%20living%20room%20curtains_final.jpg">
+              <a class="reg-a" href="buildings/008-brockton-townhomes.html">
+                <span class="reg-no num">008</span>
+                <span class="reg-name">Brockton Townhomes</span>
+                <span class="reg-street">Brockton</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">3&ndash;4</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="009" data-name="Butler Cabana" data-street="Butler" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="0" data-bedsmax="3" data-rent="4995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/butler%20cabana%20-%20dining%20room,%20bar,%20curtaisn,%20kitchen%20and%20rugs.jpg">
+              <a class="reg-a" href="buildings/009-butler-cabana.html">
+                <span class="reg-no num">009</span>
+                <span class="reg-name">Butler Cabana</span>
+                <span class="reg-street">Butler</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="010" data-name="Butler Eighteen" data-street="Butler" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="0" data-bedsmax="2" data-rent="3395" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/butler%20eighteen%20-%20lr,%20dining,%20and%20kitchen.jpg">
+              <a class="reg-a" href="buildings/010-butler-eighteen.html">
+                <span class="reg-no num">010</span>
+                <span class="reg-name">Butler Eighteen</span>
+                <span class="reg-street">Butler</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="011" data-name="Colby at Ohio" data-street="Colby" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="1" data-bedsmax="4" data-rent="2995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/colby%20at%20ohio%20-%20unit%20108%20-%20kitchen,%20dinign,%20alr,%20and%20patio_final.jpg">
+              <a class="reg-a" href="buildings/011-colby-at-ohio.html">
+                <span class="reg-no num">011</span>
+                <span class="reg-name">Colby at Ohio</span>
+                <span class="reg-street">Colby</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">1&ndash;4</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="012" data-name="Colby Missouri" data-street="Colby" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="3" data-bedsmax="3" data-rent="4945" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/colby%20missouri%20-%20ph6%20-%20kitchen,%20living%20room,%20patio,%20shelving,%20curtains_final.jpg">
+              <a class="reg-a" href="buildings/012-colby-missouri.html">
+                <span class="reg-no num">012</span>
+                <span class="reg-name">Colby Missouri</span>
+                <span class="reg-street">Colby</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="013" data-name="Colby Townhomes" data-street="Colby" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="4" data-bedsmax="5" data-rent="5050" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/photo%20oct%2018,%203%2048%2030%20pm.jpg">
+              <a class="reg-a" href="buildings/013-colby-townhomes.html">
+                <span class="reg-no num">013</span>
+                <span class="reg-name">Colby Townhomes</span>
+                <span class="reg-street">Colby</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">4&ndash;5</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="014" data-name="Colby West" data-street="Colby" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="1" data-bedsmax="3" data-rent="2495" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/colby%20west%20-%20remove%20cars%20and%20lower%20sign.jpg">
+              <a class="reg-a" href="buildings/014-colby-west.html">
+                <span class="reg-no num">014</span>
+                <span class="reg-name">Colby West</span>
+                <span class="reg-street">Colby</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="015" data-name="Santa Monica Federal" data-street="Federal" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="0" data-bedsmax="3" data-rent="4995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/santa%20monica%20federal%20-%20unit%20402%20-%20kitchen%20_final.jpg">
+              <a class="reg-a" href="buildings/015-santa-monica-federal.html">
+                <span class="reg-no num">015</span>
+                <span class="reg-name">Santa Monica Federal</span>
+                <span class="reg-street">Federal</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="016" data-name="Fox Hills Dr" data-street="Fox Hills" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="1" data-bedsmax="3" data-rent="5195" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/fox%20hills%20dr%20-%20kitchen%20lr%20patio.jpg">
+              <a class="reg-a" href="buildings/016-fox-hills-dr.html">
+                <span class="reg-no num">016</span>
+                <span class="reg-name">Fox Hills Dr</span>
+                <span class="reg-street">Fox Hills</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="017" data-name="Kelton Madera" data-street="Kelton" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="1" data-bedsmax="4" data-rent="5145" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/kelton%20madera%20-%20dining%20kitchen%20and%20shelves_final.jpg">
+              <a class="reg-a" href="buildings/017-kelton-madera.html">
+                <span class="reg-no num">017</span>
+                <span class="reg-name">Kelton Madera</span>
+                <span class="reg-street">Kelton</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">1&ndash;4</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="018" data-name="Louisiana Glen" data-street="Louisiana" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="2" data-bedsmax="5" data-rent="" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/louisiana%20glen%20-%20unit%20405%20-%20kitchen_final(1).jpg">
+              <a class="reg-a" href="buildings/018-louisiana-glen.html">
+                <span class="reg-no num">018</span>
+                <span class="reg-name">Louisiana Glen</span>
+                <span class="reg-street">Louisiana</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">2&ndash;5</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="019" data-name="McClellan Corner" data-street="McClellan" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="1" data-bedsmax="2" data-rent="3495" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/mcclellan%20corner%20-%20lr,%20dining,%20kitchen.jpg">
+              <a class="reg-a" href="buildings/019-mcclellan-corner.html">
+                <span class="reg-no num">019</span>
+                <span class="reg-name">McClellan Corner</span>
+                <span class="reg-street">McClellan</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">1&ndash;2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="020" data-name="Ohio Sawtelle" data-street="Ohio" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="1" data-bedsmax="3" data-rent="3395" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/ohio%20sawtelle%20-%20dining%20-%20blue%20accents.jpg">
+              <a class="reg-a" href="buildings/020-ohio-sawtelle.html">
+                <span class="reg-no num">020</span>
+                <span class="reg-name">Ohio Sawtelle</span>
+                <span class="reg-street">Ohio</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="021" data-name="Overland Century" data-street="Overland" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="1" data-bedsmax="3" data-rent="3295" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/overland%20century%20-%20kitchen.jpg">
+              <a class="reg-a" href="buildings/021-overland-century.html">
+                <span class="reg-no num">021</span>
+                <span class="reg-name">Overland Century</span>
+                <span class="reg-street">Overland</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="022" data-name="Purdue Ohio" data-street="Purdue" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="3" data-bedsmax="4" data-rent="4995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/purdue%20ohio%20-%20kitchen,%20dining,%20living%20room,%20patio%20curtains.jpg">
+              <a class="reg-a" href="buildings/022-purdue-ohio.html">
+                <span class="reg-no num">022</span>
+                <span class="reg-name">Purdue Ohio</span>
+                <span class="reg-street">Purdue</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">3&ndash;4</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="023" data-name="Purdue Point" data-street="Purdue" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="" data-bedsmax="" data-rent="" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/edited%201515%20purdue%20ave%20street.jpeg">
+              <a class="reg-a" href="buildings/023-purdue-point.html">
+                <span class="reg-no num">023</span>
+                <span class="reg-name">Purdue Point</span>
+                <span class="reg-street">Purdue</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds">&mdash;</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="024" data-name="Santa Monica Breeze" data-street="Purdue" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="1" data-bedsmax="3" data-rent="3795" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/smb%20-%20unit%20412%20-%20kitchen,%20lr,%20and%20patio_final.jpg">
+              <a class="reg-a" href="buildings/024-santa-monica-breeze.html">
+                <span class="reg-no num">024</span>
+                <span class="reg-name">Santa Monica Breeze</span>
+                <span class="reg-street">Purdue</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="025" data-name="Century City Icon" data-street="Santa Monica" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="0" data-bedsmax="2" data-rent="3445" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/10473%20santa%20monica%20bl%20unit%20305-%20dining%20and%20living%20room(2).jpg">
+              <a class="reg-a" href="buildings/025-century-city-icon.html">
+                <span class="reg-no num">025</span>
+                <span class="reg-name">Century City Icon</span>
+                <span class="reg-street">Santa Monica</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="026" data-name="Selby Venti" data-street="Selby" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="4" data-bedsmax="5" data-rent="5995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/selby%20venti%20-%20unit%20402%20-%20kitchen_%20countertop%20bar_final.jpg">
+              <a class="reg-a" href="buildings/026-selby-venti.html">
+                <span class="reg-no num">026</span>
+                <span class="reg-name">Selby Venti</span>
+                <span class="reg-street">Selby</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">4&ndash;5</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="027" data-name="West Idaho" data-street="Westgate" data-area="west-la" data-arealabel="West Los Angeles" data-bedsmin="1" data-bedsmax="3" data-rent="4495" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/west%20idaho%20-%20dining%20and%20livnf%20room%20patio_final.jpg">
+              <a class="reg-a" href="buildings/027-west-idaho.html">
+                <span class="reg-no num">027</span>
+                <span class="reg-name">West Idaho</span>
+                <span class="reg-street">Westgate</span>
+                <span class="reg-area">West Los Angeles</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+              </div>
+            </section>
+            <section class="reg-group" data-group="brentwood" aria-labelledby="g-brentwood">
+              <h3 class="reg-head" id="g-brentwood"><span data-grouplabel>Brentwood</span> <span class="tnum reg-gcount">13</span></h3>
+              <div class="reg-rows reg-g-lg" data-rows>
+            <div class="reg-row" data-row data-no="028" data-name="605 Barrington" data-street="Barrington" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="1" data-bedsmax="2" data-rent="3195" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/605%20s%20barrington%20ave%20unit%2017%20-%20kitchen_.jpg">
+              <a class="reg-a" href="buildings/028-605-barrington.html">
+                <span class="reg-no num">028</span>
+                <span class="reg-name">605 Barrington</span>
+                <span class="reg-street">Barrington</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds"><span class="num">1&ndash;2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="029" data-name="Darlington Home" data-street="Darlington" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="1" data-bedsmax="2" data-rent="3495" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/darlington%20home%20-%20unit%204%20-%20kitchen,%20dining,%20and%20living%20room%20_final.jpg">
+              <a class="reg-a" href="buildings/029-darlington-home.html">
+                <span class="reg-no num">029</span>
+                <span class="reg-name">Darlington Home</span>
+                <span class="reg-street">Darlington</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds"><span class="num">1&ndash;2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="030" data-name="Darlington Legacy" data-street="Darlington" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="2" data-bedsmax="3" data-rent="4995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/unit%20501%20-%20kitchen,%20patio,%20and%20dining_final.jpg">
+              <a class="reg-a" href="buildings/030-darlington-legacy.html">
+                <span class="reg-no num">030</span>
+                <span class="reg-name">Darlington Legacy</span>
+                <span class="reg-street">Darlington</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds"><span class="num">2&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="031" data-name="Gorham Fourteen" data-street="Gorham" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="1" data-bedsmax="2" data-rent="2595" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/gorham%20fourteen%20-%20unit%207%20-%20kitchen_final(1).jpg">
+              <a class="reg-a" href="buildings/031-gorham-fourteen.html">
+                <span class="reg-no num">031</span>
+                <span class="reg-name">Gorham Fourteen</span>
+                <span class="reg-street">Gorham</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds"><span class="num">1&ndash;2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="032" data-name="Goshen Bundy" data-street="Goshen" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="1" data-bedsmax="2" data-rent="2895" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/goshen%20bundy%20-%20%20unit%208%20-%20kitchen,%20dining,%20and%20patio_final.jpg">
+              <a class="reg-a" href="buildings/032-goshen-bundy.html">
+                <span class="reg-no num">032</span>
+                <span class="reg-name">Goshen Bundy</span>
+                <span class="reg-street">Goshen</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds"><span class="num">1&ndash;2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="033" data-name="Goshen Eighteen" data-street="Goshen" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="0" data-bedsmax="3" data-rent="1805" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/goshen%20eighteen%20-%20unit%209%20-%20kitchen%20_final.jpg">
+              <a class="reg-a" href="buildings/033-goshen-eighteen.html">
+                <span class="reg-no num">033</span>
+                <span class="reg-name">Goshen Eighteen</span>
+                <span class="reg-street">Goshen</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="034" data-name="Granville Elegance" data-street="Granville" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="0" data-bedsmax="1" data-rent="2695" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/granville%20elegance%20-%20unit%209%20-%20kitchen_final.jpg">
+              <a class="reg-a" href="buildings/034-granville-elegance.html">
+                <span class="reg-no num">034</span>
+                <span class="reg-name">Granville Elegance</span>
+                <span class="reg-street">Granville</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">1</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="035" data-name="Gretna Green Harlow" data-street="Gretna Green" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="1" data-bedsmax="3" data-rent="" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/809%20gretna%20green%20way%20unit%20102-%20kitchen%20and%20rug%20_final.jpg">
+              <a class="reg-a" href="buildings/035-gretna-green-harlow.html">
+                <span class="reg-no num">035</span>
+                <span class="reg-name">Gretna Green Harlow</span>
+                <span class="reg-street">Gretna Green</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="036" data-name="Gretna Green Tinos" data-street="Gretna Green" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="1" data-bedsmax="2" data-rent="3995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/gretna%20green%20tinos%20-%20unit%20202%20-%20kitchen%20and%20lr%20curtains%20etc_final(1).jpg">
+              <a class="reg-a" href="buildings/036-gretna-green-tinos.html">
+                <span class="reg-no num">036</span>
+                <span class="reg-name">Gretna Green Tinos</span>
+                <span class="reg-street">Gretna Green</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds"><span class="num">1&ndash;2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="037" data-name="Kiowa Grand" data-street="Kiowa" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="0" data-bedsmax="2" data-rent="3450" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/11978%20kiowa%20ave%20unit%20202%20-%20living%20and%20dining%20room.jpg">
+              <a class="reg-a" href="buildings/037-kiowa-grand.html">
+                <span class="reg-no num">037</span>
+                <span class="reg-name">Kiowa Grand</span>
+                <span class="reg-street">Kiowa</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="038" data-name="Kiowa Hollow" data-street="Kiowa" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="0" data-bedsmax="2" data-rent="2205" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/kiowa%20hollow%20-%20unit%209%20-%20kitchen_final.jpg">
+              <a class="reg-a" href="buildings/038-kiowa-hollow.html">
+                <span class="reg-no num">038</span>
+                <span class="reg-name">Kiowa Hollow</span>
+                <span class="reg-street">Kiowa</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="039" data-name="Mayfield Hall" data-street="Mayfield" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="1" data-bedsmax="2" data-rent="4295" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/mayfield%20hall%20-%20unit%209%20dining%20room_%20lving%20room_%20and%20patio_final.jpg">
+              <a class="reg-a" href="buildings/039-mayfield-hall.html">
+                <span class="reg-no num">039</span>
+                <span class="reg-name">Mayfield Hall</span>
+                <span class="reg-street">Mayfield</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds"><span class="num">1&ndash;2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="040" data-name="Montana View" data-street="Montana" data-area="brentwood" data-arealabel="Brentwood" data-bedsmin="1" data-bedsmax="3" data-rent="4195" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/montana%20view%20unit%208%20-%20kitchen%20and%20dining%20room%20_final.jpg">
+              <a class="reg-a" href="buildings/040-montana-view.html">
+                <span class="reg-no num">040</span>
+                <span class="reg-name">Montana View</span>
+                <span class="reg-street">Montana</span>
+                <span class="reg-area">Brentwood</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+              </div>
+            </section>
+            <section class="reg-group" data-group="beverly-grove" aria-labelledby="g-beverly-grove">
+              <h3 class="reg-head" id="g-beverly-grove"><span data-grouplabel>Beverly Grove</span> <span class="tnum reg-gcount">14</span></h3>
+              <div class="reg-rows reg-g-lg" data-rows>
+            <div class="reg-row" data-row data-no="041" data-name="Blackburn Beverly" data-street="Blackburn" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="0" data-bedsmax="2" data-rent="3995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/8403%20blackburn%20ave%20unit%20209-%20bedroom%20and%20living%20room%20area%20_final(2).jpg">
+              <a class="reg-a" href="buildings/041-blackburn-beverly.html">
+                <span class="reg-no num">041</span>
+                <span class="reg-name">Blackburn Beverly</span>
+                <span class="reg-street">Blackburn</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="042" data-name="Blackburn La Cienega" data-street="Blackburn" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="0" data-bedsmax="5" data-rent="3295" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/blackburn%20-%20kitchen,%20island,%20dining,%20living%20room,%20patio_final.jpg">
+              <a class="reg-a" href="buildings/042-blackburn-la-cienega.html">
+                <span class="reg-no num">042</span>
+                <span class="reg-name">Blackburn La Cienega</span>
+                <span class="reg-street">Blackburn</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">5</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="043" data-name="Croft Eleven" data-street="Croft" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="1" data-bedsmax="2" data-rent="" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/croft%20eleven%20-%20lrand%20curtains_final.jpg">
+              <a class="reg-a" href="buildings/043-croft-eleven.html">
+                <span class="reg-no num">043</span>
+                <span class="reg-name">Croft Eleven</span>
+                <span class="reg-street">Croft</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds"><span class="num">1&ndash;2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="044" data-name="Croft Retreat" data-street="Croft" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="0" data-bedsmax="4" data-rent="4495" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/croft%20retreat%20-%20%20unit%20103%20-%20kitchen,%20dining,%20lr,%20and%20patio_final.jpg">
+              <a class="reg-a" href="buildings/044-croft-retreat.html">
+                <span class="reg-no num">044</span>
+                <span class="reg-name">Croft Retreat</span>
+                <span class="reg-street">Croft</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">4</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="045" data-name="Hayworth Abbey" data-street="Hayworth" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="0" data-bedsmax="4" data-rent="1700" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/hayworth%20abbey%20-%20patio_final.jpg">
+              <a class="reg-a" href="buildings/045-hayworth-abbey.html">
+                <span class="reg-no num">045</span>
+                <span class="reg-name">Hayworth Abbey</span>
+                <span class="reg-street">Hayworth</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">4</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="046" data-name="Hayworth Hyde" data-street="Hayworth" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="2" data-bedsmax="3" data-rent="4495" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/409%20n%20hayworth%20ave%20unit%20102-26.jpg">
+              <a class="reg-a" href="buildings/046-hayworth-hyde.html">
+                <span class="reg-no num">046</span>
+                <span class="reg-name">Hayworth Hyde</span>
+                <span class="reg-street">Hayworth</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds"><span class="num">2&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="047" data-name="Hi Point Terrace" data-street="Hi Point" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="0" data-bedsmax="3" data-rent="2995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/hi%20point%20-%20orion%20-%20patio,%20kitchen,%20dining,%20and%20living%20room%20_final(1).jpg">
+              <a class="reg-a" href="buildings/047-hi-point-terrace.html">
+                <span class="reg-no num">047</span>
+                <span class="reg-name">Hi Point Terrace</span>
+                <span class="reg-street">Hi Point</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="048" data-name="Kings on Third" data-street="Kings" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="2" data-bedsmax="3" data-rent="4795" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/129%20kings%20rd%20unit%20203%20-%20kitchen%20and%20living%20room_final(1).jpg">
+              <a class="reg-a" href="buildings/048-kings-on-third.html">
+                <span class="reg-no num">048</span>
+                <span class="reg-name">Kings on Third</span>
+                <span class="reg-street">Kings</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds"><span class="num">2&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="049" data-name="Rimini" data-street="Kings" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="2" data-bedsmax="3" data-rent="5395" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/rimini%20-%20kitchen%20(1).jpg">
+              <a class="reg-a" href="buildings/049-rimini.html">
+                <span class="reg-no num">049</span>
+                <span class="reg-name">Rimini</span>
+                <span class="reg-street">Kings</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds"><span class="num">2&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="050" data-name="Ogden Garden" data-street="Ogden" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="0" data-bedsmax="2" data-rent="2595" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/ogden%20garden%20-%20pear%20-%20kitchen%20and%20dining_final.jpg">
+              <a class="reg-a" href="buildings/050-ogden-garden.html">
+                <span class="reg-no num">050</span>
+                <span class="reg-name">Ogden Garden</span>
+                <span class="reg-street">Ogden</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="051" data-name="Orlando on First" data-street="Orlando" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="3" data-bedsmax="3" data-rent="4595" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/orlando%20on%20first%20-%20unit%20ph3%20-%20lving%20rooma%20nd%20patio_final.jpg">
+              <a class="reg-a" href="buildings/051-orlando-on-first.html">
+                <span class="reg-no num">051</span>
+                <span class="reg-name">Orlando on First</span>
+                <span class="reg-street">Orlando</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds"><span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="052" data-name="Orlando on Third" data-street="Orlando" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="2" data-bedsmax="3" data-rent="4595" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/orlando%20on%20third%20-%20unit%20ph1%20-%20kitchen%20and%20rugs_final.jpg">
+              <a class="reg-a" href="buildings/052-orlando-on-third.html">
+                <span class="reg-no num">052</span>
+                <span class="reg-name">Orlando on Third</span>
+                <span class="reg-street">Orlando</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds"><span class="num">2&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="053" data-name="Sherbourne Hall" data-street="Sherbourne" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="2" data-bedsmax="3" data-rent="3995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/sherbourne%20hall%20-%20living%20room,%20dining%20room,%20and%20patio.jpg">
+              <a class="reg-a" href="buildings/053-sherbourne-hall.html">
+                <span class="reg-no num">053</span>
+                <span class="reg-name">Sherbourne Hall</span>
+                <span class="reg-street">Sherbourne</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds"><span class="num">2&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="054" data-name="Sweetzer on Third" data-street="Sweetzer" data-area="beverly-grove" data-arealabel="Beverly Grove" data-bedsmin="2" data-bedsmax="3" data-rent="4595" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/sweetzer%20-%20unit%20105%20-%20kitchen%20and%20countertop%20bar.jpg">
+              <a class="reg-a" href="buildings/054-sweetzer-on-third.html">
+                <span class="reg-no num">054</span>
+                <span class="reg-name">Sweetzer on Third</span>
+                <span class="reg-street">Sweetzer</span>
+                <span class="reg-area">Beverly Grove</span>
+                <span class="reg-beds"><span class="num">2&ndash;3</span> bed</span>
+              </a>
+            </div>
+              </div>
+            </section>
+            <section class="reg-group" data-group="hollywood" aria-labelledby="g-hollywood">
+              <h3 class="reg-head" id="g-hollywood"><span data-grouplabel>Hollywood</span> <span class="tnum reg-gcount">13</span></h3>
+              <div class="reg-rows reg-g-lg" data-rows>
+            <div class="reg-row" data-row data-no="055" data-name="Alfred Atlas" data-street="Alfred" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="1" data-bedsmax="2" data-rent="3995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/alfred%20atlas%20-%20kitchen%20picture.jpg">
+              <a class="reg-a" href="buildings/055-alfred-atlas.html">
+                <span class="reg-no num">055</span>
+                <span class="reg-name">Alfred Atlas</span>
+                <span class="reg-street">Alfred</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds"><span class="num">1&ndash;2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="056" data-name="Cole Grove" data-street="Cole" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="2" data-bedsmax="3" data-rent="3322" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/cole%20grove%20-%20kitchen%20and%20countertop%20bar.jpg">
+              <a class="reg-a" href="buildings/056-cole-grove.html">
+                <span class="reg-no num">056</span>
+                <span class="reg-name">Cole Grove</span>
+                <span class="reg-street">Cole</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds"><span class="num">2&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="057" data-name="Sunset Rise" data-street="Detroit" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="0" data-bedsmax="3" data-rent="" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/sunset%20%20rise%20-%20unit%20401%20-%20dining,%20lr,%20and%20patio_final.jpg">
+              <a class="reg-a" href="buildings/057-sunset-rise.html">
+                <span class="reg-no num">057</span>
+                <span class="reg-name">Sunset Rise</span>
+                <span class="reg-street">Detroit</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="058" data-name="Edinburgh Courtyard" data-street="Edinburgh" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="2" data-bedsmax="4" data-rent="3695" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/edinburgh%20-%20kitchen%20_final.jpg">
+              <a class="reg-a" href="buildings/058-edinburgh-courtyard.html">
+                <span class="reg-no num">058</span>
+                <span class="reg-name">Edinburgh Courtyard</span>
+                <span class="reg-street">Edinburgh</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds"><span class="num">2&ndash;4</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="059" data-name="Formosa Fountain" data-street="Formosa" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="0" data-bedsmax="3" data-rent="4495" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/3/1086901/1338formosa-218.jpg">
+              <a class="reg-a" href="buildings/059-formosa-fountain.html">
+                <span class="reg-no num">059</span>
+                <span class="reg-name">Formosa Fountain</span>
+                <span class="reg-street">Formosa</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="060" data-name="Gramercy Park" data-street="Gramercy" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="0" data-bedsmax="3" data-rent="2495" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/gramercy%20-%20kitchen,%20dining,%20living%20room.jpg">
+              <a class="reg-a" href="buildings/060-gramercy-park.html">
+                <span class="reg-no num">060</span>
+                <span class="reg-name">Gramercy Park</span>
+                <span class="reg-street">Gramercy</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="061" data-name="Hawthorn at Poinsettia" data-street="Hawthorn" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="1" data-bedsmax="3" data-rent="4095" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/7260%20hawthorn%20-%20kitchen_%20dining_%20and%20living%20room_final-2(3).jpg">
+              <a class="reg-a" href="buildings/061-hawthorn-at-poinsettia.html">
+                <span class="reg-no num">061</span>
+                <span class="reg-name">Hawthorn at Poinsettia</span>
+                <span class="reg-street">Hawthorn</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="062" data-name="Hudson Lux" data-street="Hudson" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="2" data-bedsmax="4" data-rent="2695" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/hudson%20lux%20unit%20103%20-%20lr_%20dining_%20kitchen_%20and%20patio_final.jpg">
+              <a class="reg-a" href="buildings/062-hudson-lux.html">
+                <span class="reg-no num">062</span>
+                <span class="reg-name">Hudson Lux</span>
+                <span class="reg-street">Hudson</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds"><span class="num">2&ndash;4</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="063" data-name="Martel Flats" data-street="Martel" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="0" data-bedsmax="3" data-rent="3895" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/martel%20flats%20-%20unit%20304-%20dining%20and%20kitchen.jpg">
+              <a class="reg-a" href="buildings/063-martel-flats.html">
+                <span class="reg-no num">063</span>
+                <span class="reg-name">Martel Flats</span>
+                <span class="reg-street">Martel</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="064" data-name="Poinsettia Sunset" data-street="Poinsettia" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="3" data-bedsmax="3" data-rent="3995" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/poinsettia%20-%20unit%20307%20-%20kitchen_%20countertop%20bar_%20dining_%20lr_%20patio_final.jpg">
+              <a class="reg-a" href="buildings/064-poinsettia-sunset.html">
+                <span class="reg-no num">064</span>
+                <span class="reg-name">Poinsettia Sunset</span>
+                <span class="reg-street">Poinsettia</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds"><span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="065" data-name="Waring Hudson" data-street="Waring" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="0" data-bedsmax="3" data-rent="4095" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/waring%20hudson%20-%20kitchen,%20dining,%20and%20storage%20closet.jpg">
+              <a class="reg-a" href="buildings/065-waring-hudson.html">
+                <span class="reg-no num">065</span>
+                <span class="reg-name">Waring Hudson</span>
+                <span class="reg-street">Waring</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="066" data-name="Wilcox Bea" data-street="Wilcox" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="2" data-bedsmax="3" data-rent="4100" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/850%20wilcox%20ave%20exteriors-1.jpg">
+              <a class="reg-a" href="buildings/066-wilcox-bea.html">
+                <span class="reg-no num">066</span>
+                <span class="reg-name">Wilcox Bea</span>
+                <span class="reg-street">Wilcox</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds"><span class="num">2&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="067" data-name="Wilcox Melrose" data-street="Wilcox" data-area="hollywood" data-arealabel="Hollywood" data-bedsmin="3" data-bedsmax="3" data-rent="3895" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/wilcox%20melrose%20-%20kitchen%20and%20rugs_final.jpg">
+              <a class="reg-a" href="buildings/067-wilcox-melrose.html">
+                <span class="reg-no num">067</span>
+                <span class="reg-name">Wilcox Melrose</span>
+                <span class="reg-street">Wilcox</span>
+                <span class="reg-area">Hollywood</span>
+                <span class="reg-beds"><span class="num">3</span> bed</span>
+              </a>
+            </div>
+              </div>
+            </section>
+            <section class="reg-group" data-group="venice" aria-labelledby="g-venice">
+              <h3 class="reg-head" id="g-venice"><span data-grouplabel>Venice</span> <span class="tnum reg-gcount">2</span></h3>
+              <div class="reg-rows reg-g-sm" data-rows>
+            <div class="reg-row" data-row data-no="068" data-name="Penmar Superba" data-street="Penmar" data-area="venice" data-arealabel="Venice" data-bedsmin="0" data-bedsmax="2" data-rent="3595" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/penmar%20superba%20-%20unit%2013%20-%20kitchen%202_final.jpg">
+              <a class="reg-a" href="buildings/068-penmar-superba.html">
+                <span class="reg-no num">068</span>
+                <span class="reg-name">Penmar Superba</span>
+                <span class="reg-street">Penmar</span>
+                <span class="reg-area">Venice</span>
+                <span class="reg-beds">Studio&ndash;<span class="num">2</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="069" data-name="Venice Wave" data-street="Venice" data-area="venice" data-arealabel="Venice" data-bedsmin="1" data-bedsmax="2" data-rent="3045" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/venice%20wave%20unit%20405%20-%20kitchen%20and%20small%20island%20with%20stools_final(1).jpg">
+              <a class="reg-a" href="buildings/069-venice-wave.html">
+                <span class="reg-no num">069</span>
+                <span class="reg-name">Venice Wave</span>
+                <span class="reg-street">Venice</span>
+                <span class="reg-area">Venice</span>
+                <span class="reg-beds"><span class="num">1&ndash;2</span> bed</span>
+              </a>
+            </div>
+              </div>
+            </section>
+            <section class="reg-group" data-group="palms" aria-labelledby="g-palms">
+              <h3 class="reg-head" id="g-palms"><span data-grouplabel>Palms · Motor Avenue</span> <span class="tnum reg-gcount">2</span></h3>
+              <div class="reg-rows reg-g-sm" data-rows>
+            <div class="reg-row" data-row data-no="070" data-name="Motor Midway" data-street="Motor" data-area="palms" data-arealabel="Palms" data-bedsmin="1" data-bedsmax="3" data-rent="3395" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/motor%20midway%20-%20unit%20704%20-%20kitchen_%20dining_%20lr_%20and%20patio_final.jpg">
+              <a class="reg-a" href="buildings/070-motor-midway.html">
+                <span class="reg-no num">070</span>
+                <span class="reg-name">Motor Midway</span>
+                <span class="reg-street">Motor</span>
+                <span class="reg-area">Palms</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+            <div class="reg-row" data-row data-no="071" data-name="Motor Tides" data-street="Motor" data-area="palms" data-arealabel="Palms" data-bedsmin="1" data-bedsmax="4" data-rent="" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/motor%20tides%20-%20unit%20705%20-%20kithcenm%20small%20dining_%20lr_%20and%20patio_final%20(1).jpg">
+              <a class="reg-a" href="buildings/071-motor-tides.html">
+                <span class="reg-no num">071</span>
+                <span class="reg-name">Motor Tides</span>
+                <span class="reg-street">Motor</span>
+                <span class="reg-area">Palms</span>
+                <span class="reg-beds"><span class="num">1&ndash;4</span> bed</span>
+              </a>
+            </div>
+              </div>
+            </section>
+            <section class="reg-group" data-group="glendale" aria-labelledby="g-glendale">
+              <h3 class="reg-head" id="g-glendale"><span data-grouplabel>Glendale</span> <span class="tnum reg-gcount">1</span></h3>
+              <div class="reg-rows reg-g-sm" data-rows>
+            <div class="reg-row" data-row data-no="072" data-name="Broadway Glendale" data-street="Broadway" data-area="glendale" data-arealabel="Glendale" data-bedsmin="1" data-bedsmax="3" data-rent="3450" data-img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/broadway%20-%20kitchen,%20rug,%20art_final.jpg">
+              <a class="reg-a" href="buildings/072-broadway-glendale.html">
+                <span class="reg-no num">072</span>
+                <span class="reg-name">Broadway Glendale</span>
+                <span class="reg-street">Broadway</span>
+                <span class="reg-area">Glendale</span>
+                <span class="reg-beds"><span class="num">1&ndash;3</span> bed</span>
+              </a>
+            </div>
+              </div>
+            </section>
+          </div>
+
+          <div class="reg-side">
+            <aside class="plate" data-plate data-cur="001" aria-hidden="true">
+              <figure class="plate-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/1331%20amherst%20ave%20exteriors%20-22.jpg" alt="Amherst Rochester" width="560" height="700" loading="lazy" decoding="async"></figure>
+              <div class="plate-meta">
+                <span class="plate-no num" data-plateno>001</span>
+                <span class="plate-name" data-platename>Amherst Rochester</span>
+                <span class="plate-street" data-platestreet>Amherst &middot; West Los Angeles</span>
+                <span class="plate-hint">The plate follows the list</span>
+              </div>
+            </aside>
+            <div class="reg-map">
+              <div class="wr-map map-full" data-map data-labels="hover" data-label="Map of all 72 Wiseman buildings in Los Angeles"></div>
+              <p class="note">Zoomed out the map counts by neighborhood; zoomed in every pin carries its building number. Hovering a pin lights that building&rsquo;s row, and hovering a row lights its pin. The register is complete with the map switched off.</p>
+              <h3 class="reg-head"><span>By neighborhood</span> <span class="tnum">72</span></h3>
+              <ul class="atlas-list">
+              <li><a href="neighborhoods/west-la.html"><span class="ak-n num">27</span><span class="ak-name">West Los Angeles</span><span class="ak-sub">Sawtelle · Santa Monica Blvd · Westgate</span></a></li>
+              <li><a href="neighborhoods/brentwood.html"><span class="ak-n num">13</span><span class="ak-name">Brentwood</span><span class="ak-sub">San Vicente · Barrington · Montana</span></a></li>
+              <li><a href="neighborhoods/beverly-grove.html"><span class="ak-n num">14</span><span class="ak-name">Beverly Grove</span><span class="ak-sub">Third Street · Beverly Center · Miracle Mile</span></a></li>
+              <li><a href="neighborhoods/hollywood.html"><span class="ak-n num">13</span><span class="ak-name">Hollywood</span><span class="ak-sub">Melrose · Fairfax · Larchmont</span></a></li>
+              <li><a href="neighborhoods/venice.html"><span class="ak-n num">2</span><span class="ak-name">Venice</span><span class="ak-sub">Abbot Kinney · Penmar · Rose</span></a></li>
+              <li><a href="neighborhoods/palms.html"><span class="ak-n num">2</span><span class="ak-name">Palms · Motor Avenue</span><span class="ak-sub">Motor Avenue · minutes from Culver City</span></a></li>
+              <li><a href="neighborhoods/glendale.html"><span class="ak-n num">1</span><span class="ak-name">Glendale</span><span class="ak-sub">Brand Boulevard</span></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <p class="note mt-s">Rent sorts on the lowest rent a building lists. Prices themselves live on the <a class="lnk" href="search.html">search page</a> and in the live leasing system.</p>
+      </div>
+
+      <div class="view view-plates" id="view-plates">
+        <h2 class="vh">The plates</h2>
+        <div class="plates">
+          <section class="pgrp" aria-labelledby="p-west-la">
+            <h3 class="reg-head" id="p-west-la"><span>West Los Angeles</span> <span class="tnum">27</span></h3>
+            <div class="spec-grid mt-s">
+              <article class="spec">
+                <a href="buildings/001-amherst-rochester.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/1331%20amherst%20ave%20exteriors%20-22.jpg" alt="Amherst Rochester, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">001</p>
+                  <h4 class="spec-name">Amherst Rochester</h4>
+                  <p class="spec-meta"><span><span class="num">3&ndash;4</span> bed</span><span>Amherst</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/002-armacost-bella.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/1439%20armacost%20ave%20unit%20306%20-%20kitchen%20_%20dining_final.jpg" alt="Armacost Bella, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">002</p>
+                  <h4 class="spec-name">Armacost Bella</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">4</span> bed</span><span>Armacost</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/003-armacost-manor.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/armacost%20manor%20-%20unit%20304-%20dining%20and%20living%20room%20patio_final.jpg" alt="Armacost Manor, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">003</p>
+                  <h4 class="spec-name">Armacost Manor</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Armacost</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/004-barrington-santa-monica.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/barrington%20-%20unit%20111-%20living%20room%20patio_final.jpg" alt="Barrington Santa Monica, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">004</p>
+                  <h4 class="spec-name">Barrington Santa Monica</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">2</span> bed</span><span>Barrington</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/005-beloit-at-ohio.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/beloit%20at%20ohio%20unit%20116%20-%20kitchen%20and%20countertop%20bar_final.jpg" alt="Beloit at Ohio, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">005</p>
+                  <h4 class="spec-name">Beloit at Ohio</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;4</span> bed</span><span>Beloit</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/006-bentley-woodland.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/bentley%20woodland%20-%20bedroom%20and%20in-suite%20washer%20and%20dryer.jpg" alt="Bentley Woodland, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">006</p>
+                  <h4 class="spec-name">Bentley Woodland</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">3</span> bed</span><span>Bentley</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/007-brockton-manor.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/1301%20brockton%20-%20kitchen(2).jpg" alt="Brockton Manor, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">007</p>
+                  <h4 class="spec-name">Brockton Manor</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">5</span> bed</span><span>Brockton</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/008-brockton-townhomes.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/brockton%20townhomes%20-%20kitchen,%20bar,%20dining,%20living%20room%20curtains_final.jpg" alt="Brockton Townhomes, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">008</p>
+                  <h4 class="spec-name">Brockton Townhomes</h4>
+                  <p class="spec-meta"><span><span class="num">3&ndash;4</span> bed</span><span>Brockton</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/009-butler-cabana.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/butler%20cabana%20-%20dining%20room,%20bar,%20curtaisn,%20kitchen%20and%20rugs.jpg" alt="Butler Cabana, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">009</p>
+                  <h4 class="spec-name">Butler Cabana</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">3</span> bed</span><span>Butler</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/010-butler-eighteen.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/butler%20eighteen%20-%20lr,%20dining,%20and%20kitchen.jpg" alt="Butler Eighteen, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">010</p>
+                  <h4 class="spec-name">Butler Eighteen</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">2</span> bed</span><span>Butler</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/011-colby-at-ohio.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/colby%20at%20ohio%20-%20unit%20108%20-%20kitchen,%20dinign,%20alr,%20and%20patio_final.jpg" alt="Colby at Ohio, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">011</p>
+                  <h4 class="spec-name">Colby at Ohio</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;4</span> bed</span><span>Colby</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/012-colby-missouri.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/colby%20missouri%20-%20ph6%20-%20kitchen,%20living%20room,%20patio,%20shelving,%20curtains_final.jpg" alt="Colby Missouri, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">012</p>
+                  <h4 class="spec-name">Colby Missouri</h4>
+                  <p class="spec-meta"><span><span class="num">3</span> bed</span><span>Colby</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/013-colby-townhomes.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/photo%20oct%2018,%203%2048%2030%20pm.jpg" alt="Colby Townhomes, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">013</p>
+                  <h4 class="spec-name">Colby Townhomes</h4>
+                  <p class="spec-meta"><span><span class="num">4&ndash;5</span> bed</span><span>Colby</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/014-colby-west.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/colby%20west%20-%20remove%20cars%20and%20lower%20sign.jpg" alt="Colby West, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">014</p>
+                  <h4 class="spec-name">Colby West</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Colby</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/015-santa-monica-federal.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/santa%20monica%20federal%20-%20unit%20402%20-%20kitchen%20_final.jpg" alt="Santa Monica Federal, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">015</p>
+                  <h4 class="spec-name">Santa Monica Federal</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">3</span> bed</span><span>Federal</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/016-fox-hills-dr.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/fox%20hills%20dr%20-%20kitchen%20lr%20patio.jpg" alt="Fox Hills Dr, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">016</p>
+                  <h4 class="spec-name">Fox Hills Dr</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Fox Hills</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/017-kelton-madera.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/kelton%20madera%20-%20dining%20kitchen%20and%20shelves_final.jpg" alt="Kelton Madera, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">017</p>
+                  <h4 class="spec-name">Kelton Madera</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;4</span> bed</span><span>Kelton</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/018-louisiana-glen.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/louisiana%20glen%20-%20unit%20405%20-%20kitchen_final(1).jpg" alt="Louisiana Glen, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">018</p>
+                  <h4 class="spec-name">Louisiana Glen</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;5</span> bed</span><span>Louisiana</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/019-mcclellan-corner.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/mcclellan%20corner%20-%20lr,%20dining,%20kitchen.jpg" alt="McClellan Corner, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">019</p>
+                  <h4 class="spec-name">McClellan Corner</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;2</span> bed</span><span>McClellan</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/020-ohio-sawtelle.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/ohio%20sawtelle%20-%20dining%20-%20blue%20accents.jpg" alt="Ohio Sawtelle, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">020</p>
+                  <h4 class="spec-name">Ohio Sawtelle</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Ohio</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/021-overland-century.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/overland%20century%20-%20kitchen.jpg" alt="Overland Century, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">021</p>
+                  <h4 class="spec-name">Overland Century</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Overland</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/022-purdue-ohio.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/purdue%20ohio%20-%20kitchen,%20dining,%20living%20room,%20patio%20curtains.jpg" alt="Purdue Ohio, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">022</p>
+                  <h4 class="spec-name">Purdue Ohio</h4>
+                  <p class="spec-meta"><span><span class="num">3&ndash;4</span> bed</span><span>Purdue</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/023-purdue-point.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/edited%201515%20purdue%20ave%20street.jpeg" alt="Purdue Point, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">023</p>
+                  <h4 class="spec-name">Purdue Point</h4>
+                  <p class="spec-meta"><span>&mdash;</span><span>Purdue</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/024-santa-monica-breeze.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/smb%20-%20unit%20412%20-%20kitchen,%20lr,%20and%20patio_final.jpg" alt="Santa Monica Breeze, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">024</p>
+                  <h4 class="spec-name">Santa Monica Breeze</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Purdue</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/025-century-city-icon.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/10473%20santa%20monica%20bl%20unit%20305-%20dining%20and%20living%20room(2).jpg" alt="Century City Icon, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">025</p>
+                  <h4 class="spec-name">Century City Icon</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">2</span> bed</span><span>Santa Monica</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/026-selby-venti.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/selby%20venti%20-%20unit%20402%20-%20kitchen_%20countertop%20bar_final.jpg" alt="Selby Venti, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">026</p>
+                  <h4 class="spec-name">Selby Venti</h4>
+                  <p class="spec-meta"><span><span class="num">4&ndash;5</span> bed</span><span>Selby</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/027-west-idaho.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/west%20idaho%20-%20dining%20and%20livnf%20room%20patio_final.jpg" alt="West Idaho, West Los Angeles" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">027</p>
+                  <h4 class="spec-name">West Idaho</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Westgate</span></p>
+                </a>
+              </article>
+            </div>
+          </section>
+          <section class="pgrp" aria-labelledby="p-brentwood">
+            <h3 class="reg-head" id="p-brentwood"><span>Brentwood</span> <span class="tnum">13</span></h3>
+            <div class="spec-grid mt-s">
+              <article class="spec">
+                <a href="buildings/028-605-barrington.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/605%20s%20barrington%20ave%20unit%2017%20-%20kitchen_.jpg" alt="605 Barrington, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">028</p>
+                  <h4 class="spec-name">605 Barrington</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;2</span> bed</span><span>Barrington</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/029-darlington-home.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/darlington%20home%20-%20unit%204%20-%20kitchen,%20dining,%20and%20living%20room%20_final.jpg" alt="Darlington Home, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">029</p>
+                  <h4 class="spec-name">Darlington Home</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;2</span> bed</span><span>Darlington</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/030-darlington-legacy.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/unit%20501%20-%20kitchen,%20patio,%20and%20dining_final.jpg" alt="Darlington Legacy, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">030</p>
+                  <h4 class="spec-name">Darlington Legacy</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;3</span> bed</span><span>Darlington</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/031-gorham-fourteen.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/gorham%20fourteen%20-%20unit%207%20-%20kitchen_final(1).jpg" alt="Gorham Fourteen, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">031</p>
+                  <h4 class="spec-name">Gorham Fourteen</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;2</span> bed</span><span>Gorham</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/032-goshen-bundy.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/goshen%20bundy%20-%20%20unit%208%20-%20kitchen,%20dining,%20and%20patio_final.jpg" alt="Goshen Bundy, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">032</p>
+                  <h4 class="spec-name">Goshen Bundy</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;2</span> bed</span><span>Goshen</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/033-goshen-eighteen.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/goshen%20eighteen%20-%20unit%209%20-%20kitchen%20_final.jpg" alt="Goshen Eighteen, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">033</p>
+                  <h4 class="spec-name">Goshen Eighteen</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">3</span> bed</span><span>Goshen</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/034-granville-elegance.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/granville%20elegance%20-%20unit%209%20-%20kitchen_final.jpg" alt="Granville Elegance, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">034</p>
+                  <h4 class="spec-name">Granville Elegance</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">1</span> bed</span><span>Granville</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/035-gretna-green-harlow.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/809%20gretna%20green%20way%20unit%20102-%20kitchen%20and%20rug%20_final.jpg" alt="Gretna Green Harlow, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">035</p>
+                  <h4 class="spec-name">Gretna Green Harlow</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Gretna Green</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/036-gretna-green-tinos.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/gretna%20green%20tinos%20-%20unit%20202%20-%20kitchen%20and%20lr%20curtains%20etc_final(1).jpg" alt="Gretna Green Tinos, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">036</p>
+                  <h4 class="spec-name">Gretna Green Tinos</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;2</span> bed</span><span>Gretna Green</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/037-kiowa-grand.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/11978%20kiowa%20ave%20unit%20202%20-%20living%20and%20dining%20room.jpg" alt="Kiowa Grand, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">037</p>
+                  <h4 class="spec-name">Kiowa Grand</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">2</span> bed</span><span>Kiowa</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/038-kiowa-hollow.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/kiowa%20hollow%20-%20unit%209%20-%20kitchen_final.jpg" alt="Kiowa Hollow, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">038</p>
+                  <h4 class="spec-name">Kiowa Hollow</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">2</span> bed</span><span>Kiowa</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/039-mayfield-hall.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/mayfield%20hall%20-%20unit%209%20dining%20room_%20lving%20room_%20and%20patio_final.jpg" alt="Mayfield Hall, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">039</p>
+                  <h4 class="spec-name">Mayfield Hall</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;2</span> bed</span><span>Mayfield</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/040-montana-view.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/montana%20view%20unit%208%20-%20kitchen%20and%20dining%20room%20_final.jpg" alt="Montana View, Brentwood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">040</p>
+                  <h4 class="spec-name">Montana View</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Montana</span></p>
+                </a>
+              </article>
+            </div>
+          </section>
+          <section class="pgrp" aria-labelledby="p-beverly-grove">
+            <h3 class="reg-head" id="p-beverly-grove"><span>Beverly Grove</span> <span class="tnum">14</span></h3>
+            <div class="spec-grid mt-s">
+              <article class="spec">
+                <a href="buildings/041-blackburn-beverly.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/8403%20blackburn%20ave%20unit%20209-%20bedroom%20and%20living%20room%20area%20_final(2).jpg" alt="Blackburn Beverly, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">041</p>
+                  <h4 class="spec-name">Blackburn Beverly</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">2</span> bed</span><span>Blackburn</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/042-blackburn-la-cienega.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/blackburn%20-%20kitchen,%20island,%20dining,%20living%20room,%20patio_final.jpg" alt="Blackburn La Cienega, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">042</p>
+                  <h4 class="spec-name">Blackburn La Cienega</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">5</span> bed</span><span>Blackburn</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/043-croft-eleven.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/croft%20eleven%20-%20lrand%20curtains_final.jpg" alt="Croft Eleven, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">043</p>
+                  <h4 class="spec-name">Croft Eleven</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;2</span> bed</span><span>Croft</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/044-croft-retreat.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/croft%20retreat%20-%20%20unit%20103%20-%20kitchen,%20dining,%20lr,%20and%20patio_final.jpg" alt="Croft Retreat, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">044</p>
+                  <h4 class="spec-name">Croft Retreat</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">4</span> bed</span><span>Croft</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/045-hayworth-abbey.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/hayworth%20abbey%20-%20patio_final.jpg" alt="Hayworth Abbey, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">045</p>
+                  <h4 class="spec-name">Hayworth Abbey</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">4</span> bed</span><span>Hayworth</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/046-hayworth-hyde.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/409%20n%20hayworth%20ave%20unit%20102-26.jpg" alt="Hayworth Hyde, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">046</p>
+                  <h4 class="spec-name">Hayworth Hyde</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;3</span> bed</span><span>Hayworth</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/047-hi-point-terrace.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/hi%20point%20-%20orion%20-%20patio,%20kitchen,%20dining,%20and%20living%20room%20_final(1).jpg" alt="Hi Point Terrace, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">047</p>
+                  <h4 class="spec-name">Hi Point Terrace</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">3</span> bed</span><span>Hi Point</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/048-kings-on-third.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/129%20kings%20rd%20unit%20203%20-%20kitchen%20and%20living%20room_final(1).jpg" alt="Kings on Third, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">048</p>
+                  <h4 class="spec-name">Kings on Third</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;3</span> bed</span><span>Kings</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/049-rimini.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/rimini%20-%20kitchen%20(1).jpg" alt="Rimini, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">049</p>
+                  <h4 class="spec-name">Rimini</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;3</span> bed</span><span>Kings</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/050-ogden-garden.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/ogden%20garden%20-%20pear%20-%20kitchen%20and%20dining_final.jpg" alt="Ogden Garden, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">050</p>
+                  <h4 class="spec-name">Ogden Garden</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">2</span> bed</span><span>Ogden</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/051-orlando-on-first.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/orlando%20on%20first%20-%20unit%20ph3%20-%20lving%20rooma%20nd%20patio_final.jpg" alt="Orlando on First, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">051</p>
+                  <h4 class="spec-name">Orlando on First</h4>
+                  <p class="spec-meta"><span><span class="num">3</span> bed</span><span>Orlando</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/052-orlando-on-third.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/orlando%20on%20third%20-%20unit%20ph1%20-%20kitchen%20and%20rugs_final.jpg" alt="Orlando on Third, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">052</p>
+                  <h4 class="spec-name">Orlando on Third</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;3</span> bed</span><span>Orlando</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/053-sherbourne-hall.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/sherbourne%20hall%20-%20living%20room,%20dining%20room,%20and%20patio.jpg" alt="Sherbourne Hall, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">053</p>
+                  <h4 class="spec-name">Sherbourne Hall</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;3</span> bed</span><span>Sherbourne</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/054-sweetzer-on-third.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/sweetzer%20-%20unit%20105%20-%20kitchen%20and%20countertop%20bar.jpg" alt="Sweetzer on Third, Beverly Grove" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">054</p>
+                  <h4 class="spec-name">Sweetzer on Third</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;3</span> bed</span><span>Sweetzer</span></p>
+                </a>
+              </article>
+            </div>
+          </section>
+          <section class="pgrp" aria-labelledby="p-hollywood">
+            <h3 class="reg-head" id="p-hollywood"><span>Hollywood</span> <span class="tnum">13</span></h3>
+            <div class="spec-grid mt-s">
+              <article class="spec">
+                <a href="buildings/055-alfred-atlas.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/alfred%20atlas%20-%20kitchen%20picture.jpg" alt="Alfred Atlas, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">055</p>
+                  <h4 class="spec-name">Alfred Atlas</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;2</span> bed</span><span>Alfred</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/056-cole-grove.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/cole%20grove%20-%20kitchen%20and%20countertop%20bar.jpg" alt="Cole Grove, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">056</p>
+                  <h4 class="spec-name">Cole Grove</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;3</span> bed</span><span>Cole</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/057-sunset-rise.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/sunset%20%20rise%20-%20unit%20401%20-%20dining,%20lr,%20and%20patio_final.jpg" alt="Sunset Rise, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">057</p>
+                  <h4 class="spec-name">Sunset Rise</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">3</span> bed</span><span>Detroit</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/058-edinburgh-courtyard.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/edinburgh%20-%20kitchen%20_final.jpg" alt="Edinburgh Courtyard, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">058</p>
+                  <h4 class="spec-name">Edinburgh Courtyard</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;4</span> bed</span><span>Edinburgh</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/059-formosa-fountain.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/3/1086901/1338formosa-218.jpg" alt="Formosa Fountain, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">059</p>
+                  <h4 class="spec-name">Formosa Fountain</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">3</span> bed</span><span>Formosa</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/060-gramercy-park.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/gramercy%20-%20kitchen,%20dining,%20living%20room.jpg" alt="Gramercy Park, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">060</p>
+                  <h4 class="spec-name">Gramercy Park</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">3</span> bed</span><span>Gramercy</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/061-hawthorn-at-poinsettia.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/7260%20hawthorn%20-%20kitchen_%20dining_%20and%20living%20room_final-2(3).jpg" alt="Hawthorn at Poinsettia, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">061</p>
+                  <h4 class="spec-name">Hawthorn at Poinsettia</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Hawthorn</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/062-hudson-lux.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/hudson%20lux%20unit%20103%20-%20lr_%20dining_%20kitchen_%20and%20patio_final.jpg" alt="Hudson Lux, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">062</p>
+                  <h4 class="spec-name">Hudson Lux</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;4</span> bed</span><span>Hudson</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/063-martel-flats.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/martel%20flats%20-%20unit%20304-%20dining%20and%20kitchen.jpg" alt="Martel Flats, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">063</p>
+                  <h4 class="spec-name">Martel Flats</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">3</span> bed</span><span>Martel</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/064-poinsettia-sunset.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/poinsettia%20-%20unit%20307%20-%20kitchen_%20countertop%20bar_%20dining_%20lr_%20patio_final.jpg" alt="Poinsettia Sunset, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">064</p>
+                  <h4 class="spec-name">Poinsettia Sunset</h4>
+                  <p class="spec-meta"><span><span class="num">3</span> bed</span><span>Poinsettia</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/065-waring-hudson.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/waring%20hudson%20-%20kitchen,%20dining,%20and%20storage%20closet.jpg" alt="Waring Hudson, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">065</p>
+                  <h4 class="spec-name">Waring Hudson</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">3</span> bed</span><span>Waring</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/066-wilcox-bea.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/850%20wilcox%20ave%20exteriors-1.jpg" alt="Wilcox Bea, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">066</p>
+                  <h4 class="spec-name">Wilcox Bea</h4>
+                  <p class="spec-meta"><span><span class="num">2&ndash;3</span> bed</span><span>Wilcox</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/067-wilcox-melrose.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/wilcox%20melrose%20-%20kitchen%20and%20rugs_final.jpg" alt="Wilcox Melrose, Hollywood" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">067</p>
+                  <h4 class="spec-name">Wilcox Melrose</h4>
+                  <p class="spec-meta"><span><span class="num">3</span> bed</span><span>Wilcox</span></p>
+                </a>
+              </article>
+            </div>
+          </section>
+          <section class="pgrp" aria-labelledby="p-venice">
+            <h3 class="reg-head" id="p-venice"><span>Venice</span> <span class="tnum">2</span></h3>
+            <div class="spec-grid mt-s">
+              <article class="spec">
+                <a href="buildings/068-penmar-superba.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/penmar%20superba%20-%20unit%2013%20-%20kitchen%202_final.jpg" alt="Penmar Superba, Venice" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">068</p>
+                  <h4 class="spec-name">Penmar Superba</h4>
+                  <p class="spec-meta"><span>Studio&ndash;<span class="num">2</span> bed</span><span>Penmar</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/069-venice-wave.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/venice%20wave%20unit%20405%20-%20kitchen%20and%20small%20island%20with%20stools_final(1).jpg" alt="Venice Wave, Venice" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">069</p>
+                  <h4 class="spec-name">Venice Wave</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;2</span> bed</span><span>Venice</span></p>
+                </a>
+              </article>
+            </div>
+          </section>
+          <section class="pgrp" aria-labelledby="p-palms">
+            <h3 class="reg-head" id="p-palms"><span>Palms · Motor Avenue</span> <span class="tnum">2</span></h3>
+            <div class="spec-grid mt-s">
+              <article class="spec">
+                <a href="buildings/070-motor-midway.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/motor%20midway%20-%20unit%20704%20-%20kitchen_%20dining_%20lr_%20and%20patio_final.jpg" alt="Motor Midway, Palms" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">070</p>
+                  <h4 class="spec-name">Motor Midway</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Motor</span></p>
+                </a>
+              </article>
+              <article class="spec">
+                <a href="buildings/071-motor-tides.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/motor%20tides%20-%20unit%20705%20-%20kithcenm%20small%20dining_%20lr_%20and%20patio_final%20(1).jpg" alt="Motor Tides, Palms" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">071</p>
+                  <h4 class="spec-name">Motor Tides</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;4</span> bed</span><span>Motor</span></p>
+                </a>
+              </article>
+            </div>
+          </section>
+          <section class="pgrp" aria-labelledby="p-glendale">
+            <h3 class="reg-head" id="p-glendale"><span>Glendale</span> <span class="tnum">1</span></h3>
+            <div class="spec-grid mt-s">
+              <article class="spec">
+                <a href="buildings/072-broadway-glendale.html">
+                  <figure class="spec-fig"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_560,h_700,c_fill,g_auto/s3/2/9707/broadway%20-%20kitchen,%20rug,%20art_final.jpg" alt="Broadway Glendale, Glendale" loading="lazy" decoding="async" width="560" height="700"></figure>
+                  <p class="spec-no num">072</p>
+                  <h4 class="spec-name">Broadway Glendale</h4>
+                  <p class="spec-meta"><span><span class="num">1&ndash;3</span> bed</span><span>Broadway</span></p>
+                </a>
+              </article>
+            </div>
+          </section>
+        </div>
+      </div>
+
+        <p class="reg-more mt-l">
+          <a class="lnk" href="search.html">Search what is listed right now</a>
+          <span class="note">Availability and pricing are settled in the live leasing system, not here.</span>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="ft">
+    <div class="wrap wrap-n">
+      <div class="ft-top">
+        <div class="ft-mark">
+          <span class="wm" aria-hidden="true"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg></span>
+          <p class="ft-tag">&ldquo;Los Angeles Living, Managed Wisely.&rdquo;</p>
+          <div class="ft-contact">
+            <span>1520 Federal Ave, Los Angeles, CA 90025</span>
+            <a href="tel:+13104733000">+1 310-473-3000</a>
+          </div>
+        </div>
+        <div class="ft-map">
+          <div class="ft-col">
+            <h2 class="ft-h">Neighborhoods</h2>
+            <ul class="ft-list">
+            <li><a href="neighborhoods/west-la.html">West Los Angeles</a><span class="num">27</span></li>
+            <li><a href="neighborhoods/brentwood.html">Brentwood</a><span class="num">13</span></li>
+            <li><a href="neighborhoods/beverly-grove.html">Beverly Grove</a><span class="num">14</span></li>
+            <li><a href="neighborhoods/hollywood.html">Hollywood</a><span class="num">13</span></li>
+            <li><a href="neighborhoods/venice.html">Venice</a><span class="num">2</span></li>
+            <li><a href="neighborhoods/palms.html">Palms · Motor Avenue</a><span class="num">2</span></li>
+            <li><a href="neighborhoods/glendale.html">Glendale</a><span class="num">1</span></li>
+            </ul>
+          </div>
+          <div class="ft-col">
+            <h2 class="ft-h">Buildings</h2>
+            <ul class="ft-list">
+              <li><a href="search.html">Find a home</a><span class="num">72</span></li>
+              <li><a href="buildings.html">The register</a><span class="num">72</span></li>
+              <li><a href="buildings.html?sort=beds">Four bedrooms and up</a><span class="num">17</span></li>
+              <li><a href="neighborhoods.html">All neighborhoods</a></li>
+            </ul>
+          </div>
+          <div class="ft-col">
+            <h2 class="ft-h">Residents</h2>
+            <ul class="ft-list">
+              <li><a href="residents.html">Residents</a></li>
+              <li><a href="residents.html#maintenance">Maintenance</a></li>
+              <li><a href="residents.html#deposits">Deposits</a></li>
+              <li><a href="residents.html#moving-in">Moving in</a></li>
+              <li><a href="residents.html#rights">Rights and resources</a></li>
+              <li><a href="https://wisemanresidential.securecafe.com/residentservices/apartmentsforrent/userlogin.aspx" rel="noopener">Resident login</a></li>
+              <li><a href="https://wisemanresidential.securecafe.com/onlineleasing/apartmentsforrent/guestlogin.aspx" rel="noopener">Applicant login</a></li>
+            </ul>
+          </div>
+          <div class="ft-col">
+            <h2 class="ft-h">Company</h2>
+            <ul class="ft-list">
+              <li><a href="company.html">What Wiseman does</a></li>
+              <li><a href="company.html#building">What we are building</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="ft-contact">
+              <span>Leasing, weekdays</span>
+              <a href="tel:+13104733000">+1 310-473-3000</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ft-base">
+        <p class="eho">
+        <svg viewBox="0 0 12 10.608" role="img" aria-label="Equal Housing Opportunity" fill="currentColor" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.95263 1.07242L0 4.00926V5.38295H0.663158V9.51979H11.2026V5.38295H11.9921V4.00926L5.95263 1.07242ZM9.9 8.27242H1.95789V4.49874L5.95263 2.44611L9.9 4.49874V8.27242Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 5.82505H4.08947V4.49874H7.77632V5.82505Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 7.73558H4.08947V6.40926H7.77632V7.73558Z"/></svg>
+        <span>Equal Housing Opportunity</span>
+      </p>
+        <nav class="ft-soc" aria-label="Social">
+          <a href="https://www.facebook.com/Officialwisemanresidential/" rel="noopener">Facebook</a>
+          <a href="https://www.instagram.com/officialwisemanresidential" rel="noopener">Instagram</a>
+          <a href="https://www.yelp.com/biz/wiseman-residential-los-angeles-2" rel="noopener">Yelp</a>
+        </nav>
+        <span>&copy; 2026 Wiseman Residential</span>
+      </div>
+    </div>
+  </footer>
+
+<script src="../core/core.js?v=15" defer></script>
+<script src="../core/map.js?v=15" defer></script>
+<script src="app.js?v=15" defer></script>
+</body>
+</html>

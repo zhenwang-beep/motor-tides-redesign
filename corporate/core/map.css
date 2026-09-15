@@ -1,0 +1,218 @@
+/* Wiseman Residential — map skin. Tokens come from the direction's stylesheet:
+   --paper --paper-2 --ink --rule --brand and optionally --map-tint. */
+
+.wr-map {
+  position: relative;
+  width: 100%;
+  min-height: 420px;
+  background: var(--paper-2);
+  isolation: isolate;
+}
+.wr-map-loading {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-size: .78rem; letter-spacing: .16em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 46%, transparent);
+}
+
+/* Esri's Canvas greys ('light' / 'dark') are desaturated fully and tinted with the
+   page palette, so the map reads as part of the design rather than a widget. */
+.wr-map:not([data-colour="1"]) .leaflet-tile-pane {
+  filter: grayscale(1) contrast(.94) brightness(1.03);
+}
+.wr-map::after {
+  content: ""; position: absolute; inset: 0; z-index: 401; pointer-events: none;
+  background: var(--map-tint, var(--paper));
+  mix-blend-mode: multiply; opacity: .3;
+}
+.wr-map[data-theme="dark"]:not([data-colour="1"]) .leaflet-tile-pane { filter: grayscale(1) contrast(1.05) brightness(.82); }
+.wr-map[data-theme="dark"]::after { mix-blend-mode: screen; opacity: .12; }
+
+/* Colour cartography (OpenStreetMap, Esri topo / streets): keep the colour — that is
+   the point — but take the edge off so our pins and the page palette still lead.
+   A whisper of paper over it, not the wash the greys get. */
+.wr-map[data-colour="1"] .leaflet-tile-pane { filter: saturate(.8) contrast(.97) brightness(1.02); }
+.wr-map[data-colour="1"]::after { opacity: .1; }
+/* Aerial photography: no tint, and the reference overlays at full strength. */
+.wr-map[data-tiles="imagery"] .leaflet-tile-pane { filter: saturate(.92) brightness(.96); }
+.wr-map[data-tiles="imagery"]::after { display: none; }
+.wr-map[data-tiles="imagery"] .leaflet-pane[class*="wrLabels"] { opacity: .95; filter: none; }
+
+/* Esri's Reference layer labels neighbourhoods loudly from z13 up — at the zoom a
+   filtered search lands on, "WEST LOS ANGELES" was competing with our own pins.
+   Quiet it down; it is orientation, not content. */
+.wr-map .leaflet-pane[class*="wrLabels"] { opacity: .46; filter: grayscale(1) contrast(.85); }
+.wr-map[data-theme="dark"] .leaflet-pane[class*="wrLabels"] { opacity: .38; }
+
+.wr-map .leaflet-container {
+  background: var(--paper-2);
+  font-family: inherit;
+  outline: none;
+}
+.wr-map .leaflet-control-attribution {
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  color: color-mix(in srgb, var(--ink) 58%, transparent);
+  font-size: 10px; letter-spacing: .02em; padding: 2px 7px;
+}
+.wr-map .leaflet-control-attribution a { color: color-mix(in srgb, var(--ink) 74%, transparent); text-decoration: underline; }
+.wr-map .leaflet-control-zoom a {
+  background: var(--paper); color: var(--ink); border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  width: 34px; height: 34px; line-height: 34px; font-weight: 400;
+}
+.wr-map .leaflet-control-zoom a:hover { background: var(--paper-2); }
+.wr-map .leaflet-control-zoom { border: 0; box-shadow: 0 2px 14px color-mix(in srgb, var(--ink) 14%, transparent); margin: 0 16px 26px 0; }
+
+/* ---- pins ---- */
+/* a plain dot on the address: ink with a paper ring, brand when lit. Zoomed out the
+   whole map shows small dots; nothing carries a number. */
+.wr-pin.dot { width: 14px; height: 14px; border-radius: 50%; background: var(--ink);
+  box-shadow: 0 0 0 2.5px var(--paper), 0 2px 8px rgba(0,0,0,.28); }
+.leaflet-marker-icon:hover .wr-pin.dot, .leaflet-marker-icon:focus-visible .wr-pin.dot, .wr-pin.dot.lit {
+  transform: scale(1.35); background: var(--brand); box-shadow: 0 0 0 2.5px var(--paper), 0 3px 12px rgba(0,0,0,.3); }
+.wr-map[data-far="1"] .wr-pin.dot { width: 9px; height: 9px; box-shadow: 0 0 0 1.5px var(--paper), 0 1px 4px rgba(0,0,0,.25); }
+.wr-pin-wrap { background: none; border: 0; display: grid; place-items: center; }
+.wr-pin {
+  display: grid; place-items: center; width: 34px; height: 34px;
+  border-radius: 50%;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 22%, transparent),
+              0 3px 12px color-mix(in srgb, var(--ink) 16%, transparent);
+  transition: transform .28s var(--ease), background-color .28s var(--ease),
+              color .28s var(--ease), box-shadow .28s var(--ease);
+  will-change: transform;
+}
+.wr-pin i {
+  font-style: normal; font-size: 11px; letter-spacing: .04em;
+  font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1;
+}
+.leaflet-marker-icon:hover .wr-pin,
+.leaflet-marker-icon:focus-visible .wr-pin,
+.wr-pin.lit {
+  transform: scale(1.32);
+  background: var(--ink); color: var(--paper);
+  box-shadow: 0 0 0 1px var(--ink), 0 8px 22px color-mix(in srgb, var(--ink) 30%, transparent);
+}
+.leaflet-marker-icon:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; border-radius: 50%; }
+
+/* starting-rent pills for the search page — flat, no tail (the marketplace convention) */
+.wr-pin.price {
+  width: max-content; min-width: 46px; height: 26px; padding: 0 10px; border-radius: 13px;
+  background: var(--paper); color: var(--ink);
+}
+.wr-pin.price i { font-size: 11.5px; font-weight: 500; letter-spacing: .02em; }
+.leaflet-marker-icon:hover .wr-pin.price,
+.leaflet-marker-icon:focus-visible .wr-pin.price,
+.wr-pin.price.lit { transform: scale(1.1); }
+/* a pill that would sit on another pill draws as a dot until zoom or hover makes room
+   (map.js crowd()); the hovered / lit one is always a pill */
+.wr-pin.price.crowd { width: 10px; min-width: 0; height: 10px; padding: 0; border-radius: 50%;
+  background: var(--ink); box-shadow: 0 0 0 1.5px var(--paper), 0 1px 3px rgba(0,0,0,.25); }
+.wr-map[data-far="1"] .wr-pin.price.crowd { width: 8px; height: 8px; }
+.wr-pin.price.crowd i { display: none; }
+.leaflet-marker-icon:hover .wr-pin.price.crowd, .leaflet-marker-icon:focus-visible .wr-pin.price.crowd, .wr-pin.price.crowd.lit {
+  width: max-content; min-width: 46px; height: 26px; padding: 0 10px; border-radius: 13px;
+  background: var(--paper); box-shadow: none; }
+.leaflet-marker-icon:hover .wr-pin.price.crowd i, .leaflet-marker-icon:focus-visible .wr-pin.price.crowd i, .wr-pin.price.crowd.lit i { display: block; }
+.leaflet-marker-icon:hover, .leaflet-marker-icon:focus-visible { z-index: 1000 !important; }
+.leaflet-marker-icon:focus-visible { border-radius: 14px; }
+
+/* ---- area bubbles for the zoomed-out view ---- */
+.wr-bub-wrap { background: none; border: 0; }
+.wr-bub {
+  position: absolute;
+  /* --bub-ox/--bub-oy come from map.js's declutter(): the separation it needs
+     to keep two counted discs legible. Zero unless a disc actually collided. */
+  transform: translate(-50%, -50%) translate(var(--bub-ox, 0px), var(--bub-oy, 0px));
+  display: grid; justify-items: center; gap: 5px; cursor: pointer;
+  white-space: nowrap;
+  transition: transform .32s var(--ease);
+}
+/* the leader: a hairline from a displaced disc back to its true centroid, so a
+   moved disc discloses the move instead of quietly lying about where it is */
+.wr-bub::before {
+  content: ""; position: absolute; z-index: -1; pointer-events: none;
+  left: 50%; top: 23px;
+  width: var(--bub-lead, 0px); height: 1px;
+  background: color-mix(in srgb, var(--ink) 34%, transparent);
+  transform-origin: 0 50%;
+  transform: rotate(var(--bub-ang, 0deg));
+}
+.wr-bub i {
+  font-style: normal;
+  display: grid; place-items: center;
+  /* the count sits on a paper disc: it must take the ink, not the colour it
+     would otherwise inherit from a dark section */
+  color: var(--ink);
+  width: 46px; height: 46px; border-radius: 50%;
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 20%, transparent),
+              0 6px 24px color-mix(in srgb, var(--ink) 16%, transparent);
+  font-size: 1.02rem; font-variant-numeric: tabular-nums;
+  transition: transform .3s var(--ease), background-color .3s var(--ease), color .3s var(--ease);
+}
+.wr-bub em {
+  font-style: normal; font-size: .58rem; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  padding: 2px 7px;
+  /* stepped down a row per --bub-i so seven names inside one city never
+     stack on each other. The disc above it has not moved. */
+  transform: translateY(calc(var(--bub-i, 0) * 19px));
+}
+.wr-bub:hover i,
+.wr-bub.lit i { transform: scale(1.08); background: var(--ink); color: var(--paper); }
+/* a register row pointed at while the map is zoomed out lights this disc */
+.wr-bub.lit { z-index: 2; }
+
+/* Opt-in, per map: seven true centroids inside one city put their NAMES on
+   top of each other at the opening zoom. data-labels="hover" keeps the
+   counted discs — which are the information — and holds the names back until
+   a pointer asks for one. Every name is still listed in full beneath the map,
+   so nothing depends on the hover. */
+.wr-map[data-labels="hover"] .wr-bub em {
+  opacity: 0;
+  transition: opacity .3s var(--ease);
+}
+.wr-map[data-labels="hover"] .wr-bub:hover em,
+.wr-map[data-labels="hover"] .wr-bub.lit em { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .wr-map[data-labels="hover"] .wr-bub em { transition: none; }
+}
+
+/* ---- popup ---- */
+.wr-map .wr-pop .leaflet-popup-content-wrapper {
+  border-radius: 0; padding: 0; overflow: hidden;
+  background: var(--paper);
+  box-shadow: 0 18px 46px color-mix(in srgb, var(--ink) 26%, transparent);
+}
+/* Leaflet sizes the popup by writing an inline width from minWidth/maxWidth.
+   Overriding that with width:auto collapsed the popup to min-content —
+   `img{max-width:100%}` in base.css leaves the photograph contributing no
+   intrinsic width, so the card shrank to the longest word. Leave the width
+   to Leaflet; only the margin and leading are ours. */
+.wr-map .wr-pop .leaflet-popup-content { margin: 0; line-height: 1.4; }
+.wr-map .wr-pop .leaflet-popup-tip { background: var(--paper); box-shadow: none; }
+.wr-map .wr-pop a.leaflet-popup-close-button { color: var(--ink); padding: 6px 8px 0 0; }
+.wr-pop-img { display: block; aspect-ratio: 16 / 10; overflow: hidden; background: var(--paper-2); }
+.wr-pop-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s var(--ease); }
+.wr-pop-img:hover img { transform: scale(1.04); }
+.wr-pop-b { display: grid; gap: 3px; padding: 13px 15px 15px; }
+.wr-pop-no { font-size: .66rem; letter-spacing: .18em; color: color-mix(in srgb, var(--ink) 50%, transparent); font-variant-numeric: tabular-nums; }
+.wr-pop-nm { font-size: 1.02rem; line-height: 1.2; }
+.wr-pop-nm:hover { text-decoration: underline; text-underline-offset: 3px; }
+.wr-pop-st, .wr-pop-fx { font-size: .74rem; color: color-mix(in srgb, var(--ink) 62%, transparent); }
+.wr-pop-fx { letter-spacing: .04em; }
+
+/* ---- SVG fallback, used only when the CDN is unreachable ---- */
+.wr-map-fallback { min-height: 0; }
+.wr-map-fallback .atlas-svg { width: 100%; height: auto; }
+.wr-map-fallback .atlas-grid line { stroke: color-mix(in srgb, var(--ink) 8%, transparent); stroke-width: 1; }
+.wr-map-fallback .pin-hit { fill: var(--paper); stroke: color-mix(in srgb, var(--ink) 22%, transparent); }
+.wr-map-fallback .pin-no { font-size: 10px; fill: var(--ink); font-variant-numeric: tabular-nums; }
+.wr-map-fallback .pin.lit .pin-hit { fill: var(--ink); }
+.wr-map-fallback .pin.lit .pin-no { fill: var(--paper); }
+
+@media (prefers-reduced-motion: reduce) {
+  .wr-pin, .wr-bub, .wr-bub i, .wr-pop-img img { transition: none; }
+}

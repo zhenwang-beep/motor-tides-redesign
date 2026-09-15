@@ -1,0 +1,255 @@
+/* Wiseman Residential — ILS search. The conventions renters already know from
+   Zillow / Redfin / Apartments.com: a sticky filter bar of dropdowns, a More-filters
+   modal, active-filter chips, a live count, a sort control, and a split list/map.
+
+   Tokens come from the direction's stylesheet: --paper --paper-2 --ink --rule
+   --brand --ease --pad. Every direction skins it; the behaviour is shared. */
+
+/* ───────────────────────────── filter bar ───────────────────────────── */
+.sbar, .sbar[data-rail] {
+  position: sticky; top: 0; z-index: 60;
+  background: var(--paper);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent);
+  padding-left: var(--pad); padding-right: var(--pad);
+}
+.sbar-in {
+  display: flex; align-items: center; gap: 8px;
+  padding-top: 12px; padding-bottom: 12px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.sbar-in::-webkit-scrollbar { display: none; }
+
+.sfield {
+  display: flex; align-items: center; gap: 9px; flex: 0 0 auto;
+  min-width: 300px; max-width: 420px; flex: 1 1 300px;
+  border: 1px solid color-mix(in srgb, var(--ink) 24%, transparent);
+  padding: 0 12px; height: 42px; background: var(--paper);
+}
+.sfield input { flex: 1 1 auto; border: 0; background: none; height: 100%; font-size: .92rem; min-width: 0; }
+.sfield input::placeholder { color: color-mix(in srgb, var(--ink) 46%, transparent); }
+.sfield svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.4; opacity: .6; flex: 0 0 auto; }
+
+.fpop { position: relative; flex: 0 0 auto; }
+.fbtn {
+  display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;
+  height: 42px; padding: 0 14px;
+  border: 1px solid color-mix(in srgb, var(--ink) 24%, transparent);
+  background: var(--paper); color: var(--ink);
+  font-size: .82rem; letter-spacing: .02em;
+  transition: border-color .25s var(--ease), background-color .25s var(--ease), color .25s var(--ease);
+}
+.fbtn:hover { border-color: color-mix(in srgb, var(--ink) 52%, transparent); }
+.fbtn[aria-expanded="true"] { border-color: var(--ink); }
+.fbtn.on { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.fbtn .cav { width: 9px; height: 9px; stroke: currentColor; stroke-width: 1.6; fill: none; transition: transform .3s var(--ease); }
+.fbtn[aria-expanded="true"] .cav { transform: rotate(180deg); }
+
+.fmenu {
+  /* fixed, not absolute: the filter bar is a scrolling rail (overflow-x:auto) and an
+     absolute menu would be clipped inside it. search.js sets top/left from the button. */
+  position: fixed; top: 0; left: 0; z-index: 990;
+  min-width: 264px; max-width: min(92vw, 400px);
+  background: var(--paper);
+  border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
+  box-shadow: 0 22px 54px color-mix(in srgb, var(--ink) 20%, transparent);
+  padding: 16px; display: grid; gap: 13px;
+}
+.fmenu[hidden] { display: none; }
+.fmenu.right { left: auto; right: 0; }
+.fmenu h4 { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+  color: color-mix(in srgb, var(--ink) 58%, transparent); }
+.fmenu-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  padding-top: 11px; border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent); }
+
+/* option rows */
+.opts { display: grid; gap: 2px; max-height: 46vh; overflow-y: auto; }
+.opt { display: flex; align-items: center; gap: 11px; padding: 8px 6px; cursor: pointer; font-size: .92rem;
+  transition: background-color .2s var(--ease); }
+.opt:hover { background: color-mix(in srgb, var(--ink) 5%, transparent); }
+.opt input { flex: 0 0 auto; width: 16px; height: 16px; accent-color: var(--ink); cursor: pointer; }
+.opt .cnt { margin-left: auto; font-size: .78rem; font-variant-numeric: tabular-nums;
+  color: color-mix(in srgb, var(--ink) 52%, transparent); }
+.opt.off { opacity: .42; }
+
+/* segmented pills, for beds and baths */
+.segs { display: flex; flex-wrap: wrap; gap: 6px; }
+.seg {
+  flex: 1 1 auto; min-width: 54px; text-align: center;
+  border: 1px solid color-mix(in srgb, var(--ink) 22%, transparent);
+  padding: 9px 10px; font-size: .84rem; cursor: pointer;
+  transition: background-color .22s var(--ease), color .22s var(--ease), border-color .22s var(--ease);
+}
+.seg input { position: absolute; opacity: 0; width: 0; height: 0; }
+.seg:hover { border-color: color-mix(in srgb, var(--ink) 50%, transparent); }
+.seg:has(input:checked) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.seg:has(input:focus-visible) { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+/* price / sq ft ranges */
+.rng { display: grid; grid-template-columns: 1fr auto 1fr; gap: 9px; align-items: center; }
+.rng span { font-size: .78rem; color: color-mix(in srgb, var(--ink) 52%, transparent); }
+.rng select, .sel {
+  width: 100%; height: 40px; padding: 0 10px; font-size: .88rem;
+  border: 1px solid color-mix(in srgb, var(--ink) 24%, transparent);
+  background: var(--paper); color: var(--ink); border-radius: 0;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 15px) 17px, calc(100% - 10px) 17px;
+  background-size: 5px 5px, 5px 5px; background-repeat: no-repeat;
+}
+
+.lnk-clear { font-size: .78rem; letter-spacing: .04em; text-decoration: underline; text-underline-offset: 3px;
+  color: color-mix(in srgb, var(--ink) 62%, transparent); }
+.lnk-clear:hover { color: var(--ink); }
+.btn-apply { background: var(--ink); color: var(--paper); padding: 9px 18px; font-size: .74rem;
+  letter-spacing: .14em; text-transform: uppercase; }
+
+/* ───────────────────────────── chips + count ───────────────────────────── */
+.sresults {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px;
+  padding: 14px var(--pad);
+  border-bottom: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+}
+.scount { font-size: .92rem; }
+.scount b { font-variant-numeric: tabular-nums; font-weight: 500; }
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip-f {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+  padding: 5px 8px 5px 11px; font-size: .78rem;
+}
+.chip-f button { display: grid; place-items: center; width: 17px; height: 17px; opacity: .6; }
+.chip-f button:hover { opacity: 1; }
+.chip-f svg { width: 9px; height: 9px; stroke: currentColor; stroke-width: 1.7; }
+.snote { flex-basis: 100%; order: 9; font-size: .74rem; letter-spacing: .04em; color: color-mix(in srgb, var(--ink) 52%, transparent); }
+.card-ad b { font-weight: 500; color: var(--ink); }
+.sright { margin-left: auto; display: flex; align-items: center; gap: 10px; }
+.sright label { font-size: .74rem; letter-spacing: .14em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--ink) 56%, transparent); }
+.sright .sel { width: auto; min-width: 190px; height: 38px; }
+
+/* view toggle, mobile only */
+.vtog { display: none; gap: 0; border: 1px solid color-mix(in srgb, var(--ink) 24%, transparent); }
+.vtog button { padding: 8px 16px; font-size: .74rem; letter-spacing: .14em; text-transform: uppercase; }
+.vtog button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+
+/* ───────────────────────────── split layout ───────────────────────────── */
+.split { display: grid; grid-template-columns: 1fr; align-items: start; }
+@media (min-width: 1060px) {
+  .split { grid-template-columns: minmax(0, 1fr) minmax(380px, 44%); }
+  .split > .smap {
+    position: sticky; top: 67px; height: calc(100svh - 67px);
+    border-left: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  }
+}
+.smap { min-height: 62svh; }
+.slist { padding: 20px var(--pad) 60px; }
+.cards { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); }
+
+/* ───────────────────────────── result card ───────────────────────────── */
+.card {
+  position: relative; display: grid; grid-template-rows: auto 1fr;
+  background: var(--paper);
+  transition: transform .4s var(--ease);
+}
+.card[hidden] { display: none; }
+.card.lit { transform: translateY(-3px); }
+.card.lit .card-img::after { opacity: 1; }
+.card-img { position: relative; display: block; overflow: hidden; aspect-ratio: 4 / 3; background: var(--paper-2); }
+.card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .9s var(--ease); }
+.card:hover .card-img img, .card:focus-within .card-img img { transform: scale(1.045); }
+.card-img::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  box-shadow: inset 0 0 0 1.5px var(--ink); opacity: 0; transition: opacity .3s var(--ease);
+}
+.card-fav {
+  position: absolute; right: 12px; top: 12px; z-index: 2;
+  display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 2px 10px rgba(0,0,0,.18);
+  backdrop-filter: blur(4px);
+  transition: background-color .25s var(--ease), transform .25s var(--ease), box-shadow .25s var(--ease);
+}
+.card-fav:hover { transform: scale(1.06); background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,.24); }
+.card-fav svg { width: 17px; height: 17px; stroke: #16242A; stroke-width: 1.5; fill: none; }
+.card-fav[aria-pressed="true"] svg { fill: #16242A; }
+.card-b { display: grid; gap: 5px; padding: 13px 2px 0; }
+.card-price { font-size: 1.12rem; font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
+.card-fx { font-size: .84rem; color: color-mix(in srgb, var(--ink) 68%, transparent); font-variant-numeric: tabular-nums; }
+.card-nm { font-size: .96rem; }
+.card-nm a::after { content: ""; position: absolute; inset: 0; } /* whole card is the link target */
+.card-ad { font-size: .8rem; color: color-mix(in srgb, var(--ink) 58%, transparent); }
+.card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 3px; }
+.card-tags span { font-size: .64rem; letter-spacing: .1em; text-transform: uppercase;
+  border: 1px solid color-mix(in srgb, var(--ink) 18%, transparent); padding: 3px 7px;
+  color: color-mix(in srgb, var(--ink) 64%, transparent); }
+
+/* ───────────────────────────── empty state ───────────────────────────── */
+.sempty { padding: 64px 0; display: grid; gap: 18px; max-width: 56ch; }
+.sempty[hidden] { display: none; }
+.sempty h3 { font-size: 1.5rem; line-height: 1.2; }
+.sempty p { color: color-mix(in srgb, var(--ink) 70%, transparent); }
+.sempty form { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 6px; }
+.sempty input { flex: 1 1 220px; height: 44px; padding: 0 13px;
+  border: 1px solid color-mix(in srgb, var(--ink) 24%, transparent); background: var(--paper); }
+
+/* ───────────────────────────── more-filters modal ───────────────────────────── */
+dialog.fmodal {
+  /* the universal *{margin:0} reset kills a dialog's auto-centering */
+  margin: auto;
+  width: min(660px, 94vw); max-height: 88svh; padding: 0;
+  border: 0; background: var(--paper); color: var(--ink);
+  box-shadow: 0 40px 90px rgba(0,0,0,.3);
+  /* the dialog itself never scrolls — the body does, between a fixed head and foot,
+     so the scrollbar lives inside the box instead of hanging off its edge */
+  overflow: hidden;
+}
+dialog.fmodal[open] { display: flex; flex-direction: column; }
+dialog.fmodal::backdrop { background: color-mix(in srgb, var(--ink) 52%, transparent); backdrop-filter: blur(3px); }
+.fmodal-h { display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 20px 24px; border-bottom: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  flex: 0 0 auto; background: var(--paper); }
+.fmodal-h h2 { font-size: 1.16rem; }
+.fmodal-x { display: grid; place-items: center; width: 36px; height: 36px; }
+.fmodal-x svg { width: 13px; height: 13px; stroke: currentColor; stroke-width: 1.6; }
+.fmodal-b {
+  flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain;
+  padding: 22px 24px 26px; display: grid; gap: 26px;
+  scrollbar-width: thin; scrollbar-color: color-mix(in srgb, var(--ink) 30%, transparent) transparent;
+}
+.fmodal-b::-webkit-scrollbar { width: 8px; }
+.fmodal-b::-webkit-scrollbar-thumb { background: color-mix(in srgb, var(--ink) 30%, transparent); border-radius: 4px; }
+.fmodal-b::-webkit-scrollbar-track { background: transparent; }
+.fgrp { display: grid; gap: 11px; }
+.fgrp h3 { font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 500;
+  color: color-mix(in srgb, var(--ink) 58%, transparent); }
+.fgrid { display: grid; gap: 2px; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+.fmodal-f { display: flex; align-items: center; justify-content: space-between; gap: 14px;
+  padding: 16px 24px; border-top: 1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  flex: 0 0 auto; background: var(--paper); }
+
+@media (max-width: 1059px) {
+  .vtog { display: flex; }
+  .split { grid-template-columns: 1fr; }
+  .split.show-map .slist { display: none; }
+  .split:not(.show-map) .smap { display: none; }
+  .split.show-map .smap { min-height: calc(100svh - 132px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .card-img img, .card-fav, .fbtn, .seg, .opt { transition: none; }
+}
+
+/* ───────────────────────────── filter bar as a rail ─────────────────────────────
+   When the bar overflows, rail.js adds arrows. They must never sit over a control: the
+   track gets end padding for them and a paper fade so scrolled controls dissolve rather
+   than being sliced by an arrow. On a wide screen the rail is static and none of this
+   applies (rail.js sets data-static and the arrows are hidden). */
+.sbar[data-rail]:not([data-static]) .sbar-in { padding-left: 46px; padding-right: 46px; scroll-padding-inline: 46px; }
+.sbar[data-rail]:not([data-static]) .rail-float::before,
+.sbar[data-rail]:not([data-static]) .rail-float::after {
+  content: ""; position: absolute; top: 0; bottom: 0; width: 84px; z-index: 3; pointer-events: none;
+}
+.sbar[data-rail]:not([data-static]) .rail-float::before { left: 0; background: linear-gradient(to right, var(--paper) var(--pad), var(--paper) calc(var(--pad) + 34px), transparent); }
+.sbar[data-rail]:not([data-static]) .rail-float::after { right: 0; background: linear-gradient(to left, var(--paper) var(--pad), var(--paper) calc(var(--pad) + 34px), transparent); }
+.sbar .rail-float .rail-btn { --rail-btn: 34px; z-index: 4; }
+.sbar .rail-float .rail-btn.prev { left: calc(var(--pad) + 4px); }
+.sbar .rail-float .rail-btn.next { right: calc(var(--pad) + 4px); }

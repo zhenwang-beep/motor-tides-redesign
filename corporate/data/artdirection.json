@@ -1,0 +1,246 @@
+{
+ "_note": "Hand-curated on 10 Sep 2026 by reviewing all 72 community photographs plus the 20 images on the client's current homepage. Use these; do not pick images by filename.",
+ "atmosphere": [
+  {
+   "file": "wr04.jpg",
+   "what": "Rooftop pergola at dusk, city beyond",
+   "pos": "50% 60%",
+   "dark": true
+  },
+  {
+   "file": "wr14.jpg",
+   "what": "Arched terrace looking over the city",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "file": "wr12.jpg",
+   "what": "Lush courtyard stair, birds of paradise",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "file": "wr06.jpg",
+   "what": "Planted courtyard, morning light",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "file": "wr01.jpg",
+   "what": "Living room under arched windows",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "file": "wr20.jpg",
+   "what": "Shaded patio lounge, teal upholstery",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "file": "wr11.jpg",
+   "what": "Tree-lined street elevation",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "file": "wr05.jpg",
+   "what": "Century City Icon at dusk, violet sky",
+   "pos": "50% 45%",
+   "dark": true
+  }
+ ],
+ "areaHero": {
+  "west-la": {
+   "no": "015",
+   "pos": "50% 50%"
+  },
+  "brentwood": {
+   "no": "037",
+   "pos": "50% 50%"
+  },
+  "beverly-grove": {
+   "no": "044",
+   "pos": "50% 50%"
+  },
+  "hollywood": {
+   "no": "067",
+   "pos": "50% 50%"
+  },
+  "venice": {
+   "no": "069",
+   "pos": "50% 55%"
+  },
+  "palms": {
+   "no": "071",
+   "pos": "50% 50%"
+  },
+  "glendale": {
+   "no": "072",
+   "pos": "50% 55%"
+  }
+ },
+ "selected": [
+  "071",
+  "015",
+  "025",
+  "044",
+  "037",
+  "072",
+  "007",
+  "012",
+  "051",
+  "032",
+  "063",
+  "067"
+ ],
+ "_selectedWhy": "Twelve that carry the brand: the flagship, the two most dramatic elevations, the best glass, the warmest courtyard, the night frame, and a spread across all seven areas.",
+ "avoid": [
+  "055",
+  "039",
+  "014",
+  "034",
+  "068",
+  "029",
+  "023",
+  "031"
+ ],
+ "_avoidWhy": "055 and 039 are interiors mislabelled as community shots; 014 is mid-construction with bare dirt; 034, 029, 031 and 068 are flat documentation frames with no light; 023 has no exterior at all.",
+ "rules": [
+  "Full-bleed photography is the default. A section that could be an image should be an image.",
+  "Never letterbox a building into a 16:9 card. Use tall crops (4:5, 3:4) for single buildings and wide crops (21:9) only for streets and skies.",
+  "Scrims: a linear-gradient from transparent to 62% ink over the bottom third, never a flat overlay across the whole frame.",
+  "Request the CDN at the width you will actually paint: w_2400 for full-bleed, w_1400 for half, w_700 for plates, w_420 for rows. Always pair with q_auto,f_auto.",
+  "Every content image gets width/height or aspect-ratio so nothing shifts on load, and loading=\"lazy\" below the fold.",
+  "One image per screen may move. Scale 1.00 to 1.06 over a full viewport of scroll is enough; anything faster reads as a slideshow."
+ ],
+ "_resolutionWarning": "MEASURED 10 Sep 2026. The RentCafe *community* thumbnails are small originals — 015 is 200x150, 025/037/044/071/012 are ~500x340, 072 is 960x640. Only 051 (1600x1200), 067 (1200x900) and 007 (1200x800) survive a wide crop. The twenty frames in assets/img/wr01-wr20.jpg are all 1800px and are the ONLY images fit for a full-bleed hero. Asking the CDN for w_2400 does not invent pixels: it upscales. Check the native size before you use a frame full-bleed.",
+ "fullBleed": [
+  {
+   "file": "wr04.jpg",
+   "px": [
+    1800,
+    1200
+   ],
+   "what": "Rooftop pergola at dusk, the city beyond",
+   "pos": "50% 58%",
+   "dark": true
+  },
+  {
+   "file": "wr05.jpg",
+   "px": [
+    1800,
+    1200
+   ],
+   "what": "Century City Icon at dusk, violet sky",
+   "pos": "50% 46%",
+   "dark": true
+  },
+  {
+   "file": "wr14.jpg",
+   "px": [
+    1800,
+    1200
+   ],
+   "what": "Arched terrace looking over Los Angeles, late light",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "file": "wr13.jpg",
+   "px": [
+    1800,
+    1348
+   ],
+   "what": "Motor Tides exterior, the flagship",
+   "pos": "50% 44%",
+   "dark": false
+  },
+  {
+   "file": "wr03.jpg",
+   "px": [
+    1800,
+    1200
+   ],
+   "what": "Brick corner elevation, palms, deep blue sky",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "file": "wr12.jpg",
+   "px": [
+    1800,
+    1013
+   ],
+   "what": "Planted courtyard stair, birds of paradise",
+   "pos": "50% 54%",
+   "dark": false
+  },
+  {
+   "file": "wr19.jpg",
+   "px": [
+    1800,
+    1200
+   ],
+   "what": "Blue-glass elevation against a clean sky",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "file": "wr11.jpg",
+   "px": [
+    1800,
+    1200
+   ],
+   "what": "Tree-lined street elevation, dappled light",
+   "pos": "50% 50%",
+   "dark": false
+  }
+ ],
+ "_fullBleedRule": "Use these, and only these, for anything that fills the viewport width. One per direction so the three sites do not open on the same photograph: TIDELINE wr14, THE PLATES wr05, FIVE BEDROOMS wr04.",
+ "heroPlate": [
+  {
+   "no": "072",
+   "why": "Blue hour, street lights, wet colour. The single most cinematic frame in the library.",
+   "pos": "50% 55%",
+   "dark": true
+  },
+  {
+   "no": "015",
+   "why": "Dramatic corner mass, long shadow, traffic streaks. Reads as a city, not a listing.",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "no": "025",
+   "why": "Blue glass against a pink-violet sky. The only frame with real sunset colour.",
+   "pos": "50% 45%",
+   "dark": false
+  },
+  {
+   "no": "071",
+   "why": "The flagship. Dark blue facade, hard diagonal, deep sky.",
+   "pos": "50% 50%",
+   "dark": true
+  },
+  {
+   "no": "044",
+   "why": "Glass balconies stacked into the frame. Clean, contemporary, expensive.",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "no": "037",
+   "why": "Palms and bougainvillea over a courtyard stair. The warmest, most Los Angeles frame.",
+   "pos": "50% 50%",
+   "dark": false
+  },
+  {
+   "no": "051",
+   "why": "Navy and white, crisp light, strong horizontal.",
+   "pos": "50% 50%",
+   "dark": false
+  }
+ ],
+ "_heroPlateNote": "These are the strongest BUILDING frames, but they are small originals — use them at plate size (<=900px wide) or in a tall crop, never full-bleed. See _resolutionWarning."
+}

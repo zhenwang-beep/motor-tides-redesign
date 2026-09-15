@@ -1,0 +1,2753 @@
+/* =====================================================================
+   WISEMAN RESIDENTIAL — direction: TIDELINE
+   Loads AFTER ../core/base.css. Everything here skins or extends the
+   shells base.css already ships. Nothing in base.css is redeclared.
+
+   ---------------------------------------------------------------------
+   CLASS INDEX — the shared furniture. Build the other eight pages from
+   this list; do not invent new components without adding them here.
+
+   LAYOUT
+     .sec              standard section. LONGHAND vertical padding, safe on .wrap
+     .sec-tight .sec-loose        rhythm modifiers (0.6x / 1.45x)
+     .bleed            full-bleed section: shorthand padding + a nested .wrap
+     .dark             --deep ground, paper ink. Pair with data-hd="dark"
+     .sand-ground      --paper-2 ground for a quiet alternating band
+     .cv               content-visibility:auto for long row groups
+     .cols-2 .cols-3   plain responsive column grids, gap var(--gap)
+     .stack-1..4       vertical rhythm helpers (margin-top on following siblings)
+     .rule             1px static hairline, --ink-10
+     .hr-top           1px hairline drawn on the top edge of a block
+
+   TYPE
+     .kicker           Archivo caps micro-label, --slate, tracked .2em
+     .t-mega .t-1 .t-2 .t-3        Fraunces display steps
+     .lede             Archivo 1.08–1.32rem intro paragraph
+     .body .small .micro           body steps
+     .tnum             (base.css) tabular numbers — on every number column
+     .no               the three-digit building number, Archivo tabular
+     .chip             [CLIENT] chip, monospace, boxed, --sand-ink
+     .cite             trade-press citation, --slate, small
+     .measure          (base.css) 62ch
+
+   CONTROLS
+     .btn              base button/link; .btn-solid .btn-quiet .btn-inv
+     .btn-row          flex row; children flex:1 1 auto; min-width:max-content
+     .lnk              inline link with a hairline underline that wipes in
+     .arw              trailing arrow glyph that steps right on hover/focus
+
+   FORMS
+     .field .field-lbl .field-in   labelled text input
+     .search .search-in .search-go the hero typeahead shell
+     .ta .ta-no .ta-nm .ta-sub .ta-empty     WR.typeahead output (markup is core's)
+     .sel              styled <select>
+
+   HOME PAGE / SIGNATURE
+     .hero .hero-fig .hero-copy .hero-line .hero-cred
+     .bloom .bloom-stage .bloom-full .lockup       masked lockup, 340vh runway
+     [data-tide] --tide            the ONE JS-set property. Default 100%.
+     .tide .tide-track .tide-fill  the 1px tideline rule with a 28px travelling gap
+     .tidefig                      a figure whose image fills from the bottom on --tide
+     .facts .fact .fact-n .fact-l  three facts sitting on a tideline rule
+     .rail .rail-item .rail-fig .rail-no .rail-street
+                       the track, the arrows and the progress rule are core/rail.css
+                       (.rail-track .rail-nav .rail-btn .rail-count .rail-bar), skinned
+                       below — no rail on this site shows an overflow scrollbar
+     .band .band-fig .band-body .band-h .band-count .band-sub .streets
+     .homes .home-row .home-beds
+     .lines .line .line-addr .line-fact
+     .doors .door .door-h .door-p
+
+   REGISTER (buildings.html, per BUILD-SPEC's markup contract)
+     .sortbar          [data-sort] buttons, aria-pressed styled
+     .reg .reg-group .reg-head .reg-rows .reg-row .reg-no .reg-name
+     .reg-street .reg-meta .reg-row.lit
+     .plate .plate-img .plate-no .plate-name .plate-street  (aside[data-plate])
+     .atlas .atlas-svg .atlas-grid .pin .pin-hit .pin-no .pin.lit
+     .reg-bar          search + sort row above the register
+                       (the rows themselves reuse .reg-lay)
+     .reg-beds .reg-rent           the two .reg-meta columns, placed
+                                   explicitly under 860px
+     .viewbar .view-alt            ?view=register|atlas|plates, real URLs
+     .jsonly                       wrapper for a control that needs JS
+     .plates .plate-cell .plate-cell-fig .plate-cell-meta .plate-cell-st
+                                   the contact sheet — no cards, 1px gutters
+     .plates-group                 one sheet per neighbourhood, under .reg-head
+     .page-top-tabs                the masthead whose bottom edge is .viewbar
+
+   AVAILABILITY (search.html — now the ILS search page)
+     The interface itself is core/search.css + core/search.js, spliced in by
+     scripts/gen_search.py between <!--SEARCH--> and <!--/SEARCH-->. It is
+     skinned in the LAST block of this stylesheet, scoped to [data-search] and
+     .searchpage so nothing else on the site moves. Add nothing here.
+     .filters .fset .checks .check .avl .fav .shortlist .empty .res-head
+                       retired with the old filter form. The rules are left in
+                       place rather than pulled out under a deadline; no page
+                       uses them any more.
+     .bleed-tight      full-bleed tint band at 0.6x rhythm
+
+   FURNITURE
+     .hd (base) skinned here; .hd.inv over data-hd="dark"
+     .mnav (base) skinned here; .mfoot
+     .pt (base) skinned here; .ptmark
+     .ft .ft-map .ft-col .ft-h .ft-list .ft-base .ft-addr .ft-social .eho
+
+   INNER PAGES (appended at the END of this file — see the second index there)
+     .page-top .crumbs .band-rule .figfill .atlas-lay .atlas-fb .keylist
+     .gal .spec .spec-k .spec-v .amen .near .near-fig .near-meta .reg-lay
+
+   ---------------------------------------------------------------------
+   RULES THAT BIND EVERY PAGE
+     1. No shorthand `padding` on any element carrying .wrap.
+     2. No raw 100vh — use var(--vh100) from base.css.
+     3. --brand is hairlines, focus rings and the logo. Never a surface.
+     4. Every tint, scrim, divider and hairline comes from the alpha ladder.
+     5. One easing curve: var(--ease). One rAF loop: WR.onScroll.
+   ===================================================================== */
+
+/* ------------------------------------------------------------ tokens */
+:root {
+  /* the two grounds */
+  --paper: #F2EFE7;
+  --paper-2: #E6E1D5;
+  /* ink */
+  --ink: #16242A;
+  --slate: #5D7076;
+  --deep: #0C1A1F;
+  /* accents */
+  --sand: #CBB69B;
+  --sand-ink: #7A6142;
+  --salt: #A8B8B2;
+  /* brand — hairlines, focus rings, the logo. Never a surface. */
+  --brand: #169BAC;
+
+  /* alpha ladder — the ONLY source of hairlines, scrims, dividers, tints */
+  --ink-05: color-mix(in srgb, var(--ink) 5%, transparent);
+  --ink-10: color-mix(in srgb, var(--ink) 10%, transparent);
+  --ink-30: color-mix(in srgb, var(--ink) 30%, transparent);
+  --ink-60: color-mix(in srgb, var(--ink) 60%, transparent);
+  --paper-05: color-mix(in srgb, var(--paper) 5%, transparent);
+  --paper-10: color-mix(in srgb, var(--paper) 10%, transparent);
+  --paper-30: color-mix(in srgb, var(--paper) 30%, transparent);
+  --paper-60: color-mix(in srgb, var(--paper) 60%, transparent);
+
+  /* the brand teal at full strength is 2.9:1 on paper — under the 3:1 floor
+     for a focus indicator. 80% brand over ink keeps the hue and clears 3:1
+     on paper, paper-2 and deep. */
+  --focus: color-mix(in srgb, var(--brand) 80%, var(--ink));
+
+  --sans: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --serif: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
+  --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+
+  /* type steps */
+  /* measured: RESIDENTIAL sets ~6.19x its font-size in Fraunces at these
+     settings, and the gutter leaves 90vw. 12.8vw keeps the longer line at
+     ~88% of the available measure at every width down to 320px. */
+  --t-mega: clamp(2.6rem, 12.8vw, 11.4rem);
+  --t-1: clamp(2.25rem, 6.1vw, 4.9rem);
+  --t-2: clamp(1.7rem, 3.5vw, 2.85rem);
+  --t-3: clamp(1.16rem, 1.75vw, 1.5rem);
+  --t-lede: clamp(1.06rem, 1.4vw, 1.3rem);
+  --t-body: 1rem;
+  --t-sm: 0.875rem;
+  --t-xs: 0.76rem;
+  --t-kicker: 0.69rem;
+
+  /* rhythm */
+  --sec-y: clamp(74px, 9.4vw, 146px);
+  --gap: clamp(20px, 3vw, 44px);
+  --s1: 8px; --s2: 14px; --s3: 22px; --s4: 34px; --s5: 54px; --s6: 86px;
+
+  /* THE ONE GUTTER. base.css sets --pad to a 5vw gutter and caps the content
+     column at 1560px with .wrap-n — so above 1560px the column centred itself
+     while the fixed header, the rails and the search bar kept the bare gutter,
+     and at 1920 the brand sat at 92px against a headline at 272px. The client
+     circled it. Now the gutter itself grows by half of whatever the viewport
+     exceeds 1560px by: the column is the same 1376px it always was at 1920,
+     but every element that reads --pad — the header, every .wrap, the rail
+     tracks, the bloom note, the filter bar, the count rail, the card grid —
+     starts on the same line at every width. .wrap-n's cap is switched off
+     below, or it would centre the column a second time. */
+  --pad: calc(clamp(20px, 5vw, 92px) + max(0px, (100vw - 1560px) / 2));
+
+  /* signature */
+  --bloom-peak: 7.2;
+  --tide-gap: 14px;   /* half the travelling gap; the rule shows 28px of air */
+}
+@media (max-width: 700px) { :root { --bloom-peak: 4.8; } }
+
+/* ------------------------------------------------------- typography */
+body {
+  font-size: 17px;
+  font-variation-settings: "wdth" 100;
+  letter-spacing: 0.004em;
+}
+h1, h2, h3, h4 { font-weight: 500; letter-spacing: -0.012em; line-height: 1.06; }
+
+.t-mega, .t-1, .t-2, .t-3 {
+  font-family: var(--serif);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+.t-mega { font-size: var(--t-mega); font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0; }
+.t-1 { font-size: var(--t-1); line-height: 1.03; font-variation-settings: "opsz" 96, "SOFT" 0, "WONK" 1; }
+.t-2 { font-size: var(--t-2); line-height: 1.06; font-variation-settings: "opsz" 72, "SOFT" 0, "WONK" 1; }
+.t-3 { font-size: var(--t-3); line-height: 1.2; letter-spacing: -0.008em; font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0; }
+
+.kicker {
+  font-family: var(--sans);
+  font-size: var(--t-kicker);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--slate);
+  font-variant-numeric: tabular-nums;
+}
+.lede { font-size: var(--t-lede); line-height: 1.5; color: var(--ink); }
+.body { font-size: var(--t-body); line-height: 1.6; color: var(--slate); }
+.small { font-size: var(--t-sm); line-height: 1.55; color: var(--slate); }
+.micro { font-size: var(--t-xs); line-height: 1.5; color: var(--slate); letter-spacing: 0.02em; }
+.no { font-family: var(--sans); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
+.chip {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.06em;
+  color: var(--sand-ink);
+  border: 1px solid color-mix(in srgb, var(--sand-ink) 34%, transparent);
+  padding: 2px 6px;
+  vertical-align: 0.12em;
+  white-space: nowrap;
+}
+.cite { display: block; font-size: var(--t-xs); color: var(--slate); letter-spacing: 0.02em; }
+.cite em { font-style: italic; }
+
+/* -------------------------------------------------------- layout */
+/* the 1560px cap lives in --pad now (see the tokens); a second, centred cap
+   on top of a growing gutter would inset the content twice */
+.wrap-n { max-width: none; }
+.sec { padding-top: var(--sec-y); padding-bottom: var(--sec-y); }
+.sec-tight { padding-top: calc(var(--sec-y) * 0.6); padding-bottom: calc(var(--sec-y) * 0.6); }
+.sec-loose { padding-top: calc(var(--sec-y) * 1.45); padding-bottom: calc(var(--sec-y) * 1.45); }
+/* full-bleed: shorthand padding is only ever allowed here, and only because
+   the gutter is restored by a nested .wrap */
+.bleed { padding: var(--sec-y) 0; }
+
+.dark { background: var(--deep); color: var(--paper); }
+.dark .body, .dark .small, .dark .micro, .dark .kicker, .dark .cite { color: color-mix(in srgb, var(--paper) 66%, transparent); }
+/* --slate is AA on --paper (4.52:1) but only 3.98:1 on --paper-2, and
+   --sand-ink drops to 4.45:1. Both secondary inks step one shade darker on
+   this ground. Any page using .sand-ground inherits the fix. */
+.sand-ground { background: var(--paper-2); --slate: #52646A; --sand-ink: #6F573A; }
+
+.rule { height: 1px; background: var(--ink-10); border: 0; }
+.hr-top { border-top: 1px solid var(--ink-10); }
+.dark .rule, .dark .hr-top { background: var(--paper-10); border-top-color: var(--paper-10); }
+
+.cv { content-visibility: auto; contain-intrinsic-size: auto 640px; }
+
+.cols-2, .cols-3 { display: grid; gap: var(--gap); }
+.cols-2 { grid-template-columns: repeat(auto-fit, minmax(min(330px, 100%), 1fr)); }
+.cols-3 { grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); }
+
+.stack-1 > * + * { margin-top: var(--s1); }
+.stack-2 > * + * { margin-top: var(--s2); }
+.stack-3 > * + * { margin-top: var(--s3); }
+.stack-4 > * + * { margin-top: var(--s4); }
+
+.mt-1 { margin-top: var(--s1); }
+.mt-2 { margin-top: var(--s2); }
+.mt-3 { margin-top: var(--s3); }
+.mt-4 { margin-top: var(--s4); }
+.mt-5 { margin-top: var(--s5); }
+.mt-6 { margin-top: var(--s6); }
+.measure-s { max-width: 46ch; }
+
+/* the standard section opening: kicker, heading, one line of lede.
+   Use it at the top of every section on every page so the rhythm holds. */
+.sec-head { max-width: 62ch; }
+.sec-head > h2, .sec-head > h3 { margin-top: 12px; }
+.sec-head > .lede, .sec-head > .body { margin-top: 16px; }
+.sec-head + * { margin-top: clamp(30px, 4vw, 54px); }
+.dark .lede { color: inherit; }
+
+/* ---------------------------------------------------------- header */
+/* an inline <polygon> defaults to fill:black — `color` alone does nothing.
+   Every inline mark on the site must take fill from currentColor. */
+.brand svg, .ft-brand svg, .ptmark svg { fill: currentColor; }
+.hd { color: var(--ink); }
+.hd .brand svg { color: var(--brand); }
+.hd .brand b { color: inherit; }
+.hd.inv { color: var(--paper); }
+.hd.inv.frost {
+  background: color-mix(in srgb, var(--deep) 82%, transparent);
+  box-shadow: 0 1px 0 var(--paper-10);
+}
+.hnav a { font-weight: 500; }
+.hd .mbtn { color: inherit; }
+
+/* ---------------------------------------------------- mobile menu */
+.mnav { background: var(--deep); }
+.mnav a {
+  font-variation-settings: "opsz" 96, "SOFT" 0, "WONK" 1;
+  font-weight: 400;
+  border-bottom: 1px solid var(--paper-10);
+}
+.mnav a:last-of-type { border-bottom: 0; }
+.mnav .mfoot { color: color-mix(in srgb, var(--paper) 70%, transparent); font-size: var(--t-sm); letter-spacing: 0.04em; opacity: 1; }
+.mnav .mfoot a { font-family: var(--sans); font-size: var(--t-sm); display: inline; border: 0; padding: 0; }
+
+/* -------------------------------------------------------- curtain */
+.pt { background: var(--deep); }
+.pt .ptmark svg { width: 34px; height: 34px; color: var(--brand); }
+.pt .ptmark span {
+  font-family: var(--sans); font-size: var(--t-kicker);
+  letter-spacing: 0.3em; text-transform: uppercase; color: var(--paper-60);
+}
+
+/* -------------------------------------------------- links, buttons */
+.lnk {
+  display: inline-block;
+  position: relative;
+  font-size: var(--t-sm);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding-bottom: 3px;
+}
+.lnk::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 1px;
+  background: currentColor; opacity: 0.35;
+  transform: scaleX(1); transform-origin: left;
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.lnk:hover::after, .lnk:focus-visible::after { opacity: 1; }
+.arw { display: inline-block; margin-left: 0.45em; transition: transform 0.4s var(--ease); }
+a:hover .arw, a:focus-visible .arw, button:hover .arw, button:focus-visible .arw { transform: translateX(5px); }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  font-family: var(--sans); font-size: var(--t-xs); font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 15px 26px; border: 1px solid transparent;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.btn-solid { background: var(--ink); color: var(--paper); }
+.btn-solid:hover, .btn-solid:focus-visible { background: var(--deep); }
+.btn-quiet { border-color: var(--ink-30); color: var(--ink); }
+.btn-quiet:hover, .btn-quiet:focus-visible { border-color: var(--ink); background: var(--ink-05); }
+.btn-inv { border-color: var(--paper-30); color: var(--paper); }
+.btn-inv:hover, .btn-inv:focus-visible { border-color: var(--paper); background: var(--paper-10); }
+/* Never a pixel min-width: a floor clips long labels between ~312 and ~430px.
+   max-content alone has the opposite failure — a label longer than the gutter
+   ("Next in West Los Angeles — 005 Beloit at Ohio") sets a min-width wider
+   than the viewport, and body{overflow-x:clip} shears the right-hand end off
+   in silence. min() keeps the no-wrap default wherever it fits and hands the
+   label back to the line-breaker when it does not. */
+.btn-row { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn-row > * { flex: 1 1 auto; min-width: min(max-content, 100%); }
+.btn { text-align: center; }
+
+/* ---------------------------------------------------------- forms */
+.field { display: block; }
+.field-lbl {
+  display: block; margin-bottom: 9px;
+  font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate);
+}
+.field-in, .sel {
+  width: 100%; background: transparent; color: var(--ink);
+  border: 0; border-bottom: 1px solid var(--ink-30);
+  padding: 12px 2px; font-size: var(--t-lede);
+  transition: border-color 0.35s var(--ease);
+}
+.field-in::placeholder { color: var(--ink-30); }
+.field-in:focus, .sel:focus { outline: none; border-bottom-color: var(--brand); }
+.field-in:focus-visible, .sel:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
+.sel {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%),
+                    linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: right 10px center, right 5px center;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 26px;
+}
+
+/* the hero typeahead shell */
+.search { position: relative; max-width: 640px; }
+.search-row { display: flex; align-items: flex-end; gap: 14px; border-bottom: 1px solid var(--ink-30); transition: border-color 0.35s var(--ease); }
+.search:focus-within .search-row { border-bottom-color: var(--brand); }
+.search-in {
+  flex: 1 1 auto; min-width: 0;
+  background: transparent; border: 0; color: var(--ink);
+  font-family: var(--serif); font-size: clamp(1.15rem, 2.1vw, 1.65rem);
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0;
+  padding: 10px 0 13px;
+}
+.search-in::placeholder { color: var(--ink-30); }
+.search-in:focus { outline: none; }
+.search-go {
+  flex: 0 0 auto; align-self: center;
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: var(--t-kicker); font-weight: 500; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--slate); padding: 8px 2px;
+  transition: color 0.35s var(--ease);
+}
+.search-go:hover, .search-go:focus-visible { color: var(--ink); }
+
+/* WR.typeahead writes this markup — style only, never re-author */
+.ta {
+  position: absolute; left: 0; right: 0; top: calc(100% + 8px); z-index: 40;
+  list-style: none; background: var(--paper);
+  border: 1px solid var(--ink-10);
+  box-shadow: 0 18px 46px -26px var(--ink-60);
+  /* the one scroller on the site that keeps its scrollbar: it scrolls
+     VERTICALLY, it is a transient typeahead list, and arrow buttons
+     inside a popover under the caret would be worse than the bar. No
+     horizontal scroller in this direction shows one — see core/rail.css. */
+  max-height: calc(var(--vh100) * 0.6); overflow-y: auto;
+}
+.ta li + li { border-top: 1px solid var(--ink-05); }
+.ta a {
+  display: grid; grid-template-columns: 3.4rem 1fr auto; align-items: baseline;
+  gap: 4px 14px; padding: 12px 16px;
+  transition: background-color 0.25s var(--ease);
+}
+.ta a:hover, .ta a:focus-visible { background: var(--ink-05); }
+.ta-no { font-family: var(--sans); font-size: var(--t-xs); color: var(--slate); letter-spacing: 0.06em; }
+.ta-nm { font-family: var(--serif); font-size: 1.04rem; font-variation-settings: "opsz" 24, "SOFT" 0, "WONK" 0; color: var(--ink); }
+.ta-sub { font-size: var(--t-xs); color: var(--slate); text-align: right; }
+.ta-empty { padding: 14px 16px; font-size: var(--t-sm); color: var(--slate); }
+@media (max-width: 560px) {
+  .ta a { grid-template-columns: 2.9rem 1fr; }
+  .ta-sub { grid-column: 2; text-align: left; }
+}
+
+/* ============================================================ 1 HERO */
+/* vw, not vh: a vh-based pad jitters when the mobile URL bar shows and hides */
+.hero { position: relative; padding-top: clamp(122px, 13vw, 190px); padding-bottom: 0; }
+.hero-copy { position: relative; z-index: 2; }
+.hero-line {
+  font-family: var(--serif);
+  font-size: var(--t-1);
+  font-weight: 500;
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+  font-variation-settings: "opsz" 120, "SOFT" 0, "WONK" 1;
+  max-width: 19ch;
+  margin-top: var(--s3);
+}
+.hero-line em { font-style: normal; color: var(--slate); }
+.hero .search { margin-top: clamp(34px, 5vw, 58px); }
+.hero-note { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 6px 18px; }
+.hero-fig {
+  position: relative;
+  margin-top: clamp(44px, 6vw, 78px);
+  height: clamp(280px, 52vw, 620px);
+  overflow: clip;
+}
+.hero-fig img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 26%; }
+/* the paper wash keeps the frame's sky reading as ground, not as a hero scrim */
+.hero-fig::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, var(--paper-60) 0%, transparent 34%);
+}
+.hero-cred {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 18px; flex-wrap: wrap;
+  padding-top: 12px;
+}
+
+/* ==================================== 2 SIGNATURE A — MASKED LOCKUP */
+/* One element carries the photograph. Two block spans clip it. The image
+   paints once across the whole lockup, so the two lines read as windows
+   onto one continuous scene. 340vh runway, sticky var(--vh100) stage. */
+.bloom {
+  position: relative;
+  height: calc(var(--vh100) * 3.4);
+  background: var(--deep);
+  /* the five properties app.js writes. Declared here so the section has a
+     correct, complete resting state before a single frame has run. */
+  --lock-k: 0.94;   /* lockup scale   — only ever increases */
+  --lock-x: 38%;    /* lockup background-position X inside the glyphs */
+  --lock-o: 1;      /* lockup opacity — the crossfade into the full frame */
+  --bloom-o: 0;     /* full-bleed opacity */
+  --bloom-k: 1;     /* full-bleed scale — only ever increases */
+}
+.bloom-stage {
+  position: sticky; top: 0;
+  height: var(--vh100);
+  overflow: clip;
+  display: grid; place-items: center;
+  padding-left: var(--pad); padding-right: var(--pad);
+}
+.bloom-full {
+  position: absolute; inset: 0; z-index: 0;
+  background-image: var(--bloom-img);
+  background-size: cover;
+  background-position: 50% 52%;
+  opacity: var(--bloom-o, 0);
+  transform: scale(var(--bloom-k, 1));
+  transform-origin: 50% 52%;
+  will-change: transform, opacity;
+}
+.bloom-full::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--deep) 46%, transparent) 0%, transparent 38%, color-mix(in srgb, var(--deep) 42%, transparent) 76%, color-mix(in srgb, var(--deep) 86%, transparent) 100%);
+}
+.lockup {
+  position: relative; z-index: 1;
+  margin: 0; text-align: center;
+  font-family: var(--serif);
+  font-size: var(--t-mega);
+  font-weight: 600;
+  line-height: 0.86;
+  letter-spacing: -0.038em;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  text-transform: uppercase;
+  background-image: var(--bloom-img);
+  /* 140%, not cover: the lockup box is ~4:1 and cover would scale the image
+     to the box width, leaving no horizontal slack for --lock-x to drift in. */
+  background-size: 140% auto;
+  background-position: var(--lock-x, 38%) 42%;
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  /* a hairline off the alpha ladder defines every glyph edge where the
+     photograph goes dark. calc() cancels the transform, so the stroke stays
+     one pixel wide the whole way to peak scale. Stroke, never an offset
+     shadow: an offset shadow ghosts at a clip edge. */
+  -webkit-text-stroke: calc(1px / var(--lock-k)) var(--paper-30);
+  paint-order: stroke fill;
+  transform: scale(var(--lock-k, 0.94));
+  transform-origin: 50% 50%;
+  opacity: var(--lock-o, 1);
+  will-change: transform, opacity;
+}
+.lockup span { display: block; }
+/* the fallback the spec demands: no background-clip:text → plain paper type */
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .lockup {
+    background-image: none;
+    color: var(--paper);
+    -webkit-text-fill-color: currentColor;
+    -webkit-text-stroke: 0;
+  }
+  .bloom-full { opacity: 0.42; }
+}
+@supports not (-webkit-text-stroke: 1px currentColor) {
+  .lockup { text-shadow: 0 0 2px var(--paper-30), 0 0 1px var(--paper-30); }
+}
+@media (max-width: 640px) {
+  .lockup { -webkit-text-stroke-width: calc(0.5px / var(--lock-k)); }
+}
+.bloom-note {
+  position: absolute; z-index: 2;
+  left: var(--pad); right: var(--pad); bottom: clamp(26px, 4vw, 54px);
+  display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+  color: var(--paper-60);
+}
+
+/* ================================= 3 SIGNATURE B — THE TIDELINE RULE */
+/* ONE JS-set property per section drives two complementary clips on a
+   shared 1px rule, and the bottom-fill mask on every photograph inside.
+   Default 100% so the page is complete and correct with no JS at all. */
+[data-tide] { --tide: 100%; }
+
+.tide { position: relative; height: 1px; width: 100%; }
+.tide-track, .tide-fill { position: absolute; inset: 0; height: 1px; display: block; }
+.tide-track {
+  background: var(--ink-10);
+  clip-path: rect(0 100% 100% calc(var(--tide) + var(--tide-gap)));
+}
+.tide-fill {
+  background: var(--brand);
+  clip-path: rect(0 calc(var(--tide) - var(--tide-gap)) 100% 0);
+}
+.dark .tide-track { background: var(--paper-10); }
+/* clip-path:rect() is recent. inset() draws the identical geometry everywhere. */
+@supports not (clip-path: rect(0px 1px 1px 0px)) {
+  .tide-track { clip-path: inset(0 0 0 calc(var(--tide) + var(--tide-gap))); }
+  .tide-fill { clip-path: inset(0 calc(100% - var(--tide) + var(--tide-gap)) 0 0); }
+}
+
+.tidefig { position: relative; overflow: clip; }
+.tidefig img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.js .tidefig img {
+  -webkit-mask-image: linear-gradient(0deg, #fff var(--tide), transparent calc(var(--tide) + 18%));
+  mask-image: linear-gradient(0deg, #fff var(--tide), transparent calc(var(--tide) + 18%));
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+@supports not ((mask-image: linear-gradient(#000, #000)) or (-webkit-mask-image: linear-gradient(#000, #000))) {
+  .js .tidefig img { -webkit-mask-image: none; mask-image: none; }
+}
+
+/* ======================================================== 4 THE COUNT */
+.facts { display: grid; gap: 0; grid-template-columns: repeat(3, 1fr); margin-top: var(--s4); }
+.facts .tide { grid-column: 1 / -1; margin-bottom: clamp(26px, 4vw, 46px); }
+.fact { padding-right: var(--gap); }
+.fact + .fact { border-left: 1px solid var(--ink-10); padding-left: var(--gap); }
+.fact-n {
+  display: block;
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 7.6vw, 6rem);
+  font-weight: 500; line-height: 0.92; letter-spacing: -0.03em;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 0;
+  font-variant-numeric: tabular-nums;
+}
+.fact-l { display: block; margin-top: 14px; max-width: 28ch; }
+@media (max-width: 760px) {
+  .facts { grid-template-columns: 1fr; }
+  .fact { padding-right: 0; }
+  .fact + .fact { border-left: 0; padding-left: 0; border-top: 1px solid var(--ink-10); margin-top: var(--s4); padding-top: var(--s4); }
+}
+
+/* ========================================================= 5 SELECTED */
+.rail-head { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--gap); flex-wrap: wrap; }
+.rail { position: relative; margin-top: clamp(30px, 4vw, 52px); }
+/* The scroll mechanics, the hidden scrollbar, the arrow buttons and the
+   disabled-at-each-end logic now come from core/rail.css + core/rail.js — the
+   client asked for arrows instead of a visible overflow scrollbar. What is left
+   here is only what the direction adds on top, and it is scoped to `.rail >`
+   so it can never reach the OTHER rail on the site: the filter bar on
+   search.html, which is a core rail too and must stay flush and unsnapped. */
+.rail > .rail-track {
+  --rail-gap: clamp(14px, 2vw, 28px);
+  list-style: none;
+  /* the track is a child of a .bleed section, not of a .wrap, so it restores
+     the page gutter itself rather than using core's .bleed negative inset */
+  scroll-padding-left: var(--pad);
+  padding-left: var(--pad); padding-right: var(--pad); padding-bottom: 6px;
+}
+.rail-item { flex: 0 0 auto; width: clamp(258px, 34vw, 460px); scroll-snap-align: start; }
+.rail-item a { display: block; }
+.rail-fig { overflow: clip; aspect-ratio: 4 / 5; background: var(--paper-2); }
+.rail-fig img {
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.001);
+  transition: transform 1.1s var(--ease), filter 0.6s var(--ease);
+  filter: saturate(0.92);
+}
+.rail-item a:hover .rail-fig img,
+.rail-item a:focus-visible .rail-fig img { transform: scale(1.045); filter: saturate(1); }
+.rail-meta {
+  display: flex; align-items: baseline; gap: 14px;
+  padding-top: 14px; border-top: 1px solid var(--ink-10); margin-top: 14px;
+}
+.rail-no { font-family: var(--sans); font-size: var(--t-xs); letter-spacing: 0.1em; color: var(--slate); font-variant-numeric: tabular-nums; }
+.rail-street {
+  font-family: var(--serif); font-size: var(--t-3); font-weight: 500;
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0;
+  letter-spacing: -0.01em;
+}
+/* core/rail.css draws the arrows as 46px discs. Tideline has no radius
+   anywhere else, so they become the same 1px hairline square as .btn-quiet.
+   Skinned, never re-authored: the enable/disable logic stays core's. They are
+   no longer hidden on a phone — the scrollbar that used to stand in for them
+   is gone, so the arrows are now the only visible control. */
+.rail-btn {
+  border-radius: 0;
+  background: transparent;
+  box-shadow: inset 0 0 0 1px var(--ink-30);
+}
+.rail-btn:hover:not(:disabled) {
+  background: var(--ink-05); color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+}
+.rail-btn:disabled { opacity: 0.3; }
+.rail-count { font-size: var(--t-xs); letter-spacing: 0.16em; color: var(--slate); }
+.rail-bar { background: var(--ink-10); }
+.rail-bar i { background: var(--ink); }
+@media (max-width: 560px) { .rail-btn { --rail-btn: 40px; } }
+
+/* ================================================== 6 NEIGHBOURHOODS */
+.bands { display: block; }
+.band { padding-top: clamp(34px, 5vw, 62px); padding-bottom: clamp(34px, 5vw, 62px); }
+.band > .tide { margin-bottom: clamp(26px, 3.6vw, 44px); }
+.band-grid {
+  display: grid; gap: var(--gap);
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  align-items: start;
+}
+.band:nth-child(even) .band-fig { order: 2; }
+.band-fig { aspect-ratio: 16 / 11; background: var(--paper-2); }
+.band-body { padding-top: 4px; }
+.band-h {
+  display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+  font-family: var(--serif); font-size: var(--t-2); font-weight: 500;
+  font-variation-settings: "opsz" 72, "SOFT" 0, "WONK" 1;
+  letter-spacing: -0.018em;
+}
+.band-count { font-family: var(--sans); font-size: var(--t-xs); font-weight: 500; letter-spacing: 0.14em; color: var(--slate); text-transform: uppercase; }
+.band-sub { margin-top: 8px; font-size: var(--t-sm); color: var(--sand-ink); letter-spacing: 0.03em; }
+.band-body .body { margin-top: 16px; }
+.streets {
+  list-style: none; display: flex; flex-wrap: wrap; gap: 6px 0;
+  margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--ink-10);
+}
+.streets li { font-size: var(--t-sm); color: var(--slate); }
+/* ::after, not ::before — a leading separator dangles at the start of a wrapped line */
+.streets li:not(:last-child)::after { content: "·"; padding: 0 9px; color: var(--ink-30); }
+.band-body .lnk { margin-top: 22px; }
+@media (max-width: 860px) {
+  .band-grid { grid-template-columns: 1fr; }
+  .band:nth-child(even) .band-fig { order: 0; }
+}
+
+/* ==================================================== 7 LARGE HOMES */
+.homes { margin-top: clamp(30px, 4vw, 50px); }
+.homes-group + .homes-group { margin-top: var(--s5); }
+.homes-h {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--ink-30);
+}
+.home-row {
+  display: grid; grid-template-columns: 3.6rem minmax(0, 1fr) minmax(0, 0.9fr) auto;
+  gap: 10px 18px; align-items: baseline;
+  padding-top: 13px; padding-bottom: 13px;
+  border-bottom: 1px solid var(--ink-10);
+  transition: background-color 0.3s var(--ease);
+}
+.home-row:hover, .home-row:focus-within { background: var(--ink-05); }
+.home-row .no { font-size: var(--t-xs); color: var(--slate); letter-spacing: 0.08em; }
+.home-name { font-family: var(--serif); font-size: 1.08rem; font-variation-settings: "opsz" 24, "SOFT" 0, "WONK" 0; }
+.home-where { font-size: var(--t-sm); color: var(--slate); }
+.home-beds { font-size: var(--t-sm); color: var(--sand-ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+@media (max-width: 640px) {
+  /* two rows: [no][name][beds] over [where]. Explicit placement — auto-flow
+     drops the beds under the number column and the row stops reading. */
+  .home-row { grid-template-columns: 3rem minmax(0, 1fr) auto; gap: 4px 14px; }
+  .home-name { grid-column: 2; grid-row: 1; }
+  .home-beds { grid-column: 3; grid-row: 1; text-align: right; }
+  .home-where { grid-column: 2 / -1; grid-row: 2; }
+}
+
+/* ======================================================= 8 PIPELINE */
+.lines { margin-top: clamp(28px, 4vw, 48px); }
+.line {
+  display: grid; gap: 8px 28px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
+  padding-top: var(--s4); padding-bottom: var(--s4);
+  border-top: 1px solid var(--paper-10);
+}
+.line:last-child { border-bottom: 1px solid var(--paper-10); }
+.line-addr {
+  font-family: var(--serif); font-size: var(--t-3); font-weight: 500;
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0;
+  color: var(--paper);
+}
+.line-addr small { display: block; font-family: var(--sans); font-size: var(--t-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--salt); margin-top: 8px; }
+.line-fact { color: color-mix(in srgb, var(--paper) 78%, transparent); font-size: var(--t-body); line-height: 1.58; }
+.line .cite { margin-top: 10px; color: var(--salt); }
+@media (max-width: 760px) { .line { grid-template-columns: 1fr; } }
+
+/* ========================================================= 9 DOORS */
+.doors { display: grid; gap: 1px; background: var(--ink-10); margin-top: clamp(28px, 4vw, 48px); }
+@media (min-width: 700px) { .doors { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .doors { grid-template-columns: repeat(4, 1fr); } }
+.door {
+  background: var(--paper);
+  display: flex; flex-direction: column; gap: 12px;
+  padding: clamp(24px, 3vw, 38px);
+  transition: background-color 0.4s var(--ease);
+}
+.door:hover, .door:focus-visible { background: var(--paper-2); }
+.door-h { font-family: var(--serif); font-size: var(--t-3); font-weight: 500; font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0; }
+.door-p { font-size: var(--t-sm); color: var(--slate); line-height: 1.55; flex: 1 1 auto; }
+.door .arw { color: var(--slate); }
+
+/* ======================================= REGISTER (buildings.html) */
+.sortbar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.sortbar > span { margin-right: 6px; }
+.sortbar button[data-sort] {
+  font-size: var(--t-xs); letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 9px 14px; border: 1px solid var(--ink-10); color: var(--slate);
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+.sortbar button[data-sort]:hover { color: var(--ink); border-color: var(--ink-30); }
+.sortbar button[data-sort][aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+
+.reg-group[hidden] { display: none !important; }
+.reg-head {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 18px;
+  padding-bottom: 14px; border-bottom: 1px solid var(--ink-30);
+  font-family: var(--serif); font-size: var(--t-3); font-weight: 500;
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0;
+}
+.reg-rows { content-visibility: auto; contain-intrinsic-size: auto 780px; }
+.reg-row { border-bottom: 1px solid var(--ink-10); }
+.reg-row a {
+  display: grid; align-items: baseline; gap: 8px 20px;
+  grid-template-columns: 3.6rem minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.8fr) auto;
+  padding-top: 15px; padding-bottom: 15px;
+  transition: background-color 0.3s var(--ease), padding-left 0.4s var(--ease);
+}
+.reg-row a:hover, .reg-row a:focus-visible, .reg-row.lit a { background: var(--ink-05); padding-left: 10px; }
+.reg-no { font-family: var(--sans); font-size: var(--t-xs); letter-spacing: 0.08em; color: var(--slate); font-variant-numeric: tabular-nums; }
+.reg-name { font-family: var(--serif); font-size: 1.1rem; font-variation-settings: "opsz" 24, "SOFT" 0, "WONK" 0; }
+.reg-street, .reg-meta { font-size: var(--t-sm); color: var(--slate); font-variant-numeric: tabular-nums; }
+@media (max-width: 860px) {
+  .reg-row a { grid-template-columns: 3rem minmax(0, 1fr) auto; }
+  .reg-street { grid-column: 2 / -1; }
+}
+
+/* specimen plate — an enhancement. Rows stay complete without it. */
+.plate { position: sticky; top: 120px; }
+.plate-img { aspect-ratio: 4 / 3; background: var(--paper-2); overflow: clip; }
+.plate-img img { width: 100%; height: 100%; object-fit: cover; }
+.plate.swap .plate-img img { animation: plate-in 0.62s var(--ease) both; }
+@keyframes plate-in { from { opacity: 0; transform: scale(1.02); } to { opacity: 1; transform: none; } }
+.plate-meta { display: flex; align-items: baseline; gap: 14px; padding-top: 14px; flex-wrap: wrap; }
+.plate-no { font-family: var(--sans); font-size: var(--t-xs); letter-spacing: 0.1em; color: var(--slate); font-variant-numeric: tabular-nums; }
+.plate-name { font-family: var(--serif); font-size: var(--t-3); font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0; }
+.plate-street { flex: 1 0 100%; font-size: var(--t-sm); color: var(--slate); }
+@media (max-width: 900px) { .plate { display: none; } }
+
+/* atlas — a drawn SVG of the real extent. Numbers as pins. */
+.atlas { background: var(--paper-2); }
+.atlas-svg { width: 100%; height: auto; display: block; }
+.atlas-grid line { stroke: var(--ink-10); stroke-width: 1; }
+.pin { cursor: pointer; }
+.pin-hit { fill: transparent; stroke: var(--ink-30); stroke-width: 1; transition: fill 0.3s var(--ease), stroke 0.3s var(--ease); }
+.pin-no { fill: var(--slate); font-family: var(--sans); font-size: 11px; font-variant-numeric: tabular-nums; letter-spacing: 0.02em; }
+.pin:hover .pin-hit, .pin.lit .pin-hit { fill: var(--brand); stroke: var(--brand); }
+.pin:hover .pin-no, .pin.lit .pin-no { fill: var(--paper); }
+
+/* ========================================================= FOOTER */
+.ft { background: var(--deep); color: var(--paper); }
+.ft-map {
+  display: grid; gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  padding-bottom: var(--s6);
+}
+.ft-col { min-width: 0; }
+.ft-h {
+  font-size: var(--t-kicker); font-weight: 500; letter-spacing: 0.2em;
+  text-transform: uppercase; color: var(--salt);
+  padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--paper-10);
+}
+.ft-list { list-style: none; display: grid; gap: 11px; }
+.ft-list a { font-size: var(--t-sm); color: color-mix(in srgb, var(--paper) 80%, transparent); transition: color 0.3s var(--ease); }
+.ft-list a:hover, .ft-list a:focus-visible { color: var(--paper); }
+.ft-list .tnum { color: var(--salt); font-size: var(--t-xs); padding-left: 8px; }
+.ft-addr { font-style: normal; font-size: var(--t-sm); line-height: 1.7; color: color-mix(in srgb, var(--paper) 80%, transparent); }
+.ft-addr a { border-bottom: 1px solid var(--paper-30); padding-bottom: 1px; }
+.ft-social { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 16px; }
+/* Legal & utility strip — 2026-09-11. Careers lives in the portfolio
+   column; the CCPA/ADA/site-map links sit on their own hairline row above
+   the brand line. Small uppercase links in the salt tone, warm-paper/square
+   language. One hairline (on .ft-legal) now separates the map from the whole
+   bottom cluster, so .ft-base drops its own border. */
+.ft-legal {
+  display: flex; flex-wrap: wrap; gap: 12px 26px;
+  padding-top: var(--s4); border-top: 1px solid var(--paper-10);
+}
+.ft-legal a {
+  font-size: var(--t-xs); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--salt); transition: color 0.3s var(--ease);
+}
+.ft-legal a:hover, .ft-legal a:focus-visible { color: var(--paper); }
+.ft-base {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 20px 34px;
+  padding-top: var(--s3);
+}
+/* the EHO mark is never smaller than the Wiseman mark */
+.ft .eho svg { width: 30px; height: auto; color: var(--paper); }
+.ft .eho span { font-size: var(--t-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--salt); }
+.ft-brand { display: inline-flex; align-items: center; gap: 12px; }
+.ft-brand svg { width: 26px; height: 26px; color: var(--brand); }
+.ft-brand b { font-weight: 500; font-size: var(--t-xs); letter-spacing: 0.26em; text-transform: uppercase; }
+.ft-copy { font-size: var(--t-xs); color: var(--salt); letter-spacing: 0.04em; }
+
+/* ================================================ motion + guards */
+@media (prefers-reduced-motion: reduce) {
+  /* choreography collapses; composition survives. The photograph stays in
+     the letters as a static piece of art; only the bloom is deleted. */
+  .bloom { height: auto; }
+  .bloom-stage { position: static; height: auto; padding-top: var(--sec-y); padding-bottom: var(--sec-y); overflow: visible; }
+  .bloom-full { display: none; }
+  .lockup { transform: none; opacity: 1; }
+  .bloom-note { position: static; margin-top: var(--s5); }
+  [data-tide] { --tide: 100%; }
+  .rail-fig img, .rail-nav button, .door, .home-row, .reg-row a { transition: none; }
+  .plate.swap .plate-img img { animation: none; }
+  .arw { transition: none; }
+}
+
+@media (max-width: 700px) {
+  .bloom-note { gap: 8px; }
+  .hero-fig { object-position: 50% 34%; }
+}
+
+/* long-word safety for the display steps on very narrow screens */
+@media (max-width: 420px) {
+  .t-mega, .lockup { letter-spacing: -0.03em; }
+  .hero-line { max-width: none; }
+}
+
+/* print: the register must survive a printout */
+@media print {
+  .hd, .mnav, .pt, .rail-nav, .plate, .atlas, .bloom { display: none !important; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .dark, .ft { background: #fff !important; color: #000 !important; }
+}
+
+/* =====================================================================
+   APPENDED — stage 2. Components for neighborhoods.html and the two
+   generated templates (templates/building.html, templates/neighborhood.html).
+
+   Nothing above this line is touched. Every selector below introduces a
+   NEW class; the only compound selectors on existing classes are the
+   `.band.lit` state (the atlas ↔ band link on neighborhoods.html) and
+   `.band-fig.figfill`, which adds geometry rather than changing it.
+
+   The two signature devices stay on the home page. Off the home page a
+   band uses `.band-rule` (a static hairline) instead of `.tide`, and
+   `.figfill` instead of `.tidefig` — the same geometry with no mask.
+
+   NEW CLASS INDEX
+     .page-top        first section of an inner page; clears the fixed header
+     .crumbs          breadcrumb trail (ol)
+     .band-rule       the static 1px hairline a band uses off the home page
+     .figfill         a figure whose <img> fills the box, no mask
+     .atlas-lay       map beside its key; single column under 900px
+     .atlas-fb        the no-JS paragraph inside an .atlas host
+     .gal             building gallery — one lead frame, the rest in a row
+     .spec .spec-k .spec-v      the fact list (dl)
+     .amen            amenity list, hairline rows
+     .near .near-fig .near-meta four nearby buildings
+     .reg-lay         register column + sticky specimen plate
+     .keylist         a compact key beside a map (name + count; no ordinal)
+   ===================================================================== */
+
+/* an inner page opens clear of the fixed header. .sec sets the rhythm;
+   this only raises the first top pad. vw, never vh. */
+.page-top { padding-top: clamp(118px, 12vw, 186px); }
+
+/* ------------------------------------------------------------ crumbs */
+.crumbs { list-style: none; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px; }
+.crumbs li { font-size: var(--t-xs); color: var(--slate); letter-spacing: 0.02em; }
+.crumbs li:not(:last-child)::after { content: "/"; padding-left: 8px; color: var(--ink-30); }
+.crumbs a { border-bottom: 1px solid var(--ink-10); padding-bottom: 2px; transition: border-color 0.35s var(--ease), color 0.35s var(--ease); }
+.crumbs a:hover, .crumbs a:focus-visible { color: var(--ink); border-bottom-color: var(--ink); }
+.crumbs [aria-current] { color: var(--ink); }
+
+/* --------------------------------------------- bands off the home page */
+.band-rule { height: 1px; background: var(--ink-10); border: 0; margin-bottom: clamp(26px, 3.6vw, 44px); }
+.figfill { overflow: clip; }
+.figfill img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* the atlas pin lights its band. Brand as a hairline, never as a surface. */
+.band.lit .band-fig { outline: 1px solid var(--brand); outline-offset: 5px; }
+
+/* --------------------------------------------------------- the atlas */
+.atlas-lay { display: grid; gap: var(--gap); grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 900px) { .atlas-lay { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: clamp(32px, 4vw, 72px); } }
+.atlas-fb { padding: clamp(20px, 3vw, 34px); }
+.keylist { list-style: none; border-top: 1px solid var(--ink-10); }
+.keylist li { border-bottom: 1px solid var(--ink-10); }
+.keylist a, .keylist > span {
+  display: grid; grid-template-columns: 2.4rem minmax(0, 1fr) auto;
+  gap: 6px 14px; align-items: baseline;
+  padding-top: 12px; padding-bottom: 12px;
+  transition: background-color 0.3s var(--ease), padding-left 0.4s var(--ease);
+}
+.keylist a:hover, .keylist a:focus-visible { background: var(--ink-05); padding-left: 8px; }
+.keylist .no { font-size: var(--t-xs); letter-spacing: 0.08em; color: var(--slate); }
+.keylist .keyname { font-family: var(--serif); font-size: 1.06rem; font-variation-settings: "opsz" 24, "SOFT" 0, "WONK" 0; }
+.keylist .keycount { font-size: var(--t-sm); color: var(--slate); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+/* ------------------------------------------------------- the gallery */
+.gal {
+  display: grid; gap: clamp(8px, 1vw, 14px);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: clamp(26px, 3.4vw, 44px);
+  list-style: none;
+}
+.gal figure { aspect-ratio: 4 / 3; background: var(--paper-2); }
+.gal figure:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+@media (max-width: 700px) {
+  .gal { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .gal figure:first-child { aspect-ratio: 3 / 2; }
+}
+
+/* ---------------------------------------------------- the fact list */
+.spec {
+  display: grid; gap: var(--s4) var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+  margin-top: var(--s4);
+  padding-top: var(--s3);
+  border-top: 1px solid var(--ink-30);
+}
+.spec-k { display: block; font-size: var(--t-kicker); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate); }
+.spec-v {
+  display: block; margin-top: 9px;
+  font-family: var(--serif); font-size: var(--t-3); font-weight: 500;
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0;
+  font-variant-numeric: tabular-nums; letter-spacing: -0.008em;
+}
+.spec-v small { display: block; font-family: var(--sans); font-size: var(--t-xs); letter-spacing: 0.02em; color: var(--slate); margin-top: 6px; }
+
+/* ------------------------------------------------------- amenities */
+.amen { list-style: none; margin-top: 18px; }
+.amen li { font-size: var(--t-sm); color: var(--slate); padding-top: 11px; padding-bottom: 11px; border-bottom: 1px solid var(--ink-10); }
+.amen li:first-child { border-top: 1px solid var(--ink-10); }
+
+/* ---------------------------------------------------------- nearby */
+.near {
+  list-style: none; display: grid; gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr));
+  margin-top: clamp(26px, 3.4vw, 44px);
+}
+.near a { display: block; }
+.near-fig { display: block; aspect-ratio: 4 / 3; background: var(--paper-2); overflow: clip; }
+.near-fig img {
+  width: 100%; height: 100%; object-fit: cover;
+  transform: scale(1.001); filter: saturate(0.92);
+  transition: transform 1.1s var(--ease), filter 0.6s var(--ease);
+}
+.near a:hover .near-fig img, .near a:focus-visible .near-fig img { transform: scale(1.045); filter: saturate(1); }
+.near-meta { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; padding-top: 12px; margin-top: 12px; border-top: 1px solid var(--ink-10); }
+
+/* -------------------------------- register column + specimen plate */
+.reg-lay { display: grid; gap: var(--gap); grid-template-columns: minmax(0, 1fr); margin-top: clamp(26px, 3.4vw, 44px); }
+@media (min-width: 900px) { .reg-lay { grid-template-columns: minmax(0, 1fr) minmax(0, 330px); gap: clamp(32px, 4vw, 72px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .near-fig img, .keylist a, .crumbs a { transition: none; }
+}
+@media print {
+  .atlas-lay, .gal, .near { display: block; }
+}
+
+/* =====================================================================
+   APPENDED — stage 2b. The three routed pages:
+   company.html · residents.html · contact.html
+
+   Nothing above this line is touched. Three new classes plus one
+   element-scoped rule on .field-in that constrains a resize handle and
+   changes nothing else. Everything else on those pages is built from
+   the class index above.
+
+   NEW CLASS INDEX
+     .doors-3     six routed doors as 3 x 2 on wide screens (contact.html)
+     .tel-xl      a display-size telephone link (the 24/7 path)
+     .note        a marginal note: an aside, a disclosure, [CLIENT COPY]
+   ===================================================================== */
+
+/* six routes need 3 x 2. The .doors default of four columns leaves two
+   empty cells, and an empty cell shows the grid's own --ink-10 ground. */
+@media (min-width: 1100px) { .doors-3 { grid-template-columns: repeat(3, 1fr); } }
+
+/* the 24/7 repair number is the most visible thing on residents.html, so
+   it is set at display size; .lnk's hairline is sized for body copy. */
+.tel-xl {
+  display: inline-block;
+  border-bottom: 1px solid color-mix(in srgb, currentColor 34%, transparent);
+  padding-bottom: 0.04em;
+  transition: border-color 0.4s var(--ease);
+}
+.tel-xl:hover, .tel-xl:focus-visible { border-bottom-color: currentColor; }
+
+/* a marginal note. One hairline on the inline-start edge — no card, no
+   radius, no tinted panel. */
+.note { border-left: 1px solid var(--ink-30); padding-left: clamp(16px, 2vw, 26px); }
+.dark .note { border-left-color: var(--paper-30); }
+
+/* the message box reuses .field-in. Only the drag handle needs
+   constraining, so a drag cannot widen its grid column. */
+textarea.field-in { resize: vertical; min-height: 8em; }
+
+@media (prefers-reduced-motion: reduce) { .tel-xl { transition: none; } }
+
+/* =====================================================================
+   STAGE 2 — buildings.html (The Register) and search.html
+   ---------------------------------------------------------------------
+   Appended, never a restyle. Every rule below is either a NEW class or
+   the narrow-width grid placement .reg-row was missing — and .reg-* is
+   used by buildings.html and by nothing else on the site.
+
+   NEW CLASSES (add to the CLASS INDEX at the top of this file)
+     .viewbar .view-alt        the three peer views behind real URLs
+     .jsonly                   wrapper for a control that needs JS
+     .reg-bar                  register shell: the search + sort row
+     .reg-beds .reg-rent       the two .reg-meta columns, so they can be
+                               placed explicitly under 860px
+     .plates .plate-cell .plate-cell-fig .plate-cell-meta .plate-cell-st
+     .bleed-tight              a full-bleed band at 0.6x rhythm
+     .filters .fset .fset-h .checks .check .check-l .check-n .filters-foot
+     .res-head .shortlist
+     .avl .avl-b .avl-no .avl-name .avl-addr .avl-area .avl-rent
+     .avl-go .avl-r .fav .avl.only-saved
+     .empty
+   ===================================================================== */
+
+/* ------------------------------------------- the three peer views */
+/* List is the page. Atlas and Plates are enhancements that need JS to be
+   reachable at all, so the bar that offers them only exists with JS —
+   a control that cannot work is worse than no control. */
+.viewbar {
+  display: none;
+  flex-wrap: wrap;
+  gap: 0 clamp(20px, 3vw, 42px);
+  margin-top: clamp(30px, 4vw, 48px);
+  border-top: 1px solid var(--ink-10);
+  border-bottom: 1px solid var(--ink-10);
+}
+.js .viewbar { display: flex; }
+.viewbar a {
+  position: relative; padding: 15px 0;
+  font-size: var(--t-xs); font-weight: 500; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--slate);
+  transition: color 0.3s var(--ease);
+}
+.viewbar a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px;
+  background: var(--brand); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.4s var(--ease);
+}
+.viewbar a:hover, .viewbar a:focus-visible, .viewbar a[aria-current] { color: var(--ink); }
+.viewbar a:hover::after, .viewbar a:focus-visible::after, .viewbar a[aria-current]::after { transform: scaleX(1); }
+.view-alt { display: none; }
+.js .view-alt.on { display: block; }
+/* same principle for the sort controls: the register is complete and
+   correct without them, and a control that cannot work is worse than no
+   control. The wrapper is gated, so .sortbar itself is never restyled. */
+.jsonly { display: none; }
+.js .jsonly { display: block; }
+
+/* ------------------------------------------------ register shell */
+.reg-bar {
+  display: grid; gap: var(--gap);
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+}
+.reg-bar .search { max-width: 540px; }
+@media (max-width: 900px) { .reg-bar { grid-template-columns: 1fr; align-items: stretch; } }
+
+/* the rows sit in .reg-lay, the shared "column + sticky specimen plate"
+   layout already declared above for templates/neighborhood.html — one
+   component, two pages, rather than a second grid that does the same job.
+   Nothing about it is overridden here. */
+.reg-group + .reg-group { margin-top: var(--s5); }
+.reg-beds { white-space: nowrap; }
+.reg-rent { text-align: right; white-space: nowrap; }
+@media (max-width: 860px) {
+  /* two lines: [no][name][beds] over [street · area][rent]. Explicit —
+     auto-flow drops the meta columns under the number and the row stops
+     reading. Mirrors the .home-row treatment on the home page. */
+  .reg-name { grid-column: 2; grid-row: 1; }
+  .reg-beds { grid-column: 3; grid-row: 1; text-align: right; }
+  .reg-street { grid-column: 2; grid-row: 2; }
+  .reg-rent { grid-column: 3; grid-row: 2; }
+}
+
+/* ----------------------------------------------- the plates view */
+/* A contact sheet, not a card grid: no radius, no shadow, no box. The 1px
+   ladder hairlines are the only dividers, exactly as in .doors. */
+.plates {
+  list-style: none;
+  display: grid; gap: 1px; background: var(--ink-10);
+  border: 1px solid var(--ink-10);
+  grid-template-columns: repeat(auto-fill, minmax(min(228px, 100%), 1fr));
+}
+.plate-cell { background: var(--paper); }
+.plate-cell-fig { display: block; aspect-ratio: 3 / 2; overflow: clip; background: var(--paper-2); }
+.plate-cell-fig img {
+  width: 100%; height: 100%; object-fit: cover; filter: saturate(0.92);
+  transition: transform 1.1s var(--ease), filter 0.6s var(--ease);
+}
+.plate-cell a:hover .plate-cell-fig img,
+.plate-cell a:focus-visible .plate-cell-fig img { transform: scale(1.04); filter: saturate(1); }
+.plate-cell-meta { display: flex; align-items: baseline; gap: 12px; padding: 13px 16px 17px; }
+.plate-cell-meta .no { font-size: var(--t-xs); letter-spacing: 0.08em; color: var(--slate); }
+.plate-cell-st {
+  font-family: var(--serif); font-size: 1.02rem;
+  font-variation-settings: "opsz" 24, "SOFT" 0, "WONK" 0;
+}
+
+/* a full-bleed tint band at 0.6x rhythm. .bleed's shorthand padding beats
+   .sec-tight's longhand, so the quiet band declares its own. */
+.bleed-tight { padding: calc(var(--sec-y) * 0.6) 0; }
+
+/* ================================== FILTERS (search.html only) */
+.filters {
+  display: grid; gap: var(--gap) var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr));
+}
+.fset { border: 0; min-width: 0; }
+.fset-h {
+  display: block; width: 100%;
+  padding-bottom: 13px; margin-bottom: 12px;
+  border-bottom: 1px solid var(--ink-30);
+  font-size: var(--t-kicker); font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--slate);
+}
+.checks { display: grid; }
+.check {
+  display: flex; align-items: baseline; gap: 11px;
+  padding: 7px 0; font-size: var(--t-sm); cursor: pointer;
+}
+.check input {
+  flex: 0 0 auto; width: 13px; height: 13px; position: relative; top: 1px;
+  accent-color: var(--ink);
+}
+.check-l { flex: 1 1 auto; transition: color 0.3s var(--ease); }
+.check-n { flex: 0 0 auto; font-size: var(--t-xs); color: var(--slate); }
+.check:hover .check-l { color: var(--ink); }
+.fset .field { margin-top: 4px; }
+.filters-foot {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 16px var(--gap);
+  margin-top: var(--s5); padding-top: var(--s3);
+  border-top: 1px solid var(--ink-10);
+}
+.filters-foot .btn-row { flex: 0 1 auto; }
+.filters-foot .btn { padding: 12px 20px; }
+
+/* ------------------------------------------- results head + shortlist */
+.res-head {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 8px var(--gap);
+}
+.res-head .small { max-width: 44ch; }
+.shortlist {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+  gap: 14px var(--gap);
+  margin-top: var(--s4); padding: 14px 18px;
+  background: var(--ink-05); border: 1px solid var(--ink-10);
+}
+.shortlist .btn-row { flex: 0 1 auto; }
+.shortlist .btn { padding: 10px 16px; }
+
+/* ---------------------------------------------- the results table */
+.avl { width: 100%; border-collapse: collapse; margin-top: clamp(26px, 3.4vw, 44px); }
+.avl th {
+  text-align: left; padding: 0 16px 14px 0;
+  border-bottom: 1px solid var(--ink-30);
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate); white-space: nowrap;
+}
+.avl td {
+  padding: 15px 16px 15px 0; border-bottom: 1px solid var(--ink-10);
+  vertical-align: baseline; font-size: var(--t-sm); color: var(--slate);
+  font-variant-numeric: tabular-nums;
+}
+.avl th.avl-r, .avl td.avl-r { text-align: right; padding-right: 0; }
+.avl tbody tr { transition: background-color 0.3s var(--ease); }
+.avl tbody tr:hover, .avl tbody tr:focus-within { background: var(--ink-05); }
+.avl-b { min-width: 13rem; }
+.avl-no { display: block; font-family: var(--sans); font-size: var(--t-xs); letter-spacing: 0.08em; color: var(--slate); }
+.avl-name {
+  display: block; margin-top: 3px;
+  font-family: var(--serif); font-size: 1.1rem;
+  font-variation-settings: "opsz" 24, "SOFT" 0, "WONK" 0;
+  color: var(--ink); font-variant-numeric: normal;
+}
+.avl-name:hover, .avl-name:focus-visible { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+.avl-addr { display: block; margin-top: 4px; font-size: var(--t-xs); color: var(--slate); }
+.avl-rent { color: var(--ink); white-space: nowrap; }
+.avl-go { white-space: nowrap; }
+.avl-go .lnk { font-size: var(--t-xs); }
+.fav {
+  margin-left: 14px; padding: 7px 11px;
+  border: 1px solid var(--ink-10); color: var(--slate);
+  font-size: var(--t-xs); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  transition: color 0.3s var(--ease), background-color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.fav:hover { color: var(--ink); border-color: var(--ink-30); }
+.fav[aria-pressed="true"] { color: var(--paper); background: var(--ink); border-color: var(--ink); }
+/* the shortlist is a mode, not a seventh filter: a saved row shows whatever
+   the filters say, so "show only saved" can never land on an empty table.
+   Specificity, not luck, is what beats [hidden]{display:none!important}. */
+.avl.only-saved tbody tr[data-row]:not(.is-saved) { display: none; }
+.avl.only-saved tbody tr[data-row].is-saved { display: table-row !important; }
+
+.empty { margin-top: var(--s5); padding-top: var(--s5); border-top: 1px solid var(--ink-30); }
+
+@media (max-width: 900px) {
+  /* the table becomes a stack of records. The column head is gone, so each
+     figure carries its own unit from data-u — no duplicated label markup. */
+  .avl, .avl tbody, .avl tr, .avl td { display: block; }
+  .avl thead { display: none; }
+  .avl tbody tr[data-row] {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 16px;
+    padding-top: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--ink-10);
+  }
+  .avl td { padding: 0; border-bottom: 0; }
+  .avl th.avl-r, .avl td.avl-r { text-align: left; }
+  .avl td[data-u]::after { content: "\00a0" attr(data-u); }
+  .avl-b { flex: 1 0 100%; min-width: 0; margin-bottom: 9px; }
+  .avl-area { flex: 1 0 100%; margin-bottom: 2px; }
+  .avl-rent { flex: 1 0 100%; margin-top: 7px; }
+  .avl-go { flex: 1 0 100%; margin-top: 13px; white-space: normal; }
+  /* rows are flex at this width, so the shortlist override follows suit */
+  .avl.only-saved tbody tr[data-row].is-saved { display: flex !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plate-cell-fig img, .fav, .viewbar a, .viewbar a::after,
+  .avl tbody tr, .check-l { transition: none; }
+}
+
+@media print {
+  /* the register and the results must survive a printout; content-visibility
+     would otherwise drop the rows that were never scrolled to */
+  .viewbar, .jsonly, .reg-bar .search, .view-alt,
+  .shortlist, .empty, .fav, .filters, .filters-foot { display: none !important; }
+  .reg-rows, .cv { content-visibility: visible; }
+  #view-register .reg-lay { grid-template-columns: 1fr; }
+}
+
+/* =====================================================================
+   STAGE 3 — ELEVATION. Image-forward, high-end, and a real map.
+   ---------------------------------------------------------------------
+   Appended, never a restyle. Every selector below is a NEW class except
+   the four `.rail-*` rules in §3, which change plate geometry only, and
+   `.tidefig img`, which gains a transform tied to the same --tide the
+   mask already reads. Nothing above this line is touched.
+
+   NEW CLASS INDEX
+     .vista .vista-fig .vista-img .vista-scrim .vista-body .vista-kicker
+     .vista-h .vl .vista-search .vista-count .vista-cred
+                     the full-bleed photographic hero, 100svh
+     .hoods .hoods-head
+     .vband .vband-fig .vband-scrim .vband-body .vband-ix .vband-h
+     .vband-count .vband-st .vband-cred
+                     a neighbourhood band: 78svh of photograph, the area
+                     name enormous over it, the streets small underneath
+     .mapsec .mapfull .mapbox .reg-map .bmap .map-aside
+                     the four real-map placements (core/map.js)
+     .bhero .bhero-fig .bhero-scrim .bhero-body .bhero-h .bhero-meta
+                     a building page opening on its own best frame
+     .gal-lg         the four-image gallery, large
+     .amen-cols      amenities as two quiet columns, no rules, no boxes
+   ===================================================================== */
+
+:root {
+  /* map.js tints CARTO's cartography with this so the map belongs to the
+     page rather than sitting on it as a widget. */
+  --map-tint: var(--paper);
+}
+
+/* ============================================ 1 THE PHOTOGRAPHIC HERO */
+.vista {
+  position: relative;
+  min-height: var(--vh100);
+  display: flex;
+  align-items: flex-end;
+  overflow: clip;
+  background: var(--deep);
+  isolation: isolate;
+  /* vw for the top pad, so a mobile URL bar cannot jitter the copy */
+  padding-top: clamp(118px, 15vw, 200px);
+  padding-bottom: clamp(40px, 6vh, 82px);
+  /* the AA-safe teal focus ring is a dark token; over a night photograph
+     the paper ring is the only one that clears 3:1 */
+  --focus: var(--paper);
+}
+.vista-fig { position: absolute; inset: 0; z-index: 0; overflow: clip; margin: 0; }
+.vista-img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 42%;
+  will-change: transform;
+}
+/* the page-load move: 1.06 -> 1.00 over 1.2s. fill-mode both, so under
+   reduced motion (base.css collapses every animation to 0.001ms) the
+   composition lands on its END state rather than freezing at the start. */
+.js .vista-img { animation: vista-in 1.2s var(--ease) both; }
+@keyframes vista-in { from { transform: scale(1.06); } to { transform: scale(1); } }
+
+/* a gradient, never a flat sheet: dense under the copy, gone by 64% */
+.vista-scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(to top,
+      color-mix(in srgb, var(--deep) 94%, transparent) 0%,
+      color-mix(in srgb, var(--deep) 82%, transparent) 22%,
+      color-mix(in srgb, var(--deep) 44%, transparent) 46%,
+      transparent 74%),
+    linear-gradient(to bottom,
+      color-mix(in srgb, var(--deep) 62%, transparent) 0%,
+      transparent 28%),
+    linear-gradient(to right,
+      color-mix(in srgb, var(--deep) 52%, transparent) 0%,
+      transparent 56%);
+}
+/* a flex item's min-width is auto, so a long unbroken run of small caps can
+   push the copy column past the viewport and body{overflow-x:clip} shears
+   the end off in silence. min-width:0 hands the line back to the breaker. */
+.vista-body { position: relative; z-index: 3; width: 100%; min-width: 0; color: var(--paper); }
+.vista-kicker {
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 78%, transparent);
+}
+.vista-h {
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 7.2vw, 8.5rem);
+  font-weight: 500; line-height: 0.94; letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+  margin-top: clamp(14px, 1.8vw, 28px);
+  max-width: 17ch;
+}
+/* CONVENTIONS 5: an overflow:hidden line mask cuts ~0.098em off the
+   descenders. Extend the mask and cancel the extension. */
+.vista-h .vl { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.vista-h .vl i { display: block; font-style: normal; }
+.js .vista-h .vl i { animation: vl-up 0.9s var(--ease) both; }
+.js .vista-h .vl:nth-of-type(1) i { animation-delay: 0.14s; }
+.js .vista-h .vl:nth-of-type(2) i { animation-delay: 0.23s; }
+@keyframes vl-up { from { transform: translateY(102%); } to { transform: none; } }
+
+/* the search is usable from the first frame: opacity only, never a
+   transform, so the hit area never moves under a pointer */
+.vista-search { margin-top: clamp(26px, 4vh, 54px); max-width: min(640px, 100%); }
+.vista-search .field-lbl { color: color-mix(in srgb, var(--paper) 74%, transparent); }
+.vista-search .search-row { border-bottom-color: var(--paper-30); }
+.vista-search .search-in { color: var(--paper); }
+.vista-search .search-in::placeholder { color: color-mix(in srgb, var(--paper) 48%, transparent); }
+.vista-search:focus-within .search-row { border-bottom-color: var(--paper); }
+.vista-search .search-go { color: color-mix(in srgb, var(--paper) 78%, transparent); }
+.vista-search .search-go:hover, .vista-search .search-go:focus-visible { color: var(--paper); }
+
+.vista-count {
+  display: flex; flex-wrap: wrap; gap: 8px clamp(18px, 3vw, 46px);
+  margin-top: clamp(22px, 3vh, 42px);
+  font-size: 0.7rem; letter-spacing: 0.22em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 74%, transparent);
+}
+.vista-count b { font-weight: 500; color: var(--paper); }
+.vista-cred {
+  position: absolute; z-index: 3; right: var(--pad); bottom: clamp(16px, 2.4vh, 30px);
+  font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 48%, transparent);
+}
+@media (max-width: 980px) { .vista-cred { display: none; } }
+@media (max-width: 560px) {
+  .vista-search .field-lbl { letter-spacing: 0.12em; }
+  .vista-count { letter-spacing: 0.16em; gap: 6px 16px; }
+  .bhero-meta { letter-spacing: 0.14em; }
+}
+
+.js .vista-kicker, .js .vista-search, .js .vista-count, .js .vista-cred {
+  animation: vfade 0.8s var(--ease) both;
+}
+.js .vista-kicker { animation-delay: 0.06s; }
+.js .vista-search { animation-delay: 0.44s; }
+.js .vista-count { animation-delay: 0.56s; }
+.js .vista-cred { animation-delay: 0.72s; }
+@keyframes vfade { from { opacity: 0; } to { opacity: 1; } }
+
+/* ==================================== 2 THE NEIGHBOURHOOD BANDS, TALL */
+.hoods { padding-top: var(--sec-y); }
+.hoods-head { padding-bottom: clamp(26px, 4vw, 54px); }
+.vband {
+  position: relative;
+  min-height: calc(var(--vh100) * 0.78);
+  display: flex; align-items: flex-end;
+  overflow: clip;
+  background: var(--deep);
+  isolation: isolate;
+  padding-top: clamp(56px, 9vh, 120px);
+  padding-bottom: clamp(34px, 5vh, 66px);
+  --focus: var(--paper);
+}
+.vband-fig { position: absolute; inset: 0; z-index: 0; margin: 0; }
+.vband-fig img { width: 100%; height: 100%; object-fit: cover; }
+.vband-scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(to top,
+      color-mix(in srgb, var(--deep) 94%, transparent) 0%,
+      color-mix(in srgb, var(--deep) 82%, transparent) 26%,
+      color-mix(in srgb, var(--deep) 46%, transparent) 54%,
+      transparent 84%),
+    linear-gradient(to right,
+      color-mix(in srgb, var(--deep) 62%, transparent) 0%,
+      transparent 58%);
+}
+.vband-body { position: relative; z-index: 3; width: 100%; min-width: 0; color: var(--paper); }
+.vband-ix {
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 62%, transparent);
+}
+.vband-h {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 6vw, 6rem);
+  font-weight: 500; line-height: 0.96; letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+  margin-top: 10px;
+}
+.vband-count {
+  margin-top: 12px;
+  font-size: var(--t-xs); letter-spacing: 0.18em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 80%, transparent);
+}
+.vband-st {
+  list-style: none; display: flex; flex-wrap: wrap; gap: 4px 0;
+  margin-top: 20px; padding-top: 15px; border-top: 1px solid var(--paper-30);
+  max-width: 74ch;
+}
+.vband-st li { font-size: var(--t-sm); color: color-mix(in srgb, var(--paper) 72%, transparent); }
+.vband-st li:not(:last-child)::after { content: "\00b7"; padding: 0 9px; color: var(--paper-30); }
+.vband-body .lnk { margin-top: 22px; color: var(--paper); }
+.vband-cred {
+  position: absolute; z-index: 3; right: var(--pad); bottom: clamp(14px, 2.2vh, 26px);
+  font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 58%, transparent);
+}
+@media (max-width: 980px) { .vband-cred { display: none; } }
+
+/* The tide runs over a full-bleed band too, but gently: at this scale a
+   photograph that is half transparent reads as a broken image, not as a
+   rising tide. The floor is set in the markup (data-tide-min) and the
+   feather is long, so only the top edge dissolves into the ground and
+   closes as the band is read. */
+.js .vband-fig img {
+  -webkit-mask-image: linear-gradient(0deg, #fff var(--tide, 100%), transparent calc(var(--tide, 100%) + 30%));
+  mask-image: linear-gradient(0deg, #fff var(--tide, 100%), transparent calc(var(--tide, 100%) + 30%));
+  /* one image per screen may move: the same --tide carries a unitless twin,
+     so the photograph settles 1.00 -> 1.035 with no second property write
+     and no second rAF loop. */
+  transform: scale(calc(1 + 0.035 * var(--tidek, 1)));
+}
+
+/* ============================================ 3 THE SELECTED TWELVE */
+/* Taller plates, a 4:5 crop, and a hard snap. Number and street only. */
+.rail > .rail-track { scroll-snap-type: x mandatory; }
+.rail-item { width: auto; }
+.rail-fig {
+  /* a <span> is inline, and aspect-ratio and height do not apply to a
+     non-replaced inline box: without this the plate takes the photograph's
+     intrinsic width and the rail blows out. */
+  display: block;
+  aspect-ratio: 4 / 5;
+  height: clamp(420px, 52vh, 640px);
+  width: auto;
+  max-width: min(78vw, 560px);
+}
+.rail-meta { border-top-color: var(--ink-30); }
+
+/* ======================================================= 4 THE MAPS */
+/* core/map.js paints Leaflet + an Esri Canvas basemap here; core/map.css
+   skins it with the tokens above. These rules give each placement its
+   geometry only. Doubled selectors so the height holds whichever order the
+   two stylesheets land in. Heights are cut from var(--vh100), not raw vh, so
+   a mobile URL bar sliding away does not resize the Leaflet container.  */
+.mapsec { position: relative; }
+.mapfull { margin-top: clamp(26px, 4vw, 52px); }
+.mapbox, .wr-map.mapbox { min-height: clamp(460px, calc(var(--vh100) * 0.72), 820px); }
+/* A fit of all 72 points needs 525px of map height at zoom 12. Once the
+   viewport is wide enough for zoom 12 to be possible at all, guarantee the
+   height for it — a 612px band left 516px after padding and dropped the whole
+   portfolio map to zoom 11, which draws LA County around a six-mile estate. */
+@media (min-width: 760px) {
+  .mapbox, .wr-map.mapbox { min-height: clamp(632px, calc(var(--vh100) * 0.72), 820px); }
+}
+/* a grid item stretches to its row by default, and a sticky map that is
+   7000px tall fits its bounds to a viewport that does not exist. Height, not
+   min-height, and align-self:start. */
+.reg-map, .wr-map.reg-map {
+  align-self: start;
+  height: clamp(420px, calc(var(--vh100) * 0.6), 660px);
+  min-height: 0;
+  position: sticky; top: 104px;
+}
+.bmap, .wr-map.bmap { min-height: clamp(320px, calc(var(--vh100) * 0.46), 520px); }
+/* the no-JS paragraph inside each host ("A map of … loads here") is only
+   covered by the tiles once Leaflet has painted, not removed: a screen reader
+   still met it inside the map region. Hidden once map.js stamps data-ready;
+   it stays for no-JS, and the SVG fallback replaces the host's content anyway. */
+.wr-map[data-ready] .atlas-fb { display: none; }
+.map-aside { display: grid; gap: var(--s3); align-content: start; }
+/* the map column is wider than the specimen plate: a city needs the room */
+@media (min-width: 900px) {
+  .reg-lay.atlas-on { grid-template-columns: minmax(0, 1fr) minmax(0, 460px); }
+}
+@media (max-width: 900px) {
+  /* the aside column collapses under the rows; the map must not follow it */
+  .reg-map, .wr-map.reg-map { position: static; order: -1; margin-bottom: var(--s4); height: clamp(340px, calc(var(--vh100) * 0.52), 520px); }
+}
+.mapsec.dark .wr-map { background: color-mix(in srgb, var(--deep) 82%, #000); }
+
+/* =================================== 5 A BUILDING PAGE, PHOTOGRAPH FIRST */
+.bhero {
+  position: relative;
+  min-height: calc(var(--vh100) * 0.84);
+  display: flex; align-items: flex-end;
+  overflow: clip;
+  background: var(--deep);
+  isolation: isolate;
+  padding-top: clamp(112px, 14vw, 190px);
+  padding-bottom: clamp(34px, 5vh, 68px);
+  --focus: var(--paper);
+}
+.bhero-fig { position: absolute; inset: 0; z-index: 0; margin: 0; }
+.bhero-fig img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 52%; }
+.js .bhero-fig img { animation: vista-in 1.2s var(--ease) both; }
+.bhero-scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    linear-gradient(to top,
+      color-mix(in srgb, var(--deep) 94%, transparent) 0%,
+      color-mix(in srgb, var(--deep) 80%, transparent) 26%,
+      color-mix(in srgb, var(--deep) 44%, transparent) 52%,
+      transparent 80%),
+    /* the fixed header sits on this frame too, and a building page can open
+       on a white ceiling */
+    linear-gradient(to bottom,
+      color-mix(in srgb, var(--deep) 74%, transparent) 0%,
+      transparent 30%),
+    linear-gradient(to right,
+      color-mix(in srgb, var(--deep) 58%, transparent) 0%,
+      transparent 58%);
+}
+.bhero-body { position: relative; z-index: 3; width: 100%; min-width: 0; color: var(--paper); }
+.bhero-body .crumbs li { color: color-mix(in srgb, var(--paper) 64%, transparent); }
+.bhero-body .crumbs li:not(:last-child)::after { color: var(--paper-30); }
+.bhero-body .crumbs a { border-bottom-color: var(--paper-30); }
+.bhero-body .crumbs a:hover, .bhero-body .crumbs a:focus-visible { color: var(--paper); border-bottom-color: var(--paper); }
+.bhero-body .crumbs [aria-current] { color: var(--paper); }
+.bhero-kicker {
+  margin-top: clamp(20px, 3vw, 38px);
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 76%, transparent);
+}
+.bhero-h {
+  font-family: var(--serif);
+  font-size: clamp(2.4rem, 6.4vw, 6.4rem);
+  font-weight: 500; line-height: 0.96; letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 0, "WONK" 1;
+  margin-top: 12px;
+}
+.bhero-h .vl { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.bhero-h .vl i { display: block; font-style: normal; }
+.js .bhero-h .vl i { animation: vl-up 0.9s var(--ease) 0.14s both; }
+.bhero-meta {
+  display: flex; flex-wrap: wrap; gap: 8px clamp(16px, 3vw, 40px);
+  margin-top: clamp(18px, 2.4vh, 30px);
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 76%, transparent);
+}
+.bhero-meta b { font-weight: 500; color: var(--paper); }
+.bhero-meta a { border-bottom: 1px solid var(--paper-30); padding-bottom: 2px; }
+.bhero-meta a:hover, .bhero-meta a:focus-visible { border-bottom-color: var(--paper); }
+.js .bhero-kicker, .js .bhero-meta, .js .bhero-body .crumbs {
+  animation: vfade 0.8s var(--ease) 0.34s both;
+}
+
+/* the four frames, large. No thumbnails, no radius, no card. */
+.gal-lg {
+  display: grid; gap: clamp(10px, 1.2vw, 20px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: clamp(26px, 3.4vw, 46px);
+  list-style: none;
+}
+.gal-lg figure { aspect-ratio: 3 / 2; background: var(--paper-2); overflow: clip; margin: 0; }
+.gal-lg figure img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 700px) { .gal-lg { grid-template-columns: 1fr; } }
+
+/* amenities: two quiet columns of small type. No rules, no boxes. */
+.amen-cols {
+  list-style: none; margin-top: 16px;
+  columns: 2; column-gap: clamp(26px, 4vw, 70px);
+}
+.amen-cols li {
+  break-inside: avoid;
+  font-size: var(--t-sm); line-height: 1.5; color: var(--slate);
+  padding-top: 6px; padding-bottom: 6px;
+}
+@media (max-width: 560px) { .amen-cols { columns: 1; } }
+
+/* ------------------------------------------------- motion + guards */
+@media (prefers-reduced-motion: reduce) {
+  /* choreography collapses; composition survives */
+  .js .vband-fig img { transform: none; }
+  .vista, .vband, .bhero { min-height: 0; }
+  .vista { padding-top: clamp(118px, 15vw, 200px); padding-bottom: var(--sec-y); }
+  .vband { padding-top: var(--sec-y); padding-bottom: var(--sec-y); }
+  .bhero { padding-bottom: var(--sec-y); }
+  .vista-fig, .vband-fig, .bhero-fig { position: relative; inset: auto; height: clamp(300px, 56vw, 620px); }
+  .vista, .vband, .bhero { display: block; }
+  .vista-scrim, .vband-scrim, .bhero-scrim { display: none; }
+  .vista-body, .vband-body, .bhero-body { margin-top: var(--s5); }
+  .vista-cred, .vband-cred { position: static; text-align: right; margin-top: var(--s2); display: block; }
+  .rail > .rail-track { scroll-snap-type: none; }
+}
+
+@media print {
+  .vista-fig, .vband-fig, .bhero-fig, .vista-scrim, .vband-scrim, .bhero-scrim,
+  .mapfull, .mapbox, .reg-map, .bmap { display: none !important; }
+  .vista, .vband, .bhero { min-height: 0; background: #fff !important; color: #000 !important; }
+  .vista-body, .vband-body, .bhero-body { color: #000 !important; }
+  .gal-lg { display: block; }
+}
+
+/* =====================================================================
+   STAGE 4 — THE ILS SEARCH PAGE (search.html)
+
+   core/search.css ships the behaviour and the geometry of the marketplace:
+   a sticky filter bar of dropdowns, a More-filters dialog, removable chips,
+   a live count, a sort control and a split list/map. It is deliberately
+   token-driven and it is shared by all three directions, so it is never
+   edited. This block is the Tideline skin on top of it.
+
+   EVERYTHING BELOW IS SCOPED TO [data-search] OR .searchpage.
+   Not one existing class is restyled, so no other page on the site moves.
+   Every class and every data attribute core/search.js reads is untouched:
+   this is paint, not plumbing.
+
+   What the skin does, in the direction's own vocabulary:
+     · One control language. The search field, the dropdown buttons, the
+       three <select>s and the bed/bath pills are the same object: a 44px
+       hairline square on --ink-30, paper inside, Archivo caps at 0.18em,
+       the same 8px chevron. A select may not look like a different widget
+       from the button standing next to it — that was the "generic" read.
+     · Hairlines, never boxes. Every border drops to the --ink alpha ladder
+       and every radius goes to zero, including core's 46px arrow discs.
+     · Checkboxes are drawn, not borrowed: appearance:none, a 16px hairline
+       square, ink fill with a paper check when ticked, a 44px row to hit,
+       the site's own focus ring.
+     · Fraunces on the card price, the result count and the dialog title —
+       numerals are typography, and those are the numbers a renter reads.
+       Every other number (option counts, chips, the note) is Archivo
+       tabular, like .kicker and .tnum everywhere else on the site.
+     · Micro-labels are .kicker: Archivo caps at 0.2em in --slate.
+     · Spacing on the 4/8 grid: 8px between controls, 16px bar and count
+       rails, 20px inside a popover, 24/28px inside the dialog.
+     · Photographs sit at 3:2 with saturate(.92), lifting to 1.04 and full
+       saturation on hover — the same move as .plate-cell-fig.
+     · The map's two-way highlight lights a 1px --brand frame rather than
+       nudging the card, matching .band.lit on neighborhoods.html.
+   ===================================================================== */
+
+/* ---- the shell: a fixed header with a sticky filter bar under it ---- */
+/* Everywhere else the header hides on scroll-down and returns on scroll-up.
+   On a results page that would drop it straight on top of the sticky filter
+   bar the moment a reader scrolled back up, so here it stays put and stays
+   frosted, and the bar parks exactly underneath. --hdh and --sbarh are
+   measured by the page's own script; the fallbacks are only for the frame
+   before it runs. */
+.searchpage .hd, .searchpage .hd.up { transform: none; }
+.searchpage .hd {
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.1);
+  box-shadow: 0 1px 0 var(--ink-10);
+}
+
+/* ---- the gutter ----
+   The bar, the count rail and the list read --pad straight from
+   core/search.css, and --pad is the site's one gutter (see the tokens at the
+   top of this file): the brand, the H1, the first filter button and the first
+   card all start on the same line, at every width. The list hands back only
+   its RIGHT gutter, beside the map: the map is full-bleed to the viewport
+   edge — the marketplace convention — so a 272px gap between the last card
+   and the map would be dead air. Under 1060px the list is full width again
+   and keeps both gutters. */
+@media (min-width: 1060px) {
+  [data-search] .slist { padding-right: clamp(20px, 2vw, 36px); }
+}
+
+[data-search] .sbar {
+  /* re-declared, never assumed: core/rail.css sets [data-rail]{position:relative}
+     on this very element and the two rules have equal specificity */
+  position: sticky;
+  top: var(--hdh, 62px);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(14px) saturate(1.1);
+  border-bottom: 1px solid var(--ink-10);
+}
+[data-search] .sbar-in { padding-top: 16px; padding-bottom: 16px; gap: 8px; }
+/* the bar's own rail arrows float over the controls on a narrow screen, so
+   they take a solid ground rather than core's 90% wash — a translucent square
+   over the search field reads as a smudge, not as a button */
+[data-search] .rail-float .rail-btn { background: var(--paper); box-shadow: inset 0 0 0 1px var(--ink-30); border-radius: 0; }
+[data-search] .rail-float .rail-btn:hover:not(:disabled) { background: var(--ink); color: var(--paper); box-shadow: inset 0 0 0 1px var(--ink); }
+
+/* ---- ONE CONTROL. The field, the buttons and every select share this ----
+   The direction's own .sel is a 1.3rem underlined field for the contact form
+   and the hero; in a bar of hairline squares an underline is the odd one out,
+   so inside [data-search] every control is re-cut to the same 44px square. */
+[data-search] .sfield,
+[data-search] .fbtn,
+[data-search] .sel,
+[data-search] .rng select {
+  height: 44px; border-radius: 0;
+  border: 1px solid var(--ink-30);
+  background-color: var(--paper); color: var(--ink);
+  transition: border-color 0.35s var(--ease), background-color 0.35s var(--ease), color 0.35s var(--ease);
+}
+[data-search] .sfield:hover,
+[data-search] .fbtn:hover,
+[data-search] .sel:hover,
+[data-search] .rng select:hover { border-color: var(--ink); }
+[data-search] .sfield:focus-within { border-color: var(--ink); }
+
+/* the text search: typed text stays sentence case; only the labels are caps */
+[data-search] .sfield { padding: 0 14px; gap: 10px; }
+[data-search] .sfield input { font-size: var(--t-sm); letter-spacing: 0.02em; }
+[data-search] .sfield input::placeholder { color: var(--ink-30); }
+[data-search] .sfield svg { opacity: 1; color: var(--slate); }
+
+/* the dropdown buttons: .kicker type in the square */
+[data-search] .fbtn {
+  padding: 0 14px; gap: 10px;
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+}
+[data-search] .fbtn[aria-expanded="true"] { border-color: var(--ink); background-color: var(--ink-05); }
+[data-search] .fbtn .cav { width: 8px; height: 8px; stroke-width: 1.6; }
+[data-search] .fbtn.on,
+[data-search] .fbtn.on:hover { background-color: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* the selects — "Any size", "No min / No max" and Sort — drawn exactly like
+   the button beside them: the same square, the same caps, and the same
+   chevron. The chevron is the .cav path (M1 1l4 4 4-4, stroke 1.6) as a data
+   URI, because a background-image cannot read currentColor: the stroke is
+   --ink (#16242A) spelt out. If the ink token ever changes, change it here. */
+[data-search] .sel,
+[data-search] .rng select {
+  width: 100%; padding: 0 34px 0 14px;
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%2316242A' stroke-width='1.6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 8px 5px;
+  cursor: pointer;
+}
+[data-search] .sel:focus,
+[data-search] .rng select:focus { outline: none; border-color: var(--ink); }
+[data-search] .sel:focus-visible,
+[data-search] .rng select:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+[data-search] .sright .sel { width: auto; min-width: 200px; }
+
+/* ---- the popovers: the .ta shadow, the .ta hairline ---- */
+[data-search] .fmenu {
+  padding: 20px; gap: 16px;
+  border: 1px solid var(--ink-10);
+  box-shadow: 0 18px 46px -26px var(--ink-60);
+}
+[data-search] .fmenu h4,
+[data-search] .fgrp h3 {
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate);
+}
+[data-search] .fmenu-foot,
+[data-search] .fmodal-h,
+[data-search] .fmodal-f { border-color: var(--ink-10); }
+[data-search] .fmenu-foot { padding-top: 16px; }
+/* the standing note under the rent range */
+[data-search] .fmenu .card-ad { font-size: var(--t-xs); line-height: 1.5; color: var(--slate); }
+
+/* ---- option rows and the drawn checkbox ---- */
+/* a 44px row is the whole hit area; the square is 16px inside it */
+[data-search] .opts { gap: 0; }
+[data-search] .opt {
+  min-height: 44px; padding: 0 8px; gap: 12px;
+  font-size: var(--t-sm); color: var(--ink);
+}
+[data-search] .opt:hover { background: var(--ink-05); }
+[data-search] .opt input {
+  appearance: none; -webkit-appearance: none;
+  width: 16px; height: 16px; margin: 0;
+  border: 1px solid var(--ink-30); border-radius: 0;
+  background-color: var(--paper);
+  background-repeat: no-repeat; background-position: center; background-size: 10px 8px;
+  transition: background-color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+[data-search] .opt:hover input { border-color: var(--ink); }
+/* ticked: ink fill, a paper check — the stroke is --paper (#F2EFE7) spelt out,
+   for the same reason as the chevron above */
+[data-search] .opt input:checked {
+  background-color: var(--ink); border-color: var(--ink);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 8'%3E%3Cpath d='M1 4.2l2.6 2.6L9 1.4' fill='none' stroke='%23F2EFE7' stroke-width='1.6'/%3E%3C/svg%3E");
+}
+[data-search] .opt input:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+[data-search] .opt .cnt {
+  font-family: var(--sans); font-size: var(--t-xs); letter-spacing: 0.04em;
+  color: var(--slate); font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1;
+}
+
+/* the bed and bath pills: the same square, 40px tall. Six of them share one
+   row — core's 54px floor per pill pushed "5+" onto a line of its own — so
+   each grows from zero to its share and only STUDIO holds its own width. */
+[data-search] .fmenu { min-width: 300px; }
+[data-search] .seg {
+  display: grid; place-items: center; min-height: 40px; padding: 0 8px;
+  flex: 1 1 0; min-width: auto;
+  border-radius: 0; border-color: var(--ink-30); background: var(--paper);
+  font-family: var(--sans); font-size: var(--t-xs); font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; font-variant-numeric: tabular-nums;
+}
+[data-search] .seg:hover { border-color: var(--ink); background: var(--ink-05); }
+[data-search] .seg:has(input:checked) { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+[data-search] .seg:has(input:focus-visible) { outline: 2px solid var(--focus); outline-offset: 2px; }
+[data-search] .rng { gap: 8px; }
+[data-search] .rng span { font-size: var(--t-xs); letter-spacing: 0.04em; color: var(--slate); }
+
+/* ---- the clear links and the apply button ---- */
+[data-search] .lnk-clear {
+  font-size: var(--t-xs); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--slate); text-decoration: none;
+  border-bottom: 1px solid var(--ink-30); padding-bottom: 2px;
+  transition: color 0.35s var(--ease), border-color 0.35s var(--ease);
+}
+[data-search] .lnk-clear:hover:not(:disabled) { color: var(--ink); border-bottom-color: var(--ink); }
+/* The dialog's own Clear all keeps its place in the footer when there is nothing
+   to clear, greyed rather than removed: hiding it let the footer's space-between
+   throw the Apply button 415px across the dialog the moment the first filter was
+   ticked. The primary action does not move. */
+[data-search] .lnk-clear:disabled {
+  color: var(--ink-30); border-bottom-color: var(--ink-10); cursor: default;
+}
+/* .btn-solid, exactly */
+[data-search] .btn-apply {
+  font-family: var(--sans); font-size: var(--t-xs); font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 15px 26px; border: 1px solid var(--ink);
+  font-variant-numeric: tabular-nums;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+[data-search] .btn-apply:hover, [data-search] .btn-apply:focus-visible { background: var(--deep); border-color: var(--deep); }
+
+/* ---- the count rail and the chips ---- */
+[data-search] .sresults {
+  padding-top: 16px; padding-bottom: 16px; gap: 8px 16px;
+  border-bottom: 1px solid var(--ink-10);
+}
+[data-search] .scount { font-size: var(--t-sm); color: var(--slate); }
+[data-search] .scount b {
+  font-family: var(--serif); font-weight: 500; font-size: 1.42rem;
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0;
+  letter-spacing: -0.015em; color: var(--ink); margin-right: 3px;
+  font-variant-numeric: tabular-nums;
+}
+[data-search] .fmenu-foot .scount b { font-size: 1.12rem; }
+[data-search] .chips { gap: 8px; }
+/* a chip is the filter it stands for: the same hairline square, 32px tall,
+   the value in sentence case and a 24px hit on the cross */
+[data-search] .chip-f {
+  height: 32px; gap: 4px; padding: 0 4px 0 12px;
+  background: transparent; border: 1px solid var(--ink-30);
+  font-size: var(--t-xs); letter-spacing: 0.02em; color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+[data-search] .chip-f button { width: 24px; height: 24px; opacity: 0.55; transition: opacity 0.3s var(--ease); }
+[data-search] .chip-f button:hover, [data-search] .chip-f button:focus-visible { opacity: 1; }
+[data-search] .chip-f svg { width: 9px; height: 9px; stroke-width: 1.6; }
+[data-search] .snote { font-size: var(--t-xs); letter-spacing: 0.02em; color: var(--slate); }
+[data-search] .sright { gap: 12px; }
+[data-search] .sright label { font-size: var(--t-kicker); font-weight: 500; letter-spacing: 0.2em; color: var(--slate); }
+[data-search] .vtog { border-color: var(--ink-30); height: 44px; }
+[data-search] .vtog button {
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.18em; padding: 0 16px;
+}
+
+/* ---- the split, cut to the measured header + bar ---- */
+@media (min-width: 1060px) {
+  [data-search] .split { grid-template-columns: minmax(0, 1fr) minmax(400px, 42%); }
+  [data-search] .split > .smap {
+    top: calc(var(--hdh, 62px) + var(--sbarh, 76px));
+    height: calc(var(--vh100) - var(--hdh, 62px) - var(--sbarh, 76px));
+    border-left: 1px solid var(--ink-10);
+  }
+}
+[data-search] .slist { padding-top: clamp(24px, 3vw, 44px); padding-bottom: var(--s6); }
+
+/* ---- the result cards: a contact sheet, not a card grid ---- */
+[data-search] .cards {
+  grid-template-columns: repeat(auto-fill, minmax(min(292px, 100%), 1fr));
+  gap: clamp(30px, 3.4vw, 52px) clamp(18px, 2vw, 34px);
+}
+[data-search] .card { background: transparent; }
+[data-search] .card-img { aspect-ratio: 3 / 2; background: var(--paper-2); }
+[data-search] .card-img img {
+  filter: saturate(0.92);
+  transition: transform 1.1s var(--ease), filter 0.6s var(--ease);
+}
+[data-search] .card:hover .card-img img,
+[data-search] .card:focus-within .card-img img { transform: scale(1.04); filter: saturate(1); }
+/* the map lights the frame; it does not move the card */
+[data-search] .card.lit { transform: none; }
+[data-search] .card-img::after { box-shadow: inset 0 0 0 1px var(--brand); }
+/* the save button is a white disc on the photograph (core/search.css) — a paper-coloured
+   square in the corner read as a notch cut out of the card */
+[data-search] .card-fav { right: 12px; top: 12px; width: 36px; height: 36px; border-radius: 50%; }
+[data-search] .card-fav:hover { transform: scale(1.06); }
+[data-search] .card-fav svg { width: 15px; height: 15px; }
+[data-search] .card-b {
+  padding: 0; margin-top: 14px; padding-top: 13px; gap: 6px;
+  border-top: 1px solid var(--ink-10);
+}
+[data-search] .card-price {
+  font-family: var(--serif); font-weight: 500; font-size: var(--t-3); line-height: 1.16;
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0;
+  letter-spacing: -0.012em; color: var(--ink);
+}
+[data-search] .card-fx { font-size: var(--t-xs); color: var(--slate); }
+[data-search] .card-nm { font-family: var(--sans); font-size: var(--t-sm); font-weight: 500; letter-spacing: 0.02em; }
+[data-search] .card-ad { font-size: var(--t-xs); color: var(--slate); }
+[data-search] .card-tags span {
+  border-color: var(--ink-10); color: var(--slate);
+  font-size: 0.6rem; letter-spacing: 0.14em; padding: 4px 8px;
+}
+
+/* ---- nothing matched ---- */
+[data-search] .sempty h3 {
+  font-family: var(--serif); font-weight: 500; font-size: var(--t-2); line-height: 1.06;
+  font-variation-settings: "opsz" 72, "SOFT" 0, "WONK" 1; letter-spacing: -0.02em;
+}
+[data-search] .sempty p { font-size: var(--t-sm); color: var(--slate); }
+[data-search] .sempty input {
+  height: 44px; border: 1px solid var(--ink-30); background: var(--paper); padding: 0 14px;
+  font-size: var(--t-sm);
+}
+[data-search] .sempty input:focus { outline: none; border-color: var(--ink); }
+[data-search] .sempty input:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+
+/* ---- the More-filters dialog ----
+   core/search.css makes the dialog a flex column that never scrolls itself:
+   the body scrolls between a fixed head and foot, so the scrollbar lives
+   INSIDE the paper box, between the two hairlines. Here it is drawn as a
+   6px ink hairline with no thumb radius — the direction has no radius
+   anywhere — and the rows, kickers and counts are set in the site's type. */
+[data-search] .fmodal {
+  width: min(680px, 94vw);
+  box-shadow: 0 40px 90px -34px var(--ink-60);
+}
+[data-search] .fmodal::backdrop { background: color-mix(in srgb, var(--deep) 62%, transparent); backdrop-filter: blur(3px); }
+[data-search] .fmodal-h { padding: 24px 28px 20px; }
+[data-search] .fmodal-h h2 {
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(1.5rem, 2vw, 1.9rem); line-height: 1.06; letter-spacing: -0.018em;
+  font-variation-settings: "opsz" 72, "SOFT" 0, "WONK" 1;
+}
+[data-search] .fmodal-x {
+  width: 44px; height: 44px; margin: -8px -12px -8px 0; color: var(--slate);
+  transition: color 0.3s var(--ease), background-color 0.3s var(--ease);
+}
+[data-search] .fmodal-x:hover, [data-search] .fmodal-x:focus-visible { color: var(--ink); background: var(--ink-05); }
+[data-search] .fmodal-x svg { width: 12px; height: 12px; stroke-width: 1.6; }
+[data-search] .fmodal-b {
+  padding: 24px 28px 28px; gap: 28px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-30) transparent;
+}
+/* Blink and WebKit ignore ::-webkit-scrollbar the moment the standard
+   properties above are set, and on macOS the standard thin bar is an OVERLAY
+   that paints only while the reader is already scrolling — measured: it takes
+   0px of layout, so a screenshot shows no bar and the reader cannot tell the
+   body scrolls at all. Where the pseudo-element exists, hand the drawing back
+   to it: a 6px ink hairline, always painted, in the body's own box. Firefox
+   never matches the selector and keeps the thin coloured bar. */
+@supports selector(::-webkit-scrollbar) {
+  [data-search] .fmodal-b { scrollbar-width: auto; scrollbar-color: auto; }
+}
+[data-search] .fmodal-b::-webkit-scrollbar { width: 6px; }
+[data-search] .fmodal-b::-webkit-scrollbar-thumb { background: var(--ink-30); border-radius: 0; }
+[data-search] .fmodal-b::-webkit-scrollbar-thumb:hover { background: var(--ink-60); }
+[data-search] .fmodal-b::-webkit-scrollbar-track { background: transparent; }
+[data-search] .fgrp { gap: 12px; }
+[data-search] .fgrid { gap: 0 16px; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); }
+[data-search] .fmodal-f { padding: 20px 28px; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-search] .card-img img, [data-search] .sfield, [data-search] .fbtn, [data-search] .sel,
+  [data-search] .rng select, [data-search] .opt input, [data-search] .fmodal-x,
+  [data-search] .chip-f button, [data-search] .lnk-clear, [data-search] .btn-apply { transition: none; }
+}
+
+@media print {
+  [data-search] .sbar, [data-search] .sright, [data-search] .smap,
+  [data-search] .card-fav, [data-search] .chips { display: none !important; }
+  [data-search] .split { grid-template-columns: 1fr; }
+  .searchpage .hd { position: static; background: none; box-shadow: none; }
+  .searchpage main { margin-top: 0; }
+}
+
+/* ============================================================ HERO SEARCH BAR
+   Zillow / Camden / Related pattern: a text field plus neighbourhood and bedroom
+   selects, submitting to search.html with the same parameter names the ILS reads. */
+.vista-sub { margin-top: 18px; max-width: 46ch; color: color-mix(in srgb, var(--paper) 84%, transparent); font-size: clamp(1rem, 1.25vw, 1.2rem); line-height: 1.5; }
+.vista-search.hs { max-width: min(860px, 100%); }
+.hs-row { flex-wrap: wrap; gap: 0 22px; }
+.hs-row .search-in { flex: 1 1 260px; }
+.hs-sel { flex: 0 0 auto; display: grid; align-items: end; }
+.hs-sel select {
+  appearance: none; background: transparent; border: 0; color: var(--paper);
+  font-family: var(--sans); font-size: .82rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: 12px 22px 15px 0; cursor: pointer;
+  background-image: linear-gradient(45deg, transparent 50%, currentColor 50%), linear-gradient(135deg, currentColor 50%, transparent 50%);
+  background-position: calc(100% - 9px) 55%, calc(100% - 4px) 55%; background-size: 5px 5px; background-repeat: no-repeat;
+}
+.hs-sel select option { color: var(--ink); }
+.hs-sel select:focus { outline: none; }
+.hs-sel:focus-within { box-shadow: 0 1px 0 var(--paper); }
+@media (max-width: 640px) { .hs-row .search-in { flex-basis: 100%; } .hs-sel select { padding-left: 0; } }
+
+/* =====================================================================
+   STAGE 5 — CLIENT REVIEW, 11 September 2026.
+   ---------------------------------------------------------------------
+   Appended. Three things changed on the client's instruction:
+     1. No property numbering anywhere. The 001–072 register numbers live
+        on only as data-no (favourites, map↔row sync). Every column, plate
+        caption and typeahead cell that showed one is re-cut here.
+     2. The search page opens on a compact header and a single boxed field.
+     3. The building page is a real property page: hero + facts strip, a
+        sticky action row, floor plans, a photograph rail, the listing's
+        own words, amenities with stroke icons, the office, the map, nearby.
+
+   NEW CLASS INDEX
+     .rail-where .plate-cell-ad          name + street where a number was
+     .search-top .search-h1 .search-line the compact search-page opening
+     .buildingpage                       body flag: header stays, bar parks
+     .bhero-x .bhero-addr .bhero-sep .bfacts
+     .bact .bact-in .bact-name .bact-btns .bact-tel
+     .plans-wrap .plans .plans-rent .plans-avail .plans-go .bplans-none
+     .brail .bgal .bgal-item
+     .bdesc .bquote
+     .amen-grid .amen-h .amen-ic .ai     icons: 20px, stroke-only, currentColor
+     .office
+     .near-x .near-nm .near-st
+   ===================================================================== */
+
+/* ------------------------------------------------ 1 numbering retired */
+/* register rows: [name][street][beds][rent] */
+.reg-row a { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.8fr) auto; }
+@media (max-width: 860px) {
+  .reg-row a { grid-template-columns: minmax(0, 1fr) auto; }
+  .reg-name { grid-column: 1; grid-row: 1; }
+  .reg-beds { grid-column: 2; grid-row: 1; text-align: right; }
+  .reg-street { grid-column: 1; grid-row: 2; }
+  .reg-rent { grid-column: 2; grid-row: 2; }
+}
+/* the large-homes rows on the home page: [name][where][beds] */
+.home-row { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr) auto; }
+@media (max-width: 640px) {
+  .home-row { grid-template-columns: minmax(0, 1fr) auto; }
+  .home-name { grid-column: 1; grid-row: 1; }
+  .home-beds { grid-column: 2; grid-row: 1; }
+  .home-where { grid-column: 1 / -1; grid-row: 2; }
+}
+/* the typeahead: core.js still writes the .ta-no cell; it is empty and hidden */
+.ta a { grid-template-columns: minmax(0, 1fr) auto; }
+.ta-no { display: none; }
+@media (max-width: 560px) { .ta a { grid-template-columns: 1fr; } .ta-sub { grid-column: 1; text-align: left; } }
+/* the Selected rail and the plates view: name where the number was, street small */
+.rail-meta { flex-wrap: wrap; gap: 3px 14px; }
+.rail-where { flex: 1 0 100%; font-size: var(--t-xs); color: var(--slate); letter-spacing: 0.04em; }
+.plate-cell-meta { flex-wrap: wrap; gap: 2px 12px; }
+.plate-cell-ad { flex: 1 0 100%; font-size: var(--t-xs); color: var(--slate); letter-spacing: 0.02em; }
+/* the drawn-SVG fallback atlas: a dot, never a numeral */
+.pin-no, .wr-map-fallback .pin-no { display: none; }
+.pin-hit, .wr-map-fallback .pin-hit { r: 6; fill: var(--ink); stroke: var(--paper); stroke-width: 2; }
+.pin:hover .pin-hit, .pin.lit .pin-hit, .wr-map-fallback .pin.lit .pin-hit { fill: var(--brand); stroke: var(--paper); }
+/* the tagline is now two lines of 19 and 15 characters */
+.vista-h { max-width: 21ch; }
+
+/* ------------------------------------------- 2 the search page opening */
+/* Breadcrumb, a modest H1, one line — and the filter bar in the first
+   screen. --hdh is the measured header height (search.html's own script). */
+/* <main> begins below the fixed header, so the opening block measures from
+   the content's own top: breadcrumb + H1 + one line, about 110px at 1440. */
+.searchpage main { margin-top: var(--hdh, 62px); }
+.search-top { padding-top: 12px; padding-bottom: 12px; }
+.search-h1 {
+  margin-top: 6px;
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem); line-height: 1.06; letter-spacing: -0.018em;
+  font-variation-settings: "opsz" 72, "SOFT" 0, "WONK" 1;
+}
+.search-line { margin-top: 4px; font-size: var(--t-sm); color: var(--slate); max-width: 96ch; }
+
+/* under 420px the List/Map toggle, the Sort label and the 190px select no
+   longer fit beside each other: the select ran 35px past the viewport edge,
+   clipped by the page's overflow-x: clip. Let the row wrap and the select
+   take what is left. */
+@media (max-width: 420px) {
+  [data-search] .sright { flex-wrap: wrap; margin-left: 0; width: 100%; }
+  [data-search] .sright .sel { min-width: 0; flex: 1 1 140px; }
+}
+
+/* --------------------------------------------- 3 the building page */
+/* the header stays visible and frosts once the hero has gone; over the
+   hero it is still the transparent, inverted header every dark section gets */
+.buildingpage .hd, .buildingpage .hd.up { transform: none; }
+.buildingpage .hd:not(.inv) {
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(14px) saturate(1.1);
+  box-shadow: 0 1px 0 var(--ink-10);
+}
+
+/* hero: taller, an address line, a facts strip on a paper hairline */
+.bhero-x { min-height: calc(var(--vh100) * 0.92); }
+.bhero-addr {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px;
+  margin-top: clamp(14px, 2vh, 22px);
+  font-size: var(--t-sm); letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--paper) 82%, transparent);
+}
+.bhero-addr a { border-bottom: 1px solid var(--paper-30); padding-bottom: 2px; transition: border-color 0.35s var(--ease), color 0.35s var(--ease); }
+.bhero-addr a:hover, .bhero-addr a:focus-visible { color: var(--paper); border-bottom-color: var(--paper); }
+.bhero-sep { color: var(--paper-30); }
+.bfacts {
+  display: grid; gap: 16px clamp(18px, 3vw, 44px);
+  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));
+  max-width: 920px;
+  margin-top: clamp(22px, 3.4vh, 40px);
+  padding-top: clamp(16px, 2vh, 24px);
+  border-top: 1px solid var(--paper-30);
+}
+.bfacts dt {
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--paper) 66%, transparent);
+}
+.bfacts dd {
+  margin-top: 6px;
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(1.3rem, 2.2vw, 1.9rem); line-height: 1.1; letter-spacing: -0.012em;
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0;
+  color: var(--paper);
+}
+.bfacts dd small {
+  display: block; margin-top: 5px;
+  font-family: var(--sans); font-size: var(--t-xs); font-weight: 400; letter-spacing: 0.02em;
+  color: color-mix(in srgb, var(--paper) 66%, transparent);
+}
+.js .bhero-addr, .js .bfacts { animation: vfade 0.8s var(--ease) 0.34s both; }
+
+/* the action row: sticky under the header, three flex buttons */
+.bact {
+  position: sticky; top: var(--hdh, 62px); z-index: 50;
+  background: color-mix(in srgb, var(--paper) 94%, transparent);
+  backdrop-filter: blur(12px) saturate(1.1);
+  border-bottom: 1px solid var(--ink-10);
+}
+.bact-in {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px clamp(18px, 3vw, 40px);
+  padding-top: 11px; padding-bottom: 11px;
+}
+.bact-name { min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: var(--t-sm); color: var(--slate); }
+.bact-name b {
+  font-family: var(--serif); font-weight: 500; font-size: 1.12rem; color: var(--ink);
+  font-variation-settings: "opsz" 24, "SOFT" 0, "WONK" 0; white-space: nowrap;
+}
+.bact-btns { display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.bact-btns > * { flex: 1 1 auto; min-width: min(max-content, 100%); }
+.bact .btn { padding: 12px 18px; }
+.bact-tel { margin-left: 4px; color: var(--slate); letter-spacing: 0.02em; text-transform: none; font-size: var(--t-xs); }
+@media (max-width: 760px) {
+  .bact-name, .bact-tel { display: none; }
+  .bact-btns { width: 100%; }
+  .bact .btn { padding: 11px 12px; }
+}
+
+/* floor plans: a hairline table; stacks into records under 700px */
+.plans-wrap { margin-top: clamp(26px, 3.4vw, 44px); overflow-x: auto; }
+.plans { width: 100%; border-collapse: collapse; min-width: 640px; }
+.plans th, .plans td {
+  text-align: left; padding: 17px 18px 17px 0;
+  border-bottom: 1px solid var(--ink-10); vertical-align: baseline;
+}
+.plans thead th {
+  padding-top: 0; padding-bottom: 12px; white-space: nowrap;
+  border-bottom: 1px solid var(--ink-30);
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate);
+}
+.plans tbody th {
+  font-family: var(--serif); font-weight: 500; font-size: var(--t-3);
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0; letter-spacing: -0.008em; color: var(--ink);
+}
+.plans tbody th a { border-bottom: 1px solid transparent; transition: border-color 0.35s var(--ease); }
+.plans tbody th a:hover, .plans tbody th a:focus-visible { border-bottom-color: var(--ink); }
+.plans td { font-size: var(--t-sm); color: var(--slate); white-space: nowrap; }
+.plans-rent {
+  font-family: var(--serif); font-weight: 500; font-size: var(--t-3); color: var(--ink);
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0; letter-spacing: -0.008em;
+}
+.plans-avail { color: var(--sand-ink); }
+.plans-go { text-align: right; padding-right: 0; }
+.plans-go a {
+  font-size: var(--t-xs); font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--slate); transition: color 0.3s var(--ease);
+}
+.plans-go a:hover, .plans-go a:focus-visible { color: var(--ink); }
+.plans tbody tr { transition: background-color 0.3s var(--ease); }
+.plans tbody tr:hover, .plans tbody tr:focus-within { background: var(--ink-05); }
+.bplans-none { margin-top: clamp(26px, 3.4vw, 44px); }
+@media (max-width: 700px) {
+  .plans { min-width: 0; }
+  .plans thead { display: none; }
+  .plans, .plans tbody, .plans th, .plans td { display: block; }
+  .plans tr {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px;
+    padding-top: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--ink-10);
+  }
+  .plans th, .plans td { padding: 0; border-bottom: 0; white-space: normal; }
+  .plans tbody th { grid-column: 1 / -1; }
+  .plans td[data-l]::before {
+    content: attr(data-l); display: block; margin-bottom: 2px;
+    font-size: var(--t-kicker); letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate);
+  }
+  .plans-go { grid-column: 1 / -1; text-align: left; margin-top: 4px; }
+}
+
+/* the photograph rail: four 3:2 frames, each most of the viewport wide */
+.brail .rail-head { align-items: flex-end; }
+.bgal { list-style: none; }
+.bgal-item { flex: 0 0 auto; width: min(78vw, 1180px); scroll-snap-align: start; }
+.bgal-item figure { margin: 0; aspect-ratio: 3 / 2; background: var(--paper-2); overflow: clip; }
+.bgal-item figure img { width: 100%; height: 100%; object-fit: cover; }
+@media (max-width: 700px) { .bgal-item { width: 88vw; } }
+
+/* the listing's own words: one hairline, no box */
+.bdesc { align-items: start; }
+.bquote { margin: 0; padding-left: clamp(18px, 2.4vw, 32px); border-left: 1px solid var(--ink-30); }
+.bquote p {
+  font-family: var(--serif); font-size: clamp(1.08rem, 1.5vw, 1.36rem); line-height: 1.52;
+  font-variation-settings: "opsz" 24, "SOFT" 0, "WONK" 0; color: var(--ink);
+}
+.bquote footer { margin-top: 14px; }
+
+/* amenities with icons: two hairline lists */
+.amen-grid { margin-top: clamp(26px, 3.4vw, 44px); }
+.amen-h {
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.2em; text-transform: uppercase; color: var(--slate);
+  padding-bottom: 12px; border-bottom: 1px solid var(--ink-30);
+}
+.amen-ic { list-style: none; }
+.amen-ic li {
+  display: flex; align-items: center; gap: 14px;
+  padding-top: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--ink-10);
+  font-size: var(--t-sm); color: var(--ink); line-height: 1.4;
+}
+/* the sprite's symbols carry no paint of their own: stroke-only, inheriting
+   currentColor, 20px, so the same file works on any ground */
+.ai {
+  width: 20px; height: 20px; flex: 0 0 auto;
+  fill: none; stroke: currentColor; stroke-width: 1.5;
+  stroke-linecap: round; stroke-linejoin: round;
+  color: var(--slate);
+}
+
+/* the office */
+.office { display: grid; gap: 0; align-content: start; }
+.office > div { display: grid; gap: 8px; padding-top: var(--s3); padding-bottom: var(--s3); border-top: 1px solid var(--ink-10); }
+.office > div:first-child { border-top-color: var(--ink-30); }
+.office dt {
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--sans); font-size: var(--t-kicker); font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--slate);
+}
+.office dd { font-size: var(--t-lede); line-height: 1.45; }
+.office .tel-xl {
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(1.5rem, 2.6vw, 2.2rem); letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0;
+}
+
+/* nearby: tall plates, name and street, no number */
+.near-x .near-fig { aspect-ratio: 4 / 5; }
+.near-nm {
+  font-family: var(--serif); font-weight: 500; font-size: var(--t-3);
+  font-variation-settings: "opsz" 36, "SOFT" 0, "WONK" 0; letter-spacing: -0.01em;
+}
+.near-st { flex: 1 0 100%; font-size: var(--t-xs); color: var(--slate); letter-spacing: 0.02em; font-variant-numeric: tabular-nums; }
+
+@media (prefers-reduced-motion: reduce) {
+  .bhero-addr a, .plans tbody tr, .plans tbody th a, .plans-go a { transition: none; }
+  .js .bhero-addr, .js .bfacts { animation: none; }
+}
+@media print {
+  .bact, .brail, .bmap, .mapfull { display: none !important; }
+  .plans { min-width: 0; }
+  .buildingpage .hd { position: static; background: none; box-shadow: none; }
+}
+
+/* =====================================================================
+   R5 — buildings.html reviewed against the client's three notes.
+     1. "Odd empty space at the top": with JS the view tabs are the
+        masthead's bottom edge, so the masthead carries no section padding
+        under them and the view that follows starts at in-section rhythm.
+        Before, two stacked section paddings (81px + 81px) put a blank
+        band between LIST / ATLAS / PLATES and the search row. Without JS
+        the tabs do not exist and the ordinary section seam stands.
+     2. The specimen plate is a grid item, and a grid item stretches to its
+        row: 6,800px tall it had nowhere to stick, so the right column sat
+        empty for the whole list and every hover swap happened off-screen.
+        Same fix as the map beside it, same offset under the header.
+     3. The plates are grouped by neighbourhood exactly as the list is, one
+        sheet per group under the same heading. The hairlines are drawn by
+        the cells rather than by a tinted sheet behind them, so a short last
+        row ends where the frames end instead of leaving a block of missing
+        cells; the line colour is mixed opaque so two cells sharing a gutter
+        paint the same value.
+   ===================================================================== */
+.js .page-top-tabs { padding-bottom: 0; }
+.js .page-top-tabs ~ [data-view] { padding-top: clamp(30px, 4vw, 48px); }
+/* the atlas heading is always followed by the register: one seam, not two */
+.js #view-atlas.on { padding-bottom: 0; }
+
+.plate { align-self: start; top: 104px; }
+
+.plates-group + .plates-group { margin-top: var(--s5); }
+.plates-group .reg-head + .plates { margin-top: 20px; }
+.plates { background: none; border: 0; padding: 1px; }
+.plate-cell { box-shadow: 0 0 0 1px color-mix(in srgb, var(--ink) 10%, var(--paper)); }
+.plate-cell a { display: block; }
+
+/* =====================================================================
+   R6 — THE NEIGHBOURHOODS KEY, UNNUMBERED
+   ---------------------------------------------------------------------
+   The map beside the key draws every building as a dot, so the 1–7 that
+   led each area keyed to nothing and read as numbering — which the client
+   has rejected twice. The numerals are gone from the markup; the key is
+   now [name][count] on the same hairline rows.
+   ===================================================================== */
+.keylist a, .keylist > span { grid-template-columns: minmax(0, 1fr) auto; }
+
+/* ===========================================================================
+   R7 — THE HEADER STAYS (client review, 11 Sep 2026, "empty space at the top")
+   base.css retracts the header on scroll-down (.up) and frosts it on scroll-up
+   (.frost). Retracting it left every sticky column (the specimen plate, the
+   atlas map, the building-page action row) hanging 104px below the top edge
+   with nothing above — the client read that as a blank band, on this direction
+   and the other. The header now stays put and takes the frost as soon as the
+   hero is passed, whichever way the page is moving; sticky offsets are unchanged
+   because they were already measured from the header's bottom edge. The search
+   and building pages' earlier per-page overrides are now redundant but harmless.
+   ========================================================================= */
+.hd.up {
+  transform: none;
+  background: color-mix(in srgb, var(--paper) 84%, transparent);
+  backdrop-filter: blur(14px) saturate(1.1);
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--ink) 12%, transparent);
+}
+.hd.inv.up {
+  background: color-mix(in srgb, var(--deep) 82%, transparent);
+  box-shadow: 0 1px 0 var(--paper-10);
+}
+
+/* =====================================================================
+   R8 — RESPONSIVE AUDIT (client review, 11 Sep 2026: "on smaller screens,
+   some texts/content overlaps")
+   ---------------------------------------------------------------------
+   A Playwright probe measured every text-owning element on twelve pages at
+   twelve widths (360–1366) for text-on-text and text-on-control overlap,
+   horizontal overflow and clipped nowrap runs. Three causes, fixed here;
+   nothing above is touched.
+
+   1. THE REGISTER ROWS. The bedrooms cell is white-space:nowrap in a
+      minmax(0, .8fr) column, so with the specimen plate beside the list
+      (900px and up) "Studio-4 Beds · 1-3 Baths" spilled 70px past its cell
+      and printed over the rent — on every neighbourhood page from 980 to
+      1280, and 3px into the gutter on buildings.html at 980. The bedrooms
+      and rent columns now size to their content (auto) so a nowrap run can
+      never be wider than its cell, and up to 1100px — where the plate
+      leaves the list only ~510px — the row takes the two-line form it
+      already has under 860: [name][beds] over [street][rent].
+   2. THE SEARCH FILTER BAR. On a narrow screen the bar is a rail with
+      floating arrows; core parks them 4px inside the gutter and pads the
+      track 46px, but the track still scrolls under them, so at rest the
+      arrow always sat on whichever control landed there ("NEI…" under →
+      at 480, "More filters" at 1024). The track now ends 46px short of each
+      edge instead: the arrows have a lane of their own and no control is
+      ever under one. The fade is 12px at the lane's edge — a hint of more,
+      not a mask. The first control still starts where core started it.
+   3. THE CONTACT FORM. .ed-two is 1fr 1fr and 1fr is minmax(auto, 1fr):
+      two text inputs at their intrinsic ~170px plus the gap out-measured
+      the 320px column at 360 and the whole form ran 18px off the viewport.
+      Every column is minmax(0, 1fr), every control is width:100% with
+      min-width:0, and the pair stacks under 480.
+   Also: the editorial hero's photo credit hides under 980 like every other
+   credit on this direction (.vista-cred, .vband-cred) — over a paragraph
+   that fills the width it read as a stray line 16px under the lede.
+   ===================================================================== */
+
+/* 1. register rows — beds and rent are FIXED tabular tracks so the two fr
+   columns (name, street) split a CONSTANT remainder on every row. Left as
+   `auto`, the meta columns took their per-row content width ("Studio–5 beds"
+   vs "3 beds"), which rebalanced the fr split and made .reg-street's left
+   edge wander up to ~49px row to row — worst on the Bedrooms sort, where the
+   whole register is one long group. Fixed tracks pin the street to one x. */
+.reg-row a { grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) 7rem 8rem; }
+.reg-beds, .reg-rent { min-width: 0; }
+.reg-street { text-align: left; justify-self: start; }
+.reg-beds { text-align: right; justify-self: end; }
+.reg-rent { text-align: right; justify-self: end; }
+@media (max-width: 1100px) {
+  .reg-row a { grid-template-columns: minmax(0, 1fr) auto; }
+  .reg-name { grid-column: 1; grid-row: 1; }
+  .reg-beds { grid-column: 2; grid-row: 1; text-align: right; }
+  .reg-street { grid-column: 1; grid-row: 2; }
+  .reg-rent { grid-column: 2; grid-row: 2; }
+}
+
+/* 2. the search filter bar: a lane for each arrow */
+[data-search] .sbar[data-rail]:not([data-static]) .sbar-in {
+  margin-left: 46px; margin-right: 46px;
+  padding-left: 0; padding-right: 0;
+  scroll-padding-inline: 0;
+}
+[data-search] .sbar[data-rail]:not([data-static]) .rail-float::before,
+[data-search] .sbar[data-rail]:not([data-static]) .rail-float::after { width: calc(var(--pad) + 58px); }
+[data-search] .sbar[data-rail]:not([data-static]) .rail-float::before {
+  background: linear-gradient(to right, var(--paper) calc(var(--pad) + 46px), transparent);
+}
+[data-search] .sbar[data-rail]:not([data-static]) .rail-float::after {
+  background: linear-gradient(to left, var(--paper) calc(var(--pad) + 46px), transparent);
+}
+
+/* 3. the contact form */
+.ed-form { grid-template-columns: minmax(0, 1fr); }
+.ed-form label { min-width: 0; }
+.ed-form input, .ed-form select, .ed-form textarea { width: 100%; min-width: 0; }
+.ed-form .ed-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 480px) { .ed-form .ed-two { grid-template-columns: minmax(0, 1fr); } }
+
+/* the editorial hero's credit, like every other credit here */
+@media (max-width: 980px) { .ed-hero .ed-cred { display: none; } }
+
+/* 4. the floor-plan table: its 640px floor out-measured the 631–640px column
+   between 701 and 711px and the wrapper grew a horizontal scrollbar — the one
+   thing no scroller on this site shows. The table stacks into records at 700
+   (min-width:0 there, which an unscoped rule here would have overridden);
+   above that the column is never narrower than 631px, so the floor is 600. */
+@media (min-width: 701px) { .plans { min-width: 600px; } }
+
+/* 5. the home hero's search row, by eye. Between ~700 and ~833px the field,
+   the two selects and the button out-measured the row by a few pixels and
+   "Search →" wrapped alone under the field. The field takes its own line up
+   to 860px — the same shape the row already has under 640 — so the second
+   line is always [Anywhere][Any beds][Search →] together. And from ~1100px
+   the row's 860px cap left the 24px Fraunces field too narrow for its own
+   placeholder ("…Motor Tide"): the cap is 960px, and a placeholder that
+   still cannot fit ends in an ellipsis rather than mid-word. */
+@media (max-width: 860px) { .hs-row .search-in { flex-basis: 100%; } }
+.vista-search.hs { max-width: min(960px, 100%); }
+.search-in, [data-search] .sfield input { text-overflow: ellipsis; }
+
+/* 6. the register masthead (buildings.html). .reg-bar is [search][sort] from
+   901px, and the sort row is 690px of max-content: at 980 the field beside it
+   was 150px wide, at 1366 still only 372px against a 420px placeholder set at
+   the hero's 2.1vw. The bar stacks — field over sort, as it already did under
+   900 — up to 1366, and the register's field takes a smaller step than the
+   hero's, so the placeholder fits the field on every screen it is beside the
+   sort row (1367px and up gives it 373px or more). */
+@media (max-width: 1366px) { .reg-bar { grid-template-columns: 1fr; align-items: stretch; } }
+.reg-bar .search-in { font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
+/* …and under 480 the register field shares its row with "Search →", which
+   leaves 219–286px for a 298px placeholder: the button wraps beneath the
+   field, the shape the hero row takes at this width. */
+@media (max-width: 480px) {
+  .reg-bar .search-row { flex-wrap: wrap; }
+  .reg-bar .search-in { flex-basis: 100%; }
+}
+
+/* =====================================================================
+   R9 — RESPONSIVE VERIFICATION (11 Sep 2026, second pass)
+   ---------------------------------------------------------------------
+   An independent probe — text-node line boxes (Range.getClientRects) in
+   place of element rects — at 360/430/600/768/980/1180 on the same twelve
+   pages found no text-on-text or text-on-control overlap, no horizontal
+   overflow, no clipped nowrap run and no console error; the hero's credit
+   keeps 8–23px of air under the count strip on windows 560–1080px tall
+   and never shares its row. The one residual was by eye, on phones: from
+   390 to ~486px the hero row wraps to [field] / [Anywhere · Any beds] /
+   [Search →] — the selects out-measure the line by a few pixels and the
+   button was orphaned at the left of a full-width rule (the same shape R8
+   fixed between 700 and 833). Under 520px the action takes the right end
+   of whichever line it lands on, where a form's submit reads as one; the
+   rule stops before the widths where the row is a single line.
+   ===================================================================== */
+@media (max-width: 520px) { .hs-row .search-go { margin-left: auto; } }
+
+/* =====================================================================
+   R10 — PRIMARY CALLS TO ACTION + VIEW/SORT ROW (11 Sep 2026)
+   ---------------------------------------------------------------------
+   Client notes, this pass:
+     1. Building pages carry an unmistakable CTA trio — Apply (dominant,
+        solid), Inquire (outlined → contact.html?building=), Call (the
+        number, tel:) — plus the small Save favourite, in the hero AND the
+        pinned action row; on phones a fixed Apply+Call bottom bar that
+        slides away while the footer is on screen. Every control >=44px.
+     4. On buildings.html the view switch and the sort buttons share one
+        row at >=1100px (view left, sort right, one hairline under); they
+        stack below. No border-radius anywhere here.
+   ===================================================================== */
+
+/* --- 1a. the hero CTA trio (on the dark hero: paper-solid Apply) -------- */
+.bhero-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: clamp(22px, 3vh, 34px); }
+.js .bhero-cta { animation: vfade 0.8s var(--ease) 0.44s both; }
+.cta-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+  min-height: 50px; padding: 13px 26px;
+  font-family: var(--sans); font-size: var(--t-xs); font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase; text-align: center;
+  border: 1px solid transparent; border-radius: 0;
+  transition: background-color 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.cta-apply { background: var(--paper); color: var(--ink); }
+.cta-apply:hover, .cta-apply:focus-visible { background: #fff; color: var(--deep); }
+.cta-inquire { border-color: var(--paper-30); color: var(--paper); }
+.cta-inquire:hover, .cta-inquire:focus-visible { border-color: var(--paper); background: var(--paper-10); }
+.cta-call { color: var(--paper); border-color: var(--paper-30); background: transparent; letter-spacing: 0.1em; }
+.cta-call:hover, .cta-call:focus-visible { border-color: var(--paper); background: var(--paper-10); }
+.cta-num { text-transform: none; letter-spacing: 0.02em; color: color-mix(in srgb, var(--paper) 82%, transparent); }
+.cta-save {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 50px; padding: 12px 20px;
+  font-family: var(--sans); font-size: var(--t-xs); font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--paper); border: 1px solid var(--paper-30); background: transparent; border-radius: 0;
+  transition: background-color 0.35s var(--ease), border-color 0.35s var(--ease), color 0.35s var(--ease);
+}
+.cta-save:hover, .cta-save:focus-visible { border-color: var(--paper); background: var(--paper-10); }
+.cta-save[aria-pressed="true"] { background: var(--paper); color: var(--ink); border-color: var(--paper); }
+@media (max-width: 560px) {
+  .cta-apply { flex: 1 1 100%; }
+  .bhero-cta .cta-btn:not(.cta-apply), .bhero-cta .cta-save { flex: 1 1 auto; }
+}
+
+/* --- 1b. the pinned action row: four controls, each >=44px tall -------- */
+.bact-apply, .bact-inquire, .bact-call, .bact-save { min-height: 44px; }
+.bact .btn { min-height: 44px; }
+.bact-btns .bact-apply { flex-grow: 1.6; }
+/* On phones the fixed bottom bar is the persistent action affordance, and the
+   tall hero parks the sticky row exactly where that bar sits — so the pinned
+   row stands down under 640 and the hero trio + bottom bar carry it there. */
+@media (max-width: 640px) { .bact { display: none; } }
+
+/* --- 1c. the phone-only fixed Apply + Call bar ------------------------- */
+.botbar { display: none; }
+@media (max-width: 640px) {
+  .botbar {
+    display: flex; gap: 10px;
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 80;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--paper) 95%, transparent);
+    backdrop-filter: blur(12px) saturate(1.1);
+    border-top: 1px solid var(--ink-10);
+    transition: transform 0.4s var(--ease), visibility 0s;
+  }
+  /* Down near the top (hero on screen) and while the footer is in view, so it
+     never covers the hero trio or the footer. It slides off (transform only)
+     and then goes visibility:hidden — the hidden state takes it out of the
+     layout the eye and the audit both read, so the parked bar can never be
+     what overlaps the content just below the fold. */
+  .botbar--down {
+    transform: translateY(120%); visibility: hidden;
+    transition: transform 0.4s var(--ease), visibility 0s linear 0.4s;
+  }
+}
+.botbar-btn {
+  flex: 1 1 0; min-height: 50px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  font-family: var(--sans); font-size: var(--t-xs); font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  border: 1px solid transparent; border-radius: 0;
+  transition: background-color 0.35s var(--ease), border-color 0.35s var(--ease), color 0.35s var(--ease);
+}
+.botbar-apply { background: var(--ink); color: var(--paper); flex-grow: 2; }
+.botbar-apply:hover, .botbar-apply:focus-visible { background: var(--deep); }
+.botbar-call { border-color: var(--ink-30); color: var(--ink); }
+.botbar-call:hover, .botbar-call:focus-visible { border-color: var(--ink); background: var(--ink-05); }
+.botbar-ic { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+@media (prefers-reduced-motion: reduce) {
+  .botbar, .cta-btn, .cta-save, .botbar-btn { transition: none; }
+  .js .bhero-cta { animation: none; }
+}
+
+/* --- 1d. the "About <building>" line above the contact form ------------ */
+.ed-about {
+  margin-bottom: 22px;
+  border-left: 1px solid var(--brand); padding: 4px 0 4px 18px;
+  font-family: var(--sans); font-size: 0.82rem; letter-spacing: 0.04em; color: var(--ed-mute);
+}
+.ed-about b { color: var(--ink); font-weight: 600; }
+
+/* --- 4. view switch + sort on one row at >=1100px --------------------- */
+/* stacked below 1100: the viewbar keeps its own top+bottom hairlines and
+   the sort sits under it — the shape the page already had. */
+.viewsort-sort { margin-top: 16px; }
+@media (min-width: 1100px) {
+  .viewsort {
+    display: flex; align-items: center; justify-content: space-between; gap: 18px 40px;
+    margin-top: clamp(30px, 4vw, 48px);
+    border-top: 1px solid var(--ink-10);
+    border-bottom: 1px solid var(--ink-10);
+  }
+  .viewsort .viewbar { margin-top: 0; border-top: 0; border-bottom: 0; }
+  .js .viewsort .viewsort-sort { display: block; margin-top: 0; }
+  .viewsort .sortbar { justify-content: flex-end; }
+}
+
+/* --- 2. no single-word last lines in a heading, lede or caption --------
+   text-wrap:balance evens a heading's lines; text-wrap:pretty stops a lone
+   word ending a paragraph. The masked hero lines (.vista-h/.lockup/.bhero-h
+   .vl>i) are single-line blocks, so balance is a no-op there and their
+   intended line breaks are untouched. Specific strings that still orphan at
+   a probe width are joined with &nbsp; in the generators. */
+h1, h2, h3, .t-1, .t-2, .t-3, .amen-h, .plate-name { text-wrap: balance; }
+p, .lede, .body, .measure, .micro, .ed-lede, .bquote p, figcaption, .bfacts dd small { text-wrap: pretty; }
+
+/* Editorial pages (shared gen_editorial.py copy we do not edit): app.js runs
+   the widont that joins a heading's last two words. The one case it cannot
+   take is the company hero's deliberate one-word triad "Owner. Builder.
+   Manager." — three single-word sentences the shared design stacks on
+   purpose; joining them would need a wider measure or smaller display type
+   than the shared spec, so it is left as its intended cadence (like the
+   masked hero lines). The routed-contact h3 only needed a hair more room in
+   the 3-column grid band for its joined pair to land: */
+@media (min-width: 760px) and (max-width: 900px) { .ed-row h3 { font-size: 1.1rem; } }
+/* Below 760 the shared .ed-row still forces .ed-cite/.ed-state into a phantom
+   second grid column (grid-column:2), so a nowrap citation ("Urbanize LA /
+   The Real Deal") sits in a content-sized track and, once the address heading
+   beside it is de-orphaned, overruns the row (clipped by overflow-x:clip, no
+   page scroll, but still an overlap the probe flags). Let those rows stack to
+   one column at phone widths — which also hands the address headings the full
+   measure, so they fit one line with no orphan to fix in the first place. */
+@media (max-width: 759.98px) {
+  .ed-row .ed-cite, .ed-row .ed-state { grid-column: auto; justify-self: start; }
+}
+
+/* ============================================ page scrollbar — 2026-09-11
+   Theme the main document scrollbar to the warm-paper palette. base.css sets
+   scrollbar-width:thin on html but no colour, so the OS default shows through.
+   Firefox reads scrollbar-color; Blink/WebKit need ::-webkit-scrollbar — and
+   Blink ignores every ::-webkit-scrollbar rule while the standard
+   scrollbar-width/scrollbar-color is still set on the same element, so reset
+   those to auto inside the @supports guard first (same fix as the modal at
+   :2045). Everything sits on `html` (the selector base.css already uses) so the
+   reset actually wins — :root would out-specify the base rule and leave the
+   standard colour set, defeating the guard. Hairline/square language: a 12px
+   bar, no radius, ink-30 → ink-60 thumb resting/hover on the paper-2 track.
+   Rails (core/rail.css) and the .fmodal-b modal body keep their own treatment. */
+html { scrollbar-color: var(--ink-30) var(--paper-2); }
+@supports selector(::-webkit-scrollbar) {
+  html { scrollbar-width: auto; scrollbar-color: auto; }
+  html::-webkit-scrollbar { width: 12px; }
+  html::-webkit-scrollbar-thumb { background: var(--ink-30); border-radius: 0; }
+  html::-webkit-scrollbar-thumb:hover { background: var(--ink-60); }
+  html::-webkit-scrollbar-track { background: var(--paper-2); }
+}

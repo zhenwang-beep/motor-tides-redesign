@@ -12,3 +12,7 @@ redesign/deploy/
 .idea/
 .vscode/
 *.log
+
+corporate/deploy/
+corporate/**/.vercel/
+corporate/assets/img/_*

@@ -1,0 +1,1408 @@
+/* ============================================================================
+   WISEMAN RESIDENTIAL — DIRECTION "CLERESTORY" (key: atrium)
+   The bright, culture-first corporate face. Los Angeles light, brought inside.
+   Newsreader (editorial serif) + Hanken Grotesk (humanist grotesk) on a cool
+   limestone ground; the brand teal as the single, sparing accent.
+   Built on the shared spine: core/base.css, core.js, map/search/rail, editorial.
+   Fonts are loaded per page in <head>; this file only names the stacks.
+   ========================================================================== */
+
+/* ---------------------------------------------------------------- tokens
+   RE-SKINNED to the Motor Tides by Wiseman design language (2026-09):
+   warm cream ground, deep teal-green ink, terracotta as the sparing accent.
+   Display = Prata (page-filling titles), reading serif = Newsreader,
+   UI / labels / body = Montserrat. Brand teal #169BAC is reserved for the
+   three-bar Wiseman logo mark only. */
+:root{
+  /* palette (warm, elegant, bright) */
+  --bg:#F3F0E7;            /* warm cream ground */
+  --bg-2:#EFEADD;          /* one step down — warm stone bands */
+  --raised:#F7F4EC;        /* near-white warm — frosted header, raised surfaces */
+  --ink:#074B4D;           /* deep teal-green — primary ink, headings, buttons */
+  --ink-2:#42585B;         /* body copy — warm slate, ~7:1 on --bg */
+  /* meta, captions, labels. Was #6B7B7E, documented as ~4.7:1 but measured at
+     3.87:1 — below AA, and it carries real facts (the card bed counts, the
+     footer address, spec keys, citations) in ~45 rules. Darkened one step to
+     4.80:1 while staying a clear third stop under --ink-2 (7:1). */
+  --ink-3:#5D6C6F;         /* meta, captions, labels — 4.80:1 on --bg */
+  --deep-teal:#04343A;     /* deeper teal — page-transition ground, dark accents */
+  --graphite:#1F3538;
+
+  --accent:#C8784D;        /* terracotta — decorative keylines, marks, fills */
+  /* terracotta as TEXT / links / eyebrow ticks. Was #AD6643, which measured
+     3.87:1 on --bg — below AA, and it carries inline links, the [CLIENT] chips
+     at ~10px, the "Now leasing" flags and the building counts. Darkened within
+     the same hue until it clears AA on BOTH grounds it is used over — 4.95:1
+     on --bg cream and 4.70:1 on the --bg-2 stone bands, where the [CLIENT]
+     chips sit. --accent-deep (5.20:1) still reads as a step down for pressed
+     and hover. Every usage sits on cream or stone, never on a dark
+     ground, so there is no light-on-dark case to trade off against. */
+  --accent-ink:#9A5533;    /* terracotta as TEXT / links / eyebrow ticks — 4.95:1 cream, 4.70:1 stone */
+  --accent-deep:#96522F;   /* terracotta pressed */
+  --brand-teal:#169BAC;    /* THE Wiseman logo mark colour — three-bar mark only */
+  --tide:#A8C9CE;          /* light teal — accents on dark grounds */
+  --sand:#FEDA77;
+
+  /* compatibility aliases: the sheet still references --teal / --teal-ink in
+     many rules; repoint them at the terracotta accent so the warm accent
+     register flows through without rewriting every selector. */
+  --teal:var(--accent);
+  --teal-ink:var(--accent-ink);
+  --teal-deep:var(--accent-deep);
+
+  --line:rgba(7,75,77,.16);
+  --line-2:rgba(7,75,77,.08);
+  --scrim:linear-gradient(to top, rgba(4,52,58,.58), rgba(4,52,58,.10) 46%, transparent 66%);
+
+  /* over-photo hero — ONE legible recipe shared by every full-bleed hero
+     (Live/Track fbhero + About/Careers/Contact/Residents ed-hero). Warm-white
+     type on a firmed scrim; the tagline keeps a light teal tint. */
+  --hero-fg:#FBF8F0;                        /* warm-white headline over photo */
+  --hero-eyebrow:rgba(255,255,255,.90);     /* solid light eyebrow */
+  --hero-sub:rgba(251,248,240,.90);         /* sub-paragraph */
+  --hero-tag:#CFEBF0;                        /* light teal-tinted white — reads over the scrim */
+  --hero-shadow:0 1px 2px rgba(0,0,0,.40);   /* belt-and-suspenders for busy/bright frames */
+  --hero-img:brightness(.92);                /* subtle global darken so any crop clears AA */
+
+  /* type */
+  --disp:"Newsreader",Georgia,"Times New Roman",serif;        /* reading serif — every heading you read */
+  --disp-lg:"Prata",Georgia,"Times New Roman",serif;          /* Prata — the page-filling display titles */
+  --text:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;  /* UI, labels, body */
+
+  /* layout */
+  --pad:clamp(20px,4vw,72px);
+  --maxw:1580px;
+  --hd-h:70px;
+  --ease:cubic-bezier(.16,1,.3,1);           /* Motor Tides' single elegant ease */
+
+  /* ---- bridge tokens so the shared core (base/editorial/search/map/rail) renders native ---- */
+  --paper:var(--bg);
+  --paper-2:var(--bg-2);
+  --deep:var(--ink);
+  --brand:var(--ink);
+  --sans:var(--text);
+  --serif:var(--disp);
+  --display:var(--disp-lg);
+  --focus:var(--accent);
+  --map-tint:var(--bg);
+}
+
+/* ---------------------------------------------------------------- base overrides */
+html{ scrollbar-color:#c8c2b1 var(--bg); }
+body{
+  background:var(--bg); color:var(--ink-2);
+  font-family:var(--text); font-weight:400; font-size:1rem; line-height:1.7;
+  font-synthesis:none; -webkit-font-smoothing:antialiased;
+}
+::selection{ background:var(--ink); color:var(--bg); }
+.wrap-n{ max-width:var(--maxw); }
+
+h1,h2,h3,h4{ font-family:var(--disp); font-weight:500; color:var(--ink);
+  text-wrap:balance; letter-spacing:-.008em; line-height:1.08; }
+h1 em,h2 em,h3 em,.hero h1 em{ font-style:italic; }
+p{ text-wrap:pretty; }
+strong,b{ font-weight:600; }
+.serif-i{ font-family:var(--disp); font-style:italic; font-weight:500; }
+.tnum{ font-variant-numeric:tabular-nums lining-nums; }
+.nb{ white-space:nowrap; }
+
+/* Prata — the four page-filling display titles only (hero / full-bleed hero /
+   building hero / page head / search head). Prata carries no 500 weight, so
+   these stay at 400 with a touch more line height for its tall caps. */
+.hero h1,.fbhero h1,.bh-h,.pagehead-h,.shead-h{
+  font-family:var(--disp-lg); font-weight:400; letter-spacing:-.01em; }
+
+/* section kickers in terracotta — Motor Tides' warm eyebrow register */
+.eyebrow{ font-family:var(--text); font-weight:600; font-size:.72rem;
+  letter-spacing:.2em; text-transform:uppercase; color:#945536; }
+.eyebrow .tk{ color:var(--ink); }
+/* keep the over-photo hero eyebrows on their light recipe */
+.fbhero .eyebrow,.ed-hero .ed-eyebrow{ color:var(--hero-eyebrow); }
+.lead{ font-size:1.075rem; line-height:1.62; color:var(--ink-2); max-width:60ch; }
+.meta{ font-size:.85rem; color:var(--ink-3); font-weight:500; }
+
+/* the [CLIENT] chip — small, monospace, boxed, in the readable teal */
+.chip{ display:inline-block; font-family:ui-monospace,"SF Mono",Menlo,monospace;
+  font-size:.62rem; letter-spacing:.08em; color:var(--teal-ink);
+  border:1px solid color-mix(in srgb, var(--teal) 42%, var(--line));
+  padding:.18em .5em; border-radius:2px; vertical-align:.12em; margin-left:.4em; white-space:nowrap; }
+
+/* ---------------------------------------------------------------- buttons
+   ONE consistent Wiseman button system (Motor Tides register):
+     .btn-primary  (also -solid / -ink / -teal)  solid deep teal-green, cream
+                    text, Montserrat caps, letterspacing .14em, radius 0.
+     .btn-secondary (also -line / -tert)          1px ink border on transparent.
+     .btn-quiet                                   text + underline (tertiary).
+   Every CTA on the site — Apply / Search / Inquire / Call / Save / Explore —
+   resolves to one of these three, identical everywhere. */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:.7em;
+  font-family:var(--text); font-weight:600; font-size:.7rem; letter-spacing:.14em;
+  text-transform:uppercase; line-height:1.1; padding:1.05em 1.85em;
+  border:1px solid transparent; border-radius:0; min-height:48px;
+  cursor:pointer; white-space:nowrap; text-decoration:none;
+  flex:0 1 auto; min-width:max-content;
+  transition:background .38s var(--ease), color .38s var(--ease), border-color .38s var(--ease);
+}
+.btn .ar{ transition:transform .38s var(--ease); }
+.btn:hover .ar{ transform:translateX(4px); }
+
+/* primary — solid deep teal-green; hover quietly inverts to an outline */
+.btn-solid,.btn-ink,.btn-teal,.btn-primary{ background:var(--ink); color:var(--bg); border-color:var(--ink); }
+.btn-solid:hover,.btn-ink:hover,.btn-teal:hover,.btn-primary:hover,
+.btn-solid:focus-visible,.btn-ink:focus-visible,.btn-teal:focus-visible,.btn-primary:focus-visible{
+  background:transparent; color:var(--ink); border-color:var(--ink); }
+
+/* secondary — 1px ink border on transparent; hover fills to the primary */
+.btn-line,.btn-tert,.btn-secondary{ background:transparent; color:var(--ink); border-color:var(--ink); }
+.btn-line:hover,.btn-tert:hover,.btn-secondary:hover,
+.btn-line:focus-visible,.btn-tert:focus-visible,.btn-secondary:focus-visible{
+  background:var(--ink); color:var(--bg); border-color:var(--ink); }
+
+/* tertiary / quiet — text + underline, no box */
+.btn-quiet{ background:transparent; color:var(--ink); border-color:transparent;
+  min-height:0; padding:.5em 0; letter-spacing:.1em;
+  text-decoration:underline; text-underline-offset:.4em; text-decoration-thickness:1px;
+  text-decoration-color:var(--line); }
+.btn-quiet:hover,.btn-quiet:focus-visible{ color:var(--accent-ink); text-decoration-color:currentColor; }
+
+/* ================================================================ HEADER
+   base.css makes .hd position:fixed and WR.header toggles .up/.frost/.inv.
+   Clerestory never retracts: transparent over the bright masthead, frosts on
+   scroll, and inverts to light over a dark hero (live / building / editorial).
+
+   FULL WIDTH. The <header> itself carries no .wrap/.wrap-n, so the frosted
+   band and its hairline run edge to edge at every viewport; the inner .hd-in
+   carries wrap + wrap-n, which is the same gutter + 1580 cap the footer and
+   every section use. Header content therefore lines up with page content
+   exactly: 57.6px in at 1440, 242px in at 1920. */
+.hd{ z-index:900; display:block; padding:0; height:var(--hd-h);
+  border-bottom:1px solid transparent; }
+.hd-in{ display:flex; align-items:center; justify-content:space-between;
+  gap:16px; height:100%; }
+.hd.up{ transform:none !important; }                 /* never retract */
+.hd.frost{
+  background:color-mix(in srgb, var(--raised) 88%, transparent);
+  backdrop-filter:blur(14px) saturate(1.2); -webkit-backdrop-filter:blur(14px) saturate(1.2);
+  border-bottom-color:var(--line); box-shadow:0 1px 0 rgba(25,26,25,.02);
+}
+.hd .brand{ gap:.6rem; }
+.hd .brand svg{ width:22px; height:22px; color:var(--brand-teal); }   /* the real Wiseman mark, brand teal */
+.hd .brand b{ font-family:var(--text); font-weight:600; font-size:.74rem;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--ink); }
+.hd .brand-sub{ display:none; }
+.hnav{ gap:clamp(1rem,2.1vw,2.2rem); }
+.hnav a{ font-family:var(--text); font-weight:500; font-size:.78rem; letter-spacing:.02em;
+  text-transform:none; color:var(--ink-2); padding:.3em 0; }
+.hnav a::after{ background:var(--accent); height:1px; bottom:.02em; }
+.hnav a:hover{ color:var(--ink); }
+.hd-cta{ display:flex; align-items:center; gap:.7rem; }
+.hd-cta .btn{ min-height:40px; padding:.75em 1.25em; font-size:.62rem; }
+.mbtn span, .mbtn span::before, .mbtn span::after{ background:var(--ink); }
+
+/* header inverted over a dark hero — the mark keeps its brand teal, the
+   wordmark and nav go light.
+
+   The scrim is the same device the home hero uses (.mono-haze), turned the
+   other way up: those heroes are photographs, and "dark hero" is only true on
+   average. Measured white-on-photo at 1440, the nav was running 3.08-3.68:1 on
+   a building page and down to 2.98:1 on /live — sky and pale stucco sit right
+   under the nav row. This gradient is spent well below the bar, so it reads as
+   the top of the photograph rather than a band, and it takes every label to
+   4.5:1 or better. Not on .frost (that state has its own cream band) and not
+   while the menu is open (that panel is already solid). */
+.hd.inv:not(.frost)::before{ content:""; position:absolute; inset:0 0 auto 0;
+  height:calc(var(--hd-h) * 2.3); z-index:-1; pointer-events:none;
+  background:linear-gradient(rgba(4,52,58,.58), rgba(4,52,58,.34) 46%, rgba(4,52,58,0)); }
+body.menu-open .hd.inv:not(.frost)::before,
+body:has(.mnav.open) .hd.inv:not(.frost)::before{ display:none; }
+.hd.inv .brand b{ color:#fff; }
+.hd.inv .hnav a{ color:rgba(255,255,255,.82); }
+.hd.inv .hnav a:hover{ color:#fff; }
+.hd.inv .mbtn span, .hd.inv .mbtn span::before, .hd.inv .mbtn span::after{ background:#fff; }
+.hd.inv.frost .brand b{ color:var(--ink); }
+.hd.inv.frost .hnav a{ color:var(--ink-2); }
+.hd.inv.frost .mbtn span, .hd.inv.frost .mbtn span::before, .hd.inv.frost .mbtn span::after{ background:var(--ink); }
+
+@media(max-width:1080px){
+  .hnav{ display:none; }
+  .hd-cta .btn{ display:none; }
+  .mbtn{ display:inline-flex; }
+}
+
+/* ---------------------------------------------------------------- expanded nav
+   base.css positions the panel (fixed, full-bleed, --deep ground) and core.js
+   opens it, inerts <main>, closes on Escape and returns focus to the button.
+
+   The fixed header sits ABOVE the panel (core.js lifts it to z-index 960 so the
+   toggle stays clickable), so two things have to be true: the panel's first
+   item must never run under it, and the header has to read as the panel's own
+   top bar rather than as cream page chrome floating on deep teal.
+
+   1. CLEARANCE. The panel is laid out from the top with the header's height as
+      padding and the list centred by `margin-block:auto` on the inner box —
+      centring with `justify-content` clips the top of the list once the items
+      are taller than the viewport (at 768x500 the first item used to sit at
+      y = -165, off-screen and unreachable). With auto margins the overflow
+      scrolls instead, so item 01 is always in view and always below the bar. */
+.mnav{ justify-content:flex-start; overflow-y:auto; overscroll-behavior:contain;
+  padding-top:calc(var(--hd-h) + clamp(14px,3.2vh,38px));
+  padding-bottom:clamp(28px,6vh,64px); }
+.mnav-in{ width:100%; margin-block:auto; }
+.mnav a{ font-family:var(--disp); font-weight:500; letter-spacing:-.01em; }
+.mnav-list{ list-style:none; }
+.mnav .mn-no{ display:inline-block; font-size:.7rem; letter-spacing:.14em;
+  color:var(--tide); margin-right:1rem; vertical-align:.25em; font-family:var(--text); }
+/* the contact block is not a nav item — hold it at label size, inline, so the
+   middot separators read (base.css's .mnav a rule was setting it at 3.2rem) */
+.mnav .mfoot{ margin-top:clamp(30px,5vh,52px); opacity:1; }
+.mnav .mfoot p{ font-family:var(--text); font-size:.86rem; line-height:1.9;
+  letter-spacing:.04em; color:rgba(243,240,231,.74); }
+.mnav .mfoot a{ display:inline; font-family:var(--text); font-size:inherit;
+  line-height:inherit; letter-spacing:inherit; padding:0; color:var(--tide); }
+.mnav .mfoot a:hover{ color:#fff; }
+
+/* 2. OPEN STATE. The header goes transparent over the panel, its wordmark and
+      bars go light, and the burger becomes an unmistakable ringed close
+      control: 48x48 (>=44 hit area), white 1.5px cross, aria-label swapped to
+      "Close" by app.js. .menu-open is set by app.js; the :has() twin keeps it
+      correct even if that observer never runs. */
+/* .hd.hd doubles the class so the open state outranks .hd.inv.frost, which
+   pulls the wordmark and bars back to dark ink over a light frost — exactly
+   wrong on the deep-teal panel. */
+body.menu-open .hd.hd, body:has(.mnav.open) .hd.hd{
+  background:transparent; box-shadow:none;
+  backdrop-filter:none; -webkit-backdrop-filter:none;
+  border-bottom-color:rgba(255,255,255,.15); }
+body.menu-open .hd.hd .brand b, body:has(.mnav.open) .hd.hd .brand b{ color:#fff; }
+body.menu-open .hd.hd .hd-cta .btn, body:has(.mnav.open) .hd.hd .hd-cta .btn{ display:none; }
+body.menu-open .hd.hd .mbtn, body:has(.mnav.open) .hd.hd .mbtn{
+  width:48px; height:48px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.44); background:rgba(255,255,255,.08);
+  transition:background-color .3s var(--ease), border-color .3s var(--ease); }
+body.menu-open .hd.hd .mbtn:hover, body:has(.mnav.open) .hd.hd .mbtn:hover{
+  background:rgba(255,255,255,.18); border-color:#fff; }
+body.menu-open .hd.hd .mbtn span, body:has(.mnav.open) .hd.hd .mbtn span{ background:transparent; }
+body.menu-open .hd.hd .mbtn span::before, body:has(.mnav.open) .hd.hd .mbtn span::before,
+body.menu-open .hd.hd .mbtn span::after,  body:has(.mnav.open) .hd.hd .mbtn span::after{
+  background:#fff; height:1.5px; width:19px; }
+body.menu-open .hd.hd .mbtn:focus-visible, body:has(.mnav.open) .hd.hd .mbtn:focus-visible{
+  outline:2px solid #fff; outline-offset:3px; }
+
+/* ================================================================ PAGE TRANSITION
+   The curtain glides, it does not snap. These are the Motor Tides values to the
+   millisecond — the concept the client picked — and they replace the shared
+   core/base.css pair for THIS DIRECTION ONLY (core/base.css is untouched, so
+   tideline / register / nocturne keep their own snappier curve):
+
+       reveal  ptReveal .8s cubic-bezier(.65,0,.35,1) .42s both
+       cover   ptCover  .6s cubic-bezier(.65,0,.35,1)      both
+       hold    950ms before navigation  (atrium/app.js "transition")
+
+   Two differences from base matter. First the curve: base rides
+   cubic-bezier(.16,1,.3,1), which dumps almost all of its travel in the first
+   third and then crawls — that is the "snap" the client saw. (.65,0,.35,1) is
+   symmetric, easing in AND out, so the panel leaves and arrives at rest.
+   Second the mechanism: keyframes with `both` fill, not transitions, so the
+   curtain HOLDS at full cover through the .42s delay instead of starting to
+   lift the instant a class lands. Animations outrank transitions in the
+   cascade, so base's `.reveal` / `.cover` transitions simply stop applying.
+   102%, not 100%: a hair of overtravel keeps a sub-pixel seam off the edge.
+
+   Suppressed on the home page: the hero opens with its own three beats, and a
+   curtain retracting over beat 1 would step on the full-bleed frame. */
+.pt{ background:var(--deep-teal); transform:translateY(102%); }
+.js-pt .pt{ animation:ptReveal .8s cubic-bezier(.65,0,.35,1) .42s both; }
+.pt.cover{ animation:ptCover .6s cubic-bezier(.65,0,.35,1) both; }
+@keyframes ptReveal{ from{ transform:translateY(0); } to{ transform:translateY(-102%); } }
+@keyframes ptCover{ from{ transform:translateY(102%); } to{ transform:translateY(0); } }
+body:has(.hero-runway) .pt:not(.cover){ display:none; animation:none; }
+
+/* the lockup rides the panel the whole way up, rather than fading off it */
+.pt .ptmark{ gap:12px; opacity:1; transition:none; }
+.js-pt .pt .ptmark, .pt.cover .ptmark{ opacity:1; }
+.pt .ptmark svg{ color:var(--brand-teal); width:38px; height:38px; }
+.pt .ptmark .pt-name{ font-family:var(--disp); color:var(--hero-fg); font-size:1.05rem;
+  letter-spacing:.3em; text-indent:.3em; text-transform:uppercase; line-height:1.1; }
+.pt .ptmark .pt-sub{ font-family:var(--sans); font-weight:600; font-size:.54rem;
+  letter-spacing:.46em; text-indent:.46em; text-transform:uppercase; line-height:1;
+  color:color-mix(in srgb, var(--hero-fg) 70%, transparent); margin-top:-4px; }
+
+@media(prefers-reduced-motion:reduce){
+  .js-pt .pt{ animation:none; transform:translateY(-102%); }
+  .pt.cover{ animation:none; transform:translateY(102%); }
+}
+
+/* ---------------------------------------------------------------- skip link */
+.skip-link{ background:var(--ink); color:#fff; }
+
+/* ================================================================ HERO — LIVING MONOGRAM
+   The front door, in three beats.
+
+   WISEMAN is cut out of a full-bleed Los Angeles building photograph via an SVG
+   cream letter-mask: a cream rect masked by the word, so the photo shows THROUGH
+   the letterforms and the warm ground fills everything around them.
+
+     BEAT 1 (load)    .mono-veil and .mono-tone sit at opacity 0, so the frame is
+                      the photograph, edge to edge, unmasked, for ~1s. The stage
+                      breathes on a very slow alternating scale so it is alive
+                      rather than a frozen plate.
+     BEAT 2 (clip-in) veil + tone fade up over 1.05s on the one Motor Tides ease
+                      while .mono-type scales down into place — the letterforms
+                      "clip in" and the image survives only inside them. The copy
+                      rises after, staggered.
+     BEAT 3 (scroll)  .hero-runway gives the sticky stage a viewport of runway;
+                      app.js drives the letters back out and the veil back off as
+                      you scroll, re-opening the frame before the stats ribbon.
+
+   Beats 1-2 are pure CSS keyframes with `both` fill: they auto-run on load with
+   no scroll observer, and they settle even in a headless render. Nothing is
+   gated on JS — with no .js class, and under prefers-reduced-motion, the hero
+   paints its settled end state and the runway collapses to a single screen.
+
+   PROPORTION. The word used to be stretched edge-to-edge with textLength, which
+   over-tracked it on desktop and compressed Prata's glyphs below 1024. Both are
+   gone: the caps now stand at their natural width at every size, tuned by the
+   clamp below to hold ~72% of the viewport on desktop and ~85% on a phone, with
+   real cream margin either side. */
+main{ display:block; }
+
+/* BEAT 3 runway. Only a taller-than-viewport block when JS can drive the
+   reveal; otherwise it is exactly the hero and nothing scrolls past. */
+.hero-runway{ position:relative; }
+.js .hero-runway{ height:178svh; }
+
+.hero-mono{
+  position:relative; min-height:100svh; overflow:hidden; isolation:isolate;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; background:var(--bg);
+  padding-block:calc(var(--hd-h) + 6vh) clamp(48px,10svh,120px);
+}
+.js .hero-mono{ position:sticky; top:0; height:100svh; min-height:0; }
+
+/* isolate: .mono-duo blends against the frame inside this box and nowhere else */
+.mono-stage{ position:absolute; inset:0; z-index:0; overflow:hidden; isolation:isolate; }
+.mono-photo,.mono-video{ position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:50% 43%;
+  /* the brick and the sky carry the letterforms; lift them a little so the word
+     fills with colour rather than grey stucco */
+  filter:saturate(1.12) contrast(1.05); }
+/* The video is the optional upgrade path and never the fallback: it stays at
+   opacity 0 until app.js has seen a real `playing` event, so the wr03 still
+   underneath carries the hero unless and until a clip actually runs. */
+.mono-video{ opacity:0; transition:opacity .5s var(--ease); }
+.mono-video.on{ opacity:1; }
+/* THE DUOTONE. The reference fills MOTOR TIDES with saturated turquoise water:
+   one hue, top to bottom (measured on the live page — mean HSL saturation .57,
+   hue 189, interquartile hue spread 3 degrees). A photograph of brick, stucco
+   and glass cannot do that on its own; a flat teal scrim over it only darkens,
+   and the word came out grey-teal and patchy (sat .17, hue spread 14) — a photo
+   crop rather than a mark. `mix-blend-mode:color` takes hue and saturation from
+   this layer and luminance from the frame behind it, so the architecture keeps
+   all of its modelling and light while every pixel lands on the brand hue.
+   The gradient is the reference's own move: deeper at the cap-line, opening up
+   through the baseline, so the word reads as one object lit from above.
+   It fades in and out with the veil (same beats), so beat 1's full-bleed frame
+   and beat 3's opening are never tinted — the duotone exists only inside the
+   letterforms. Compositing only; no filter or backdrop-filter on the scroll
+   path. mix-blend-mode is universally supported; without it the layer simply
+   paints teal at its own opacity and the veil still hides it outside the word. */
+.mono-duo{ position:absolute; inset:0; mix-blend-mode:color;
+  background:linear-gradient(#0E86A0, #1AA3B4 46%, #2FA9A8); }
+/* A cream haze over the top band only, present from the first frame. It keeps
+   the header's teal ink legible where it rides over bright sky and white cloud
+   during beat 1, and it lets the cream ground start at the edge of the frame —
+   a quiet foreshadow of the veil that closes in on beat 2. It is spent by 26%,
+   well above the cap-line of the letters, so it never washes the word out. */
+.mono-haze{ position:absolute; inset:0;
+  background:linear-gradient(rgba(243,240,231,.80), rgba(243,240,231,.30) 12%, rgba(243,240,231,0) 26%); }
+/* a whisper of teal-ink deepens the photo inside the letterforms so the word
+   holds against the cream at any crop; everything outside is covered by cream.
+   It can afford to be strong: the veil hides it everywhere but inside WISEMAN,
+   and on beats 1 and 3 it fades off with the veil, so the full-bleed frame is
+   never tinted. Slightly deeper at the top, where the caps sample pale sky. */
+.mono-tone{ position:absolute; inset:0;
+  background:linear-gradient(rgba(4,52,58,.66), rgba(4,52,58,.54) 44%, rgba(4,52,58,.60)); }
+
+.mono-word{ position:absolute; inset:0; z-index:1; margin:0; pointer-events:none; }
+.mono-veil{ position:absolute; inset:0; display:block; width:100%; height:100%; }
+/* The monogram. Natural width, never textLength-stretched.
+     size     12.6vw + .8rem interpolates ~85% of the viewport at 360 down to
+              ~72% at 1440; the 13.5rem cap stops it growing past a composed
+              display word on wide monitors, and 26svh keeps it off the copy in
+              landscape. Well under the old 20.5vw.
+     tracking -.012em. Prata's caps carry generous sidebearings, so the old
+              +.015em read as an over-tracked banner; closing it just past
+              neutral is what makes the word a monogram rather than a stretch.
+              Nowhere near the -.04em floor where letters start to touch. */
+.mono-letters{
+  font-family:var(--disp-lg); font-weight:400;
+  font-size:clamp(3.4rem,min(12.6vw + .8rem,26svh),13.5rem);
+  letter-spacing:-.012em;
+}
+/* scale the mask word about its own centre — beats 2 and 3 both drive this */
+.mono-type{ transform-box:fill-box; transform-origin:50% 50%; }
+
+.mono-content{ position:relative; z-index:2; margin-top:clamp(104px,23vh,272px);
+  padding-inline:var(--pad); max-width:52rem; }
+/* The hero's voice, and sized like it: terracotta display italic at roughly a
+   third of the monogram, not the caption it used to be. `balance` plus the
+   bound "managed wisely." keeps the two-line break off a single-word last line. */
+.mono-tag{ font-family:var(--disp); font-style:italic; font-weight:500;
+  font-size:clamp(1.75rem,3.6vw,3.1rem); line-height:1.14; letter-spacing:-.018em;
+  color:var(--teal-ink); text-wrap:balance; max-width:22ch; margin-inline:auto; }
+.mono-lead{ margin-top:clamp(1rem,1.8vh,1.5rem); font-size:clamp(.95rem,1.05vw,1.1rem);
+  color:var(--ink-2); max-width:46ch; margin-inline:auto; line-height:1.6; text-wrap:pretty; }
+.mono-cta{ margin-top:clamp(1.6rem,3vh,2.4rem); display:flex; flex-wrap:wrap;
+  justify-content:center; gap:.8rem; }
+.mono-loc{ position:absolute; z-index:2; right:var(--pad); bottom:clamp(20px,4svh,40px);
+  font-size:.64rem; font-weight:600; letter-spacing:.24em; text-transform:uppercase;
+  color:var(--ink-3); }
+.mono-loc span{ display:inline-flex; align-items:center; gap:.7em; }
+.mono-loc span::before{ content:""; width:28px; height:1px; background:var(--line); }
+/* a quiet scroll cue closes the composition, echoing the Motor Tides masthead —
+   and on this page it now points at a real beat 3 */
+.mono-scroll{ position:absolute; left:50%; bottom:clamp(18px,4svh,38px); z-index:2;
+  width:1px; height:clamp(38px,7svh,64px); transform:translateX(-50%); transform-origin:top;
+  background:linear-gradient(var(--ink-3), transparent); opacity:.7; }
+@media(max-width:600px){
+  /* Lift the monogram on a tall phone screen, where centring it leaves a dead
+     cream field under the header. Done by growing the mask box UPWARD out of
+     the hero (which clips it) rather than translating it: the cream rect still
+     reaches the bottom edge, so no strip of the photograph leaks out below. */
+  .mono-word{ inset:-8% 0 0; }
+  .mono-scroll{ display:none; }
+  .mono-content{ margin-top:clamp(76px,19vh,190px); }
+  .mono-cta{ flex-direction:column; align-items:stretch; width:100%; max-width:320px; margin-inline:auto; }
+  .mono-loc{ display:none; }
+}
+
+/* A landscape phone gives the hero ~430px of height: at that point the word,
+   which is placed at 40% of the stage, runs straight into the tagline. Shrink
+   it hard against svh, pull the mask box further up out of the frame, and close
+   the copy offset to match — the composition stays the same, just compressed. */
+@media(max-height:600px){
+  .hero-mono{ padding-block:calc(var(--hd-h) + 3vh) clamp(24px,5svh,44px); }
+  .mono-word{ inset:-16% 0 0; }
+  .mono-letters{ font-size:min(12.6vw + .8rem,17svh); }
+  .mono-content{ margin-top:clamp(44px,10svh,80px); }
+  .mono-tag{ font-size:clamp(1.35rem,2.7vw,1.9rem); }
+  .mono-scroll{ display:none; }
+}
+
+/* ---- the load sequence ------------------------------------------------ */
+/* An enhancement over an already-visible default: without .js every one of
+   these elements is already at its settled value. `both` fill holds the
+   from-state through the delay, which is what gives beat 1 its hold. */
+@keyframes monoBreathe{ from{ transform:scale(1.03); } to{ transform:scale(1.10); } }
+@keyframes monoCutout{ from{ opacity:0; } to{ opacity:1; } }
+@keyframes monoClipIn{ from{ transform:scale(1.5); } to{ transform:none; } }
+@keyframes monoUp{ from{ opacity:0; transform:translateY(14px); } to{ opacity:1; transform:none; } }
+@keyframes monoGrow{ from{ transform:translateX(-50%) scaleY(0); } to{ transform:translateX(-50%) scaleY(1); } }
+/* beat 1 — 22s there and back, so the frame drifts rather than zooms. Chrome
+   promotes an animated transform on its own, so no standing will-change; app.js
+   parks it with .mono-still once the hero is off screen rather than keeping a
+   composited layer breathing for the whole page. */
+.js .mono-stage{ animation:monoBreathe 22s ease-in-out alternate infinite; }
+.js .mono-still .mono-stage{ animation-play-state:paused; }
+/* beat 2 — held off for .95s, then the veil closes as the letters settle */
+.js .mono-veil,
+.js .mono-duo,
+.js .mono-tone{ animation:monoCutout 1.05s var(--ease) .95s both; }
+.js .mono-type{ animation:monoClipIn 1.2s var(--ease) .95s both; }
+.js .mono-tag{ animation:monoUp .9s var(--ease) 1.78s both; }
+.js .mono-lead{ animation:monoUp .9s var(--ease) 1.92s both; }
+.js .mono-cta{ animation:monoUp .9s var(--ease) 2.06s both; }
+.js .mono-loc{ animation:monoUp .9s var(--ease) 2.2s both; }
+.js .mono-scroll{ animation:monoGrow 1.1s var(--ease) 2.2s both; }
+/* Once the sequence is spent app.js adds .mono-settled and takes the wheel:
+   a finished animation with `both` fill would otherwise outrank the inline
+   transform/opacity that beat 3 writes. */
+.mono-settled .mono-veil,.mono-settled .mono-duo,.mono-settled .mono-tone,.mono-settled .mono-type,
+.mono-settled .mono-tag,.mono-settled .mono-lead,.mono-settled .mono-cta,
+.mono-settled .mono-loc,.mono-settled .mono-scroll{ animation:none; }
+
+@media(prefers-reduced-motion:reduce){
+  /* clean static end state: no runway, no sticky, no beats, no video */
+  .js .hero-runway{ height:auto; }
+  .js .hero-mono{ position:relative; height:auto; min-height:100svh; }
+  .js .mono-stage,.js .mono-veil,.js .mono-duo,.js .mono-tone,.js .mono-type,.js .mono-tag,
+  .js .mono-lead,.js .mono-cta,.js .mono-loc,.js .mono-scroll{ animation:none; }
+  .mono-video{ display:none; }
+}
+
+/* ================================================================ STATS RIBBON */
+.stats{ border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  margin-top:clamp(40px,6vh,80px); }
+.stats .row{ display:grid; grid-template-columns:repeat(4,1fr); }
+.stat{ padding:clamp(26px,3.4vw,46px) clamp(14px,2vw,34px); border-left:1px solid var(--line-2); }
+.stat:first-child{ border-left:0; }
+.stat .n{ font-family:var(--disp); font-weight:500; font-size:clamp(2.6rem,5.2vw,4.6rem);
+  line-height:.95; color:var(--ink); letter-spacing:-.02em; }
+.stat .n .u{ font-size:.34em; color:var(--teal-ink); vertical-align:.9em; margin-left:.15em; letter-spacing:0; }
+.stat .k{ margin-top:.7rem; font-size:.78rem; color:var(--ink-3); font-weight:500; line-height:1.35; }
+@media(max-width:720px){
+  .stats .row{ grid-template-columns:1fr 1fr; }
+  .stat:nth-child(3){ border-left:0; }
+  .stat:nth-child(n+3){ border-top:1px solid var(--line-2); }
+}
+
+/* ================================================================ SECTION SHELL */
+/* The vertical rhythm must not depend on the tag. `.band` is a <section> when it
+   stands on the cream ground, but a <div> when it sits inside a tinted `.promise`
+   wrapper — and a `section.band` selector silently skipped those, leaving the
+   tinted bands with zero padding so their eyebrow sat 18px off the tint's edge
+   while the untinted ones breathed at 96px. Key it on the class alone. */
+.band{ padding-block:clamp(72px,11vh,148px); }
+@media(max-width:740px){ .band{ padding-block:clamp(56px,9vh,96px); } }
+.band-head{ max-width:56ch; }
+.band-head h2{ font-size:clamp(1.9rem,3.4vw,3.1rem); letter-spacing:-.016em; }
+.band-head .eyebrow{ margin-bottom:1.1rem; display:block; }
+.band-head p{ margin-top:1.3rem; color:var(--ink-2); font-size:1.05rem; max-width:52ch; }
+/* .rule (a standalone full-width hairline) retired 2026-09: its one use sat
+   40px above .pillars' own border-top and drew the same line twice. */
+
+/* ---- WHAT WE DO (ordered pillars + sticky figure) ---- */
+/* the space the retired .rule used to hold: the intro copy needs air before
+   .pillars' own top hairline, which is now the section's only lead-in line */
+.dolayout{ display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(30px,5vw,84px);
+  align-items:start; margin-top:clamp(36px,5.2vh,68px); }
+.dofig{ position:sticky; top:calc(var(--hd-h) + 30px); aspect-ratio:3/4; overflow:hidden; background:var(--bg-2); }
+.dofig img{ width:100%; height:100%; object-fit:cover; }
+.dofig::after{ content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 1px var(--line-2); }
+.pillars{ border-top:1px solid var(--line); }
+.pillar{ display:grid; grid-template-columns:auto 1fr; gap:clamp(1rem,2.4vw,2.4rem);
+  padding:clamp(24px,3vh,38px) 0; border-bottom:1px solid var(--line); }
+.pillar .idx{ font-family:var(--disp); font-weight:500; font-size:1rem; color:var(--teal-ink);
+  font-variant-numeric:tabular-nums; padding-top:.35em; }
+.pillar h3{ font-size:clamp(1.35rem,2vw,1.75rem); letter-spacing:-.01em; margin-bottom:.5rem; }
+.pillar p{ font-size:.98rem; color:var(--ink-2); max-width:44ch; }
+@media(max-width:860px){
+  .dolayout{ grid-template-columns:1fr; }
+  .dofig{ position:relative; top:0; aspect-ratio:16/10; order:-1; margin-bottom:8px; }
+}
+
+/* ---- ON-SITE / ABOUT stone band ---- */
+/* the tonal step from --bg to --bg-2 is the separation; no rules needed */
+.promise{ background:var(--bg-2); }
+.promise .grid{ display:grid; grid-template-columns:1.1fr .9fr; gap:clamp(30px,5vw,80px); align-items:center; }
+.promise .statement{ font-family:var(--disp); font-weight:500; font-size:clamp(1.7rem,3.1vw,3rem);
+  line-height:1.12; letter-spacing:-.015em; color:var(--ink); text-wrap:balance; }
+.promise .statement em{ font-style:italic; color:var(--teal-ink); }
+.promise .trust{ margin-top:1.8rem; display:flex; align-items:flex-start; gap:.7rem;
+  color:var(--ink-2); font-size:.98rem; max-width:46ch; }
+.promise .trust svg{ width:18px; height:18px; color:var(--teal); flex:none; margin-top:.2em; }
+.promise-fig{ aspect-ratio:4/5; overflow:hidden; position:relative; background:var(--bg); }
+.promise-fig img{ width:100%; height:100%; object-fit:cover; }
+.promise-fig::after{ content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 1px var(--line-2); }
+@media(max-width:860px){ .promise .grid{ grid-template-columns:1fr; } .promise-fig{ aspect-ratio:16/10; order:-1; } }
+
+/* ---- LIVE AT WISEMAN featured grid (image-forward editorial cells) ---- */
+.live-top{ display:flex; justify-content:space-between; align-items:flex-end; gap:2rem;
+  flex-wrap:wrap; margin-bottom:clamp(30px,4vh,54px); }
+.live-top h2{ font-size:clamp(1.9rem,3.4vw,3.1rem); }
+.live-top .eyebrow{ display:block; margin-bottom:1rem; }
+.live-top .aside{ max-width:34ch; color:var(--ink-2); font-size:.98rem; padding-bottom:.2rem; }
+/* ---- community card -----------------------------------------------------
+   Anatomy, top to bottom: photograph (4:5, the loudest thing on the card) ·
+   area eyebrow in the small caps label register · the name in the reading
+   serif, the one piece of display type · a hairline · a baseline facts row,
+   beds left and rent right in tabular lining figures.
+
+   The facts used to sit in a tinted 1px box — not a decision, a leak from the
+   building page's dl.facts spec grid (now scoped). Here the row is carried by
+   one hairline and by space: 1.05rem above it, .78rem below. Hover stays calm:
+   the frame warms, the photograph creeps 4%, the name takes the deep terracotta
+   (5.2:1 on cream). The whole card is one <a>; nothing inside is a second
+   target. */
+.communities{ display:grid; grid-template-columns:repeat(3,1fr);
+  gap:clamp(34px,3.4vw,58px) clamp(18px,1.8vw,28px); }
+.card{ display:block; position:relative; color:inherit; }
+.card .ph{ display:block; aspect-ratio:4/5; overflow:hidden; background:var(--bg-2); position:relative; }
+.card .ph img{ width:100%; height:100%; object-fit:cover; transition:transform 1.2s var(--ease); }
+.card .ph::after{ content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 1px var(--line-2);
+  transition:box-shadow .45s var(--ease); }
+.card:hover .ph img,.card:focus-visible .ph img{ transform:scale(1.04); }
+.card:hover .ph::after,.card:focus-visible .ph::after{
+  box-shadow:inset 0 0 0 1px color-mix(in srgb, var(--accent) 40%, var(--line)); }
+.card .info{ display:block; padding-top:1.15rem; }
+.card .area{ display:block; font-family:var(--text); font-size:.63rem; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--ink-3); font-weight:600; }
+.card .nm{ display:block; margin-top:.52rem; font-family:var(--disp); font-weight:500;
+  font-size:clamp(1.3rem, 1.05vw + .92rem, 1.6rem); color:var(--ink);
+  line-height:1.13; letter-spacing:-.014em; text-wrap:balance;
+  transition:color .35s var(--ease); }
+.card:hover .nm,.card:focus-visible .nm{ color:var(--accent-deep); }
+.card .facts{ display:flex; justify-content:space-between; align-items:baseline; gap:1.1rem;
+  background:none; border:0;
+  border-top:1px solid color-mix(in srgb, var(--ink) 12%, transparent);
+  margin-top:1.05rem; padding-top:.78rem; }
+/* balance, not pretty: on the neighbourhood cards this line is a street list
+   that wraps to two lines in the 900-1080 band, and an unbalanced wrap drops a
+   single word ("Westgate", "Mile", "City") onto the second line. */
+.card .facts .b{ font-size:.85rem; line-height:1.45; color:var(--ink-3); font-weight:500;
+  min-width:0; text-wrap:balance; }
+.card .facts .p{ flex:none; font-size:1rem; color:var(--ink); font-weight:600;
+  font-variant-numeric:tabular-nums lining-nums; letter-spacing:-.004em; white-space:nowrap; }
+.card .facts .p .from{ font-weight:600; color:var(--ink-3); font-size:.6rem; letter-spacing:.16em;
+  text-transform:uppercase; margin-right:.5em; vertical-align:.1em; }
+/* Motor Tides publishes no rent — the status stands in for the figure, and
+   reads as a status because of the label register, not because of a box. */
+.card .facts .flag{ flex:none; font-family:var(--text); font-size:.66rem; font-weight:600;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--accent-deep); white-space:nowrap; }
+/* neighbourhood cards carry no figure: the arrow is the affordance */
+.card .facts .go{ flex:none; display:inline-block; font-size:1rem; line-height:1;
+  color:var(--accent-deep); transition:transform .45s var(--ease); }
+.card:hover .facts .go,.card:focus-visible .facts .go{ transform:translateX(5px); }
+.live-foot{ margin-top:clamp(52px,7vh,86px); display:flex; align-items:center; gap:1.2rem;
+  flex-wrap:wrap; }
+.live-foot .btn{ flex:none; }
+.live-foot .note{ color:var(--ink-3); font-size:.82rem; flex:1 1 240px; min-width:200px; }
+@media(max-width:900px){ .communities{ grid-template-columns:1fr 1fr; } }
+@media(max-width:560px){ .communities{ grid-template-columns:1fr; } }
+
+/* ---- core values row ---- */
+.values{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line);
+  border:1px solid var(--line); margin-top:clamp(30px,4vh,50px); }
+.value{ background:var(--bg); padding:clamp(26px,3vw,40px); }
+.value h3{ font-size:1.3rem; margin-bottom:.6rem; }
+.value p{ font-size:.94rem; color:var(--ink-2); max-width:38ch; }
+@media(max-width:860px){ .values{ grid-template-columns:1fr; } }
+
+/* ---- track teaser ---- */
+.track{ display:grid; grid-template-columns:.92fr 1.08fr; gap:clamp(30px,5vw,72px);
+  align-items:center; margin-top:clamp(56px,8vh,110px); }
+.track-fig{ aspect-ratio:5/4; overflow:hidden; position:relative; background:var(--bg-2); }
+.track-fig img{ width:100%; height:100%; object-fit:cover; }
+.track-fig::after{ content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 1px var(--line-2); }
+.track .eyebrow{ display:block; margin-bottom:1.1rem; }
+.track h2{ font-size:clamp(1.7rem,3vw,2.7rem); }
+.track p{ margin-top:1.2rem; color:var(--ink-2); font-size:1rem; max-width:48ch; }
+.track .cite{ margin-top:1.4rem; font-size:.78rem; color:var(--ink-3); }
+@media(max-width:860px){ .track{ grid-template-columns:1fr; } .track-fig{ aspect-ratio:16/10; } }
+
+/* portfolio map on the home / live pages */
+.homemap{ position:relative; }
+.homemap .mapbox{ height:clamp(420px,60vh,640px); background:var(--bg-2); }
+.map-foot{ display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  margin-top:.9rem; color:var(--ink-3); font-size:.8rem; }
+
+/* ================================================================ FULL-BLEED HERO
+   Used by the Live-at-Wiseman portfolio door and the Track Record page. */
+.fbhero{ position:relative; min-height:clamp(520px,82svh,880px); display:flex; align-items:flex-end;
+  overflow:clip; background:var(--ink); color:#fff; isolation:isolate;
+  padding-top:calc(var(--hd-h) + clamp(60px,12vh,150px)); padding-bottom:clamp(40px,7vh,90px); }
+.fbhero .fbimg{ position:absolute; inset:0; z-index:0; }
+.fbhero .fbimg img{ width:100%; height:100%; object-fit:cover; object-position:var(--pos,50% 50%); filter:var(--hero-img); }
+.js .fbhero .fbimg img{ animation:fb-in 1.3s var(--ease) both; }
+@keyframes fb-in{ from{ transform:scale(1.06); } to{ transform:scale(1); } }
+.fbhero::after{ content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(to top, rgba(14,15,13,.86) 0%, rgba(14,15,13,.56) 36%, rgba(14,15,13,.20) 60%, transparent 80%),
+             linear-gradient(105deg, rgba(14,15,13,.40) 0%, rgba(14,15,13,.08) 42%, transparent 62%),
+             linear-gradient(to bottom, rgba(14,15,13,.40), transparent 22%); }
+.fbhero .fb-in{ position:relative; z-index:2; width:100%; }
+.fbhero .tagline{ font-family:var(--disp); font-style:italic; font-weight:500; color:var(--hero-tag);
+  text-shadow:var(--hero-shadow); font-size:clamp(1rem,1.6vw,1.35rem); margin-bottom:1rem; }
+.fbhero h1{ color:var(--hero-fg); text-shadow:var(--hero-shadow); font-size:clamp(2.5rem,6vw,6rem); line-height:1.0; letter-spacing:-.022em; max-width:16ch; }
+.fbhero h1 em{ font-style:italic; }
+.fbhero .sub{ margin-top:1.3rem; color:var(--hero-sub); text-shadow:var(--hero-shadow); max-width:50ch; font-size:clamp(1rem,1.15vw,1.15rem); }
+.fbhero .cta{ margin-top:2rem; display:flex; gap:.8rem; flex-wrap:wrap; }
+/* buttons on a dark photo hero (fbhero / building hero / editorial hero) */
+.fbhero .btn-solid,.fbhero .btn-ink,.fbhero .btn-teal,.fbhero .btn-primary,
+.bh .btn-solid,.bh .btn-ink,.bh .btn-teal,.bh .btn-primary,
+.ed-hero .btn-solid,.ed-hero .btn-ink,.ed-hero .btn-teal,.ed-hero .btn-primary{
+  background:var(--bg); color:var(--ink); border-color:var(--bg); }
+.fbhero .btn-solid:hover,.fbhero .btn-teal:hover,.fbhero .btn-primary:hover,
+.bh .btn-solid:hover,.bh .btn-teal:hover,.bh .btn-primary:hover{
+  background:transparent; color:#fff; border-color:#fff; }
+.fbhero .cta .btn-line,.fbhero .cta .btn-tert,.fbhero .cta .btn-secondary,
+.bh .btn-line,.ed-hero .btn-line{ color:#fff; border-color:rgba(255,255,255,.55); background:transparent; }
+.fbhero .cta .btn-line:hover,.bh .btn-line:hover,.ed-hero .btn-line:hover{ border-color:#fff; background:rgba(255,255,255,.1); color:#fff; }
+.fbhero .fb-cred{ position:absolute; right:var(--pad); bottom:16px; z-index:2;
+  font-size:.64rem; letter-spacing:.16em; text-transform:uppercase; color:rgba(255,255,255,.6); }
+
+/* funnel tiles (Live at Wiseman doors into Buildings / Neighbourhoods / Search) */
+.funnel{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(18px,2vw,30px); }
+.fnl{ display:block; position:relative; color:inherit; }
+.fnl .ph{ aspect-ratio:4/5; overflow:hidden; background:var(--bg-2); position:relative; display:block; }
+.fnl .ph img{ width:100%; height:100%; object-fit:cover; transition:transform 1.1s var(--ease); }
+.fnl .ph::after{ content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 1px var(--line-2); }
+.fnl:hover .ph img{ transform:scale(1.04); }
+.fnl .info{ padding-top:.9rem; }
+.fnl .k{ font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3); font-weight:600; }
+.fnl h3{ font-size:1.5rem; margin-top:.4rem; }
+.fnl p{ margin-top:.5rem; font-size:.95rem; color:var(--ink-2); max-width:34ch; }
+.fnl .go{ margin-top:.7rem; display:inline-flex; gap:.5em; font-size:.74rem; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--teal-ink); font-weight:600; }
+@media(max-width:820px){ .funnel{ grid-template-columns:1fr; } .fnl .ph{ aspect-ratio:16/10; } }
+
+/* ================================================================ PAGE HEAD (buildings/neighborhood hubs)
+   COMPACT BY DESIGN. The old head ran ~426px on buildings.html before the
+   filter toolbar appeared — a full screen of throat-clearing on a page whose
+   job is a list. Three moves, none of them "just make it smaller":
+     1  the head clears the fixed bar and little else (14–34px, not 40–96px);
+     2  the type scale drops a step (4rem -> 2.8rem) so the line still reads as
+        a page title without behaving like a hero;
+     3  `.pagehead-split` sets the title block and its companion (the search
+        form on buildings, the standing sub on neighbourhoods) side by side, so
+        the block is as tall as its TALLER column, not the sum of both.
+   Under 900px it folds back to one column and the rhythm is unchanged. */
+.pagehead{ padding-top:calc(var(--hd-h) + clamp(14px,2.6vh,34px)); padding-bottom:clamp(14px,2vh,26px); }
+.pagehead-no{ display:flex; gap:1.1rem; flex-wrap:wrap; align-items:baseline; color:var(--ink-3);
+  font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600; margin-bottom:.7rem; }
+.pagehead-no .tnum{ letter-spacing:.05em; }
+.pagehead-h{ font-size:clamp(1.9rem,3.4vw,2.8rem); line-height:1.02; letter-spacing:-.02em; }
+.pagehead-sub{ margin-top:.7rem; color:var(--ink-2); font-size:.98rem; max-width:52ch; }
+.pagehead-sub a{ color:var(--teal-ink); border-bottom:1px solid var(--line); }
+.pagehead-sub a:hover{ border-color:var(--teal-ink); }
+.pagehead-split{ display:grid; gap:clamp(14px,2vh,22px) clamp(28px,4vw,64px); align-items:end; }
+.pagehead-split .pagehead-sub{ margin-top:0; }
+@media(min-width:900px){
+  .pagehead-split{ grid-template-columns:minmax(0,1fr) minmax(300px,min(42%,560px)); }
+  .pagehead-split > .search{ margin-top:0; }
+  .pagehead-split > .pagehead-sub{ padding-bottom:.35rem; }
+}
+
+/* home-style inline search */
+.search{ margin-top:clamp(16px,2.2vh,26px); }
+.search-row{ display:flex; flex-wrap:wrap; gap:.6rem; align-items:stretch; max-width:760px; }
+.search-field{ flex:1 1 240px; min-width:0; background:var(--raised); border:1px solid var(--line);
+  padding:.85em 1em; font-size:.95rem; color:var(--ink); border-radius:0; }
+.search-field:focus{ outline:none; border-color:var(--teal); }
+.hs-sel select{ height:100%; background:var(--raised); border:1px solid var(--line);
+  padding:.7em .9em; font-size:.9rem; color:var(--ink); border-radius:0; }
+.search-btn{ background:var(--ink); color:#fff; border:0; padding:.85em 1.6em; font-weight:600;
+  font-size:.82rem; letter-spacing:.02em; cursor:pointer; }
+.search-btn:hover{ background:#000; }
+.ta{ list-style:none; position:relative; z-index:5; margin-top:.4rem; background:var(--raised);
+  border:1px solid var(--line); max-width:760px; }
+.ta li a{ display:grid; grid-template-columns:1fr auto; gap:.4rem; padding:.7em 1em; align-items:baseline;
+  border-bottom:1px solid var(--line-2); }
+.ta li a:hover{ background:var(--bg-2); }
+.ta .ta-nm{ font-weight:600; color:var(--ink); }
+.ta .ta-sub{ font-size:.8rem; color:var(--ink-3); }
+.ta .ta-no{ display:none; }
+.ta-empty{ padding:.8em 1em; color:var(--ink-3); font-size:.9rem; }
+
+/* ---- toolbar: view + sort ---- */
+.toolbar{ display:flex; flex-wrap:wrap; gap:1.4rem 2.4rem; align-items:center;
+  padding-block:clamp(14px,2vh,22px); border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.sortbar{ display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; }
+.sortbar-label{ font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+  font-weight:600; margin-right:.3rem; }
+.views{ display:inline-flex; gap:.2rem; }
+.view-btn{ font-size:.8rem; font-weight:500; color:var(--ink-2); padding:.4em .8em; border:1px solid transparent; }
+.view-btn[aria-selected="true"]{ color:var(--ink); border-color:var(--line); background:var(--raised); }
+.view-btn:hover{ color:var(--ink); }
+.sort-btn{ font-size:.8rem; font-weight:500; color:var(--ink-2); padding:.4em .7em; border-bottom:1px solid transparent; }
+.sort-btn[aria-pressed="true"]{ color:var(--ink); border-bottom-color:var(--teal); }
+.sort-btn:hover{ color:var(--ink); }
+
+/* ================================================================ REGISTER ROWS (buildings/neighborhood) */
+.reg{ padding-top:clamp(34px,5vh,60px); padding-bottom:clamp(50px,7vh,90px); }
+.reg-block{ margin-bottom:clamp(40px,6vh,72px); scroll-margin-top:calc(var(--hd-h) + 16px); }
+.reg-head{ display:flex; align-items:baseline; gap:.8rem; font-size:clamp(1.4rem,2.4vw,2rem);
+  letter-spacing:-.01em; padding-bottom:.4rem; }
+.reg-head-count{ color:var(--teal-ink); font-size:.7em; }
+.reg-head-flat{ display:none; }
+.reg-head-sub{ color:var(--ink-3); font-size:.86rem; margin-bottom:.8rem; }
+.reg-cols{ display:none; }
+.reg-rows{ border-top:1px solid var(--line); }
+.reg-row{ border-bottom:1px solid var(--line-2); }
+.reg-row.lit{ background:var(--bg-2); }
+.row-link{ display:grid; grid-template-columns:56px 1fr auto; gap:1rem; align-items:center;
+  padding:.85rem .4rem; color:inherit; }
+.row-link:hover{ background:var(--bg-2); }
+.row-thumb{ width:56px; height:56px; object-fit:cover; background:var(--bg-2); }
+.row-body{ display:grid; gap:.15rem; min-width:0; }
+.row-name{ font-family:var(--disp); font-weight:500; font-size:1.15rem; color:var(--ink); line-height:1.15; letter-spacing:-.01em; }
+.row-street{ font-size:.82rem; color:var(--ink-3); }
+.row-figs{ display:flex; align-items:baseline; gap:1.4rem; text-align:right; }
+.row-beds{ font-size:.86rem; color:var(--ink-2); font-weight:500; }
+.row-rent{ font-size:.92rem; color:var(--ink); font-weight:600; min-width:5ch; }
+.row-rent.is-none{ color:var(--ink-3); font-weight:500; }
+.row-flag{ font-size:.78rem; font-weight:600; color:var(--teal-ink); }
+.reg-legend{ margin-top:1.8rem; display:grid; gap:.4rem; color:var(--ink-3); font-size:.8rem; max-width:70ch; }
+@media(max-width:560px){
+  .row-link{ grid-template-columns:44px 1fr auto; gap:.7rem; }
+  .row-thumb{ width:44px; height:44px; }
+  .row-figs{ flex-direction:column; gap:.1rem; }
+}
+
+/* map blocks */
+.mapbleed{ margin-block:clamp(30px,4vh,54px); }
+.mapbox{ height:clamp(420px,58vh,620px); background:var(--bg-2); }
+.mapbox-one{ height:clamp(320px,42vh,440px); }
+.map-key{ display:flex; gap:1rem 1.4rem; flex-wrap:wrap; color:var(--ink-3); font-size:.78rem;
+  padding-top:.8rem; }
+.map-key span span{ color:var(--ink); }
+
+/* plates / photographs grid view */
+.book{ padding-bottom:clamp(40px,6vh,80px); }
+.reg-note{ display:grid; gap:.3rem; color:var(--ink-3); font-size:.82rem; margin-bottom:clamp(24px,3vh,40px); }
+.run{ margin-bottom:clamp(44px,6vh,80px); scroll-margin-top:calc(var(--hd-h) + 16px); }
+.run-head{ margin-bottom:clamp(18px,2.5vh,30px); }
+.run-eyebrow{ display:flex; gap:.6rem; align-items:baseline; color:var(--ink-3);
+  font-size:.7rem; letter-spacing:.14em; text-transform:uppercase; font-weight:600; }
+.run-eyebrow .tnum{ color:var(--teal-ink); }
+.run-h{ font-size:clamp(1.5rem,2.6vw,2.2rem); margin-top:.5rem; }
+.run-meta{ display:flex; gap:1.4rem; flex-wrap:wrap; margin-top:.5rem; color:var(--ink-3); font-size:.82rem; }
+.run-meta a{ color:var(--teal-ink); }
+.pgrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,1.6vw,26px); }
+.pl{ display:block; color:inherit; }
+.pl-frame{ display:block; aspect-ratio:3/2; overflow:hidden; background:var(--bg-2); position:relative;
+  transform:scale(var(--z,1)); transform-origin:center; }
+.pl-frame img{ width:100%; height:100%; object-fit:cover; transition:transform 1.1s var(--ease); }
+.pl-frame::after{ content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 1px var(--line-2); }
+.pl:hover .pl-frame img{ transform:scale(1.04); }
+.pl--open{ grid-column:1/-1; }
+.pl--open .pl-frame{ aspect-ratio:21/9; }
+.pl-cap{ display:flex; flex-wrap:wrap; align-items:baseline; gap:.5rem 1rem; padding-top:.7rem; }
+.pl-nm{ font-family:var(--disp); font-weight:500; font-size:1.2rem; color:var(--ink); letter-spacing:-.01em; }
+.pl-st{ font-size:.82rem; color:var(--ink-3); }
+.pl-fg{ margin-left:auto; font-size:.85rem; color:var(--ink-2); font-variant-numeric:tabular-nums; }
+.pl-flag{ color:var(--teal-ink); font-weight:600; font-size:.82rem; }
+@media(max-width:820px){ .pgrid{ grid-template-columns:1fr 1fr; } }
+@media(max-width:520px){ .pgrid{ grid-template-columns:1fr; } .pl--open .pl-frame{ aspect-ratio:3/2; } }
+
+/* ================================================================ NEIGHBORHOOD template */
+.slab{ padding-block:clamp(40px,6vh,80px); }
+.duo{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,5vw,72px); align-items:start; }
+.duo .prose p{ color:var(--ink-2); }
+.duo .prose p + p{ margin-top:1rem; }
+.spec{ margin-top:clamp(24px,3vh,40px); border-top:1px solid var(--line); }
+.spec-row{ display:grid; grid-template-columns:auto 1fr; gap:1rem; padding:.85rem 0;
+  border-bottom:1px solid var(--line-2); align-items:baseline; }
+.spec-k{ font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); font-weight:600; }
+.spec-v{ font-size:.95rem; color:var(--ink); }
+.duo-fig .pc-frame{ aspect-ratio:4/5; overflow:hidden; position:relative; background:var(--bg-2); }
+.duo-fig .pc-frame img{ width:100%; height:100%; object-fit:cover; }
+.duo-fig .pc-frame::after{ content:""; position:absolute; inset:0; box-shadow:inset 0 0 0 1px var(--line-2); }
+.pc-cap{ display:flex; justify-content:space-between; gap:1rem; margin-top:.7rem; color:var(--ink-3); font-size:.8rem; }
+.pc-cap .pc-name{ font-weight:600; color:var(--ink-2); }
+@media(max-width:820px){ .duo{ grid-template-columns:1fr; } .duo-fig{ order:-1; } .duo-fig .pc-frame{ aspect-ratio:16/10; } }
+.essay{ padding-top:clamp(40px,6vh,72px); }
+.essay-kicker{ font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3); font-weight:600; }
+.essay-h{ font-size:clamp(1.7rem,3vw,2.6rem); margin-top:.6rem; letter-spacing:-.016em; }
+.tally-index{ list-style:none; margin-top:clamp(24px,3vh,38px); border-top:1px solid var(--line); }
+.tix a{ display:grid; grid-template-columns:auto 1fr auto; gap:1rem; align-items:baseline;
+  padding:1rem .3rem; border-bottom:1px solid var(--line-2); color:inherit; }
+.tix a:hover{ background:var(--bg-2); }
+.tix-no{ color:var(--teal); }
+.tix-name{ font-family:var(--disp); font-weight:500; font-size:1.2rem; color:var(--ink); }
+.tix-sub{ font-size:.82rem; color:var(--ink-3); grid-column:2; }
+.tix-count{ color:var(--ink-2); font-weight:600; }
+
+/* ================================================================ BUILDING template */
+.bh{ position:relative; min-height:clamp(460px,72svh,760px); display:flex; align-items:flex-end;
+  overflow:clip; background:var(--ink); color:#fff; isolation:isolate;
+  padding-top:calc(var(--hd-h) + clamp(48px,10vh,120px)); padding-bottom:clamp(34px,6vh,72px); }
+.bh-frame{ position:absolute; inset:0; z-index:0; }
+.bh-img{ width:100%; height:100%; object-fit:cover; object-position:50% 46%; }
+.js .bh-img{ animation:fb-in 1.3s var(--ease) both; }
+.bh-scrim{ position:absolute; inset:0; z-index:1; pointer-events:none;
+  background:linear-gradient(to top, rgba(18,19,17,.80) 0%, rgba(18,19,17,.32) 42%, transparent 70%),
+             linear-gradient(to bottom, rgba(18,19,17,.44), transparent 22%); }
+.bh-in{ position:relative; z-index:2; width:100%; }
+.bh-h{ color:#fff; font-size:clamp(2.4rem,5.4vw,5rem); line-height:1.0; letter-spacing:-.022em; }
+.bh-h em{ font-style:italic; }
+.bh-addr{ margin-top:1rem; display:flex; gap:1.2rem; flex-wrap:wrap; align-items:baseline;
+  color:rgba(255,255,255,.82); font-size:.95rem; }
+.bh-addr a{ color:#9FC7CD; }
+.crumb{ display:flex; gap:.5rem; flex-wrap:wrap; font-size:.72rem; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:1.1rem; }
+.crumb a{ color:var(--ink-2); border-bottom:1px solid transparent; }
+.crumb a:hover{ border-bottom-color:var(--ink-2); }
+.crumb-inv{ color:rgba(255,255,255,.6); }
+.crumb-inv a{ color:rgba(255,255,255,.82); }
+
+.bh-facts{ padding-block:clamp(26px,4vh,48px); border-bottom:1px solid var(--line); }
+/* scoped to the <dl> on the building page: this grid draws its cell rules with
+   a 1px gap over a tinted ground, which used to leak onto .card .facts */
+dl.facts{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line-2);
+  border:1px solid var(--line-2); margin-bottom:clamp(22px,3vh,34px); }
+.fact{ background:var(--bg); padding:clamp(16px,2vw,26px); }
+.fact dt{ font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3); font-weight:600; }
+.fact dd{ font-family:var(--disp); font-weight:500; font-size:clamp(1.3rem,2.2vw,1.9rem);
+  color:var(--ink); margin-top:.4rem; letter-spacing:-.01em; }
+@media(max-width:640px){ dl.facts{ grid-template-columns:1fr 1fr; } }
+.cta{ display:flex; flex-wrap:wrap; gap:.7rem; align-items:center; }
+.cta .cta-tel{ margin-left:.5em; color:var(--ink-3); font-weight:500; }
+.ai{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.6; }
+
+/* pinned action row */
+.acts{ position:fixed; top:var(--hd-h); left:0; right:0; z-index:800;
+  background:color-mix(in srgb, var(--raised) 92%, transparent);
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+  transform:translateY(-100%); opacity:0; pointer-events:none; transition:transform .38s var(--ease), opacity .38s var(--ease); }
+.acts.in{ transform:none; opacity:1; pointer-events:auto; }
+.acts-in{ display:flex; align-items:center; justify-content:space-between; gap:1rem; height:60px; }
+.acts-name{ font-family:var(--disp); font-weight:500; font-size:1.1rem; color:var(--ink); }
+.acts-btns{ display:flex; gap:.5rem; align-items:center; }
+.acts-btns .btn{ padding:.6em 1em; font-size:.78rem; }
+.acts .btn-s{ display:none; }
+.mbar{ display:none; }
+@media(max-width:760px){
+  .acts{ display:none; }
+  .mbar{ display:flex; position:fixed; left:0; right:0; bottom:0; z-index:800; gap:.5rem;
+    padding:.6rem var(--pad); background:color-mix(in srgb, var(--raised) 94%, transparent);
+    backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); border-top:1px solid var(--line);
+    transform:translateY(100%); transition:transform .38s var(--ease); }
+  .mbar.in{ transform:none; }
+  .mbar.off{ transform:translateY(100%); }
+  .mbar .btn{ flex:1 1 auto; justify-content:center; }
+}
+
+.bsec{ padding-block:clamp(48px,7vh,96px); }
+.bsec + .bsec{ padding-top:0; }
+.bsec-h{ font-size:clamp(1.6rem,2.8vw,2.4rem); margin-top:.5rem; letter-spacing:-.016em; }
+.bsec-at{ color:var(--ink-3); }
+.bsec-foot{ margin-top:1.2rem; }
+.cite{ font-size:.78rem; color:var(--ink-3); max-width:70ch; }
+
+/* plans table */
+.plans{ width:100%; border-collapse:collapse; margin-top:clamp(20px,3vh,32px); font-size:.92rem; }
+.plans thead th{ text-align:left; font-family:var(--text); font-weight:600; font-size:.68rem;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3); padding:.7rem .8rem;
+  border-bottom:1px solid var(--line); }
+.plans td{ padding:.85rem .8rem; border-bottom:1px solid var(--line-2); vertical-align:baseline; }
+.plans .pl-name a{ font-family:var(--disp); font-weight:500; font-size:1.05rem; color:var(--ink); }
+.plans .pl-name a:hover{ color:var(--teal-ink); }
+.plans .pl-rent{ font-weight:600; color:var(--ink); }
+.plans .pl-go a{ color:var(--teal-ink); font-size:.8rem; font-weight:600; white-space:nowrap; }
+.plans .is-none{ color:var(--ink-3); }
+.plans-none{ margin-top:1rem; color:var(--ink-2); }
+.plans-none a{ color:var(--teal-ink); }
+@media(max-width:760px){
+  .plans thead{ display:none; }
+  .plans, .plans tbody, .plans tr, .plans td{ display:block; width:100%; }
+  .plans tr{ border-bottom:1px solid var(--line); padding:.6rem 0; }
+  .plans td{ border:0; padding:.2rem 0; display:flex; justify-content:space-between; gap:1rem; }
+  .plans td::before{ content:attr(data-l); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3); }
+  .plans .pl-go{ display:none; }
+}
+
+/* gallery rail */
+.gal{ margin-top:clamp(20px,3vh,32px); }
+.bgal-track{ display:flex; gap:14px; }
+.bgal-fr{ flex:0 0 clamp(280px,70vw,760px); aspect-ratio:3/2; overflow:hidden; background:var(--bg-2); position:relative; }
+.bgal-fr img{ width:100%; height:100%; object-fit:cover; }
+
+/* listing prose */
+.prose .listing{ font-family:var(--disp); font-size:clamp(1.15rem,1.8vw,1.5rem); line-height:1.45;
+  color:var(--ink); max-width:60ch; border-left:2px solid var(--teal); padding-left:1.2rem; }
+.listing-cite{ margin-top:1rem; }
+
+/* amenities */
+.amen2{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(24px,4vw,64px); margin-top:clamp(20px,3vh,32px); }
+.amen-h{ font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+  font-weight:600; margin-bottom:.9rem; }
+.ailist{ list-style:none; display:grid; gap:.7rem; }
+.ailist li{ display:flex; align-items:center; gap:.7rem; font-size:.95rem; color:var(--ink-2); }
+.ailist .ai{ width:20px; height:20px; color:var(--teal); flex:none; }
+@media(max-width:640px){ .amen2{ grid-template-columns:1fr; } }
+
+/* office + map */
+.office{ display:grid; grid-template-columns:1fr 1.2fr; gap:clamp(28px,4vw,64px); align-items:start; }
+.office-list{ margin-top:clamp(20px,3vh,30px); border-top:1px solid var(--line); }
+.office-row{ display:grid; grid-template-columns:auto 1fr; gap:1rem; padding:.9rem 0;
+  border-bottom:1px solid var(--line-2); align-items:baseline; }
+.office-row dt .ai{ color:var(--teal); }
+.office-tel{ font-family:var(--disp); font-size:1.3rem; color:var(--ink); }
+.map-dir{ color:var(--teal-ink); font-size:.85rem; }
+@media(max-width:820px){ .office{ grid-template-columns:1fr; } }
+
+/* nearby */
+.near{ list-style:none; display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(16px,1.6vw,26px);
+  margin-top:clamp(20px,3vh,32px); }
+.near-it a{ display:block; color:inherit; }
+.near-fr{ display:block; aspect-ratio:4/5; overflow:hidden; background:var(--bg-2); position:relative; }
+.near-fr img{ width:100%; height:100%; object-fit:cover; transition:transform 1s var(--ease); }
+.near-it:hover .near-fr img{ transform:scale(1.04); }
+.near-nm{ display:block; font-family:var(--disp); font-weight:500; font-size:1.05rem; color:var(--ink); margin-top:.6rem; }
+.near-st{ display:block; font-size:.8rem; color:var(--ink-3); margin-top:.1rem; }
+.near-fx{ display:block; font-size:.82rem; color:var(--ink-2); margin-top:.35rem; }
+.btn-row{ display:flex; gap:.6rem; flex-wrap:wrap; }
+@media(max-width:820px){ .near{ grid-template-columns:1fr 1fr; } }
+
+/* standing note */
+.avail-line{ padding-block:clamp(46px,6vh,78px);
+  color:var(--ink-2); font-size:.95rem; }
+.avail-line a{ color:var(--teal-ink); border-bottom:1px solid var(--line); }
+.avail-sub{ display:block; margin-top:.5rem; color:var(--ink-3); font-size:.82rem; max-width:70ch; }
+
+/* ================================================================ SEARCH shell — LIVE AT WISEMAN
+   The nav's "Live at Wiseman" lands here, so everything above the first card is
+   chrome and every pixel of it is rented. Three bands, in order:
+
+     .shead      the masthead        — TWO marks on one baseline row
+     .sbar       the filter bar      — 57px
+     .sresults   the count + sort    — 57px, matched to the bar
+
+   The bar and the results row are deliberately the same height: two matched
+   strips of chrome read as one instrument, where three unequal strips read as
+   clutter. Below them the list and map start 48px earlier than they used to. */
+
+/* ---- the masthead ---------------------------------------------------------
+   Was four marks: a "LIVE AT WISEMAN" kicker, its terracotta rule, the title,
+   and a standing-figures line that opened on "72 buildings" — the same number
+   the count row repeats 130px lower. The kicker only restated the nav item that
+   is already aria-current, and the figures line only restated the count. Both
+   are gone. What is left is the Prata title and one short qualifier that says
+   something the rest of the page does not: the spread of areas and of bed
+   counts. Two marks, one baseline row, no repetition. */
+.shead{ padding-top:calc(var(--hd-h) + clamp(11px,1.5vh,19px)); padding-bottom:clamp(9px,1.2vh,15px);
+  display:flex; flex-wrap:wrap; align-items:baseline; column-gap:clamp(14px,1.8vw,28px); row-gap:.3rem; }
+.shead-h{ font-size:clamp(1.5rem,2.4vw,2.1rem); line-height:1.05; letter-spacing:-.02em;
+  margin-top:0; flex:0 1 auto; }
+/* no ch cap on the wide row: the point is that it sits on ONE line beside the
+   title, pushed to the far edge so the row reads as a masthead, not a stack. */
+.shead-sub{ margin-top:0; margin-inline-start:auto; color:var(--ink-3); font-size:.85rem;
+  line-height:1.45; max-width:none; flex:0 1 auto; }
+/* the two marks sit side by side until the title and the qualifier together
+   stop fitting — measured at ~574px of text, so the stack begins at 700, not
+   820. That keeps 768 on a single 25px row instead of a 49px stack. */
+@media(max-width:700px){
+  .shead{ padding-top:calc(var(--hd-h) + clamp(9px,1.2vh,15px)); row-gap:.32rem; }
+  .shead-h, .shead-sub{ flex-basis:100%; margin-inline-start:0; }
+  .shead-sub{ max-width:52ch; }
+}
+
+/* ---- one control height ---------------------------------------------------
+   The page shipped four: 42px filter buttons, a 40px select inside the Price
+   menu, a 38px sort select and a 33px List/Map toggle — the same `.sel` class
+   rendering two different heights depending on which band it landed in. One
+   token now, so a reader who opens a menu sees the vocabulary they were just
+   using in the bar. */
+:root{ --ctl-h:40px; --sbar-h:57px; }   /* 8 + the 40px control + 8 + the 1px closing rule */
+.sel, .rng select{ height:var(--ctl-h); }
+.seg{ display:flex; align-items:center; justify-content:center;
+  min-height:var(--ctl-h); padding:0 10px; }
+.btn-apply{ display:inline-flex; align-items:center; height:var(--ctl-h);
+  padding-top:0; padding-bottom:0; }
+.sempty input{ height:var(--ctl-h); }
+
+/* ---- the filter bar -------------------------------------------------------
+   THE BAR HAS TO STAY REACHABLE. core/search.css parks it at top:0, which is
+   right for a direction whose header retracts on scroll. Atrium's does not —
+   `.hd.up{transform:none !important}` keeps the band planted — so at top:0 the
+   70px header swallowed the bar whole the moment you scrolled. `position` is
+   restated, not assumed: core/rail.css sets `[data-rail]{position:relative}` on
+   this very element at equal specificity, and the later sheet would win.
+
+   THE SPACING. core/rail.css also loads after core/search.css, and `.rail-track`
+   quietly took the bar over: a fluid `gap:clamp(14px,1.6vw,28px)` (23px at 1440,
+   so the seam between the query field and the first facet was identical to the
+   seam between two facets — no grouping at all), `padding-bottom:2px` against a
+   12px top (the controls sat 10px low in their own band), and `flex:0 0 auto` on
+   every child, which beat `.sfield{flex:1 1 300px}` on specificity. That last one
+   is why the field never grew past its 300px floor and why the placeholder was
+   being cut: a 33-character placeholder measures 251.6px inside a 250px box.
+   All three are restated below, scoped to the bar so no other rail is touched. */
+.sbar, .sbar[data-rail]{ position:sticky; top:var(--hd-h); }
+.sbar .sbar-in{
+  gap:8px;                                   /* facet to facet — one tight group */
+  padding-top:8px; padding-bottom:8px;       /* symmetric: the controls centre in the band */
+  align-items:center;
+}
+/* the query field is the one control that grows, and the only one separated
+   from the group: 8px gap + this margin = a 16-24px seam. One rhythm, two
+   values, and the reason for each is legible. */
+.sbar .sbar-in > .sfield{
+  flex:1 1 340px; min-width:300px; max-width:400px;
+  margin-right:clamp(8px,1vw,16px);
+  height:var(--ctl-h);
+}
+.sbar .sbar-in .fbtn{ height:var(--ctl-h); }
+/* when the bar is not scrolling there is spare track; the escape hatch to the
+   full filter set takes the far pole of it, so the four facets stay a group and
+   the bar resolves edge to edge instead of huddling left. rail.js sets
+   data-static only when the track does not overflow, so this can never fight
+   the scroller. */
+.sbar[data-rail][data-static] .sbar-in > .fbtn[data-fbtn="more"]{ margin-left:auto; }
+
+/* Under 760 the bar is a touch scroller. The floating arrows and the 46px insets
+   core/search.css reserves for them cost 92px of a 350px track, and the paper
+   fades another 84px each side — a quarter of the bar occluded to drive it with
+   a mouse that is not there. Hidden; the finger scrolls it, and tabbing still
+   brings each control into view natively. The field also goes to 16px, below
+   which iOS zooms the whole page on focus, and widens to keep the full
+   placeholder inside the wider text. */
+@media(max-width:760px){
+  .sbar[data-rail]:not([data-static]) .sbar-in{
+    padding-left:0; padding-right:0; scroll-padding-inline:0; }
+  .sbar .rail-float .rail-btn{ display:none; }
+  .sbar[data-rail]:not([data-static]) .rail-float::before,
+  .sbar[data-rail]:not([data-static]) .rail-float::after{ width:30px; }
+  .sbar[data-rail]:not([data-static]) .rail-float::before{
+    background:linear-gradient(to right, var(--paper), transparent); }
+  .sbar[data-rail]:not([data-static]) .rail-float::after{
+    background:linear-gradient(to left, var(--paper), transparent); }
+  /* 16px, below which iOS zooms the whole page when the field takes focus.
+     The 24-character placeholder measures 189px inside a 250px box here, so
+     the larger text costs nothing. */
+  .sbar .sfield input{ font-size:16px; }
+}
+
+/* ---- the results row ------------------------------------------------------
+   Was 97px of three unrelated fragments: the count top left, the snapshot note
+   dropped onto a full-width line of its own beneath it (core sets
+   `flex-basis:100%; order:9`), and SORT stranded at the far right with nothing
+   between them. It is one 57px band now, matched to the filter bar.
+
+   The note is a footnote to the count, not a third statement, so it is set one
+   step smaller, one step lighter, and bound to the count by a hairline — the
+   same hairline vocabulary as every other rule on this site. The chips take the
+   second line ONLY when a filter is on; empty, they are removed from the flow
+   entirely so the row stays a single line in its resting state. */
+.sresults{
+  padding-top:8px; padding-bottom:8px;
+  column-gap:14px; row-gap:0; align-items:center;
+}
+/* An empty flex line that puts the chips on a row of their own so Clear all can
+   share it. Giving `.chips` flex-basis:100% did the same job but swallowed the
+   whole line and pushed Clear all onto a wasted third row. Row spacing is on the
+   items rather than row-gap, so this zero-height line costs nothing when it
+   appears — and :has() keeps it out of the flow entirely when no filter is on. */
+.sresults::before{ content:""; display:none; }
+.sresults:has(.chips:not(:empty))::before{ display:block; order:4; flex:0 0 100%; height:0; }
+.sresults .scount{ order:1; flex:0 0 auto; line-height:1.4; }
+.sresults .snote{
+  order:2; flex:1 1 180px; min-width:0;
+  font-size:.72rem; line-height:1.5; letter-spacing:.02em;
+  padding-left:14px; border-left:1px solid var(--line);
+  color:var(--ink-3);
+}
+/* `min-width:0`: a flex item defaults to min-width:auto, so .sright refused to
+   shrink below the sum of its children's min-content widths and pushed 12px
+   of sideways scroll into the row at 360. Zeroed, the select absorbs it. */
+.sresults .sright{ order:3; margin-left:auto; gap:10px; min-width:0; }
+.sresults .chips{ order:5; margin-top:8px; }
+.sresults .chips:empty{ display:none; }     /* search.js writes '' when nothing is on */
+.sresults .lnk-clear{ order:6; margin-top:8px; }
+.sresults .sright .sel{ height:var(--ctl-h); min-width:200px; }
+/* core draws the select's arrow as two gradients at calc(100% - 15px) over a
+   10px right padding, so a long option ran straight into it. Reserve the track. */
+.sel, .rng select{ padding-right:30px; }
+
+/* ---- contrast floor -------------------------------------------------------
+   core/search.css sets its quiet labels as a percentage of --ink. That was
+   written against a near-black ink; atrium's ink is the teal-green #074B4D, and
+   the same percentages land far lighter than they read in the source: the
+   snapshot note at 52% measures 2.72:1 on the cream, the SORT label at 56%
+   about the same, and the placeholder at 46% worse still. Every one of them is
+   repointed at --ink-3, the palette's documented 4.80:1 meta stop. */
+.sfield input::placeholder{ color:var(--ink-3); }
+.sresults .sright label,
+.fmenu h4, .fgrp h3, .opt .cnt, .rng span, .card-ad{ color:var(--ink-3); }
+.lnk-clear{ color:var(--ink-2); }
+/* the toggle is a bordered box around its buttons, so a 40px button made a
+   42px control sitting 2px proud of the select beside it. Height the box. */
+.sresults .vtog{ height:var(--ctl-h); }
+.sresults .vtog button{ height:100%; padding:0 16px; }
+/* the chip dismiss was a 17px target. The hit area grows to the chip's own
+   height without moving the cross or changing the chip. */
+.sresults .chip-f button{ width:28px; height:28px; margin-block:-6px; }
+
+/* The List/Map toggle appears at 1059 and costs 120px, which would squeeze the
+   note into three lines beside it. Below that width the controls take a band of
+   their own under the statement — the same left-statement / right-controls
+   composition, stacked instead of side by side. */
+@media(max-width:1059px){
+  .sresults .sright{ flex-basis:100%; justify-content:flex-end; margin-left:0; margin-top:8px; }
+}
+@media(max-width:560px){
+  .sresults{ column-gap:12px; }
+  .sresults .sright{ justify-content:flex-start; }
+  .sresults .sright > label{ margin-left:auto; }   /* view toggle left, sort right */
+  .sresults .sright .sel{ min-width:0; flex:0 1 auto; }
+}
+/* the smallest phones: the toggle gives back 12px of padding and the row's own
+   gap tightens, so the sort select keeps a full "Recommended" instead of being
+   squeezed into an ellipsis. */
+@media(max-width:430px){
+  .sresults .sright{ gap:8px; }
+  .sresults .vtog button{ padding:0 13px; }
+  .sel, .rng select{ padding-right:26px; }
+  /* the footnote gets ~232px of a 350px row here. At .72rem with tracking it
+     broke to three lines and orphaned the middot onto the head of line two;
+     one step down and no tracking settles it at two. */
+  .sresults .snote{ font-size:.68rem; letter-spacing:0; line-height:1.45; padding-left:12px; }
+  /* `p{text-wrap:pretty}` stays: packing the note greedily here does save a
+     line of raggedness but strands "availability" alone on the last one. */
+}
+
+@media(min-width:1060px){
+  .split > .smap{
+    top:calc(var(--hd-h) + var(--sbar-h));
+    height:calc(var(--vh100) - var(--hd-h) - var(--sbar-h)); }
+}
+
+/* ================================================================ EDITORIAL overrides (.ed) */
+.ed .chip{ border:1px solid color-mix(in srgb, var(--teal) 42%, var(--line)); color:var(--teal-ink); }
+.ed .ed-note{ border-left-color:var(--teal); }
+.ed .ed-eyebrow{ font-weight:600; }
+.ed .ed-h1, .ed .ed-h2{ letter-spacing:-.02em; }
+.ed .ed-link{ color:var(--teal-ink); border-bottom-color:color-mix(in srgb, var(--teal) 50%, var(--line)); }
+.ed .ed-link:hover{ border-color:var(--teal-ink); }
+.ed .ed-row .ed-state, .ed .ed-row .ed-cite{ color:var(--ink-3); }
+/* The shared rule gives the label a FIXED track — clamp(9rem,18vw,16rem) — and
+   `justify-self:start`, so a label wider than the track (at 768: "Maintenance
+   emergency" 228px into 144px, and two of the pipeline addresses by a hair)
+   sizes to max-content and paints straight over the description beside it.
+   Grid items do not clip. Capping at the track width makes them wrap instead. */
+.ed .ed-row > h3{ max-width:100%; overflow-wrap:break-word; }
+/* cream text at ~10px over these scrims: 60%/66% ink gave 3.3:1 and 3.7:1.
+   78% takes both to 4.98:1 and still reads as a scrim, not a solid bar. */
+.ed .ed-fig figcaption{ background:color-mix(in srgb, var(--ink) 78%, transparent); }
+.ed .ed-urgent{ border-color:var(--line); background:var(--raised); }
+.ed .ed-urgent .ed-tel{ color:var(--teal-ink); }
+.ed .ed-form button{ border-radius:0; }
+.ed .ed-form button:hover{ background:#000; }
+.ed .ed-door .ed-tag{ background:color-mix(in srgb, var(--ink) 78%, transparent); }
+
+/* over-photo editorial hero — warm-white type on a firmed scrim.
+   The shared global `h1{color:var(--ink)}` would otherwise leave the ed-hero
+   headline dark charcoal over the photograph; these give the over-image copy
+   one legible recipe that matches the fbhero pages (Live/Track). */
+.ed .ed-hero .ed-img img{ filter:var(--hero-img); }
+.ed .ed-hero::after{
+  background:linear-gradient(to top, rgba(14,15,13,.90) 0%, rgba(14,15,13,.60) 34%, rgba(14,15,13,.22) 58%, transparent 80%),
+             linear-gradient(105deg, rgba(14,15,13,.42) 0%, rgba(14,15,13,.10) 40%, transparent 62%),
+             linear-gradient(to bottom, rgba(14,15,13,.44), transparent 24%); }
+.ed .ed-hero .ed-body .ed-eyebrow{ color:var(--hero-eyebrow); text-shadow:var(--hero-shadow); }
+.ed .ed-hero .ed-body .ed-h1{ color:var(--hero-fg); text-shadow:var(--hero-shadow); }
+.ed .ed-hero .ed-body .ed-lede{ color:var(--hero-sub); text-shadow:var(--hero-shadow); }
+.ed .ed-hero .ed-cred{ color:rgba(255,255,255,.62); }
+
+/* ================================================================ CONTACT — routing and form share the first screen
+   The client asked whether the form should lead the page. The answer is no —
+   a bare form makes you guess where it goes — but it should not be the third
+   scroll either. So contact keeps its short hero and then puts BOTH halves of
+   the decision side by side: "Six ways in" on the left (every row intact, the
+   emergency caveat and the phone-first guidance untouched) and the written
+   form on the right. The office + map, which is reference rather than action,
+   moves below them.
+
+   contact.html's body comes from the SHARED scripts/gen_editorial.py, so not a
+   line of its markup or copy is touched here — this is pure layout, scoped to
+   this direction and to the one page by `:has(.ed-office)` (only contact has an
+   office block). The sections are addressed by what they CONTAIN rather than by
+   nth-of-type, so the generator can reorder or add sections without silently
+   scrambling this grid. Each column keeps its own `.wrap` gutter on the outer
+   edge and trades the inner one for the column gap, so the text still lands on
+   the page's own 1560px measure.
+
+   The hero is shortened here only. Everywhere else `.ed-hero` is a full
+   78svh frame; on contact it is a 42svh band, because the point of the page is
+   the thing underneath it. */
+.ed:has(.ed-office){ display:grid; grid-template-columns:minmax(0,1fr); }
+.ed:has(.ed-office) > .ed-hero{ grid-row:1; min-height:clamp(300px,42svh,460px);
+  padding-top:calc(var(--hd-h) + clamp(28px,5vh,66px)); padding-bottom:clamp(28px,4vh,54px); }
+.ed:has(.ed-office) > .ed-sec:has(.ed-rows){ grid-row:2; }   /* Six ways in */
+.ed:has(.ed-office) > .ed-sec:has(.ed-write){ grid-row:3; }  /* Send it in writing */
+.ed:has(.ed-office) > .ed-sec:has(.ed-office){ grid-row:4; } /* the office + map */
+
+/* vertical rhythm: `.ed-sec + .ed-sec{padding-top:0}` is keyed to DOM order,
+   which no longer matches paint order — so state it outright. */
+.ed:has(.ed-office) > .ed-sec:has(.ed-rows),
+.ed:has(.ed-office) > .ed-sec:has(.ed-write){
+  padding-top:clamp(34px,5vh,60px); padding-bottom:clamp(30px,4vh,56px); }
+.ed:has(.ed-office) > .ed-sec:has(.ed-office){
+  padding-top:clamp(40px,6vh,80px); padding-bottom:clamp(72px,11vh,160px); }
+.ed:has(.ed-office) .ed-hero .ed-h1{ font-size:clamp(2.1rem,4.2vw,3.6rem); margin-top:10px; }
+.ed:has(.ed-office) .ed-hero .ed-lede{ margin-top:14px; }
+
+/* the form column: the mood photograph is the one thing that can go, because
+   it is the only element here that is not part of the decision. */
+.ed:has(.ed-office) .ed-write > .ed-fig{ display:none; }
+.ed:has(.ed-office) .ed-write{ grid-template-columns:minmax(0,1fr); gap:0; }
+.ed:has(.ed-office) .ed-writebody .ed-form{ margin-top:20px; max-width:none; }
+.ed:has(.ed-office) .ed-rows{ margin-top:22px !important; }
+.ed:has(.ed-office) .ed-sec:has(.ed-rows) .ed-h2,
+.ed:has(.ed-office) .ed-writebody .ed-h2{ font-size:clamp(1.7rem,2.8vw,2.5rem); margin-top:8px; }
+
+@media(min-width:1000px){
+  .ed:has(.ed-office){ grid-template-columns:minmax(0,1fr) minmax(0,1fr); align-items:start; }
+  .ed:has(.ed-office) > .ed-hero{ grid-column:1 / -1; }
+  .ed:has(.ed-office) > .ed-sec:has(.ed-rows){
+    grid-row:2; grid-column:1; max-width:calc(780px + var(--pad));
+    margin-left:auto; margin-right:0;
+    padding-right:clamp(18px,2.2vw,40px); }
+  .ed:has(.ed-office) > .ed-sec:has(.ed-write){
+    grid-row:2; grid-column:2; max-width:calc(780px + var(--pad));
+    margin-left:0; margin-right:auto;
+    padding-left:clamp(18px,2.2vw,40px); }
+  .ed:has(.ed-office) > .ed-sec:has(.ed-office){ grid-row:3; grid-column:1 / -1; }
+  /* three columns of row furniture in a half-width column is a squeeze: let the
+     label sit above its description and keep the destination on the right. */
+  .ed:has(.ed-office) .ed-row{ grid-template-columns:minmax(0,1fr) auto; gap:4px 18px; padding:15px 0; }
+  .ed:has(.ed-office) .ed-row h3{ font-size:1.08rem; }
+  .ed:has(.ed-office) .ed-row p{ font-size:.9rem; grid-column:1; }
+  .ed:has(.ed-office) .ed-row .ed-state{ grid-row:1; grid-column:2; align-self:baseline; }
+  .ed:has(.ed-office) .ed-form .ed-two{ grid-template-columns:1fr 1fr; gap:14px; }
+  .ed:has(.ed-office) .ed-form{ gap:14px; }
+  .ed:has(.ed-office) .ed-form textarea{ min-height:88px; }
+}
+@media(min-width:1000px) and (max-width:1200px){
+  .ed:has(.ed-office) .ed-form .ed-two{ grid-template-columns:1fr; }
+}
+
+/* ================================================================ FOOTER (atrium — bright cream, Motor Tides register) */
+/* no margin above the footer: the cream sliver it used to leave under the
+   stone About band turned one boundary into two (a tone step, then a rule
+   22px later). Flush, the tonal change and the hairline are the same edge —
+   and every other page already ends on 50-150px of its own bottom padding. */
+footer.ft{ background:var(--bg); color:var(--ink-2);
+  border-top:1px solid var(--line); }
+footer.ft a{ color:var(--ink); text-decoration:none; }
+footer.ft a:hover{ color:var(--accent-ink); }
+.ft-top{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:clamp(28px,3vw,56px);
+  padding-block:clamp(56px,7vh,88px); border-bottom:1px solid var(--line); }
+.ft-brand svg{ width:24px; height:24px; color:var(--brand-teal); }   /* the real Wiseman mark, brand teal on cream */
+.ft-brand .wm{ font-family:var(--text); font-weight:600; letter-spacing:.2em; text-transform:uppercase;
+  font-size:.78rem; color:var(--ink); margin-top:.9rem; }
+.ft-brand .tag{ font-family:var(--disp); font-style:italic; font-size:1.15rem; color:var(--accent-ink); margin-top:1rem; }
+.ft-brand .addr{ margin-top:1.4rem; font-size:.86rem; line-height:1.8; color:var(--ink-3); }
+.ft-brand .addr a{ color:var(--ink); }
+.ft-col h2, .ft-col h4{ font-family:var(--text); font-weight:600; font-size:.64rem; letter-spacing:.18em;
+  text-transform:uppercase; color:var(--ink-3); margin-bottom:1.1rem; }
+.ft-col ul{ list-style:none; display:grid; gap:.6rem; }
+.ft-col li{ font-size:.88rem; }
+.ft-col .ct{ color:var(--accent-ink); font-size:.78rem; font-variant-numeric:tabular-nums; margin-left:.35em; }
+.ft-base{ display:flex; justify-content:space-between; align-items:center; gap:1.5rem; flex-wrap:wrap;
+  padding-block:clamp(22px,3vh,30px); }
+.ft-base .lg{ display:flex; align-items:center; gap:1.4rem; flex-wrap:wrap; }
+footer.ft .eho{ display:flex; align-items:center; gap:.55rem; color:var(--ink-3); }
+footer.ft .eho svg{ width:26px; height:23px; color:var(--ink); flex:none; }
+footer.ft .eho span{ font-size:.72rem; letter-spacing:.02em; }
+.ft-base .cp{ font-size:.76rem; color:var(--ink-3); }
+/* social row — inline SVG brand icons, currentColor, consistent size */
+.ft-base .social{ display:flex; align-items:center; gap:1rem; }
+.ft-base .social a{ display:inline-flex; color:var(--ink); transition:color .3s var(--ease), transform .3s var(--ease); }
+.ft-base .social a:hover{ color:var(--accent-ink); transform:translateY(-1px); }
+.ft-base .social svg{ width:19px; height:19px; fill:currentColor; }
+.ft-note{ font-size:.72rem; color:var(--ink-3); padding-bottom:clamp(18px,2.5vh,26px); }
+.ft-note a{ color:var(--ink); }
+@media(max-width:860px){ .ft-top{ grid-template-columns:1fr 1fr; } .ft-brand{ grid-column:1/-1; } }
+@media(max-width:520px){ .ft-top{ grid-template-columns:1fr; } }
+
+/* ================================================================ REVEALS (extend base.css) */
+.js .rvl{ transform:scaleX(0); transform-origin:left; transition:transform .85s var(--ease); }
+.js .rvl.in{ transform:scaleX(1); }
+.js .hero-figure .keyline.rvl{ transform:scaleY(0); transform-origin:top; transition:transform 1s var(--ease) .2s; }
+.js .hero-figure .keyline.rvl.in{ transform:scaleY(1); }
+.js [data-d="1"].in{ transition-delay:.08s; }
+.js [data-d="2"].in{ transition-delay:.16s; }
+.js [data-d="3"].in{ transition-delay:.24s; }
+.js [data-d="4"].in{ transition-delay:.32s; }
+.js [data-d="5"].in{ transition-delay:.40s; }
+@media(prefers-reduced-motion:reduce){
+  .js .rvl{ transform:none; transition:none; }
+  .card .ph img, .fnl .ph img, .near-fr img, .pl-frame img, .btn .ar{ transition:none; }
+  .card .ph::after, .card .nm, .card .facts .go{ transition:none; }
+  .card:hover .ph img, .card:focus-visible .ph img{ transform:none; }
+  .card:hover .facts .go, .card:focus-visible .facts .go{ transform:none; }
+  .js .fbhero .fbimg img, .js .bh-img{ animation:none; }
+}

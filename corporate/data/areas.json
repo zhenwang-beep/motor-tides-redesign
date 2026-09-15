@@ -1,0 +1,164 @@
+{
+ "west-la": {
+  "name": "West Los Angeles",
+  "sub": "Sawtelle · Santa Monica Blvd · Westgate",
+  "zips": [
+   "90025",
+   "90064"
+  ],
+  "lead": "The densest stretch of the portfolio. Wiseman owns on nearly every north–south street between Santa Monica Boulevard and Olympic.",
+  "body": "Sawtelle Japantown runs along Sawtelle Boulevard with its ramen counters, izakayas and nurseries. The Expo Line stops at Bundy and at Sepulveda; the 405 and the 10 meet a few blocks south. UCLA and Westwood Village are ten minutes north, Santa Monica ten minutes west.",
+  "streets": [
+   "Brockton",
+   "Colby",
+   "Purdue",
+   "Butler",
+   "Armacost",
+   "Beloit",
+   "Barrington",
+   "Bentley",
+   "Selby",
+   "Kelton",
+   "Ohio",
+   "Federal",
+   "Overland",
+   "Amherst",
+   "McClellan",
+   "Westgate",
+   "Louisiana"
+  ],
+  "center": [
+   34.0452,
+   -118.452
+  ]
+ },
+ "brentwood": {
+  "name": "Brentwood",
+  "sub": "San Vicente · Barrington · Montana",
+  "zips": [
+   "90049"
+  ],
+  "lead": "Low buildings under old trees, north of Wilshire and south of Sunset.",
+  "body": "San Vicente Boulevard runs through the middle of it, the coral trees down its median designated a Los Angeles Historic-Cultural Monument and the grass beside them used as the neighborhood's running track. The Brentwood Country Mart, the Sunday farmers market and the Getty Center are all within a short drive.",
+  "streets": [
+   "Kiowa",
+   "Gretna Green",
+   "Goshen",
+   "Gorham",
+   "Darlington",
+   "Montana",
+   "Granville",
+   "Mayfield",
+   "Barrington"
+  ],
+  "center": [
+   34.0495,
+   -118.469
+  ]
+ },
+ "beverly-grove": {
+  "name": "Beverly Grove",
+  "sub": "Third Street · Beverly Center · Miracle Mile",
+  "zips": [
+   "90048",
+   "90036",
+   "90035",
+   "90069"
+  ],
+  "lead": "Fourteen buildings inside a half-mile of the busiest corner of the Westside.",
+  "body": "Third Street's restaurant row, the Beverly Center and Cedars-Sinai are all within walking distance. The Grove and the Original Farmers Market sit at Third and Fairfax. The streets themselves — Croft, Orlando, Kings, Sweetzer, Hayworth — stay residential and quiet one block off the traffic.",
+  "streets": [
+   "Blackburn",
+   "Croft",
+   "Orlando",
+   "Kings",
+   "Sweetzer",
+   "Hayworth",
+   "Alfred",
+   "Sherbourne",
+   "Hi Point",
+   "Ogden"
+  ],
+  "center": [
+   34.0735,
+   -118.372
+  ]
+ },
+ "hollywood": {
+  "name": "Hollywood",
+  "sub": "Melrose · Fairfax · Larchmont",
+  "zips": [
+   "90038",
+   "90046",
+   "90004"
+  ],
+  "lead": "The working side of Hollywood — studio blocks, bungalow courts and side streets off Melrose.",
+  "body": "Paramount Pictures is on Melrose, Sunset Bronson and Netflix are on Sunset, and Runyon Canyon is at the top of the hill. The Hollywood Farmers Market takes over Ivar on Sundays; Larchmont Village keeps its own main street a few blocks east.",
+  "streets": [
+   "Wilcox",
+   "Hudson",
+   "Cole",
+   "Waring",
+   "Martel",
+   "Formosa",
+   "Poinsettia",
+   "Hawthorn",
+   "Edinburgh",
+   "Gramercy",
+   "Detroit"
+  ],
+  "center": [
+   34.088,
+   -118.34
+  ]
+ },
+ "venice": {
+  "name": "Venice",
+  "sub": "Abbot Kinney · Penmar · Rose",
+  "zips": [
+   "90291"
+  ],
+  "lead": "Two buildings, a mile from the water.",
+  "body": "Abbot Kinney Boulevard and Rose Avenue are the neighborhood's two commercial spines; the canals, the Penmar golf course and the beach path are all within a short ride.",
+  "streets": [
+   "Venice",
+   "Penmar"
+  ],
+  "center": [
+   33.9982,
+   -118.4511
+  ]
+ },
+ "palms": {
+  "name": "Palms · Motor Avenue",
+  "sub": "Motor Avenue · minutes from Culver City",
+  "zips": [
+   "90034"
+  ],
+  "lead": "The newest ground Wiseman has built on, and the address of the flagship.",
+  "body": "Motor Avenue runs north from downtown Culver City through Palms. Sony Pictures, Amazon MGM and Apple TV+ all have campuses within a few minutes, the Helms Bakery District is close, and the Expo/Culver City E Line station puts Santa Monica at one end of the train and Downtown at the other. The address is in the City of Los Angeles; Culver City begins a few blocks south.",
+  "streets": [
+   "Motor"
+  ],
+  "center": [
+   34.0243,
+   -118.4072
+  ]
+ },
+ "glendale": {
+  "name": "Glendale",
+  "sub": "Brand Boulevard",
+  "zips": [
+   "91205"
+  ],
+  "lead": "One building, downtown.",
+  "body": "East Broadway sits a block off Brand Boulevard, with the Americana at Brand, the Alex Theatre and the Glendale Galleria all within walking distance.",
+  "streets": [
+   "Broadway"
+  ],
+  "center": [
+   34.146,
+   -118.253
+  ]
+ }
+}

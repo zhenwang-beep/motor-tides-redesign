@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Atelier — Wiseman Residential, third direction</title>
+<meta name="description" content="Concept board for ATELIER, the third design direction for Wiseman Residential: buildings presented as exhibits with specifications on a drafting grid.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans:ital,wght@0,300;0,400;0,500;1,400&family=Sofia+Sans+Extra+Condensed:wght@200..700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ATELIER — tokens
+   ============================================================ */
+:root{
+  --ground:#E4E3DE;          /* plaster */
+  --ground-2:#D9D8D2;        /* concrete band */
+  --ink:#141413;
+  --ink-70:rgba(20,20,19,.74);
+  --ink-50:rgba(20,20,19,.54);
+  --rule:rgba(20,20,19,.22); /* structural hairline */
+  --grid:rgba(20,20,19,.085);/* drafting grid */
+  --signal:#E8481C;          /* survey orange — one colour, spent on availability, search, pins */
+  --paper:#F4F3EF;           /* text on ink / on photographs */
+  --brand:#169BAC;           /* the mark only */
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --pad:clamp(20px,3.4vw,56px);
+  --max:1600px;
+  --display:"Sofia Sans Extra Condensed","Arial Narrow",sans-serif-condensed,sans-serif;
+  --text:"Alegreya Sans","Gill Sans",sans-serif;
+  --vh100:100vh;
+}
+@supports (height:100svh){:root{--vh100:100svh}}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{overflow-x:clip}
+html{background:var(--ground);color:var(--ink);-webkit-text-size-adjust:100%}
+body{font-family:var(--text);font-size:16px;line-height:1.5;font-weight:400;font-variant-numeric:tabular-nums;text-rendering:optimizeLegibility}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+ul{list-style:none}
+:focus-visible{outline:2px solid var(--signal);outline-offset:3px}
+
+.wrap{width:100%;max-width:var(--max);margin-left:auto;margin-right:auto;padding-left:var(--pad);padding-right:var(--pad)}
+
+/* the drafting hand: condensed caps, tracked */
+.k{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.18em;text-transform:uppercase;line-height:1}
+.k-lg{font-size:13px}
+.disp{font-family:var(--display);font-weight:300;text-transform:uppercase;line-height:.9;letter-spacing:.005em}
+.num{font-family:var(--display);font-weight:400;font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.italic{font-style:italic}
+.muted{color:var(--ink-50)}
+
+/* ---- the sheet: a 12-column grid whose column lines are drawn ---- */
+.sheet{position:relative;display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:0}
+.sheet::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to right,var(--grid) 1px,transparent 1px) 0 0/calc(100%/12) 100% repeat-x;
+  border-right:1px solid var(--grid)}
+.sheet > *{position:relative;min-width:0}
+.lines{position:absolute;top:0;bottom:0;left:var(--pad);right:var(--pad);pointer-events:none;
+  background:linear-gradient(to right,var(--grid) 1px,transparent 1px) 0 0/calc(100%/12) 100% repeat-x;
+  border-right:1px solid var(--grid)}
+
+/* ---- dimension line: tick — line — label — line — tick ---- */
+.dim{display:flex;align-items:center;width:100%;height:20px;color:var(--ink-70)}
+.dim i{flex:1 1 auto;position:relative;height:1px;background:currentColor;opacity:.55;transform-origin:left center}
+.dim i + i{transform-origin:right center}
+.dim i::before{content:"";position:absolute;top:-5px;width:1px;height:11px;background:currentColor;left:0}
+.dim i + i::before{left:auto;right:0}
+.dim span{flex:0 0 auto;padding:0 12px;font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;line-height:1;white-space:nowrap}
+.dim.light{color:var(--paper)}
+.dim .sw{display:grid;padding:0}
+.dim .sw > *{grid-area:1/1;padding:0 12px;transition:opacity .28s var(--ease)}
+.dim .sw .b{opacity:0;color:var(--signal)}
+
+/* ---- reveals (opacity/transform only; layout already painted) ---- */
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:var(--d,0s)}
+.js .rv.in{opacity:1;transform:none}
+.js .dim i{transform:scaleX(0);transition:transform .8s var(--ease);transition-delay:var(--d,0s)}
+.js .dim.in i{transform:scaleX(1)}
+.js .dim > span{opacity:0;transition:opacity .5s var(--ease) calc(var(--d,0s) + .55s)}
+.js .dim.in > span{opacity:1}
+.js .fr img{clip-path:inset(0 0 8% 0);transition:clip-path 1.1s var(--ease) .12s,transform 1.2s var(--ease)}
+.js .fr.in img{clip-path:inset(0)}
+@media (prefers-reduced-motion:reduce){
+  .js .rv,.js .dim i,.js .dim > span,.js .fr img,.js .hero-img img{opacity:1;transform:none;clip-path:none;transition:none}
+}
+
+/* ============================================================
+   board chrome — the sheet tabs of a drawing set
+   ============================================================ */
+.strip{background:var(--ground-2);border-bottom:1px solid var(--rule)}
+.strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;height:36px}
+.strip .k{color:var(--ink-70)}
+.tab{background:var(--ground-2);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.tab .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:46px;padding-top:8px;padding-bottom:8px}
+.tab .note{font-style:italic;font-size:14px;color:var(--ink-50);text-align:right}
+
+/* ============================================================
+   header — never retracts; shares the gutter
+   ============================================================ */
+.hd{height:64px;display:flex;align-items:center}
+.hd .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.brand{display:flex;align-items:center;gap:12px;color:inherit}
+.brand svg{width:22px;height:22px;fill:currentColor}
+.brand .wm{font-family:var(--display);font-weight:500;font-size:16px;letter-spacing:.2em;text-transform:uppercase;line-height:1}
+.nav{display:flex;align-items:center;gap:clamp(16px,2.2vw,34px)}
+.nav a{font-family:var(--display);font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;line-height:1;padding:12px 0;position:relative}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:6px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .28s var(--ease)}
+.nav a:hover::after{transform:scaleX(1)}
+.nav a.now{color:var(--signal)}
+.hd .tel{font-size:15px;font-weight:500;letter-spacing:.01em;white-space:nowrap}
+.hd .menu{display:none}
+.hero .hd{position:absolute;left:0;right:0;top:0;z-index:3;color:var(--paper)}
+.hero .hd::after{content:"";position:absolute;left:var(--pad);right:var(--pad);bottom:0;height:1px;background:rgba(244,243,239,.28)}
+.hd.on-ground{border-bottom:1px solid var(--rule);color:var(--ink)}
+
+/* ============================================================
+   hero — full-bleed photograph, copy low-left, search inside
+   ============================================================ */
+.hero{position:relative;height:clamp(640px,var(--vh100),960px);min-height:640px;color:var(--paper);--grid:rgba(244,243,239,.13);overflow:clip;isolation:isolate}
+.hero-img{position:absolute;inset:0;z-index:0}
+.hero-img img{width:100%;height:100%;object-fit:cover;object-position:50% 44%}
+.js .hero-img img{transform:scale(1.06);transition:transform 1.2s var(--ease)}
+.js .loaded .hero-img img,.js.loaded .hero-img img{transform:scale(1)}
+.hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(12,12,11,.5) 0%,transparent 24%),linear-gradient(to top,rgba(12,12,11,.8) 0%,rgba(12,12,11,.44) 34%,transparent 62%)}
+.hero > .wrap{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:40px}
+.hero .lines{--grid:rgba(244,243,239,.13)}
+.hero-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;margin-bottom:38px}
+.hero-copy{grid-column:1/9;padding-left:14px;max-width:920px}
+.tagline{font-family:var(--text);font-style:italic;font-size:clamp(17px,1.5vw,21px);color:var(--paper);margin-bottom:18px;text-shadow:0 1px 14px rgba(0,0,0,.45)}
+.hero h1{font-variant-numeric:proportional-nums;font-family:var(--display);font-weight:300;text-transform:uppercase;line-height:.88;letter-spacing:.004em;font-size:clamp(4rem,9.6vw,10.4rem);text-wrap:balance;max-width:none;text-shadow:0 2px 24px rgba(0,0,0,.18)}
+.hero .dek{margin-top:22px;max-width:52ch;font-size:clamp(15px,1.15vw,17px);color:rgba(244,243,239,.86);line-height:1.5}
+.hero-lbl{grid-column:10/13;padding-left:14px;padding-bottom:6px;border-left:1px solid rgba(244,243,239,.35);margin-left:-1px}
+.hero-lbl .k{color:rgba(244,243,239,.92)}
+.hero-lbl p{font-size:13.5px;line-height:1.45;color:rgba(244,243,239,.8);margin-top:8px}
+.hero-lbl p b{font-weight:500;color:var(--paper)}
+
+/* ---- the search strip: a hairline row, cells separated by 1px rules, one solid button ---- */
+.srch{display:grid;grid-template-columns:1.7fr 1fr .85fr .85fr auto auto;height:64px;border:1px solid rgba(244,243,239,.38);border-left:0;background:rgba(12,12,11,.18);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.srch > *{border-left:1px solid rgba(244,243,239,.38);min-width:0}
+.srch .cell{display:flex;flex-direction:column;justify-content:center;gap:5px;padding:0 18px;text-align:left;color:var(--paper);position:relative}
+.srch .cell .k{font-size:10.5px;color:rgba(244,243,239,.72)}
+.srch .cell .v{font-size:15.5px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.srch .cell .v svg{width:12px;height:12px;flex:0 0 auto;stroke:currentColor;fill:none;stroke-width:1.5}
+.srch .cell::after{content:"";position:absolute;left:18px;right:18px;bottom:0;height:1px;background:var(--paper);transform:scaleX(0);transform-origin:left;transition:transform .28s var(--ease)}
+.srch .cell:hover::after{transform:scaleX(1)}
+.srch input{width:100%;background:none;border:0;color:var(--paper);font:inherit;font-size:15.5px;padding:0;outline:0}
+.srch input::placeholder{color:rgba(244,243,239,.6)}
+.srch .more{display:flex;align-items:center;gap:10px;padding:0 20px;color:var(--paper);font-family:var(--display);font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+.srch .more svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.5}
+.srch .go{display:flex;align-items:center;gap:14px;padding:0 28px;background:var(--signal);color:#fff;font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:.18em;text-transform:uppercase;white-space:nowrap;border-left:0;transition:background .28s var(--ease)}
+.srch .go:hover{background:var(--paper);color:var(--ink)}
+.srch .go svg{width:18px;height:12px;stroke:currentColor;fill:none;stroke-width:1.5;transition:transform .28s var(--ease)}
+.srch .go:hover svg{transform:translateX(4px)}
+
+/* ============================================================
+   measure bar — the portfolio in one dimension line
+   ============================================================ */
+.measure{padding-top:34px;padding-bottom:0}
+.measure .dim{height:26px;color:var(--ink)}
+.measure .dim span{font-size:13px;letter-spacing:.2em;font-variant-numeric:proportional-nums}
+.measure .sub{display:flex;justify-content:space-between;gap:16px;margin-top:10px;font-size:13px;color:var(--ink-50)}
+
+/* ============================================================
+   section heads
+   ============================================================ */
+.sec{padding-top:clamp(80px,11vh,150px)}
+.sec-hd{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));align-items:end;margin-bottom:clamp(36px,5vh,64px)}
+.sec-hd .l{grid-column:1/9;padding-left:14px}
+.sec-hd .r{grid-column:10/13;padding-left:14px;display:flex;flex-direction:column;gap:12px;padding-bottom:4px}
+.sec-hd .k{color:var(--signal);display:block;margin-bottom:22px}
+.sec-hd h2{font-variant-numeric:proportional-nums;font-family:var(--display);font-weight:300;text-transform:uppercase;line-height:.9;letter-spacing:.004em;font-size:clamp(3.2rem,6.6vw,7.2rem);text-wrap:balance;max-width:16ch}
+.sec-hd .dek{margin-top:20px;max-width:56ch;font-size:17px;color:var(--ink-70)}
+.arrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:.16em;text-transform:uppercase;line-height:1;padding:10px 0}
+.arrow svg{width:22px;height:12px;stroke:currentColor;fill:none;stroke-width:1.5;transition:transform .28s var(--ease)}
+.arrow:hover svg{transform:translateX(4px)}
+
+/* ============================================================
+   the wall — six exhibits hung on the grid
+   ============================================================ */
+.wall{row-gap:clamp(56px,7vh,96px);align-items:start;padding-bottom:8px}
+.ex{display:flex;flex-direction:column}
+.fr{width:100%;overflow:hidden;background:var(--ground-2);aspect-ratio:var(--ar,4/5)}
+.fr img{width:100%;height:100%;object-fit:cover;object-position:var(--pos,50% 50%)}
+.ex:hover .fr img{transform:scale(1.03)}
+.ex:hover .dim .sw .a{opacity:0}
+.ex:hover .dim .sw .b{opacity:1}
+.ex .dim{margin-top:10px}
+.lbl{padding:14px 12px 0}
+.lbl h3{font-variant-numeric:proportional-nums;font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:clamp(26px,2.1vw,32px);line-height:.95;letter-spacing:.01em}
+.lbl h3 a{display:inline-flex;align-items:baseline;gap:10px}
+.lbl h3 svg{width:18px;height:11px;stroke:currentColor;fill:none;stroke-width:1.5;transition:transform .28s var(--ease);opacity:0}
+.ex:hover .lbl h3 svg{transform:translateX(4px);opacity:1}
+.lbl .where{margin-top:8px;font-size:14.5px;color:var(--ink-70);line-height:1.4}
+.lbl .spec{margin-top:10px;display:flex;align-items:baseline;justify-content:space-between;gap:14px;border-top:1px solid var(--rule);padding-top:10px}
+.lbl .spec b{font-family:var(--display);font-weight:400;font-size:24px;line-height:1;letter-spacing:.01em}
+.lbl .spec b small{font-family:var(--text);font-weight:400;font-size:13px;letter-spacing:0;text-transform:none;color:var(--ink-50);margin-right:6px}
+.lbl .spec .av{font-size:13.5px;color:var(--ink-70);white-space:nowrap}
+.lbl .spec .av em{font-style:normal;color:var(--signal);font-weight:500}
+.ex-1{grid-column:1/8;--ar:7/5}
+.ex-2{grid-column:9/13;--ar:4/5}
+.ex-3{grid-column:2/5;--ar:4/5}
+.ex-4{grid-column:6/9;--ar:4/5}
+.ex-5{grid-column:10/13;--ar:4/5}
+.ex-6{grid-column:1/4;--ar:4/5}
+.areas{grid-column:5/13;padding-left:14px;align-self:stretch;display:flex;flex-direction:column}
+.areas .k{color:var(--ink-50);margin-bottom:22px;display:block}
+.areas ul{border-top:1px solid var(--rule)}
+.areas li{display:flex;align-items:baseline;justify-content:space-between;gap:16px;border-bottom:1px solid var(--rule);padding:13px 0;transition:padding-left .28s var(--ease)}
+.areas li:hover{padding-left:8px}
+.areas li a{font-size:17px}
+.areas li small{font-size:13.5px;color:var(--ink-50);margin-left:10px;font-style:italic}
+.areas li .n{font-family:var(--display);font-weight:400;font-size:24px;line-height:1;letter-spacing:.02em}
+.areas .all{margin-top:auto;padding-top:34px;display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap}
+.areas .all a.big{font-variant-numeric:proportional-nums;font-family:var(--display);font-weight:300;text-transform:uppercase;font-size:clamp(34px,3.4vw,52px);line-height:.9;display:inline-flex;align-items:center;gap:16px}
+.areas .all a.big svg{width:36px;height:18px;stroke:currentColor;fill:none;stroke-width:1.2;transition:transform .28s var(--ease)}
+.areas .all a.big:hover svg{transform:translateX(6px)}
+
+/* ============================================================
+   building page — the exhibit and its title block
+   ============================================================ */
+.bp{padding-bottom:clamp(64px,8vh,110px)}
+.crumb{display:flex;align-items:center;gap:10px;height:44px;font-size:13.5px;color:var(--ink-50);border-bottom:1px solid var(--rule)}
+.crumb a:hover{color:var(--ink)}
+.crumb span{opacity:.6}
+.bp-grid{margin-top:34px;align-items:start}
+.bp-dimv{grid-column:1/2;align-self:start;height:0}
+.bp-dimv .dim{position:absolute;top:0;left:50%;width:466.67%;height:20px;transform-origin:0 0;transform:rotate(-90deg) translate(-100%,-50%)}
+.bp-fr{grid-column:2/9}
+.bp-fr .fr{--ar:3/2}
+.bp-fr .dim{margin-top:10px}
+.tb{grid-column:9/13;padding-left:clamp(20px,2.4vw,36px);padding-top:6px}
+.tb .k{color:var(--ink-50);display:block}
+.tb h1{font-variant-numeric:proportional-nums;font-family:var(--display);font-weight:300;text-transform:uppercase;line-height:.9;letter-spacing:.004em;font-size:clamp(3.2rem,5.2vw,5.4rem);margin-top:16px;text-wrap:balance}
+.tb .addr{margin-top:14px;font-size:15.5px;color:var(--ink-70)}
+.spec-t{margin-top:26px;border-top:1px solid var(--rule)}
+.spec-t div{display:grid;grid-template-columns:118px 1fr;gap:16px;align-items:baseline;border-bottom:1px solid var(--rule);padding:10px 0}
+.spec-t dt{font-family:var(--display);font-weight:500;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-50);line-height:1.2}
+.spec-t dd{font-size:15.5px}
+.spec-t dd.big{font-family:var(--display);font-weight:400;font-size:26px;line-height:1;letter-spacing:.01em}
+.spec-t dd.sig{color:var(--signal);font-weight:500}
+.acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.btn{flex:1 1 auto;min-width:max-content;height:50px;display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:0 20px;background:var(--ink);color:var(--paper);font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:.18em;text-transform:uppercase;line-height:1;border-radius:0;transition:background .28s var(--ease),color .28s var(--ease)}
+.btn:hover{background:var(--signal);color:#fff}
+.btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:1.6}
+.feed{margin-top:16px;font-size:13px;color:var(--ink-50);font-style:italic}
+
+.sub-sec{margin-top:clamp(56px,7vh,88px)}
+.sub-sec .k{color:var(--ink-50);display:block;margin-bottom:18px;padding-left:14px}
+.plans{width:100%;border-collapse:collapse;border-top:1px solid var(--rule)}
+.plans th{font-family:var(--display);font-weight:500;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-50);text-align:left;padding:12px 14px;border-bottom:1px solid var(--rule);white-space:nowrap}
+.plans td{padding:18px 14px;border-bottom:1px solid var(--rule);font-size:15.5px;vertical-align:baseline}
+.plans tr:hover td{background:rgba(20,20,19,.035)}
+.plans td.plan{font-variant-numeric:proportional-nums;font-family:var(--display);font-weight:400;font-size:24px;line-height:1;letter-spacing:.01em;text-transform:uppercase}
+.plans td.rent{font-family:var(--display);font-weight:400;font-size:24px;line-height:1;letter-spacing:.01em}
+.plans td.av{color:var(--signal);font-weight:500}
+.plans td.go{text-align:right}
+.plans .arrow{padding:0}
+.amen{border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
+.amen li{border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:26px 22px 24px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;gap:20px}
+.amen li svg{width:34px;height:34px;stroke:currentColor;fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.amen li b{display:block;font-weight:500;font-size:16px}
+.amen li small{display:block;font-size:13.5px;color:var(--ink-50);margin-top:3px}
+.amen .more{grid-column:span 3;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);min-height:0;padding:16px 22px;flex-direction:row;align-items:baseline;justify-content:flex-start;gap:10px;font-size:14.5px;color:var(--ink-70)}
+.amen .more .k{color:var(--ink-50);margin:0;padding:0}
+
+/* ============================================================
+   footer — the title block
+   ============================================================ */
+.ft{background:var(--ink);color:var(--paper);--rule:rgba(244,243,239,.18);--grid:rgba(244,243,239,.06);padding-top:0}
+.ft .sheet{border-top:1px solid var(--rule);border-left:1px solid var(--rule)}
+.ft .cell{padding:30px 22px 34px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.ft .c-brand{grid-column:1/4}
+.ft .c-b{grid-column:4/6}
+.ft .c-a{grid-column:6/9}
+.ft .c-c{grid-column:9/11}
+.ft .c-o{grid-column:11/13}
+.ft .k{color:rgba(244,243,239,.6);display:block;margin-bottom:18px}
+.ft .brand{color:var(--paper)}
+.ft .brand svg{fill:var(--brand)}
+.ft .tag{margin-top:26px;font-style:italic;font-size:16px;color:rgba(244,243,239,.8);max-width:26ch}
+.ft ul li{margin:0 0 9px}
+.ft ul a{font-size:15.5px;position:relative}
+.ft ul a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .28s var(--ease)}
+.ft ul a:hover::after{transform:scaleX(1)}
+.ft ul .n{font-family:var(--display);font-weight:400;font-size:15px;letter-spacing:.06em;color:rgba(244,243,239,.6);margin-left:8px}
+.ft address{font-style:normal;font-size:15.5px;line-height:1.5}
+.ft address a{display:block;margin-top:10px}
+.ft .soc{margin-top:16px;display:flex;flex-wrap:wrap;gap:6px 14px}
+.ft-b{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));border-left:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.ft-b > *{border-right:1px solid var(--rule);padding:16px 22px;display:flex;align-items:center;gap:12px;font-size:13.5px;color:rgba(244,243,239,.8);min-height:60px}
+.ft-b .eho{grid-column:1/4}
+.ft-b .eho svg{width:26px;height:26px;fill:currentColor;flex:0 0 auto}
+.ft-b .cp{grid-column:4/6}
+.ft-b .fd{grid-column:6/10;font-style:italic}
+.ft-b .rv-n{grid-column:10/13;font-family:var(--display);font-weight:500;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:rgba(244,243,239,.6);justify-content:flex-end;text-align:right}
+.ft .end{height:34px}
+
+/* ============================================================
+   responsive
+   ============================================================ */
+@media (max-width:1100px){
+  .hero-copy{grid-column:1/10}
+  .hero-lbl{grid-column:10/13}
+  .srch{grid-template-columns:1.6fr 1fr .9fr .9fr auto}
+  .srch .more{display:none}
+}
+@media (max-width:900px){
+  .bp-dimv{display:none}
+  .bp-fr{grid-column:1/13}
+  .tb{grid-column:1/13;padding-left:14px;padding-top:36px}
+  .sec-hd .l{grid-column:1/13}
+  .sec-hd .r{grid-column:1/13;flex-direction:row;gap:28px;margin-top:22px}
+  .ex-1{grid-column:1/8;--ar:7/5}
+  .ex-2{grid-column:9/13}
+  .ex-3{grid-column:1/6}
+  .ex-4{grid-column:7/13;--ar:4/5}
+  .ex-5{grid-column:1/6}
+  .ex-6{grid-column:7/13}
+  .areas{grid-column:1/13;padding-top:12px}
+  .hero-lbl{display:none}
+  .hero-copy{grid-column:1/13}
+  .ft .c-brand{grid-column:1/13}
+  .ft .c-b{grid-column:1/5}
+  .ft .c-a{grid-column:5/9}
+  .ft .c-c{grid-column:9/13}
+  .ft .c-o{grid-column:1/13}
+  .ft-b .eho{grid-column:1/7}.ft-b .cp{grid-column:7/13}.ft-b .fd{grid-column:1/8}.ft-b .rv-n{grid-column:8/13}
+}
+@media (max-width:720px){
+  .sheet,.hero-grid,.sec-hd,.ft-b{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .sheet::before,.lines{background-size:calc(100%/4) 100%}
+  .strip .wrap{gap:10px}.strip .l{display:none}
+  .hd{height:56px}
+  .hd .nav,.hd .tel{display:none}
+  .hd .menu{display:inline-flex;align-items:center;gap:10px;font-family:var(--display);font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;padding:12px 0}
+  .hd .menu i{display:block;width:22px;height:9px;border-top:1px solid currentColor;border-bottom:1px solid currentColor}
+  .hero{height:max(640px,var(--vh100))}
+  .hero > .wrap{padding-bottom:24px}
+  .hero-grid{margin-bottom:26px}
+  .hero-copy{grid-column:1/5;padding-left:10px}
+  .hero h1{font-size:clamp(3.6rem,18.4vw,5.6rem);max-width:none}
+  .hero .dek{font-size:15px;max-width:34ch;margin-top:16px}
+  .tagline{margin-bottom:14px}
+  .srch{grid-template-columns:1fr 1fr auto;grid-template-rows:56px 56px;height:auto;border-left:1px solid rgba(244,243,239,.38)}
+  .srch .cell.q{grid-column:1/4;border-left:0;border-bottom:1px solid rgba(244,243,239,.38)}
+  .srch .cell.nb{border-left:0}
+  .srch .cell.rt,.srch .more{display:none}
+  .srch .go{padding:0 20px}
+  .measure .dim span{font-size:11px;letter-spacing:.14em;white-space:normal;text-align:center;line-height:1.35}
+  .measure .sub{flex-direction:column;gap:2px}
+  .sec{padding-top:72px}
+  .sec-hd .l,.sec-hd .r{grid-column:1/5;padding-left:10px}
+  .sec-hd .r{flex-direction:column;gap:6px}
+  .sec-hd h2{font-size:clamp(3rem,15vw,4.4rem);max-width:none}
+  .sec-hd .dek{font-size:16px}
+  .wall{row-gap:52px}
+  .ex-1,.ex-2,.ex-3,.ex-4,.ex-5,.ex-6{grid-column:1/5;--ar:4/5}
+  .ex-1{--ar:4/3}
+  .lbl{padding-left:10px;padding-right:10px}
+  .areas{grid-column:1/5;padding-left:10px;padding-right:10px}
+  .tab .wrap{flex-direction:column;align-items:flex-start;gap:4px}
+  .tab .note{text-align:left}
+  .crumb{height:auto;padding:10px 0;flex-wrap:wrap;font-size:13px}
+  .bp-fr{grid-column:1/5}.bp-fr .fr{--ar:4/5}
+  .tb{grid-column:1/5;padding-left:10px;padding-right:10px;padding-top:30px}
+  .spec-t div{grid-template-columns:104px 1fr;gap:12px}
+  .acts{flex-direction:column}
+  .btn{width:100%}
+  .sub-sec .k{padding-left:10px}
+  .plans thead{display:none}
+  .plans,.plans tbody,.plans tr,.plans td{display:block}
+  .plans tr{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule);padding:14px 10px 16px;gap:8px 12px}
+  .plans td{border:0;padding:0;font-size:15px}
+  .plans td::before{content:attr(data-l);display:block;font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-50);margin-bottom:4px}
+  .plans td.plan{grid-column:1/3;font-size:26px}
+  .plans td.plan::before{display:none}
+  .plans td.go{grid-column:1/3;text-align:left;padding-top:6px}
+  .plans td.go::before{display:none}
+  .amen{display:block}
+  .amen li{min-height:0;flex-direction:row;align-items:center;justify-content:flex-start;padding:16px 14px}
+  .amen li svg{width:28px;height:28px;flex:0 0 auto}
+  .amen .more{flex-wrap:wrap;padding:14px}
+  .ft .cell{padding:22px 14px 24px}
+  .ft .c-brand,.ft .c-b,.ft .c-a,.ft .c-c,.ft .c-o{grid-column:1/5}
+  .ft-b > *{padding:12px 14px;min-height:0}
+  .ft-b .eho,.ft-b .cp,.ft-b .fd,.ft-b .rv-n{grid-column:1/5;justify-content:flex-start;text-align:left}
+}
+</style>
+</head>
+<body>
+
+<!-- ======================= board chrome ======================= -->
+<div class="strip"><div class="wrap">
+  <span class="k l">Wiseman Residential · third direction</span>
+  <span class="k c">Atelier</span>
+  <span class="k r">Concept board · 11 Sep 2026</span>
+</div></div>
+
+<!-- ======================= HOME ======================= -->
+<section class="hero" aria-label="Home">
+  <div class="hero-img"><img src="../../assets/img/wr13.jpg" alt="Motor Tides, 3557 Motor Avenue, seen from across the street" width="1800" height="1348" fetchpriority="high" decoding="async"></div>
+  <div class="hero-scrim" aria-hidden="true"></div>
+
+  <header class="hd">
+    <div class="wrap">
+      <a class="brand" href="#" aria-label="Wiseman Residential, home">
+        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg>
+        <span class="wm">Wiseman Residential</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#" class="now">Find a home</a><a href="#">Buildings</a><a href="#">Neighborhoods</a><a href="#">Residents</a><a href="#">Company</a><a href="#">Contact</a>
+      </nav>
+      <a class="tel" href="tel:+13104733000">+1 310-473-3000</a>
+      <button class="menu" aria-label="Open menu"><i></i>Menu</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <div class="lines" aria-hidden="true"></div>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <p class="tagline rv" style="--d:.15s">Los Angeles living, managed wisely.</p>
+        <h1 class="rv" style="--d:.25s">Your next address, to the square&nbsp;foot.</h1>
+        <p class="dek rv" style="--d:.38s">Studios to five bedrooms in 72 buildings across seven parts of Los Angeles. Every building has its own leasing line and its floor plans as advertised today.</p>
+      </div>
+      <aside class="hero-lbl rv" style="--d:.5s" aria-label="About this photograph">
+        <span class="k">Motor Tides</span>
+        <p>3557 Motor Avenue · Palms, minutes from Culver City<br><b>Seven storeys · 107 homes · completing 2026</b></p>
+      </aside>
+    </div>
+
+    <form class="srch rv" style="--d:.6s" action="search.html" role="search" aria-label="Find a home">
+      <label class="cell q"><span class="k">Where</span><span class="v"><input type="search" name="q" placeholder="Building, street or area" autocomplete="off"></span></label>
+      <button type="button" class="cell nb" aria-haspopup="listbox" aria-expanded="false"><span class="k">Neighborhood</span><span class="v">Anywhere <svg viewBox="0 0 12 12"><path d="M2 4.5l4 4 4-4"/></svg></span></button>
+      <button type="button" class="cell" aria-haspopup="listbox" aria-expanded="false"><span class="k">Bedrooms</span><span class="v">Any <svg viewBox="0 0 12 12"><path d="M2 4.5l4 4 4-4"/></svg></span></button>
+      <button type="button" class="cell rt" aria-haspopup="listbox" aria-expanded="false"><span class="k">Monthly rent</span><span class="v">Any <svg viewBox="0 0 12 12"><path d="M2 4.5l4 4 4-4"/></svg></span></button>
+      <button type="button" class="more" aria-haspopup="dialog"><svg viewBox="0 0 16 16"><path d="M1 4h14M1 12h14"/><circle cx="5" cy="4" r="2" fill="currentColor" stroke="none"/><circle cx="11" cy="12" r="2" fill="currentColor" stroke="none"/></svg>More filters</button>
+      <button type="submit" class="go">Search <svg viewBox="0 0 18 12"><path d="M0 6h16M11 1l5 5-5 5"/></svg></button>
+    </form>
+  </div>
+</section>
+
+<div class="measure wrap">
+  <div class="dim" style="--d:.2s"><i></i><span>72 buildings · 7 areas · 52 streets · studios to five bedrooms</span><i></i></div>
+  <div class="sub"><span>Every count on this page is read from the live leasing feed.</span><span>Snapshot 11 September 2026</span></div>
+</div>
+
+<!-- ======================= HOME · the collection ======================= -->
+<section class="sec wrap" aria-label="The collection">
+  <div class="sec-hd">
+    <div class="l">
+      <span class="k rv">Six of the seventy-two</span>
+      <h2 class="rv" style="--d:.08s">Choose the street&nbsp;first.</h2>
+      <p class="dek rv" style="--d:.16s">Each building is shown as it stands: its address, its floor areas, today's rents and what is available now. Nothing is filtered away — sort the portfolio by neighborhood, size or rent and all 72 stay on the page.</p>
+    </div>
+    <div class="r">
+      <a class="arrow rv" style="--d:.2s" href="#">All 72 buildings <svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5"/></svg></a>
+      <a class="arrow rv" style="--d:.26s" href="#">Neighborhoods <svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5"/></svg></a>
+    </div>
+  </div>
+
+  <div class="sheet wall">
+
+    <article class="ex ex-1">
+      <a class="fr" href="#" tabindex="-1" aria-hidden="true" style="--pos:50% 46%"><img src="../../assets/img/wr05.jpg" alt="" width="1800" height="1200" loading="lazy" decoding="async"></a>
+      <div class="dim"><i></i><span class="sw"><span class="a">393 – 1,127 sq ft</span><span class="b">2 available now</span></span><i></i></div>
+      <div class="lbl">
+        <h3><a href="#">Century City Icon <svg viewBox="0 0 18 12"><path d="M0 6h16M11 1l5 5-5 5"/></svg></a></h3>
+        <p class="where">10473 Santa Monica Boulevard · West Los Angeles, Sawtelle<br>Studio to 2 bedrooms · 1 to 2 baths · rooftop deck</p>
+        <p class="spec"><b><small>from</small>$3,445</b><span class="av"><em>2</em> available now</span></p>
+      </div>
+    </article>
+
+    <article class="ex ex-2">
+      <a class="fr" href="#" tabindex="-1" aria-hidden="true" style="--pos:42% 50%"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1000/s3/3/1030854/100sorlando-105.jpg" alt="" width="1000" height="750" loading="lazy" decoding="async"></a>
+      <div class="dim"><i></i><span class="sw"><span class="a">1,266 – 1,600 sq ft</span><span class="b">1 available now</span></span><i></i></div>
+      <div class="lbl">
+        <h3><a href="#">Orlando on First <svg viewBox="0 0 18 12"><path d="M0 6h16M11 1l5 5-5 5"/></svg></a></h3>
+        <p class="where">100 South Orlando Avenue · Beverly Grove<br>3 bedrooms · 3 baths · courtyard, rooftop deck</p>
+        <p class="spec"><b><small>from</small>$4,595</b><span class="av"><em>1</em> available now</span></p>
+      </div>
+    </article>
+
+    <article class="ex ex-3">
+      <a class="fr" href="#" tabindex="-1" aria-hidden="true" style="--pos:50% 50%"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1000/s3/3/550100/1(1).jpg" alt="" width="1000" height="750" loading="lazy" decoding="async"></a>
+      <div class="dim"><i></i><span class="sw"><span class="a">1,269 – 1,547 sq ft</span><span class="b">4 available now</span></span><i></i></div>
+      <div class="lbl">
+        <h3><a href="#">Wilcox Melrose <svg viewBox="0 0 18 12"><path d="M0 6h16M11 1l5 5-5 5"/></svg></a></h3>
+        <p class="where">748 Wilcox Avenue · Hollywood<br>3 bedrooms · 3 baths · courtyard, elevator</p>
+        <p class="spec"><b><small>from</small>$3,895</b><span class="av"><em>4</em> available now</span></p>
+      </div>
+    </article>
+
+    <article class="ex ex-4">
+      <a class="fr" href="#" tabindex="-1" aria-hidden="true" style="--pos:52% 50%"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_960/s3/3/119320/220_east_broadway_exterior.jpg" alt="" width="960" height="640" loading="lazy" decoding="async"></a>
+      <div class="dim"><i></i><span class="sw"><span class="a">924 – 1,685 sq ft</span><span class="b">2 available now</span></span><i></i></div>
+      <div class="lbl">
+        <h3><a href="#">Broadway Glendale <svg viewBox="0 0 18 12"><path d="M0 6h16M11 1l5 5-5 5"/></svg></a></h3>
+        <p class="where">220 East Broadway · Glendale<br>1 to 3 bedrooms · 1.5 to 3 baths</p>
+        <p class="spec"><b><small>from</small>$3,450</b><span class="av"><em>2</em> available now</span></p>
+      </div>
+    </article>
+
+    <article class="ex ex-5">
+      <a class="fr" href="#" tabindex="-1" aria-hidden="true" style="--pos:55% 50%"><img src="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1000/s3/3/216712/3_216712_1389740.jpg" alt="" width="1000" height="667" loading="lazy" decoding="async"></a>
+      <div class="dim"><i></i><span class="sw"><span class="a">Studio to 5 bedrooms</span><span class="b">1 available now</span></span><i></i></div>
+      <div class="lbl">
+        <h3><a href="#">Brockton Manor <svg viewBox="0 0 18 12"><path d="M0 6h16M11 1l5 5-5 5"/></svg></a></h3>
+        <p class="where">1301 Brockton Avenue · West Los Angeles, Sawtelle<br>Studio to 5 bedrooms · 1,360 sq ft plan listed today</p>
+        <p class="spec"><b><small>from</small>$4,995</b><span class="av"><em>1</em> available now</span></p>
+      </div>
+    </article>
+
+    <article class="ex ex-6">
+      <a class="fr" href="#" tabindex="-1" aria-hidden="true" style="--pos:86% 28%"><img src="../../assets/img/wr13.jpg" alt="" width="1800" height="1348" loading="lazy" decoding="async"></a>
+      <div class="dim"><i></i><span class="sw"><span class="a">374 – 1,248 sq ft</span><span class="b">14 available now</span></span><i></i></div>
+      <div class="lbl">
+        <h3><a href="#">Motor Tides <svg viewBox="0 0 18 12"><path d="M0 6h16M11 1l5 5-5 5"/></svg></a></h3>
+        <p class="where">3557 Motor Avenue · Palms, minutes from Culver City<br>1 to 4 bedrooms · rooftop deck, fitness center</p>
+        <p class="spec"><b>Now leasing</b><span class="av"><em>14</em> available now</span></p>
+      </div>
+    </article>
+
+    <div class="areas rv">
+      <span class="k">Seven parts of Los Angeles</span>
+      <ul>
+        <li><span><a href="#">West Los Angeles</a><small>Sawtelle · Santa Monica Blvd · Westgate</small></span><span class="n">27</span></li>
+        <li><span><a href="#">Beverly Grove</a><small>Third Street · Beverly Center · Miracle Mile</small></span><span class="n">14</span></li>
+        <li><span><a href="#">Brentwood</a><small>San Vicente · Barrington · Montana</small></span><span class="n">13</span></li>
+        <li><span><a href="#">Hollywood</a><small>Melrose · Fairfax · Larchmont</small></span><span class="n">13</span></li>
+        <li><span><a href="#">Venice</a><small>Abbot Kinney · Penmar · Rose</small></span><span class="n">2</span></li>
+        <li><span><a href="#">Palms · Motor Avenue</a><small>minutes from Culver City</small></span><span class="n">2</span></li>
+        <li><span><a href="#">Glendale</a><small>Brand Boulevard</small></span><span class="n">1</span></li>
+      </ul>
+      <div class="all">
+        <a class="big" href="#">All 72 buildings <svg viewBox="0 0 36 18"><path d="M0 9h33M25 1l8 8-8 8"/></svg></a>
+        <span class="muted italic" style="font-size:14px">Sorted by neighborhood, size or rent. Never filtered.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= BUILDING PAGE ======================= -->
+<div class="tab" style="margin-top:clamp(80px,11vh,150px)"><div class="wrap">
+  <span class="k">Sheet · building page — buildings/broadway-glendale.html</span>
+  <span class="note">The same header, now on the ground. The title block is a sticky column from 1060px and a bottom bar below it.</span>
+</div></div>
+
+<section class="bp" aria-label="Building page">
+  <header class="hd on-ground">
+    <div class="wrap">
+      <a class="brand" href="#" aria-label="Wiseman Residential, home">
+        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg>
+        <span class="wm">Wiseman Residential</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#">Find a home</a><a href="#" class="now">Buildings</a><a href="#">Neighborhoods</a><a href="#">Residents</a><a href="#">Company</a><a href="#">Contact</a>
+      </nav>
+      <a class="tel" href="tel:+13104733000">+1 310-473-3000</a>
+      <button class="menu" aria-label="Open menu"><i></i>Menu</button>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <nav class="crumb" aria-label="Breadcrumb"><a href="#">Buildings</a><span>/</span><a href="#">Glendale</a><span>/</span><a href="#" aria-current="page">Broadway Glendale</a></nav>
+
+    <div class="sheet bp-grid">
+      <div class="bp-dimv"><div class="dim" style="--d:.3s"><i></i><span>1 to 3 bedrooms</span><i></i></div></div>
+      <div class="bp-fr">
+        <div class="fr" style="--pos:50% 50%"><img src="../../assets/img/wr03.jpg" alt="Broadway Glendale at the corner of Broadway, a brick and glass building of four storeys" width="1800" height="1200" loading="lazy" decoding="async"></div>
+        <div class="dim" style="--d:.15s"><i></i><span>924 – 1,685 sq ft</span><i></i></div>
+      </div>
+      <div class="tb">
+        <span class="k rv">Glendale · Brand Boulevard</span>
+        <h1 class="rv" style="--d:.08s">Broadway Glendale</h1>
+        <p class="addr rv" style="--d:.14s">220 East Broadway, Glendale, CA 91205</p>
+        <dl class="spec-t rv" style="--d:.2s">
+          <div><dt>Homes</dt><dd>1 to 3 bedrooms</dd></div>
+          <div><dt>Bathrooms</dt><dd>1.5 to 3</dd></div>
+          <div><dt>Floor area</dt><dd>924 to 1,685 sq ft</dd></div>
+          <div><dt>Rent today</dt><dd class="big">$3,450 – $3,795</dd></div>
+          <div><dt>Available now</dt><dd class="sig">2 homes</dd></div>
+          <div><dt>Office</dt><dd>Mon – Fri 9 to 5 · Sat – Sun 11 to 4</dd></div>
+          <div><dt>Leasing line</dt><dd><a href="tel:+13104733000">+1 310-473-3000</a></dd></div>
+        </dl>
+        <div class="acts rv" style="--d:.28s">
+          <a class="btn" href="#">Apply</a>
+          <a class="btn" href="#">Inquire</a>
+          <a class="btn" href="tel:+13104733000"><svg viewBox="0 0 24 24"><path d="M6 3h3l2 5-2.5 1.5a11 11 0 0 0 5 5L15 12l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 4 5a2 2 0 0 1 2-2z"/></svg>Call +1 310-473-3000</a>
+        </div>
+        <p class="feed rv" style="--d:.34s">Floor plans and rents as advertised on the live leasing feed, 11 September 2026.</p>
+      </div>
+    </div>
+
+    <div class="sub-sec">
+      <span class="k rv">Schedule of plans</span>
+      <table class="plans">
+        <thead><tr><th>Plan</th><th>Bedrooms</th><th>Bathrooms</th><th>Floor area</th><th>Rent</th><th>Deposit</th><th>Available</th><th></th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="plan" data-l="Plan">2 Beds, 2 Baths</td><td data-l="Bedrooms">2</td><td data-l="Bathrooms">2</td><td data-l="Floor area">1,152 sq ft</td><td class="rent" data-l="Rent">$3,450</td><td class="dep" data-l="Deposit">$3,450</td><td class="av" data-l="Available">1 now</td>
+            <td class="go"><a class="arrow" href="#">Apply <svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5"/></svg></a></td>
+          </tr>
+          <tr>
+            <td class="plan" data-l="Plan">2 Beds, 3 Baths</td><td data-l="Bedrooms">2</td><td data-l="Bathrooms">3</td><td data-l="Floor area">1,332 sq ft</td><td class="rent" data-l="Rent">$3,795</td><td class="dep" data-l="Deposit">$3,795</td><td class="av" data-l="Available">1 now</td>
+            <td class="go"><a class="arrow" href="#">Apply <svg viewBox="0 0 22 12"><path d="M0 6h20M15 1l5 5-5 5"/></svg></a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sub-sec">
+      <span class="k rv">In the building and in the home</span>
+      <ul class="sheet amen">
+        <li style="grid-column:1/5"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 17V7a2 2 0 0 1 2-2h8l4 6v6"/><path d="M3 17h18"/><circle cx="7.5" cy="17.5" r="2"/><circle cx="16.5" cy="17.5" r="2"/></svg><span><b>Gated residents' garage</b><small>Controlled access, in the building</small></span></li>
+        <li style="grid-column:5/9"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="2.5" width="16" height="19"/><circle cx="12" cy="13" r="5"/><circle cx="12" cy="13" r="2"/><path d="M7 6h2M11 6h6"/></svg><span><b>In-suite washer and dryer</b><small>In every home</small></span></li>
+        <li style="grid-column:9/13"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/><path d="M12 3l-2 2M12 3l2 2M12 21l-2-2M12 21l2-2"/></svg><span><b>Central air and heat</b><small>In every home</small></span></li>
+        <li class="more" style="grid-column:1/13"><span class="k">And three more</span><span>View · in-suite alarm system · walk-in closets with built-in organizers</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ======================= FOOTER — the title block ======================= -->
+<div class="tab"><div class="wrap">
+  <span class="k">Sheet · footer — every page</span>
+  <span class="note">The footer as a drawing's title block: mark and wordmark, the site map, the office, the feed date.</span>
+</div></div>
+
+<footer class="ft" aria-label="Site footer">
+  <div class="wrap">
+    <div class="sheet">
+      <div class="cell c-brand">
+        <a class="brand" href="#" aria-label="Wiseman Residential, home">
+          <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg>
+          <span class="wm">Wiseman Residential</span>
+        </a>
+        <p class="tag">Los Angeles living, managed wisely.</p>
+      </div>
+      <div class="cell c-b">
+        <span class="k">Buildings</span>
+        <ul><li><a href="#">Find a home</a></li><li><a href="#">All buildings <span class="n">72</span></a></li><li><a href="#">Neighborhoods <span class="n">7</span></a></li></ul>
+      </div>
+      <div class="cell c-a">
+        <span class="k">Areas</span>
+        <ul>
+          <li><a href="#">West Los Angeles <span class="n">27</span></a></li>
+          <li><a href="#">Beverly Grove <span class="n">14</span></a></li>
+          <li><a href="#">Brentwood <span class="n">13</span></a></li>
+          <li><a href="#">Hollywood <span class="n">13</span></a></li>
+          <li><a href="#">Venice <span class="n">2</span></a></li>
+          <li><a href="#">Palms · Motor Avenue <span class="n">2</span></a></li>
+          <li><a href="#">Glendale <span class="n">1</span></a></li>
+        </ul>
+      </div>
+      <div class="cell c-c">
+        <span class="k">Company</span>
+        <ul><li><a href="#">Company</a></li><li><a href="#">Residents</a></li><li><a href="#">Contact</a></li><li><a href="https://wisemanresidential.securecafe.com/residentservices/apartmentsforrent/userlogin.aspx">Resident login</a></li><li><a href="https://wisemanresidential.securecafe.com/onlineleasing/apartmentsforrent/guestlogin.aspx">Applicant login</a></li></ul>
+      </div>
+      <div class="cell c-o">
+        <span class="k">Office</span>
+        <address>1520 Federal Ave<br>Los Angeles, CA 90025<a href="tel:+13104733000">+1 310-473-3000</a></address>
+        <ul class="soc"><li><a href="https://www.facebook.com/Officialwisemanresidential/">Facebook</a></li><li><a href="https://www.instagram.com/officialwisemanresidential">Instagram</a></li><li><a href="https://www.yelp.com/biz/wiseman-residential-los-angeles-2">Yelp</a></li></ul>
+      </div>
+    </div>
+    <div class="ft-b">
+      <p class="eho"><svg viewBox="0 0 12 10.608" role="img" aria-label="Equal Housing Opportunity" fill="currentColor" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.95263 1.07242L0 4.00926V5.38295H0.663158V9.51979H11.2026V5.38295H11.9921V4.00926L5.95263 1.07242ZM9.9 8.27242H1.95789V4.49874L5.95263 2.44611L9.9 4.49874V8.27242Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 5.82505H4.08947V4.49874H7.77632V5.82505Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 7.73558H4.08947V6.40926H7.77632V7.73558Z"/></svg><span>Equal Housing Opportunity</span></p>
+      <p class="cp">© 2026 Wiseman Residential</p>
+      <p class="fd">Every figure on this site is a point-in-time snapshot of the live leasing feed.</p>
+      <p class="rv-n">Feed read 11 Sep 2026</p>
+    </div>
+    <div class="end"></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var h=document.documentElement;h.classList.add('js');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=document.querySelectorAll('.rv,.dim,.fr');
+  if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});h.classList.add('loaded');return}
+  var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.06,rootMargin:'0px 0px -4% 0px'});
+  els.forEach(function(e){io.observe(e)});
+  window.addEventListener('load',function(){h.classList.add('loaded')});
+  setTimeout(function(){h.classList.add('loaded')},1600);
+})();
+</script>
+</body>
+</html>

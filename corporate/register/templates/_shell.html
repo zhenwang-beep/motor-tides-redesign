@@ -1,0 +1,135 @@
+<!-- PAGE FURNITURE — the single source for every generated page in this direction.
+     gen_register.py lifts each block by its opening tag and writes it verbatim into
+     index.html, buildings.html and search.html, so the nine pages cannot drift.
+     Edit here, then re-run: python3 register/gen_register.py
+     The neighbourhood strip goes only onto buildings.html, in the flow after the
+     toolbar: seven links with counts (rewritten from the data by gen_register.py),
+     sticky under the header, the current area lit by app.js as the page scrolls.
+     Footer counts follow their labels as a muted figure — no bullets, no leading
+     numbers (client note, round 5). -->
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="hd wrap wrap-n">
+  <a class="brand" href="index.html" aria-label="Wiseman Residential, home" aria-current="page">
+    <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg>
+    <b>Wiseman Residential</b>
+    <span class="brand-sub tnum">72 buildings</span>
+  </a>
+  <nav class="hnav" aria-label="Primary">
+    <a href="search.html" class="hnav-flag">Find a home</a>
+    <a href="buildings.html">Buildings</a>
+    <a href="neighborhoods.html">Neighborhoods</a>
+    <a href="residents.html">Residents</a>
+    <a href="company.html">Company</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+  <button class="mbtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span></button>
+</header>
+
+<div class="nstrip" data-nstrip>
+  <nav class="nstrip-in wrap wrap-n" data-rail data-rail-label="Neighbourhoods" aria-label="Neighbourhoods">
+    <ol class="nstrip-track rail-track free" data-rail-track>
+      <li><a href="#west-la" data-nmark="west-la" aria-current="location">West Los Angeles <span class="tnum">27</span></a></li>
+      <li><a href="#brentwood" data-nmark="brentwood">Brentwood <span class="tnum">13</span></a></li>
+      <li><a href="#beverly-grove" data-nmark="beverly-grove">Beverly Grove <span class="tnum">14</span></a></li>
+      <li><a href="#hollywood" data-nmark="hollywood">Hollywood <span class="tnum">13</span></a></li>
+      <li><a href="#venice" data-nmark="venice">Venice <span class="tnum">2</span></a></li>
+      <li><a href="#palms" data-nmark="palms">Palms · Motor Avenue <span class="tnum">2</span></a></li>
+      <li><a href="#glendale" data-nmark="glendale">Glendale <span class="tnum">1</span></a></li>
+    </ol>
+    <div class="rail-float">
+      <button class="rail-btn sm prev" type="button" data-rail-prev aria-label="Earlier neighbourhoods"></button>
+      <button class="rail-btn sm next" type="button" data-rail-next aria-label="Later neighbourhoods"></button>
+    </div>
+  </nav>
+</div>
+
+<footer class="colophon wrap wrap-n" id="site-map" data-menu-inert>
+  <div class="colo-top">
+    <span class="colo-mark"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg><b>Wiseman Residential</b></span>
+    <span class="colo-say">&ldquo;Los Angeles Living, Managed Wisely.&rdquo;</span>
+  </div>
+  <div class="colo-grid">
+    <div class="colo-col">
+      <h2 class="colo-h">Buildings</h2>
+      <ul class="colo-list">
+        <li><a class="cl-flag" href="search.html">Find a home &mdash; search &amp; availability</a></li>
+        <li><a href="buildings.html">All buildings <span class="cl-n tnum">72</span></a></li>
+        <li><a href="neighborhoods.html">Neighborhoods <span class="cl-n tnum">7</span></a></li>
+      </ul>
+    </div>
+    <div class="colo-col">
+      <h2 class="colo-h">Areas</h2>
+      <ul class="colo-list">
+          <li><a href="neighborhoods/west-la.html">West Los Angeles <span class="cl-n tnum">27</span></a></li>
+          <li><a href="neighborhoods/brentwood.html">Brentwood <span class="cl-n tnum">13</span></a></li>
+          <li><a href="neighborhoods/beverly-grove.html">Beverly Grove <span class="cl-n tnum">14</span></a></li>
+          <li><a href="neighborhoods/hollywood.html">Hollywood <span class="cl-n tnum">13</span></a></li>
+          <li><a href="neighborhoods/venice.html">Venice <span class="cl-n tnum">2</span></a></li>
+          <li><a href="neighborhoods/palms.html">Palms · Motor Avenue <span class="cl-n tnum">2</span></a></li>
+          <li><a href="neighborhoods/glendale.html">Glendale <span class="cl-n tnum">1</span></a></li>
+      </ul>
+    </div>
+    <div class="colo-col">
+      <h2 class="colo-h">Company</h2>
+      <ul class="colo-list">
+        <li><a href="company.html">Company</a></li>
+        <li><a href="residents.html">Residents</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="https://wisemanresidential.securecafe.com/residentservices/apartmentsforrent/userlogin.aspx" rel="noopener">Resident login</a></li>
+        <li><a href="https://wisemanresidential.securecafe.com/onlineleasing/apartmentsforrent/guestlogin.aspx" rel="noopener">Applicant login</a></li>
+      </ul>
+    </div>
+    <div class="colo-col">
+      <h2 class="colo-h">Office</h2>
+      <ul class="colo-list">
+        <li><address>1520 Federal Ave<br>Los Angeles, CA 90025</address></li>
+        <li><a href="tel:+13104733000">+1 310-473-3000 &middot; Leasing</a></li>
+        <li><a href="https://www.facebook.com/Officialwisemanresidential/" rel="noopener">Facebook</a></li>
+        <li><a href="https://www.instagram.com/officialwisemanresidential" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.yelp.com/biz/wiseman-residential-los-angeles-2" rel="noopener">Yelp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="colo-legal">
+    <nav class="colo-utility" aria-label="Legal and site map">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="accessibility.html">Accessibility</a>
+      <a href="privacy-choices.html">Your Privacy Choices</a>
+      <a href="#site-map">Site Map</a>
+    </nav>
+    <p class="eho">
+      <svg viewBox="0 0 12 10.608" role="img" aria-label="Equal Housing Opportunity" fill="currentColor" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.95263 1.07242L0 4.00926V5.38295H0.663158V9.51979H11.2026V5.38295H11.9921V4.00926L5.95263 1.07242ZM9.9 8.27242H1.95789V4.49874L5.95263 2.44611L9.9 4.49874V8.27242Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 5.82505H4.08947V4.49874H7.77632V5.82505Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 7.73558H4.08947V6.40926H7.77632V7.73558Z"/></svg>
+      <span>Equal Housing Opportunity</span>
+    </p>
+    <p>&copy; 2026 Wiseman Residential</p>
+    <p>Every figure here is a point-in-time snapshot of the live leasing system.</p>
+  </div>
+</footer>
+
+<nav class="mnav" id="mnav" aria-label="Menu">
+  <div class="mnav-in">
+    <ul class="mnav-list">
+      <li><a href="search.html"><span class="mn-no tnum">01</span><span>Find a home</span></a></li>
+      <li><a href="buildings.html"><span class="mn-no tnum">02</span><span>Buildings</span></a></li>
+      <li><a href="neighborhoods.html"><span class="mn-no tnum">03</span><span>Neighborhoods</span></a></li>
+      <li><a href="residents.html"><span class="mn-no tnum">04</span><span>Residents</span></a></li>
+      <li><a href="company.html"><span class="mn-no tnum">05</span><span>Company</span></a></li>
+      <li><a href="contact.html"><span class="mn-no tnum">06</span><span>Contact</span></a></li>
+    </ul>
+    <div class="mfoot">
+      <p>1520 Federal Ave, Los Angeles, CA 90025</p>
+      <p><a href="tel:+13104733000">+1 310-473-3000</a> &middot; Leasing</p>
+      <p><a href="https://wisemanresidential.securecafe.com/residentservices/apartmentsforrent/userlogin.aspx" rel="noopener">Resident login</a> &middot; <a href="https://wisemanresidential.securecafe.com/onlineleasing/apartmentsforrent/guestlogin.aspx" rel="noopener">Apply</a></p>
+    </div>
+  </div>
+</nav>
+
+<div class="pt" aria-hidden="true">
+  <div class="ptmark">
+    <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="14,18 34,18 34,74 14,80"/><polygon points="40,18 60,18 60,71 40,77"/><polygon points="66,18 86,18 86,68 66,74"/></svg>
+    <span>Wiseman Residential</span>
+  </div>
+</div>
