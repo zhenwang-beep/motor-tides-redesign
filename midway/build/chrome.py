@@ -128,8 +128,8 @@ def map_scripts() -> str:
     return (f'<script id="maplibre-js" defer src="{MAPLIBRE_BASE}/maplibre-gl.js"></script>\n'
             f'<script src="{v("../assets/map.js")}" defer></script>\n')
 
-FAVICON = "../assets/img/wiseman-symbol.svg"       # from a concept page
-FAVICON_HUB = "assets/img/wiseman-symbol.svg"      # from the hub at the root
+FAVICON = "data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%20-181.5%201162%201162%22%3E%3Cpath%20d%3D%22M%200%20393.500%20L%200%20787%200.750%20787.033%20C%201.163%20787.051%2C%2061.908%20770.738%2C%20135.741%20750.783%20L%20269.982%20714.500%20269.991%20357.250%20L%20270%200%20135%200%20L%200%200%200%20393.500%20M%20446%20393.617%20L%20446%20787.233%20448.306%20786.792%20C%20449.575%20786.550%2C%20510.324%20770.185%2C%20583.305%20750.426%20L%20715.997%20714.500%20715.998%20357.250%20L%20716%200%20581%200%20L%20446%200%20446%20393.617%20M%20892%20393.500%20L%20892%20787%20893.220%20787%20C%20893.892%20787%2C%20954.642%20770.698%2C%201028.220%20750.773%20L%201162%20714.545%201162%20357.273%20L%201162%200%201027%200%20L%20892%200%20892%20393.500%22%20fill%3D%22%23074B4D%22%2F%3E%3C%2Fsvg%3E"
+FAVICON_HUB = FAVICON
 
 
 def head(*, title, desc, concept_css, body_class="", extra_head="") -> str:
@@ -161,7 +161,7 @@ def head(*, title, desc, concept_css, body_class="", extra_head="") -> str:
 def header(current: str, *, cta_label="Plan a visit", cta_href="contact.html") -> str:
     links = "".join(
         f'<a href="{h}"{" aria-current=\'page\'" if h == current else ""}>{t}</a>'
-        for h, t in NAV if h != "index.html"
+        for h, t in NAV
     )
     mlinks = "".join(
         f'<a href="{h}"{" aria-current=\'page\'" if h == current else ""}>{t}</a>'
@@ -189,8 +189,19 @@ def header(current: str, *, cta_label="Plan a visit", cta_href="contact.html") -
 """
 
 
-def footer(concept_name: str, concept_slug: str, extra_scripts: str = "") -> str:
+CONCEPTS = [("golden-hour", "Golden Hour"), ("crossing", "The Crossing"),
+            ("open-door", "Open Door")]
+
+
+def footer(concept_name: str, concept_slug: str, extra_scripts: str = "",
+           page: str = "index.html") -> str:
     hours = "".join(f"<li>{d} &middot; {t}</li>" for d, t in D.HOURS)
+    # Links to the SAME page in each direction, so a reviewer comparing the
+    # three does not have to go back through the hub and navigate down again.
+    switch = "".join(
+        f'<b>{nm}</b>' if slug == concept_slug
+        else f'<a href="../{slug}/{page}">{nm}</a>'
+        for slug, nm in CONCEPTS)
     return f"""<footer class="ft dark" data-hd="inv">
 <div class="wrap">
   <div class="ft-cta">
@@ -251,11 +262,14 @@ def footer(concept_name: str, concept_slug: str, extra_scripts: str = "") -> str
     <span class="eho">{EHO} Equal Housing Opportunity</span>
   </div>
 
-  <p class="concept-note">
-    Design concept &mdash; <b>{concept_name}</b> &middot;
-    <a href="../index.html">View all three directions</a> &middot;
-    Photography served from the property&rsquo;s own RentCafe library.
-  </p>
+  <div class="concept-note">
+    <p>Design concept &mdash; photography served from the property&rsquo;s own RentCafe library.</p>
+    <nav class="concept-switch" aria-label="Compare this page across the three directions">
+      <span>This page in:</span>
+      {switch}
+      <a href="../index.html">All three &rarr;</a>
+    </nav>
+  </div>
 </div>
 </footer>
 <script src="{v('../assets/site.js')}" defer></script>

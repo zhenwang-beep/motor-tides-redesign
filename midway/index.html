@@ -6,7 +6,7 @@
 <title>Motor Midway by Wiseman — Three Redesign Directions</title>
 <meta name="description" content="Three complete, browsable redesign directions for Motor Midway by Wiseman at 3657 Motor Ave., Los Angeles — built on the Motor Tides design system.">
 <meta name="robots" content="noindex,nofollow">
-<link rel="icon" href="assets/img/wiseman-symbol.svg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%20-181.5%201162%201162%22%3E%3Cpath%20d%3D%22M%200%20393.500%20L%200%20787%200.750%20787.033%20C%201.163%20787.051%2C%2061.908%20770.738%2C%20135.741%20750.783%20L%20269.982%20714.500%20269.991%20357.250%20L%20270%200%20135%200%20L%200%200%200%20393.500%20M%20446%20393.617%20L%20446%20787.233%20448.306%20786.792%20C%20449.575%20786.550%2C%20510.324%20770.185%2C%20583.305%20750.426%20L%20715.997%20714.500%20715.998%20357.250%20L%20716%200%20581%200%20L%20446%200%20446%20393.617%20M%20892%20393.500%20L%20892%20787%20893.220%20787%20C%20893.892%20787%2C%20954.642%20770.698%2C%201028.220%20750.773%20L%201162%20714.545%201162%20357.273%20L%201162%200%201027%200%20L%20892%200%20892%20393.500%22%20fill%3D%22%23074B4D%22%2F%3E%3C%2Fsvg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://resource.rentcafe.com" crossorigin>
@@ -23,13 +23,20 @@ img{max-width:100%;display:block}
 a{color:inherit}
 :where(a,button):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--pad)}
-.mk{width:26px;height:26px}
+/* The brand mark is a CSS mask filled with currentColor (same as base.css).
+   The hub carries its own self-contained stylesheet, so when MARK changed
+   from an inline <svg> to a masked <span> this rule had to come with it —
+   without it the span has no background and no mask, and renders as nothing. */
+.wiseman-mark{display:block;background:currentColor;
+ -webkit-mask:url("assets/img/wiseman-symbol.svg") center/contain no-repeat;
+ mask:url("assets/img/wiseman-symbol.svg") center/contain no-repeat}
+.mk{width:30px;height:21px;flex:none}
 header{padding-top:clamp(34px,5vw,60px)}
 .brand{display:flex;align-items:center;gap:13px;text-decoration:none}
 .brand b{font-size:.84rem;letter-spacing:.3em;text-transform:uppercase;font-weight:600}
 .brand i{display:block;font-style:normal;font-size:.5rem;letter-spacing:.46em;text-transform:uppercase;
  opacity:.72;margin-top:3px;font-weight:500}
-.hero{padding:clamp(46px,7vw,86px) 0 clamp(34px,5vw,54px);border-bottom:1px solid var(--rule)}
+.hero{padding-block:clamp(46px,7vw,86px) clamp(34px,5vw,54px);border-bottom:1px solid var(--rule)}
 .kick{font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);
  display:flex;align-items:center;gap:14px;margin-bottom:20px}
 .kick::before{content:"";width:30px;height:1px;background:currentColor}
@@ -80,7 +87,7 @@ h1 em{font-style:italic;color:var(--accent)}
 .ncols a{color:var(--sun)}
 .flag{margin-top:26px;padding:16px 18px;border-left:2px solid var(--sun);background:rgba(232,192,143,.1);
  font-size:.86rem;line-height:1.85;color:#DCE6E7}
-footer{padding:clamp(30px,4vw,48px) 0;font-size:.76rem;color:var(--muted);display:flex;
+footer{padding-block:clamp(30px,4vw,48px);font-size:.76rem;color:var(--muted);display:flex;
  flex-wrap:wrap;gap:10px 26px;justify-content:space-between}
 
 .pages-row{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px 22px;align-items:baseline;
@@ -88,7 +95,7 @@ footer{padding:clamp(30px,4vw,48px) 0;font-size:.76rem;color:var(--muted);displa
 .pages-row h3{font-family:var(--serif);font-size:1.15rem;text-transform:uppercase;font-weight:400;
  letter-spacing:.02em}
 @media(max-width:620px){.pages-row{grid-template-columns:1fr;gap:10px}}
-.allpages{padding:clamp(34px,5vw,54px) 0}
+.allpages{padding-block:clamp(34px,5vw,54px)}
 .allpages>p.kick{margin-bottom:22px}
 </style>
 </head>
@@ -104,7 +111,7 @@ footer{padding:clamp(30px,4vw,48px) 0;font-size:.76rem;color:var(--muted);displa
   <p>Three complete seven-page websites for Motor Midway by Wiseman at 3657 Motor Ave., Los Angeles, CA 90034 &mdash; each built on the
      same Wiseman system that runs Motor Tides, so the two properties read as one operator. They
      carry the property&rsquo;s real content: the four current floor plans and their rents, every
-     published amenity, the pet policy, all all 47 photographs, the seven Matterport tours
+     published amenity, the pet policy, all 47 photographs, the seven Matterport tours
      and the live application portal. They differ in exactly one thing &mdash; the idea that
      carries them.</p>
   <div class="facts">

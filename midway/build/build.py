@@ -86,7 +86,7 @@ def build_concept(c):
                    extra_head=C.MAP_HEAD if needs_map else "")
             + C.header(fname, cta_label=cta_label, cta_href=cta_href)
             + body
-            + C.footer(c.name, c.slug,
+            + C.footer(c.name, c.slug, page=fname,
                        extra_scripts=C.map_scripts() if needs_map else "")
         )
         path = os.path.join(out, fname)
@@ -108,13 +108,20 @@ img{max-width:100%;display:block}
 a{color:inherit}
 :where(a,button):focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--pad)}
-.mk{width:26px;height:26px}
+/* The brand mark is a CSS mask filled with currentColor (same as base.css).
+   The hub carries its own self-contained stylesheet, so when MARK changed
+   from an inline <svg> to a masked <span> this rule had to come with it —
+   without it the span has no background and no mask, and renders as nothing. */
+.wiseman-mark{display:block;background:currentColor;
+ -webkit-mask:url("assets/img/wiseman-symbol.svg") center/contain no-repeat;
+ mask:url("assets/img/wiseman-symbol.svg") center/contain no-repeat}
+.mk{width:30px;height:21px;flex:none}
 header{padding-top:clamp(34px,5vw,60px)}
 .brand{display:flex;align-items:center;gap:13px;text-decoration:none}
 .brand b{font-size:.84rem;letter-spacing:.3em;text-transform:uppercase;font-weight:600}
 .brand i{display:block;font-style:normal;font-size:.5rem;letter-spacing:.46em;text-transform:uppercase;
  opacity:.72;margin-top:3px;font-weight:500}
-.hero{padding:clamp(46px,7vw,86px) 0 clamp(34px,5vw,54px);border-bottom:1px solid var(--rule)}
+.hero{padding-block:clamp(46px,7vw,86px) clamp(34px,5vw,54px);border-bottom:1px solid var(--rule)}
 .kick{font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--accent);
  display:flex;align-items:center;gap:14px;margin-bottom:20px}
 .kick::before{content:"";width:30px;height:1px;background:currentColor}
@@ -165,7 +172,7 @@ h1 em{font-style:italic;color:var(--accent)}
 .ncols a{color:var(--sun)}
 .flag{margin-top:26px;padding:16px 18px;border-left:2px solid var(--sun);background:rgba(232,192,143,.1);
  font-size:.86rem;line-height:1.85;color:#DCE6E7}
-footer{padding:clamp(30px,4vw,48px) 0;font-size:.76rem;color:var(--muted);display:flex;
+footer{padding-block:clamp(30px,4vw,48px);font-size:.76rem;color:var(--muted);display:flex;
  flex-wrap:wrap;gap:10px 26px;justify-content:space-between}
 """
 
@@ -213,7 +220,7 @@ def build_hub():
 .pages-row h3{{font-family:var(--serif);font-size:1.15rem;text-transform:uppercase;font-weight:400;
  letter-spacing:.02em}}
 @media(max-width:620px){{.pages-row{{grid-template-columns:1fr;gap:10px}}}}
-.allpages{{padding:clamp(34px,5vw,54px) 0}}
+.allpages{{padding-block:clamp(34px,5vw,54px)}}
 .allpages>p.kick{{margin-bottom:22px}}
 </style>
 </head>
@@ -229,7 +236,7 @@ def build_hub():
   <p>Three complete seven-page websites for {D.FULL} at {D.ADDRESS_ONE} &mdash; each built on the
      same Wiseman system that runs Motor Tides, so the two properties read as one operator. They
      carry the property&rsquo;s real content: the four current floor plans and their rents, every
-     published amenity, the pet policy, all all {D.GALLERY_COUNT} photographs, the seven Matterport tours
+     published amenity, the pet policy, all {D.GALLERY_COUNT} photographs, the seven Matterport tours
      and the live application portal. They differ in exactly one thing &mdash; the idea that
      carries them.</p>
   <div class="facts">

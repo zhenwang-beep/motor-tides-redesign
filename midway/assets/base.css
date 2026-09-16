@@ -442,8 +442,15 @@ dialog.lb::backdrop{background:rgba(4,52,58,.94)}
 .eho{display:flex;align-items:center;gap:9px}
 .eho svg{width:17px;height:17px;flex:none;fill:currentColor}
 .concept-note{margin-top:20px;padding-top:18px;border-top:1px solid var(--rule-dark);
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 28px;
   font-size:var(--t-caption);color:var(--tide);letter-spacing:.06em}
-.concept-note a{border-bottom:1px solid currentColor}
+.concept-note p{margin:0}
+.concept-switch{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.concept-switch span{opacity:.72}
+.concept-switch b{font-weight:600;color:var(--sun)}
+.concept-switch a{border-bottom:1px solid currentColor;padding-bottom:1px}
+.concept-switch a:hover{color:var(--sun)}
+@media(max-width:620px){.concept-note{flex-direction:column;align-items:flex-start}}
 @media(max-width:940px){.ft-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.ft-grid{grid-template-columns:1fr;gap:30px}.ft-bottom{flex-direction:column;align-items:flex-start}}
 
