@@ -113,7 +113,7 @@ phone numbers, amenity lists, descriptions and today's floor plans were read out
 RentCafe feed; the coordinates out of the JSON-LD their own search page publishes; the 288
 photographs are hotlinked from their CDN. Map tiles come from OpenStreetMap's community server —
 fine for a pitch; a launched site should swap in a keyed provider (MapTiler, Stadia) serving the same
-style, which is one URL in `core/map.js`. The brand mark and its colour `#169BAC` come from their logo file.
+style, which is one URL in `core/map.js`. The brand mark and its colour `#1C6775` come from their logo file.
 
 Two claims on their current homepage — "over 45 years" and "over 100+ apartment communities" — could
 not be verified and are contradicted by the company's own archived pages and their own feed. Neither

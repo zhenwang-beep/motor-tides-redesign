@@ -101,8 +101,11 @@ Their own RentCafe search returns **72**. The Real Deal counted "nearly 70" in J
   deep roots in the city, we develop and manage apartments with your needs at the heart of
   everything we do."; "smart development, well-run properties, and communities people are proud to
   call home."; "Experience That Shows."
-- **Brand colour** #169BAC, sampled from their logo PNG. The mark is three angled bars over a
-  letterspaced "WISEMAN".
+- **Brand colour** #1C6775 — **supplied by the client** on 15 September 2026, together with the
+  logo file. It supersedes #169BAC, which an earlier pass had sampled from a low-resolution
+  logo PNG and which was markedly brighter and greener than the real mark. The lockup is three
+  tapered bars above a letterspaced "WISEMAN", both in the brand colour; the horizontal
+  arrangement used in the site header is ours, the stacked one in the footer is theirs.
 
 ---
 

@@ -38,7 +38,7 @@ sq ft, plans, office hours, the building's own line) — the fair-housing-safe r
 #1C1915` (hover) · `--cream #EFE8DB` = ink at 100%, with an alpha ladder `--c86/--c72/--c56/--c40/--c24`
 via color-mix · `--line rgba(cream,.14)` and `--line-2 rgba(cream,.08)` (every hairline; no boxes, no
 shadows) · `--brass #C9A468` the single accent, `--brass-ink #181206` for text on it, hover `#D6B378` ·
-`--focus #169BAC` (the brand teal survives only as the focus ring and the mark's own colour) ·
+`--focus #1C6775` (the brand teal survives only as the focus ring and the mark's own colour) ·
 `--scrim linear-gradient(to top, rgba(15,14,12,.88) 0%, rgba(15,14,12,.46) 34%, transparent 66%)` + a
 radial vignette on the hero · `--map-tint var(--night)`; every map runs core/map.js `theme:'dark'` (Esri
 imagery + road/place overlays) with 8px brass dots ringed 1px cream, price pills cream-on-night on

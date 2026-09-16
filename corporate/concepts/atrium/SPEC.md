@@ -61,7 +61,7 @@ near-neutral limestone that leans faintly cool, not a warm cream.
 --ink       #191A19   cool near-black (neutral, not brown) — headings, wordmark
 --ink-2     #3D3F3A   body copy — 9.6:1 on --bg
 --ink-3     #63645B   meta, captions, labels — 5.4:1 on --bg (passes AA for small text)
---teal      #169BAC   THE accent (brand) — decorative surfaces/marks only (2.99:1: never body text)
+--teal      #1C6775   THE accent (brand) — decorative surfaces/marks only (2.99:1: never body text)
 --teal-ink  #0C6C79   teal as TEXT / links on the light ground — 5.5:1 (the readable teal)
 --teal-deep #0E7C8B   teal button hover
 --line      rgba(25,26,25,.13)   every hairline

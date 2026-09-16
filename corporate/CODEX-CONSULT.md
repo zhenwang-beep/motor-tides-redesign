@@ -116,7 +116,7 @@ This carries the water lineage through pacing, luminous photography and a contin
 | Background | Bone `#F2F0E9` |
 | Primary text | Deep pine `#173D37` |
 | Secondary surface | Pale mineral `#DCE7E3` |
-| Brand accent | Wiseman teal `#169BAC` |
+| Brand accent | Wiseman teal `#1C6775` |
 | Secondary text | Slate `#52635F` |
 | Google Fonts | **Bodoni Moda**, 500/600 for display; **Manrope**, 400/500/600 for text and controls |
 
@@ -159,7 +159,7 @@ This makes the actual shape of the business the brand expression.
 | Background | Chalk `#F4F2EB` |
 | Primary text | Asphalt `#252B2A` |
 | Secondary surface | Pale teal `#DCEBEC` |
-| Brand accent | Wiseman teal `#169BAC` |
+| Brand accent | Wiseman teal `#1C6775` |
 | Rules and boundaries | Stone `#C8CEC8` |
 | Secondary text | Gray-green `#58645F` |
 | Google Fonts | **DM Serif Display**, 400 for chapter titles; **DM Sans**, 400/500/600 for navigation, facts and body |
@@ -210,7 +210,7 @@ This is the strongest corporate positioning. The other directions lead with disc
 | Background | Plaster `#EEE9DF` |
 | Primary text | Brown-black `#302E29` |
 | Secondary surface | Limestone `#D9D1C4` |
-| Brand accent | Wiseman teal `#169BAC` |
+| Brand accent | Wiseman teal `#1C6775` |
 | Editorial accent | Terracotta `#A45B43` |
 | Secondary text | Warm gray `#635F56` |
 | Google Fonts | **Marcellus**, 400 for display; **Source Sans 3**, 400/500/600 for body and controls |
