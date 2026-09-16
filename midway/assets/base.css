@@ -238,8 +238,8 @@ figure{margin:0;position:relative}
 .stats>div{border-top:1px solid var(--rule);padding-top:18px}
 .dark .stats>div{border-color:var(--rule-dark)}
 .stats b{display:block;font-family:var(--serif);font-weight:400;font-size:clamp(2.6rem,6vw,4.4rem);line-height:1}
-.stats span{display:block;margin-top:8px;font-size:var(--t-caption);letter-spacing:.2em;text-transform:uppercase;font-weight:600}
-.stats p{margin-top:8px;font-size:var(--t-small);color:var(--muted);line-height:1.7}
+.stats span{display:block;margin-top:10px;font-size:var(--t-caption);letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+.stats p{margin-top:11px;font-size:var(--t-small);color:var(--muted);line-height:1.7}
 .dark .stats p{color:var(--muted-dark)}
 @media(max-width:620px){.stats{grid-template-columns:1fr;gap:0}.stats>div{padding-block:18px}}
 
@@ -252,13 +252,13 @@ figure{margin:0;position:relative}
 .plan-draw img{width:100%;height:100%;object-fit:contain;mix-blend-mode:multiply}
 .plan h2{font-size:clamp(2rem,4.2vw,3.4rem);text-transform:uppercase}
 .plan-spec{display:flex;flex-wrap:wrap;gap:8px 30px;margin-top:18px;font-size:var(--t-small)}
-.plan-spec div{display:flex;flex-direction:column;gap:3px}
+.plan-spec div{display:flex;flex-direction:column;gap:10px}
 .plan-spec dt{font-size:var(--t-caption);letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:600}
 .dark .plan-spec dt{color:var(--muted-dark)}
 .plan-spec dd{font-size:1.05rem;font-weight:500}
 .plan-price{font-family:var(--serif);font-size:clamp(1.9rem,3.4vw,2.7rem);line-height:1}
 .plan-price small{display:block;font-family:var(--sans);font-size:var(--t-caption);letter-spacing:.2em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:600}
+  text-transform:uppercase;color:var(--muted);margin-bottom:11px;font-weight:600}
 .dark .plan-price small{color:var(--muted-dark)}
 .badge{display:inline-block;padding:6px 12px;font-size:var(--t-caption);letter-spacing:.16em;
   text-transform:uppercase;font-weight:600;border:1px solid var(--accent);color:var(--accent)}
@@ -324,7 +324,7 @@ dialog.lb::backdrop{background:rgba(4,52,58,.94)}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 22px;margin-top:8px}
 .field{display:flex;flex-direction:column;gap:8px}
 .field.full{grid-column:1/-1}
-.field label{font-size:var(--t-caption);letter-spacing:.18em;text-transform:uppercase;font-weight:600}
+.field label{font-size:var(--t-caption);letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:2px}
 .field :is(input,textarea,select){
   font:400 1rem var(--sans);padding:14px 15px;border:1px solid var(--rule);
   background:transparent;color:inherit;min-height:50px;border-radius:0;
@@ -339,7 +339,7 @@ dialog.lb::backdrop{background:rgba(4,52,58,.94)}
 
 .info-list{list-style:none;display:flex;flex-direction:column;gap:26px}
 .info-list h3{font-family:var(--sans);font-size:var(--t-caption);font-weight:600;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+  text-transform:uppercase;color:var(--muted);margin-bottom:12px}
 .dark .info-list h3{color:var(--muted-dark)}
 .info-list p,.info-list a{font-size:1.05rem;line-height:1.75;text-decoration:none}
 .info-list a{border-bottom:1px solid var(--rule)}
@@ -404,7 +404,7 @@ dialog.lb::backdrop{background:rgba(4,52,58,.94)}
 /* Every cell is placed explicitly. Left to auto-placement the distance took
    the name's column and the name was pushed into the third, so each row read
    "06  0.78 mi ......... Trader Joe's". */
-.map-list button{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:3px 14px;
+.map-list button{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:7px 14px;
   width:100%;padding:14px 10px;background:none;border:0;text-align:left;cursor:pointer;
   align-items:baseline;transition:background-color .25s}
 .map-list button:hover{background:rgba(154,90,43,.07)}

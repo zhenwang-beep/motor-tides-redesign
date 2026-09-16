@@ -67,7 +67,6 @@ def phero(page, *, kick, title, lede):
     <h1 class="rv d1">{title}</h1>
     <p class="lede rv d1">{lede}</p>
   </div>
-  <span class="od-phero-frame" aria-hidden="true"></span>
 </section>"""
 
 
