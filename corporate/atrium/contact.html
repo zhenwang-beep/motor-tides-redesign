@@ -20,10 +20,10 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Prata&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../core/base.css?v=39">
-<link rel="stylesheet" href="../core/map.css?v=39">
-<link rel="stylesheet" href="../core/editorial.css?v=39">
-<link rel="stylesheet" href="style.css?v=39">
+<link rel="stylesheet" href="../core/base.css?v=40">
+<link rel="stylesheet" href="../core/map.css?v=40">
+<link rel="stylesheet" href="../core/editorial.css?v=40">
+<link rel="stylesheet" href="style.css?v=40">
 <script>(function(d){var r=d.documentElement;r.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches){r.classList.add('js-pt');setTimeout(function(){r.classList.remove('js-pt');},1500);}})(document);</script>
 </head>
 <body>
@@ -48,7 +48,62 @@
   </div>
 </header>
 
-<main id="main"></main>
+<main id="main">
+<div class="ed">
+  <section class="ed-hero" data-hd="dark" style="--pos:50% 50%">
+    <figure class="ed-img"><img src="../assets/img/wr07.jpg" alt="The entrance of a Wiseman building, dark timber and terracotta." width="1800" height="1200" fetchpriority="high" decoding="async"></figure>
+    <div class="ed-body wrap wrap-n">
+      <p class="ed-eyebrow">Contact</p>
+      <h1 class="ed-h1">One number. Six routes.</h1>
+      <p class="ed-lede">Each route says where it goes and who answers, before you spend a call finding out.</p>
+    </div>
+    
+  </section>
+  <section class="ed-sec wrap wrap-n">
+    <div class="ed-office rv">
+      <div class="ed-addr">
+        <p class="ed-eyebrow">The office</p>
+        <p class="ed-big">1520 Federal Ave<br>Los Angeles, CA 90025</p>
+        <p style="margin-top:16px"><a class="ed-tel tnum" href="tel:+13104733000" style="font-size:clamp(1.5rem,2.6vw,2.2rem)">+1 310-473-3000</a></p>
+        <p>One number for leasing and the corporate office. Office hours <span class="chip">[CLIENT]</span></p>
+        <p style="margin-top:14px"><a class="ed-link" href="https://maps.google.com/?q=1520+Federal+Ave,+Los+Angeles,+CA+90025" rel="noopener">Directions <svg viewBox="0 0 26 8" aria-hidden="true"><path d="M0 4h24M20 1l4 3-4 3"/></svg></a></p>
+      </div>
+      <div class="ed-map" id="office-map" data-theme="light"></div>
+    </div>
+  </section>
+  <section class="ed-sec wrap wrap-n">
+    <p class="ed-eyebrow">Routed by what you need</p>
+    <h2 class="ed-h2">Six ways in.</h2>
+    <ul class="ed-rows rv" style="margin-top:32px"><li class="ed-row"><h3>Leasing</h3><p>You want to see an apartment, or ask what is free and what it costs.<br><span style="color:var(--ed-mute)">The leasing office for that building calls you back.</span></p><a class="ed-state" href="search.html">What is available →</a></li><li class="ed-row"><h3>Current resident</h3><p>Rent, a document, a lease question, a renewal.<br><span style="color:var(--ed-mute)">Rent goes to the portal; everything else to your building's own office.</span></p><a class="ed-state" href="residents.html">Residents →</a></li><li class="ed-row"><h3>Maintenance emergency</h3><p>Water that will not stop, no heat, a door that will not lock.<br><span style="color:var(--ed-mute)">You call rather than write. If anyone is in danger, 911 first.</span></p><a class="ed-state" href="tel:+13104733000">Call now →</a></li><li class="ed-row"><h3>Owner &amp; development</h3><p>A site, a building, a partnership on a project.<br><span style="color:var(--ed-mute)">Goes to the development side of the company. Named contact <span class="chip">[CLIENT]</span></span></p><a class="ed-state" href="company.html#pipeline">What is under way →</a></li><li class="ed-row"><h3>Careers</h3><p>On-site management, maintenance, leasing, the office.<br><span style="color:var(--ed-mute)">The roles behind the on-site model, and how to apply.</span></p><a class="ed-state" href="careers.html">Work at Wiseman →</a></li><li class="ed-row"><h3>Press</h3><p>A reporter on deadline, or a number to check before it prints.<br><span style="color:var(--ed-mute)">Press contact <span class="chip">[CLIENT]</span>. Every figure on this site is computed from the live feed.</span></p><a class="ed-state" href="company.html">The portfolio in numbers →</a></li></ul>
+  </section>
+  <section class="ed-sec wrap wrap-n">
+    <div class="ed-write">
+      <figure class="ed-fig rvi" style="--pos:50% 54%"><img src="../assets/img/wr12.jpg" alt="A planted courtyard stair with birds of paradise at a Wiseman building." width="1400" height="933" loading="lazy" decoding="async"></figure>
+      <div class="ed-writebody rv">
+        <p class="ed-eyebrow">Or write it down</p>
+        <h2 class="ed-h2">Send it in writing.</h2>
+        <p>Slower than the phone, and better when you need a record of what you asked. An emergency should never go through a form.</p>
+        <form class="ed-form" onsubmit="return false">
+          <div class="ed-two">
+            <label>Your name<input type="text" name="name" autocomplete="name"></label>
+            <label>Email<input type="email" name="email" autocomplete="email"></label>
+          </div>
+          <div class="ed-two">
+            <label>Phone (optional)<input type="tel" name="tel" autocomplete="tel"></label>
+            <label>Building or street (optional)<input type="text" name="building"></label>
+          </div>
+          <label>What is this about
+            <select name="topic"><option>Leasing — I am looking at an apartment</option><option>I am a current resident</option><option>Maintenance — not an emergency</option><option>A security deposit</option><option>Owner &amp; development</option><option>Careers</option><option>Press</option></select>
+          </label>
+          <label>Message<textarea name="message"></textarea></label>
+          <button type="submit">Send — demo only</button>
+          <p class="ed-note">This form posts nowhere in the demo. Before launch it needs a monitored inbox and an acknowledgement. <span class="chip">[CLIENT]</span></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>
+</main>
 
 <footer class="ft" id="site-map" data-menu-inert>
   <div class="wrap wrap-n">
@@ -130,8 +185,18 @@
   </div>
 </div>
 
-<script src="../core/core.js?v=39" defer></script>
-<script src="../core/map.js?v=39" defer></script>
-<script src="app.js?v=39" defer></script>
+<script src="../core/core.js?v=40" defer></script>
+<script src="../core/map.js?v=40" defer></script>
+<script src="app.js?v=40" defer></script>
+<script>
+addEventListener('DOMContentLoaded', function () {
+  if (!window.WR || !WR.map || !document.getElementById('office-map')) return;
+  WR.map({ el: '#office-map', theme: 'light', label: 'Map of the Wiseman office at 1520 Federal Ave',
+    points: [{ no: 'HQ', lat: 34.0452, lng: -118.4541, name: 'Wiseman Residential', street: '1520 Federal Ave',
+               areaLabel: 'West Los Angeles', pinLabel: 'Office', url: 'https://maps.google.com/?q=1520+Federal+Ave,+Los+Angeles,+CA+90025' }],
+    pins: 'price', breakZoom: 0 });
+  var t = setInterval(function () { if (WR.mapInstance) { clearInterval(t); WR.mapInstance.setView([34.0452, -118.4541], 15); } }, 150);
+});
+</script>
 </body>
 </html>

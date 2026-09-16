@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en" data-base="" data-data="../data/wiseman.json" data-index="../data/index.json">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Design System &amp; Handoff &mdash; Wiseman Residential</title>
+<meta name="description" content="The design system behind the new Wiseman Residential site — brand, colour, typography, information architecture, components, motion and content rules — with the phased plan to launch the corporate site, Motor Tides and Motor Midway.">
+<meta name="theme-color" content="#F3F0E7">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20fill='%23F3F0E7'/%3E%3Cg%20fill='%23169BAC'%3E%3Cpolygon%20points='14,18%2034,18%2034,72%2014,76'/%3E%3Cpolygon%20points='40,18%2060,18%2060,72%2040,76'/%3E%3Cpolygon%20points='66,18%2086,18%2086,72%2066,76'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Wiseman Residential">
+<meta property="og:title" content="Design System &amp; Handoff &mdash; Wiseman Residential">
+<meta property="og:description" content="The design system behind the new Wiseman Residential site — brand, colour, typography, information architecture, components, motion and content rules — with the phased plan to launch the corporate site, Motor Tides and Motor Midway.">
+<meta property="og:image" content="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1200/s3/2/9707/rsz_2motor_jpeg_1.jpg">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Design System &amp; Handoff &mdash; Wiseman Residential">
+<meta name="twitter:image" content="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1200/s3/2/9707/rsz_2motor_jpeg_1.jpg">
+<link rel="preconnect" href="https://resource.rentcafe.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../core/base.css?v=40">
+<link rel="stylesheet" href="../core/map.css?v=40"><link rel="stylesheet" href="../core/rail.css?v=40">
+<link rel="stylesheet" href="style.css?v=40">
+<script>(function(d){var r=d.documentElement;r.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches){r.classList.add('js-pt');setTimeout(function(){r.classList.remove('js-pt');},1500);}})(document);</script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="hd" id="hd">
+  <div class="hd-in wrap wrap-n">
+  <a class="brand" href="index.html" aria-label="Wiseman Residential, home">
+    <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" fill="currentColor"><polygon points="14,18 34,18 34,72 14,76"/><polygon points="40,18 60,18 60,72 40,76"/><polygon points="66,18 86,18 86,72 66,76"/></svg>
+    <b>Wiseman Residential</b>
+  </a>
+  <nav class="hnav" aria-label="Primary">
+      <a href="company.html">About Wiseman</a>
+      <a href="search.html">Live at Wiseman</a>
+      <a href="careers.html">Work at Wiseman</a>
+      <a href="track.html">Track Record</a>
+      <a href="contact.html">Contact</a>
+  </nav>
+  <div class="hd-cta">
+    <a class="btn btn-teal" href="search.html">Find a home <span class="ar" aria-hidden="true">&rarr;</span></a>
+    <button class="mbtn" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mnav"><span></span></button>
+  </div>
+  </div>
+</header>
+<main id="main">
+
+  <section class="pagehead pagehead-split wrap wrap-n">
+    <div class="pagehead-l">
+      <p class="pagehead-no"><span>Handoff</span><span class="tnum">95 pages</span></p>
+      <h1 class="pagehead-h">The system, and how it was&nbsp;decided.</h1>
+    </div>
+    <p class="pagehead-sub">Every specimen below is the live token or the live component &mdash; this page is built out of the same system it documents, so it cannot describe something the site does not&nbsp;do.</p>
+  </section>
+
+  <!-- brand -->
+  <section class="band wrap wrap-n" id="brand">
+    <div class="band-head">
+      <p class="eyebrow rv">Brand</p>
+      <h2 class="rv" data-d="1">The mark, and the one colour it&nbsp;owns.</h2>
+      <p class="rv" data-d="2">Three tapered bars over a letterspaced wordmark, rebuilt as inline SVG from the company&rsquo;s own logo so it stays sharp at every size and inherits colour from its&nbsp;context.</p>
+    </div>
+    <div class="ho-brand rv">
+      <div class="ho-mark-row">
+        <span class="ho-mark ho-mark-lg"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" fill="currentColor"><polygon points="14,18 34,18 34,72 14,76"/><polygon points="40,18 60,18 60,72 40,76"/><polygon points="66,18 86,18 86,72 66,76"/></svg></span>
+        <span class="ho-mark ho-mark-md"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" fill="currentColor"><polygon points="14,18 34,18 34,72 14,76"/><polygon points="40,18 60,18 60,72 40,76"/><polygon points="66,18 86,18 86,72 66,76"/></svg></span>
+        <span class="ho-mark ho-mark-sm"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" fill="currentColor"><polygon points="14,18 34,18 34,72 14,76"/><polygon points="40,18 60,18 60,72 40,76"/><polygon points="66,18 86,18 86,72 66,76"/></svg></span>
+      </div>
+      <div class="ho-lockup"><svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" fill="currentColor"><polygon points="14,18 34,18 34,72 14,76"/><polygon points="40,18 60,18 60,72 40,76"/><polygon points="66,18 86,18 86,72 66,76"/></svg><span class="ho-wm">Wiseman Residential</span></div>
+    </div>
+    <ul class="ho-rules rv">
+      <li><b>One colour, reserved.</b> <span class="ho-sw ho-sw-i" style="background:#169BAC"></span><code>#169BAC</code> belongs to the mark and to nothing else on the site. Body text, buttons and links never use it.</li>
+      <li><b>It inherits.</b> The SVG is <code>fill="currentColor"</code>, so the mark is teal on cream, cream on the deep ground, and never needs a second file.</li>
+      <li><b>Clear space.</b> One bar-width on every side. Minimum height 18px, below which the taper stops reading.</li>
+      <li><b>Never the placeholder.</b> The generic three-rectangle mark used in early drafts is retired; the bars are tapered, and the taper is the mark.</li>
+    </ul>
+  </section>
+
+  <!-- colour -->
+  <section class="promise" id="colour" data-hd="light">
+    <div class="band wrap wrap-n">
+      <div class="band-head">
+        <p class="eyebrow rv">Colour</p>
+        <h2 class="rv" data-d="1">Twelve tokens, and the contrast each one&nbsp;clears.</h2>
+        <p class="rv" data-d="2">Nothing is a raw hex in a component &mdash; every colour is a named custom property, so a change lands in one place. Each text colour was measured against both grounds it can sit&nbsp;on.</p>
+      </div>
+      <ul class="ho-colours rv">
+        <li><span class="ho-sw" style="background:#F3F0E7"></span><code>--bg</code><b>Ground</b><span class="ho-note">The warm cream every page stands on.</span><span class="ho-hex tnum">#F3F0E7</span></li>
+        <li><span class="ho-sw" style="background:#EFEADD"></span><code>--bg-2</code><b>Tinted band</b><span class="ho-note">One step down, for alternating sections.</span><span class="ho-hex tnum">#EFEADD</span></li>
+        <li><span class="ho-sw" style="background:#F7F4EC"></span><code>--raised</code><b>Raised</b><span class="ho-note">The frosted header and lifted surfaces.</span><span class="ho-hex tnum">#F7F4EC</span></li>
+        <li><span class="ho-sw" style="background:#074B4D"></span><code>--ink</code><b>Ink</b><span class="ho-note">Headings, primary buttons. 10.4:1 on cream.</span><span class="ho-hex tnum">#074B4D</span></li>
+        <li><span class="ho-sw" style="background:#42585B"></span><code>--ink-2</code><b>Body</b><span class="ho-note">Every paragraph. 7:1 on cream.</span><span class="ho-hex tnum">#42585B</span></li>
+        <li><span class="ho-sw" style="background:#5D6C6F"></span><code>--ink-3</code><b>Meta</b><span class="ho-note">Captions, citations, spec keys. 4.80:1 — AA.</span><span class="ho-hex tnum">#5D6C6F</span></li>
+        <li><span class="ho-sw" style="background:#04343A"></span><code>--deep-teal</code><b>Deep</b><span class="ho-note">Page-transition ground and dark sections.</span><span class="ho-hex tnum">#04343A</span></li>
+        <li><span class="ho-sw" style="background:#C8784D"></span><code>--accent</code><b>Terracotta</b><span class="ho-note">Decorative keylines, ticks, marks.</span><span class="ho-hex tnum">#C8784D</span></li>
+        <li><span class="ho-sw" style="background:#9A5533"></span><code>--accent-ink</code><b>Terracotta ink</b><span class="ho-note">Links and chips. 4.95:1 cream, 4.70:1 stone.</span><span class="ho-hex tnum">#9A5533</span></li>
+        <li><span class="ho-sw" style="background:#169BAC"></span><code>--brand-teal</code><b>The mark</b><span class="ho-note">Reserved for the three-bar logo. Nothing else.</span><span class="ho-hex tnum">#169BAC</span></li>
+        <li><span class="ho-sw" style="background:#A8C9CE"></span><code>--tide</code><b>Tide</b><span class="ho-note">Light teal, only on dark grounds.</span><span class="ho-hex tnum">#A8C9CE</span></li>
+        <li><span class="ho-sw" style="background:#FEDA77"></span><code>--sand</code><b>Sand</b><span class="ho-note">Rare warm highlight.</span><span class="ho-hex tnum">#FEDA77</span></li>
+      </ul>
+      <p class="cite rv">Ratios measured against <code>--bg</code> cream. AA requires 4.5:1 for body text and 3:1 for large text; every text token above clears it on both the cream and the tinted&nbsp;ground.</p>
+    </div>
+  </section>
+
+  <!-- type -->
+  <section class="band wrap wrap-n" id="type">
+    <div class="band-head">
+      <p class="eyebrow rv">Typography</p>
+      <h2 class="rv" data-d="1">Three faces, three&nbsp;jobs.</h2>
+      <p class="rv" data-d="2">Set from the reference the client chose. Each face has one job and does not take another&nbsp;one.</p>
+    </div>
+    <div class="ho-type rv">
+      <div class="ho-spec">
+        <p class="ho-spec-k">Prata &middot; display only</p>
+        <p class="ho-spec-a" style="font-family:var(--disp-lg)">Los Angeles living</p>
+        <p class="ho-note">Four places on the whole site: the home monogram, the full-bleed heroes, the building hero and the page head. It carries no 500 weight, so it is never asked for one.</p>
+      </div>
+      <div class="ho-spec">
+        <p class="ho-spec-k">Newsreader &middot; everything you read</p>
+        <p class="ho-spec-b">A family-run Los Angeles apartment company.</p>
+        <p class="ho-note">Every heading and every paragraph. Italic is used for pull-quotes and the tagline, never for emphasis inside a sentence.</p>
+      </div>
+      <div class="ho-spec">
+        <p class="ho-spec-k">Montserrat &middot; interface and figures</p>
+        <p class="ho-spec-c">FIND A HOME &nbsp;&middot;&nbsp; <span class="tnum">$4,895&ndash;$5,095</span> &nbsp;&middot;&nbsp; <span class="tnum">72</span> BUILDINGS</p>
+        <p class="ho-note">Buttons, labels, eyebrows and every number. Figures are tabular so columns of rent and bedroom counts line up rather than shimmer.</p>
+      </div>
+    </div>
+    <ul class="ho-rules rv">
+      <li><b>No orphans.</b> Headings never end with a single word on its own line &mdash; non-breaking spaces are written into the copy, not left to chance.</li>
+      <li><b>One scale.</b> Every size is a <code>clamp()</code> between a phone and a desktop value, so nothing steps at a breakpoint.</li>
+      <li><b>Measure.</b> Body copy is capped near 62 characters; captions near 70.</li>
+    </ul>
+  </section>
+
+  <!-- IA -->
+  <section class="promise" id="ia" data-hd="light">
+    <div class="band wrap wrap-n">
+      <div class="band-head">
+        <p class="eyebrow rv">Information architecture</p>
+        <h2 class="rv" data-d="1">Corporate first, renters one click&nbsp;away.</h2>
+        <p class="rv" data-d="2">The structure follows the model the client pointed at &mdash; a company that leads with who it is &mdash; while keeping the person looking for an apartment on a direct path. Five sections, plus a standing <em>Find a home</em>&nbsp;button.</p>
+      </div>
+
+      <div class="ho-ia rv">
+        <div>
+          <h3 class="ho-h3">Top level</h3>
+          <ul class="ho-nav">
+        <li><a href="company.html">About Wiseman</a><span class="ho-note">Who the company is. The culture and corporate layer.</span></li>
+        <li><a href="search.html">Live at Wiseman</a><span class="ho-note">Every renter path: search, buildings, areas.</span></li>
+        <li><a href="careers.html">Work at Wiseman</a><span class="ho-note">On-site management, maintenance, leasing, office.</span></li>
+        <li><a href="track.html">Track Record</a><span class="ho-note">What is built and what is filed, each figure cited.</span></li>
+        <li><a href="contact.html">Contact</a><span class="ho-note">Six ways in, routed by what the visitor needs.</span></li>
+          </ul>
+          <p class="cite">The <em>Find a home</em> button sits outside the five, in teal, on every page &mdash; so the commercial path never competes with the corporate narrative for a nav slot.</p>
+        </div>
+        <div>
+          <h3 class="ho-h3">Page families</h3>
+          <ul class="ho-fam">
+        <li><h4>Editorial pages <span class="ho-ct tnum">9</span></h4><p>Company, careers, track record, residents, contact and the legal set. One template, image-led.</p></li>
+        <li><h4>Building pages <span class="ho-ct tnum">72</span></h4><p>One per building: floor plans, amenities, its own office and phone, its own map.</p></li>
+        <li><h4>Area pages <span class="ho-ct tnum">7</span></h4><p>One per Los Angeles area, with the buildings in it and what is nearby.</p></li>
+        <li><h4>Index pages <span class="ho-ct tnum">4</span></h4><p>Home, the property search, every building, the seven areas.</p></li>
+          </ul>
+          <p class="cite">Four templates carry 95 pages. A new building is a row of data, not a new&nbsp;page design.</p>
+        </div>
+      </div>
+
+      <ul class="ho-rules rv">
+        <li><b>Every building is a real page.</b> 72 of them, each linkable, each with its own office, phone, plans and map &mdash; not a modal over a list.</li>
+        <li><b>Areas are a layer, not a filter.</b> 7 area pages give Los Angeles neighbourhoods their own addressable content; 52 named streets appear across the portfolio.</li>
+        <li><b>The leasing system is named, not hidden.</b> Resident and applicant logins are marked as a separate system rather than mixed in with the site&rsquo;s own pages.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- components -->
+  <section class="band wrap wrap-n" id="components">
+    <div class="band-head">
+      <p class="eyebrow rv">Components</p>
+      <h2 class="rv" data-d="1">Ten shared modules, four&nbsp;surfaces.</h2>
+      <p class="rv" data-d="2">The corporate site and every property site draw on the same files. A fix to the map, the search or a rail lands everywhere at&nbsp;once &mdash; which is what makes 72 building pages affordable to&nbsp;maintain.</p>
+    </div>
+    <ul class="ho-mods rv">
+        <li><code>base.css</code><span class="ho-note">Reset, tokens, header, footer, buttons, page transition.</span></li>
+        <li><code>core.js</code><span class="ho-note">Data loading, header behaviour, reveals, reduced-motion flag.</span></li>
+        <li><code>search.css</code><span class="ho-note">Filter bar, dropdowns, chips, the results column.</span></li>
+        <li><code>search.js</code><span class="ho-note">Filtering, sorting, URL state, the more-filters dialog.</span></li>
+        <li><code>map.css</code><span class="ho-note">Leaflet skin, price pills, dot pins, area bubbles.</span></li>
+        <li><code>map.js</code><span class="ho-note">Tiles, pins, pill thinning, map-to-row highlighting.</span></li>
+        <li><code>rail.css</code><span class="ho-note">Horizontal rails: hidden scrollbar, arrows, focus ring.</span></li>
+        <li><code>rail.js</code><span class="ho-note">Arrow and keyboard control for every rail on the site.</span></li>
+        <li><code>editorial.css</code><span class="ho-note">Long-form pages: heroes, row tables, forms, legal set.</span></li>
+        <li><code>icons.svg</code><span class="ho-note">One sprite: amenities, building features, social, EHO.</span></li>
+    </ul>
+    <ul class="ho-rules rv">
+      <li><b>One button system.</b> Solid deep teal, cream text, letterspaced caps, square corners. A secondary is the same button with a hairline instead of a fill. There is no third.</li>
+      <li><b>No visible horizontal scrollbars.</b> Rails are driven by arrows and the keyboard; the scrollbar is hidden by design, and the track is focusable so it is still reachable without a mouse.</li>
+      <li><b>Map pins are dots.</b> Plain dots everywhere, flat price pills on search maps only &mdash; no numbers on pins, which read as a count of homes, and no tails.</li>
+    </ul>
+  </section>
+
+  <!-- motion + content rules -->
+  <section class="promise" id="rules" data-hd="light">
+    <div class="band wrap wrap-n">
+      <div class="band-head">
+        <p class="eyebrow rv">Motion and content</p>
+        <h2 class="rv" data-d="1">One curve, and a rule about every&nbsp;sentence.</h2>
+      </div>
+      <div class="values">
+        <div class="value rv" data-d="1">
+          <h3>Motion</h3>
+          <p>A single easing curve across the estate, <code>cubic-bezier(.16, 1, .3, 1)</code>. Pages leave under a cover and arrive with a reveal rather than sliding. Everything is cancelled under <code>prefers-reduced-motion</code>.</p>
+        </div>
+        <div class="value rv" data-d="2">
+          <h3>Figures</h3>
+          <p>Counts, rents and bedroom ranges are computed from the live leasing feed at build time. No page hand-writes a number, so nothing can go stale independently of the data.</p>
+        </div>
+        <div class="value rv" data-d="3">
+          <h3>Claims</h3>
+          <p>Anything only the company can confirm shows a <span class="chip">[CLIENT]</span> marker instead of a plausible guess. The site ships honest and fills in as answers arrive.</p>
+        </div>
+      </div>
+      <ul class="ho-rules rv">
+        <li><b>Fair housing is a writing rule.</b> Copy describes the apartment, never the household. Neighbourhood text stays on transit, distance, parks and named streets. The Equal Housing mark appears in every footer at no less than the size of the Wiseman mark.</li>
+        <li><b>Accessibility is built in.</b> WCAG 2.1 AA: contrast measured on both grounds, visible focus on every interactive element including scroll containers, keyboard paths through the filters, the map and every rail, semantic lists and sequential headings. No third-party overlay &mdash; they measurably increase litigation risk for housing sites.</li>
+        <li><b>Copy is short on purpose.</b> Roughly 450 words on the home page. Where a sentence is doing no work, it is cut rather than softened.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- roadmap -->
+  <section class="band wrap wrap-n" id="roadmap">
+    <div class="band-head">
+      <p class="eyebrow rv">Roadmap</p>
+      <h2 class="rv" data-d="1">Five phases to&nbsp;launch.</h2>
+      <p class="rv" data-d="2">Durations are working estimates for one designer-developer. Phases 1 and 2 run in parallel; only the items marked as Wiseman&rsquo;s can stall the&nbsp;schedule.</p>
+    </div>
+
+    <ol class="ho-phases rv">
+      <li>
+        <p class="ho-ph-n tnum">Phase 0 &middot; ~1 week</p>
+        <div>
+          <h3>Settle the record</h3>
+          <p>Entirely on Wiseman, and nothing else can be written until it is done. We hand over the fact-check dossier and the claims sheet every page will be built against.</p>
+          <p class="ho-them"><b>Wiseman provides</b> a founding year in writing &middot; a decision on &ldquo;over 45 years&rdquo; and &ldquo;100+ communities&rdquo; &middot; the responsible broker entity and DRE number &middot; leadership names and bios &middot; a values statement.</p>
+        </div>
+      </li>
+      <li>
+        <p class="ho-ph-n tnum">Phase 1 &middot; ~3&ndash;4 weeks</p>
+        <div>
+          <h3>The corporate site</h3>
+          <p>All 95 pages to production, the legal set to counsel-review draft, a full accessibility pass, a redirect map from every existing URL, analytics and search console.</p>
+          <p class="ho-them"><b>Wiseman provides</b> vector logo files &middot; which Instagram handle is canonical &middot; counsel review of the legal drafts &middot; corrected address of record on CSLB, BBB and Archinect.</p>
+        </div>
+      </li>
+      <li>
+        <p class="ho-ph-n tnum">Phase 2 &middot; ~2 weeks, parallel</p>
+        <div>
+          <h3>Live leasing data</h3>
+          <p>Today&rsquo;s snapshot is replaced by the RentCafe / Yardi API, so availability, rent, plans and office hours refresh on their own and apply links deep-link into the existing flow.</p>
+          <p class="ho-them"><b>Wiseman provides</b> API credentials and the account manager &middot; confirmation of canonical property IDs &middot; a fix for the Motor Tides listing URL, which currently reads <code>motor-tabor-by-wiseman</code>.</p>
+        </div>
+      </li>
+      <li>
+        <p class="ho-ph-n tnum">Phase 3 &middot; ~2 weeks</p>
+        <div>
+          <h3>Motor Tides</h3>
+          <p>The flagship gets a dedicated property site on this same system &mdash; hero, floor plans, amenities, neighbourhood, tour booking &mdash; and proves the property template before it is copied.</p>
+          <p class="ho-them"><b>Wiseman provides</b> written rights confirmation for the Vimeo tour library &middot; floor plan files and a signed-off amenity list &middot; leasing phone, hours and tour method &middot; a decision on a standalone domain.</p>
+        </div>
+      </li>
+      <li>
+        <p class="ho-ph-n tnum">Phase 4 &middot; ~1 week, then rolling</p>
+        <div>
+          <h3>Motor Midway, then the portfolio</h3>
+          <p>The proven template is applied to Motor Midway &mdash; same street, same architect &mdash; then rolled out area by area, heaviest first.</p>
+          <p class="ho-them"><b>Wiseman provides</b> per-building photography or a decision to shoot &middot; any building-specific copy worth keeping &middot; on-site manager names and hours.</p>
+        </div>
+      </li>
+      <li>
+        <p class="ho-ph-n tnum">Phase 5 &middot; ~1 week</p>
+        <div>
+          <h3>Cutover and handover</h3>
+          <p>DNS cutover with the full redirect map so no existing link breaks, monitoring and analytics handed over, a written runbook and a working session on updating content.</p>
+          <p class="ho-them"><b>Wiseman provides</b> DNS access &middot; final sign-off &middot; who owns the site internally after launch.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- asks -->
+  <section class="promise" id="asks" data-hd="light">
+    <div class="band wrap wrap-n">
+      <div class="band-head">
+        <p class="eyebrow rv">The short version</p>
+        <h2 class="rv" data-d="1">What we need from&nbsp;Wiseman.</h2>
+        <p class="rv" data-d="2">Everything else is ours. These are the items that decide whether the schedule&nbsp;holds.</p>
+      </div>
+      <ul class="ho-asks rv">
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>A founding year, in writing</h4><p>LinkedIn says 1980, the contractor licence carries 1982, the Archinect profile says 1985, the Better Business Bureau has 1987. No page states a year until one is chosen.</p></li>
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>A decision on &ldquo;45 years&rdquo; and &ldquo;100+ communities&rdquo;</h4><p>Both are on the current homepage; neither is supported by any public source we could find, and the live feed lists 72 buildings.</p></li>
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>Responsible broker entity and DRE number</h4><p>Every principal&rsquo;s licence reads as expired and no company record exists. The footer needs a correct one before launch.</p></li>
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>Leadership, values and history in the company&rsquo;s words</h4><p>The only name any public source supports is founder Isaac Cohanzad.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 2</span><h4>RentCafe / Yardi API access</h4><p>The single biggest upgrade available: with it, the site maintains itself.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 1</span><h4>Vector logo files</h4><p>The mark has been rebuilt from a 600px PNG; the original vector will be sharper at every size.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 3</span><h4>Rights confirmation for the video library</h4><p>159 embeddable clips are already owned &mdash; a real asset &mdash; but they carry a third-party watermark.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 3</span><h4>A photography decision</h4><p>The existing library is interiors only. A half-day shoot with a licensed drone operator is the only way to get the actual buildings and streets on screen.</p></li>
+        <li><span class="ho-tag ho-tag-later">Phase 1</span><h4>Canonical social handles</h4><p>Two Instagram accounts are live and the site data points at the less-followed one.</p></li>
+        <li><span class="ho-tag ho-tag-later">Phase 5</span><h4>DNS access and an internal owner</h4><p>Needed only at cutover, but worth identifying early.</p></li>
+      </ul>
+      <p class="cite rv">Dated claims about the company are sourced to public records or to reporting by Urbanize LA and The Real Deal, each checked against the source rather than taken from a summary. Prepared by UnitPulse for Wiseman Residential &mdash; a proposal document, not a Wiseman Residential&nbsp;publication.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer class="ft" id="site-map" data-menu-inert>
+  <div class="wrap wrap-n">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" fill="currentColor"><polygon points="14,18 34,18 34,72 14,76"/><polygon points="40,18 60,18 60,72 40,76"/><polygon points="66,18 86,18 86,72 66,76"/></svg>
+        <div class="wm">Wiseman Residential</div>
+        <div class="tag">Los Angeles living, managed wisely.</div>
+        <div class="addr">1520 Federal Ave, Los Angeles, CA 90025<br><a href="tel:+13104733000">+1 310-473-3000</a></div>
+      </div>
+      <div class="ft-col">
+        <h2>Company</h2>
+        <ul>
+          <li><a href="company.html">About Wiseman</a></li>
+          <li><a href="search.html">Live at Wiseman</a></li>
+          <li><a href="careers.html">Work at Wiseman</a></li>
+          <li><a href="track.html">Track Record</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="residents.html">Residents</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h2>Neighbourhoods</h2>
+        <ul>
+        <li><a href="neighborhoods/west-la.html">West Los Angeles <span class="ct tnum">27</span></a></li>
+        <li><a href="neighborhoods/beverly-grove.html">Beverly Grove <span class="ct tnum">14</span></a></li>
+        <li><a href="neighborhoods/brentwood.html">Brentwood <span class="ct tnum">13</span></a></li>
+        <li><a href="neighborhoods/hollywood.html">Hollywood <span class="ct tnum">13</span></a></li>
+        <li><a href="neighborhoods/venice.html">Venice <span class="ct tnum">2</span></a></li>
+        <li><a href="neighborhoods/palms.html">Palms · Motor Avenue <span class="ct tnum">2</span></a></li>
+        <li><a href="neighborhoods/glendale.html">Glendale <span class="ct tnum">1</span></a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h2>Find a home</h2>
+        <ul>
+          <li><a href="buildings.html">All 72 buildings</a></li>
+          <li><a href="neighborhoods.html">The seven areas</a></li>
+          <li><a href="https://wisemanresidential.securecafe.com/residentservices/apartmentsforrent/userlogin.aspx" rel="noopener">Resident login</a></li>
+          <li><a href="https://wisemanresidential.securecafe.com/onlineleasing/apartmentsforrent/guestlogin.aspx" rel="noopener">Applicant login</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-base">
+      <div class="lg">
+        <p class="eho"><svg viewBox="0 0 12 10.608" role="img" aria-label="Equal Housing Opportunity" fill="currentColor" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.95263 1.07242L0 4.00926V5.38295H0.663158V9.51979H11.2026V5.38295H11.9921V4.00926L5.95263 1.07242ZM9.9 8.27242H1.95789V4.49874L5.95263 2.44611L9.9 4.49874V8.27242Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 5.82505H4.08947V4.49874H7.77632V5.82505Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M7.77632 7.73558H4.08947V6.40926H7.77632V7.73558Z"/></svg><span>Equal Housing Opportunity</span></p>
+        <span class="social"><a href="https://www.instagram.com/officialwisemanresidential" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.4a4.6 4.6 0 1 1 0 9.2 4.6 4.6 0 0 1 0-9.2Zm0 2a2.6 2.6 0 1 0 0 5.2 2.6 2.6 0 0 0 0-5.2ZM17.6 5.9a1.1 1.1 0 1 1 0 2.2 1.1 1.1 0 0 1 0-2.2Z"/></svg></a><a href="https://www.facebook.com/Officialwisemanresidential/" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.45 2.89h-2.33v6.99A10 10 0 0 0 22 12Z"/></svg></a><a href="https://www.yelp.com/biz/wiseman-residential-los-angeles-2" rel="noopener" aria-label="Yelp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7.6885 15.1415-3.6715.8483c-.3769.0871-.755.183-1.1452.155-.2611-.0188-.5122-.0414-.7606-.213a1.179 1.179 0 0 1-.331-.3594c-.3486-.5519-.3656-1.3661-.3697-2.0004a6.2874 6.2874 0 0 1 .3314-2.0642 1.857 1.857 0 0 1 .1073-.2474 2.3426 2.3426 0 0 1 .1255-.2165 2.4572 2.4572 0 0 1 .1563-.1975 1.1736 1.1736 0 0 1 .399-.2831 1.082 1.082 0 0 1 .4592-.0837c.2355.0016.5139.052.91.1734.0555.0191.1237.0382.1856.0572.3277.1013.7048.2404 1.1499.3987.6863.2404 1.3663.487 2.0463.7397l1.2117.4423c.2217.0807.4363.18.6412.297.174.0984.3273.2298.4512.387a1.217 1.217 0 0 1 .192.4309 1.2205 1.2205 0 0 1-.872 1.4522c-.0468.0151-.0852.0239-.1085.0293l-1.105.2553-.0031-.001zM18.8208 7.565a1.8506 1.8506 0 0 0-.2042-.1754 2.4082 2.4082 0 0 0-.2077-.1394 2.3607 2.3607 0 0 0-.2269-.109 1.1705 1.1705 0 0 0-.482-.0796 1.0862 1.0862 0 0 0-.4498.1263c-.2107.1048-.4388.2732-.742.5551-.042.0417-.0947.0886-.142.133-.2502.2351-.5286.5252-.8599.863a114.6363 114.6363 0 0 0-1.5166 1.5629l-.8962.9293a4.1897 4.1897 0 0 0-.4466.5483 1.541 1.541 0 0 0-.2364.5459 1.2199 1.2199 0 0 0 .0107.4518l.0046.02a1.218 1.218 0 0 0 1.4184.923 1.162 1.162 0 0 0 .1105-.0213l4.7781-1.104c.3766-.087.7587-.1667 1.097-.3631.2269-.1316.4428-.262.5909-.5252a1.1793 1.1793 0 0 0 .1405-.4683c.0733-.6512-.2668-1.3908-.5403-1.963a6.2792 6.2792 0 0 0-1.2001-1.7103zM8.9703.0754a8.6724 8.6724 0 0 0-.83.1564c-.2754.066-.548.1383-.8146.2236-.868.2844-2.0884.8063-2.295 1.8065-.1165.5655.1595 1.1439.3737 1.66.2595.6254.614 1.1889.9373 1.7777.8543 1.5545 1.7245 3.0993 2.5922 4.6457.259.4617.5416 1.0464 1.043 1.2856a1.058 1.058 0 0 0 .1013.0383c.2248.0851.4699.1016.7041.0471a4.3015 4.3015 0 0 0 .0418-.0097 1.2136 1.2136 0 0 0 .5658-.3397 1.1033 1.1033 0 0 0 .079-.0822c.3463-.435.3454-1.0833.3764-1.6134.1042-1.771.2139-3.5423.3009-5.3142.0332-.6712.1055-1.3333.0655-2.0096-.0328-.5579-.0368-1.1984-.3891-1.6563-.6218-.8073-1.9476-.741-2.8523-.6158zm2.084 15.9505a1.1053 1.1053 0 0 0-1.2306-.4145 1.1398 1.1398 0 0 0-.1526.0633 1.4806 1.4806 0 0 0-.2171.1354c-.1992.1475-.3668.3392-.5196.5315-.0386.049-.074.1143-.12.1562l-.7686 1.0573a113.9168 113.9168 0 0 0-1.2913 1.789c-.278.3895-.5184.7184-.7083 1.0094-.036.0547-.0734.116-.1075.1647-.2277.3522-.3566.6092-.4228.8381a1.0945 1.0945 0 0 0-.046.4721c.0211.1655.0768.3246.1635.467.046.0715.0957.1406.1487.207a2.334 2.334 0 0 0 .1754.1825 1.843 1.843 0 0 0 .2108.1732c.5304.369 1.1112.6342 1.722.8391a6.0958 6.0958 0 0 0 1.5716.3004c.091.0046.1821.0025.2728-.006a2.3878 2.3878 0 0 0 .2506-.0351 2.3862 2.3862 0 0 0 .2447-.071 1.1927 1.1927 0 0 0 .4175-.2658c.1127-.113.1994-.249.2541-.3989.0889-.2214.1473-.5026.1857-.92.0034-.0593.0118-.1305.0177-.1958.0304-.3463.0443-.7531.0666-1.2315.0375-.7357.067-1.4681.0903-2.2026 0 0 .0495-1.3053.0494-1.306.0113-.3008.002-.6342-.0814-.9336a1.396 1.396 0 0 0-.1756-.4054zm8.6754 2.0439c-.1605-.176-.3878-.3514-.7462-.5682-.0518-.0288-.1124-.0674-.1684-.1009-.2985-.1795-.658-.3684-1.078-.5965a120.7615 120.7615 0 0 0-1.9427-1.042l-1.1515-.6107c-.0597-.0175-.1203-.0607-.1766-.0878-.2212-.1058-.4558-.2045-.6992-.2498a1.4915 1.4915 0 0 0-.2545-.0265 1.1527 1.1527 0 0 0-.1648.01 1.1077 1.1077 0 0 0-.9227.9133 1.4186 1.4186 0 0 0 .0159.439c.0563.3065.1932.6096.3346.875l.615 1.1526c.3422.65.6884 1.2963 1.0435 1.9406.229.4202.4196.7799.5982 1.078.0338.056.0721.1163.1011.1682.2173.3584.392.584.569.7458.1146.1107.252.195.4026.247.1583.0525.326.071.4919.0546a2.368 2.368 0 0 0 .251-.0435c.0817-.022.1622-.048.241-.0784a1.863 1.863 0 0 0 .2475-.1143 6.1018 6.1018 0 0 0 1.2818-.9597c.4596-.4522.8659-.9454 1.182-1.51.044-.08.0819-.163.1138-.2483a2.49 2.49 0 0 0 .0773-.2411c.0186-.083.033-.1669.0429-.2513a1.188 1.188 0 0 0-.0565-.491 1.0933 1.0933 0 0 0-.248-.4041z"/></svg></a></span>
+      </div>
+      <p class="cp">&copy; 2026 Wiseman Residential</p>
+    </div>
+    <p class="ft-note"><a href="privacy.html">Privacy Policy</a> &middot; <a href="accessibility.html">Accessibility</a> &middot; <a href="privacy-choices.html">Your Privacy Choices</a> &middot; <a href="sitemap.html">Site Map</a> &middot; Every figure here is a point-in-time snapshot of the live leasing system. No DRE number is published pending the client&rsquo;s confirmation of the responsible broker entity.</p>
+  </div>
+</footer>
+
+<nav class="mnav" id="mnav" aria-label="Menu">
+  <div class="mnav-in">
+    <ul class="mnav-list">
+      <li><a href="company.html"><span class="mn-no tnum">01</span><span>About Wiseman</span></a></li>
+      <li><a href="search.html"><span class="mn-no tnum">02</span><span>Live at Wiseman</span></a></li>
+      <li><a href="careers.html"><span class="mn-no tnum">03</span><span>Work at Wiseman</span></a></li>
+      <li><a href="track.html"><span class="mn-no tnum">04</span><span>Track Record</span></a></li>
+      <li><a href="contact.html"><span class="mn-no tnum">05</span><span>Contact</span></a></li>
+      <li><a href="buildings.html"><span class="mn-no tnum">06</span><span>Every building</span></a></li>
+      <li><a href="residents.html"><span class="mn-no tnum">07</span><span>Residents</span></a></li>
+    </ul>
+    <div class="mfoot">
+      <p>1520 Federal Ave, Los Angeles, CA 90025</p>
+      <p><a href="tel:+13104733000">+1 310-473-3000</a> &middot; Leasing</p>
+      <p><a href="https://wisemanresidential.securecafe.com/residentservices/apartmentsforrent/userlogin.aspx" rel="noopener">Resident login</a> &middot; <a href="https://wisemanresidential.securecafe.com/onlineleasing/apartmentsforrent/guestlogin.aspx" rel="noopener">Apply</a></p>
+    </div>
+  </div>
+</nav>
+
+<div class="pt" aria-hidden="true">
+  <div class="ptmark">
+    <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" fill="currentColor"><polygon points="14,18 34,18 34,72 14,76"/><polygon points="40,18 60,18 60,72 40,76"/><polygon points="66,18 86,18 86,72 66,76"/></svg>
+    <span class="pt-name">Wiseman Residential</span>
+    <span class="pt-sub">Los Angeles</span>
+  </div>
+</div>
+
+<script src="../core/core.js?v=40" defer></script>
+<script src="../core/map.js?v=40" defer></script>
+<script src="app.js?v=40" defer></script>
+</body>
+</html>

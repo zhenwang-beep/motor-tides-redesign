@@ -33,7 +33,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data", "wiseman.json")
 
-VER = "39"
+VER = "40"
 SNAPSHOT = "10 September 2026"
 TOTAL = 72
 FLAG_NO = "071"                    # Motor Tides — FACT-CHECK §2: never a rent
@@ -815,6 +815,7 @@ def main():
 
     # ============================================================== sitemap.html
     build_sitemap(groups, areas, props)
+    build_handoff(groups, areas, props, streets_total, four_plus)
 
     # ============================================================== editorial shells
     for fn, title, desc, cur in [
@@ -1201,6 +1202,334 @@ def sm_group(title, key, rows, extra=""):
 {lis}
         </ul>{extra}
       </section>""".format(key=key, title=esc(title), lis=lis, extra=extra)
+
+
+
+# ---------------------------------------------------------------- handoff.html
+# The design-system handoff, built AS a page of the site rather than as a deck
+# about it. Every specimen on this page is the live token or the live component,
+# so the document cannot drift away from what actually ships: the swatches are
+# the real custom properties, the type specimens are set in the three real
+# faces, and the IA tree is generated from the same NAV and SM_SECTIONS the
+# header and the site map are built from. Deliberately not in the top nav —
+# it is a document for Wiseman and for whoever maintains this next, not part
+# of the public site.
+COLOURS = [
+    ("--bg",         "#F3F0E7", "Ground",        "The warm cream every page stands on."),
+    ("--bg-2",       "#EFEADD", "Tinted band",   "One step down, for alternating sections."),
+    ("--raised",     "#F7F4EC", "Raised",        "The frosted header and lifted surfaces."),
+    ("--ink",        "#074B4D", "Ink",           "Headings, primary buttons. 10.4:1 on cream."),
+    ("--ink-2",      "#42585B", "Body",          "Every paragraph. 7:1 on cream."),
+    ("--ink-3",      "#5D6C6F", "Meta",          "Captions, citations, spec keys. 4.80:1 — AA."),
+    ("--deep-teal",  "#04343A", "Deep",          "Page-transition ground and dark sections."),
+    ("--accent",     "#C8784D", "Terracotta",    "Decorative keylines, ticks, marks."),
+    ("--accent-ink", "#9A5533", "Terracotta ink","Links and chips. 4.95:1 cream, 4.70:1 stone."),
+    ("--brand-teal", "#169BAC", "The mark",      "Reserved for the three-bar logo. Nothing else."),
+    ("--tide",       "#A8C9CE", "Tide",          "Light teal, only on dark grounds."),
+    ("--sand",       "#FEDA77", "Sand",          "Rare warm highlight."),
+]
+
+MODULES = [
+    ("base.css",     "Reset, tokens, header, footer, buttons, page transition."),
+    ("core.js",      "Data loading, header behaviour, reveals, reduced-motion flag."),
+    ("search.css",   "Filter bar, dropdowns, chips, the results column."),
+    ("search.js",    "Filtering, sorting, URL state, the more-filters dialog."),
+    ("map.css",      "Leaflet skin, price pills, dot pins, area bubbles."),
+    ("map.js",       "Tiles, pins, pill thinning, map-to-row highlighting."),
+    ("rail.css",     "Horizontal rails: hidden scrollbar, arrows, focus ring."),
+    ("rail.js",      "Arrow and keyboard control for every rail on the site."),
+    ("editorial.css","Long-form pages: heroes, row tables, forms, legal set."),
+    ("icons.svg",    "One sprite: amenities, building features, social, EHO."),
+]
+
+
+def build_handoff(groups, areas, props, streets_total, four_plus):
+    nav_rows = "\n".join(
+        '        <li><a href="%s">%s</a><span class="ho-note">%s</span></li>' % (href, esc(label), esc(note))
+        for href, label, note in [
+            ("company.html", "About Wiseman", "Who the company is. The culture and corporate layer."),
+            ("search.html", "Live at Wiseman", "Every renter path: search, buildings, areas."),
+            ("careers.html", "Work at Wiseman", "On-site management, maintenance, leasing, office."),
+            ("track.html", "Track Record", "What is built and what is filed, each figure cited."),
+            ("contact.html", "Contact", "Six ways in, routed by what the visitor needs."),
+        ])
+
+    fam_rows = "\n".join(
+        '        <li><h4>%s <span class="ho-ct tnum">%s</span></h4><p>%s</p></li>' % (t, n, d)
+        for t, n, d in [
+            ("Editorial pages", "9", "Company, careers, track record, residents, contact and the legal set. One template, image-led."),
+            ("Building pages", str(TOTAL), "One per building: floor plans, amenities, its own office and phone, its own map."),
+            ("Area pages", str(len(AREA_ORDER)), "One per Los Angeles area, with the buildings in it and what is nearby."),
+            ("Index pages", "4", "Home, the property search, every building, the seven areas."),
+        ])
+
+    colour_rows = "\n".join(
+        '        <li><span class="ho-sw" style="background:%s"></span>'
+        '<code>%s</code><b>%s</b><span class="ho-note">%s</span>'
+        '<span class="ho-hex tnum">%s</span></li>' % (hexv, tok, esc(role), esc(note), hexv)
+        for tok, hexv, role, note in COLOURS)
+
+    mod_rows = "\n".join(
+        '        <li><code>%s</code><span class="ho-note">%s</span></li>' % (name, esc(note))
+        for name, note in MODULES)
+
+    page = head(
+        title="Design System &amp; Handoff &mdash; Wiseman Residential",
+        desc=("The design system behind the new Wiseman Residential site — brand, colour, "
+              "typography, information architecture, components, motion and content rules — "
+              "with the phased plan to launch the corporate site, Motor Tides and Motor Midway."),
+        img="https://resource.rentcafe.com/image/upload/q_auto,f_auto,w_1200/s3/2/9707/rsz_2motor_jpeg_1.jpg",
+        extra='<link rel="stylesheet" href="../core/rail.css?v=%s">' % VER)
+    page += header("")
+    page += """
+<main id="main">
+
+  <section class="pagehead pagehead-split wrap wrap-n">
+    <div class="pagehead-l">
+      <p class="pagehead-no"><span>Handoff</span><span class="tnum">{pages} pages</span></p>
+      <h1 class="pagehead-h">The system, and how it was&nbsp;decided.</h1>
+    </div>
+    <p class="pagehead-sub">Every specimen below is the live token or the live component &mdash; this page is built out of the same system it documents, so it cannot describe something the site does not&nbsp;do.</p>
+  </section>
+
+  <!-- brand -->
+  <section class="band wrap wrap-n" id="brand">
+    <div class="band-head">
+      <p class="eyebrow rv">Brand</p>
+      <h2 class="rv" data-d="1">The mark, and the one colour it&nbsp;owns.</h2>
+      <p class="rv" data-d="2">Three tapered bars over a letterspaced wordmark, rebuilt as inline SVG from the company&rsquo;s own logo so it stays sharp at every size and inherits colour from its&nbsp;context.</p>
+    </div>
+    <div class="ho-brand rv">
+      <div class="ho-mark-row">
+        <span class="ho-mark ho-mark-lg">{mark}</span>
+        <span class="ho-mark ho-mark-md">{mark}</span>
+        <span class="ho-mark ho-mark-sm">{mark}</span>
+      </div>
+      <div class="ho-lockup">{mark}<span class="ho-wm">Wiseman Residential</span></div>
+    </div>
+    <ul class="ho-rules rv">
+      <li><b>One colour, reserved.</b> <span class="ho-sw ho-sw-i" style="background:#169BAC"></span><code>#169BAC</code> belongs to the mark and to nothing else on the site. Body text, buttons and links never use it.</li>
+      <li><b>It inherits.</b> The SVG is <code>fill="currentColor"</code>, so the mark is teal on cream, cream on the deep ground, and never needs a second file.</li>
+      <li><b>Clear space.</b> One bar-width on every side. Minimum height 18px, below which the taper stops reading.</li>
+      <li><b>Never the placeholder.</b> The generic three-rectangle mark used in early drafts is retired; the bars are tapered, and the taper is the mark.</li>
+    </ul>
+  </section>
+
+  <!-- colour -->
+  <section class="promise" id="colour" data-hd="light">
+    <div class="band wrap wrap-n">
+      <div class="band-head">
+        <p class="eyebrow rv">Colour</p>
+        <h2 class="rv" data-d="1">Twelve tokens, and the contrast each one&nbsp;clears.</h2>
+        <p class="rv" data-d="2">Nothing is a raw hex in a component &mdash; every colour is a named custom property, so a change lands in one place. Each text colour was measured against both grounds it can sit&nbsp;on.</p>
+      </div>
+      <ul class="ho-colours rv">
+{colours}
+      </ul>
+      <p class="cite rv">Ratios measured against <code>--bg</code> cream. AA requires 4.5:1 for body text and 3:1 for large text; every text token above clears it on both the cream and the tinted&nbsp;ground.</p>
+    </div>
+  </section>
+
+  <!-- type -->
+  <section class="band wrap wrap-n" id="type">
+    <div class="band-head">
+      <p class="eyebrow rv">Typography</p>
+      <h2 class="rv" data-d="1">Three faces, three&nbsp;jobs.</h2>
+      <p class="rv" data-d="2">Set from the reference the client chose. Each face has one job and does not take another&nbsp;one.</p>
+    </div>
+    <div class="ho-type rv">
+      <div class="ho-spec">
+        <p class="ho-spec-k">Prata &middot; display only</p>
+        <p class="ho-spec-a" style="font-family:var(--disp-lg)">Los Angeles living</p>
+        <p class="ho-note">Four places on the whole site: the home monogram, the full-bleed heroes, the building hero and the page head. It carries no 500 weight, so it is never asked for one.</p>
+      </div>
+      <div class="ho-spec">
+        <p class="ho-spec-k">Newsreader &middot; everything you read</p>
+        <p class="ho-spec-b">A family-run Los Angeles apartment company.</p>
+        <p class="ho-note">Every heading and every paragraph. Italic is used for pull-quotes and the tagline, never for emphasis inside a sentence.</p>
+      </div>
+      <div class="ho-spec">
+        <p class="ho-spec-k">Montserrat &middot; interface and figures</p>
+        <p class="ho-spec-c">FIND A HOME &nbsp;&middot;&nbsp; <span class="tnum">$4,895&ndash;$5,095</span> &nbsp;&middot;&nbsp; <span class="tnum">72</span> BUILDINGS</p>
+        <p class="ho-note">Buttons, labels, eyebrows and every number. Figures are tabular so columns of rent and bedroom counts line up rather than shimmer.</p>
+      </div>
+    </div>
+    <ul class="ho-rules rv">
+      <li><b>No orphans.</b> Headings never end with a single word on its own line &mdash; non-breaking spaces are written into the copy, not left to chance.</li>
+      <li><b>One scale.</b> Every size is a <code>clamp()</code> between a phone and a desktop value, so nothing steps at a breakpoint.</li>
+      <li><b>Measure.</b> Body copy is capped near 62 characters; captions near 70.</li>
+    </ul>
+  </section>
+
+  <!-- IA -->
+  <section class="promise" id="ia" data-hd="light">
+    <div class="band wrap wrap-n">
+      <div class="band-head">
+        <p class="eyebrow rv">Information architecture</p>
+        <h2 class="rv" data-d="1">Corporate first, renters one click&nbsp;away.</h2>
+        <p class="rv" data-d="2">The structure follows the model the client pointed at &mdash; a company that leads with who it is &mdash; while keeping the person looking for an apartment on a direct path. Five sections, plus a standing <em>Find a home</em>&nbsp;button.</p>
+      </div>
+
+      <div class="ho-ia rv">
+        <div>
+          <h3 class="ho-h3">Top level</h3>
+          <ul class="ho-nav">
+{nav}
+          </ul>
+          <p class="cite">The <em>Find a home</em> button sits outside the five, in teal, on every page &mdash; so the commercial path never competes with the corporate narrative for a nav slot.</p>
+        </div>
+        <div>
+          <h3 class="ho-h3">Page families</h3>
+          <ul class="ho-fam">
+{fams}
+          </ul>
+          <p class="cite">Four templates carry {pages} pages. A new building is a row of data, not a new&nbsp;page design.</p>
+        </div>
+      </div>
+
+      <ul class="ho-rules rv">
+        <li><b>Every building is a real page.</b> {total} of them, each linkable, each with its own office, phone, plans and map &mdash; not a modal over a list.</li>
+        <li><b>Areas are a layer, not a filter.</b> {areas} area pages give Los Angeles neighbourhoods their own addressable content; {streets} named streets appear across the portfolio.</li>
+        <li><b>The leasing system is named, not hidden.</b> Resident and applicant logins are marked as a separate system rather than mixed in with the site&rsquo;s own pages.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- components -->
+  <section class="band wrap wrap-n" id="components">
+    <div class="band-head">
+      <p class="eyebrow rv">Components</p>
+      <h2 class="rv" data-d="1">Ten shared modules, four&nbsp;surfaces.</h2>
+      <p class="rv" data-d="2">The corporate site and every property site draw on the same files. A fix to the map, the search or a rail lands everywhere at&nbsp;once &mdash; which is what makes {total} building pages affordable to&nbsp;maintain.</p>
+    </div>
+    <ul class="ho-mods rv">
+{mods}
+    </ul>
+    <ul class="ho-rules rv">
+      <li><b>One button system.</b> Solid deep teal, cream text, letterspaced caps, square corners. A secondary is the same button with a hairline instead of a fill. There is no third.</li>
+      <li><b>No visible horizontal scrollbars.</b> Rails are driven by arrows and the keyboard; the scrollbar is hidden by design, and the track is focusable so it is still reachable without a mouse.</li>
+      <li><b>Map pins are dots.</b> Plain dots everywhere, flat price pills on search maps only &mdash; no numbers on pins, which read as a count of homes, and no tails.</li>
+    </ul>
+  </section>
+
+  <!-- motion + content rules -->
+  <section class="promise" id="rules" data-hd="light">
+    <div class="band wrap wrap-n">
+      <div class="band-head">
+        <p class="eyebrow rv">Motion and content</p>
+        <h2 class="rv" data-d="1">One curve, and a rule about every&nbsp;sentence.</h2>
+      </div>
+      <div class="values">
+        <div class="value rv" data-d="1">
+          <h3>Motion</h3>
+          <p>A single easing curve across the estate, <code>cubic-bezier(.16, 1, .3, 1)</code>. Pages leave under a cover and arrive with a reveal rather than sliding. Everything is cancelled under <code>prefers-reduced-motion</code>.</p>
+        </div>
+        <div class="value rv" data-d="2">
+          <h3>Figures</h3>
+          <p>Counts, rents and bedroom ranges are computed from the live leasing feed at build time. No page hand-writes a number, so nothing can go stale independently of the data.</p>
+        </div>
+        <div class="value rv" data-d="3">
+          <h3>Claims</h3>
+          <p>Anything only the company can confirm shows a <span class="chip">[CLIENT]</span> marker instead of a plausible guess. The site ships honest and fills in as answers arrive.</p>
+        </div>
+      </div>
+      <ul class="ho-rules rv">
+        <li><b>Fair housing is a writing rule.</b> Copy describes the apartment, never the household. Neighbourhood text stays on transit, distance, parks and named streets. The Equal Housing mark appears in every footer at no less than the size of the Wiseman mark.</li>
+        <li><b>Accessibility is built in.</b> WCAG 2.1 AA: contrast measured on both grounds, visible focus on every interactive element including scroll containers, keyboard paths through the filters, the map and every rail, semantic lists and sequential headings. No third-party overlay &mdash; they measurably increase litigation risk for housing sites.</li>
+        <li><b>Copy is short on purpose.</b> Roughly 450 words on the home page. Where a sentence is doing no work, it is cut rather than softened.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- roadmap -->
+  <section class="band wrap wrap-n" id="roadmap">
+    <div class="band-head">
+      <p class="eyebrow rv">Roadmap</p>
+      <h2 class="rv" data-d="1">Five phases to&nbsp;launch.</h2>
+      <p class="rv" data-d="2">Durations are working estimates for one designer-developer. Phases 1 and 2 run in parallel; only the items marked as Wiseman&rsquo;s can stall the&nbsp;schedule.</p>
+    </div>
+
+    <ol class="ho-phases rv">
+      <li>
+        <p class="ho-ph-n tnum">Phase 0 &middot; ~1 week</p>
+        <div>
+          <h3>Settle the record</h3>
+          <p>Entirely on Wiseman, and nothing else can be written until it is done. We hand over the fact-check dossier and the claims sheet every page will be built against.</p>
+          <p class="ho-them"><b>Wiseman provides</b> a founding year in writing &middot; a decision on &ldquo;over 45 years&rdquo; and &ldquo;100+ communities&rdquo; &middot; the responsible broker entity and DRE number &middot; leadership names and bios &middot; a values statement.</p>
+        </div>
+      </li>
+      <li>
+        <p class="ho-ph-n tnum">Phase 1 &middot; ~3&ndash;4 weeks</p>
+        <div>
+          <h3>The corporate site</h3>
+          <p>All {pages} pages to production, the legal set to counsel-review draft, a full accessibility pass, a redirect map from every existing URL, analytics and search console.</p>
+          <p class="ho-them"><b>Wiseman provides</b> vector logo files &middot; which Instagram handle is canonical &middot; counsel review of the legal drafts &middot; corrected address of record on CSLB, BBB and Archinect.</p>
+        </div>
+      </li>
+      <li>
+        <p class="ho-ph-n tnum">Phase 2 &middot; ~2 weeks, parallel</p>
+        <div>
+          <h3>Live leasing data</h3>
+          <p>Today&rsquo;s snapshot is replaced by the RentCafe / Yardi API, so availability, rent, plans and office hours refresh on their own and apply links deep-link into the existing flow.</p>
+          <p class="ho-them"><b>Wiseman provides</b> API credentials and the account manager &middot; confirmation of canonical property IDs &middot; a fix for the Motor Tides listing URL, which currently reads <code>motor-tabor-by-wiseman</code>.</p>
+        </div>
+      </li>
+      <li>
+        <p class="ho-ph-n tnum">Phase 3 &middot; ~2 weeks</p>
+        <div>
+          <h3>Motor Tides</h3>
+          <p>The flagship gets a dedicated property site on this same system &mdash; hero, floor plans, amenities, neighbourhood, tour booking &mdash; and proves the property template before it is copied.</p>
+          <p class="ho-them"><b>Wiseman provides</b> written rights confirmation for the Vimeo tour library &middot; floor plan files and a signed-off amenity list &middot; leasing phone, hours and tour method &middot; a decision on a standalone domain.</p>
+        </div>
+      </li>
+      <li>
+        <p class="ho-ph-n tnum">Phase 4 &middot; ~1 week, then rolling</p>
+        <div>
+          <h3>Motor Midway, then the portfolio</h3>
+          <p>The proven template is applied to Motor Midway &mdash; same street, same architect &mdash; then rolled out area by area, heaviest first.</p>
+          <p class="ho-them"><b>Wiseman provides</b> per-building photography or a decision to shoot &middot; any building-specific copy worth keeping &middot; on-site manager names and hours.</p>
+        </div>
+      </li>
+      <li>
+        <p class="ho-ph-n tnum">Phase 5 &middot; ~1 week</p>
+        <div>
+          <h3>Cutover and handover</h3>
+          <p>DNS cutover with the full redirect map so no existing link breaks, monitoring and analytics handed over, a written runbook and a working session on updating content.</p>
+          <p class="ho-them"><b>Wiseman provides</b> DNS access &middot; final sign-off &middot; who owns the site internally after launch.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- asks -->
+  <section class="promise" id="asks" data-hd="light">
+    <div class="band wrap wrap-n">
+      <div class="band-head">
+        <p class="eyebrow rv">The short version</p>
+        <h2 class="rv" data-d="1">What we need from&nbsp;Wiseman.</h2>
+        <p class="rv" data-d="2">Everything else is ours. These are the items that decide whether the schedule&nbsp;holds.</p>
+      </div>
+      <ul class="ho-asks rv">
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>A founding year, in writing</h4><p>LinkedIn says 1980, the contractor licence carries 1982, the Archinect profile says 1985, the Better Business Bureau has 1987. No page states a year until one is chosen.</p></li>
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>A decision on &ldquo;45 years&rdquo; and &ldquo;100+ communities&rdquo;</h4><p>Both are on the current homepage; neither is supported by any public source we could find, and the live feed lists {total} buildings.</p></li>
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>Responsible broker entity and DRE number</h4><p>Every principal&rsquo;s licence reads as expired and no company record exists. The footer needs a correct one before launch.</p></li>
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>Leadership, values and history in the company&rsquo;s words</h4><p>The only name any public source supports is founder Isaac Cohanzad.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 2</span><h4>RentCafe / Yardi API access</h4><p>The single biggest upgrade available: with it, the site maintains itself.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 1</span><h4>Vector logo files</h4><p>The mark has been rebuilt from a 600px PNG; the original vector will be sharper at every size.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 3</span><h4>Rights confirmation for the video library</h4><p>{vimeo} embeddable clips are already owned &mdash; a real asset &mdash; but they carry a third-party watermark.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 3</span><h4>A photography decision</h4><p>The existing library is interiors only. A half-day shoot with a licensed drone operator is the only way to get the actual buildings and streets on screen.</p></li>
+        <li><span class="ho-tag ho-tag-later">Phase 1</span><h4>Canonical social handles</h4><p>Two Instagram accounts are live and the site data points at the less-followed one.</p></li>
+        <li><span class="ho-tag ho-tag-later">Phase 5</span><h4>DNS access and an internal owner</h4><p>Needed only at cutover, but worth identifying early.</p></li>
+      </ul>
+      <p class="cite rv">Dated claims about the company are sourced to public records or to reporting by Urbanize LA and The Real Deal, each checked against the source rather than taken from a summary. Prepared by UnitPulse for Wiseman Residential &mdash; a proposal document, not a Wiseman Residential&nbsp;publication.</p>
+    </div>
+  </section>
+
+</main>
+""".format(mark=BRAND_SVG, colours=colour_rows, nav=nav_rows, fams=fam_rows, mods=mod_rows,
+           total=TOTAL, areas=len(AREA_ORDER), streets=streets_total, pages=95, vimeo=159)
+    page += tail(groups)
+    write("handoff.html", page)
 
 
 def build_sitemap(groups, areas, props):
