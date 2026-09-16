@@ -26,7 +26,13 @@ CONCEPTS = ["golden-hour", "crossing", "open-door"]
 PAGES = ["index", "floorplans", "amenities", "gallery", "tours", "map", "contact"]
 
 VERCEL = {
-    "cleanUrls": True,
+    # cleanUrls MUST stay off. With it on, /golden-hour/index.html 308s to
+    # /golden-hour — no trailing slash — and the browser then resolves every
+    # relative link on that page against the ROOT: "floorplans.html" becomes
+    # /floorplans.html, which 404s. A visitor arriving from a hub card got a
+    # home page whose entire nav, footer and CTAs were dead. Verified against
+    # the live deploy before changing.
+    "cleanUrls": False,
     "trailingSlash": False,
     "headers": [
         {

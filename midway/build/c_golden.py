@@ -100,10 +100,10 @@ def home():
         space and the bedrooms, and a wall of glass onto the patio. 692 to 909 square feet.</p>
     </header>
     <div class="gh-grid">
-      <figure class="fig rv g1">{C.img('u704-kdl-patio', 'Open-concept kitchen, dining and living room with patio', sizes='(max-width:900px) 100vw, 58vw')}<figcaption class="cap">Living &middot; Kitchen &middot; Patio</figcaption></figure>
-      <figure class="fig rv d1 g2">{C.img('u709-kitchen', 'Open-concept kitchen with stainless-steel appliances', sizes='(max-width:900px) 100vw, 38vw')}<figcaption class="cap">Full-size kitchens</figcaption></figure>
-      <figure class="fig rv d2 g3">{C.img('u17-bed-closet', 'Large bedroom with a mirrored closet, recessed lighting and vinyl flooring', sizes='(max-width:900px) 100vw, 38vw')}<figcaption class="cap">Mirrored closets</figcaption></figure>
-      <figure class="fig rv d3 g4">{C.img('u702-bath', 'Bathroom with glass-door shower-bath and vanity cabinet storage', sizes='(max-width:900px) 100vw, 58vw')}<figcaption class="cap">A bath for every bedroom</figcaption></figure>
+      <figure class="rv g1"><div class="fig">{C.img('u704-kdl-patio', 'Open-concept kitchen, dining and living room with patio', sizes='(max-width:900px) 100vw, 58vw')}</div><figcaption class="cap">Living &middot; Kitchen &middot; Patio</figcaption></figure>
+      <figure class="rv d1 g2"><div class="fig">{C.img('u709-kitchen', 'Open-concept kitchen with stainless-steel appliances', sizes='(max-width:900px) 100vw, 38vw')}</div><figcaption class="cap">Full-size kitchens</figcaption></figure>
+      <figure class="rv d2 g3"><div class="fig">{C.img('u17-bed-closet', 'Large bedroom with a mirrored closet, recessed lighting and vinyl flooring', sizes='(max-width:900px) 100vw, 38vw')}</div><figcaption class="cap">Mirrored closets</figcaption></figure>
+      <figure class="rv d3 g4"><div class="fig">{C.img('u702-bath', 'Bathroom with glass-door shower-bath and vanity cabinet storage', sizes='(max-width:900px) 100vw, 58vw')}</div><figcaption class="cap">A bath for every bedroom</figcaption></figure>
     </div>
     <div class="actions rv"><a class="btn outline" href="gallery.html">See all {D.GALLERY_COUNT} photographs</a></div>
   </div>
@@ -180,13 +180,13 @@ def home():
     <div class="gh-split-copy">
       <p class="kick rv">8:50 &middot; Evening</p>
       <h2 class="section-title rv d1">The rest of the evening<br>is <em>outside.</em></h2>
-      <p class="lede rv d1">Downtown Culver City, three studio lots and a Metro stop are all
+      <p class="lede rv d1">Downtown Culver City, two studio lots and Apple TV+&rsquo;s campus and a Metro stop are all
         inside a mile. Palms station on the E Line is the closest, four tenths of a mile up
         Motor Avenue; the 10 and the 405 are both a short drive; and the Ballona Creek Trail
         carries on west to the ocean.</p>
-      <ul class="score-notes rv d2">
-        {''.join(f'<li><b>{lbl}</b><span>{note}</span></li>' for _n, lbl, note in D.SCORES)}
-      </ul>
+      <div class="stats">
+        {''.join(f"<div class='rv'><b>{n}</b><span>{lbl}</span><p>{note}</p></div>" for n, lbl, note in D.SCORES)}
+      </div>
       <div class="actions rv d2"><a class="btn outline" href="map.html">Open the map</a></div>
     </div>
   </div>

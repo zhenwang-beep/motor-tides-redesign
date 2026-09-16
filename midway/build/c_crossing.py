@@ -127,7 +127,7 @@ def home():
       Midway is the building <em>at the crossing.</em></h2>
     <p class="lede rv d1">That angle is why the Walk Score is 89 and the Bike Score is 82.
       A diagonal meets more of the grid than a straight line does, so more is close in more
-      directions &mdash; downtown Culver City, three studio lots, the E Line, the Ballona
+      directions &mdash; downtown Culver City, two studio lots and Apple TV+&rsquo;s campus, the E Line, the Ballona
       Creek Trail, and on-ramps for both the 10 and the 405.</p>
   </div>
 </section>
@@ -177,11 +177,11 @@ def home():
       stainless appliances, central heating and air, vinyl flooring, mirrored closets and a
       private patio on every plan.</p>
     <div class="cr-res-grid">
-      <figure class="fig rv">{C.img('u703-kdl-patio', 'Open-concept kitchen, dining, living room and patio', sizes='(max-width:900px) 100vw, 50vw')}<figcaption class="cap">01 &middot; Living</figcaption></figure>
-      <figure class="fig rv d1">{C.img('u708-kitchen', 'Kitchen and dining space', sizes='(max-width:900px) 100vw, 25vw')}<figcaption class="cap">02 &middot; Kitchen</figcaption></figure>
-      <figure class="fig rv d2">{C.img('u704-bed-patio', 'Large bedroom with mirrored closet, built-in organizers and a patio', sizes='(max-width:900px) 100vw, 25vw')}<figcaption class="cap">03 &middot; Bedroom</figcaption></figure>
-      <figure class="fig rv d3">{C.img('u703-patio', 'Large patio', sizes='(max-width:900px) 100vw, 25vw')}<figcaption class="cap">04 &middot; Patio</figcaption></figure>
-      <figure class="fig rv d4">{C.img('u702-bath', 'Bathroom with glass-door shower-bath and vanity cabinet storage', sizes='(max-width:900px) 100vw, 25vw')}<figcaption class="cap">05 &middot; Bath</figcaption></figure>
+      <figure class="rv"><div class="fig">{C.img('u703-kdl-patio', 'Open-concept kitchen, dining, living room and patio', sizes='(max-width:900px) 100vw, 50vw')}</div><figcaption class="cap">01 &middot; Living</figcaption></figure>
+      <figure class="rv d1"><div class="fig">{C.img('u708-kitchen', 'Kitchen and dining space', sizes='(max-width:900px) 100vw, 25vw')}</div><figcaption class="cap">02 &middot; Kitchen</figcaption></figure>
+      <figure class="rv d2"><div class="fig">{C.img('u704-bed-patio', 'Large bedroom with mirrored closet, built-in organizers and a patio', sizes='(max-width:900px) 100vw, 25vw')}</div><figcaption class="cap">03 &middot; Bedroom</figcaption></figure>
+      <figure class="rv d3"><div class="fig">{C.img('u703-patio', 'Large patio', sizes='(max-width:900px) 100vw, 25vw')}</div><figcaption class="cap">04 &middot; Patio</figcaption></figure>
+      <figure class="rv d4"><div class="fig">{C.img('u702-bath', 'Bathroom with glass-door shower-bath and vanity cabinet storage', sizes='(max-width:900px) 100vw, 25vw')}</div><figcaption class="cap">05 &middot; Bath</figcaption></figure>
     </div>
     <div class="actions rv"><a class="btn outline" href="gallery.html">All {D.GALLERY_COUNT} photographs</a></div>
   </div>

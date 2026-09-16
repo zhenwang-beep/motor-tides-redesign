@@ -177,9 +177,14 @@ def gallery(c) -> str:
     for i, (_g, items) in enumerate(D.GALLERY):
         for slug, alt in items:
             total += 1
+            # A <figure> is not focusable and announces nothing, so the
+            # full-size view of all 47 photographs was mouse-only. The real
+            # control is a button; site.js still delegates from .gal.
             figs.append(f'<figure data-group="g{i}">'
+                        f'<button class="gal-open" type="button">'
                         f'{C.img(slug, alt, sizes="(max-width:560px) 100vw, (max-width:960px) 50vw, 33vw", full=True)}'
-                        f'</figure>')
+                        f'<span class="sr-only">Open photograph: {alt}</span>'
+                        f'</button></figure>')
 
     return f"""<main id="main">
 {c.phero('gallery',
@@ -218,8 +223,9 @@ def tours(c) -> str:
       <article class="tour rv">
         <div class="frame">{C.img(posters[i], f'Still from {label.lower()}', sizes='(max-width:700px) 100vw, 33vw', cls='tour-poster')}</div>
         <div class="meta">
-          <b>{label}</b>
-          <button class="btn outline" type="button" data-tour="{mid}">Start tour</button>
+          <b id="tour-{i}">{label}</b>
+          <button class="btn outline" type="button" data-tour="{mid}"
+                  aria-label="Start {label}">Start tour</button>
         </div>
       </article>""")
 
@@ -298,7 +304,7 @@ def contact(c) -> str:
 
 <section class="sec-tight">
   <div class="wrap contact-grid">
-    <form class="contact-form rv" data-demo novalidate aria-labelledby="ct-form-h">
+    <form class="contact-form rv" data-demo method="post" action="#" novalidate aria-labelledby="ct-form-h">
       <h2 class="sr-only" id="ct-form-h">Send the leasing office a message</h2>
       <div class="form-grid">
         <div class="field"><label for="fn">First name</label><input id="fn" name="fn" autocomplete="given-name" required></div>
@@ -321,6 +327,7 @@ def contact(c) -> str:
         <a class="btn outline" href="{D.APPLY}" target="_blank" rel="noopener">Apply online</a>
       </div>
       <p class="form-note fine" data-demo-note tabindex="-1" hidden></p>
+      <noscript><p class="form-note fine">This is a design concept &mdash; the form is not wired to a mailbox. Please call <a href="{D.PHONE_TEL}">{D.PHONE_DISPLAY}</a> during office hours.</p></noscript>
     </form>
 
     <aside class="contact-info rv d1" aria-labelledby="ct-info-h">

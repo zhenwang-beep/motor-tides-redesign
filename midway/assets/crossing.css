@@ -82,12 +82,16 @@
   gap:clamp(20px,4vw,64px);align-items:end}
 .cr-site-head .section-title{margin-bottom:0}
 @media(max-width:860px){.cr-site-head{grid-template-columns:1fr;gap:20px}}
-.cr .map-frame{border-color:var(--hair-dark);background:rgba(243,240,231,.04)}
+/* These were written for the dark site-plan section on the home page, but
+   were scoped concept-wide — so on the light map page The Crossing drew a
+   frame and a button border in the on-dark colour, i.e. invisible. */
+.cr .dark .map-frame{border-color:var(--hair-dark);background:rgba(243,240,231,.04)}
 .cr .map-layout{margin-top:clamp(26px,3.4vw,40px)}
 .cr .map-list button{font-family:inherit}
 .cr .map-list .m-dist{letter-spacing:.06em}
 .cr .map-toolbar button{font-family:var(--mono);font-size:var(--t-caption);
-  letter-spacing:.1em;text-transform:uppercase;border-color:var(--hair-dark)}
+  letter-spacing:.1em;text-transform:uppercase;border-color:var(--hair)}
+.cr .dark .map-toolbar button{border-color:var(--hair-dark)}
 .cr .map-note{font-family:var(--mono);font-size:var(--t-caption);letter-spacing:.04em}
 
 /* ── Section / levels ────────────────────────────────────────────────────── */
@@ -113,16 +117,18 @@
 /* ── Residences grid ─────────────────────────────────────────────────────── */
 .cr-res-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(12px,1.6vw,20px);
   margin-top:clamp(32px,4vw,50px)}
-.cr-res-grid figure:first-child{grid-column:1/3;grid-row:1/3}
+/* Same rule as golden.css: the clip goes on the inner .fig, never on the
+   <figure> that also holds the caption. */
+.cr-res-grid figure:first-child{grid-column:1/3;grid-row:1/3;display:flex;flex-direction:column}
 .cr-res-grid .fig{aspect-ratio:1;overflow:hidden}
-.cr-res-grid figure:first-child .fig{aspect-ratio:auto;height:100%}
+.cr-res-grid figure:first-child .fig{aspect-ratio:auto;flex:1;min-height:0}
 .cr-res-grid img{transition:transform 1.1s var(--ease-out)}
 .cr-res-grid figure:hover img{transform:scale(1.04)}
 .cr-res-grid .cap{font-family:var(--mono);letter-spacing:.1em}
 @media(max-width:900px){
   .cr-res-grid{grid-template-columns:1fr 1fr}
-  .cr-res-grid figure:first-child{grid-column:1/-1;grid-row:auto}
-  .cr-res-grid figure:first-child .fig{aspect-ratio:16/10}
+  .cr-res-grid figure:first-child{grid-column:1/-1;grid-row:auto;display:block}
+  .cr-res-grid figure:first-child .fig{aspect-ratio:16/10;flex:none}
 }
 @media(max-width:520px){.cr-res-grid{grid-template-columns:1fr}}
 

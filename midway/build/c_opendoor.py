@@ -187,7 +187,7 @@ def home():
   <div class="wrap">
     <p class="kick rv">Outside the front one</p>
     <h2 class="section-title rv d1">What is <em>within reach.</em></h2>
-    <p class="lede rv d1">Downtown Culver City, three studio lots and a Metro stop are all
+    <p class="lede rv d1">Downtown Culver City, two studio lots and Apple TV+&rsquo;s campus and a Metro stop are all
       inside a mile of the front door. Palms station on the E Line is the closest of them,
       and the Ballona Creek Trail carries on west to the ocean.</p>
     <div class="stats">

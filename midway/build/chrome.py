@@ -161,6 +161,7 @@ def head(*, title, desc, concept_css, body_class="", extra_head="") -> str:
 <link href="{FONTS}" rel="stylesheet">
 <link rel="stylesheet" href="{v('../assets/base.css')}">
 <link rel="stylesheet" href="{v(concept_css)}">
+<noscript><style>.rv{{opacity:1;transform:none}}</style></noscript>
 {extra_head}</head>
 <body class="{body_class}">
 <a class="skip-link" href="#main">Skip to content</a>

@@ -44,6 +44,12 @@
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
+/* The `hidden` attribute only carries `display:none` from the UA sheet, so any
+   author rule that sets `display` beats it. `.plan{display:grid}` did exactly
+   that: filtering Floor Plans to "3 bedrooms" set hidden on three cards, moved
+   the counter to "1 plan", and left all four cards on screen. This makes the
+   attribute mean what it says, here and for the gallery filter. */
+[hidden]{display:none!important}
 html{overflow-x:clip;scrollbar-gutter:stable;-webkit-text-size-adjust:100%}
 html:has(dialog[open]),html:has(.mnav.open){overflow:hidden}
 body{
@@ -158,9 +164,12 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spacin
 .mbtn{display:none;place-items:center;width:44px;height:44px;background:none;border:0;cursor:pointer}
 .mbtn svg{width:20px;height:20px}
 @media(max-width:1100px){
+  /* With .hnav hidden its margin-left:auto goes with it, so the auto margin
+     has to move to the CTA — put it on the menu button instead and the CTA
+     stays stranded next to the lockup while only the button goes right. */
   .hnav{display:none}
-  .mbtn{display:grid;margin-left:auto}
-  .hd .cta{margin-left:0}
+  .hd .cta{margin-left:auto}
+  .mbtn{display:grid;margin-left:8px}
 }
 @media(max-width:520px){
   :root{--hd-h:62px}
@@ -269,7 +278,11 @@ figure{margin:0;position:relative}
   font-size:var(--t-small);transition:background-color .25s,color .25s,border-color .25s}
 .gal-filter button[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 .gal{columns:3;column-gap:16px;margin-top:34px}
-.gal figure{break-inside:avoid;margin-bottom:16px;cursor:zoom-in;position:relative;background:var(--paper-warm)}
+.gal figure{break-inside:avoid;margin-bottom:16px;position:relative;background:var(--paper-warm)}
+/* The trigger is a <button> so it is focusable and announced; it is stripped
+   back to looking exactly like the photograph it wraps. */
+.gal .gal-open{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in}
+.gal .gal-open:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .gal img{width:100%;height:auto;transition:opacity .4s ease,transform .7s var(--ease-out)}
 .gal figure:hover img{transform:scale(1.03)}
 .gal figure::after{content:"";position:absolute;inset:0;background:var(--ink);opacity:0;transition:opacity .3s}
@@ -456,6 +469,10 @@ dialog.lb::backdrop{background:rgba(4,52,58,.94)}
 @media(max-width:560px){.ft-grid{grid-template-columns:1fr;gap:30px}.ft-bottom{flex-direction:column;align-items:flex-start}}
 
 /* ── Reduced motion ──────────────────────────────────────────────────────── */
+/* Scroll-reveal starts at opacity:0 and is cleared by JS. With JS blocked or
+   site.js failing, that hid essentially all body copy on all 21 pages. */
+@media(scripting:none){.rv{opacity:1;transform:none}}
+
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
     transition-duration:.01ms!important;scroll-behavior:auto!important}

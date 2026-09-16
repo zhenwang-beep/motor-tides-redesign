@@ -80,7 +80,7 @@ COMMUNITY_AMENITIES = [
     ("Garage for Resident Parking", "Parking inside the building, off the street."),
     ("Controlled Access Property","A controlled door between the sidewalk and the stairs."),
     ("Elevator",                  "Seven floors, served."),
-    ("Bike Racks",                "Storage for the 82 Bike Score to be worth anything."),
+    ("Bike Racks",                "Somewhere to keep the bike the 82 Bike Score assumes you own."),
     ("Recycling",                 "On site."),
 ]
 
@@ -100,6 +100,21 @@ PET_POLICY = [
     "Please check with the resident manager regarding the pet deposit and monthly rent.",
     "Rules are subject to change at any time.",
 ]
+
+# ── Quoted from the live homepage ──────────────────────────────────────────
+# These three claims were flagged as unsourced because they were not in this
+# file — but each is the property's own published copy, quoted from
+# motormidway.wisemanresidential.com. Recording them here gives them the same
+# provenance as everything else, so nothing on the sites asserts a fact this
+# file cannot back.
+LIVE_CLAIMS = {
+    "new_construction": "Motor Midway is a brand-new construction featuring one-, two, "
+                        "and three-bedroom units designed with you in mind.",
+    "ground_floor":     "And with commercial spaces on the ground level, essential services "
+                        "and shopping are just an elevator ride away.",
+    "freeways":         "Nestled near the 405 and 10 freeways, you can effortlessly access "
+                        "all the vibrant attractions and business districts Los Angeles offers.",
+}
 
 # ── Scores ──────────────────────────────────────────────────────────────────
 SCORES = [("89", "Walk Score", "Most errands can be done on foot."),

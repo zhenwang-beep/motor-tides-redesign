@@ -180,12 +180,19 @@
   /* ── Tours: load Matterport only on request (they are heavy) ───────────── */
   [].forEach.call(document.querySelectorAll('[data-tour]'), function (btn) {
     btn.addEventListener('click', function () {
-      var frame = btn.closest('.tour').querySelector('.frame');
+      var card = btn.closest('.tour');
+      var frame = card.querySelector('.frame');
       var id = btn.dataset.tour;
-      frame.innerHTML = '<iframe title="Matterport 360 tour" allowfullscreen '
+      var label = btn.getAttribute('aria-label') || 'Matterport 360 tour';
+      frame.innerHTML = '<iframe title="' + label + '" allowfullscreen '
         + 'allow="xr-spatial-tracking" loading="lazy" '
         + 'src="https://my.matterport.com/show/?m=' + id + '"></iframe>';
-      btn.closest('.tour').querySelector('.meta .btn').remove();
+      // Removing the button the user is standing on drops focus to <body>,
+      // which throws a keyboard user back to the top of the document. Move
+      // focus into the tour that just opened instead.
+      var iframe = frame.querySelector('iframe');
+      if (iframe) { iframe.setAttribute('tabindex', '0'); iframe.focus(); }
+      btn.remove();
     });
   });
 })();
