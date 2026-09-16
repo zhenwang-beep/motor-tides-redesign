@@ -656,3 +656,74 @@
 
   d.addEventListener('cancel', function (e) { e.preventDefault(); d.close(); });
 })();
+
+/* ---- history: the year index drives the rail ----------------------------
+   The years ship as real anchors (href="#h-origins"), so with JavaScript off
+   they still jump to the chapter and still deep-link — Morgan sets
+   URLhashListener:false and no per-entry ids, so you cannot send anyone "the
+   1959 one". Here we take the click back and scroll the RAIL instead of the
+   page, which keeps the reader's vertical position, then mirror the rail's
+   own scrolling back onto the index with aria-current so the state is
+   announced and not merely coloured. */
+(function historyYears () {
+  var nav = document.querySelector('.tl-years');
+  var track = document.querySelector('.tl.rail-track');
+  if (!nav || !track) return;
+  var links = [].slice.call(nav.querySelectorAll('.tl-yr'));
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+  function cards () { return [].slice.call(track.children); }
+
+  function mark (i) {
+    links.forEach(function (a, n) {
+      if (n === i) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  }
+
+  links.forEach(function (a, i) {
+    a.addEventListener('click', function (e) {
+      var card = document.getElementById(a.hash.slice(1));
+      if (!card) return;
+      /* stacked (phone): let the anchor do its normal job */
+      if (getComputedStyle(track).display !== 'flex') return;
+      e.preventDefault();
+      var items = cards();
+      var left = card.offsetLeft - items[0].offsetLeft;
+      track.scrollTo({ left: left, behavior: reduce ? 'auto' : 'smooth' });
+      mark(i);
+      /* Hold the mark the reader just asked for. The rail shows three-and-a-bit
+         chapters, so the LAST TWO share the final scroll position: asking for
+         2018-24 scrolls to the same place as asking for 2025-now, and without
+         this the scroll handler would immediately repaint the mark onto
+         whichever chapter happens to sit at the left edge — answering a
+         question the reader did not ask. Manual scrolling takes it back. */
+      lock = true;
+      clearTimeout(lockT);
+      lockT = setTimeout(function () { lock = false; }, 900);
+      /* the hash is still worth having for a shared link */
+      if (history.replaceState) history.replaceState(null, '', a.hash);
+    });
+  });
+
+  var raf = 0, lock = false, lockT = 0;
+  track.addEventListener('scroll', function () {
+    if (raf) return;
+    raf = requestAnimationFrame(function () {
+      raf = 0;
+      if (lock) return;
+      /* the chapter at the left edge — the scrubber convention. Deliberately
+         NO "at the end, say the last" rule here: the reader can see three
+         chapters at once, so the left edge is the honest answer to "where am
+         I", and jumping the mark to the last one at max scroll made the index
+         disagree with the arrow the reader had just pressed. */
+      var items = cards(), x = track.scrollLeft, l0 = items[0].offsetLeft;
+      var best = 0, bd = Infinity;
+      items.forEach(function (el, i) {
+        var d = Math.abs((el.offsetLeft - l0) - x);
+        if (d < bd) { bd = d; best = i; }
+      });
+      mark(best);
+    });
+  }, { passive: true });
+})();

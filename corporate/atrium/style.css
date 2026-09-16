@@ -1982,68 +1982,114 @@ dialog.fmodal.is-closing::backdrop{ animation:fscrim-out .2s var(--ease,cubic-be
 }
 
 /* ---- history timeline (home §9) — horizontal rail -----------------------
-   Horizontal, on the shared rail (core/rail.js + rail.css): hidden scrollbar,
-   arrows as the control, trackpad and touch still native. That component is
-   also where the accessibility lives, which is the reason to reuse it rather
-   than hand-roll a scroller — it gives the track tabindex="0" with
-   ArrowLeft/Right + Home/End, labels and disables the arrows at each end,
-   pulls a Tab-focused card into view, and honours prefers-reduced-motion.
-   Two things it will NOT do, both deliberate: it never stamps role="group"
-   on an <ol>, so these stay five list items a screen reader can count, and
-   it never draws its own focus ring — that now lives in core/rail.css.
+   Horizontal on the shared rail (core/rail.js + rail.css): hidden scrollbar,
+   arrows and the year index as the controls, trackpad and touch still native.
+   Reusing that component rather than hand-rolling a scroller is what buys the
+   accessibility — it gives the track tabindex="0" with ArrowLeft/Right and
+   Home/End, labels and disables the arrows at each end, pulls a Tab-focused
+   chapter into view, honours prefers-reduced-motion, and refuses to stamp
+   role="group" on an <ol>, so these stay five list items a reader can count.
 
-   Morgan's carousel is the counter-example this is built against: it shows
-   ONE entry at a time, disables mouse AND touch drag, hides its year rail
-   under 767px and sets URLhashListener:false. On a phone its entire company
-   history is ten taps on a chevron with no position indicator and no way to
-   link a single moment. Here every chapter keeps an anchor id, the count
-   reads "01 / 05", and under 860px the rail unrolls into a plain vertical
-   stack — no horizontal scrolling on a phone at all, which is also what
-   keeps WCAG 1.4.10 reflow honest.
+   Under 860px the rail unrolls into a plain vertical stack: no horizontal
+   scrolling on a phone at all, which is both better reading and what keeps
+   WCAG 1.4.10 reflow honest. Morgan's carousel does the opposite — it hides
+   its year rail under 767px and disables drag, leaving a phone tapping
+   chevrons through a century with no position indicator. */
 
-   --rail-gap:0 so the chapters' own top rules butt together into ONE
-   continuous line across the whole rail — the horizontal spine. Hairline
-   dividers separate the chapters instead of whitespace, the same ledger
-   vocabulary as .values. */
-.tl-rail{ margin-top:clamp(30px,4.4vh,52px); }
+/* ---- the year index: its own line, and the scroll control --------------
+   Morgan's one genuinely clever device, rebuilt. A single hairline runs the
+   width of the row; each year sits ON it with the page's own background, so
+   the label knocks the rule out and you get one continuous line interrupted
+   by five stops. Spacing is even because this is an INDEX, not a scale — the
+   date ranges carry the duration, and the rule never pretends to be a ruler.
+   They are real anchors, so they deep-link and work with JS off. */
+/* one control row: the year index takes the space it needs, the arrows sit at
+   the far right on the same line — the rule runs behind BOTH, so the row reads
+   as a single span of time with its controls on the end rather than as two
+   stacked widgets. It also keeps the arrows off the bottom edge, away from the
+   page scrollbar. */
+.tl-index{ display:flex; align-items:center; gap:clamp(12px,2vw,28px);
+  margin-top:clamp(26px,3.6vh,44px); }
+.tl-years{ position:relative; display:flex; flex-wrap:wrap; gap:0 clamp(14px,2.4vw,40px);
+  align-items:center; flex:1 1 auto; min-width:0; }
+.tl-years::before{ content:""; position:absolute; left:0; right:0; top:50%;
+  border-top:1px solid var(--line); }
+.tl-yr{ position:relative; background:var(--bg); padding:0 clamp(8px,1vw,14px);
+  color:var(--ink-3); text-decoration:none; line-height:1.9;
+  transition:color var(--t-ui,.28s) var(--ease,cubic-bezier(.16,1,.3,1)); }
+.tl-yr .tnum{ font-family:var(--disp); font-weight:500; font-size:clamp(.95rem,1.3vw,1.16rem);
+  white-space:nowrap; }
+.tl-yr:first-child{ padding-left:0; }
+.tl-yr:hover{ color:var(--ink); }
+.tl-yr[aria-current="true"]{ color:var(--accent-ink); }
+.tl-yr:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; border-radius:2px; }
+
+.tl-rail{ margin-top:0; }
+.tl-rail .tl{ margin-top:clamp(22px,3vh,34px); }
 .tl{ list-style:none; margin:0; padding:0; --rail-gap:0; }
 
-.tl-e{ flex:0 0 clamp(266px,28vw,366px); padding:0 clamp(20px,2.1vw,32px);
-  border-right:1px solid var(--line-2); }
-.tl-e:first-child{ padding-left:0; }
-.tl-e:last-child{ border-right:0; padding-right:0; }
+/* Separation is GAP, not per-card padding, and the track is never shifted.
+   Two bugs came out of doing it the other way. Padding exceptions on the first
+   and last card (`padding-left:0` / `padding-right:0`) made those two cards
+   30px wider — and because the plate is sized by aspect-ratio off the CONTENT
+   width, their plates were 23px taller and the five rules landed at three
+   different heights. Compensating with a negative margin-left on the track
+   then broke scroll-snapping outright: it shifts the items relative to the
+   snapport, so the first card stopped being a reachable snap position —
+   scrollLeft = 0 settled at 343 and the Prev arrow could not get back to
+   chapter one. With a plain gap every card is identical, chapter one's text
+   sits on the page gutter by itself, and snapping is left alone. */
+.tl{ --rail-gap:clamp(26px,3vw,46px); }
+.tl-e{ flex:0 0 clamp(250px,26vw,340px); }
 
-.tl-y{ margin:0 0 clamp(13px,1.5vh,19px); }
-.tl-y .tnum{ font-family:var(--disp); font-weight:500; letter-spacing:.005em;
-  font-size:clamp(1.05rem,1.5vw,1.34rem); color:var(--ink); white-space:nowrap; }
+/* Figure and plate share ONE aspect-ratio so .tl-c's border-top lands at the
+   same height in every card and the five rules read as one line across the
+   rail. A card that swapped a photograph for a plate of a different height
+   would break that line. */
+.tl-fig, .tl-plate{ aspect-ratio:4/3; overflow:hidden; position:relative;
+  margin:0 0 clamp(15px,1.8vh,22px); background:var(--bg-2); }
+.tl-fig img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-.tl-c{ border-top:1px solid var(--line); padding-top:clamp(17px,2.1vh,25px);
+/* the two chapters with no honest photograph: a dispute between four records,
+   and a magazine profile. Typographic, never stock. */
+.tl-plate{ display:grid; place-content:center; gap:.1rem 1.1rem;
+  grid-template-columns:repeat(2,auto); padding:clamp(16px,2vw,26px);
+  background:var(--bg-2); }
+.tl-plate .tnum{ font-family:var(--disp); font-weight:500; color:var(--ink);
+  font-size:clamp(1.15rem,2.1vw,1.6rem); opacity:.34; text-align:center; }
+.tl-plate.quote{ grid-template-columns:1fr; place-content:center; }
+.tl-plate.quote p{ font-family:var(--disp); font-style:italic; color:var(--ink);
+  font-size:clamp(1rem,1.5vw,1.18rem); line-height:1.34; text-wrap:balance; }
+
+.tl-c{ border-top:1px solid var(--line); padding-top:clamp(15px,1.9vh,22px);
   position:relative; }
-/* the tick rides ON the rule, at the card's own text edge */
 .tl-c::before{ content:""; position:absolute; left:0; top:-3px;
   width:5px; height:5px; border-radius:50%; background:var(--accent); }
-.tl-c h3{ font-size:clamp(1.06rem,1.55vw,1.28rem); margin-bottom:.55rem; line-height:1.26; }
-.tl-c p{ color:var(--ink-2); font-size:.95rem; line-height:1.6; }
+.tl-c h3{ font-size:clamp(1.04rem,1.5vw,1.24rem); margin-bottom:.5rem; line-height:1.26; }
+.tl-c p{ color:var(--ink-2); font-size:.93rem; line-height:1.58; }
 .tl-c em{ font-style:italic; }
-.tl-s{ margin-top:.8rem; font-size:.73rem; line-height:1.5; color:var(--ink-3);
+.tl-s{ margin-top:.7rem; font-size:.72rem; line-height:1.5; color:var(--ink-3);
   letter-spacing:.015em; }
 
-.tl-rail .rail-nav{ justify-content:flex-end; margin-top:clamp(20px,2.4vh,30px); }
-.tl-rail .rail-count{ font-size:.74rem; letter-spacing:.1em; color:var(--ink-3);
-  font-variant-numeric:tabular-nums; margin:0 .35rem; }
+.tl-index .rail-nav{ flex:none; --rail-btn:40px; }
+/* the row is the rail's own control strip, so it goes when there is nothing
+   to scroll (rail.js stamps [data-static]) rather than showing dead arrows */
+[data-rail][data-static] .tl-index .rail-nav{ display:none; }
+#history .cite{ margin-top:clamp(24px,3vh,36px); }
 
 /* Phones read the record as a stack. `.tl.rail-track` (0,2,0) out-specifies
-   core's `.rail-track` display:flex regardless of sheet order; with nothing to
-   scroll rail.js also stamps [data-static] and the arrows would hide anyway. */
+   core's `.rail-track { display:flex }` regardless of sheet order; with nothing
+   left to scroll rail.js also stamps [data-static] and hides the arrows. The
+   year index stays — it is still a useful table of contents, and as anchors it
+   jumps down the stack. */
 @media(max-width:860px){
   .tl.rail-track{ display:block; overflow:visible; scroll-snap-type:none; }
-  .tl-e{ padding:clamp(21px,2.9vh,29px) 0; border-right:0;
-    border-top:1px solid var(--line-2); }
+  .tl-e{ padding:clamp(21px,2.9vh,29px) 0; border-top:1px solid var(--line-2); }
   .tl-e:first-child{ border-top:1px solid var(--line); }
   .tl-e:last-child{ padding-bottom:0; }
-  .tl-y{ margin-bottom:.45rem; }
-  .tl-y .tnum{ font-size:1.02rem; color:var(--accent-ink); }
+  .tl-fig, .tl-plate{ aspect-ratio:16/10; }
   .tl-c{ border-top:0; padding-top:0; }
   .tl-c::before{ display:none; }
-  .tl-rail .rail-nav{ display:none; }
+  .tl-index .rail-nav{ display:none; }
+  .tl-years{ gap:0 clamp(10px,3vw,20px); }
 }
