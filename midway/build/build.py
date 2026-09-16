@@ -54,13 +54,14 @@ PAGE_BUILDERS = {
     "contact":    P.contact,
 }
 
-CTA = {"index": ("Plan a visit", "contact.html"),
-       "floorplans": ("Check availability", D.APPLY),
-       "gallery": ("Plan a visit", "contact.html"),
-       "amenities": ("Plan a visit", "contact.html"),
-       "tours": ("Plan a visit", "contact.html"),
-       "map": ("Plan a visit", "contact.html"),
-       "contact": ("Call leasing", D.PHONE_TEL)}
+# One primary action, the same on every page. It used to change per page —
+# "Check availability" on floor plans, "Call leasing" on contact — which made
+# the one fixed control in the chrome unpredictable, and resized the header
+# between pages (134px to 192px) so the lockup shifted as you navigated.
+# "Plan a visit" is also what Motor Tides puts here, so the two properties
+# match. The apply portal is still one click away: the footer CTA pair, every
+# plan card, and the floor-plans page all lead with "Check availability".
+CTA_LABEL, CTA_HREF = "Plan a visit", "contact.html"
 
 
 def build_concept(c):
@@ -72,7 +73,7 @@ def build_concept(c):
         fname = f"{key}.html"
         title = title_t.format(n=D.NAME)
         desc = desc.format(count=D.GALLERY_COUNT) if "{count}" in desc else desc
-        cta_label, cta_href = CTA[key]
+        cta_label, cta_href = CTA_LABEL, CTA_HREF
 
         body = c.home() if key == "index" else PAGE_BUILDERS[key](c)
 
