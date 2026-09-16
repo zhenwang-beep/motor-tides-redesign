@@ -1,0 +1,228 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Concept A — GOLDEN HOUR
+   The page is one evening. Four chapters, four palettes, and the background
+   travels between them as you scroll. Everything below is additive: strip
+   this file out and the pages still read as plain Wiseman house style.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.gh{
+  --ch-bg:var(--paper);
+  --ch-ink:var(--ink);
+  transition:background-color 1.1s var(--ease),color 1.1s var(--ease);
+  background:var(--ch-bg);color:var(--ch-ink);
+}
+/* Chapter palettes. The four steps are a real sunset sampled to stay legible:
+   every --ch-ink clears 7:1 on its own --ch-bg.                              */
+.gh[data-hour="0"]{--ch-bg:#F3F0E7;--ch-ink:#074B4D}   /* daylight  — cream    */
+.gh[data-hour="1"]{--ch-bg:#EFE3D2;--ch-ink:#0A3F45}   /* afternoon — warmed   */
+.gh[data-hour="2"]{--ch-bg:#2A1E1C;--ch-ink:#F3E6D6}   /* golden hr — ember    */
+.gh[data-hour="3"]{--ch-bg:#04343A;--ch-ink:#F3F0E7}   /* evening   — deep     */
+
+.gh .gh-warm{background:rgba(154,90,43,.055)}
+.gh .gh-night,.gh .gh-plans,.gh .gh-scores,.gh .gh-strip{background:var(--deep);color:var(--paper)}
+.gh .gh-night .lede,.gh .gh-plans .lede{color:var(--muted-dark)}
+.gh .gh-night .section-title em,.gh .gh-plans .section-title em{color:var(--sun)}
+.gh .gh-night .kick,.gh .gh-plans .kick,.gh .gh-scores .kick{color:var(--sun)}
+.gh .gh-night .btn.outline,.gh .gh-plans .btn.outline{color:var(--paper);border-color:rgba(239,234,221,.55)}
+.gh .gh-night .btn.outline:is(:hover,:focus-visible),
+.gh .gh-plans .btn.outline:is(:hover,:focus-visible){background:var(--paper);color:var(--ink)}
+.gh .gh-night .btn:not(.outline),.gh .gh-plans .btn:not(.outline){background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.gh .gh-night .btn:not(.outline):is(:hover,:focus-visible),
+.gh .gh-plans .btn:not(.outline):is(:hover,:focus-visible){background:var(--sun);border-color:var(--sun);color:var(--deep)}
+.gh .gh-scores .stats>div{border-color:var(--rule-dark)}
+.gh .gh-scores .stats p{color:var(--muted-dark)}
+
+/* ── The hour rail ───────────────────────────────────────────────────────── */
+/* The rail lives in the gutter beside the content column, never over it.
+   `left` is measured from the column edge: (viewport - column) / 2 is the
+   gutter, and the rail is pulled back into it. Below 1440px the gutter is too
+   narrow to hold the rail without touching the text, so it is not drawn.
+   Colour is inherited, so it flips with the chapter palette on its own. */
+.hour-rail{
+  position:fixed;top:50%;translate:0 -50%;z-index:40;pointer-events:none;
+  left:calc((100vw - var(--maxw)) / 2 - 74px);
+  color:inherit;
+  transition:color 1.1s var(--ease);
+}
+.hour-rail ol{list-style:none;display:flex;flex-direction:column;gap:22px}
+.hour-rail li{display:flex;align-items:center;gap:11px;opacity:.34;transition:opacity .6s var(--ease)}
+.hour-rail li::before{content:"";width:16px;height:1px;background:currentColor;
+  transition:width .6s var(--ease),background-color .6s var(--ease);flex:none}
+.hour-rail li.on{opacity:1}
+.hour-rail li.on::before{width:34px;background:var(--accent)}
+.gh[data-hour="2"] .hour-rail li.on::before,
+.gh[data-hour="3"] .hour-rail li.on::before{background:var(--sun)}
+.hour-rail .t{font:500 .62rem/1 var(--mono);letter-spacing:.1em}
+.hour-rail .l{display:none;font:600 .52rem/1 var(--sans);letter-spacing:.22em;
+  text-transform:uppercase;opacity:.75}
+@media(min-width:1700px){
+  .hour-rail{left:calc((100vw - var(--maxw)) / 2 - 156px)}
+  .hour-rail .l{display:block}
+}
+@media(max-width:1439px){.hour-rail{display:none}}
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+.gh-hero{position:relative;min-height:100svh;display:grid;align-items:end;
+  padding-block:calc(var(--hd-h) + 40px) clamp(56px,9vh,110px);isolation:isolate;overflow:hidden}
+.gh-hero-media{position:absolute;inset:0;z-index:-1}
+.gh-hero-img{width:100%;height:100%;object-fit:cover;object-position:50% 58%;
+  animation:ghDrift 46s linear infinite alternate both}
+@keyframes ghDrift{from{transform:scale(1.06) translate3d(0,0,0)}
+                   to{transform:scale(1.17) translate3d(-2%,-1.6%,0)}}
+.gh-hero-scrim{position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(11,25,30,.58) 0%,rgba(11,25,30,.12) 34%,
+             rgba(9,20,24,.42) 68%,rgba(6,16,20,.86) 100%)}
+.gh-hero-copy{position:relative;color:#F6EFE4}
+.gh-eyebrow{font-size:var(--t-caption);font-weight:600;letter-spacing:.28em;text-transform:uppercase;
+  color:#F0D6AE;margin-bottom:clamp(16px,2.6vw,26px)}
+.gh-title{font-size:clamp(3rem,13.5vw,12rem);line-height:.88;letter-spacing:-.015em;
+  text-shadow:0 2px 40px rgba(6,16,20,.5)}
+.gh-title span{display:block}
+.gh-title span:last-child{padding-left:.09em}
+.gh-sub{margin-top:clamp(18px,2.6vw,30px);max-width:44ch;font-size:clamp(.95rem,1.4vw,1.1rem);
+  line-height:1.8;color:rgba(246,239,228,.9)}
+.gh-actions{margin-top:clamp(22px,3vw,34px)}
+.gh-hero .btn:not(.outline){background:#F6EFE4;border-color:#F6EFE4;color:#12262A}
+.gh-hero .btn:not(.outline):is(:hover,:focus-visible){background:var(--sun);border-color:var(--sun);color:#1C1210}
+.gh-hero .btn.outline{color:#F6EFE4;border-color:rgba(246,239,228,.6)}
+.gh-hero .btn.outline:is(:hover,:focus-visible){background:#F6EFE4;color:#12262A;border-color:#F6EFE4}
+.gh-call{margin-top:22px;font-size:var(--t-small);color:rgba(246,239,228,.78)}
+.gh-call a{color:#F0D6AE;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:1px}
+.gh-scroll{position:absolute;left:50%;bottom:22px;translate:-50% 0;width:1px;height:46px;
+  background:rgba(246,239,228,.3);overflow:hidden}
+.gh-scroll i{position:absolute;inset:0;background:#F0D6AE;animation:ghScroll 2.6s var(--ease) infinite}
+@keyframes ghScroll{0%{translate:0 -100%}55%,100%{translate:0 100%}}
+@media(max-width:600px){.gh-scroll{display:none}}
+
+/* Staged entrance — one orchestrated load, not scattered micro-motion. */
+.gh-home .gh-eyebrow,.gh-home .gh-title span,.gh-home .gh-sub,
+.gh-home .gh-actions,.gh-home .gh-call{animation:ghIn .95s var(--ease) both}
+.gh-home .gh-title span:nth-child(1){animation-delay:.12s}
+.gh-home .gh-title span:nth-child(2){animation-delay:.24s}
+.gh-home .gh-sub{animation-delay:.42s}
+.gh-home .gh-actions{animation-delay:.54s}
+.gh-home .gh-call{animation-delay:.64s}
+@keyframes ghIn{from{opacity:0;translate:0 26px}to{opacity:1;translate:0 0}}
+
+/* ── Manifesto ───────────────────────────────────────────────────────────── */
+.gh-big{font-family:var(--serif);font-weight:300;font-size:clamp(1.65rem,3.9vw,3.3rem);
+  line-height:1.22;max-width:21ch;letter-spacing:-.008em}
+.gh-big em{font-style:italic;color:var(--accent)}
+.gh[data-hour="2"] .gh-big em,.gh[data-hour="3"] .gh-big em{color:var(--sun)}
+.gh-mani .lede{margin-top:clamp(26px,3.4vw,40px)}
+
+/* ── Chapter heads + the daylight grid ───────────────────────────────────── */
+.gh-head{max-width:68ch}
+.gh-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(12px,1.6vw,22px);
+  margin-top:clamp(34px,4.5vw,58px)}
+.gh-grid .g1{grid-column:1/8;aspect-ratio:16/10}
+.gh-grid .g2{grid-column:8/13;aspect-ratio:4/5;align-self:end}
+.gh-grid .g3{grid-column:1/6;aspect-ratio:4/5}
+.gh-grid .g4{grid-column:6/13;aspect-ratio:16/10;align-self:start}
+.gh-grid figure{overflow:visible}
+.gh-grid .fig img,.gh-split .fig img{transition:transform 1.1s var(--ease-out)}
+.gh-grid figure:hover img,.gh-split figure:hover img{transform:scale(1.035)}
+.gh-grid .fig{overflow:hidden}
+@media(max-width:900px){
+  .gh-grid{grid-template-columns:1fr 1fr}
+  .gh-grid .g1,.gh-grid .g4{grid-column:1/-1;aspect-ratio:16/10}
+  .gh-grid .g2,.gh-grid .g3{grid-column:auto;aspect-ratio:4/5}
+}
+@media(max-width:560px){.gh-grid{grid-template-columns:1fr}.gh-grid .g2,.gh-grid .g3{aspect-ratio:4/3}}
+
+/* ── Split rows ──────────────────────────────────────────────────────────── */
+.gh-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);
+  gap:clamp(30px,6vw,92px);align-items:center}
+.gh-split .fig{aspect-ratio:4/5;overflow:hidden}
+.gh-split.reverse .gh-split-copy{order:2}
+@media(max-width:820px){
+  .gh-split{grid-template-columns:1fr;gap:32px}
+  .gh-split .fig{aspect-ratio:4/3}
+  .gh-split.reverse .gh-split-copy{order:0}
+}
+
+/* ── The peak: golden hour ───────────────────────────────────────────────── */
+.gh-peak{position:relative;min-height:96svh;display:grid;align-items:center;
+  padding-block:clamp(72px,11vw,140px);isolation:isolate;overflow:hidden}
+.gh-peak-media{position:absolute;inset:0;z-index:-1}
+.gh-peak-img{width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.gh-peak-scrim{position:absolute;inset:0;
+  background:linear-gradient(100deg,rgba(18,12,10,.88) 0%,rgba(20,14,11,.62) 42%,rgba(28,18,12,.14) 78%)}
+.gh-peak-copy{position:relative;color:#F6EFE4;max-width:min(100%,var(--maxw))}
+.gh-peak-copy .kick{color:#F0D6AE}
+.gh-peak-title{font-family:var(--serif);font-weight:300;font-size:clamp(2.6rem,8.4vw,7.4rem);
+  line-height:.98;text-transform:uppercase;margin:16px 0 26px;letter-spacing:-.012em}
+.gh-peak-title em{font-style:italic;color:var(--sun);text-transform:none}
+.gh-peak-copy .lede{color:rgba(246,239,228,.88);max-width:46ch}
+.gh-peak .btn:not(.outline){background:#F6EFE4;border-color:#F6EFE4;color:#1C1210}
+.gh-peak .btn:not(.outline):is(:hover,:focus-visible){background:var(--sun);border-color:var(--sun)}
+.gh-peak .btn.outline{color:#F6EFE4;border-color:rgba(246,239,228,.6)}
+.gh-peak .btn.outline:is(:hover,:focus-visible){background:#F6EFE4;color:#1C1210;border-color:#F6EFE4}
+@media(max-width:700px){.gh-peak-scrim{background:linear-gradient(180deg,rgba(18,12,10,.55),rgba(18,12,10,.88))}}
+
+/* ── Rooftop strip ───────────────────────────────────────────────────────── */
+.gh-strip{padding-block:0;overflow:hidden}
+.gh-strip-rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px}
+.gh-strip-rail .fig{aspect-ratio:3/4;overflow:hidden}
+.gh-strip-rail img{transition:transform 1.2s var(--ease-out)}
+.gh-strip-rail figure:hover img{transform:scale(1.06)}
+@media(max-width:820px){.gh-strip-rail{grid-template-columns:1fr 1fr}}
+
+/* ── Plan index ──────────────────────────────────────────────────────────── */
+.gh-plan-index{list-style:none;margin-top:clamp(34px,4vw,52px);counter-reset:p}
+.gh-plan-index li{border-top:1px solid var(--rule-dark)}
+.gh-plan-index li:last-child{border-bottom:1px solid var(--rule-dark)}
+.gh-plan-index a{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;
+  align-items:baseline;gap:14px 30px;padding:22px 0;text-decoration:none;
+  transition:padding-inline-start .4s var(--ease),color .3s ease}
+.gh-plan-index a:is(:hover,:focus-visible){padding-inline-start:18px;color:var(--sun)}
+.gh-plan-index b{font-family:var(--serif);font-weight:300;font-size:clamp(1.7rem,3.6vw,2.9rem);
+  text-transform:uppercase;letter-spacing:.01em}
+.gh-plan-index span{font-size:var(--t-small);color:var(--muted-dark)}
+.gh-plan-index em{font-family:var(--serif);font-style:normal;font-size:clamp(1.2rem,2.2vw,1.7rem)}
+@media(max-width:700px){
+  .gh-plan-index a{grid-template-columns:1fr auto;gap:6px 18px}
+  .gh-plan-index span{grid-column:1/-1}
+}
+
+/* ── Interior page hero ──────────────────────────────────────────────────── */
+.gh-phero{position:relative;overflow:hidden}
+.gh-phero-glow{position:absolute;right:-12%;top:-45%;width:min(70vw,720px);aspect-ratio:1;
+  border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(232,192,143,.5) 0%,rgba(232,192,143,.14) 45%,transparent 70%)}
+.gh-phero h1{max-width:16ch}
+@media(max-width:700px){.gh-phero-glow{right:-30%;top:-18%;width:110vw}}
+
+/* ── Shared blocks, tuned for this concept ───────────────────────────────── */
+.gh .am-showcase{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:clamp(14px,2vw,26px)}
+.gh .am-showcase .fig:first-child{aspect-ratio:16/10}
+.gh .am-showcase .fig:last-child{aspect-ratio:4/5}
+@media(max-width:900px){.gh .am-showcase{grid-template-columns:1fr}
+  .gh .am-showcase .fig{aspect-ratio:16/10}}
+.gh .pet{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:clamp(30px,6vw,84px);align-items:center}
+.gh .pet .fig{aspect-ratio:4/5}
+.gh .pet-copy p{margin-bottom:14px}
+@media(max-width:820px){.gh .pet{grid-template-columns:1fr}.gh .pet .fig{aspect-ratio:4/3}}
+.gh .plan-toolbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px}
+.gh .plan-toolbar .gal-filter{margin-top:0}
+.gh .plan-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px 26px}
+.gh .plan-blurb{margin-top:14px;color:var(--muted);line-height:1.8;max-width:46ch}
+.gh .plan-meta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:20px}
+.gh .plan-note{margin-top:12px;font-style:italic}
+.gh .utilities{margin-top:clamp(30px,4vw,44px);padding-top:20px;border-top:1px solid var(--rule)}
+.gh .nearby{list-style:none;margin-top:clamp(28px,3.5vw,44px)}
+.gh .nearby li{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) auto;gap:8px 30px;
+  align-items:baseline;padding:18px 0;border-bottom:1px solid var(--rule-dark)}
+.gh .nearby .n-name{font-family:var(--serif);font-size:clamp(1.15rem,2.1vw,1.6rem)}
+.gh .nearby .n-note{font-size:var(--t-small);color:var(--muted-dark)}
+.gh .nearby .n-dist{font:500 var(--t-small)/1 var(--mono);color:var(--sun)}
+@media(max-width:760px){.gh .nearby li{grid-template-columns:1fr auto}.gh .nearby .n-note{grid-column:1/-1}}
+.gh .map-actions{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  gap:16px 30px;margin-top:22px}
+.gh .contact-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
+  gap:clamp(34px,6vw,86px);align-items:start}
+.gh .contact-fig{aspect-ratio:4/5;margin-top:30px;overflow:hidden}
+.gh .hours p{line-height:1.9}
+.gh .form-note{margin-top:18px;padding:14px 16px;border-left:2px solid var(--accent);background:rgba(154,90,43,.07)}
+@media(max-width:900px){.gh .contact-grid{grid-template-columns:1fr}}
+.gh .tour-poster{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}

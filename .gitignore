@@ -12,3 +12,10 @@ redesign/deploy/
 .idea/
 .vscode/
 *.log
+
+# Generated deploy bundle — rebuilt by `python3 midway/scripts/prep_deploy.py`
+midway/deploy/
+
+# Python bytecode
+__pycache__/
+*.pyc
