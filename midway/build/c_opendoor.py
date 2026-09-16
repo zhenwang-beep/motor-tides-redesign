@@ -108,11 +108,9 @@ def home():
     <p class="kick rv">The extra room</p>
     <p class="od-big rv d1">In a 692-square-foot two-bedroom, the patio is not a feature.
       It is <em>the room you actually live in</em> nine months of the year.</p>
-    <p class="lede rv d1">Motor Midway is brand-new construction in Palms, on the Culver City
-      line. Open layouts, a bathroom for every bedroom, a washer and dryer in the unit,
-      full-size kitchens with energy-efficient stainless appliances, central heating and air,
-      vinyl flooring, mirrored closets &mdash; and <em>Patio / Balcony</em> on every plan in
-      the building, not on a lucky few.</p>
+    <p class="lede rv d1">Brand-new construction in Palms, on the Culver City line. Two and
+      three bedrooms, 692 to 909 square feet &mdash; and <em>Patio / Balcony</em> on every
+      plan in the building, not on a lucky few.</p>
   </div>
 </section>
 

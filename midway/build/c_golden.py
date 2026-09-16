@@ -83,9 +83,8 @@ def home():
       Midway is the building <em>at the crossing</em> &mdash; and the best room in it
       has no ceiling.</p>
     <p class="lede rv d1">Brand-new construction in Palms, on the Culver City line. Open-concept
-      two- and three-bedroom residences with a washer and dryer in the unit, full-size kitchens
-      with energy-efficient stainless appliances, central air and heat, and a private patio on
-      every single one. Commercial space on the ground floor, so essential services are an
+      two- and three-bedroom residences, 692 to 909 square feet, with a private patio on every
+      single one &mdash; and commercial space on the ground floor, so essential services are an
       elevator ride away.</p>
   </div>
 </section>
