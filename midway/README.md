@@ -83,7 +83,7 @@ with Cloudinary transforms generating a real `srcset` at 600/1000/1600/2200px.
 That was deliberate. A mirrored copy of this photography exists elsewhere in the
 Wiseman repos with **reuse rights still unverified**; pointing at the client's own CDN
 leaves that question exactly where it already sits, and keeps the whole deployed
-bundle at **589 KB**.
+bundle at **587 KB**.
 
 All 56 CDN filenames were verified to return HTTP 200 before being built against.
 Note the source filenames are inconsistently spaced (`exterior-1.jpg` but
@@ -120,7 +120,9 @@ assets/
 ```
 
 Each concept supplies a `phero()` and a `home()`; the interior pages are shared and
-restyled through the concept stylesheet. Content and IA are identical across all
+restyled through the concept stylesheet. Pages end on their last real section and run
+straight into the footer — there is no "next page" hand-off, because the fixed header
+carries every page and the footer's Explore column repeats them directly below. Content and IA are identical across all
 three because the brief was for the concepts to differ in design, not in what they say.
 
 ## Deploy

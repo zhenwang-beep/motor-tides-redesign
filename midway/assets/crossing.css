@@ -212,5 +212,3 @@
 .cr .tour-poster{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
 .cr .stats>div{border-color:var(--hair)}
 .cr .dark .stats>div{border-color:var(--hair-dark)}
-.cr .next{border-color:var(--hair)}
-.cr .next small{font-family:var(--mono);letter-spacing:.16em}

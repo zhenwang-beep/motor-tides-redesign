@@ -189,16 +189,6 @@ def header(current: str, *, cta_label="Plan a visit", cta_href="contact.html") -
 """
 
 
-def next_link(href, label, title) -> str:
-    """A quiet one-line hand-off. This used to be a display-type block with a
-    second CTA beside it, stacked directly above the footer's own "Ready to
-    experience good living?" — two competing calls to action in the same
-    colour, with a lot of empty space between them. One line is enough."""
-    return f"""<div class="wrap"><nav class="next rv" aria-label="Next page">
-  <a href="{href}"><small>{label}</small><span>{title}</span></a>
-</nav></div>"""
-
-
 def footer(concept_name: str, concept_slug: str, extra_scripts: str = "") -> str:
     hours = "".join(f"<li>{d} &middot; {t}</li>" for d, t in D.HOURS)
     return f"""<footer class="ft dark" data-hd="inv">

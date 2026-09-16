@@ -107,7 +107,6 @@ def floorplans(c) -> str:
   </div>
 </section>
 
-{C.next_link('amenities.html', 'Next', 'Amenities')}
 </main>"""
 
 
@@ -164,7 +163,6 @@ def amenities(c) -> str:
   </div>
 </section>
 
-{C.next_link('gallery.html', 'Next', 'Photo gallery')}
 </main>"""
 
 
@@ -207,7 +205,6 @@ def gallery(c) -> str:
   <button class="lb-next" type="button" aria-label="Next photograph">&#8250;</button>
 </dialog>
 
-{C.next_link('tours.html', 'Next', '360° tours')}
 </main>"""
 
 
@@ -242,7 +239,6 @@ def tours(c) -> str:
   </div>
 </section>
 
-{C.next_link('map.html', 'Next', 'Map & directions')}
 </main>"""
 
 
@@ -287,7 +283,6 @@ def map_page(c) -> str:
   </div>
 </section>
 
-{C.next_link('contact.html', 'Next', 'Contact us')}
 </main>"""
 
 
@@ -342,5 +337,4 @@ def contact(c) -> str:
   </div>
 </section>
 
-{C.next_link('index.html', 'Back to', 'The home page')}
 </main>"""

@@ -197,5 +197,4 @@ def home():
   </div>
 </section>
 
-{C.next_link('floorplans.html', 'Start here', 'Floor plans & availability')}
 </main>"""

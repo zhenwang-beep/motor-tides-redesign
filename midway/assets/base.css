@@ -447,20 +447,6 @@ dialog.lb::backdrop{background:rgba(4,52,58,.94)}
 @media(max-width:940px){.ft-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.ft-grid{grid-template-columns:1fr;gap:30px}.ft-bottom{flex-direction:column;align-items:flex-start}}
 
-/* ── Cross-page next link ────────────────────────────────────────────────── */
-.next{padding-block:clamp(28px,3.4vw,44px);border-top:1px solid var(--rule)}
-.dark .next{border-color:var(--rule-dark)}
-.next a{display:inline-flex;align-items:baseline;gap:14px;text-decoration:none;
-  padding:8px 0;transition:gap .3s var(--ease-out),color .3s ease}
-.next small{font-size:var(--t-caption);letter-spacing:.2em;text-transform:uppercase;
-  font-weight:600;color:var(--muted)}
-.dark .next small{color:var(--muted-dark)}
-.next span{font-family:var(--serif);font-size:clamp(1.15rem,2vw,1.5rem)}
-.next a::after{content:"\2192";font-size:1.05rem;transition:transform .3s var(--ease-out)}
-.next a:is(:hover,:focus-visible){color:var(--accent);gap:18px}
-.next a:is(:hover,:focus-visible)::after{transform:translateX(4px)}
-.dark .next a:is(:hover,:focus-visible){color:var(--sun)}
-
 /* ── Reduced motion ──────────────────────────────────────────────────────── */
 @media(prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
