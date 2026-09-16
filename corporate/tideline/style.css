@@ -111,15 +111,20 @@
   --paper: #F2EFE7;
   --paper-2: #E6E1D5;
   /* ink */
-  --ink: #16242A;
-  --slate: #5D7076;
-  --deep: #0C1A1F;
+  --ink: #152527;
+  --slate: #5C7074;
+  --deep: #0B1A1D;
   /* accents */
   --sand: #CBB69B;
   --sand-ink: #7A6142;
   --salt: #A8B8B2;
   /* brand — hairlines, focus rings, the logo. Never a surface. */
   --brand: #1C6775;
+  /* The same mark on the page-transition curtain. The client's teal is deep,
+     and on --deep it makes 2.75:1 — under the 3:1 a graphic needs. This is the
+     brand hue lifted to read on the dark ground (5.76:1); the old, much
+     brighter teal had got away with using one value for both. */
+  --brand-lift: #2BA0B5;
 
   /* alpha ladder — the ONLY source of hairlines, scrims, dividers, tints */
   --ink-05: color-mix(in srgb, var(--ink) 5%, transparent);
@@ -129,8 +134,8 @@
      percentages of --ink written into the shared sheets, which on this paper
      landed at 2.76-5.20:1 — the facet labels, card addresses, eyebrows and the
      rail readout all under AA. Measured on --paper #F2EFE7:
-       --ink-quiet  72% of #16242A  5.90:1   (was 62-70%, 4.33-5.54)
-       --ink-mute   66% of #16242A  4.89:1   (was 46-58%, 2.76-3.85) */
+       --ink-quiet  72% of #152527  5.84:1   (was 62-70%, 4.33-5.54)
+       --ink-mute   66% of #152527  4.86:1   (was 46-58%, 2.76-3.85) */
   --ink-quiet: color-mix(in srgb, var(--ink) 72%, transparent);
   --ink-mute:  color-mix(in srgb, var(--ink) 66%, transparent);
   --ink-30: color-mix(in srgb, var(--ink) 30%, transparent);
@@ -143,7 +148,12 @@
   /* the brand teal at full strength is 2.9:1 on paper — under the 3:1 floor
      for a focus indicator. 80% brand over ink keeps the hue and clears 3:1
      on paper, paper-2 and deep. */
-  --focus: color-mix(in srgb, var(--brand) 80%, var(--ink));
+  /* Focus has to clear 3:1 on paper, paper-2 AND deep. Mixing the brand with
+     the ink satisfied the light grounds and failed the dark one (2.29:1).
+     A single brand-hue value does satisfy all three, but only inside a
+     narrow band — L 30.5%-38.5%; this sits in the middle of it, at
+     4.16:1 on paper, 3.66:1 on paper-2 and 3.72:1 on deep. */
+  --focus: #227D8E;
 
   --sans: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --serif: "Fraunces", "Iowan Old Style", Georgia, "Times New Roman", serif;
@@ -250,7 +260,7 @@ h1, h2, h3, h4 { font-weight: 500; letter-spacing: -0.012em; line-height: 1.06; 
 /* --slate is AA on --paper (4.52:1) but only 3.98:1 on --paper-2, and
    --sand-ink drops to 4.45:1. Both secondary inks step one shade darker on
    this ground. Any page using .sand-ground inherits the fix. */
-.sand-ground { background: var(--paper-2); --slate: #52646A; --sand-ink: #6F573A; }
+.sand-ground { background: var(--paper-2); --slate: #516568; --sand-ink: #6F573A; }
 
 .rule { height: 1px; background: var(--ink-10); border: 0; }
 .hr-top { border-top: 1px solid var(--ink-10); }
@@ -311,7 +321,7 @@ h1, h2, h3, h4 { font-weight: 500; letter-spacing: -0.012em; line-height: 1.06; 
 
 /* -------------------------------------------------------- curtain */
 .pt { background: var(--deep); }
-.pt .ptmark svg { width: 34px; height: 34px; color: var(--brand); }
+.pt .ptmark svg { width: 34px; height: 34px; color: var(--brand-lift); }
 .pt .ptmark span {
   font-family: var(--sans); font-size: var(--t-kicker);
   letter-spacing: 0.3em; text-transform: uppercase; color: var(--paper-60);

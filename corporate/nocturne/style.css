@@ -40,7 +40,10 @@
   --brass-2:#D6B378;   /* hover */
   --brass-ink:#181206; /* text on brass */
   /* the brand teal survives only as the focus ring and the mark's own colour */
-  --focus:#1C6775;
+  /* The focus RING, on a near-black ground. The client's #1C6775 makes only
+     2.98:1 there — under WCAG 1.4.11's 3:1 for a non-text indicator — where
+     the older, brighter teal made 5.80:1. Same hue, lifted: 6.25:1. */
+  --focus:#2BA0B5;
 
   /* --- tokens the SHARED core consumes (base.css / editorial / map / search / rail) --- */
   --paper:var(--night);
