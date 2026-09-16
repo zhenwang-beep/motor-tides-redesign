@@ -88,8 +88,23 @@ def build(key, quiet=False):
         print("  ! no such direction: %s" % key)
         return 0
     dst = os.path.join(OUT, key)
+    # `vercel link` writes .vercel/project.json into the bundle, and that file is
+    # the ONLY thing tying this folder to an existing Vercel project. Wiping it
+    # with the rest of the bundle makes the next `vercel deploy` look unlinked,
+    # and the CLI then silently creates a BRAND NEW project named after the
+    # folder ("atrium") and ships there — while the link everyone has been given
+    # (wiseman-clerestory.vercel.app) quietly stays on the previous build.
+    # That happened twice. Carry the link across the rebuild.
+    keep = os.path.join(dst, ".vercel")
+    stash = None
+    if os.path.isdir(keep):
+        stash = os.path.join(OUT, ".vercel-%s.keep" % key)
+        shutil.rmtree(stash, ignore_errors=True)
+        shutil.move(keep, stash)
     shutil.rmtree(dst, ignore_errors=True)
     os.makedirs(dst)
+    if stash:
+        shutil.move(stash, keep)
 
     copy_tree(os.path.join(ROOT, "core"), os.path.join(dst, "core"))
     rewrite_paths_inplace(os.path.join(dst, "core"))

@@ -96,7 +96,12 @@
       if (prev) prev.disabled = atStart;
       if (next) next.disabled = atEnd;
       if (count) {
-        var i = nearest();
+        /* nearest() answers "which item is at the left edge", which is right
+           everywhere except the last scroll position: a rail showing three
+           items at once rests at max with the final item fully on screen while
+           the left edge still sits on item two, and the counter read "02 / 05"
+           with item five in plain view. At the end, say so. */
+        var i = atEnd ? items.length - 1 : nearest();
         count.textContent = pad(i + 1) + ' / ' + pad(items.length);
       }
       if (bar) {

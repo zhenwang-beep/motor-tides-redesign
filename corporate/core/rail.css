@@ -182,3 +182,17 @@
   .rail-track { scroll-behavior: auto; }
   .rail-btn, .rail-bar i { transition: none; }
 }
+
+/* ---- the track's own focus ring ----------------------------------------
+   rail.js gives every track `tabindex="0"` so a keyboard user can scroll a row
+   that holds no focusable children (ArrowLeft/Right, Home, End are bound
+   there). Nothing ever drew that focus, so the caret landed on an invisible
+   target — WCAG 2.4.7. The ring is on the track rather than an inner wrapper
+   because the track is the element that actually receives focus.
+   `outline-offset` keeps it clear of the snapped item's own edge. */
+.rail-track:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+[data-rail][data-on="dark"] .rail-track:focus-visible { outline-color: var(--paper); }

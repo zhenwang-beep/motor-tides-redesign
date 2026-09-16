@@ -20,9 +20,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Prata&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../core/base.css?v=35">
-<link rel="stylesheet" href="../core/map.css?v=35">
-<link rel="stylesheet" href="style.css?v=35">
+<link rel="stylesheet" href="../core/base.css?v=37">
+<link rel="stylesheet" href="../core/map.css?v=37"><link rel="stylesheet" href="../core/rail.css?v=37">
+<link rel="stylesheet" href="style.css?v=37">
 <script>(function(d){var r=d.documentElement;r.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches){r.classList.add('js-pt');setTimeout(function(){r.classList.remove('js-pt');},1500);}})(document);</script>
 <script type="application/ld+json">
 {
@@ -283,6 +283,98 @@
     </div>
   </section>
 
+  <!-- 9. history ------------------------------------------------------------
+       Morgan's "Explore Our History" is the model the client pointed at, and
+       the thing to NOT copy from it is its year rail: ten evenly-spaced stops
+       on a dashed rule, reading 1925 at the left end. That device is powered
+       entirely by the length of the span. Reproduced over a record that is
+       shorter and partly undocumented it does the opposite job — it invites
+       the reader to count the gaps. Morgan itself shows the failure mode: once
+       the founder-era material runs out the page pads with floating holidays
+       and internal job postings.
+
+       So this is organised by CHAPTER carrying a date RANGE, not by bare year.
+       Ranges absorb gaps that bare years expose. Every chapter is rendered at
+       once and revealed on scroll rather than hidden behind carousel arrows
+       (Morgan disables both mouse and touch drag AND hides its year rail under
+       767px, which leaves a phone tapping chevrons through a century), each
+       one carries a real anchor id so a specific moment can be linked, and
+       each ends with the document it rests on.
+
+       No photograph per entry, deliberately. Morgan's twelve entries carry
+       twelve images and two of them are Pexels stock — stock photography
+       inside a company-history section undercuts the one claim the section
+       exists to make. There is no archival Wiseman photography, so the
+       treatment is typographic and documentary instead.
+
+       The first chapter is the honest one: four live sources give four
+       different founding years. It collapses to a single line the day the
+       client confirms one. -->
+  <section class="band wrap wrap-n" id="history" aria-labelledby="history-h">
+    <div class="band-head">
+      <p class="eyebrow rv">Our History</p>
+      <h2 class="rv" data-d="1" id="history-h">The record, as it&nbsp;stands.</h2>
+      <p class="rv" data-d="2">Five chapters, each resting on a document anyone can check. Where the public record disagrees with itself, it says&nbsp;so.</p>
+    </div>
+
+    <div class="tl-rail rv" data-rail data-rail-label="Company history, five chapters from 1980 to today">
+      <ol class="tl rail-track" data-rail-track>
+      <li class="tl-e" id="h-origins">
+        <p class="tl-y"><span class="tnum">1980&ndash;87</span></p>
+        <div class="tl-c">
+          <h3>Four records, four founding&nbsp;years <span class="chip">[CLIENT]</span></h3>
+          <p>The company&rsquo;s LinkedIn page gives 1980. California contractor licence <span class="tnum">417744</span> &mdash; still current, still naming Isaac Wise Cohanzad as its qualifying individual &mdash; carries an issue date of 3&nbsp;February&nbsp;1982. Wiseman&rsquo;s own Archinect profile says 1985. The Better Business Bureau has a business start of 28&nbsp;June&nbsp;1987. Four live sources, four answers; no year is printed here until Wiseman confirms&nbsp;one.</p>
+          <p class="tl-s">LinkedIn &middot; California CSLB licence 417744 &middot; Archinect &middot; BBB &mdash; retrieved September&nbsp;2026</p>
+        </div>
+      </li>
+
+      <li class="tl-e" id="h-2010">
+        <p class="tl-y"><span class="tnum">2010</span></p>
+        <div class="tl-c">
+          <h3>A Westside builder, in his own&nbsp;words</h3>
+          <p>The <em>Los Angeles Business Journal</em> profiled Isaac Cohanzad, then president of Wiseman Development Co., with two projects under way: 63 homes on Santa Monica Boulevard and 34 in Glendale. Asked why he became a residential developer, he credited his father, who built apartment buildings throughout his&nbsp;childhood.</p>
+          <p class="tl-s">Los Angeles Business Journal, &ldquo;Who&rsquo;s Who in Real Estate&rdquo;, 29&nbsp;August&nbsp;2010</p>
+        </div>
+      </li>
+
+      <li class="tl-e" id="h-floorplans">
+        <p class="tl-y"><span class="tnum">2013&ndash;23</span></p>
+        <div class="tl-c">
+          <h3>One claim held for eleven&nbsp;years</h3>
+          <p>Wiseman put its portfolio online in 2013. Through two complete rebuilds of the site, one sentence survived verbatim &mdash; that its three- and four-bedroom floor plans are rare and highly coveted. It is the company&rsquo;s longest-running claim about itself, and the live feed still bears it out: <span class="tnum">17</span> buildings offer four bedrooms or more, <span class="tnum">5</span> go to&nbsp;five.</p>
+          <p class="tl-s">wisemanresidential.com, Internet Archive captures 2014&ndash;2025 &middot; live leasing feed</p>
+        </div>
+      </li>
+
+      <li class="tl-e" id="h-palms">
+        <p class="tl-y"><span class="tnum">2018&ndash;24</span></p>
+        <div class="tl-c">
+          <h3>Ground-up, and mostly in&nbsp;Palms</h3>
+          <p>Plans filed on Lincoln Boulevard in 2018 and East Venice Boulevard in 2019; the Venice project carried on appeal in December 2020. Motor Avenue broke ground in 2021 and again on 31&nbsp;October&nbsp;2022, topping out in June&nbsp;2024. Over the same stretch the trade press put the portfolio at around thirty buildings in December&nbsp;2022 and nearly seventy by June&nbsp;2024.</p>
+          <p class="tl-s">Urbanize LA, 2018&ndash;2024 &middot; The Real Deal, 30&nbsp;December&nbsp;2022 and 10&nbsp;June&nbsp;2024</p>
+        </div>
+      </li>
+
+      <li class="tl-e" id="h-now">
+        <p class="tl-y"><span class="tnum">2025&ndash;now</span></p>
+        <div class="tl-c">
+          <h3>Seven storeys on Motor&nbsp;Avenue</h3>
+          <p>Motor Tides finished in 2026 &mdash; <span class="tnum">104</span> apartments with three accessory dwellings above, <span class="tnum">107</span> homes in all. In March 2026 Wiseman filed for <span class="tnum">490</span> more on Venice Boulevard. The portfolio stands today at <span class="tnum">72</span> buildings across seven Los Angeles&nbsp;areas.</p>
+          <p class="tl-s">Urbanize LA, 12&nbsp;May&nbsp;2026 and 16&nbsp;March&nbsp;2026 &middot; live leasing feed</p>
+        </div>
+      </li>
+      </ol>
+
+      <div class="rail-nav">
+        <button class="rail-btn prev" data-rail-prev aria-label="Previous chapter"></button>
+        <span class="rail-count" data-rail-count aria-hidden="true"></span>
+        <button class="rail-btn next" data-rail-next aria-label="Next chapter"></button>
+      </div>
+    </div>
+
+    <p class="cite rv" style="margin-top:clamp(28px,3.6vh,42px)">Every date above is sourced to a public record or to reporting, not to the company&rsquo;s marketing copy. The founding year, the number of homes built to date and anything about the family behind the firm are the company&rsquo;s to confirm in writing. <span class="chip">[CLIENT]</span></p>
+  </section>
+
 </main>
 
 <footer class="ft" id="site-map" data-menu-inert>
@@ -365,8 +457,19 @@
   </div>
 </div>
 
-<script src="../core/core.js?v=35" defer></script>
-<script src="../core/map.js?v=35" defer></script>
-<script src="app.js?v=35" defer></script>
+<script src="../core/core.js?v=37" defer></script>
+<script src="../core/map.js?v=37" defer></script>
+<script src="../core/rail.js?v=37" defer></script>
+<script src="app.js?v=37" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  /* The history rail is the only rail on the home page. rail.js is what makes
+     it reachable without a mouse — it gives the <ol> tabindex="0" and binds
+     ArrowLeft/Right, Home and End, labels and disables the arrows at each end,
+     and scrolls a Tab-focused chapter into view. Without this call the row is
+     a plain overflow box that a keyboard cannot move. */
+  if (window.WR && WR.rails) WR.rails();
+});
+</script>
 </body>
 </html>
