@@ -14,6 +14,7 @@
 <style>
 :root{--paper:#F3F0E7;--ink:#074B4D;--deep:#04343A;--accent:#9A5A2B;--sun:#E8C08F;
  --tide:#A8C9CE;--muted:#4E5E62;--rule:rgba(7,75,77,.2);--rule-d:rgba(239,234,221,.22);
+ --wiseman:#006B78;
  --serif:'Newsreader',Georgia,serif;--sans:'Montserrat',sans-serif;--mono:'IBM Plex Mono',monospace;
  --ease:cubic-bezier(.22,.61,.36,1);--pad:clamp(22px,4vw,80px)}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -27,7 +28,7 @@ a{color:inherit}
    The hub carries its own self-contained stylesheet, so when MARK changed
    from an inline <svg> to a masked <span> this rule had to come with it —
    without it the span has no background and no mask, and renders as nothing. */
-.wiseman-mark{display:block;background:currentColor;
+.wiseman-mark{display:block;background:var(--wiseman);
  -webkit-mask:url("assets/img/wiseman-symbol.svg") center/contain no-repeat;
  mask:url("assets/img/wiseman-symbol.svg") center/contain no-repeat}
 .mk{width:30px;height:21px;flex:none}

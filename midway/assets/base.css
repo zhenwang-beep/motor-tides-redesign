@@ -28,6 +28,10 @@
   --rule:rgba(7,75,77,.20); --rule-dark:rgba(239,234,221,.22);
   /* Midway's own accent */
   --accent:#9A5A2B; --accent-deep:#8A5028; --sun:#E8C08F; --sun-soft:#EDCBA3;
+  /* Wiseman brand teal, taken from the fill declared in the official logo
+     artwork (assets/img/wiseman-symbol.svg). 5.46:1 on cream — AA. It is
+     only 2.17:1 on --deep, so dark surfaces keep the light treatment. */
+  --wiseman:#006B78;
 
   --serif:'Newsreader',Georgia,'Times New Roman',serif;
   --sans:'Montserrat','Avenir Next',-apple-system,sans-serif;
@@ -135,9 +139,12 @@ h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.06;letter-spacin
 .hd.inv.frost{background:rgba(4,52,58,.90);box-shadow:0 1px 0 var(--rule-dark)}
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex-shrink:0}
 /* The symbol is 1162x799, so it is 1.45:1 — sizing it square squashed it. */
-.wiseman-mark{display:block;background:currentColor;
+.wiseman-mark{display:block;background:var(--wiseman);
   -webkit-mask:url("img/wiseman-symbol.svg") center/contain no-repeat;
   mask:url("img/wiseman-symbol.svg") center/contain no-repeat}
+/* On a dark ground the brand teal is 2.17:1, so there the mark follows the
+   surrounding colour instead — the same way the wordmark beside it does. */
+.hd.inv .wiseman-mark,.dark .wiseman-mark,.ft .wiseman-mark{background:currentColor}
 .brand .mk{width:29px;height:20px;flex:none}
 .brand b{display:block;font-weight:600;font-size:.82rem;letter-spacing:.3em;text-transform:uppercase;white-space:nowrap}
 .brand i{display:block;font-style:normal;font-weight:500;font-size:.5rem;letter-spacing:.46em;
