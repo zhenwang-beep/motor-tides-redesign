@@ -440,7 +440,8 @@ dialog.lb::backdrop{background:rgba(4,52,58,.94)}
 .ft-bottom nav{display:flex;flex-wrap:wrap;gap:8px 22px}
 .ft-bottom a:hover{color:var(--sun)}
 .eho{display:flex;align-items:center;gap:9px}
-.eho svg{width:17px;height:17px;flex:none;fill:currentColor}
+/* The mark is 2354 x 1657, i.e. 1.42:1 — sizing it square squashed it. */
+.eho svg{width:24px;height:17px;flex:none;fill:currentColor}
 .concept-note{margin-top:20px;padding-top:18px;border-top:1px solid var(--rule-dark);
   display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 28px;
   font-size:var(--t-caption);color:var(--tide);letter-spacing:.06em}

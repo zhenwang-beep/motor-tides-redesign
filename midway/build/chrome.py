@@ -92,9 +92,18 @@ def img(slug, alt, *, sizes="100vw", cls="", loading="lazy",
 # bar widths and slope were both wrong.
 MARK = '<span class="mk wiseman-mark" aria-hidden="true"></span>'
 
-EHO = ('<svg viewBox="0 0 24 24" aria-hidden="true">'
-       '<path d="M12 3 2 10.2h2.6V21h5.1v-5.6h4.6V21h5.1V10.2H22L12 3Zm0 2.5 6.4 4.6V19h-1.1v-5.6H7.7V19H6.6'
-       'v-8.9L12 5.5Z"/></svg>')
+# The official Equal Housing Opportunity mark, taken from the Wiseman property
+# design file in Figma (node 54:8184). What was here before was a generic
+# house-with-a-doorway glyph — the real mark is a house OUTLINE with an equals
+# sign inside it, and on a fair-housing notice the difference is not cosmetic.
+# Figma's export is dropped of its #F5F5F5 backing rect and its clip path, and
+# black is swapped for currentColor so it takes the footer's colour.
+EHO = ('<svg viewBox="0 0 2354 1657" fill="currentColor" fill-rule="evenodd" '
+       'clip-rule="evenodd" aria-hidden="true" focusable="false">'
+       '<path d="M1168.28 0.74 0.21 576.04v270.24h130.74v810.63h2065.88V846.28h157V576.04L1168.28 0.74Z'
+       'M383.74 1412.77V671.93l784.54-400.95 775.8 400.95v740.84H383.74Z"/>'
+       '<path d="M1525.6 933.37H802.19V671.93h723.41v261.44Z'
+       'M1525.6 1308.35H802.19v-261.61h723.41v261.61Z"/></svg>')
 
 # ── Navigation ─────────────────────────────────────────────────────────────
 NAV = [
