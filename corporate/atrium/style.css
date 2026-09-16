@@ -2246,3 +2246,34 @@ dialog.fmodal.is-closing::backdrop{ animation:fscrim-out .2s var(--ease,cubic-be
   background:color-mix(in srgb, var(--accent) 9%, transparent); }
 .ho-tag-soon{ color:var(--ink-2); border-color:var(--line); }
 .ho-tag-later{ color:var(--ink-3); border-color:var(--line-2); }
+
+/* ---- handoff: the section index ----------------------------------------
+   Eight sections is too many to scroll blind, and the roadmap in particular
+   needs to be linkable on its own — the whole point of sending someone this
+   page is often "read the plan". Every section keeps an id; this is the way
+   in. scroll-margin-top matches the convention already used by .reg-block
+   and .run, so an anchored heading clears the fixed header instead of
+   sitting behind it. */
+.ho-index{ display:flex; flex-wrap:wrap; gap:.55rem clamp(14px,2vw,28px);
+  padding-block:clamp(16px,2.2vh,22px);
+  border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
+.ho-index a{ font-family:var(--text); font-size:.72rem; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--ink-3); text-decoration:none;
+  border-bottom:1px solid transparent; padding-bottom:2px;
+  transition:color var(--t-ui,.28s) var(--ease,cubic-bezier(.16,1,.3,1)); }
+.ho-index a:hover{ color:var(--accent-ink); border-bottom-color:var(--accent-ink); }
+.ho-index a:focus-visible{ outline:2px solid var(--ink); outline-offset:3px; border-radius:2px; }
+
+#brand, #colour, #type, #ia, #components, #rules, #roadmap, #asks{
+  scroll-margin-top:calc(var(--hd-h) + 16px); }
+
+/* a reference from an ask to the place that shows what it affects. Quiet
+   enough to read as prose inside the tinted note, underlined so it is not
+   colour alone that says "link" — the .ho-them block is already terracotta. */
+.ho-ref{ color:inherit; text-decoration:underline;
+  text-decoration-color:color-mix(in srgb, currentColor 45%, transparent);
+  text-underline-offset:.18em; text-decoration-thickness:1px;
+  transition:text-decoration-color var(--t-ui,.28s) var(--ease,cubic-bezier(.16,1,.3,1)); }
+.ho-ref:hover{ text-decoration-color:currentColor; }
+.ho-ref:focus-visible{ outline:2px solid var(--ink); outline-offset:2px; border-radius:2px; }
+.ho-asks h4 .ho-ref{ color:var(--ink); }

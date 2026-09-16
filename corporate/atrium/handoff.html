@@ -21,9 +21,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Prata&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../core/base.css?v=43">
-<link rel="stylesheet" href="../core/map.css?v=43"><link rel="stylesheet" href="../core/rail.css?v=43">
-<link rel="stylesheet" href="style.css?v=43">
+<link rel="stylesheet" href="../core/base.css?v=45">
+<link rel="stylesheet" href="../core/map.css?v=45"><link rel="stylesheet" href="../core/rail.css?v=45">
+<link rel="stylesheet" href="style.css?v=45">
 <script>(function(d){var r=d.documentElement;r.classList.add('js');if(!matchMedia('(prefers-reduced-motion: reduce)').matches){r.classList.add('js-pt');setTimeout(function(){r.classList.remove('js-pt');},1500);}})(document);</script>
 </head>
 <body>
@@ -56,6 +56,17 @@
     </div>
     <p class="pagehead-sub">Every specimen below is the live token or the live component &mdash; this page is built out of the same system it documents, so it cannot describe something the site does not&nbsp;do.</p>
   </section>
+
+  <nav class="ho-index wrap wrap-n" aria-label="Sections of this document">
+    <a href="#brand">Brand</a>
+    <a href="#colour">Colour</a>
+    <a href="#type">Typography</a>
+    <a href="#ia">Information architecture</a>
+    <a href="#components">Components</a>
+    <a href="#rules">Motion &amp; content</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#asks">What we need</a>
+  </nav>
 
   <!-- brand -->
   <section class="band wrap wrap-n" id="brand">
@@ -238,56 +249,56 @@
     <div class="band-head">
       <p class="eyebrow rv">Roadmap</p>
       <h2 class="rv" data-d="1">Five phases to&nbsp;launch.</h2>
-      <p class="rv" data-d="2">Durations are working estimates for one designer-developer. Phases 1 and 2 run in parallel; only the items marked as Wiseman&rsquo;s can stall the&nbsp;schedule.</p>
+      <p class="rv" data-d="2">The order is what matters here, not a calendar. Phase&nbsp;0 gates everything, Phases&nbsp;1 and&nbsp;2 run in parallel, and only the items marked as Wiseman&rsquo;s can hold the sequence&nbsp;up.</p>
     </div>
 
     <ol class="ho-phases rv">
       <li>
-        <p class="ho-ph-n tnum">Phase 0 &middot; ~1 week</p>
+        <p class="ho-ph-n tnum">Phase 0</p>
         <div>
           <h3>Settle the record</h3>
           <p>Entirely on Wiseman, and nothing else can be written until it is done. We hand over the fact-check dossier and the claims sheet every page will be built against.</p>
-          <p class="ho-them"><b>Wiseman provides</b> a founding year in writing &middot; a decision on &ldquo;over 45 years&rdquo; and &ldquo;100+ communities&rdquo; &middot; the responsible broker entity and DRE number &middot; leadership names and bios &middot; a values statement.</p>
+          <p class="ho-them"><b>Wiseman provides</b> <a class="ho-ref" href="index.html#h-origins">a founding year in writing</a> &middot; a decision on <a class="ho-ref" href="index.html#h-origins">&ldquo;over 45&nbsp;years&rdquo;</a> and <a class="ho-ref" href="buildings.html">&ldquo;100+&nbsp;communities&rdquo;</a> &middot; <a class="ho-ref" href="#site-map">the responsible broker entity and DRE&nbsp;number</a> &middot; <a class="ho-ref" href="company.html#client-gaps">leadership names and bios</a> &middot; <a class="ho-ref" href="company.html#client-gaps">a values statement</a>.</p>
         </div>
       </li>
       <li>
-        <p class="ho-ph-n tnum">Phase 1 &middot; ~3&ndash;4 weeks</p>
+        <p class="ho-ph-n tnum">Phase 1</p>
         <div>
           <h3>The corporate site</h3>
           <p>All 95 pages to production, the legal set to counsel-review draft, a full accessibility pass, a redirect map from every existing URL, analytics and search console.</p>
-          <p class="ho-them"><b>Wiseman provides</b> vector logo files &middot; which Instagram handle is canonical &middot; counsel review of the legal drafts &middot; corrected address of record on CSLB, BBB and Archinect.</p>
+          <p class="ho-them"><b>Wiseman provides</b> <a class="ho-ref" href="#brand">vector logo files</a> &middot; <a class="ho-ref" href="#site-map">which Instagram handle is canonical</a> &middot; <a class="ho-ref" href="privacy.html">counsel review of the legal drafts</a> &middot; <a class="ho-ref" href="contact.html">corrected address of record</a> on CSLB, BBB and Archinect.</p>
         </div>
       </li>
       <li>
-        <p class="ho-ph-n tnum">Phase 2 &middot; ~2 weeks, parallel</p>
+        <p class="ho-ph-n tnum">Phase 2 &middot; parallel with Phase&nbsp;1</p>
         <div>
           <h3>Live leasing data</h3>
           <p>Today&rsquo;s snapshot is replaced by the RentCafe / Yardi API, so availability, rent, plans and office hours refresh on their own and apply links deep-link into the existing flow.</p>
-          <p class="ho-them"><b>Wiseman provides</b> API credentials and the account manager &middot; confirmation of canonical property IDs &middot; a fix for the Motor Tides listing URL, which currently reads <code>motor-tabor-by-wiseman</code>.</p>
+          <p class="ho-them"><b>Wiseman provides</b> <a class="ho-ref" href="search.html">API credentials and the account manager</a> &middot; <a class="ho-ref" href="buildings.html">confirmation of canonical property IDs</a> &middot; a fix for <a class="ho-ref" href="buildings/motor-tides.html">the Motor Tides listing URL</a>, which currently reads <code>motor-tabor-by-wiseman</code>.</p>
         </div>
       </li>
       <li>
-        <p class="ho-ph-n tnum">Phase 3 &middot; ~2 weeks</p>
+        <p class="ho-ph-n tnum">Phase 3</p>
         <div>
           <h3>Motor Tides</h3>
           <p>The flagship gets a dedicated property site on this same system &mdash; hero, floor plans, amenities, neighbourhood, tour booking &mdash; and proves the property template before it is copied.</p>
-          <p class="ho-them"><b>Wiseman provides</b> written rights confirmation for the Vimeo tour library &middot; floor plan files and a signed-off amenity list &middot; leasing phone, hours and tour method &middot; a decision on a standalone domain.</p>
+          <p class="ho-them"><b>Wiseman provides</b> <a class="ho-ref" href="buildings/motor-tides.html#gal-h">written rights confirmation for the Vimeo tour&nbsp;library</a> &middot; <a class="ho-ref" href="buildings/motor-tides.html#plans-h">floor plan files and a signed-off amenity&nbsp;list</a> &middot; <a class="ho-ref" href="buildings/motor-tides.html#office-h">leasing phone, hours and tour&nbsp;method</a> &middot; a decision on a standalone domain.</p>
         </div>
       </li>
       <li>
-        <p class="ho-ph-n tnum">Phase 4 &middot; ~1 week, then rolling</p>
+        <p class="ho-ph-n tnum">Phase 4 &middot; then rolling</p>
         <div>
           <h3>Motor Midway, then the portfolio</h3>
           <p>The proven template is applied to Motor Midway &mdash; same street, same architect &mdash; then rolled out area by area, heaviest first.</p>
-          <p class="ho-them"><b>Wiseman provides</b> per-building photography or a decision to shoot &middot; any building-specific copy worth keeping &middot; on-site manager names and hours.</p>
+          <p class="ho-them"><b>Wiseman provides</b> <a class="ho-ref" href="buildings.html">per-building photography</a> or a decision to shoot &middot; <a class="ho-ref" href="buildings/motor-midway.html">any building-specific copy worth&nbsp;keeping</a> &middot; <a class="ho-ref" href="buildings/motor-tides.html#office-h">on-site manager names and hours</a>.</p>
         </div>
       </li>
       <li>
-        <p class="ho-ph-n tnum">Phase 5 &middot; ~1 week</p>
+        <p class="ho-ph-n tnum">Phase 5</p>
         <div>
           <h3>Cutover and handover</h3>
           <p>DNS cutover with the full redirect map so no existing link breaks, monitoring and analytics handed over, a written runbook and a working session on updating content.</p>
-          <p class="ho-them"><b>Wiseman provides</b> DNS access &middot; final sign-off &middot; who owns the site internally after launch.</p>
+          <p class="ho-them"><b>Wiseman provides</b> DNS access &middot; <a class="ho-ref" href="sitemap.html">final sign-off, page by page</a> &middot; who owns the site internally after launch.</p>
         </div>
       </li>
     </ol>
@@ -299,18 +310,18 @@
       <div class="band-head">
         <p class="eyebrow rv">The short version</p>
         <h2 class="rv" data-d="1">What we need from&nbsp;Wiseman.</h2>
-        <p class="rv" data-d="2">Everything else is ours. These are the items that decide whether the schedule&nbsp;holds.</p>
+        <p class="rv" data-d="2">Everything else is ours. Each one links to the place on the site that shows what it&nbsp;affects.</p>
       </div>
       <ul class="ho-asks rv">
-        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>A founding year, in writing</h4><p>LinkedIn says 1980, the contractor licence carries 1982, the Archinect profile says 1985, the Better Business Bureau has 1987. No page states a year until one is chosen.</p></li>
-        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>A decision on &ldquo;45 years&rdquo; and &ldquo;100+ communities&rdquo;</h4><p>Both are on the current homepage; neither is supported by any public source we could find, and the live feed lists 72 buildings.</p></li>
-        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>Responsible broker entity and DRE number</h4><p>Every principal&rsquo;s licence reads as expired and no company record exists. The footer needs a correct one before launch.</p></li>
-        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4>Leadership, values and history in the company&rsquo;s words</h4><p>The only name any public source supports is founder Isaac Cohanzad.</p></li>
-        <li><span class="ho-tag ho-tag-soon">Phase 2</span><h4>RentCafe / Yardi API access</h4><p>The single biggest upgrade available: with it, the site maintains itself.</p></li>
-        <li><span class="ho-tag ho-tag-soon">Phase 1</span><h4>Vector logo files</h4><p>The mark has been rebuilt from a 600px PNG; the original vector will be sharper at every size.</p></li>
-        <li><span class="ho-tag ho-tag-soon">Phase 3</span><h4>Rights confirmation for the video library</h4><p>159 embeddable clips are already owned &mdash; a real asset &mdash; but they carry a third-party watermark.</p></li>
-        <li><span class="ho-tag ho-tag-soon">Phase 3</span><h4>A photography decision</h4><p>The existing library is interiors only. A half-day shoot with a licensed drone operator is the only way to get the actual buildings and streets on screen.</p></li>
-        <li><span class="ho-tag ho-tag-later">Phase 1</span><h4>Canonical social handles</h4><p>Two Instagram accounts are live and the site data points at the less-followed one.</p></li>
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4><a class="ho-ref" href="index.html#h-origins">A founding year, in writing</a></h4><p>LinkedIn says 1980, the contractor licence carries 1982, the Archinect profile says 1985, the Better Business Bureau has 1987. No page states a year until one is chosen.</p></li>
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4><a class="ho-ref" href="index.html#h-origins">A decision on &ldquo;45 years&rdquo; and &ldquo;100+ communities&rdquo;</a></h4><p>Both are on the current homepage; neither is supported by any public source we could find, and the live feed lists 72 buildings.</p></li>
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4><a class="ho-ref" href="#site-map">Responsible broker entity and DRE number</a></h4><p>Every principal&rsquo;s licence reads as expired and no company record exists. The footer needs a correct one before launch.</p></li>
+        <li><span class="ho-tag ho-tag-block">Blocks Phase 0</span><h4><a class="ho-ref" href="company.html#client-gaps">Leadership, values and history in the company&rsquo;s words</a></h4><p>The only name any public source supports is founder Isaac Cohanzad.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 2</span><h4><a class="ho-ref" href="search.html">RentCafe / Yardi API access</a></h4><p>The single biggest upgrade available: with it, the site maintains itself.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 1</span><h4><a class="ho-ref" href="#brand">Vector logo files</a></h4><p>The mark has been rebuilt from a 600px PNG; the original vector will be sharper at every size.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 3</span><h4><a class="ho-ref" href="buildings/motor-tides.html#gal-h">Rights confirmation for the video library</a></h4><p>159 embeddable clips are already owned &mdash; a real asset &mdash; but they carry a third-party watermark.</p></li>
+        <li><span class="ho-tag ho-tag-soon">Phase 3</span><h4><a class="ho-ref" href="buildings.html">A photography decision</a></h4><p>The existing library is interiors only. A half-day shoot with a licensed drone operator is the only way to get the actual buildings and streets on screen.</p></li>
+        <li><span class="ho-tag ho-tag-later">Phase 1</span><h4><a class="ho-ref" href="#site-map">Canonical social handles</a></h4><p>Two Instagram accounts are live and the site data points at the less-followed one.</p></li>
         <li><span class="ho-tag ho-tag-later">Phase 5</span><h4>DNS access and an internal owner</h4><p>Needed only at cutover, but worth identifying early.</p></li>
       </ul>
       <p class="cite rv">Dated claims about the company are sourced to public records or to reporting by Urbanize LA and The Real Deal, each checked against the source rather than taken from a summary. Prepared by UnitPulse for Wiseman Residential &mdash; a proposal document, not a Wiseman Residential&nbsp;publication.</p>
@@ -401,8 +412,8 @@
   </div>
 </div>
 
-<script src="../core/core.js?v=43" defer></script>
-<script src="../core/map.js?v=43" defer></script>
-<script src="app.js?v=43" defer></script>
+<script src="../core/core.js?v=45" defer></script>
+<script src="../core/map.js?v=45" defer></script>
+<script src="app.js?v=45" defer></script>
 </body>
 </html>

@@ -168,7 +168,7 @@ def company():
   </section>
   <section class="ed-sec wrap wrap-n" id="about">
     <p class="ed-eyebrow">Still to come from Wiseman</p>
-    <h2 class="ed-h2">The parts only the company can write.</h2>
+    <h2 class="ed-h2" id="client-gaps">The parts only the company can write.</h2>
     <p class="ed-lede" style="margin-top:16px">Rather than invent a team page, a founding date or a set of values, the demo marks them. Each is the company's to confirm in writing.</p>
     <ul class="ed-rows rv" style="margin-top:32px">
       {doc_row("Leadership", ["The company was founded by Isaac Cohanzad. Any other name, title or biography is the company's to supply. <span class=\"chip\">[CLIENT]</span>"], "Founder named")}
