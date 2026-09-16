@@ -1731,9 +1731,25 @@ footer.ft a{ color:var(--ink); text-decoration:none; }
 footer.ft a:hover{ color:var(--accent-ink); }
 .ft-top{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:clamp(28px,3vw,56px);
   padding-block:clamp(56px,7vh,88px); border-bottom:1px solid var(--line); }
-.ft-brand svg{ width:24px; height:24px; color:var(--brand-teal); }   /* the real Wiseman mark, brand teal on cream */
-.ft-brand .wm{ font-family:var(--text); font-weight:600; letter-spacing:.2em; text-transform:uppercase;
-  font-size:.78rem; color:var(--ink); margin-top:.9rem; }
+/* The footer carries the STACKED lockup — the client's logo as they drew it:
+   three bars with WISEMAN beneath, both in the brand colour, the wordmark
+   tracked out to sit on the mark's own width. The header keeps the horizontal
+   lockup, because stacking it there would double the height of a bar that is
+   fixed on every page.
+
+   --lock-w is the single source of the relationship. The mark is set to it and
+   the wordmark is tracked to match it, so changing one number rescales the
+   lockup as a unit instead of drifting the two halves apart. */
+.ft-lock{ --lock-w:104px; display:inline-grid; justify-items:start; gap:.46rem; }
+.ft-brand .ft-lock svg{ width:var(--lock-w); height:auto; color:var(--brand-teal); display:block; }
+.ft-lock-wm{ font-family:var(--text); font-weight:500; text-transform:uppercase;
+  color:var(--brand-teal); font-size:calc(var(--lock-w) * .155);
+  letter-spacing:.208em;
+  /* tracking adds a trailing space after the last letter; pull it back so the
+     wordmark's INK, not its advance width, lines up with the mark's left and
+     right edges */
+  margin-right:-.208em;
+  line-height:1; }
 .ft-brand .tag{ font-family:var(--disp); font-style:italic; font-size:1.15rem; color:var(--accent-ink); margin-top:1rem; }
 .ft-brand .addr{ margin-top:1.4rem; font-size:.86rem; line-height:1.8; color:var(--ink-3); }
 .ft-brand .addr a{ color:var(--ink); }

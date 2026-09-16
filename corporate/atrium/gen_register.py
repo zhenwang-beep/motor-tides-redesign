@@ -33,7 +33,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data", "wiseman.json")
 
-VER = "41"
+VER = "43"
 SNAPSHOT = "10 September 2026"
 TOTAL = 72
 FLAG_NO = "071"                    # Motor Tides — FACT-CHECK §2: never a rent
@@ -105,8 +105,8 @@ def plural(n, w):
 
 # ---------------------------------------------------------------- furniture
 BRAND_SVG = ('<svg viewBox="0 0 100 100" aria-hidden="true" focusable="false" fill="currentColor">'
-             '<polygon points="14,18 34,18 34,72 14,76"/><polygon points="40,18 60,18 60,72 40,76"/>'
-             '<polygon points="66,18 86,18 86,72 66,76"/></svg>')
+             '<polygon points="9,16 30,16 30,76 9,82"/><polygon points="39.5,16 60.5,16 60.5,76 39.5,82"/>'
+             '<polygon points="70,16 91,16 91,76 70,82"/></svg>')
 EHO_SVG = ('<svg viewBox="0 0 12 10.608" role="img" aria-label="Equal Housing Opportunity" '
            'fill="currentColor" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" '
            'd="M5.95263 1.07242L0 4.00926V5.38295H0.663158V9.51979H11.2026V5.38295H11.9921V4.00926L5.95263 '
@@ -169,8 +169,10 @@ def footer(base, groups):
   <div class="wrap wrap-n">
     <div class="ft-top">
       <div class="ft-brand">
-        {mark}
-        <div class="wm">Wiseman Residential</div>
+        <div class="ft-lock" role="img" aria-label="Wiseman Residential">
+          {mark}
+          <span class="ft-lock-wm" aria-hidden="true">Wiseman</span>
+        </div>
         <div class="tag">Los Angeles living, managed wisely.</div>
         <div class="addr">1520 Federal Ave, Los Angeles, CA 90025<br><a href="tel:+13104733000">+1 310-473-3000</a></div>
       </div>
@@ -264,7 +266,8 @@ LIVE_STUB = """<!doctype html>
 <meta name="robots" content="noindex, follow">
 <meta http-equiv="refresh" content="0; url=search.html">
 <meta name="theme-color" content="#F3F0E7">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20fill='%23F3F0E7'/%3E%3Cg%20fill='%231C6775'%3E%3Cpolygon%20points='14,18%2034,18%2034,72%2014,76'/%3E%3Cpolygon%20points='40,18%2060,18%2060,72%2040,76'/%3E%3Cpolygon%20points='66,18%2086,18%2086,72%2066,76'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20fill='%23F3F0E7'/%3E%3Cg%20fill='%231C6775'%3E%3Cpolygon%20points='9,16%2030,16%2030,76%209,82'/%3E%3Cpolygon%20points='39.5,16%2060.5,16%2060.5,76%2039.5,82'/%3E%3Cpolygon%20points='70,16%2091,16%2091,76%2070,82'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/img/wiseman-icon-180.png">
 <style>
   html,body{margin:0;height:100%;background:#F3F0E7;color:#0E1520}
   body{display:grid;place-items:center;font:400 1rem/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-align:center;padding:24px}
@@ -294,7 +297,8 @@ def head(title, desc, img, extra="", ld="", base=""):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#F3F0E7">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20fill='%23F3F0E7'/%3E%3Cg%20fill='%231C6775'%3E%3Cpolygon%20points='14,18%2034,18%2034,72%2014,76'/%3E%3Cpolygon%20points='40,18%2060,18%2060,72%2040,76'/%3E%3Cpolygon%20points='66,18%2086,18%2086,72%2066,76'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20fill='%23F3F0E7'/%3E%3Cg%20fill='%231C6775'%3E%3Cpolygon%20points='9,16%2030,16%2030,76%209,82'/%3E%3Cpolygon%20points='39.5,16%2060.5,16%2060.5,76%2039.5,82'/%3E%3Cpolygon%20points='70,16%2091,16%2091,76%2070,82'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/img/wiseman-icon-180.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Wiseman Residential">
 <meta property="og:title" content="{title}">
