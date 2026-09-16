@@ -119,7 +119,7 @@
   --sand-ink: #7A6142;
   --salt: #A8B8B2;
   /* brand — hairlines, focus rings, the logo. Never a surface. */
-  --brand: #169BAC;
+  --brand: #1C6775;
 
   /* alpha ladder — the ONLY source of hairlines, scrims, dividers, tints */
   --ink-05: color-mix(in srgb, var(--ink) 5%, transparent);

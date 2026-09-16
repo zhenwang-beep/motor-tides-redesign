@@ -40,7 +40,7 @@
   --brass-2:#D6B378;   /* hover */
   --brass-ink:#181206; /* text on brass */
   /* the brand teal survives only as the focus ring and the mark's own colour */
-  --focus:#169BAC;
+  --focus:#1C6775;
 
   /* --- tokens the SHARED core consumes (base.css / editorial / map / search / rail) --- */
   --paper:var(--night);

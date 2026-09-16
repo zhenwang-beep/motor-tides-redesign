@@ -97,7 +97,7 @@
   --terra:   #A8562F;   /* accent 1 — decorative + large type */
   --olive:   #6B6F4B;   /* accent 2 — decorative + large type */
   --deep:    #241C16;   /* dark sections, menu, curtain */
-  --brand:   #169BAC;   /* the logo mark and nothing else */
+  --brand:   #1C6775;   /* the logo mark and nothing else */
 
   /* text-safe twins of the two accents (CONVENTIONS §7) */
   --terra-ink: #8E4423; /* 6.40:1 on --paper */

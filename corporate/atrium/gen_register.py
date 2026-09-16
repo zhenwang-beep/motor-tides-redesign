@@ -33,7 +33,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 DATA = os.path.join(ROOT, "data", "wiseman.json")
 
-VER = "40"
+VER = "41"
 SNAPSHOT = "10 September 2026"
 TOTAL = 72
 FLAG_NO = "071"                    # Motor Tides — FACT-CHECK §2: never a rent
@@ -264,7 +264,7 @@ LIVE_STUB = """<!doctype html>
 <meta name="robots" content="noindex, follow">
 <meta http-equiv="refresh" content="0; url=search.html">
 <meta name="theme-color" content="#F3F0E7">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20fill='%23F3F0E7'/%3E%3Cg%20fill='%23169BAC'%3E%3Cpolygon%20points='14,18%2034,18%2034,72%2014,76'/%3E%3Cpolygon%20points='40,18%2060,18%2060,72%2040,76'/%3E%3Cpolygon%20points='66,18%2086,18%2086,72%2066,76'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20fill='%23F3F0E7'/%3E%3Cg%20fill='%231C6775'%3E%3Cpolygon%20points='14,18%2034,18%2034,72%2014,76'/%3E%3Cpolygon%20points='40,18%2060,18%2060,72%2040,76'/%3E%3Cpolygon%20points='66,18%2086,18%2086,72%2066,76'/%3E%3C/g%3E%3C/svg%3E">
 <style>
   html,body{margin:0;height:100%;background:#F3F0E7;color:#0E1520}
   body{display:grid;place-items:center;font:400 1rem/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;text-align:center;padding:24px}
@@ -294,7 +294,7 @@ def head(title, desc, img, extra="", ld="", base=""):
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#F3F0E7">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20fill='%23F3F0E7'/%3E%3Cg%20fill='%23169BAC'%3E%3Cpolygon%20points='14,18%2034,18%2034,72%2014,76'/%3E%3Cpolygon%20points='40,18%2060,18%2060,72%2040,76'/%3E%3Cpolygon%20points='66,18%2086,18%2086,72%2066,76'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Crect%20width='100'%20height='100'%20fill='%23F3F0E7'/%3E%3Cg%20fill='%231C6775'%3E%3Cpolygon%20points='14,18%2034,18%2034,72%2014,76'/%3E%3Cpolygon%20points='40,18%2060,18%2060,72%2040,76'/%3E%3Cpolygon%20points='66,18%2086,18%2086,72%2066,76'/%3E%3C/g%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Wiseman Residential">
 <meta property="og:title" content="{title}">
@@ -1218,13 +1218,13 @@ COLOURS = [
     ("--bg",         "#F3F0E7", "Ground",        "The warm cream every page stands on."),
     ("--bg-2",       "#EFEADD", "Tinted band",   "One step down, for alternating sections."),
     ("--raised",     "#F7F4EC", "Raised",        "The frosted header and lifted surfaces."),
-    ("--ink",        "#074B4D", "Ink",           "Headings, primary buttons. 10.4:1 on cream."),
+    ("--ink",        "#144952", "Ink",           "Headings, primary buttons. 8.8:1 on cream."),
     ("--ink-2",      "#42585B", "Body",          "Every paragraph. 7:1 on cream."),
     ("--ink-3",      "#5D6C6F", "Meta",          "Captions, citations, spec keys. 4.80:1 — AA."),
-    ("--deep-teal",  "#04343A", "Deep",          "Page-transition ground and dark sections."),
+    ("--deep-teal",  "#092D34", "Deep",          "Page-transition ground and dark sections."),
     ("--accent",     "#C8784D", "Terracotta",    "Decorative keylines, ticks, marks."),
     ("--accent-ink", "#9A5533", "Terracotta ink","Links and chips. 4.95:1 cream, 4.70:1 stone."),
-    ("--brand-teal", "#169BAC", "The mark",      "Reserved for the three-bar logo. Nothing else."),
+    ("--brand-teal", "#1C6775", "The mark",      "The client's own logo colour. Reserved for the mark."),
     ("--tide",       "#A8C9CE", "Tide",          "Light teal, only on dark grounds."),
     ("--sand",       "#FEDA77", "Sand",          "Rare warm highlight."),
 ]
@@ -1308,7 +1308,7 @@ def build_handoff(groups, areas, props, streets_total, four_plus):
       <div class="ho-lockup">{mark}<span class="ho-wm">Wiseman Residential</span></div>
     </div>
     <ul class="ho-rules rv">
-      <li><b>One colour, reserved.</b> <span class="ho-sw ho-sw-i" style="background:#169BAC"></span><code>#169BAC</code> belongs to the mark and to nothing else on the site. Body text, buttons and links never use it.</li>
+      <li><b>One colour, reserved.</b> <span class="ho-sw ho-sw-i" style="background:#1C6775"></span><code>#1C6775</code> belongs to the mark and to nothing else on the site. Body text, buttons and links never use it.</li>
       <li><b>It inherits.</b> The SVG is <code>fill="currentColor"</code>, so the mark is teal on cream, cream on the deep ground, and never needs a second file.</li>
       <li><b>Clear space.</b> One bar-width on every side. Minimum height 18px, below which the taper stops reading.</li>
       <li><b>Never the placeholder.</b> The generic three-rectangle mark used in early drafts is retired; the bars are tapered, and the taper is the mark.</li>

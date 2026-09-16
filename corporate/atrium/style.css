@@ -11,22 +11,28 @@
    RE-SKINNED to the Motor Tides by Wiseman design language (2026-09):
    warm cream ground, deep teal-green ink, terracotta as the sparing accent.
    Display = Prata (page-filling titles), reading serif = Newsreader,
-   UI / labels / body = Montserrat. Brand teal #169BAC is reserved for the
+   UI / labels / body = Montserrat. Brand teal #1C6775 is reserved for the
    three-bar Wiseman logo mark only. */
 :root{
   /* palette (warm, elegant, bright) */
   --bg:#F3F0E7;            /* warm cream ground */
   --bg-2:#EFEADD;          /* one step down — warm stone bands */
   --raised:#F7F4EC;        /* near-white warm — frosted header, raised surfaces */
-  --ink:#074B4D;           /* deep teal-green — primary ink, headings, buttons */
+  /* The ink sits on the BRAND's hue. It used to be #074B4D at hsl(181.7deg) —
+     almost 8 degrees greener than the client's own #1C6775 at hsl(189.4deg),
+     which is what read as "the primary colour is off": two teals, one of them
+     nearly the logo but not quite. Retuned to the brand hue at the lightness
+     that preserves the contrast we already had — 8.76:1 on cream against the
+     old 8.68:1, so nothing regressed to buy the correction. */
+  --ink:#144952;           /* deep teal — primary ink, headings, buttons. 8.76:1 on cream */
   --ink-2:#42585B;         /* body copy — warm slate, ~7:1 on --bg */
   /* meta, captions, labels. Was #6B7B7E, documented as ~4.7:1 but measured at
      3.87:1 — below AA, and it carries real facts (the card bed counts, the
      footer address, spec keys, citations) in ~45 rules. Darkened one step to
      4.80:1 while staying a clear third stop under --ink-2 (7:1). */
   --ink-3:#5D6C6F;         /* meta, captions, labels — 4.80:1 on --bg */
-  --deep-teal:#04343A;     /* deeper teal — page-transition ground, dark accents */
-  --graphite:#1F3538;
+  --deep-teal:#092D34;     /* deeper teal — page-transition ground, dark accents */
+  --graphite:#1E3033;
 
   --accent:#C8784D;        /* terracotta — decorative keylines, marks, fills */
   /* terracotta as TEXT / links / eyebrow ticks. Was #AD6643, which measured
@@ -39,7 +45,7 @@
      ground, so there is no light-on-dark case to trade off against. */
   --accent-ink:#9A5533;    /* terracotta as TEXT / links / eyebrow ticks — 4.95:1 cream, 4.70:1 stone */
   --accent-deep:#96522F;   /* terracotta pressed */
-  --brand-teal:#169BAC;    /* THE Wiseman logo mark colour — three-bar mark only */
+  --brand-teal:#1C6775;    /* THE Wiseman logo colour, supplied by the client — mark only */
   --tide:#A8C9CE;          /* light teal — accents on dark grounds */
   --sand:#FEDA77;
 
@@ -50,9 +56,9 @@
   --teal-ink:var(--accent-ink);
   --teal-deep:var(--accent-deep);
 
-  --line:rgba(7,75,77,.16);
-  --line-2:rgba(7,75,77,.08);
-  --scrim:linear-gradient(to top, rgba(4,52,58,.58), rgba(4,52,58,.10) 46%, transparent 66%);
+  --line:rgba(20,73,82,.16);
+  --line-2:rgba(20,73,82,.08);
+  --scrim:linear-gradient(to top, rgba(9,45,52,.58), rgba(9,45,52,.10) 46%, transparent 66%);
 
   /* over-photo hero — ONE legible recipe shared by every full-bleed hero
      (Live/Track fbhero + About/Careers/Contact/Residents ed-hero). Warm-white
@@ -318,7 +324,7 @@ strong,b{ font-weight:600; }
    while the menu is open (that panel is already solid). */
 .hd.inv:not(.frost)::before{ content:""; position:absolute; inset:0 0 auto 0;
   height:calc(var(--hd-h) * 2.3); z-index:-1; pointer-events:none;
-  background:linear-gradient(rgba(4,52,58,.58), rgba(4,52,58,.34) 46%, rgba(4,52,58,0)); }
+  background:linear-gradient(rgba(9,45,52,.58), rgba(9,45,52,.34) 46%, rgba(9,45,52,0)); }
 body.menu-open .hd.inv:not(.frost)::before,
 body:has(.mnav.open) .hd.inv:not(.frost)::before{ display:none; }
 .hd.inv .brand b{ color:#fff; }
@@ -426,7 +432,10 @@ body:has(.hero-runway) .pt:not(.cover){ display:none; animation:none; }
 /* the lockup rides the panel the whole way up, rather than fading off it */
 .pt .ptmark{ gap:12px; opacity:1; transition:none; }
 .js-pt .pt .ptmark, .pt.cover .ptmark{ opacity:1; }
-.pt .ptmark svg{ color:var(--brand-teal); width:38px; height:38px; }
+/* The transition mark sits on the deep ground, and the client's #1C6775 makes
+   only 2.26:1 there — the old, much lighter teal got away with it. --tide is
+   the token that exists for exactly this (light teal on dark): 8.29:1. */
+.pt .ptmark svg{ color:var(--tide); width:38px; height:38px; }
 .pt .ptmark .pt-name{ font-family:var(--disp); color:var(--hero-fg); font-size:1.05rem;
   letter-spacing:.3em; text-indent:.3em; text-transform:uppercase; line-height:1.1; }
 .pt .ptmark .pt-sub{ font-family:var(--sans); font-weight:600; font-size:.54rem;
@@ -527,7 +536,7 @@ main{ display:block; }
    and on beats 1 and 3 it fades off with the veil, so the full-bleed frame is
    never tinted. Slightly deeper at the top, where the caps sample pale sky. */
 .mono-tone{ position:absolute; inset:0;
-  background:linear-gradient(rgba(4,52,58,.66), rgba(4,52,58,.54) 44%, rgba(4,52,58,.60)); }
+  background:linear-gradient(rgba(9,45,52,.66), rgba(9,45,52,.54) 44%, rgba(9,45,52,.60)); }
 
 .mono-word{ position:absolute; inset:0; z-index:1; margin:0; pointer-events:none; }
 .mono-veil{ position:absolute; inset:0; display:block; width:100%; height:100%; }
@@ -1489,7 +1498,7 @@ dl.facts{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background
 .leaflet-marker-icon:focus-visible .wr-pin.price.crowd,
 .wr-pin.price.crowd.lit{
   background:var(--ink); color:var(--bg);
-  box-shadow:0 0 0 1px var(--ink), 0 10px 26px rgba(7,75,77,.34);
+  box-shadow:0 0 0 1px var(--ink), 0 10px 26px rgba(20,73,82,.34);
   /* the pill going from 46px to ~200px IS the feedback; core's extra scale(1.1)
      on top of it only softened the type and pushed the ends further out */
   transform:translateX(var(--pin-dx,0px));
@@ -1500,7 +1509,7 @@ dl.facts{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background
    terracotta, with a cream gap so it reads over any tile underneath. */
 .wr-map .leaflet-marker-icon:focus-visible .wr-pin.price{
   box-shadow:0 0 0 1px var(--ink), 0 0 0 3px var(--bg), 0 0 0 5px var(--accent-ink),
-             0 10px 26px rgba(7,75,77,.34);
+             0 10px 26px rgba(20,73,82,.34);
 }
 /* only the pill trades the wrapper outline for the ring — a dot pin on the
    portfolio and area maps keeps core's outline, which is legible on a 14px dot */
